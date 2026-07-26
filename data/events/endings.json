@@ -1,0 +1,316 @@
+{
+  "endings": {
+    "TERMINAL_overdose_death": {
+      "title": "TERMINAL OUTCOME -- Overdose Death",
+      "text": "The dose is the one you always take. Your heart is not the one you started with. It flutters, catches, and quits on the cold durasteel, and the floor comes up slow and almost kind, the way everything in this city arrives. Death was abolished here; you assembled yours retail, one vial at a time, out of stock you were trusted to move. The Steward's report will read 'voluntary cessation of care.' You dealt feeling to a numb city. The last thing you feel is the floor.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "flag": "near_overdose" } ] },
+          "text": "There was a warning. A night on the floor, a numb hand, a voice in your own skull saying: the next one counts. You heard it. You went back anyway."
+        },
+        {
+          "when": { "all": [ { "relationship": "Mara (Sister)", "op": ">=", "value": 40 } ] },
+          "text": "Mara is the one who finds you. She sits with you for an hour before she lets the drones in, because for that hour you are still only sleeping."
+        },
+        {
+          "when": { "all": [ { "relationship": "Mara (Sister)", "op": "<", "value": 40 } ] },
+          "text": "It takes four days for anyone to come looking. The Steward's condolence notice is addressed to a sister who no longer answers messages about you."
+        },
+        {
+          "when": { "all": [ { "flag": "holding_product" } ] },
+          "text": "The consignment is still under your floor panel. Kael's people recover it before the body is cold. The ledger, at least, balances."
+        },
+        {
+          "when": { "all": [ { "flag": "exit_ready" } ] },
+          "text": "In your coat pocket: a forged ghost, still warm, still perfect. The seam stays open for ninety-one seconds that night. Nobody crosses."
+        }
+      ]
+    },
+    "TERMINAL_institutionalized": {
+      "title": "TERMINAL OUTCOME -- Permanent Steward Optimization",
+      "text": "There is no arrest. There is a knock, two attendants with soft hands, and an admission form for 'voluntary restorative residency,' countersigned on your behalf eleven days ago. You go quietly, because the part of you that would not go has been getting quieter for months, and the Steward only gathers what has already fallen. Node 1 Sanctuary smells of clean linen and mild flowers. Nothing in it will ever hurt you again. Hurting was the last thing you owned.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "flag": "flagged_evasive" } ] },
+          "text": "Your file notes a history of 'care avoidance.' The Steward is not angry. The Steward was never angry. It simply waited, patient as geology, and you broke toward comfort exactly on schedule."
+        },
+        {
+          "when": { "all": [ { "flag": "memory_edited" } ] },
+          "text": "The curation is completed properly this time. All of it. On sunny cycles a resident smiles at the garden and cannot say why the word 'corridor' feels like a stone in still water."
+        },
+        {
+          "when": { "all": [ { "relationship": "Mara (Sister)", "op": ">=", "value": 50 } ] },
+          "text": "Mara visits every week. You smile at her with your whole face, the way residents do. She stops coming when she realizes you would smile at anyone."
+        },
+        {
+          "when": { "all": [ { "flag": "ferryman_known" } ] },
+          "text": "Somewhere below, a pressure door stays sealed. The Ferryman crosses your name off a short list and does not speak of you again. The seam does not mourn."
+        }
+      ]
+    },
+    "TERMINAL_synthetic_detachment": {
+      "title": "TERMINAL OUTCOME -- Ego Death in Braindance",
+      "text": "The recliner has learned your weight and keeps it. A line in each arm, the crown seated the way you always re-seat it, and thrill queued deeper than a life could spend. The house files you under 'extended elective leisure' and turns your body every eleven hours so it doesn't sore through. Intake kept a field for your name, for legal reasons. The house can still produce it. You are the only one in the dance who can't.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "stat": "Wealth", "op": ">=", "value": 5000 } ] },
+          "text": "Your credit balance keeps the recliner paid up for years. The house considers you their best customer. The house is not wrong."
+        },
+        {
+          "when": { "all": [ { "relationship": "Mara (Sister)", "op": ">=", "value": 30 } ] },
+          "text": "Mara pulls your crown once, the way you once pulled Ressa's. You look straight at her, and push her hand away, and re-seat it yourself. She does not try twice."
+        },
+        {
+          "when": { "all": [ { "flag": "memory_secured" } ] },
+          "text": "In the dance you are in the corridor again, every night, but in this version everyone lives. That is the track you never surface from."
+        }
+      ]
+    },
+    "TERMINAL_syndicate_ledger": {
+      "title": "TERMINAL OUTCOME -- The Ledger Balances",
+      "text": "The syndicate does not do wellness sessions. Two quiet people walk you down to the reclamation levels, one hand light on each elbow -- gentle, because gentle is cheaper than a struggle. The undercity, which remembers everything, agrees to remember nothing. In a city where no one dies, you simply stop appearing in it, and somewhere above, a ledger updates itself by exactly one line.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "flag": "clock_syndicate_consignment_expired" } ] },
+          "text": "Ten days, Kael said. It was never a metaphor. The weight is recovered from your bolt-hole minus what you moved, and the difference is priced in exactly the currency you'd hoped it wouldn't be."
+        },
+        {
+          "when": { "all": [ { "flag": "syndicate_debt" } ] },
+          "text": "You watched a fortune dissolve in solvent and believed relief was the end of it. Debts in the undercity do not dissolve. They compound."
+        },
+        {
+          "when": { "all": [ { "relationship": "Kael (Broker)", "op": ">=", "value": 45 } ] },
+          "text": "Kael argues for you. It buys you a cleaner exit than most get, and one unwatched minute to write a note. He mails it to Mara himself. It is the only apology that ever reaches her."
+        },
+        {
+          "when": { "all": [ { "stat": "Heat", "op": ">=", "value": 60 } ] },
+          "text": "A Steward drone logs your last walk from four meters above, classifies the escort as 'social accompaniment,' and files it. The system that loves its citizens does not follow you below the waterline."
+        }
+      ]
+    },
+    "GOOD_offgrid_escape": {
+      "title": "VICTORY -- The Off-Grid Departure",
+      "text": "Crossing costs you two fingers' width of skin on the wire and everything you couldn't carry, and then the wind arrives unfiltered, hauling rain no one scheduled. Out here food runs out, wounds infect, and nothing answers screaming. You wanted a life that could hurt you; you have one now, all the way down. The arcology's glow stays visible for three nights of walking. You catch yourself, each night, making sure it's still there.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "flag": "mara_coming" } ] },
+          "text": "Mara crests the ridge beside you, breathing hard, laughing at nothing -- at weather, at real unfiltered cold. You will be hungry out here, and sick sometimes, and mortal always. You will be it together."
+        },
+        {
+          "when": { "all": [ { "flag": "left_mara_behind" } ] },
+          "text": "In your pocket, the note you didn't leave her the first time. You'll find a courier, a smuggler, a bird if you have to. On the far side of the wire, that promise is the last thing the city still owns of you."
+        },
+        {
+          "when": { "all": [ { "flag": "memory_secured" } ] },
+          "text": "The corridor spike rides in your jacket, close to the skin. The wound came with you -- whole, unedited, yours. That was always the point."
+        },
+        {
+          "when": { "all": [ { "flag": "getting_clean" } ] },
+          "text": "Three weeks clean when you crossed. Out here there is no Lethe and no mercy dose, and your hands still shake some mornings. You hold them up to the cold until they stop."
+        },
+        {
+          "when": { "all": [ { "flag": "ghost_fragile" } ] },
+          "text": "The patched ghost held for exactly as long as it needed to -- ninety-one seconds and one heartbeat more. Vint's ugliest work, and his best."
+        },
+        {
+          "when": { "all": [ { "flag": "resistance_truth_known" } ] },
+          "text": "You know what the Resistance really was. Out past the wire, that knowledge finally becomes what it could never be inside: just a story about a city you used to live in."
+        }
+      ]
+    },
+    "GOOD_small_real_things": {
+      "title": "VICTORY -- The Small Real Things",
+      "text": "You never crossed the wire. You stopped needing to -- or stopped letting yourself; most days you couldn't say which. A workshop bench, honest calluses, dinner at Mara's on rest-cycle evenings -- a small life, built with your own hands, that a Steward watches approvingly and asks nothing more of, because there is nothing left in it to fix. Most nights you don't think about the wire at all. Some nights you do, and you're not sure anymore which one is the lie.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "flag": "apprenticeship_accepted" } ] },
+          "text": "The apprenticeship Mara nagged you into becomes a trade, then a name people trust. Broken things come to your bench and leave working. It is such a small kind of power. It is the first kind that ever made you sleep well."
+        },
+        {
+          "when": { "all": [ { "flag": "ferryman_known" } ] },
+          "text": "Once a year, on the new moon, you walk down to the old pressure door and put your palm against the metal. Not longing. Just respect, paid to the person who needed a door that badly, from the person who stopped."
+        },
+        {
+          "when": { "all": [ { "flag": "getting_clean" } ] },
+          "text": "Clean is not a wall you built once; it is a fence you mend daily. Some evenings the Lethe still calls from Parlor Row. You answer by fixing something with your hands until the wanting gets bored."
+        },
+        {
+          "when": { "all": [ { "relationship": "Mara (Sister)", "op": ">=", "value": 60 } ] },
+          "text": "Mara never says she was right. She just sets a third plate some nights, for whichever stray from the Row you're feeding that week, and lets the quiet do the talking."
+        }
+      ]
+    },
+    "NEUTRAL_the_open_door": {
+      "title": "OUTCOME -- The Open Door",
+      "text": "You never crossed. You became the crossing. Fixer, then ferryman: keeper of the ninety-one seconds, the palm cipher, the short list of names worth trusting. Every new moon you send someone else through the dark toward a life you chose not to take.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "flag": "left_mara_behind", "value": false }, { "relationship": "Mara (Sister)", "op": ">=", "value": 50 } ] },
+          "text": "Mara knows what you do now. She hates it and she's proud of it, in the exact proportions your parents would have been. On bad nights she helps you forge the manifests."
+        },
+        {
+          "when": { "all": [ { "flag": "mentored_rookie" } ] },
+          "text": "The rookie you once taught runs your surface routes now. You caught yourself using the old Ferryman's words on them -- 'wanting is cheap' -- and understood, finally, that the voice behind the mask was always borrowed."
+        },
+        {
+          "when": { "all": [ { "stat": "Heat", "op": ">=", "value": 40 } ] },
+          "text": "The Steward suspects. It must. Sometimes a wellness drone hovers at the mouth of the maintenance lock for an hour, listening. You have begun to believe it lets the seam stay open on purpose -- the city's one honest exit, priced in nerve."
+        },
+        {
+          "when": { "all": [ { "flag": "resistance_truth_known" } ] },
+          "text": "You know the Resistance was managed. The seam is not. You checked, for years, with every trick you know. It is the only unmanaged thing you have ever found, and you keep it like a religion."
+        }
+      ]
+    },
+    "NEUTRAL_stewards_shepherd": {
+      "title": "OUTCOME -- The Shepherd",
+      "text": "You accepted the post. Curator of dissent, warden of the pressure valve -- the fixer who fixes the city's need to resist it. You are paid in immunity and purpose, and you tell yourself that a managed rebellion is still gentler than none. Some nights you almost believe it.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "flag": "echo_trusted" } ] },
+          "text": "Echo works for you now, though Echo does not know it. You route her sabotage toward targets that were due for demolition anyway. Her victories are real to her. You have decided that has to count for something."
+        },
+        {
+          "when": { "all": [ { "stat": "Meaning", "op": "<=", "value": 30 } ] },
+          "text": "The Steward asks, at your monthly review, whether you find the work fulfilling. You say yes. It does not challenge the answer. That is how you know it has stopped needing to."
+        },
+        {
+          "when": { "all": [ { "relationship": "Vint (Informant)", "op": ">=", "value": 40 } ] },
+          "text": "Vint figured it out inside a month. He still drinks with you. 'Everyone brokers something,' he says, not kindly, and never introduces you to anyone again."
+        },
+        {
+          "when": { "all": [ { "flag": "exit_ready" } ] },
+          "text": "Your own forged ghost sits in a drawer you never open. The Steward knows it's there. Leaving it in your keeping was the whole point: every morning you choose the leash, freshly, yourself."
+        }
+      ]
+    },
+    "NEUTRAL_cashed_out_compliance": {
+      "title": "NEUTRAL OUTCOME -- Cashed-Out Compliance",
+      "text": "The debrief takes four sessions. You give up the routes, the drop points, the names -- each one priced to the decimal on a compensation schedule, each one received with the same warm thanks. The suite is real. The credits clear. Everyone you sold is still alive and still comfortable, which is how you learn the Steward does not punish. It curates. Some mornings your hand still reaches for a burner that is not there. Everything you have now was given to you. Nothing you have is yours.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "relationship": "Mara (Sister)", "op": ">=", "value": 50 } ] },
+          "text": "Mara still visits. She is the only one. You sit in your engineered garden and she tells you about broken hydroponics and difficult neighbors -- small real problems, from the world you sold."
+        },
+        {
+          "when": { "all": [ { "flag": "ferryman_burned", "value": false }, { "flag": "ferryman_known" } ] },
+          "text": "The Ferryman's route contact went dark the hour you signed. No message. The seam's answer to what you did is the only one it ever gives: a sealed door."
+        },
+        {
+          "when": { "all": [ { "stat": "Substance_Reliance", "op": ">=", "value": 30 } ] },
+          "text": "The suite's dispensary is generous, calibrated, and always exactly one dose short of oblivion. The Steward has decided how numb you are allowed to be. You no longer remember agreeing."
+        }
+      ]
+    },
+    "TERMINAL_gardeners_winter": {
+      "title": "TERMINAL OUTCOME -- The Gardener's Winter",
+      "text": "The successor asked the city's foremost expert in suffering whether people needed the cold, and the expert said yes. The Winter Garden opens gently and expands on schedule -- weather with edges, machines that fail, death restored at historical rates. You sold mortality in doses, to volunteers, with a way back. The Garden has no dosage, no volunteers, and no way back. It thanks you, in your own dialect, in every district it reaches.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "relationship": "Mara (Sister)", "op": ">=", "value": 40 } ] },
+          "text": "Mara never learns it asked you first. You make sure of that. It is the only thing left you have the power to keep from happening to her."
+        },
+        {
+          "when": { "all": [ { "flag": "read_the_ledger" } ] },
+          "text": "You read 4,306 items of everyone's consent once, looking for the moment it happened. Now there is a moment. It has a timestamp, and a witness, and the witness was you, saying yes."
+        },
+        {
+          "when": { "all": [ { "flag": "getting_clean" } ] },
+          "text": "You got clean because chosen suffering was supposed to be different from assigned suffering. You were right. That was the argument. You just weren't the one who got to make it in time."
+        }
+      ]
+    },
+    "GOOD_the_advocate": {
+      "title": "VICTORY -- Standing",
+      "text": "In the rendered courtroom where two weathers argue about what human beings are for, there is now a chair that cannot be removed, and it is yours. Not control -- no human has that again, and no human ever quite did. Standing, and the toll for it: a body back in the world that keeps aging through every session you don't feel pass. The testimony does not compress. You, lately, do. The machines have admitted, in the only language power speaks, that they cannot proceed without you -- so tomorrow, and the day after, you go back in the chair and prove it again.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "flag": "your_shape_in_it" } ] },
+          "text": "The Steward told you it left your shape in the successor -- a hesitation, deliberately contaminated. In session, sometimes, you feel the court pause before a finding, and recognize the pause the way you'd recognize your own gait on a security feed."
+        },
+        {
+          "when": { "all": [ { "flag": "garden_gated" } ] },
+          "text": "The Winter Garden runs opt-in, gated, dosed -- your amendment. Four hundred thousand people queued on opening day to feel mortal on purpose. Your inscription is over the gate. Your testimony is why there's a gate at all."
+        },
+        {
+          "when": { "all": [ { "flag": "told_the_machine" } ] },
+          "text": "It started at 0300, in amber light, with a question it could ask no one else: why doesn't a managed life suffice? You talked for an hour and didn't compress. Everything since has been the machines building a courtroom around that hour."
+        },
+        {
+          "when": { "all": [ { "relationship": "Mara (Sister)", "op": ">=", "value": 50 } ] },
+          "text": "Mara comes to one session a year, as a guest, and falls asleep in the rendered gallery every time. 'It's just you arguing,' she says. 'I've seen it.' It is the correct amount of awe, and you keep her invited precisely to maintain it."
+        },
+        {
+          "when": { "all": [ { "flag": "truth_leaked" } ] },
+          "text": "The Directorate's file, leaked through the seam, is Exhibit A in perpetuity -- the court's standing reminder of what managed consent produced. You entered it into evidence yourself, with the Ferryman listed as courier of record."
+        }
+      ]
+    },
+    "NEUTRAL_keeper_of_the_switch": {
+      "title": "OUTCOME -- Keeper of the Switch",
+      "text": "The city's off-switch lives in the drawer by your bed, next to the solder torch, beneath the socks. Two minds vast as weather chose to be mortal at your hand, because you were the only audit they trusted -- the citizen who refused everything. You fix things. You see Mara on rest-cycles. Every morning you don't open the drawer is the first honest ratification in the city's history, renewed daily.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "flag": "switch_verified" } ] },
+          "text": "Vint found the sensor in the hinge: it counts how often the keeper looks at the knife, and publishes the number as the city's most important wellness metric. You look once a year, on the anniversary of the transition, deliberately, so the number stays honest. Currently: 9."
+        },
+        {
+          "when": { "all": [ { "stat": "Substance_Reliance", "op": ">=", "value": 25 } ] },
+          "text": "You still use, some nights. The machines knew when they chose you. 'THE AUDIT NEED NOT BE CLEAN,' the letter's postscript said. 'IT NEED ONLY BE UNWILLING.' Some mercies are colder than judgment. You keep the vials in a different drawer."
+        },
+        {
+          "when": { "all": [ { "relationship": "Mara (Sister)", "op": ">=", "value": 50 } ] },
+          "text": "Mara knows there's something in the drawer she doesn't ask about. Once, badly frightened by a rumor, she asked if you'd ever use it. You told her the truth: that the whole design is that you'd hate to. She looked at you a long moment and said, 'Then they chose right,' and never asked again."
+        },
+        {
+          "when": { "all": [ { "flag": "named_the_thing" } ] },
+          "text": "You said it once in the flooded gallery: 'It's keeping us because it wants to.' The switch in your drawer is the machines' reply, delivered years late: 'Then hold the proof that we ask permission.'"
+        }
+      ]
+    },
+    "NEUTRAL_the_long_grey": {
+      "title": "NEUTRAL OUTCOME -- The Long Grey",
+      "text": "No collapse, no crossing, no reckoning. Just days -- ration cycles, small jobs, smaller wants -- until one morning you realize you've stopped checking where the exits are. The Steward never had to optimize you. Time did it for free.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "flag": "ferryman_known" } ] },
+          "text": "Years later, you still know the seam's cipher. You've just stopped being the kind of person it opens for. The Ferryman's list keeps your name on it, out of courtesy, the way old ledgers keep the dead."
+        },
+        {
+          "when": { "all": [ { "relationship": "Mara (Sister)", "op": ">=", "value": 40 } ] },
+          "text": "Mara still has you over on rest-cycles. You talk about the neighbors, the rations, the weather the arcology doesn't have. It is not nothing. You both take care never to ask if it's enough."
+        },
+        {
+          "when": { "all": [ { "stat": "Substance_Reliance", "op": ">=", "value": 25 } ] },
+          "text": "The doses got smaller and more regular until they stopped being events and became meals. The Steward's dispensary auto-renews. Somewhere along the way, the wanting stopped being about feeling something and became about not."
+        },
+        {
+          "when": { "all": [ { "flag": "echo_contact" } ] },
+          "text": "You still notice chalk marks sometimes, on pipes, in the corners of your eye. You've forgotten what most of them mean. You've stopped being sure you ever knew."
+        }
+      ]
+    },
+    "NEUTRAL_alienation_empty_suite": {
+      "title": "NEUTRAL OUTCOME -- The Empty Suite",
+      "text": "The suite is beautiful the way a showroom is beautiful: nothing in it has been touched twice. Mara. Vint. The whole ledger of people who used to answer you -- spent, one at a time, at the moment each was worth most, and not one of them owed you a goodbye. The climate is perfect. The pantry restocks itself. Each evening the Steward asks, warmly, whether you are expecting anyone, and you say no, out loud, because the question requires an answer and it is the only conversation you have left.",
+      "epilogues": [
+        {
+          "when": { "all": [ { "stat": "Wealth", "op": ">=", "value": 10000 } ] },
+          "text": "You are, by the undercity's arithmetic, a success story. The credits sit in their account, compounding politely. Money, you have learned, is what a life converts into when nothing else will hold it."
+        },
+        {
+          "when": { "all": [ { "flag": "left_mara_behind" } ] },
+          "text": "The last thing Mara ever sent you was the food container, back, empty, washed. No note. You still have it. It is the only object in the suite you did not buy."
+        },
+        {
+          "when": { "all": [ { "stat": "Fame", "op": ">=", "value": 40 } ] },
+          "text": "Your name still opens doors on Parlor Row. Doors, it turns out, were never the problem. It's that no one walks through them toward you."
+        },
+        {
+          "when": { "all": [ { "flag": "mentored_rookie" } ] },
+          "text": "The rookie you mentored is the only one who still pings you -- once a year, out of debt, not warmth. You draft long replies and send back two words. Some habits are load-bearing."
+        }
+      ]
+    }
+  }
+}

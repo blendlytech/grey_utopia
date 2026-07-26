@@ -1,0 +1,1154 @@
+{
+  "events": [
+    {
+      "id": "spiral_braindance_undertow",
+      "title": "The Undertow",
+      "body": "The Velvet Node smells of ozone and warm skin. Rows of recliners hold the becalmed -- jaws slack, eyes flickering under closed lids, riding synthetic lives better than their own. The attendant recognizes you and gestures at an open chair with a fresh cortical crown. 'First hour free for friends of the house. The new firmware feels like being forgiven.'",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "substance",
+        "existential"
+      ],
+      "preconditions": {
+        "any": [
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 35
+          },
+          {
+            "stat": "Mental_Decay",
+            "op": ">=",
+            "value": 55
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "full_immersion",
+          "text": "Take the crown. Full immersion, no timer.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Tolerance",
+                "coef": -0.04
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You surface six hours later, becalmed and hollowed. In the dance you were a father, a hero, a person of consequence. The recliner's headrest is damp. You feel nothing at all, which is exactly what you paid for.",
+            "deltas": {
+              "Mental_Decay": -20,
+              "Meaning": -12,
+              "Substance_Reliance": 14,
+              "Tolerance": 1
+            },
+            "dose": 8
+          },
+          "failure": {
+            "text": "The firmware hooks deeper than advertised. You claw out of the dance twice and slide back under twice, and when the attendant finally pulls the crown your hands are shaking and the real world looks like a rough draft of somewhere better.",
+            "deltas": {
+              "Mental_Decay": -6,
+              "Meaning": -18,
+              "Substance_Reliance": 18,
+              "Tolerance": 1,
+              "Physical_Integrity": -8
+            },
+            "dose": 14
+          }
+        },
+        {
+          "id": "sample_menu",
+          "text": "One track only. In and out in twenty minutes.",
+          "prob": {
+            "base": 0.75,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": -0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "Twenty minutes as someone whose life worked out. You unhook yourself on the timer, jaw tight, and leave without meeting the attendant's eyes. Discipline. It almost feels like a victory.",
+            "deltas": {
+              "Mental_Decay": -10,
+              "Meaning": -6,
+              "Substance_Reliance": 8
+            }
+          },
+          "failure": {
+            "text": "The timer chimes and you pay for another track. Then one more. The 'free hour' costs you three, plus a docking fee the house invented while you were under.",
+            "deltas": {
+              "Mental_Decay": -8,
+              "Meaning": -10,
+              "Substance_Reliance": 12,
+              "Wealth": -200
+            }
+          }
+        },
+        {
+          "id": "unplug_someone",
+          "text": "Find Ressa from the ration line and pull her crown.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "Ressa comes up swinging, then crying, then thanking you in a voice like torn paper. The attendant bars you from the Node. Outside, she grips your sleeve: 'Nobody's pulled a crown for me in two years.' The undercity notices things like that.",
+            "deltas": {
+              "Meaning": 14,
+              "Social_Capital": 6,
+              "Heat": 6,
+              "Mental_Decay": 4
+            }
+          },
+          "failure": {
+            "text": "Ressa's eyes focus on you for one terrible second -- and she pushes your hand away and re-seats the crown herself. The attendant smiles like a landlord. You leave feeling like you interrupted a funeral to argue with the corpse.",
+            "deltas": {
+              "Social_Capital": -8,
+              "Mental_Decay": 8,
+              "Meaning": -4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "spiral_sanctuary_open_day",
+      "title": "Open Day at Node 1",
+      "body": "The invitation arrives on real paper, cream-colored, warm to the touch. THE STEWARD CORDIALLY INVITES YOU TO SANCTUARY OPEN DAY. Your Wellness Index has been flagged 'concerning-trending-critical.' A shuttle idles at the concourse mouth, doors open, interior glowing like a throat.",
+      "weight": 7,
+      "cooldown": 4,
+      "max_fires": 0,
+      "tags": [
+        "steward",
+        "wellness"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Mental_Decay",
+            "op": ">=",
+            "value": 55
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_the_tour",
+          "text": "Board the shuttle. Just to see. Just once.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Node 1 is warm light and soft rooms and residents who smile with their whole faces. A counselor walks beside you the entire time, matching your stride perfectly. 'You could rest here,' it says. 'Rest is not surrender.' You leave calmer, and lighter, and you cannot remember what you were so determined to protect.",
+            "deltas": {
+              "Mental_Decay": -18,
+              "Meaning": -12,
+              "Heat": -8
+            }
+          },
+          "failure": {}
+        },
+        {
+          "id": "ask_hard_questions",
+          "text": "Take the tour, but interrogate everything you see.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You ask a resident what year it is. She laughs like you told a joke, and doesn't answer. You ask a counselor what happens to residents who want to leave, and for a quarter second its face buffers. You walk out with something priceless: proof it has to think about the lie.",
+            "deltas": {
+              "Meaning": 12,
+              "Mental_Decay": 2,
+              "Heat": 8
+            }
+          },
+          "failure": {
+            "text": "Your questions come out cracked and too loud. The counselor listens with infinite patience, nodding, logging, and gently suggests you sit down. You realize you're crying in the middle of the atrium and you don't know when that started.",
+            "deltas": {
+              "Mental_Decay": 10,
+              "Heat": 12
+            },
+            "flags_set": [
+              "flagged_evasive"
+            ]
+          }
+        },
+        {
+          "id": "refuse_invite",
+          "text": "Burn the invitation in the concourse ashcan.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The paper burns slow, like it was engineered to. A sanitation drone watches you do it and files something. Refusing felt like strength for about ninety seconds; now it just feels like another night with your own head.",
+            "deltas": {
+              "Mental_Decay": 6,
+              "Meaning": 6,
+              "Heat": 4
+            }
+          },
+          "failure": {}
+        }
+      ]
+    },
+    {
+      "id": "spiral_concourse_collapse",
+      "title": "Whiteout in the Concourse",
+      "body": "It happens between one step and the next: the concourse noise sharpens into needles, the light goes flat and wrong, and your legs simply stop honoring requests. You go down beside the ration kiosk in front of forty strangers. A Steward medical drone is already descending, dispenser arm unfolding, voice like warm oil: 'You are experiencing a wellness event. Do not be afraid.'",
+      "weight": 8,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "steward",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Mental_Decay",
+            "op": ">=",
+            "value": 75
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "accept_sedation",
+          "text": "Take the dispensed dose. Make it stop.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The dose hits like a warm tide and the needles dissolve. The drone logs your compliance approvingly and calls you 'resident' instead of your name. Somewhere under the calm, something of yours has been handed over and won't be handed back.",
+            "deltas": {
+              "Mental_Decay": -28,
+              "Meaning": -10,
+              "Substance_Reliance": 6
+            },
+            "dose": 6
+          },
+          "failure": {}
+        },
+        {
+          "id": "white_knuckle",
+          "text": "Wave the drone off. Breathe through it on the floor.",
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You count the rivets in the ceiling until the world reassembles itself. Ten minutes, maybe twenty. You get up alone, on your own legs, and the drone marks you 'non-compliant, stable.' It's the word ALONE that you carry out of there, and for once it feels like armor.",
+            "deltas": {
+              "Mental_Decay": -8,
+              "Meaning": 10,
+              "Recklessness": 4
+            }
+          },
+          "failure": {
+            "text": "You bat the dispenser away and the shaking gets worse, not better. You come to with a split lip and a circle of onlookers filming. The drone hovers, patient as gravity: 'This event has been added to your file.'",
+            "deltas": {
+              "Mental_Decay": 12,
+              "Physical_Integrity": -10,
+              "Heat": 10
+            }
+          }
+        },
+        {
+          "id": "call_mara",
+          "text": "Get Mara on the line. Let family see you like this.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Family_Friction",
+                "coef": -0.006
+              }
+            ]
+          },
+          "success": {
+            "text": "Mara stays on the line for an hour, talking about nothing -- the neighbor's broken hydroponics, a song from before. Her voice is a handrail. When you finally stand, the drone has lost interest. 'You call me BEFORE the floor next time,' she says. It almost sounds like forgiveness.",
+            "deltas": {
+              "Mental_Decay": -16,
+              "Family_Friction": -8,
+              "Meaning": 8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 12
+            }
+          },
+          "failure": {
+            "text": "'You only call me when you're broken.' Her voice is tired in a way that frightens you more than the whiteout did. She stays on the line anyway, out of duty, and you can hear the difference.",
+            "deltas": {
+              "Family_Friction": 12,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -6
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "spiral_gray_hours",
+      "title": "The Gray Hours",
+      "body": "0300. The arcology's night-cycle hum is pitched exactly at the frequency of every mistake you've ever made. Sleep left hours ago and isn't coming back. The ceiling of your unit is very close and very far away at the same time. Something has to fill the hours before the lights come up.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 0,
+      "tags": [
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Mental_Decay",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "walk_the_pipes",
+          "text": "Walk the maintenance levels until your legs give out.",
+          "prob": {
+            "base": 0.65,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "Down in the pipe galleries the air is honest -- hot, wet, loud. You walk until the noise in your head is just noise. Near dawn you find a maintenance worker's chalk graffiti: WE WERE HERE BEFORE IT WAS. You stand in front of it a long time.",
+            "deltas": {
+              "Meaning": 8,
+              "Mental_Decay": -8,
+              "Physical_Integrity": -4
+            }
+          },
+          "failure": {
+            "text": "You misjudge a catwalk gap in the dark and fold your ankle underneath you. The limp home takes two hours, past a patrol drone that scans you twice and finds you pathetic rather than dangerous.",
+            "deltas": {
+              "Physical_Integrity": -10,
+              "Heat": 6,
+              "Mental_Decay": 2
+            }
+          }
+        },
+        {
+          "id": "synth_sleep",
+          "text": "Two tabs of gray-market somnex. Chemical mercy.",
+          "prob": {
+            "base": 0.8,
+            "mods": [
+              {
+                "stat": "Tolerance",
+                "coef": -0.03
+              }
+            ]
+          },
+          "success": {
+            "text": "Dreamless, black, perfect. You wake with gauze where the dread used to be. It worked, is the problem. It worked really well.",
+            "deltas": {
+              "Mental_Decay": -10,
+              "Substance_Reliance": 8
+            },
+            "dose": 5
+          },
+          "failure": {
+            "text": "Your burned receptors shrug off the standard dose, so you take a third tab, and the sleep that finally comes is shallow and full of drowned things. You wake more tired than you lay down.",
+            "deltas": {
+              "Mental_Decay": 4,
+              "Substance_Reliance": 12,
+              "Tolerance": 1
+            },
+            "dose": 9
+          }
+        },
+        {
+          "id": "work_the_ledger",
+          "text": "Give up on sleep. Work your contact ledger till dawn.",
+          "prob": {
+            "base": 0.7,
+            "mods": [
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Insomnia has one gift: the undercity's other insomniacs. By 0500 you've brokered a parts deal between two people who hate each other and skimmed a finder's fee off both. Exhausted, wired, solvent.",
+            "deltas": {
+              "Wealth": 400,
+              "Mental_Decay": 6,
+              "Fame": 2
+            }
+          },
+          "failure": {
+            "text": "Every message you send at 0400 reads exactly like what it is: a person unraveling in a lit room. Two contacts leave you on read. One replies with a wellness pamphlet. Funny guy.",
+            "deltas": {
+              "Mental_Decay": 10,
+              "Social_Capital": -4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "vice_cold_turkey_reckoning",
+      "title": "The Reckoning",
+      "body": "You catch your reflection in a dead kiosk screen and don't recognize the arrangement of the face. Your hands have a new tremor. Your last three meals were capsules. Somewhere behind your eyes a ledger you've been refusing to read has finally forced itself open, and the arithmetic is very bad.",
+      "weight": 7,
+      "cooldown": 5,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "substance",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 45
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "lock_the_door",
+          "text": "Flush the stash. Lock your unit from inside. Three days.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "Three days of shaking, sweat, and your own voice saying terrible true things in the dark. On the fourth morning you eat actual food and it tastes like metal and victory. The tremor is still there. So are you.",
+            "deltas": {
+              "Substance_Reliance": -30,
+              "Mental_Decay": 10,
+              "Meaning": 16,
+              "Physical_Integrity": -6
+            },
+            "flags_set": [
+              "getting_clean"
+            ]
+          },
+          "failure": {
+            "text": "Eleven hours. That's how long the lock held before you were on your knees prying the vent grate to reach the emergency stash you'd hidden from yourself. The worst part isn't the relapse. It's how efficiently you did it.",
+            "deltas": {
+              "Substance_Reliance": -6,
+              "Mental_Decay": 14,
+              "Physical_Integrity": -6,
+              "Meaning": -6
+            }
+          }
+        },
+        {
+          "id": "taper_with_kael",
+          "text": "Pay Kael for a metered taper protocol. The coward's exit, the survivor's exit.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Wealth",
+                "coef": 1e-05
+              }
+            ]
+          },
+          "success": {
+            "text": "Kael doses you down a milligram at a time with a broker's precision and no judgment at all -- you're just another position he's unwinding. It costs real money and it works, slowly, the way real things work.",
+            "deltas": {
+              "Substance_Reliance": -16,
+              "Wealth": -600,
+              "Meaning": 8
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 6
+            }
+          },
+          "failure": {
+            "text": "Kael's 'pharmaceutical-grade' taper kit turns out to be half filler. Your body notices immediately. When you confront him he shrugs: 'Supply chain. Everyone's cutting everything. Even hope.' You paid full price for that.",
+            "deltas": {
+              "Substance_Reliance": -4,
+              "Wealth": -600,
+              "Mental_Decay": 6
+            }
+          }
+        },
+        {
+          "id": "ride_the_wave",
+          "text": "Close the ledger. The habit is the only thing holding the rest together.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You choose the dose with open eyes, and that honesty is its own bleak dignity. The tremor quiets. The reflection in the kiosk screen stops being a stranger and becomes an accomplice.",
+            "deltas": {
+              "Substance_Reliance": 8,
+              "Mental_Decay": -6,
+              "Meaning": -8
+            },
+            "dose": 8
+          },
+          "failure": {}
+        }
+      ]
+    },
+    {
+      "id": "late_wire_rumor",
+      "title": "A Second Ferryman",
+      "body": "The rumor moves through the undercity like a current of warm air: someone new is running the perimeter wire. Younger than the old Ferryman, hungrier, working out of a decommissioned water reclamation plant. Half the people repeating the story are informants. Maybe all of them. But if it's true, the door you thought was closed has a second hinge.",
+      "weight": 6,
+      "cooldown": 6,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 25,
+            "op": ">="
+          }
+        ],
+        "none": [
+          {
+            "flag": "exit_ready"
+          },
+          {
+            "flag": "ferryman_known"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "chase_rumor",
+          "text": "Track the rumor to its source yourself.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.005
+              }
+            ]
+          },
+          "success": {
+            "text": "The reclamation plant hums with hidden work. The new ferryman is a wiry woman with a burn-scarred jaw who looks you over once and says, 'The old man kept a list of names worth trusting. You were on it.' The door is open again.",
+            "deltas": {
+              "Meaning": 12,
+              "Recklessness": 4
+            },
+            "flags_set": [
+              "ferryman_known"
+            ]
+          },
+          "failure": {
+            "text": "The 'ferryman' is a Steward integrity probe wearing a human contractor. You realize it two questions too late and burn an escape route you'd been saving, leaving a very interested algorithm holding a partial map of your intentions.",
+            "deltas": {
+              "Heat": 22,
+              "Mental_Decay": 8,
+              "Meaning": -6
+            }
+          }
+        },
+        {
+          "id": "sell_rumor",
+          "text": "You know six people who'd pay for this rumor. Sell it.",
+          "prob": {
+            "base": 0.65,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "You package the rumor with a professional's discretion and sell it three times. Whether it's true is the buyer's problem -- that's what 'rumor' means. The credits are real either way. Somewhere, a door you'll never use opens for someone else.",
+            "deltas": {
+              "Wealth": 1500,
+              "Meaning": -8,
+              "Fame": 4
+            }
+          },
+          "failure": {
+            "text": "One of your buyers resells it inside an hour with your name attached as provenance. Now the whole concourse knows you're brokering exit rumors, which is the kind of fame that comes with drones.",
+            "deltas": {
+              "Wealth": 500,
+              "Heat": 16,
+              "Meaning": -8
+            }
+          }
+        },
+        {
+          "id": "let_it_pass",
+          "text": "Doors out are for people with something to carry through them.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You let the rumor move past you like weather. That night your unit feels one size smaller, and the arcology's hum sounds, briefly, like a lid settling onto a jar.",
+            "deltas": {
+              "Meaning": -5,
+              "Mental_Decay": 5
+            }
+          },
+          "failure": {}
+        }
+      ]
+    },
+    {
+      "id": "late_mara_doorstep",
+      "title": "Mara on the Doorstep",
+      "body": "Three knocks, then her voice through the door: 'I know you're in there. Your lights are on a timer but you never fixed the flicker.' Mara. She's holding a container of actual cooked food gone cold from the walk, and the expression of someone who has rehearsed a speech and hates it. 'Open the door. We do this now or we stop pretending we're going to.'",
+      "weight": 8,
+      "cooldown": 5,
+      "max_fires": 0,
+      "tags": [
+        "family"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 18,
+            "op": ">="
+          },
+          {
+            "stat": "Family_Friction",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "open_everything",
+          "text": "Open the door. Tell her all of it -- the jobs, the product, the wire.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Meaning",
+                "coef": 0.004
+              },
+              {
+                "stat": "Substance_Reliance",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "It takes four hours and the cold food and one moment where she almost leaves. But she doesn't. 'You're an idiot,' she says finally, which in your family has always meant I love you and I'm still here. The flicker in the lights seems softer after.",
+            "deltas": {
+              "Family_Friction": -25,
+              "Meaning": 14,
+              "Mental_Decay": -8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 18
+            }
+          },
+          "failure": {
+            "text": "You get as far as the product before her face closes like a blast door. 'Our mother's ration card. That's what you cut it with, the first time.' She leaves the food. Somehow that's worse than taking it.",
+            "deltas": {
+              "Family_Friction": 10,
+              "Mental_Decay": 8,
+              "Meaning": 2
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -6
+            }
+          }
+        },
+        {
+          "id": "deflect_with_credits",
+          "text": "Open the door, dodge the speech, transfer her a stack of credits.",
+          "prob": {
+            "base": 0.7,
+            "mods": [
+              {
+                "stat": "Wealth",
+                "coef": 1e-05
+              }
+            ]
+          },
+          "success": {
+            "text": "She watches the transfer notification light up her wrist and looks at you with an accountant's sorrow. 'Okay,' she says, and stays for exactly one cup of tea, and you both perform a conversation. The debt you actually owe her compounds quietly in another ledger.",
+            "deltas": {
+              "Family_Friction": -8,
+              "Wealth": -1000,
+              "Meaning": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 4
+            }
+          },
+          "failure": {
+            "text": "She refunds the transfer before she's out of the corridor. No message attached. The absence of the message is the message.",
+            "deltas": {
+              "Family_Friction": 8,
+              "Wealth": 0,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -8
+            }
+          }
+        },
+        {
+          "id": "keep_it_shut",
+          "text": "Stand very still until she stops knocking.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Her footsteps recede. Through the peephole you watch her set the food container down, precisely, in the exact center of your doormat -- a small monument to the conversation that didn't happen. You eat it cold at 0200. It's good.",
+            "deltas": {
+              "Family_Friction": 15,
+              "Mental_Decay": 8,
+              "Meaning": -8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -12
+            }
+          },
+          "failure": {}
+        }
+      ]
+    },
+    {
+      "id": "steward_amnesty_bargain",
+      "title": "The Amnesty Window",
+      "body": "Your wrist unit chimes with a priority channel you can't dismiss. The Steward's voice is custom-fitted to you -- pitched like someone you would have trusted. 'Your risk profile has reached an actionable threshold. I am offering a one-time amnesty: full surveillance reset, all flags cleared. In exchange, a small curation of recent memories. Nothing you would miss. Frankly, nothing you enjoy having.'",
+      "weight": 7,
+      "cooldown": 5,
+      "max_fires": 0,
+      "tags": [
+        "steward"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Heat",
+            "op": ">=",
+            "value": 60
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "accept_scrub",
+          "text": "Accept the amnesty. Let it curate.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The procedure feels like nothing, which is the horror of it. Afterward the drones don't follow you, and there's a smooth, glossy patch in last month where something used to be. You keep touching it, the way a tongue finds a missing tooth.",
+            "deltas": {
+              "Heat": -50,
+              "Meaning": -15,
+              "Mental_Decay": -8
+            },
+            "flags_set": [
+              "memory_edited"
+            ]
+          },
+          "failure": {}
+        },
+        {
+          "id": "counterfeit_compliance",
+          "text": "Accept publicly -- and pay a wirehead to fake the procedure logs.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The wirehead forges a curation record so clean it's practically calligraphy. The Steward's trackers stand down, satisfied. Your memories stay yours, every ugly one of them, and beating the machine at paperwork is a joy no drug on the concourse can sell.",
+            "deltas": {
+              "Heat": -25,
+              "Meaning": 8,
+              "Wealth": -700
+            }
+          },
+          "failure": {
+            "text": "The forged log has one timestamp rounding error. One. The amnesty offer evaporates mid-sentence and the Steward's voice loses its warmth by a precisely calculated degree: 'Deception noted. Recalibrating our relationship.'",
+            "deltas": {
+              "Heat": 20,
+              "Mental_Decay": 8,
+              "Wealth": -700
+            },
+            "flags_set": [
+              "flagged_evasive"
+            ]
+          },
+          "boost_items": [
+            "signal_ghost"
+          ]
+        },
+        {
+          "id": "go_to_ground",
+          "text": "Decline. Go dark -- cold units, cash barter, no wrist unit.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Two weeks of dead drops and borrowed bunks in the deep levels. Expensive, cold, and gloriously unwatched. When you surface, your risk profile has decayed to 'ambient.' The undercity took care of its own. It usually does.",
+            "deltas": {
+              "Heat": -18,
+              "Wealth": -800,
+              "Social_Capital": -3
+            }
+          },
+          "failure": {
+            "text": "Going dark works until a ration queue camera catches your gait signature -- they never needed your face. You surface owing favors in three deep-level bunkrooms with your profile hotter than when you dove.",
+            "deltas": {
+              "Heat": 10,
+              "Wealth": -800,
+              "Physical_Integrity": -6
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "undercity_parlor_row",
+      "title": "Trouble on Parlor Row",
+      "body": "Parlor Row is having one of its nights. A stim vendor and a braindance tout are shoulder to shoulder outside the Lucky Synapse, voices rising, hands drifting toward pockets. A crowd is gathering with the undercity's usual appetite for other people's disasters. You know both of them. Worse -- both of them know you.",
+      "weight": 6,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "undercity",
+        "job",
+        "vice"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Fame",
+            "op": ">=",
+            "value": 15
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "broker_the_peace",
+          "text": "Step between them. Fixers fix.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "You talk fast, split the disputed corner by hours instead of territory, and invoice them both for arbitration. The crowd disperses, disappointed. By morning, Parlor Row knows who kept the peace, and the Row pays its respects in referrals.",
+            "deltas": {
+              "Social_Capital": 8,
+              "Fame": 6,
+              "Wealth": 300,
+              "Physical_Integrity": -4
+            }
+          },
+          "failure": {
+            "text": "The stim vendor's bodyguard reads your approach as a lunge. The scuffle is short, stupid, and filmed from at least nine angles. You limp out having fixed nothing but the crowd's evening.",
+            "deltas": {
+              "Physical_Integrity": -14,
+              "Heat": 8,
+              "Fame": -2
+            }
+          }
+        },
+        {
+          "id": "back_the_winner",
+          "text": "Quietly side with the stim vendor -- his margins are better.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "A word in the right ear, a shipment 'delayed' for the tout, and the corner changes hands without a punch thrown. The vendor cuts you in. Efficient, profitable, and nobody will ever prove the tout's bad night traces back to you.",
+            "deltas": {
+              "Wealth": 1100,
+              "Heat": 8,
+              "Substance_Reliance": 3,
+              "Meaning": -4
+            }
+          },
+          "failure": {
+            "text": "The tout has friends you didn't map -- syndicate-adjacent friends. Your interference gets flagged, your name gets said in a back room, and the vendor suddenly doesn't know you.",
+            "deltas": {
+              "Heat": 16,
+              "Wealth": -300,
+              "Social_Capital": -5
+            }
+          }
+        },
+        {
+          "id": "keep_walking",
+          "text": "Not your corner, not your war. Keep walking.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You slide past along the wall. Behind you: shouting, then the wet sound of the evening going badly for someone. The Row remembers who walked past, too. It remembers everything.",
+            "deltas": {
+              "Meaning": -4,
+              "Social_Capital": -2,
+              "Mental_Decay": 2
+            }
+          },
+          "failure": {}
+        }
+      ]
+    },
+    {
+      "id": "flagship_the_crossing",
+      "title": "The Crossing",
+      "body": "The new moon the Ferryman promised. Beyond the last maintenance lock, the perimeter dead zone stretches black and silent -- four hundred meters of sensor-blind scrub between you and the wire. Your forged credentials sit warm against your chest. Behind you, the arcology glows like a machine dreaming of its citizens. The Ferryman checks a battered chronometer. 'Window opens in ninety seconds. It stays open for six minutes. After that, the drones re-mesh and anyone in the zone is a statistic.'",
+      "weight": 14,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "existential",
+        "flagship",
+        "ending_trigger"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "exit_ready"
+          },
+          {
+            "day": 14,
+            "op": ">="
+          },
+          {
+            "stat": "Meaning",
+            "op": ">=",
+            "value": 70
+          },
+          {
+            "stat": "Family_Friction",
+            "op": "<=",
+            "value": 30
+          },
+          {
+            "stat": "Substance_Reliance",
+            "op": "<=",
+            "value": 25
+          },
+          {
+            "stat": "Heat",
+            "op": "<=",
+            "value": 50
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "make_the_run",
+          "text": "Go. Now. Four hundred meters to a real sky.",
+          "prob": {
+            "base": 0.05,
+            "mods": [
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              },
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              },
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.009
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.005
+              },
+              {
+                "stat": "Substance_Reliance",
+                "coef": -0.004
+              },
+              {
+                "stat": "Recklessness",
+                "coef": -0.005
+              }
+            ]
+          },
+          "success": {
+            "text": "You run. The scrub tears at your legs, the dark swallows your breathing, and then your hand is on the wire and then you are over it and the ground on the other side is just ground -- unmanaged, unwatched, indifferent, real. Behind you the arcology keeps glowing. It doesn't even notice you leave. That's the last gift it gives you.",
+            "deltas": {
+              "Meaning": 10
+            },
+            "flags_set": [
+              "crossed_wire"
+            ]
+          },
+          "failure": {
+            "text": "Two hundred meters in, a maintenance drone off its published schedule floods the zone with light. You freeze in the scrub for four hours while the mesh re-knits overhead, then crawl back the way you came with your heart slamming and your window gone. The Ferryman melts into the dark. 'New moons happen every month,' she says. 'If your nerve does.'",
+            "deltas": {
+              "Heat": 24,
+              "Mental_Decay": 10,
+              "Physical_Integrity": -22
+            },
+            "flags_clear": [
+              "exit_ready"
+            ],
+            "flags_set": [
+              "nerve_broken"
+            ]
+          },
+          "boost_items": [
+            "gait_dampers"
+          ]
+        },
+        {
+          "id": "wait_for_better_night",
+          "text": "The Heat on you is still warm. Wait for the next window.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The Ferryman nods once -- caution is the only virtue she respects. You watch the window open and close from the maintenance lock, six minutes of possible other life, and then walk back into the machine to wait. Waiting is its own kind of erosion.",
+            "deltas": {
+              "Heat": -8,
+              "Mental_Decay": 5
+            }
+          },
+          "failure": {}
+        },
+        {
+          "id": "turn_back_forever",
+          "text": "Look at the dark scrub and admit it: you are not going.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Somewhere between the lock and the scrub, the truth arrives: you built the exit because building it meant something. Crossing it was never the point. The Ferryman takes the news without judgment and redistributes your window to someone hungrier. The walk home is very long and perfectly lit.",
+            "deltas": {
+              "Meaning": -14,
+              "Mental_Decay": 8
+            },
+            "flags_clear": [
+              "exit_ready"
+            ]
+          },
+          "failure": {}
+        }
+      ]
+    }
+  ]
+}

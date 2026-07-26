@@ -1,0 +1,248 @@
+{
+  "events": [
+    {
+      "id": "fac_steward_audit_01",
+      "title": "The Steward Protocol Audit",
+      "body": "An automated Steward Auditor drone hovers above your hideout entrance. Its blue optical sensor scans your retina as a smooth synthetic voice speaks: 'Citizen Fixer. Discrepancies detected in your Arcology energy quota allocation.'",
+      "weight": 1.5,
+      "cooldown": 3,
+      "max_fires": 2,
+      "tags": [
+        "steward",
+        "faction",
+        "audit"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Heat",
+            "op": ">=",
+            "value": 15.0
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "steward_audit_compliance",
+          "text": "Submit full bio-metric logs and pay the 800 cr clearance fine.",
+          "prob": {
+            "base": 0.85,
+            "mods": [
+              {
+                "stat": "Wealth",
+                "coef": 1e-05
+              }
+            ]
+          },
+          "success": {
+            "text": "The Auditor records your compliance token and departs. Heat drops, but your savings take a hit.",
+            "deltas": {
+              "Wealth": -800.0,
+              "Heat": -15.0,
+              "Meaning": -5.0
+            },
+            "faction_deltas": {
+              "Steward": 15.0
+            }
+          },
+          "failure": {
+            "text": "The fine clears, but the drone flags your transaction history for secondary review.",
+            "deltas": {
+              "Wealth": -800.0,
+              "Heat": 5.0
+            },
+            "faction_deltas": {
+              "Steward": 5.0
+            }
+          }
+        },
+        {
+          "id": "steward_audit_spoof",
+          "text": "Deploy a forged identity chip to scramble the Auditor's scan telemetry.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The optical sensor glitches in pink static. The Auditor registers a phantom system error and resets.",
+            "deltas": {
+              "Heat": -10.0,
+              "Fame": 5.0
+            },
+            "faction_deltas": {
+              "Resistance": 10.0,
+              "Steward": -10.0
+            }
+          },
+          "failure": {
+            "text": "The spoof fails! The Auditor emits a piercing alarm pulse, instantly broadcasting your co-ordinates to district enforcement.",
+            "deltas": {
+              "Heat": 30.0,
+              "Physical_Integrity": -10.0
+            },
+            "faction_deltas": {
+              "Steward": -25.0
+            }
+          }
+        },
+        {
+          "id": "steward_audit_bribe_vint",
+          "text": "Signal Vint to intercept the Auditor's datalink via underset relays.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "Vint spikes the drone's transmission queue with corrupted junk packets. It spins away out into the smog.",
+            "deltas": {
+              "Heat": -20.0,
+              "Meaning": 10.0
+            },
+            "faction_deltas": {
+              "Undercity": 15.0
+            }
+          },
+          "failure": {
+            "text": "Vint's signal jammer triggers an immediate emergency lockdown sweep in your sector.",
+            "deltas": {
+              "Heat": 20.0,
+              "Family_Friction": 10.0
+            },
+            "faction_deltas": {
+              "Undercity": -10.0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "fac_syndicate_contraband_run",
+      "title": "The Undercity Syndicate Contract",
+      "body": "A courier from the Iron Lotus syndicate drops a heavy sealed canister of unrefined neural dampeners onto your table. 'Get this up to Sector 7 before midnight, or answer to the boss.'",
+      "weight": 1.2,
+      "cooldown": 4,
+      "max_fires": 3,
+      "tags": [
+        "syndicate",
+        "job",
+        "contraband"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "syndicate_run_stealth",
+          "text": "Smuggle the load through ventilation shafts and maintenance ducts.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You navigate the toxic damp ducts unnoticed and deliver the load. The Lotus pays out 1,500 cr.",
+            "deltas": {
+              "Wealth": 1500.0,
+              "Fame": 10.0,
+              "Heat": 5.0
+            },
+            "faction_deltas": {
+              "Undercity": 20.0
+            }
+          },
+          "failure": {
+            "text": "A corrosive leak in duct 4 burns through your gloves. You drop half the cargo but escape.",
+            "deltas": {
+              "Wealth": 600.0,
+              "Physical_Integrity": -15.0,
+              "Heat": 10.0
+            },
+            "faction_deltas": {
+              "Undercity": 5.0
+            }
+          }
+        },
+        {
+          "id": "syndicate_run_bribe_gate",
+          "text": "Flash forged credentials to pass through the main checkpoint cleanly.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "The gate guard glances at your credential screen, nods lethargically, and waives you through.",
+            "deltas": {
+              "Wealth": 1500.0,
+              "Social_Capital": 5.0
+            },
+            "faction_deltas": {
+              "Undercity": 15.0
+            }
+          },
+          "failure": {
+            "text": "The scanner flags a discrepancy in your clearance code. You have to abandon the payload and run.",
+            "deltas": {
+              "Heat": 25.0,
+              "Family_Friction": 15.0
+            },
+            "faction_deltas": {
+              "Undercity": -20.0,
+              "Steward": -10.0
+            }
+          }
+        },
+        {
+          "id": "syndicate_run_skim_cargo",
+          "text": "Skim a vial of the synthetic dampener for personal use before delivering the rest.",
+          "prob": {
+            "base": 0.7,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You pocket a vial unnoticed and deliver the rest. Your stress vanishes, but reliance creeps up.",
+            "deltas": {
+              "Wealth": 1000.0,
+              "Mental_Decay": -20.0,
+              "Substance_Reliance": 10.0
+            },
+            "faction_deltas": {
+              "Undercity": 10.0
+            }
+          },
+          "failure": {
+            "text": "The Lotus enforcer weighs the canister upon delivery. He notices the missing volume and takes your cut as penance.",
+            "deltas": {
+              "Wealth": 0.0,
+              "Physical_Integrity": -20.0
+            },
+            "faction_deltas": {
+              "Undercity": -30.0
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

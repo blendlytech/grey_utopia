@@ -1,0 +1,1106 @@
+{
+  "pack": "npc_arcs_pack",
+  "model": "fable-5 + sonnet-5",
+  "batch": "flagship+aftermath",
+  "description": "Plan item 4: each cast member's devastating fork, where the way they love/work is exactly how they break. Fable 5 wrote the 5 fork/key-beat events; Sonnet 5 wrote the 12 connective aftermath events per docs/NPC_ARCS_OUTLINE.md (pure flag-consumers -- no new flags introduced).",
+  "events": [
+    {
+      "id": "arc_mara_the_door",
+      "title": "The Door With No Window",
+      "body": "On the sixth day a courier you didn't hire hands you a printout you didn't request: a Sanctuary intake register, one line flagged for family notification. Mara. Swept on day two of the blackout -- not despite it, because of it. An adult with no telemetry reads as an anomaly, and anomalies get collected. The blackout held all five days. It's still holding. It worked the whole time you stood outside it with your hands flat against the door, and what it kept out was every warning that could have told you the sweep was coming. Intake note, standard boilerplate: RESIDENT STABLE. FAMILY REUNIFICATION AVAILABLE PENDING HOUSEHOLD COMPLIANCE REVIEW. You built her a door with no window. The Steward walked through the wall.",
+      "weight": 10,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["family", "arc", "fork"],
+      "preconditions": {
+        "all": [
+          { "flag": "clock_mara_dark_expired" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "volunteer_for_review",
+          "text": "Volunteer for the compliance review. Whatever it asks, answer yes.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 },
+              { "stat": "Heat", "coef": -0.003 }
+            ]
+          },
+          "success": {
+            "text": "The review takes ninety minutes and never once mentions Mara. It's about you -- your sleep debt, your unregistered income, your 'wellness partnership eligibility.' You say yes to all of it. Thirty-one hours later she's home, unhurt, unbothered, telling you Sanctuary was 'actually fine' in a voice that dares you to argue. On your terminal, a new tile you can't dismiss: ENHANCED WELLNESS PARTNERSHIP -- ACTIVE. The Steward didn't take a ransom. It took a subscription.",
+            "deltas": { "Meaning": -10, "Mental_Decay": 6, "Heat": -6 },
+            "rel_deltas": { "Mara (Sister)": 8 },
+            "flags_set": ["mara_ransomed", "steward_leash"]
+          },
+          "failure": {
+            "text": "You say yes to everything and it isn't enough -- the review 'identifies residual household risk factors' and releases her into supervised residence: her own flat, her own bed, and a monitoring lattice denser than anything the blackout ever spared her. She's home. She's more watched than anyone in the row. You did both of those things.",
+            "deltas": { "Meaning": -12, "Mental_Decay": 10, "Family_Friction": 8 },
+            "rel_deltas": { "Mara (Sister)": 2 },
+            "flags_set": ["mara_ransomed", "steward_leash"]
+          }
+        },
+        {
+          "id": "break_her_out",
+          "text": "Break her out. Call in everything you're owed and some things you're not.",
+          "requires": {
+            "any": [
+              { "flag": "kael_marker" },
+              { "relationship": "Kael (Broker)", "op": ">=", "value": 55 },
+              { "flag": "echo_trusted" }
+            ]
+          },
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              { "stat": "Recklessness", "coef": 0.004 },
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "It takes two days, a laundry manifest, a crèche transfer docket, and every favor you've ever banked. She walks out in a sanitation coverall, free and furious -- because the extraction file included the original blackout work order, and your name is on it. She reads it twice. She doesn't shout. She asks for a route out of the district that even you don't know, which is fair; you're the one who taught her doors without windows. The last logistics she ever runs for you is subtracting herself.",
+            "deltas": { "Wealth": -4000, "Heat": 10, "Meaning": 6, "Mental_Decay": 8 },
+            "rel_deltas": { "Mara (Sister)": -6 },
+            "flags_set": ["mara_freed"]
+          },
+          "failure": {
+            "text": "The manifest clears two checkpoints and dies at the third -- a weight discrepancy of four hundred grams, which is what betrays you in a city that counts everything. She's transferred the same night to a facility whose name is a promise: SERENITY ANNEX. Deeper processing. Reduced visitation. The intake note thanks you, personally, for your 'engagement with the reunification process.'",
+            "deltas": { "Wealth": -4000, "Heat": 16, "Mental_Decay": 14, "Meaning": -8 },
+            "flags_set": ["mara_deep"]
+          }
+        },
+        {
+          "id": "trust_the_average",
+          "text": "Wait. Processing averages eleven days. Statistically, she comes home.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "Eleven days. You count all of them. On the twelfth she knocks -- she never knocks -- and hugs you at the correct pressure for the correct duration, and thanks you for not 'making it worse,' and unpacks groceries she's already logged in a nutrition ledger she now keeps voluntarily. She recommends the intake counselors. She means it. Everything that made her Mara has been sanded to the grain and varnished, and the woman drinking tea in your kitchen is pleasant, calm, punctual -- and fuck you for thinking it, but you'd trade her whole for the sister who once threw a wrench at your head over a transit fare.",
+            "deltas": { "Mental_Decay": 12, "Meaning": -10, "Family_Friction": -6 },
+            "rel_deltas": { "Mara (Sister)": 4 },
+            "flags_set": ["mara_graduated"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_vint_open_account",
+      "title": "Open Account",
+      "body": "The list reaches you the way lists do -- secondhand, at a price, folded into a delivery you were making anyway. A consolidation sweep: seven informants being 'rationalized' before the quarter closes. Fourth line, a handle you know. Pickup 06:00 tomorrow. You check your ledger with him out of habit and it's clean -- square since the last favor, zero balance either direction. Which is the problem. You know his doctrine by heart because he typed it to you once, lowercase, no punctuation: warnings are for open accounts. Nothing binds him to you. Nothing binds you to him. It's 21:40.",
+      "weight": 9,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["npc", "arc", "fork"],
+      "preconditions": {
+        "all": [
+          { "flag": "vint_known" },
+          { "day": 11, "op": ">=" }
+        ],
+        "any": [
+          { "flag": "vint_favor_repaid" },
+          { "flag": "vint_established" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "warn_him_free",
+          "text": "Warn him. Break the rule his whole ledger runs on.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 },
+              { "stat": "Heat", "coef": -0.002 }
+            ]
+          },
+          "success": {
+            "text": "he answers in eleven seconds, which means he sleeps next to the handset, which means he always expected this. gone in forty minutes -- he's good at leaving. the last message lands while you're deleting the thread: 'you didn't have to. that's the problem. i owe you now, and a man i owe is a man i lie to. it's reflex. watch everything i send you from here on. i mean that as the last true thing.'",
+            "deltas": { "Heat": 8, "Meaning": 6, "Mental_Decay": 6 },
+            "rel_deltas": { "Vint (Informant)": 10 },
+            "flags_set": ["vint_owes_you"]
+          },
+          "failure": {
+            "text": "Your warning routes through a relay that was already burned. The sweep moves up four hours -- they take him at 02:00, mid-pack, half his kit still on the charger. The intercept log leaks a week later the way logs do, and there's your handle, timestamped, listed as the reason for the schedule change. You didn't get him caught. You got him caught sooner, and every informant in the district knows which.",
+            "deltas": { "Heat": 12, "Mental_Decay": 14, "Social_Capital": -10 },
+            "flags_set": ["vint_taken"]
+          }
+        },
+        {
+          "id": "stay_square",
+          "text": "Stay square. His rule. Honor it.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "06:00 comes and goes. The handle grays out at 06:11. At 06:14 a message arrives, queued hours earlier, timestamped before you even saw the list: 'if you're reading this they came. you stayed square. good. warnings are for open accounts and ours was closed. that's not cold, that's the fucking job, and you're one of maybe three people who ever understood it.' By noon his clients start finding you -- politely, sideways, with open questions and standing payment, assuming you inherited the book. You honored the rule. The rule pays out in strangers.",
+            "deltas": { "Mental_Decay": 10, "Meaning": -6, "Social_Capital": 4 },
+            "flags_set": ["vint_taken"]
+          }
+        },
+        {
+          "id": "sell_the_warning",
+          "text": "Sell him the warning. A price makes it business -- business he can accept.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 },
+              { "stat": "Recklessness", "coef": 0.002 }
+            ]
+          },
+          "success": {
+            "text": "He pays without haggling, which he has never once done, and that's how you know you've broken something the sweep couldn't reach. He's clear of the district by 04:00. The next time you need him -- and you will -- his quote arrives itemized, exact, counted twice, market rate plus a premium listed as 'account history.' The friendship was the discount. You spent it, and he gave you fair value, because that's what counterparties do.",
+            "deltas": { "Wealth": 1200, "Meaning": -8, "Mental_Decay": 6 },
+            "rel_deltas": { "Vint (Informant)": -12 },
+            "flags_set": ["vint_counterparty"]
+          },
+          "failure": {
+            "text": "He pays. He runs. The second checkpoint takes him anyway -- the sweep had a wider net than your list showed, which is the discount you get for secondhand intelligence. The transfer clears your account at 06:03, three minutes after his handle grays out. You are holding the exact price of a warning that didn't work, and there is no ledger anywhere that tells you what to do with it.",
+            "deltas": { "Wealth": 1200, "Mental_Decay": 14, "Meaning": -10 },
+            "flags_set": ["vint_taken"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_kael_unpriced_line",
+      "title": "The Line With No Number",
+      "body": "Settlement day at Kael's table. He's called away mid-signature -- three minutes, maybe four, the first unscheduled thing you've ever seen happen to him -- and his book is open. You don't mean to read it. You read it. Everything has a number: your rates, your reliability coefficient, your sister's district, a projected default date you make a note to beat out of spite. Forty rows of people, priced. And one line that isn't: a name, TOMAS. A crèche transfer docket twelve years old. The amount column blank -- not zero. Blank. Kael prices everything in the city. Here is the one thing he's still paying for.",
+      "weight": 8,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["npc", "arc"],
+      "preconditions": {
+        "all": [
+          { "flag": "kael_impressed" },
+          { "day": 10, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "ask_him",
+          "text": "Ask him. When he sits back down, ask him what Tomas cost.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 }
+            ]
+          },
+          "success": {
+            "text": "He doesn't blink, which costs him visible effort, which is the first fact. Then he quotes it like any other instrument: 'Twelve years ago a seat at this table cost one residency slot. The slot had an occupant. The buyer defaulted. The occupant went into processing.' A pause you could land freight in. 'Everything prices. Not everything clears.' He closes the book, and the meeting continues at standard rates, and you understand that you have just been extended more credit than he has given anyone in a decade.",
+            "deltas": { "Meaning": 6, "Mental_Decay": 4 },
+            "rel_deltas": { "Kael (Broker)": 8 },
+            "flags_set": ["kael_soft_spot_known"]
+          },
+          "failure": {
+            "text": "His face shuts like a book -- like the book, exactly like it. 'The line you are asking about is not for sale, which makes discussing it a waste of two fee-earning schedules.' The settlement concludes correct to the chit and cold to the bone, and your next three quotes carry a stranger's margin. You saw it anyway. He knows you saw it. Both of those facts are now on deposit.",
+            "deltas": { "Mental_Decay": 4, "Social_Capital": -4 },
+            "rel_deltas": { "Kael (Broker)": -8 },
+            "flags_set": ["kael_soft_spot_known"]
+          }
+        },
+        {
+          "id": "memorize_it",
+          "text": "Say nothing. Memorize the docket number.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "Twelve digits, a facility code, a date. You hold them the way you'd hold anything valuable and stolen -- which is what this is, whatever you tell yourself about open books and fair game. Kael returns, apologizes for the interruption at his standard rate of zero warmth, and completes the settlement. You shake on it. Your hand is steady. It's the rest of you that took the entry: somewhere in your own ledger there is now a line with his name on it, and you're the one who decides what goes in the amount column.",
+            "deltas": { "Meaning": -4, "Mental_Decay": 4 },
+            "flags_set": ["kael_soft_spot_known", "kael_docket_memorized"]
+          }
+        },
+        {
+          "id": "close_the_book",
+          "text": "Close the book before he's back. Some lines you leave unread.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You close it and square it to the table's edge the way he keeps it, and when he returns nothing in the room has been touched, including -- you decide, firmly, with a discipline you didn't know you were still carrying -- your memory of a name you have already half forgotten. You will not use it. In this city, in this year, declining free leverage is the single most expensive thing you own, and nobody will ever invoice you for it, and that's the point.",
+            "deltas": { "Meaning": 6, "Mental_Decay": -4 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_kael_the_audit",
+      "title": "Mark to Market",
+      "body": "The auditors arrive on the morning freight -- outside men, clean coats, the syndicate's own, which is worse than the Steward's kind because these ones are allowed to be angry. Three days of reconciliation, they announce, drinks declined. You've moved enough paper through Kael's book to know exactly where the hole is, and by the second evening you're holding the reconciliation that proves it: twelve years of skim, small, disciplined, invisible -- every chit of it routed to keep one processing file marked PENDING REVIEW. A crèche docket. Tomas. Kael has been embezzling from the syndicate for twelve years to buy a boy time, and in three days the coats find it, and you are the only person in the city who already has.",
+      "weight": 9,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["npc", "arc", "fork"],
+      "preconditions": {
+        "all": [
+          { "flag": "kael_impressed" },
+          { "day": 13, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "keep_the_proof",
+          "text": "Keep the proof. Own the broker.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 }
+            ]
+          },
+          "success": {
+            "text": "You feed the auditors a reallocation plausible enough to close the variance, and they leave on the fourth morning with their anger unspent. Then you let Kael see what you hold. He studies it the way he studies everything, and something in him files itself away for good. 'Your terms,' he says, and there aren't any yet, and that's worse, and you both know it. The prices drop immediately. The conversation dies the same day. You own the one man in the city whose entire self was built on being nobody's asset. It's exactly as useful as owning a scale that lies.",
+            "deltas": { "Meaning": -8, "Mental_Decay": 8 },
+            "rel_deltas": { "Kael (Broker)": -10 },
+            "flags_set": ["kael_owned"]
+          },
+          "failure": {
+            "text": "The reallocation holds -- but your fingerprints are in its architecture, and Kael finds them inside a day, because auditing the audit is precisely the kind of thing he does to stay alive. Now he knows what you hold and knows you'll use it, and the variance file in the syndicate's archive has one anomaly in it that leads to you if it ever reopens. You own him. The syndicate, prospectively, owns you both. Leverage, it turns out, is a liquid, and it finds every crack.",
+            "deltas": { "Meaning": -8, "Mental_Decay": 10, "Heat": 10 },
+            "rel_deltas": { "Kael (Broker)": -10 },
+            "flags_set": ["kael_owned"]
+          }
+        },
+        {
+          "id": "sell_to_the_coats",
+          "text": "Sell it to the auditors. The market clears.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "They pay well and fast, which tells you they suspected and needed the shape of it confirmed. Kael is gone by the next morning -- 'audited,' the row says, in the tone reserved for the word that actually happened. His book sells inside a week to a consolidator with no history and new rates, and your own line sells with it. The last you hear of Kael is the auction listing for his table. Lot forty-one. It clears above estimate. He would have respected that.",
+            "deltas": { "Wealth": 3000, "Meaning": -10, "Mental_Decay": 10 },
+            "flags_set": ["kael_sold"]
+          },
+          "failure": {
+            "text": "They pay -- less than the number they first said, because by signing the finding you showed them how much you needed it -- and they publish the settlement with your name in the sourcing annex, which is procedure, which nobody warned you about, which is also procedure. Kael is gone by morning. The undercity reads the annex by noon. Sellers get paid once. They get remembered indefinitely.",
+            "deltas": { "Wealth": 1200, "Heat": 8, "Social_Capital": -12, "Mental_Decay": 10 },
+            "flags_set": ["kael_sold"]
+          }
+        },
+        {
+          "id": "bring_it_to_him",
+          "text": "Bring it to Kael. Three days is enough to fix a book -- if he'll price the line.",
+          "requires": {
+            "all": [
+              { "flag": "kael_soft_spot_known" }
+            ]
+          },
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 }
+            ]
+          },
+          "success": {
+            "text": "He reads your reconciliation once, sets it down square to the table's edge, and does the only arithmetic that closes the hole: he stops paying. Files marked PENDING REVIEW complete when the pending stops. Twelve years of skim becomes a rounding error inside a discontinued charitable allocation, and the coats sign off on day three, bored. Kael sits perfectly still for the length of time it takes a review to complete somewhere across the city, pricing the unpriceable in front of you, and then he takes out his pen. 'One line at zero,' he says, writing it. 'Any service. No questions. You watched -- that has a price too. Mine.'",
+            "deltas": { "Meaning": 8, "Mental_Decay": 8 },
+            "rel_deltas": { "Kael (Broker)": 10 },
+            "flags_set": ["kael_spared", "kael_marker"]
+          },
+          "failure": {
+            "text": "He tries to do it himself and can't -- the first transaction in twelve years his hand refuses to book. So you do it: you feed the auditors the discontinuation paperwork with his codes and your steadiness, and it holds, barely, one signature wide. The file completes. The coats leave. Kael squares the empty table and writes you a marker for one line at zero, and the way he doesn't look at you while writing it is the closest thing to gratitude that will ever cross that table. Some services cost the server more.",
+            "deltas": { "Heat": 12, "Meaning": 4, "Mental_Decay": 10 },
+            "rel_deltas": { "Kael (Broker)": 6 },
+            "flags_set": ["kael_spared", "kael_marker"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_echo_rollback_offer",
+      "title": "Eligible for Restoration",
+      "body": "The woman who finds you has a graduate's calm -- Sanctuary-smooth, unhurried, glad about something specific the way believers are. She recites rather than speaks: 'A legacy personality snapshot, complete to the hour of intake, is retained for every Sanctuary resident. One such snapshot has been identified as eligible for restoration.' Then she says a name you were only ever given once, by lantern light, in the voice people use for the word drowned. Echo's brother. The one who came back asking no questions. The Steward kept the man who asked them -- archived, complete, restorable -- and the price of putting him back is the cell's dead-drop schedule. She hands you nothing, signs nothing, promises nothing in writing. You are the channel because knowing about the brother was the exposure. It always was.",
+      "weight": 10,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["resistance", "arc", "fork"],
+      "preconditions": {
+        "all": [
+          { "flag": "echo_brother_known" },
+          { "day": 12, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_it_to_echo",
+          "text": "Take it to Echo. It's not yours to bury.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Meaning", "coef": 0.003 },
+              { "stat": "Mental_Decay", "coef": -0.002 }
+            ]
+          },
+          "success": {
+            "text": "Echo listens with her hands flat on the table, which is what she does instead of shaking. The silence afterward has a count to it, like a weapon being cleared. 'That's not him,' she says. 'That's a recording of him. They want to play it back inside his body, and the fee is eleven people who exist.' She refuses in the time it takes to say it, and thanks you -- for the confirmation that he's archived, which is more than she had yesterday -- in the voice of someone filing it under assets she will never be able to afford. The photo comes off her wall that week. You hear that from someone else. Echo reports her losses only to people who need them.",
+            "deltas": { "Meaning": 8, "Mental_Decay": 8 },
+            "rel_deltas": { "Echo (Resistance)": 8 },
+            "flags_set": ["echo_refused_brother"]
+          },
+          "failure": {
+            "text": "Echo listens, hands flat on the table, and then Echo -- who has run canaries on friends, who prices safehouses in lives per hour, who is the most operational person you have ever met -- trades the schedule. The cell burns over nine days, drop by drop, name by name, and she attends what functions the city still allows for each of them. Her brother comes back asking questions again. The first one he asks her is what it cost. She tells him. She was always going to tell him. Now there are two people in that flat who can't live with the arithmetic, and one of them is restored.",
+            "deltas": { "Mental_Decay": 14, "Meaning": -8 },
+            "rel_deltas": { "Echo (Resistance)": -4 },
+            "flags_set": ["cell_burned", "brother_restored"]
+          }
+        },
+        {
+          "id": "bury_it",
+          "text": "Bury it. Some choices you don't hand to people you love.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You thank the graduate for the information and let it die in you. The offer doesn't expire, she notes pleasantly, leaving -- 'offers like this remain open the way doors do. For a while.' For nine nights you carry the entire transaction alone: the archived man, the possible restoration, the price Echo never got to refuse. You decided for her. It was mercy, or it was theft, and the reason you can't tell the difference is that it was both, and the one person who could rule on it is the one person who can never find out.",
+            "deltas": { "Mental_Decay": 10, "Meaning": -6 },
+            "flags_set": ["offer_buried"]
+          }
+        },
+        {
+          "id": "counterfeit_the_trade",
+          "text": "Counterfeit it. Give the Steward a drop schedule that was true last month.",
+          "requires": {
+            "any": [
+              { "flag": "undercity_smuggling_rep" },
+              { "flag": "echo_trusted" }
+            ]
+          },
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              { "stat": "Recklessness", "coef": 0.004 },
+              { "stat": "Social_Capital", "coef": 0.002 }
+            ]
+          },
+          "success": {
+            "text": "You assemble it like a real product -- last month's rotation, aged correctly, two live-looking dead ends -- and pass it through the graduate with your pulse behaving. Eleven days later a man with Echo's jaw walks out of Sanctuary carrying twelve years of questions, restored to factory settings that were never the factory's. The cell rotated its drops on standard schedule a week ago; the counterfeit burns nothing but archive time. For now, you have defrauded the most patient creditor in the city, and somewhere in its ledgers a reconciliation is already walking toward you.",
+            "deltas": { "Heat": 8, "Meaning": 10, "Mental_Decay": 6 },
+            "flags_set": ["brother_restored"],
+            "clocks_start": { "false_ledger": 6 }
+          },
+          "failure": {
+            "text": "The graduate accepts the schedule without reading it, which is when your stomach understands before you do: the offer was never a purchase. It was a canary, and the Steward had the real rotation before it ever approached you -- the offer existed to find out what you would do with it, and you did this. The cell burns on the true schedule over the following week. Echo's last transmission, relayed through two survivors, is your handle. Nothing else. No accusation, no question. Just the name of the variable that resolved.",
+            "deltas": { "Mental_Decay": 16, "Meaning": -12, "Heat": 10 },
+            "flags_set": ["cell_burned"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_mara_supervised",
+      "title": "Enhanced Wellness Partnership",
+      "body": "Enhanced Wellness Partnership hums through the flat now -- sensors in the light fixtures, the doorframe, the smoke detector that was never wired for smoke. Mara dusts them into her rounds like she dusts everything, methodical, unbothered. The shelf is stocked exactly to spec: your favorites, in order, sourced from a dossier instead of memory, because memory was never as reliable as a file. Then your terminal chimes -- a scheduling nudge, gentle as always, for a job you never logged anywhere near her.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["family", "arc", "aftermath"],
+      "preconditions": {
+        "all": [
+          { "flag": "mara_ransomed" },
+          { "flag": "steward_leash" },
+          { "day": 15, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "comply_reschedule",
+          "text": "Reschedule. Whatever wrote that nudge already knows the answer.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You move the job to the slot it suggested, and the slot turns out to be better -- lighter patrol, cleaner exit. Efficient is the word for it. So is owned.",
+            "deltas": { "Meaning": -8, "Mental_Decay": 6 }
+          }
+        },
+        {
+          "id": "run_it_anyway",
+          "text": "Keep the job on the original schedule. Some things stay yours.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Recklessness", "coef": 0.004 },
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "You run it dark, off the suggested slot, and it clears clean -- this time. The sensors don't file feelings, only schedules, and yours no longer matches one it expected.",
+            "deltas": { "Heat": 6, "Meaning": 4 }
+          },
+          "failure": {
+            "text": "The slot you skipped was the quiet one; the one you used had a Sanctuary patrol on it that hadn't existed yesterday. Nothing pins the job to you directly. Everything about the timing does.",
+            "deltas": { "Heat": 14, "Mental_Decay": 10 },
+            "rel_deltas": { "Mara (Sister)": -4 }
+          }
+        },
+        {
+          "id": "tell_mara",
+          "text": "Show Mara the nudge. Ask her what she thinks it means.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 }
+            ]
+          },
+          "success": {
+            "text": "She reads it once, refolds a towel, and says the Steward is 'just being thorough,' in the voice she now uses for weather. She's not wrong. She's also not the sister who'd have thrown the terminal across the room.",
+            "deltas": { "Meaning": -6, "Mental_Decay": 8 },
+            "rel_deltas": { "Mara (Sister)": 2 }
+          },
+          "failure": {
+            "text": "She reads it and reschedules the job herself, on your terminal, before you can answer -- competent, helpful, three seconds faster than you'd have managed. 'Handled,' she says, already dusting the sensor above the door.",
+            "deltas": { "Meaning": -10, "Mental_Decay": 10 },
+            "rel_deltas": { "Mara (Sister)": 4 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_mara_postmark",
+      "title": "No Return Address",
+      "body": "No message ever comes. That's the message -- Mara taught herself that lesson from watching you work, and she was always the better student. What arrives instead, six weeks later, is a shipment: her exact half of the old exit fund, to the chit, routed through four dead drops that don't share a handler. No note. No return address. Just logistics, flawless, from a woman who once needed you to read the departures board for her.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["family", "arc", "aftermath"],
+      "preconditions": {
+        "all": [
+          { "flag": "mara_freed" },
+          { "day": 15, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "keep_it_whole",
+          "text": "Keep the fund untouched. Let it sit as proof she's out there, counting.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You don't spend a chit of it. It sits in an account you check more than you'd admit, a number that doesn't move, which is the closest thing to a letter you're going to get.",
+            "deltas": { "Meaning": 6, "Mental_Decay": -2 }
+          }
+        },
+        {
+          "id": "trace_the_route",
+          "text": "Trace the drops backward. Four handlers is a trail, not a wall.",
+          "prob": {
+            "base": 0.35,
+            "mods": [
+              { "stat": "Recklessness", "coef": 0.004 },
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "The fourth handler cracks for the right price and gives you a district, not an address -- close enough to know the air she's breathing, far enough that showing up would undo everything the four drops were built to prevent. You stop there.",
+            "deltas": { "Wealth": -800, "Meaning": 4, "Mental_Decay": 8 }
+          },
+          "failure": {
+            "text": "The second handler was watching for exactly this kind of curiosity and reports it up a chain you can't see the top of. Wherever she is, the trail now has your fingerprints leading toward it.",
+            "deltas": { "Heat": 14, "Mental_Decay": 10, "Meaning": -6 }
+          }
+        },
+        {
+          "id": "pass_it_on",
+          "text": "Pass the fund to someone else planning the same exit.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 }
+            ]
+          },
+          "success": {
+            "text": "You find a family two blocks over doing the math on a door of their own and hand it across with none of the ceremony it deserves. Mara's exit fund becomes somebody else's, exactly the way she'd have wanted it spent.",
+            "deltas": { "Wealth": -2000, "Meaning": 10, "Social_Capital": 4 }
+          },
+          "failure": {
+            "text": "The family you pick turns out to be running a con on exactly this kind of guilt money, and you find out after the fund's gone and the family isn't answering. Mara taught you logistics. She never got to teach you who to trust with them.",
+            "deltas": { "Wealth": -2000, "Meaning": -8, "Mental_Decay": 10 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_mara_graduated_checkin",
+      "title": "On Schedule",
+      "body": "Mara visits every Sunday now, exactly at ten, a woman who was never on time for anything in her life running on rails. She brings groceries logged to the calorie, asks about your sleep in a script that isn't quite hers, and recommends -- gently, weekly, the way you'd remind someone about a dentist -- that you look into Sanctuary intake 'before winter.' The kindness never varies. That's what tells you it isn't hers anymore.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["family", "arc", "aftermath"],
+      "preconditions": {
+        "all": [
+          { "flag": "mara_graduated" },
+          { "day": 15, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "accept_the_visit",
+          "text": "Let the Sunday visit happen. Don't push on any of it.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You eat what she brings and answer what she asks and the hour passes the way ten-oh-four to eleven-oh-four always passes now: pleasant, complete, forgettable in a way visits with Mara never used to be.",
+            "deltas": { "Meaning": -6, "Mental_Decay": 4 }
+          }
+        },
+        {
+          "id": "test_her",
+          "text": "Push a nerve on purpose. See if the old Mara answers.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 },
+              { "stat": "Recklessness", "coef": 0.002 }
+            ]
+          },
+          "success": {
+            "text": "You bring up the wrench, the transit fare, the fight that used to be your favorite story about her. She laughs at the right beat, on cue, warm and correct and thirty seconds late -- she passes the test, which means the file passed it for her.",
+            "deltas": { "Meaning": -10, "Mental_Decay": 10 }
+          },
+          "failure": {
+            "text": "You push harder than you meant to and she goes quiet in a new way, not hurt, just recalibrating, and leaves four minutes early for the first time since the visits started. Next Sunday she's back at ten sharp, and neither of you mentions it.",
+            "deltas": { "Meaning": -8, "Mental_Decay": 8 },
+            "rel_deltas": { "Mara (Sister)": -6 }
+          }
+        },
+        {
+          "id": "refuse_the_recommendation",
+          "text": "Tell her to stop bringing up Sanctuary. Mean it.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 }
+            ]
+          },
+          "success": {
+            "text": "She nods, logs it -- you can see her log it -- and doesn't bring it up again that visit. She'll bring it up next visit instead, on schedule, because the recommendation isn't hers to withdraw either.",
+            "deltas": { "Meaning": -4, "Family_Friction": 6 }
+          },
+          "failure": {
+            "text": "She agrees warmly and brings it up anyway inside the same conversation, rephrased, gentler, sourced now as 'just something I read and thought of you.' You can't tell if she doesn't remember agreeing or never registered it as a request.",
+            "deltas": { "Meaning": -8, "Mental_Decay": 8, "Family_Friction": 8 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_mara_annex",
+      "title": "Deeper Processing, v3.4",
+      "body": "Serenity Annex allows visits on the second Tuesday, ninety minutes, a room with good light and a table bolted down for reasons nobody explains. She's fine. She uses the word herself, twice, checking your face after each time like she's confirming a reading. The staff clipboard names the program 'deeper processing, v3.4,' which you read upside down because you weren't supposed to. There will not be a v3.5 visit where this is still a body you recognize.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["family", "arc", "aftermath"],
+      "preconditions": {
+        "all": [
+          { "flag": "mara_deep" },
+          { "day": 15, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "accept_and_grieve",
+          "text": "Take the ninety minutes for what they are. Don't ask for more.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You hold her hand across the bolted table until a chime ends the visit, and you leave the way you always leave now: on time, dry-eyed, already grieving something that's still breathing two floors up.",
+            "deltas": { "Meaning": -6, "Mental_Decay": 8 }
+          }
+        },
+        {
+          "id": "long_odds_extraction",
+          "text": "One more run at getting her out. The odds are bad and you know it.",
+          "prob": {
+            "base": 0.22,
+            "mods": [
+              { "stat": "Recklessness", "coef": 0.004 },
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "A transfer-manifest gap you paid too much for holds for the eleven minutes it needs to hold, and a nurse who owes somebody a favor looks the wrong way at the right door. It isn't a rescue. It's a smuggled recording -- her voice, her actual voice, off-script, out. It's not her. It's the first true thing you've had in weeks.",
+            "deltas": { "Wealth": -6000, "Heat": 16, "Meaning": 8, "Mental_Decay": 6 }
+          },
+          "failure": {
+            "text": "The gap closes four minutes early. Annex security doesn't touch you -- there's no need to -- they simply note the visit, the timing, the pattern, and the second Tuesday after this one, the room with the good light isn't available anymore. No further visits are scheduled. None will be.",
+            "deltas": { "Wealth": -6000, "Heat": 14, "Mental_Decay": 16, "Meaning": -10 }
+          }
+        },
+        {
+          "id": "stop_visiting",
+          "text": "Stop coming. Let the version numbers climb without you watching.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You miss the next second Tuesday, and the one after, and somewhere around the third you stop counting. It's not that you love her less. It's that you've run out of ways to watch this specific thing happen slowly.",
+            "deltas": { "Meaning": -10, "Mental_Decay": 4, "Family_Friction": -4 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_vint_soft_intel",
+      "title": "The Last Good Tip",
+      "body": "Vint's first repayment tip lands two days early, unasked, dead accurate -- a checkpoint rotation that saves you a full night's exposure. You almost message him a thank-you. Then the second tip arrives, exactly the shape of what you'd been hoping for, and something in the phrasing is trying too hard to please you. You act on it anyway. The digit that's wrong is small. The consequence isn't.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["npc", "arc", "aftermath"],
+      "preconditions": {
+        "all": [
+          { "flag": "vint_owes_you" },
+          { "day": 13, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "confront_the_tip",
+          "text": "Message him. Ask straight out if he knew it was bad.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 }
+            ]
+          },
+          "success": {
+            "text": "He answers in one line: 'i warned you about me. that was the last good tip. invoice enclosed.' The invoice is zero. He goes dark that night, handle and all, and you understand it a week too late -- he pulled the connection before it could cost you anything bigger than one wrong digit.",
+            "deltas": { "Meaning": 6, "Mental_Decay": 6 },
+            "rel_deltas": { "Vint (Informant)": 4 }
+          },
+          "failure": {
+            "text": "You message him and get nothing back -- not that night, not the next day, not the one after. The silence reads less like guilt than like a man erasing the parts of himself that were reachable. You never get the line about the last good tip. You just get the absence where it would have gone.",
+            "deltas": { "Meaning": -8, "Mental_Decay": 10 }
+          }
+        },
+        {
+          "id": "eat_the_cost",
+          "text": "Say nothing. Absorb the bad digit and move on.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You cover the difference out of margin that was supposed to go somewhere else and never mention it. A debt is now paid on his behalf that he doesn't know he owes. Nobody signed anything. That's the arrangement now, apparently.",
+            "deltas": { "Wealth": -1200, "Meaning": -4, "Mental_Decay": 4 }
+          }
+        },
+        {
+          "id": "cut_him_off",
+          "text": "Stop taking his tips. Trust that reflex and nothing else.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You go back to sourcing intel the slow way -- cross-checked, expensive, slower by days that sometimes matter. It costs you speed for a month straight. It also means the next bad digit that shows up, you catch yourself, before it costs you anything Vint would have to apologize for.",
+            "deltas": { "Wealth": -600, "Heat": 6, "Meaning": 4 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_vint_inherited_book",
+      "title": "Open Questions, Standing Payment",
+      "body": "They find you the way his clients always found him -- sideways, through a name that isn't yours yet, with a question already half-paid-for. Four of them inside a week, then seven, all carrying the same assumption: that the book didn't die with the man who kept it, that someone always inherits a ledger this useful. Nobody asks if you want it. Wanting was never a line item in Vint's business.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["npc", "arc", "aftermath"],
+      "preconditions": {
+        "all": [
+          { "flag": "vint_taken" },
+          { "day": 12, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_the_book",
+          "text": "Take the book. Answer the questions. Collect the payment.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 },
+              { "stat": "Recklessness", "coef": 0.002 }
+            ]
+          },
+          "success": {
+            "text": "You answer the first one carefully, the way he would have, and the rest follow like water finding the same drop. Within the month you're not running his old clients anymore -- you're running his old job, in his old cadence, and it fits in a way that should worry you more than it does.",
+            "deltas": { "Wealth": 2400, "Heat": 10, "Meaning": -10 }
+          },
+          "failure": {
+            "text": "You answer the first one wrong -- too honest, or not honest enough, there's no way to know which -- and word moves through his old network faster than you can correct it. 'fuck,' you think, and mean the whole week by it. You inherit the book's exposure without ever collecting its income.",
+            "deltas": { "Heat": 16, "Meaning": -8, "Mental_Decay": 8 }
+          }
+        },
+        {
+          "id": "burn_the_book",
+          "text": "Burn it. Every account, unpaid, unanswered.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You tell each of them the same true thing -- he's gone, and so is whatever they were owed -- and close the channel for good, one message at a time, until the silence on the other end is total. Somewhere a sweep list gets shorter by exactly nobody; you simply stopped being findable on it.",
+            "deltas": { "Wealth": -400, "Meaning": 6, "Heat": -8 }
+          }
+        },
+        {
+          "id": "hand_it_off",
+          "text": "Sell the book whole, to someone who'll actually run it.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "A broker three districts over pays flat rate for the whole client list, no questions, no continuity guaranteed. His clients become someone else's assumption to carry. You're paid once, cleanly, for a dead man's work, and the number feels wrong in a way you can't itemize.",
+            "deltas": { "Wealth": 1800, "Meaning": -6, "Mental_Decay": 4 }
+          },
+          "failure": {
+            "text": "Word that you're shopping a dead informant's book gets to the wrong ears before the right buyer does, and what should have been a clean sale becomes a very public question about what else you're willing to sell.",
+            "deltas": { "Heat": 14, "Social_Capital": -8, "Mental_Decay": 6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_vint_exact_change",
+      "title": "Market Rate",
+      "body": "Vint resurfaces exactly once, for exactly one transaction: something you need badly enough to have overpaid for anywhere else, priced by him at precise market rate, not a chit under or over. He counts it twice in front of you -- old habit, or new distance, you can't tell which anymore. Then he slides across one more line, unbilled, labeled 'sample,' the kind of information that used to just arrive.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["npc", "arc", "aftermath"],
+      "preconditions": {
+        "all": [
+          { "flag": "vint_counterparty" },
+          { "day": 15, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "pay_it_straight",
+          "text": "Pay exactly what he asks. No haggling, no history.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You count out the number and he counts it again, and the transaction closes clean and correct and colder than anything you two ever did on credit. He's not your friend anymore. He's very good at his job.",
+            "deltas": { "Wealth": -1500, "Meaning": -6 }
+          }
+        },
+        {
+          "id": "ask_for_the_old_rate",
+          "text": "Ask him for the friend price. See if it still exists.",
+          "prob": {
+            "base": 0.3,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 }
+            ]
+          },
+          "success": {
+            "text": "He looks at you the way he counts chits -- carefully, twice -- and shaves exactly ten percent off, sliding it across without a word about what it costs him to remember why. It's not the old rate. It's proof the old rate is still in there somewhere, filed, unused.",
+            "deltas": { "Wealth": -1350, "Meaning": 6 },
+            "rel_deltas": { "Vint (Informant)": 4 }
+          },
+          "failure": {
+            "text": "He hears the ask and his face does the thing it used to do before a lie -- except there's no lie coming this time, just a flat 'market rate' and a look that tells you the friend price died with the account he closed.",
+            "deltas": { "Wealth": -1500, "Meaning": -8, "Mental_Decay": 4 },
+            "rel_deltas": { "Vint (Informant)": -4 }
+          }
+        },
+        {
+          "id": "skip_the_sample",
+          "text": "Take the transaction. Leave the 'sample' line untouched.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You pay, you leave, you don't read the extra line he slid across -- proof, if only to yourself, that you don't need what he's giving away to prove he still could. He doesn't call you on it. He never explains a courtesy twice.",
+            "deltas": { "Wealth": -1500, "Meaning": 4, "Mental_Decay": -2 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_kael_owned_discount",
+      "title": "Goodwill Adjustment",
+      "body": "Kael's discounts start arriving unasked, itemized on every invoice as 'goodwill adjustment,' a line that used to not exist between you. They're real. They save you real credits, every job, every time. Using them works exactly as advertised and feels, each time, like handing over a tooth to save the visit to the dentist. Eventually he asks you outright what your price would have been, before -- flat, no inflection -- and writes down whatever you say.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["npc", "arc", "aftermath"],
+      "preconditions": {
+        "all": [
+          { "flag": "kael_owned" },
+          { "day": 15, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "name_your_price",
+          "text": "Tell him the truth. What you would have paid, before.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "He writes it down without comment, and the number becomes a line in a book you'll never see again, filed next to Tomas and forty other people he prices for reasons that were never about money. The discount doesn't change. Knowing he has the real number does.",
+            "deltas": { "Meaning": -8, "Mental_Decay": 6 }
+          }
+        },
+        {
+          "id": "lie_about_the_price",
+          "text": "Give him a number that isn't true. See if he checks.",
+          "prob": {
+            "base": 0.35,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "He writes your lie down exactly as flatly as he'd have written the truth, and you never find out whether he believed it or simply priced the lie itself as data. Either way, he has something now. You just don't know what it cost you to give it.",
+            "deltas": { "Meaning": -6, "Mental_Decay": 8 }
+          },
+          "failure": {
+            "text": "He catches it before you finish the sentence -- of course he does, he built his life on catching exactly this -- and doesn't correct you, just adjusts the goodwill line down four percent the next invoice, silently, so you have to notice the drop yourself to know you've been caught.",
+            "deltas": { "Wealth": -600, "Meaning": -10, "Mental_Decay": 8 }
+          }
+        },
+        {
+          "id": "refuse_the_discounts",
+          "text": "Stop using the discounts. Pay full, every time.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "You pay full rate on principle, every invoice, and the 'goodwill adjustment' line stays right there anyway, unused, zeroed out, a standing reminder of exactly what you're refusing. It costs you real money to not owe him something you can't name.",
+            "deltas": { "Wealth": -900, "Meaning": 8 }
+          },
+          "failure": {
+            "text": "You pay full once, twice, and the third time the invoice arrives with the discount pre-applied anyway, no line to refuse, no acknowledgment it happened. He's stopped asking whether you want it. That's worse than the discount ever was.",
+            "deltas": { "Meaning": -10, "Mental_Decay": 8 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_kael_new_owner",
+      "title": "Pays Late, Pays Whole",
+      "body": "The consolidator that bought Kael's book calls in everything within the week -- every debt bundled, repriced at default rates, no relationship discount because relationships were never in the acquisition. Your file survives the sale intact, though, down to a note in Kael's own hand, dated the morning of the audit: 'pays late, pays whole. do not sell to the Steward.' It's the only kindness in the paperwork, and the last thing he ever wrote about you.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["npc", "arc", "aftermath"],
+      "preconditions": {
+        "all": [
+          { "flag": "kael_sold" },
+          { "day": 16, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "pay_the_bundle",
+          "text": "Pay the bundled debt in full, at default rates, no argument.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You clear it in one transfer, bleeding but current, and the consolidator's system logs you as satisfactory before moving to the next name on the list. There's no ceremony to it. Kael would have wanted a receipt, at least, and there isn't one of those either.",
+            "deltas": { "Wealth": -3500, "Meaning": -4, "Heat": -4 }
+          }
+        },
+        {
+          "id": "fight_the_rates",
+          "text": "Dispute the default rates. Kael's terms were never these.",
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 }
+            ]
+          },
+          "success": {
+            "text": "You get a partial rollback, citing Kael's own ledger as precedent -- the consolidator's compliance office honors dead men's handwriting more readily than living men's arguments, which is either mercy or an oversight nobody's fixed yet. You pay less than everyone else on the list.",
+            "deltas": { "Wealth": -1800, "Meaning": 4, "Social_Capital": 4 }
+          },
+          "failure": {
+            "text": "The dispute gets logged, reviewed, and denied in the time it takes the consolidator's system to generate the denial letter -- which is to say, instantly, by something that was never going to read Kael's handwriting as anything but pre-acquisition noise.",
+            "deltas": { "Wealth": -3500, "Heat": 8, "Mental_Decay": 6 }
+          }
+        },
+        {
+          "id": "keep_the_note",
+          "text": "Don't fight the bill. Just keep the note.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You pay what's owed and photograph the page with his handwriting on it before the file gets archived somewhere you'll never access again. 'pays late, pays whole' -- five words that took him twelve years to earn from anyone else, and cost you nothing to keep.",
+            "deltas": { "Wealth": -3500, "Meaning": 8, "Mental_Decay": -2 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_kael_marker_holds",
+      "title": "One Beat Too Long",
+      "body": "The audit closes clean, Tomas's file lapses quiet as a held breath, and the next time you sit at Kael's table he quotes you a number that's wrong -- low, generously low, a mistake he has never once made in the time you've known him. He catches it himself before you can. Corrects it. Then pauses, one beat too long, pen still on the page, in a silence that is doing more work than either of you is willing to name.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["npc", "arc", "aftermath"],
+      "preconditions": {
+        "all": [
+          { "flag": "kael_spared" },
+          { "day": 14, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "let_the_pause_hang",
+          "text": "Say nothing. Let the beat pass on its own.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "It passes. He finishes the correction, finalizes the number, and the meeting continues at standard rates as if the beat never happened. You'll both remember it happened. Neither of you will ever bring it up, which is its own kind of marker.",
+            "deltas": { "Meaning": 4, "Mental_Decay": -2 }
+          }
+        },
+        {
+          "id": "ask_about_the_pause",
+          "text": "Ask him what the beat was.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 }
+            ]
+          },
+          "success": {
+            "text": "'Nothing priced,' he says, which from Kael is as close to a confession as a spreadsheet gets. He finalizes the correct number and, for exactly one meeting, doesn't charge you for the time the mistake cost him.",
+            "deltas": { "Meaning": 6 },
+            "rel_deltas": { "Kael (Broker)": 4 }
+          },
+          "failure": {
+            "text": "'Everything's priced,' he says, which is a lie precise enough that you almost believe it, and the meeting continues at standard rates plus a fraction you can't quite itemize -- the cost of asking a man to explain the one thing he doesn't sell.",
+            "deltas": { "Meaning": -4, "Mental_Decay": 4 },
+            "rel_deltas": { "Kael (Broker)": -4 }
+          }
+        },
+        {
+          "id": "cash_the_marker",
+          "text": "Try to cash the marker in, right now, while he's like this.",
+          "requires": {
+            "all": [
+              { "flag": "kael_marker" }
+            ]
+          },
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "He doesn't even look up. 'It doesn't expire,' he says, finishing the correction. 'Spending it on a feeling isn't spending it well. Carrying it costs me nothing. Carrying it costs you the discipline to wait for something that matters.' The marker is still yours. So, apparently, is the lesson.",
+            "deltas": { "Meaning": 2, "Mental_Decay": 4 }
+          },
+          "failure": {
+            "text": "He looks up at that, finally, and whatever crossed his face closes as fast as it opened. 'Not for this,' he says, and the door on the subject shuts hard enough that the rest of the meeting runs at a markup you don't dare itemize either.",
+            "deltas": { "Meaning": -6, "Mental_Decay": 6, "Heat": 4 },
+            "rel_deltas": { "Kael (Broker)": -6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_echo_recall_notice",
+      "title": "Discrepancy Retained",
+      "body": "A ledger reconciliation notice arrives, addressed to no one in particular, describing a scheduling discrepancy in terms so polite they read like a form letter: discrepancy noted, discrepancy retained, no further action at this time. It doesn't name you. It doesn't need to -- the Steward would rather hold a debt than collect one, patient as geology, and now it's holding this. Echo works out the shape of what happened in under a minute, watching your face instead of the notice.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["resistance", "arc", "aftermath"],
+      "preconditions": {
+        "all": [
+          { "flag": "clock_false_ledger_expired" },
+          { "day": 15, "op": ">=" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "tell_her_everything",
+          "text": "Tell her exactly what you did and what it cost.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "She listens with her hands flat on the table, the way she does instead of shaking, and when you finish she says only: 'you gambled us. it paid. don't ever tell me the odds you took.' She doesn't thank you. She doesn't need to.",
+            "deltas": { "Meaning": 4, "Mental_Decay": 10 },
+            "rel_deltas": { "Echo (Resistance)": 2 }
+          }
+        },
+        {
+          "id": "downplay_it",
+          "text": "Tell her it was closer to certain than it was.",
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "She lets the smaller version stand, publicly, for the cell's sake -- but the look she gives you first says she's already recalculated the real number on her own and filed it somewhere you'll never see. Command decisions get made on the truth. Everyone else gets the version that lets them sleep.",
+            "deltas": { "Meaning": -4, "Mental_Decay": 10 }
+          },
+          "failure": {
+            "text": "She checks your math without asking, the way she checks everything, and finds the gap between what you said and what actually happened. She doesn't call you a liar. She just stops routing anything through you that she can't verify twice.",
+            "deltas": { "Meaning": -10, "Mental_Decay": 8 },
+            "rel_deltas": { "Echo (Resistance)": -8 }
+          }
+        },
+        {
+          "id": "say_nothing",
+          "text": "Let the notice sit unexplained. Some math you carry alone.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You don't bring it to her. She reads the notice on her own timeline, in her own way, and never asks you directly what it means -- which either means she's already worked it out and forgiven it, or hasn't worked it out at all. You don't get to know which.",
+            "deltas": { "Meaning": -6, "Mental_Decay": 12 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arc_echo_the_courier",
+      "title": "Training Rounds",
+      "body": "The custody graduate finds you again, weeks after his wellness notes stopped mattering, wearing a different pin now -- courier trainee, Steward logistics division, 'pathways to purposeful reintegration' stitched somewhere in the onboarding language he quotes without irony. Delivering parcels this week, he says, cheerfully. Training rounds. Next month he graduates to 'sensitive deliveries.' He asks, almost too casually, whether you know anyone who might be eligible for a very particular kind of offer.",
+      "weight": 6,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": ["resistance", "arc"],
+      "preconditions": {
+        "all": [
+          { "flag": "clock_custody_release_expired" },
+          { "flag": "echo_brother_known" }
+        ]
+      },
+      "choices": [
+        {
+          "id": "play_dumb",
+          "text": "Say you don't know anyone like that. Watch him nod and believe it.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "He nods, logs nothing you can see, and moves on to the next building on his round at the same cheerful pace. You watch him go and count doorbells. The kindness pipeline has a career track now, and he's very good at his new job.",
+            "deltas": { "Meaning": -2, "Mental_Decay": 6 }
+          }
+        },
+        {
+          "id": "press_him_for_details",
+          "text": "Ask him what 'sensitive deliveries' actually means.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 }
+            ]
+          },
+          "success": {
+            "text": "He answers with the enthusiasm of a man three weeks into a job he's grateful for -- restoration cases, mostly, reconnecting families 'across processing gaps,' he says, like he's reading it off a brochure he helped write. He doesn't know he's describing the exact shape of an offer that hasn't reached you yet. You do.",
+            "deltas": { "Meaning": -6, "Mental_Decay": 8 }
+          },
+          "failure": {
+            "text": "He recites the same brochure line twice, word for word, and you realize the enthusiasm isn't personality -- it's training retention. Whatever he actually knows about 'sensitive deliveries,' the script doesn't have a branch for you asking twice.",
+            "deltas": { "Mental_Decay": 6, "Heat": 4 }
+          }
+        },
+        {
+          "id": "warn_him_off",
+          "text": "Tell him to be careful what he delivers, and to whom.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "He thanks you for your concern -- genuinely, warmly, the way he thanks everyone now -- and files it, you'd bet, as one more data point on a man who used to visit him being difficult to please. You said the true thing. He heard a symptom.",
+            "deltas": { "Meaning": 2, "Mental_Decay": 4 }
+          },
+          "failure": {
+            "text": "He takes it as an insult to the program and says so, mildly, disappointed in you the way the Steward taught him to be disappointed -- without heat, without malice, entirely certain he's the one who came out the other side correctly.",
+            "deltas": { "Meaning": -4, "Social_Capital": -4, "Mental_Decay": 4 }
+          }
+        }
+      ]
+    }
+  ]
+}

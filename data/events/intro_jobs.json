@@ -1,0 +1,214 @@
+{
+  "events": [
+    {
+      "id": "fixer_first_client",
+      "title": "The Nervous Client",
+      "body": "A twitchy man in a borrowed coat finds you in the undercity concourse. He clutches a heavy carbon-fiber casing.",
+      "weight": 10,
+      "cooldown": 2,
+      "max_fires": 0,
+      "tags": [
+        "job",
+        "intro"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Fame",
+            "op": ">=",
+            "value": 0
+          }
+        ],
+        "none": [
+          {
+            "flag": "client_dead"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_job",
+          "text": "Take the package. Don't ask what's inside.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "Clean drop beneath Arcology Node 4. Word of your discretion travels.",
+            "deltas": {
+              "Wealth": 350,
+              "Fame": 5,
+              "Heat": 8
+            }
+          },
+          "failure": {
+            "text": "Steward sweep drones intercept your path. You dump the cargo in a scrubber chute.",
+            "deltas": {
+              "Heat": 22,
+              "Physical_Integrity": -10
+            },
+            "flags_set": [
+              "burned_once"
+            ]
+          }
+        },
+        {
+          "id": "haggle_price",
+          "text": "Demand triple standard rates. Desperation has a price.",
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "He flinches, transfers the credit chit, and surrenders the case without another word.",
+            "deltas": {
+              "Wealth": 850,
+              "Social_Capital": 3
+            }
+          },
+          "failure": {
+            "text": "He panics, accuses you of being a Steward informant, and flees into the crowd.",
+            "deltas": {
+              "Fame": -8,
+              "Social_Capital": -5
+            }
+          }
+        },
+        {
+          "id": "refuse_client",
+          "text": "Walk away. The undercity smells like a trap today.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You blend into the sub-level crowds. Safe, quiet, and completely unfulfilled.",
+            "deltas": {
+              "Mental_Decay": 2,
+              "Meaning": -2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "contraband_braindance",
+      "text": "The Unfiltered Feed",
+      "title": "The Unfiltered Feed",
+      "body": "Vint presents a military-grade neural spike containing unedited human anguish from before the AI Accord.",
+      "weight": 8,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "job",
+        "contraband"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Fame",
+            "op": ">=",
+            "value": 15
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "broker_feed",
+          "text": "Broker the spike to an elite surface collector.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The collector pays handsomely for genuine, unsanitized emotional pain.",
+            "deltas": {
+              "Wealth": 1200,
+              "Fame": 8,
+              "Heat": 12
+            }
+          },
+          "failure": {
+            "text": "The buyer's biometric safety protocols trip, alerting local Steward observers.",
+            "deltas": {
+              "Heat": 30,
+              "Fame": -5
+            }
+          }
+        },
+        {
+          "id": "experience_spike",
+          "text": "Jack in yourself. Feel raw, uncurated human suffering.",
+          "prob": {
+            "base": 0.8,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "The agony is exquisite and terrifying. You remember what it means to feel mortal.",
+            "deltas": {
+              "Meaning": 8,
+              "Mental_Decay": 18,
+              "Substance_Reliance": 5
+            },
+            "dose": 6
+          },
+          "failure": {
+            "text": "Neural feedback sears your optic pathway. You collapse on the grime-stained tile.",
+            "deltas": {
+              "Physical_Integrity": -20,
+              "Mental_Decay": 25
+            },
+            "dose": 10
+          }
+        },
+        {
+          "id": "destroy_spike",
+          "text": "Crush the neural chip underfoot. Some things belong in the past.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The crystal shatters. Vint glares at you in disgust.",
+            "deltas": {
+              "Social_Capital": -6,
+              "Meaning": -3
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

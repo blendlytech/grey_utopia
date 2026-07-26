@@ -1,0 +1,16 @@
+{
+  "TERMINAL_overdose_death":       { "stat_deltas": { "Heat": 4 }, "faction_deltas": { "Undercity": 3 } },
+  "TERMINAL_institutionalized":    { "stat_deltas": { "Heat": -3 }, "faction_deltas": { "Steward": 5 } },
+  "TERMINAL_synthetic_detachment": { "stat_deltas": { "Substance_Reliance": 3, "Social_Capital": -2 } },
+  "TERMINAL_syndicate_ledger":     { "faction_deltas": { "Undercity": -5 }, "rel_deltas": { "Kael (Broker)": -8 } },
+  "TERMINAL_gardeners_winter":     { "stat_deltas": { "Meaning": 4, "Mental_Decay": 4 } },
+  "GOOD_offgrid_escape":           { "stat_deltas": { "Heat": 4, "Meaning": 3 }, "faction_deltas": { "Undercity": 5 } },
+  "GOOD_small_real_things":        { "stat_deltas": { "Family_Friction": -5 }, "rel_deltas": { "Mara (Sister)": 6 } },
+  "GOOD_the_advocate":             { "stat_deltas": { "Fame": 5, "Social_Capital": 3 }, "faction_deltas": { "Steward": 3 } },
+  "NEUTRAL_the_open_door":         { "stat_deltas": { "Heat": 3 }, "faction_deltas": { "Undercity": 4 } },
+  "NEUTRAL_stewards_shepherd":     { "stat_deltas": { "Social_Capital": -3 }, "faction_deltas": { "Resistance": -8 } },
+  "NEUTRAL_cashed_out_compliance": { "faction_deltas": { "Undercity": -4, "Steward": 4 } },
+  "NEUTRAL_keeper_of_the_switch":  { "stat_deltas": { "Meaning": 3 }, "faction_deltas": { "Steward": 5 } },
+  "NEUTRAL_the_long_grey":         { "stat_deltas": { "Meaning": -4, "Social_Capital": -2 } },
+  "NEUTRAL_alienation_empty_suite":{ "stat_deltas": { "Social_Capital": -4, "Fame": 3 } }
+}

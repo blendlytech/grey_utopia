@@ -1,0 +1,29 @@
+{
+  "cast": [
+    {
+      "name": "Mara (Sister)",
+      "description": "Your younger sister who still remembers your parents before the Steward UBI transition.",
+      "satisfaction": 75.0,
+      "strength": 12.0
+    },
+    {
+      "name": "Vint (Informant)",
+      "description": "An off-grid data broker who deals in illegal pre-accord historical media.",
+      "satisfaction": 50.0,
+      "strength": 6.0
+    },
+    {
+      "name": "Kael (Broker)",
+      "description": "An undercity syndicate intermediary who connects fixers with high-paying clients.",
+      "satisfaction": 40.0,
+      "strength": 8.0
+    },
+    {
+      "name": "Echo (Resistance)",
+      "description": "A cell handler for the undercity Resistance who recruits through chalk marks and dead drops. Met through play; not in the starting network.",
+      "satisfaction": 30.0,
+      "strength": 5.0,
+      "starting": false
+    }
+  ]
+}

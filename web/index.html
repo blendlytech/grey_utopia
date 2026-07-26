@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GREY UTOPIA -- Underground Life Sim</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="crt-overlay">
+  <div class="vignette"></div>
+  <div class="app-container" id="app-root">
+    <!-- Header Bar -->
+    <header class="top-bar">
+      <div class="brand">
+        <span class="glitch-text" data-text="GREY UTOPIA">GREY UTOPIA</span>
+        <span class="sub-brand">Arcology Node 4 // Undercity Fixer</span>
+      </div>
+      <div class="turn-tracker">
+        <span class="day-badge">DAY <span id="val-day">1</span></span>
+        <span class="slots-badge">ACTIONS <span id="slot-pips" class="slot-pips"></span></span>
+      </div>
+      <div class="controls">
+        <button id="btn-journal" class="btn-ghost" title="Run journal [J]">&#128214; Journal</button>
+        <button id="btn-help" class="btn-ghost" title="Protocol briefing [?]">? Protocol</button>
+        <button id="btn-audio" class="btn-ghost">&#128266; Audio: ON</button>
+        <button id="btn-reset" class="btn-ghost">Restart Simulation</button>
+      </div>
+    </header>
+
+    <!-- Main Grid Layout -->
+    <main class="main-grid">
+      <!-- Left Column: Biometric & Stat HUD -->
+      <aside class="sidebar-left glass-panel">
+        <h2 class="panel-title"><span class="icon">&#9889;</span> Biometric State</h2>
+
+        <div class="stat-group" id="group-md" title="Sustained stress compounds overnight. Three days at 90%+ and the Sanctuary takes you -- permanently.">
+          <div class="stat-header">
+            <span>Mental Decay</span>
+            <span class="stat-val" id="val-md">20.0%</span>
+          </div>
+          <div class="meter-bar"><div class="meter-fill" id="bar-md" style="width: 20%;"></div></div>
+        </div>
+
+        <div class="stat-group" id="group-phys" title="Your body. Regenerates slowly each night; at zero, you die. Low integrity also raises overdose risk and costs an action slot.">
+          <div class="stat-header">
+            <span>Physical Integrity</span>
+            <span class="stat-val" id="val-phys">90.0%</span>
+          </div>
+          <div class="meter-bar"><div class="meter-fill" id="bar-phys" style="width: 90%;"></div></div>
+        </div>
+
+        <div class="stat-group" id="group-rel" title="Dependence. Every dose raises it and builds tolerance; clean days lower it but bring withdrawal that grinds mind and body.">
+          <div class="stat-header">
+            <span>Substance Reliance</span>
+            <span class="stat-val" id="val-rel">5.0%</span>
+          </div>
+          <div class="meter-bar"><div class="meter-fill" id="bar-rel" style="width: 5%;"></div></div>
+          <div class="stat-sub">Tolerance: <span id="val-tol">0.00</span> / 10.0</div>
+        </div>
+
+        <div class="stat-group" id="group-heat" title="How closely the Steward is watching. High heat feeds daily stress and hardens surveillance events. Cools on quiet days.">
+          <div class="stat-header">
+            <span>Steward Heat</span>
+            <span class="stat-val" id="val-heat">0.0%</span>
+          </div>
+          <div class="meter-bar"><div class="meter-fill" id="bar-heat" style="width: 0%;"></div></div>
+        </div>
+
+        <div class="stat-group" id="group-meaning" title="Why you get up. Drifts down every day nothing matters. At rock bottom with heavy reliance, the self dissolves.">
+          <div class="stat-header">
+            <span>Meaning / Purpose</span>
+            <span class="stat-val" id="val-meaning">30.0%</span>
+          </div>
+          <div class="meter-bar"><div class="meter-fill" id="bar-meaning" style="width: 30%;"></div></div>
+        </div>
+
+        <div class="stat-group" id="group-friction" title="The state of things with Mara. High friction feeds nightly stress, and some doors only open to a mended family.">
+          <div class="stat-header">
+            <span>Family Friction</span>
+            <span class="stat-val" id="val-friction">40.0%</span>
+          </div>
+          <div class="meter-bar"><div class="meter-fill" id="bar-friction" style="width: 40%;"></div></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2 class="panel-title"><span class="icon">&#128179;</span> Capital &amp; Faction</h2>
+        <div class="resource-row">
+          <div class="resource-card">
+            <span class="res-label">Wealth</span>
+            <span class="res-val" id="val-wealth">500 cr</span>
+          </div>
+          <div class="resource-card">
+            <span class="res-label">Fame</span>
+            <span class="res-val" id="val-fame">10.0</span>
+          </div>
+        </div>
+
+        <div class="faction-widget">
+          <div class="faction-row">
+            <span>Undercity:</span> <span id="fac-undercity" class="fac-val">+10</span>
+          </div>
+          <div class="faction-row">
+            <span>Steward Council:</span> <span id="fac-steward" class="fac-val">-10</span>
+          </div>
+          <div class="faction-row">
+            <span>Resistance:</span> <span id="fac-resistance" class="fac-val">0</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2 class="panel-title"><span class="icon">&#128274;</span> Exit Chain</h2>
+        <div class="exit-chain" id="exit-chain">
+          <!-- Dynamically populated chain nodes -->
+        </div>
+
+        <div id="clocks-panel" class="clocks-panel hidden">
+          <div class="divider"></div>
+          <h2 class="panel-title"><span class="icon">&#9203;</span> Deadlines</h2>
+          <div class="clocks-list" id="clocks-list"></div>
+        </div>
+
+        <div id="threads-panel" class="threads-panel hidden">
+          <div class="divider"></div>
+          <h2 class="panel-title"><span class="icon">&#129525;</span> Threads</h2>
+          <p class="panel-sub">What the city remembers about you</p>
+          <div class="threads-list" id="threads-list"></div>
+        </div>
+      </aside>
+
+      <!-- Center Stage Column: Scene Artwork & Storylet Stage -->
+      <section class="center-stage glass-panel" id="center-stage">
+        <div class="scene-header">
+          <div id="scene-stage" class="scene-stage"></div>
+          <div class="scene-overlay"></div>
+          <div class="scene-caption" id="scene-caption">FIXER HIDEOUT // LEVEL B-7</div>
+        </div>
+
+        <!-- Outcome Alert Banner -->
+        <div id="outcome-banner" class="outcome-banner hidden">
+          <div class="outcome-head">
+            <div class="outcome-tag" id="outcome-tag">SUCCESS</div>
+            <div class="roll-reveal" id="roll-reveal">
+              <span class="roll-label">ROLL</span>
+              <div class="roll-track"><div class="roll-target" id="roll-target"></div><div class="roll-needle" id="roll-needle"></div></div>
+              <span class="roll-numbers" id="roll-numbers">16.5 / 59.5</span>
+            </div>
+          </div>
+          <div class="outcome-text" id="outcome-text">Clean drop. Word of your discretion travels.</div>
+          <div class="outcome-deltas" id="outcome-deltas"></div>
+        </div>
+
+        <!-- Storylet Stage -->
+        <div id="storylet-stage" class="storylet-container">
+          <div class="event-meta">
+            <h1 class="event-title" id="event-title">The Nervous Client</h1>
+            <div class="tags-row" id="event-tags"></div>
+          </div>
+
+          <p class="event-body" id="event-body"></p>
+
+          <div class="choices-container">
+            <h3 class="choices-title">Select Action Protocol <span class="kbd-hint">[keys 1-9, R rests]</span>
+              <span id="edge-chip" class="edge-chip hidden"></span></h3>
+            <div class="choices-list" id="choices-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Contact Network & Cyberdeck Equipment -->
+      <aside class="sidebar-right glass-panel">
+        <div class="tabs-header">
+          <button id="tab-contacts" class="tab-btn active">&#128101; Network</button>
+          <button id="tab-shop" class="tab-btn">&#9889; Gear</button>
+        </div>
+
+        <div id="view-contacts" class="tab-view active">
+          <p class="panel-sub">Ebbinghaus Memory Retention</p>
+          <div class="contacts-list" id="contacts-list"></div>
+        </div>
+
+        <div id="view-shop" class="tab-view">
+          <p class="panel-sub">Undercity Black Market Catalog</p>
+          <div class="inventory-section">
+            <h4 class="sub-heading">Equipped / Inventory</h4>
+            <div id="inventory-list" class="inventory-list"></div>
+          </div>
+          <div class="divider"></div>
+          <h4 class="sub-heading">Hardware &amp; Cyberware Shop</h4>
+          <div id="catalog-list" class="catalog-list"></div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Day Transition Overlay -->
+    <div id="day-overlay" class="day-overlay hidden">
+      <div class="day-overlay-inner">
+        <div class="day-overlay-label">CYCLE COMPLETE</div>
+        <div class="day-overlay-day" id="day-overlay-day">DAY 2</div>
+        <div class="day-overlay-sub" id="day-overlay-sub">The arcology hums. The Steward watches.</div>
+        <div class="night-ledger" id="night-ledger"></div>
+      </div>
+    </div>
+
+    <!-- Intro / Protocol Briefing Overlay -->
+    <div id="intro-overlay" class="modal-overlay intro-overlay hidden">
+      <div class="modal-card glass-panel intro-card">
+        <div class="intro-title-block">
+          <div class="intro-eyebrow">ARCOLOGY NODE 4 // POST-SCARCITY ADMINISTRATION ZONE</div>
+          <div class="glitch-text intro-logo" data-text="GREY UTOPIA">GREY UTOPIA</div>
+          <div class="intro-tag">Nobody is hungry. Nobody is needed. Nobody leaves.</div>
+        </div>
+        <div class="intro-body">
+          <p>The Steward ended scarcity, sickness, and unmanaged death. It watches four million
+          citizens with perfect patience and gentle hands, and it only wants you well.</p>
+          <p>You are a <strong>fixer</strong> in the undercity -- moving what the utopia pretends
+          it doesn't want, for people who still need to want something. Somewhere past the
+          perimeter wire there is a way out. There are other ways out, too. Most of them are worse.</p>
+        </div>
+        <div class="intro-rules">
+          <div class="intro-rule"><span class="ir-key">3 ACTIONS / DAY</span><span>Each storylet, meeting, or day lying low spends one. Nights bring stress, withdrawal, and ticking deadlines.</span></div>
+          <div class="intro-rule"><span class="ir-key">HIDDEN DICE</span><span>Every gamble shows its risk tier and which of your stats move the odds. The roll itself is revealed after you commit.</span></div>
+          <div class="intro-rule"><span class="ir-key">CONSEQUENCE</span><span>Flags you set come back. Debts mature. Doses accumulate. The city keeps a ledger, and it always balances.</span></div>
+          <div class="intro-rule"><span class="ir-key">14 ENDINGS</span><span>Escape, meaning, custody, or the reclamation levels. Death is permanent -- but the next cycle remembers.</span></div>
+        </div>
+        <div class="intro-cycle hidden" id="intro-cycle"></div>
+        <button id="btn-intro-begin" class="btn-primary">ENTER THE ROW</button>
+      </div>
+    </div>
+
+    <!-- Run Journal Drawer -->
+    <div id="journal-drawer" class="journal-drawer hidden">
+      <div class="journal-head">
+        <span class="journal-title">RUN JOURNAL</span>
+        <button id="btn-journal-close" class="btn-ghost">Close</button>
+      </div>
+      <div class="journal-list" id="journal-list">
+        <p class="journal-empty">Nothing yet. The city is waiting to find out what kind of story you are.</p>
+      </div>
+    </div>
+
+    <!-- Ending Overlay Screen -->
+    <div id="ending-modal" class="modal-overlay hidden">
+      <div class="modal-card glass-panel">
+        <div class="ending-scene-wrap"><div id="ending-scene" class="scene-stage"></div></div>
+        <h1 class="ending-title" id="ending-title">TERMINAL OUTCOME</h1>
+        <p class="ending-body" id="ending-body">Your journey in the Grey Utopia has ended.</p>
+        <div class="ending-epilogue" id="ending-epilogue"></div>
+        <div class="ending-memories" id="ending-memories"></div>
+        <div class="run-stats" id="run-stats"></div>
+        <h4 class="sub-heading gallery-heading">ENDINGS DISCOVERED</h4>
+        <div class="endings-gallery" id="endings-gallery"></div>
+        <button id="btn-modal-reset" class="btn-primary">Begin New Cycle</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

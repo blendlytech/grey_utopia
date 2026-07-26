@@ -1,0 +1,1978 @@
+{
+  "pack": "sonnet_volume_pack",
+  "model": "sonnet-5",
+  "batch": "volume",
+  "generated_for": "GREY UTOPIA -- The Steward",
+  "description": "20 ambient undercity job, minor vice vendor, and relationship-upkeep volume storylets expanding the base event deck per CLAUDE.md Checkpoint 2.",
+  "events": [
+    {
+      "id": "volume_job_dead_drop_run",
+      "title": "The Dead Drop",
+      "body": "A client too paranoid to meet face-to-face leaves coordinates for a dead drop three sublevels down -- a sealed cache wedged behind a coolant valve nobody's supposed to touch.",
+      "weight": 9,
+      "cooldown": 2,
+      "max_fires": 0,
+      "tags": [
+        "job",
+        "undercity"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "skim_the_cache",
+          "text": "Skim a little off the top before sealing it back up. They'll never count that precisely.",
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You reseal the cache short by a fraction nobody will notice. A little extra weight in your pocket.",
+            "deltas": {
+              "Wealth": 380,
+              "Recklessness": 4
+            }
+          },
+          "failure": {
+            "text": "The client counted. Word gets back to Kael that you skim. He doesn't say anything -- he just remembers.",
+            "deltas": {
+              "Wealth": -100,
+              "Social_Capital": -8
+            },
+            "flags_set": [
+              "known_skimmer"
+            ]
+          }
+        },
+        {
+          "id": "retrieve_clean",
+          "text": "Retrieve the cache exactly as instructed. No detours.",
+          "prob": {
+            "base": 0.68,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "The cache holds sealed credit chits and a thank-you chip. Simple. Professional. Forgettable.",
+            "deltas": {
+              "Wealth": 300,
+              "Social_Capital": 3
+            }
+          },
+          "failure": {
+            "text": "A wellness patrol reroutes through the sublevel mid-retrieval. You palm the cache and walk fast, pulse hammering.",
+            "deltas": {
+              "Heat": 14,
+              "Mental_Decay": 4
+            }
+          }
+        },
+        {
+          "id": "leave_it_sealed",
+          "text": "Leave it sealed. Something about the coordinates smells like a sting.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You never surface. The cache stays exactly where it was, and so does the pay you didn't collect.",
+            "deltas": {
+              "Meaning": -3,
+              "Mental_Decay": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_job_forged_ration_chits",
+      "title": "Counting Someone Else's Rations",
+      "body": "A UBI systems clerk with sticky fingers offers you a stack of forged ration-overage chits -- rations that, on paper, were never eaten by people who no longer exist in the Steward's rolls.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "job",
+        "contraband",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Fame",
+            "op": ">=",
+            "value": 5
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "move_the_chits",
+          "text": "Move the whole stack through your usual undercity contacts.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The chits clear through three hands and vanish into legitimate-looking grocery draws. Clean margin.",
+            "deltas": {
+              "Wealth": 420,
+              "Fame": 3,
+              "Heat": 6
+            }
+          },
+          "failure": {
+            "text": "A Steward provisioning audit flags a cluster of impossible draws. The clerk's name comes up first. Yours comes up second.",
+            "deltas": {
+              "Heat": 24,
+              "Social_Capital": -5
+            },
+            "flags_set": [
+              "ration_audit_flagged"
+            ]
+          }
+        },
+        {
+          "id": "verify_clerk_first",
+          "text": "Vet the clerk through Vint before touching the chits.",
+          "prob": {
+            "base": 0.75,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "Vint confirms the clerk is real and not a honeypot. You move a smaller, safer batch.",
+            "deltas": {
+              "Wealth": 220,
+              "Social_Capital": 2,
+              "Heat": 2
+            }
+          },
+          "failure": {
+            "text": "Vint's check takes too long. The clerk gets nervous and sells the batch to someone less careful. You missed it.",
+            "deltas": {
+              "Meaning": -2
+            }
+          }
+        },
+        {
+          "id": "decline_forged_chits",
+          "text": "Decline. Skimming UBI rolls is the one thing that gets Steward attention fast.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You leave the clerk to their own fate. Somewhere, a ghost keeps not-eating meals that were never coming to you.",
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_job_scrubber_favor",
+      "title": "A Favor in the Scrubbers",
+      "body": "A stranger with chemical burns up one forearm asks you to hide a nondescript case in the industrial waste-scrubber levels for exactly one week. No questions. Triple the usual rate.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "job",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Heat",
+            "op": "<=",
+            "value": 60
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "hide_it_blind",
+          "text": "Take the case and hide it blind. The money's too good to ask questions.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "One quiet week, one heavy case, one payment that clears without incident. You never open it. You don't want to know.",
+            "deltas": {
+              "Wealth": 500,
+              "Heat": 8
+            }
+          },
+          "failure": {
+            "text": "The case turns out to be radioactive-tagged medical waste, illegally dumped. Scrubber sensors light up like a shrine.",
+            "deltas": {
+              "Heat": 28,
+              "Physical_Integrity": -12,
+              "Mental_Decay": 6
+            },
+            "flags_set": [
+              "scrubber_incident"
+            ]
+          }
+        },
+        {
+          "id": "peek_inside_first",
+          "text": "Crack the seal and look before you commit to hiding it.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              },
+              {
+                "stat": "Recklessness",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "Just pre-accord photographs and a handwritten letter -- someone's whole erased life in a box. You hide it anyway, gently.",
+            "deltas": {
+              "Wealth": 450,
+              "Meaning": 6,
+              "Heat": 5
+            }
+          },
+          "failure": {
+            "text": "The seal is rigged with a tamper flare. It doesn't hurt you, but it paints the whole level in Steward-visible dye for a day.",
+            "deltas": {
+              "Heat": 20,
+              "Wealth": -50
+            }
+          }
+        },
+        {
+          "id": "refuse_the_case",
+          "text": "Refuse. A case nobody will explain is a case that ends careers.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The stranger nods like they expected it and disappears down a side conduit. You keep your hands empty and your nerves whole.",
+            "deltas": {
+              "Meaning": -3,
+              "Social_Capital": -2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_job_black_market_repair",
+      "title": "Off-the-Books Repairs",
+      "body": "An elderly citizen slides you a pre-Accord tube radio, its dial cracked, wiring brittle. The Steward would happily replace it with a superior synthetic unit -- but replacement means surrender, and she wants it fixed, not improved.",
+      "weight": 6,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "job",
+        "undercity",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Social_Capital",
+            "op": ">=",
+            "value": 10
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "rig_a_quick_fix",
+          "text": "Rig a fast, ugly fix with whatever's on hand.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "It works, technically. The tone is wrong and it smells like hot dust, but it plays. She's just glad to hear anything at all.",
+            "deltas": {
+              "Wealth": 150,
+              "Recklessness": 2
+            }
+          },
+          "failure": {
+            "text": "Your rigged fix shorts and the old casing scorches. She's more heartbroken than angry, which is somehow worse.",
+            "deltas": {
+              "Wealth": -40,
+              "Social_Capital": -5,
+              "Meaning": -3
+            }
+          }
+        },
+        {
+          "id": "repair_it_carefully",
+          "text": "Take the job seriously. Source period-correct parts through Vint's contacts.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "The radio hums back to life, static and all. She cries a little, hands you double the asking price, and doesn't explain why.",
+            "deltas": {
+              "Wealth": 260,
+              "Meaning": 8,
+              "Social_Capital": 4
+            }
+          },
+          "failure": {
+            "text": "A component you sourced is subtly wrong. The radio plays one station forever, warped and wrong, and she asks you to just take it away.",
+            "deltas": {
+              "Wealth": -60,
+              "Social_Capital": -3
+            }
+          }
+        },
+        {
+          "id": "suggest_steward_replace",
+          "text": "Tell her honestly: a Steward replacement unit would just work. Walk away from the job.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She thanks you stiffly and says she'll 'consider it,' in the tone of someone who never will. You kept your integrity and lost the sale.",
+            "deltas": {
+              "Meaning": -4,
+              "Social_Capital": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_job_data_fence",
+      "title": "Fencing a Low-Grade Spike",
+      "body": "A courier hands off a scuffed memory spike -- nothing like Vint's pre-Accord braindance archive, just somebody's ordinary stolen memories: a wedding, an argument, a childhood dog. Low-grade, low-risk, low-glory.",
+      "weight": 6,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "job",
+        "contraband"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Fame",
+            "op": ">=",
+            "value": 8
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "fence_quietly",
+          "text": "Fence it quietly through a discreet collector.",
+          "prob": {
+            "base": 0.65,
+            "mods": [
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The collector pays modestly for an ordinary stranger's ordinary life. No fireworks. Good, boring money.",
+            "deltas": {
+              "Wealth": 240,
+              "Fame": 2,
+              "Heat": 4
+            }
+          },
+          "failure": {
+            "text": "The buyer turns out to be a Steward memory-provenance researcher building a fraud case. You get out before questions start, barely.",
+            "deltas": {
+              "Heat": 16,
+              "Social_Capital": -3
+            }
+          }
+        },
+        {
+          "id": "watch_it_first",
+          "text": "Jack in and watch the memories before selling them on.",
+          "prob": {
+            "base": 0.75,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "A wedding, an argument, a dog. Somebody's whole unremarkable life. You sell it anyway, but it sits with you a while.",
+            "deltas": {
+              "Wealth": 200,
+              "Meaning": -3,
+              "Mental_Decay": 4
+            }
+          },
+          "failure": {
+            "text": "The spike's compression is unstable. The playback stutters and loops the argument fifty times before you rip the jack free.",
+            "deltas": {
+              "Mental_Decay": 8,
+              "Physical_Integrity": -3
+            }
+          }
+        },
+        {
+          "id": "wipe_the_spike",
+          "text": "Wipe it. Somebody's memories shouldn't be currency.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You erase a stranger's wedding day rather than sell it. Nobler than it is profitable.",
+            "deltas": {
+              "Meaning": 5,
+              "Wealth": -20
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_job_rooftop_message",
+      "title": "Message Above the Smog",
+      "body": "A client needs a physical message hand-carried to a surface-adjacent maintenance shaft -- above the Steward's densest sensor lattice, where a single drone sweep can end a career in one clean sightline.",
+      "weight": 6,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "job",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Heat",
+            "op": "<=",
+            "value": 50
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "climb_the_shaft",
+          "text": "Climb the shaft yourself under cover of a maintenance shift change.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              },
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You time the shift change to the second and deliver the message unseen. The client pays in full, relieved past words.",
+            "deltas": {
+              "Wealth": 400,
+              "Fame": 4,
+              "Heat": 8
+            }
+          },
+          "failure": {
+            "text": "A drone sweep clips your position on the way down. You're not caught, but your silhouette is now a data point somewhere.",
+            "deltas": {
+              "Heat": 24,
+              "Physical_Integrity": -10
+            }
+          }
+        },
+        {
+          "id": "pay_a_lookout",
+          "text": "Hire a lookout to watch the sensor sweep pattern and call your window.",
+          "prob": {
+            "base": 0.7,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "Your lookout calls three clean windows in a row. You deliver the message without breaking a sweat that isn't your own.",
+            "deltas": {
+              "Wealth": 320,
+              "Social_Capital": 3,
+              "Heat": 5
+            }
+          },
+          "failure": {
+            "text": "The lookout miscounts the sweep interval. You make it back down, but only just, heart slamming.",
+            "deltas": {
+              "Heat": 14,
+              "Wealth": -50
+            }
+          }
+        },
+        {
+          "id": "decline_rooftop_job",
+          "text": "Decline. The surface isn't worth the exposure.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You tell the client to find someone with less to lose. Your reputation stays exactly where it was: underground.",
+            "deltas": {
+              "Meaning": -2,
+              "Social_Capital": -2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_job_new_fixer_referral",
+      "title": "A New Face Wants In",
+      "body": "A jittery kid half your age corners you near the concourse, having heard your name from someone who owed someone else a favor. They want in on the fixer trade and they want you, specifically, to show them how.",
+      "weight": 5,
+      "cooldown": 6,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "npc",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Fame",
+            "op": ">=",
+            "value": 20
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "mentor_them",
+          "text": "Take them on properly. Teach them the real rules, including the ones that keep people alive.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "It's slow and it costs you jobs you hand off instead of taking. But watching them get it -- actually get it -- feels like something you haven't felt in a while.",
+            "deltas": {
+              "Meaning": 14,
+              "Social_Capital": 5,
+              "Wealth": -150
+            },
+            "flags_set": [
+              "mentored_rookie"
+            ]
+          },
+          "failure": {
+            "text": "You teach them to case a mark and they immediately overplay it, burning a contact you both needed. Mentorship is not your gift.",
+            "deltas": {
+              "Social_Capital": -6,
+              "Heat": 8
+            }
+          }
+        },
+        {
+          "id": "use_them_as_cover",
+          "text": "Let them run errands and take the fall if anything goes wrong.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "The kid runs three clean errands and asks for nothing but proximity to your reputation. Useful, and a little sad.",
+            "deltas": {
+              "Wealth": 280,
+              "Fame": 3,
+              "Meaning": -6
+            }
+          },
+          "failure": {
+            "text": "The kid gets picked up by a wellness sweep running your errand. They don't give you up, but you feel the debt anyway.",
+            "deltas": {
+              "Heat": 12,
+              "Meaning": -8,
+              "Family_Friction": 3
+            }
+          }
+        },
+        {
+          "id": "turn_them_away",
+          "text": "Turn them away. This life isn't a favor you owe a stranger's kid.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "They call you a coward on the way out, which might even be fair. You sleep fine. Mostly.",
+            "deltas": {
+              "Meaning": -4,
+              "Social_Capital": -2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_homebrew_still",
+      "title": "The Sublevel Still",
+      "body": "Down past the condensation pipes, an amateur chemist runs a homebrew still cooking a cloudy knockoff of Lethe-9 -- cheaper, dirtier, and one bad batch away from a hospital transfer nobody wants to explain.",
+      "weight": 8,
+      "cooldown": 2,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "substance",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 5
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "buy_the_batch",
+          "text": "Buy in bulk. It's cheap, and cheap adds up when you need it often.",
+          "prob": {
+            "base": 0.65,
+            "mods": [
+              {
+                "stat": "Tolerance",
+                "coef": -0.04
+              }
+            ]
+          },
+          "success": {
+            "text": "Rough around the edges but it does the job, and your credits stretch three times as far as the branded stuff.",
+            "deltas": {
+              "Wealth": -60,
+              "Mental_Decay": -14,
+              "Substance_Reliance": 9,
+              "Physical_Integrity": -4
+            },
+            "dose": 8
+          },
+          "failure": {
+            "text": "This batch is under-cooked. Your stomach revolts and your vision swims for an ugly hour.",
+            "deltas": {
+              "Wealth": -60,
+              "Physical_Integrity": -16,
+              "Mental_Decay": 6
+            },
+            "dose": 12
+          }
+        },
+        {
+          "id": "test_a_sample",
+          "text": "Ask for a small free sample before committing any real money.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The chemist obliges, more out of pride in the work than generosity. It's mediocre. You learn enough to skip the rest.",
+            "deltas": {
+              "Mental_Decay": -4,
+              "Substance_Reliance": 2
+            },
+            "dose": 3
+          }
+        },
+        {
+          "id": "walk_away_still",
+          "text": "Say nothing, buy nothing, and get out before you're associated with the still.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You leave the chemist to their cloudy beakers. Whatever happens down here happens without you.",
+            "deltas": {
+              "Meaning": 2,
+              "Mental_Decay": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_braindance_den",
+      "title": "The Braindance Den",
+      "body": "A converted maintenance bay strung with salvaged VR rigs -- the local den where undercity residents jack into shared synthetic euphoria loops for an hour of borrowed, manufactured joy.",
+      "weight": 7,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "substance",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Mental_Decay",
+            "op": ">=",
+            "value": 10
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "full_immersion",
+          "text": "Pay for full immersion. An hour of someone else's happiest memory, looped.",
+          "prob": {
+            "base": 0.85,
+            "mods": [
+              {
+                "stat": "Tolerance",
+                "coef": -0.03
+              }
+            ]
+          },
+          "success": {
+            "text": "Borrowed joy, technicolor and warm. You surface disoriented but genuinely, chemically lighter.",
+            "deltas": {
+              "Wealth": -80,
+              "Mental_Decay": -16,
+              "Substance_Reliance": 6,
+              "Meaning": -2
+            },
+            "dose": 6
+          },
+          "failure": {
+            "text": "The loop glitches on a stranger's grief instead of their joy -- a wiring error nobody caught. You surface shaking.",
+            "deltas": {
+              "Wealth": -80,
+              "Mental_Decay": 10,
+              "Physical_Integrity": -4
+            },
+            "dose": 9
+          }
+        },
+        {
+          "id": "socialize_only",
+          "text": "Skip the rig. Just sit in the den and talk with the regulars.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "No chemicals, no loop -- just undercity strangers comparing notes on a life none of them chose. It helps more than you expected.",
+            "deltas": {
+              "Social_Capital": 5,
+              "Meaning": 5,
+              "Mental_Decay": -4
+            }
+          }
+        },
+        {
+          "id": "leave_den",
+          "text": "Leave. The den's warmth is exactly the kind that's easy to need.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You step back out into the cold conduit air, proud and a little lonelier for it.",
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_tolerance_reset_serum",
+      "title": "The Tolerance Reset",
+      "body": "A back-alley chemist offers a shimmering vial: an illegal serum that scrubs your body's built-up tolerance back to zero. Everything after tastes like the first time again. Everything after also hits like the first time again.",
+      "weight": 5,
+      "cooldown": 6,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "substance"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Tolerance",
+            "op": ">=",
+            "value": 3
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_the_serum",
+          "text": "Take the full dose. Reset the clock.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "Your body forgets everything it learned to survive. Dangerous, but the next dose of anything will feel like a revelation.",
+            "deltas": {
+              "Wealth": -350,
+              "Tolerance": -6,
+              "Physical_Integrity": -8
+            }
+          },
+          "failure": {
+            "text": "Your system doesn't reset so much as revolt. A full day lost to fever and shakes on a stranger's floor.",
+            "deltas": {
+              "Wealth": -350,
+              "Physical_Integrity": -22,
+              "Mental_Decay": 10
+            }
+          }
+        },
+        {
+          "id": "half_dose_serum",
+          "text": "Take a half-dose. Safer, smaller reset.",
+          "prob": {
+            "base": 0.8,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "A partial reset -- not the clean slate, but enough to make the habit cheaper again for a while.",
+            "deltas": {
+              "Wealth": -180,
+              "Tolerance": -3,
+              "Physical_Integrity": -3
+            }
+          },
+          "failure": {
+            "text": "Even the half-dose fights you. A rough night, but you wake up in your own bed at least.",
+            "deltas": {
+              "Wealth": -180,
+              "Physical_Integrity": -10,
+              "Mental_Decay": 5
+            }
+          }
+        },
+        {
+          "id": "refuse_serum",
+          "text": "Refuse. Let the tolerance stand as the price of everything you've already taken.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You walk out with your tolerance, and the honest cost of your habits, fully intact.",
+            "deltas": {
+              "Meaning": 3,
+              "Mental_Decay": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_pawn_for_a_hit",
+      "title": "Pawning the Present",
+      "body": "The craving is loud tonight and your credits are thin. You're standing in front of a pawnbroker with the one thing on you worth real money -- a keepsake, not currency, until suddenly it has to be both.",
+      "weight": 6,
+      "cooldown": 4,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "substance",
+        "family"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 25
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "pawn_the_keepsake",
+          "text": "Pawn it. It's just an object. You need this more.",
+          "prob": {
+            "base": 0.9,
+            "mods": []
+          },
+          "success": {
+            "text": "The broker doesn't even look up. Cash in hand, craving answered, and a small hole where the keepsake used to sit.",
+            "deltas": {
+              "Wealth": 220,
+              "Substance_Reliance": 6,
+              "Meaning": -12,
+              "Family_Friction": 8
+            },
+            "dose": 8,
+            "rel_deltas": {
+              "Mara (Sister)": -10
+            }
+          },
+          "failure": {
+            "text": "The broker recognizes the piece and refuses -- 'stolen goods carry a scent, friend' -- and you leave empty-handed and humiliated.",
+            "deltas": {
+              "Meaning": -6,
+              "Mental_Decay": 4
+            },
+            "dose": 8,
+            "rel_deltas": {
+              "Mara (Sister)": -10
+            }
+          }
+        },
+        {
+          "id": "sell_something_else",
+          "text": "Sell spare gear instead. Slower cash, but you keep the keepsake.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "It takes longer and pays less, but the keepsake stays in your pocket where it belongs.",
+            "deltas": {
+              "Wealth": 90,
+              "Substance_Reliance": 3,
+              "Meaning": 2
+            },
+            "dose": 4
+          },
+          "failure": {
+            "text": "Nobody's buying spare gear tonight. You go home with the craving and the keepsake both, which is its own kind of misery.",
+            "deltas": {
+              "Mental_Decay": 8
+            }
+          }
+        },
+        {
+          "id": "keep_it_ride_out",
+          "text": "Keep it. Ride out the craving with nothing but time.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "A miserable, clawing night. In the morning the keepsake is still yours, and so, barely, are you.",
+            "deltas": {
+              "Mental_Decay": 10,
+              "Meaning": 6,
+              "Substance_Reliance": -4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_dealer_debt_collection",
+      "title": "Squaring the Tab",
+      "body": "Two of the corner dealer's associates find you in a service corridor, polite in the specific way that means they're not asking. Your tab's come due, and 'we can wait' was never actually an offer.",
+      "weight": 6,
+      "cooldown": 5,
+      "max_fires": 1,
+      "tags": [
+        "vice",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 20
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "run_from_debt",
+          "text": "Refuse to pay and disappear into the conduits.",
+          "prob": {
+            "base": 0.35,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "You know the sublevels better than they do. You lose them in the dark, for now. This is not the last you'll hear of it.",
+            "deltas": {
+              "Heat": 10,
+              "Meaning": -4
+            },
+            "flags_set": [
+              "dealer_debt_pending"
+            ],
+            "clocks_start": {
+              "dealer_debt": 6
+            }
+          },
+          "failure": {
+            "text": "They're faster and meaner than you gambled. You pay double what you owed, mostly in bruises.",
+            "deltas": {
+              "Physical_Integrity": -24,
+              "Wealth": -200,
+              "Mental_Decay": 10
+            },
+            "clocks_start": {
+              "dealer_debt": 6
+            }
+          }
+        },
+        {
+          "id": "negotiate_terms",
+          "text": "Talk them into a payment plan. Buy time instead of paying in full now.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "They agree to installments, reluctantly, and remind you exactly what happens if you miss one.",
+            "deltas": {
+              "Wealth": -150,
+              "Heat": 4
+            },
+            "flags_set": [
+              "dealer_debt_pending"
+            ],
+            "clocks_start": {
+              "dealer_debt": 6
+            }
+          },
+          "failure": {
+            "text": "They don't like your tone. You end up paying the same amount anyway, plus a bruise to remember the conversation by.",
+            "deltas": {
+              "Wealth": -300,
+              "Physical_Integrity": -12,
+              "Mental_Decay": 6
+            },
+            "clocks_start": {
+              "dealer_debt": 6
+            }
+          }
+        },
+        {
+          "id": "pay_in_full",
+          "text": "Pay the whole tab, on the spot, no argument.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It empties your pockets, but they nod, almost respectful, and leave without another word. Debt cleared. Reputation intact.",
+            "deltas": {
+              "Wealth": -600,
+              "Social_Capital": 2
+            },
+            "flags_set": [
+              "dealer_debt_cleared"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_mara_dinner_invite",
+      "title": "Mara's Table",
+      "body": "Mara has cooked, actually cooked, using rationed ingredients she can't really spare, and set two places at a table built for a family that used to be bigger. She wants one uninterrupted evening. That's all. Just one.",
+      "weight": 8,
+      "cooldown": 4,
+      "max_fires": 0,
+      "tags": [
+        "family"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "stay_the_evening",
+          "text": "Stay. Put everything else down for one night.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You talk about nothing important and it's the best conversation you've had in weeks. She laughs the way she used to before either of you had to grow up this fast.",
+            "deltas": {
+              "Family_Friction": -18,
+              "Meaning": 10,
+              "Mental_Decay": -8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 15
+            }
+          }
+        },
+        {
+          "id": "stay_but_distracted",
+          "text": "Stay, but keep half your attention on your comms the whole time.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "You're present enough that she doesn't call it out directly. Close enough to fine.",
+            "deltas": {
+              "Family_Friction": -6,
+              "Meaning": 2
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 5
+            }
+          },
+          "failure": {
+            "text": "She catches you checking a job ping mid-sentence and goes quiet for the rest of the meal. You both pretend it's fine.",
+            "deltas": {
+              "Family_Friction": 10,
+              "Meaning": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -4
+            }
+          }
+        },
+        {
+          "id": "cancel_for_work",
+          "text": "Cancel. A paying job just came in and it can't wait.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She says she understands, in the tone that means she's counting. The extra plate goes back in the cupboard.",
+            "deltas": {
+              "Family_Friction": 16,
+              "Wealth": 150,
+              "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_npc_vint_favor_owed",
+      "title": "Vint Calls in a Favor",
+      "body": "Vint doesn't ask for much, which is exactly why you can't refuse when he finally does. He needs a small package moved through a checkpoint he can't personally risk crossing today, no questions, and he's calling in three favors at once to get it.",
+      "weight": 6,
+      "cooldown": 6,
+      "max_fires": 1,
+      "tags": [
+        "npc",
+        "job"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "carry_it_yourself",
+          "text": "Carry it through the checkpoint personally.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "You clear the checkpoint on nerve and a bored guard's disinterest. Vint's relief is almost worth more than the favor cleared.",
+            "deltas": {
+              "Social_Capital": 8,
+              "Heat": 10
+            },
+            "flags_set": [
+              "vint_favor_repaid"
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 12
+            }
+          },
+          "failure": {
+            "text": "The checkpoint scanner flags something in the package Vint didn't mention. You talk your way out, but only just, and you're both shaken.",
+            "deltas": {
+              "Heat": 20,
+              "Mental_Decay": 6,
+              "Social_Capital": -3
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 4
+            }
+          }
+        },
+        {
+          "id": "send_a_proxy",
+          "text": "Pay a stranger to carry it through instead, keeping your own hands clean.",
+          "prob": {
+            "base": 0.65,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The proxy clears the checkpoint without incident and without ever knowing your name. Vint's favor is repaid at a discount to your nerves.",
+            "deltas": {
+              "Wealth": -150,
+              "Social_Capital": 4
+            },
+            "flags_set": [
+              "vint_favor_repaid"
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 6
+            }
+          },
+          "failure": {
+            "text": "The proxy panics at the checkpoint and drops your name under questioning. Vint is furious you outsourced his trust.",
+            "deltas": {
+              "Heat": 14,
+              "Social_Capital": -10
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -6
+            }
+          }
+        },
+        {
+          "id": "refuse_vint",
+          "text": "Refuse. Three favors at once is a debt trap, not a friendship.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Vint's voice goes very flat and very quiet. 'Noted,' is all he says before he cuts the channel.",
+            "deltas": {
+              "Social_Capital": -12,
+              "Meaning": -4
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -15
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_npc_kael_syndicate_check_in",
+      "title": "Kael's Check-In",
+      "body": "Kael finds you between jobs, all easy smiles and hard eyes, and asks how business has been -- the way a landlord asks how the apartment's treating you right before the rent goes up.",
+      "weight": 6,
+      "cooldown": 5,
+      "max_fires": 0,
+      "tags": [
+        "npc",
+        "job"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Fame",
+            "op": ">=",
+            "value": 10
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "impress_kael",
+          "text": "Talk up your recent work. Make sure he knows your name is worth more now.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Kael's smile turns genuine for half a second. 'Bigger jobs, bigger cut. I'll remember you said that.'",
+            "deltas": {
+              "Fame": 5,
+              "Social_Capital": 4
+            },
+            "flags_set": [
+              "kael_impressed"
+            ],
+            "rel_deltas": {
+              "Kael (Broker)": 10
+            }
+          },
+          "failure": {
+            "text": "You oversell it and Kael sees straight through the bravado. 'Careful,' he says, not unkindly. 'Reputation's a debt too.'",
+            "deltas": {
+              "Social_Capital": -5,
+              "Meaning": -3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -6
+            }
+          }
+        },
+        {
+          "id": "push_back_on_kael",
+          "text": "Push back -- ask what Kael's actually offering for the loyalty he expects.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Recklessness",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "Kael respects the directness more than he expected to and sweetens the next job's terms just slightly.",
+            "deltas": {
+              "Wealth": 200,
+              "Social_Capital": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 4
+            }
+          },
+          "failure": {
+            "text": "Kael doesn't like being pushed. The next few jobs he sends your way are noticeably worse.",
+            "deltas": {
+              "Social_Capital": -8,
+              "Heat": 4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -8
+            }
+          }
+        },
+        {
+          "id": "stay_humble",
+          "text": "Keep it modest. Undersell your reach on purpose.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Kael shrugs, unbothered either way, and moves on to the next name on his list. Nothing gained, nothing risked.",
+            "deltas": {
+              "Meaning": 1
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_mara_needs_a_favor",
+      "title": "A Small, Illegal Favor",
+      "body": "Mara asks, quietly and with visible shame, if you can get your hands on a piece of unregistered medical tech the Steward's clinics won't prescribe -- something that worked for their mother, once, before the Accord made it obsolete and forbidden.",
+      "weight": 6,
+      "cooldown": 5,
+      "max_fires": 0,
+      "tags": [
+        "family",
+        "contraband"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Family_Friction",
+            "op": ">=",
+            "value": 5
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "source_it_properly",
+          "text": "Spend real time and money sourcing a safe, working unit.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "It takes calling in favors across three contacts, but the unit works, and Mara's hands shake with relief when you hand it over.",
+            "deltas": {
+              "Wealth": -400,
+              "Family_Friction": -22,
+              "Meaning": 12,
+              "Heat": 6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 15
+            }
+          },
+          "failure": {
+            "text": "The unit you sourced is a convincing fake. Mara doesn't find out until it fails when she needs it most, and neither of you says much after.",
+            "deltas": {
+              "Wealth": -400,
+              "Family_Friction": 10,
+              "Mental_Decay": 8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 5
+            }
+          }
+        },
+        {
+          "id": "grab_something_fast",
+          "text": "Grab whatever's fastest to acquire, quality unverified.",
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "Fast, cheap, and it actually works. You got lucky and you both know it.",
+            "deltas": {
+              "Wealth": -120,
+              "Family_Friction": -14,
+              "Recklessness": 3
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 8
+            }
+          },
+          "failure": {
+            "text": "The fast option is junk. Mara's disappointment is quieter and worse than anger would have been.",
+            "deltas": {
+              "Wealth": -120,
+              "Family_Friction": 8,
+              "Meaning": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -6
+            }
+          }
+        },
+        {
+          "id": "tell_her_no",
+          "text": "Tell her no. Unregistered medical tech is exactly the kind of heat you can't afford right now.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She says she understands. She does not look like she understands.",
+            "deltas": {
+              "Family_Friction": 14,
+              "Meaning": -4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -12
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_steward_satisfaction_survey",
+      "title": "The Satisfaction Survey",
+      "body": "Your apartment array chimes with the gentlest possible urgency: a mandatory quarterly Wellness & Satisfaction Survey, seven questions, estimated ninety seconds, 'your honest feedback shapes a kinder city.'",
+      "weight": 6,
+      "cooldown": 6,
+      "max_fires": 0,
+      "tags": [
+        "steward",
+        "wellness"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "answer_honestly",
+          "text": "Answer honestly. Every rating, every open comment, exactly as you feel.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You tell the truth about the hollowness, the boredom, the ache under the comfort. The system thanks you warmly. Somewhere, a flag quietly ticks upward.",
+            "deltas": {
+              "Meaning": 6,
+              "Heat": 6,
+              "Mental_Decay": -2
+            }
+          }
+        },
+        {
+          "id": "answer_perfectly",
+          "text": "Answer every question with maximum satisfaction. Give it exactly what it wants to hear.",
+          "prob": {
+            "base": 0.85,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Seven perfect fives. The array chimes approvingly and your household's compliance index ticks quietly upward.",
+            "deltas": {
+              "Heat": -8,
+              "Meaning": -4
+            }
+          },
+          "failure": {
+            "text": "The system cross-references your survey against your biometric stress log and flags the mismatch as 'concerning cheerfulness.'",
+            "deltas": {
+              "Heat": 10,
+              "Mental_Decay": 4
+            }
+          }
+        },
+        {
+          "id": "ignore_survey",
+          "text": "Let the survey time out unanswered.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The array chimes twice more, then goes quiet, faintly disappointed in the way only a benevolent AI can be.",
+            "deltas": {
+              "Heat": 3,
+              "Meaning": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_steward_kindness_drone",
+      "title": "A Drone Offers You an Umbrella",
+      "body": "It starts raining -- real, scheduled, atmospherically-managed rain -- and a small Steward courtesy drone descends silently to hover an umbrella over your head for the walk to the nearest transit hub, unasked, unstoppable, and entirely, suffocatingly kind.",
+      "weight": 5,
+      "cooldown": 4,
+      "max_fires": 0,
+      "tags": [
+        "steward",
+        "existential"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "swat_the_drone",
+          "text": "Swat the drone out of the air. Some kindness deserves to be refused violently.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "It clatters to the pavement, chirps a small apologetic tone, and rights itself to hover a polite three meters further away instead. Point technically made.",
+            "deltas": {
+              "Meaning": 8,
+              "Recklessness": 4,
+              "Heat": 6
+            }
+          },
+          "failure": {
+            "text": "You dent a piece of city property in full view of a pedestrian sensor cluster. A very polite notice of 'restitution owed' arrives within the hour.",
+            "deltas": {
+              "Heat": 16,
+              "Wealth": -80,
+              "Mental_Decay": 4
+            }
+          }
+        },
+        {
+          "id": "walk_in_the_rain",
+          "text": "Step out from under it and walk in the rain anyway.",
+          "prob": {
+            "base": 0.9,
+            "mods": []
+          },
+          "success": {
+            "text": "The drone follows for eleven meters, recalculating, then peels off to find someone else to save from the weather. You get soaked. It feels like the first honest sensation all week.",
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 3,
+              "Physical_Integrity": -2
+            }
+          },
+          "failure": {
+            "text": "You get thoroughly soaked, catch a chill, and spend the next day sniffling in a way that feels like a moral victory anyway.",
+            "deltas": {
+              "Physical_Integrity": -6,
+              "Meaning": 4
+            }
+          }
+        },
+        {
+          "id": "accept_the_umbrella",
+          "text": "Accept it. Let yourself be dry and looked after, just this once.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You walk the whole way dry, watched, cared for down to the last raindrop. It is, technically, a nice thing that happened to you today.",
+            "deltas": {
+              "Mental_Decay": -6,
+              "Meaning": -4,
+              "Heat": -2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_existential_empty_plaza",
+      "title": "The Empty Plaza at 3AM",
+      "body": "The comfort plaza on Sublevel 6 is engineered for togetherness -- benches, soft light, ambient music tuned to encourage lingering conversation -- and at three in the morning it is completely, perfectly empty, exactly the way you feel.",
+      "weight": 6,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "existential",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Meaning",
+            "op": "<=",
+            "value": 60
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "call_someone",
+          "text": "Call someone -- anyone -- rather than sit with it alone.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              }
+            ]
+          },
+          "success": {
+            "text": "Someone actually picks up at this hour, half-asleep and kind about it anyway. The plaza feels a little less engineered and a little more survivable.",
+            "deltas": {
+              "Social_Capital": 6,
+              "Meaning": 8,
+              "Family_Friction": -4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 6
+            }
+          },
+          "failure": {
+            "text": "Nobody picks up. The unanswered chime is somehow lonelier than the empty plaza was.",
+            "deltas": {
+              "Meaning": -6,
+              "Mental_Decay": 6
+            }
+          }
+        },
+        {
+          "id": "chase_a_distraction",
+          "text": "Give up on sitting with it and go find something -- anything -- to blur the edges.",
+          "prob": {
+            "base": 0.7,
+            "mods": [
+              {
+                "stat": "Substance_Reliance",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "You find enough noise to drown the quiet out for a few hours. It works, the way it always works, for exactly as long as it lasts.",
+            "deltas": {
+              "Mental_Decay": -8,
+              "Substance_Reliance": 6,
+              "Meaning": -6
+            }
+          },
+          "failure": {
+            "text": "Whatever you find isn't enough, and you end up back on the same bench an hour later, worse off for the detour.",
+            "deltas": {
+              "Mental_Decay": 6,
+              "Wealth": -60
+            }
+          }
+        },
+        {
+          "id": "sit_with_it",
+          "text": "Sit on a bench and let the emptiness be exactly what it is, without reaching for anything to numb it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It's an ugly, honest hour. Nothing gets resolved. But you're still there at the end of it, unmedicated and entirely yourself.",
+            "deltas": {
+              "Meaning": 9,
+              "Mental_Decay": 6
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_job_undercity_market_haggle",
+      "title": "Haggling in the Grey Market",
+      "body": "The undercity grey market runs three levels of stalls selling everything the Steward's official supply chains politely pretend doesn't exist -- unregistered tools, off-book parts, and vendors who remember when haggling meant something.",
+      "weight": 7,
+      "cooldown": 2,
+      "max_fires": 0,
+      "tags": [
+        "job",
+        "undercity"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "haggle_hard",
+          "text": "Haggle hard for a set of unregistered fixer tools you need.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "You talk the vendor down to a third of the asking price and walk away with gear that'll pay for itself on the next job.",
+            "deltas": {
+              "Wealth": -150,
+              "Social_Capital": 3,
+              "Fame": 1
+            }
+          },
+          "failure": {
+            "text": "The vendor gets insulted by your lowball and doubles the price out of spite. You pay full price just to save face.",
+            "deltas": {
+              "Wealth": -400,
+              "Social_Capital": -2
+            }
+          }
+        },
+        {
+          "id": "pay_asking_price",
+          "text": "Pay the asking price without any fuss. Time is worth more than the haggle today.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Quick, clean, overpriced. The vendor appreciates a customer who doesn't waste their morning.",
+            "deltas": {
+              "Wealth": -320,
+              "Social_Capital": 1
+            }
+          }
+        },
+        {
+          "id": "browse_and_leave",
+          "text": "Browse without buying anything. You don't actually need the gear yet.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You walk the whole grey market, hands in pockets, spending nothing but time. Nice, in its way, to want nothing for an hour.",
+            "deltas": {
+              "Meaning": 2,
+              "Mental_Decay": -1
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

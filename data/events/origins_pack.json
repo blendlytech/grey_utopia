@@ -1,0 +1,259 @@
+{
+  "pack": "origins_pack",
+  "model": "fable-5",
+  "batch": "flagship",
+  "description": "The Day-0 opening: who you were before the Row decides how the city fights you. Four origins, four builds, four different first weeks.",
+  "events": [
+    {
+      "id": "origin_before_the_row",
+      "title": "Before the Row",
+      "body": "Vint asks it the way he asks everything -- sideways, over solder smoke, while his hands work on something else. 'Everybody down here walked away from a life up there. Kael was somebody's accountant. I indexed archives for the transition committee.' He tests a connection, doesn't look at you. 'You've been on the Row three months and nobody knows your before. That's not privacy, friend, that's inventory nobody's priced yet.' The workbench hums. The question stands. Who were you, back when the city still thought it knew what you were for?",
+      "weight": 100,
+      "cooldown": 1,
+      "max_fires": 1,
+      "tags": ["intro", "flagship", "existential"],
+      "preconditions": {
+        "all": [ { "day": 0, "op": "<=" } ]
+      },
+      "choices": [
+        {
+          "id": "origin_auditor",
+          "text": "A Steward compliance auditor. You read the system from inside for nine years -- then read your own file.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You tell him about the audit floors: nine years verifying that the machine's kindness balanced, until the cycle you found your own behavioral file open on a colleague's desk, annotated, predicted, three years into your future and correct so far. You resigned by walking to the undercity mid-shift, still holding your credentials. Vint whistles low. 'An auditor.' He files it where he files valuable things. You still know how the surface thinks. It still doesn't know you left angry.",
+            "deltas": { "Social_Capital": 15, "Wealth": 200, "Meaning": 5, "Recklessness": -5 },
+            "flags_set": [ "origin_auditor" ],
+            "faction_deltas": { "Steward": 10 }
+          }
+        },
+        {
+          "id": "origin_pit",
+          "text": "A fighter in the unsanctioned pits. The last legal way to bleed, until it wasn't, until you weren't.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You show him instead of telling him: the knuckles, the shoulder that clicks, the ear. Four years in the pits under Parlor Row, back when the crowds paid to watch someone consent to consequences. You were good. You were, briefly, famous in the way the undercity is famous -- one level deep and one year long. The pits taught you the only economics that never deprecated: someone always pays to see nerve. Vint nods slowly. 'I remember you,' he says. 'Third bracket, the southpaw.' It's the first time in months anyone has remembered you correctly.",
+            "deltas": { "Physical_Integrity": 10, "Recklessness": 20, "Fame": 8, "Wealth": -200 },
+            "flags_set": [ "origin_pit" ],
+            "faction_deltas": { "Undercity": 8 }
+          }
+        },
+        {
+          "id": "origin_archivist",
+          "text": "A grief archivist. You catalogued pre-accord media -- the raw, unedited feeling -- until they optimized the archive.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You tell him about the stacks: three sublevels of pre-accord recordings, human feeling in its original packaging, and your job -- the best job anyone ever had -- reading it, tagging it, keeping it findable. Then the directive: the archive was 'a wellness hazard,' and you watched the optimization crews soften it shelf by shelf. You saved what you could carry. One spike rides against your chest right now -- the realest night of your old life, unedited, yours. Vint's hands stop working. 'Show me sometime,' he says, and means it like a prayer.",
+            "deltas": { "Meaning": 15, "Mental_Decay": 10, "Wealth": -100, "Social_Capital": 5 },
+            "flags_set": [ "origin_archivist", "memory_secured" ]
+          }
+        },
+        {
+          "id": "origin_chemist",
+          "text": "A synth chemist. You cooked the cleanest product on three levels -- and sampled the inventory one year too long.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You give him the resume the Row already half knows: the cleanest Lethe derivatives three levels ever tasted, a lab that never once poisoned a customer, margins that made Kael's people court you like a diplomat. And the other ledger, the private one: your own dose curve, climbing that whole final year, until you were your own best customer and the lab's silence started sounding like the corridor of a hospital. You walked away with your reputation, your tolerance, and a test kit you never work without. Vint slides you a drink and doesn't make it synthetic. 'Chemists who quit their own supply,' he says, 'are the only experts I trust.'",
+            "deltas": { "Wealth": 400, "Substance_Reliance": 15, "Tolerance": 2, "Fame": 5 },
+            "flags_set": [ "origin_chemist" ],
+            "item_rewards": [ "lethe_test_kit" ],
+            "faction_deltas": { "Undercity": 10 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "origin_auditor_recognized",
+      "title": "The Colleague",
+      "body": "The wellness clerk processing the ration queue looks up at you twice, then a third time, and her professional smile develops a hairline crack. You know her. Compliance floor 12, four desks over, nine years. 'They told us you had a breakdown,' she says quietly, scanning your card with hands that have decided not to notice things. 'There's a flag on your file. Re-integration priority.' Her eyes flick to the queue cameras and back. 'It's a WARM flag. They want you back, not punished. That's worse, isn't it. I can see on your face that's worse.'",
+      "weight": 8,
+      "cooldown": 6,
+      "max_fires": 1,
+      "tags": ["steward", "job"],
+      "preconditions": {
+        "all": [ { "flag": "origin_auditor" }, { "day": 5, "op": ">=" } ]
+      },
+      "choices": [
+        {
+          "id": "recruit_her",
+          "text": "She didn't report you on sight. Test that: ask her what ELSE crosses her desk.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.005 },
+              { "stat": "Heat", "coef": -0.004 }
+            ]
+          },
+          "success": {
+            "text": "Auditors read people; it was the whole job, and you were good at the job. She's been skimming wellness flags for two years -- warning neighbors before sweeps, small mercies under the machine's nose. By the second coffee you have what you came to the undercity without: an inside line. Sweep schedules, flag statuses, the audit calendar. She has a price and it isn't chits: 'When you find the way out everyone says you people are digging -- remember who fed you.'",
+            "deltas": { "Meaning": 8, "Social_Capital": 6, "Heat": 4 },
+            "flags_set": [ "sweep_wire" ]
+          },
+          "failure": {
+            "text": "You push one question too far and watch her professional self reassert like a blast door. 'I have a family,' she says, which is undercity for no, and re-scans your card with formal thoroughness. The warm flag on your file gets a fresh annotation. She doesn't report the conversation. She also never looks at you again, and the queue takes four minutes longer forever after.",
+            "deltas": { "Heat": 10, "Mental_Decay": 6, "Social_Capital": -3 }
+          }
+        },
+        {
+          "id": "warn_her_off",
+          "text": "Protect her from the association. 'You processed a stranger today.' Walk away clean.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You say it in the audit-floor deadpan you both spent nine years perfecting -- 'You processed a stranger today; the queue was unremarkable' -- and her shoulders drop a centimeter in gratitude. Some kindnesses only ex-colleagues can price. She stamps your ration allocation with two extra cycles, which is not in any manual, and you leave before either of you can be worth reporting.",
+            "deltas": { "Meaning": 6, "Wealth": 100 },
+            "rel_deltas": {}
+          }
+        },
+        {
+          "id": "spoof_reintegration",
+          "text": "A warm flag is leverage. Feed the re-integration pipeline a beautiful, cooperative, entirely false you.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.005 },
+              { "stat": "Recklessness", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "You know exactly what re-integration wants to hear because you spent nine years scoring it. You attend one voluntary session and perform the recovery arc of the century -- regretful, healing, grateful, boring. The warm flag cools to 'monitored-stable.' Your file now describes a man drifting harmlessly back toward citizenship, and files, you know better than anyone, are what the machine polices instead of people.",
+            "deltas": { "Heat": -15, "Meaning": 4, "Recklessness": 4 }
+          },
+          "failure": {
+            "text": "The intake model was retrained since your day. It clocks your performance in the first session -- not the content, the FLUENCY; recovering people stumble, and you didn't. 'Subject demonstrates expert familiarity with assessment criteria,' the note reads, and the warm flag acquires teeth. You taught the old model half its tells. The new one learned from your resignation.",
+            "deltas": { "Heat": 16, "Mental_Decay": 8 },
+            "flags_set": [ "flagged_evasive" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "origin_pit_challenger",
+      "title": "The Southpaw's Return",
+      "body": "The kid finds you at the noodle stall, and the whole Row pretends not to watch. Young, fast-looking, hands wrapped in the new style. 'You're the southpaw. Third bracket.' It isn't a question; there's a poster somewhere, apparently, that survived you. 'I fight under the Lucky Synapse now. Nobody good left to beat. They say if I want a real name I have to take one.' The kid's chin comes up. 'One round. Exhibition. Old rules.' The stall goes quiet the way rooms did before your fights, and the sound is so exactly remembered that your body starts its old arithmetic without asking you.",
+      "weight": 8,
+      "cooldown": 6,
+      "max_fires": 1,
+      "tags": ["undercity", "vice"],
+      "preconditions": {
+        "all": [ { "flag": "origin_pit" }, { "day": 4, "op": ">=" } ]
+      },
+      "choices": [
+        {
+          "id": "one_last_round",
+          "text": "One round. Old rules. Some debts you owe your own legend.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Physical_Integrity", "coef": 0.004 },
+              { "stat": "Recklessness", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "The pit under the Synapse still smells the same: chalk, copper, other people's adrenaline. The kid is faster than you ever were and greener than you ever were, and the difference decides it in the second minute -- you read the feint their coach never trained out of them and end it clean, gentle as these things go. You help them up yourself. 'Now you've fought the name,' you tell them, loud enough for the book-makers. 'Next year, take it.' The Row eats the story like bread. Your knee files a formal objection for a week.",
+            "deltas": { "Fame": 10, "Physical_Integrity": -12, "Meaning": 10, "Wealth": 300 },
+            "faction_deltas": { "Undercity": 8 }
+          },
+          "failure": {
+            "text": "Four years is four years. The kid's third exchange finds the shoulder that clicks and the pit finds out what the pit always finds out: time is undefeated. You finish the round on your feet, which at your vintage counts as a victory everywhere except the scorecard. The kid bows to you after -- old rules -- and the applause is warm and terrible, the kind they give the past. Your name is now officially a rung on someone else's ladder.",
+            "deltas": { "Physical_Integrity": -20, "Fame": -4, "Meaning": 6, "Mental_Decay": 6 }
+          }
+        },
+        {
+          "id": "train_the_kid",
+          "text": "Decline the round. Offer them the thing that beat you instead: the feint they telegraph.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "'You drop your left shoulder a half-beat before the overhand. Everyone in the third bracket will see it by summer.' The kid's face does the thing faces do when someone gives away money. You spend an evening in the Synapse's back room rebuilding their guard, and decline to be paid, and the pit's whole ecosystem quietly re-files you: not a name to take, a name to train under. It pays worse than fighting. It compounds better.",
+            "deltas": { "Meaning": 12, "Social_Capital": 8, "Fame": 4 },
+            "faction_deltas": { "Undercity": 6 }
+          }
+        },
+        {
+          "id": "sell_the_fight",
+          "text": "Take the fight -- and sell the outcome to the book-makers first. Legends have margins.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              { "stat": "Fame", "coef": 0.004 },
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "You visit two book-makers before the exhibition and place, through cutouts, a modest sum on the kid -- then fight one honest round and lose it honestly, which is the beauty of the scheme: at your age nobody has to throw anything. The payout is obscene. The kid gets a name, the Row gets a story, the books get emptied, and you get the oldest pit lesson reconfirmed: the real money was never in the winning.",
+            "deltas": { "Wealth": 900, "Physical_Integrity": -14, "Fame": -2, "Meaning": -6 }
+          },
+          "failure": {
+            "text": "One of your cutouts talks. The book-makers void the line before the first bell, the exhibition happens under a cloud of exactly the kind of arithmetic you hoped to keep private, and the Row -- which forgives violence, vice, and most brands of theft -- files gambling-adjacent cleverness under 'bears watching.' The kid still bows after. That part, at least, stays clean.",
+            "deltas": { "Wealth": -200, "Fame": -6, "Heat": 6, "Physical_Integrity": -12 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "origin_chemist_recipe",
+      "title": "The Recipe Comes Asking",
+      "body": "Kael brings the visitor personally, which is how you know the number will be large. A surface pharma-cultist, silk gloves, the careful eyes of a man who has read your old lab's product analyses like scripture. 'The Verdi batch,' he says, naming your masterpiece -- the derivative nobody has replicated since you walked. 'The synthesis notes died with your lab. But the synthesist didn't.' He sets a case on the table. It isn't chits. It's lab equipment -- yours, the originals, bought from whoever stripped your old site. 'Cook it once more. Teach me the step you never wrote down. Name anything.'",
+      "weight": 8,
+      "cooldown": 6,
+      "max_fires": 1,
+      "tags": ["vice", "undercity", "job"],
+      "preconditions": {
+        "all": [ { "flag": "origin_chemist" }, { "day": 5, "op": ">=" } ]
+      },
+      "choices": [
+        {
+          "id": "cook_it_once",
+          "text": "Cook the Verdi batch one final time. Your hands remember. That's the problem.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              { "stat": "Tolerance", "coef": 0.02 },
+              { "stat": "Substance_Reliance", "coef": -0.004 }
+            ]
+          },
+          "success": {
+            "text": "The synthesis takes nine hours and your hands do remember -- every temperature ramp, every patience, the unwritten step (it's a SOUND; the reflux changes pitch when the isomer turns, and you never wrote it down because paper can't hear). The batch comes off perfect. The cultist pays like a man buying relics. And you cork the one sample owed to tradition, and pour it down the drain in front of him, and the look on his face is worth more than the fee. Almost.",
+            "deltas": { "Wealth": 2000, "Fame": 6, "Meaning": 4, "Substance_Reliance": 4 },
+            "flags_set": [ "verdi_cooked" ]
+          },
+          "failure": {
+            "text": "The hands remember. So does the rest of you. Nine hours over your own masterpiece, its signature reflux-note singing in the glassware, and by hour six you have sampled 'for quality' twice and the old year is back in your bloodstream like it never ended. The batch is flawless. The chemist is not. The cultist pays full price and leaves quickly, the way people leave a room where something is on fire that they don't want to be asked to help carry.",
+            "deltas": { "Wealth": 2000, "Substance_Reliance": 18, "Mental_Decay": 8, "Meaning": -8 },
+            "dose": 10,
+            "flags_set": [ "verdi_cooked" ]
+          }
+        },
+        {
+          "id": "teach_dont_touch",
+          "text": "Teach the synthesis from across the room. Your voice cooks; your hands stay in your pockets.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 },
+              { "stat": "Meaning", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "You run the whole synthesis as pure instruction -- hands in pockets, three meters back, talking the cultist's own gloved fingers through every ramp and every patience. When the reflux note turns, you say 'THERE,' and watch him hear it, and something transfers that was never on paper. The batch is ninety-percent right, which for a first apprentice is history-making. Your hands never touched the glass. All nine hours, they wanted to. You tell no one that part. The wanting is the tuition you pay for keeping the recipe alive without going back inside it.",
+            "deltas": { "Wealth": 1200, "Meaning": 10, "Substance_Reliance": -4 },
+            "flags_set": [ "verdi_taught" ]
+          },
+          "failure": {
+            "text": "Teaching, it turns out, is a different craft than cooking, and three meters of distance turns your unwritten step into a language problem nobody solves on the first try. The batch dies at hour seven -- beautifully, expensively, in a bloom of exactly the wrong crystal. The cultist takes it with a collector's grace: 'Even the failures are yours. I'll take the failure.' He pays half. He'll be back. The recipe stays where it has always been: in your hands, which are the place you're trying to leave.",
+            "deltas": { "Wealth": 600, "Mental_Decay": 6, "Meaning": 2 }
+          }
+        },
+        {
+          "id": "burn_the_recipe",
+          "text": "Refuse -- and end it properly. Perform the forgetting: tell him the step, wrong, convincingly, forever.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You give him the unwritten step with a straight face and one fatal, undetectable error -- a temperature two degrees kind, a patience thirty seconds merciful. He'll cook it a hundred times and get a hundred almost-Verdis, close enough to keep trying, wrong enough to never arrive, and someday he'll conclude the legend was always bigger than the batch. You watch him leave with your life's work, sabotaged into folklore. Somewhere in you, a door you've been holding half-open for years swings quietly, finally shut.",
+            "deltas": { "Meaning": 14, "Wealth": -100, "Substance_Reliance": -6, "Mental_Decay": 4 },
+            "flags_set": [ "verdi_buried" ]
+          }
+        }
+      ]
+    }
+  ]
+}

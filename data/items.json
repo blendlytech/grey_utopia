@@ -1,0 +1,113 @@
+{
+  "items": [
+    {
+      "id": "neural_suppressor",
+      "name": "Synthetic Neural Suppressor",
+      "category": "Medical",
+      "cost": 800.0,
+      "description": "High-grade neuro-dampening auto-injector. Reduces mental decay spikes but increases reliance.",
+      "stat_deltas": {
+        "Mental_Decay": -15.0,
+        "Substance_Reliance": 5.0
+      },
+      "tags": ["medical", "vice"]
+    },
+    {
+      "id": "burner_deck",
+      "name": "Military-Grade Burner Deck",
+      "category": "Hardware",
+      "cost": 1500.0,
+      "description": "Single-use untraceable cyberdeck. Bypasses Steward network locks and boosts hack success rate.",
+      "prob_bonus": 0.15,
+      "tags": ["tech", "fixer"],
+      "single_use": true
+    },
+    {
+      "id": "forged_steward_id",
+      "name": "Forged Council Identity Chip",
+      "category": "Credential",
+      "cost": 2500.0,
+      "description": "Spoofed biometric credential. Substantially reduces surveillance heat build-up.",
+      "stat_deltas": {
+        "Heat": -25.0,
+        "Social_Capital": 10.0
+      },
+      "tags": ["steward", "stealth"]
+    },
+    {
+      "id": "adrenalin_booster",
+      "name": "Bio-Adrenaline Surge Pack",
+      "category": "Medical",
+      "cost": 600.0,
+      "description": "Emergency bio-stimulant. Instantly recovers physical integrity at the cost of high stress.",
+      "stat_deltas": {
+        "Physical_Integrity": 35.0,
+        "Mental_Decay": 10.0
+      },
+      "tags": ["medical", "emergency"],
+      "single_use": true
+    },
+    {
+      "id": "syndicate_encryptor",
+      "name": "Syndicate Quantum Encryptor",
+      "category": "Hardware",
+      "cost": 3000.0,
+      "description": "Encrypted comms relay used by high-level Fixers. Boosts Fixer job rewards and syndicate standing.",
+      "stat_deltas": {
+        "Social_Capital": 20.0,
+        "Wealth": 1000.0
+      },
+      "tags": ["fixer", "syndicate"]
+    },
+    {
+      "id": "gait_dampers",
+      "name": "Adaptive Gait Dampers",
+      "category": "Stealth",
+      "cost": 1100.0,
+      "description": "Servo-heels that randomize your stride signature. Permanent bonus to infiltration and evasion attempts.",
+      "prob_bonus": 0.10,
+      "tags": ["stealth", "fixer"]
+    },
+    {
+      "id": "lethe_test_kit",
+      "name": "Lethe Purity Test Kit",
+      "category": "Medical",
+      "cost": 350.0,
+      "description": "Reagent strips that read a dose's true purity before it reads you. Halves overdose risk while carried.",
+      "tags": ["medical", "vice"]
+    },
+    {
+      "id": "naloxinol_patch",
+      "name": "Naloxinol Auto-Patch",
+      "category": "Medical",
+      "cost": 900.0,
+      "description": "Dermal counter-agent that fires on cardiac stutter. Converts one lethal overdose into a survivable collapse, then burns out.",
+      "single_use": true,
+      "tags": ["medical", "emergency"]
+    },
+    {
+      "id": "signal_ghost",
+      "name": "Signal Ghost Spoofer",
+      "category": "Stealth",
+      "cost": 1600.0,
+      "description": "Single-use telemetry phantom that impersonates you somewhere boring. Large bonus to one surveillance-critical attempt.",
+      "prob_bonus": 0.20,
+      "single_use": true,
+      "tags": ["stealth", "steward"]
+    },
+    {
+      "id": "pre_accord_locket",
+      "name": "Pre-Accord Locket",
+      "category": "Keepsake",
+      "cost": 700.0,
+      "description": "A real-silver locket from before the transition, the kind Mara's mother wore. A gift that says what you can't.",
+      "rel_deltas": {
+        "Mara (Sister)": 18.0
+      },
+      "stat_deltas": {
+        "Family_Friction": -10.0
+      },
+      "tags": ["family", "keepsake"]
+    }
+  ]
+}

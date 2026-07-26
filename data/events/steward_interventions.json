@@ -1,0 +1,190 @@
+{
+  "events": [
+    {
+      "id": "steward_wellness_check",
+      "title": "A Benevolent Intervention",
+      "body": "A soft, melodious chime sounds through your apartment array. The Steward has detected elevated biometric stress and offers 'guided equilibrium.'",
+      "weight": 8,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "steward",
+        "wellness"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Heat",
+            "op": ">=",
+            "value": 20
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "accept_counseling",
+          "text": "Accept the neuro-calm session. Let the AI soothe your pulse.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Warm light fills the room. Your heart rate slows, but a quiet piece of your ambition dies.",
+            "deltas": {
+              "Mental_Decay": -18,
+              "Heat": -12,
+              "Meaning": -5,
+              "Recklessness": -8
+            }
+          }
+        },
+        {
+          "id": "deflect_steward",
+          "text": "Feign compliance and spoof your biometric readings.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.006
+              },
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The chime fades into gentle silence. The algorithm accepts your dummy telemetry.",
+            "deltas": {
+              "Heat": -10,
+              "Meaning": 2
+            }
+          },
+          "failure": {
+            "text": "The Steward notes telemetry discrepancy #8491. Surveillance priority escalates.",
+            "deltas": {
+              "Heat": 18,
+              "Mental_Decay": 6
+            }
+          },
+          "boost_items": [
+            "signal_ghost"
+          ]
+        },
+        {
+          "id": "sever_connection",
+          "text": "Sever the room feed. Manually sever the wall comms.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Sparks fly. The sterile silence returns, heavy and ominous.",
+            "deltas": {
+              "Heat": 15,
+              "Meaning": 4,
+              "Recklessness": 5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "steward_buyout_offer",
+      "title": "The Golden Package",
+      "body": "A pristine Steward emissary drone hovers before your desk. It extends a legally binding offer: full immunity, a permanent luxury suite, and zero responsibilities.",
+      "weight": 5,
+      "cooldown": 10,
+      "max_fires": 1,
+      "tags": [
+        "steward",
+        "ending_trigger"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Wealth",
+            "op": ">=",
+            "value": 2000
+          },
+          {
+            "stat": "Heat",
+            "op": ">=",
+            "value": 35
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "accept_buyout",
+          "text": "Sign the contract. Surrender your underground network for total comfort.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You sign. The drone transfers 50,000 credits and wipes your surveillance file.",
+            "deltas": {
+              "Wealth": 50000,
+              "Heat": -100,
+              "Meaning": -50
+            },
+            "flags_set": [
+              "steward_buyout_accepted"
+            ]
+          }
+        },
+        {
+          "id": "counter_offer",
+          "text": "Use your leverage to demand off-grid credentials for your family.",
+          "prob": {
+            "base": 0.35,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.007
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The emissary pauses, processes, and issues dirty off-grid transit tokens.",
+            "deltas": {
+              "Meaning": 15,
+              "Social_Capital": 10
+            },
+            "flags_set": [
+              "exit_ready"
+            ]
+          },
+          "failure": {
+            "text": "The emissary declines: 'Family optimization cannot be traded.'",
+            "deltas": {
+              "Family_Friction": 15,
+              "Heat": 10
+            }
+          }
+        },
+        {
+          "id": "reject_emissary",
+          "text": "Spit on the drone's optic lens and order it out.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The drone retracts silently. You have chosen the hard road.",
+            "deltas": {
+              "Meaning": 6,
+              "Heat": 10
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

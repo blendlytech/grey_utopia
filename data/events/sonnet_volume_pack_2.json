@@ -1,0 +1,2203 @@
+{
+  "pack": "sonnet_volume_pack_2",
+  "model": "sonnet-5",
+  "batch": "volume",
+  "generated_for": "GREY UTOPIA -- The Steward",
+  "description": "25 volume storylets expanding the undercity vice-market economy and Mara/family relationship arcs per CLAUDE.md Checkpoint 2.",
+  "events": [
+    {
+      "id": "volume_vice_market_lethe_cutter",
+      "title": "The Cutter's Stall",
+      "body": "A stall three sublevels down sells 'enhanced' Lethe-9 -- the same neon vial, but the cutter swears his blend hits harder for less. The crowd around him is thin. The regulars know why.",
+      "weight": 7,
+      "cooldown": 2,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "substance",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 10
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "buy_the_cut_batch",
+          "text": "Buy the cut batch. Cheaper is cheaper.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Tolerance",
+                "coef": -0.04
+              }
+            ]
+          },
+          "success": {
+            "text": "It hits twice as hard for half the price. You don't ask what it's cut with. You never do.",
+            "deltas": {
+              "Wealth": -25,
+              "Mental_Decay": -18,
+              "Substance_Reliance": 10,
+              "Physical_Integrity": -6
+            },
+            "dose": 10
+          },
+          "failure": {
+            "text": "Whatever's in the cut disagrees violently with your bloodstream. You spend the night on a stranger's bathroom floor.",
+            "deltas": {
+              "Wealth": -25,
+              "Physical_Integrity": -20,
+              "Mental_Decay": 8
+            },
+            "dose": 15
+          }
+        },
+        {
+          "id": "buy_the_standard_vial",
+          "text": "Pay full price for the standard, uncut vial instead.",
+          "prob": {
+            "base": 0.9,
+            "mods": []
+          },
+          "success": {
+            "text": "Same warm fog as always, no surprises. Boring, in the best way a drug can be.",
+            "deltas": {
+              "Wealth": -40,
+              "Mental_Decay": -14,
+              "Substance_Reliance": 6
+            },
+            "dose": 6
+          },
+          "failure": {
+            "text": "Even the 'standard' vial is thinner than usual this week. Someone's skimming somewhere up the chain.",
+            "deltas": {
+              "Wealth": -40,
+              "Mental_Decay": -4
+            }
+          }
+        },
+        {
+          "id": "walk_past_cutter_stall",
+          "text": "Walk past. A stall with a thin crowd is a warning, not a bargain.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep walking, craving intact, spine intact too.",
+            "deltas": {
+              "Meaning": 2,
+              "Mental_Decay": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_market_fight_pit",
+      "title": "The Undercity Fight Pit",
+      "body": "A cleared-out cargo bay rings with cheering three nights a week -- an unlicensed fight pit where undercity residents bet ration credits and worse on bare-knuckle matches the Steward's wellness metrics pretend don't exist.",
+      "weight": 6,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Physical_Integrity",
+            "op": ">=",
+            "value": 40
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "bet_on_a_fighter",
+          "text": "Bet a stack of credits on the underdog.",
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "The underdog eats three rounds of punishment and still lands the final hit. The pit roars. Your pockets are heavier.",
+            "deltas": {
+              "Wealth": 350,
+              "Recklessness": 3
+            }
+          },
+          "failure": {
+            "text": "The underdog folds in round two, exactly like the odds said he would. You knew better and bet anyway.",
+            "deltas": {
+              "Wealth": -200,
+              "Mental_Decay": 4
+            }
+          }
+        },
+        {
+          "id": "step_into_the_pit",
+          "text": "Step into the ring yourself. Cash prize for whoever's still standing.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You take a beating but land more than you absorb. The purse is real, and so is the ringing in your ears.",
+            "deltas": {
+              "Wealth": 450,
+              "Physical_Integrity": -22,
+              "Fame": 3
+            }
+          },
+          "failure": {
+            "text": "You're outclassed fast and hard. The crowd gets its money's worth out of your face.",
+            "deltas": {
+              "Physical_Integrity": -30,
+              "Mental_Decay": 8
+            }
+          }
+        },
+        {
+          "id": "watch_the_pit_only",
+          "text": "Just watch. Keep your credits and your knuckles to yourself.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You watch two strangers hurt each other for sport and go home exactly as you arrived.",
+            "deltas": {
+              "Meaning": -1,
+              "Mental_Decay": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_market_organ_broker",
+      "title": "The Organ Broker's Ledger",
+      "body": "A soft-spoken broker in a converted freight container keeps a ledger of black-market synthetic organ upgrades -- augments the Steward's clinics ration by lottery, sold here without the wait, without the paperwork, and without any guarantee.",
+      "weight": 5,
+      "cooldown": 6,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "undercity",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Wealth",
+            "op": ">=",
+            "value": 600
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "buy_liver_augment",
+          "text": "Buy a black-market liver augment to blunt what the vices have been doing to you.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The install is rough but the augment takes. Your body forgives you a little more than it should.",
+            "deltas": {
+              "Wealth": -600,
+              "Physical_Integrity": 12,
+              "Substance_Reliance": -4
+            }
+          },
+          "failure": {
+            "text": "The augment is rejected mid-install. You're bedridden a week and the broker keeps the deposit regardless.",
+            "deltas": {
+              "Wealth": -600,
+              "Physical_Integrity": -20,
+              "Mental_Decay": 8
+            }
+          }
+        },
+        {
+          "id": "haggle_broker_terms",
+          "text": "Haggle the broker down and ask hard questions about the augment's origin.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "The broker respects the due diligence and cuts the price, along with a name you can vet through Vint later.",
+            "deltas": {
+              "Wealth": -350,
+              "Social_Capital": 2
+            }
+          },
+          "failure": {
+            "text": "Your questions kill the deal. The broker closes the ledger and politely asks you to leave.",
+            "deltas": {
+              "Meaning": -2
+            }
+          }
+        },
+        {
+          "id": "refuse_organ_broker",
+          "text": "Refuse. Whatever's wrong with your body, it isn't wrong enough for this.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You walk out with every organ you walked in with, unmodified and unmortgaged.",
+            "deltas": {
+              "Meaning": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_market_loan_shark",
+      "title": "The Undercity Loan Shark",
+      "body": "A moneylender who never touches Steward-tracked credit lines offers fast, untraceable cash at a rate that's less a number than a threat. Everyone down here has a story about someone who borrowed once.",
+      "weight": 6,
+      "cooldown": 4,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Wealth",
+            "op": "<=",
+            "value": 200
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_the_loan",
+          "text": "Take the loan. You'll figure out repayment later.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Cash in hand, no questions, no Steward record. The interest clock starts the second you walk away.",
+            "deltas": {
+              "Wealth": 500,
+              "Heat": -2
+            },
+            "flags_set": [
+              "loan_shark_debt"
+            ],
+            "clocks_start": {
+              "loan_shark": 8
+            }
+          },
+          "failure": {
+            "clocks_start": {
+              "loan_shark": 8
+            }
+          }
+        },
+        {
+          "id": "ask_smaller_loan",
+          "text": "Ask for a smaller sum. Less relief, less noose.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "A modest sum, a modest debt. Still a debt.",
+            "deltas": {
+              "Wealth": 200
+            },
+            "flags_set": [
+              "loan_shark_debt"
+            ],
+            "clocks_start": {
+              "loan_shark": 8
+            }
+          }
+        },
+        {
+          "id": "refuse_loan_shark",
+          "text": "Refuse. Poor and free beats comfortable and owned.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You walk away broke, but nobody's clock is running against you.",
+            "deltas": {
+              "Meaning": 3,
+              "Mental_Decay": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_market_memory_parlor_debt",
+      "title": "The Braindance Parlor's Tab",
+      "body": "The braindance den keeps a running tab for its regulars, and yours has quietly climbed past what you remember agreeing to. The proprietor mentions it gently, the way someone mentions a knife they're not currently using.",
+      "weight": 6,
+      "cooldown": 4,
+      "max_fires": 1,
+      "tags": [
+        "vice",
+        "substance",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 30
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "clear_parlor_tab",
+          "text": "Clear the whole tab in one go.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It costs more than you'd like to admit, but the proprietor's smile turns genuinely warm again.",
+            "deltas": {
+              "Wealth": -450,
+              "Social_Capital": 3
+            }
+          }
+        },
+        {
+          "id": "negotiate_parlor_tab",
+          "text": "Negotiate a partial payment and a promise.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "The proprietor accepts half now, the rest 'whenever,' which everyone involved knows means soon.",
+            "deltas": {
+              "Wealth": -220,
+              "Substance_Reliance": 2
+            }
+          },
+          "failure": {
+            "text": "The proprietor isn't in a negotiating mood today. Full amount, no discount, slightly cold eye contact.",
+            "deltas": {
+              "Wealth": -450,
+              "Mental_Decay": 4
+            }
+          }
+        },
+        {
+          "id": "stop_visiting_parlor",
+          "text": "Pay nothing today and stop visiting the den for a while.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You leave the tab open and your feet pointed somewhere else. The craving notices immediately.",
+            "deltas": {
+              "Mental_Decay": 10,
+              "Substance_Reliance": -6
+            },
+            "flags_set": [
+              "parlor_tab_open"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_market_smoke_lounge",
+      "title": "The Vapor Lounge Off Sublevel 4",
+      "body": "A dim lounge sells hand-rolled cigarettes cut with something the Steward's air filtration wasn't designed to catch -- legal in the letter, not quite legal in the spirit, and popular precisely because it walks that line.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "substance",
+        "undercity"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "smoke_with_regulars",
+          "text": "Buy a round and smoke with the regulars.",
+          "prob": {
+            "base": 0.8,
+            "mods": [
+              {
+                "stat": "Tolerance",
+                "coef": -0.02
+              }
+            ]
+          },
+          "success": {
+            "text": "Easy smoke, easy conversation, a low warm hum that lasts the rest of the evening.",
+            "deltas": {
+              "Wealth": -30,
+              "Mental_Decay": -8,
+              "Substance_Reliance": 4,
+              "Social_Capital": 2
+            },
+            "dose": 3
+          },
+          "failure": {
+            "text": "This batch is harsher than usual. You cough through half the lounge's attention and half your dignity.",
+            "deltas": {
+              "Wealth": -30,
+              "Physical_Integrity": -4
+            },
+            "dose": 5
+          }
+        },
+        {
+          "id": "just_the_company",
+          "text": "Sit with the regulars but skip the smoke.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Secondhand haze and secondhand gossip. You get most of the benefit for none of the habit.",
+            "deltas": {
+              "Social_Capital": 2,
+              "Mental_Decay": -2
+            }
+          }
+        },
+        {
+          "id": "skip_the_lounge",
+          "text": "Skip the lounge entirely tonight.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep walking. The lounge's warm light fades behind you.",
+            "deltas": {}
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_market_black_lottery",
+      "title": "The Undercity Black Lottery",
+      "body": "An unlicensed lottery runs out of a barbershop back room, paying out in untraceable credit instead of Steward-tracked winnings -- illegal purely because the Steward can't tax or monitor it, not because anyone's really hurt.",
+      "weight": 6,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "undercity"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "buy_lottery_tickets",
+          "text": "Buy a handful of tickets. Someone's got to win.",
+          "prob": {
+            "base": 0.2,
+            "mods": []
+          },
+          "success": {
+            "text": "Your numbers hit. The barber pays out in cash from a drawer that officially doesn't exist.",
+            "deltas": {
+              "Wealth": 900,
+              "Meaning": 2
+            }
+          },
+          "failure": {
+            "text": "Nothing. As expected, as always, as the whole point of a lottery.",
+            "deltas": {
+              "Wealth": -50
+            }
+          }
+        },
+        {
+          "id": "buy_one_ticket",
+          "text": "Buy just one ticket. Small stake, small dream.",
+          "prob": {
+            "base": 0.05,
+            "mods": []
+          },
+          "success": {
+            "text": "Impossibly, absurdly, your one ticket hits. The barber checks it twice before believing it.",
+            "deltas": {
+              "Wealth": 900,
+              "Meaning": 4
+            }
+          },
+          "failure": {
+            "text": "It doesn't hit. You didn't really expect it to.",
+            "deltas": {
+              "Wealth": -10
+            }
+          }
+        },
+        {
+          "id": "skip_the_lottery",
+          "text": "Skip it. Hope is a bad investment strategy.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep your credits and your cynicism intact.",
+            "deltas": {
+              "Meaning": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_market_grief_dealer",
+      "title": "The Grief Dealer",
+      "body": "A quiet man in the back of the braindance den specializes in something darker than euphoria loops -- curated grief spikes, other people's worst days, sold to customers who find their own numbness easier to bear against someone else's tragedy.",
+      "weight": 5,
+      "cooldown": 5,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "substance",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Meaning",
+            "op": "<=",
+            "value": 40
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "buy_a_grief_spike",
+          "text": "Buy one. Feeling something ugly might beat feeling nothing.",
+          "prob": {
+            "base": 0.75,
+            "mods": [
+              {
+                "stat": "Mental_Decay",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "Someone else's worst day floods through you, borrowed and raw. It's not healing. It's not supposed to be.",
+            "deltas": {
+              "Wealth": -60,
+              "Meaning": 6,
+              "Mental_Decay": 6
+            }
+          },
+          "failure": {
+            "text": "The spike overwhelms the safety cutoffs and loops twice before it releases you. You surface hollowed out.",
+            "deltas": {
+              "Wealth": -60,
+              "Mental_Decay": 12,
+              "Physical_Integrity": -4
+            }
+          }
+        },
+        {
+          "id": "ask_dealer_why",
+          "text": "Ask the dealer why anyone would pay for this.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "'Numb people pay good money to remember what feeling anything is like,' he says, like it's the most reasonable business in the world.",
+            "deltas": {
+              "Meaning": 3
+            }
+          }
+        },
+        {
+          "id": "leave_grief_dealer",
+          "text": "Leave without buying. Some numbness you'd rather sit with than cure this way.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You leave the grief dealer to his stranger clientele.",
+            "deltas": {
+              "Mental_Decay": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_market_wellness_bribe",
+      "title": "Bribing the Wellness Patrol",
+      "body": "A wellness patrol officer catches you exactly where you shouldn't be, clipboard raised, ready to log a citation that'll tick your Heat up for a month. He also, pointedly, hasn't looked directly at your pockets yet.",
+      "weight": 6,
+      "cooldown": 4,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Heat",
+            "op": ">=",
+            "value": 30
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "bribe_the_officer",
+          "text": "Slip him a folded stack of credits, quick and quiet.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Fame",
+                "coef": -0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "The clipboard goes back on his belt. He never saw you. You were never here.",
+            "deltas": {
+              "Wealth": -150,
+              "Heat": -15
+            }
+          },
+          "failure": {
+            "text": "Wrong officer, wrong day. He's offended, not tempted, and the citation gets a bribery-attempt addendum.",
+            "deltas": {
+              "Wealth": -150,
+              "Heat": 20,
+              "Social_Capital": -4
+            }
+          }
+        },
+        {
+          "id": "talk_way_out",
+          "text": "Talk your way out of it without any money changing hands.",
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              }
+            ]
+          },
+          "success": {
+            "text": "A convincing story about a sick relative and a wrong turn buys you a warning instead of a citation.",
+            "deltas": {
+              "Heat": -5
+            }
+          },
+          "failure": {
+            "text": "He's heard every version of that story. The citation goes through, verbatim, with your name spelled correctly.",
+            "deltas": {
+              "Heat": 15
+            }
+          }
+        },
+        {
+          "id": "accept_the_citation",
+          "text": "Accept the citation. Don't compound the problem.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "He logs it, hands you a slip, and moves on. Clean, on the record, survivable.",
+            "deltas": {
+              "Heat": 10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_mara_late_night_call",
+      "title": "Mara Calls Past Midnight",
+      "body": "Your comms buzz well after a reasonable hour. Mara's voice comes through thin and unsteady -- not an emergency, she insists, she just couldn't sleep and wanted to hear someone who isn't a Steward wellness chatbot.",
+      "weight": 8,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "family"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "stay_on_the_line",
+          "text": "Stay on the line as long as she needs, no matter how late it gets.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You talk about nothing until the nothing becomes something real. She thanks you like it cost you nothing, though you both know better.",
+            "deltas": {
+              "Family_Friction": -12,
+              "Meaning": 8,
+              "Mental_Decay": -4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 12
+            }
+          }
+        },
+        {
+          "id": "cut_call_short",
+          "text": "Keep it brief. You need the sleep more than she needs the company tonight.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "She says goodnight and doesn't push. You're not sure if that's relief or resignation in her voice.",
+            "deltas": {
+              "Family_Friction": 4,
+              "Mental_Decay": -2
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 2
+            }
+          },
+          "failure": {
+            "text": "You cut it shorter than she wanted. The silence before she hangs up says more than the goodbye did.",
+            "deltas": {
+              "Family_Friction": 10,
+              "Meaning": -4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -5
+            }
+          }
+        },
+        {
+          "id": "let_call_ring_out",
+          "text": "Let it ring out. Whatever it is, it can wait until morning.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It stops ringing eventually. No follow-up message. The quiet afterward feels worse than any argument would have.",
+            "deltas": {
+              "Family_Friction": 14,
+              "Meaning": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_mara_finds_out",
+      "title": "Mara Finds Out",
+      "body": "Mara corners you in the doorway, jaw set, holding a scrap of information she clearly wishes she didn't have -- someone mentioned your name and a vice den in the same breath, and she wants to hear it isn't true from you directly.",
+      "weight": 7,
+      "cooldown": 5,
+      "max_fires": 0,
+      "tags": [
+        "family",
+        "vice"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 15
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "admit_it_to_mara",
+          "text": "Tell her the truth. All of it, not the softened version.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She doesn't yell. She just goes very quiet and asks how long, and you realize the quiet is worse than yelling would've been.",
+            "deltas": {
+              "Family_Friction": 18,
+              "Meaning": 6,
+              "Mental_Decay": -4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 10
+            }
+          }
+        },
+        {
+          "id": "minimize_to_mara",
+          "text": "Admit some of it, downplay the rest.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "She takes the softened version at face value, or pretends to, which might be a kindness on both your parts.",
+            "deltas": {
+              "Family_Friction": 6,
+              "Meaning": -2
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -2
+            }
+          },
+          "failure": {
+            "text": "She sees straight through the softening. 'Don't do that,' she says. 'Don't lie to make it easier for me.'",
+            "deltas": {
+              "Family_Friction": 20,
+              "Meaning": -8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -8
+            }
+          }
+        },
+        {
+          "id": "deny_it_to_mara",
+          "text": "Deny it outright. Whoever told her got it wrong.",
+          "prob": {
+            "base": 0.35,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "She wants to believe you badly enough that she lets it go, this time.",
+            "deltas": {
+              "Family_Friction": -4,
+              "Meaning": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -4
+            }
+          },
+          "failure": {
+            "text": "She already knew. The denial is the thing that actually breaks something between you.",
+            "deltas": {
+              "Family_Friction": 28,
+              "Meaning": -14,
+              "Social_Capital": -3
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -12
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_mara_job_offer",
+      "title": "Mara Has a Real Job Lined Up",
+      "body": "Mara sits you down with something like hope on her face -- a legitimate Steward-sponsored apprenticeship opening, boring and stable and completely legal, that she thinks could pull you out of the fixer trade for good.",
+      "weight": 7,
+      "cooldown": 6,
+      "max_fires": 1,
+      "tags": [
+        "family",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Family_Friction",
+            "op": ">=",
+            "value": 10
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "apply_for_apprenticeship",
+          "text": "Apply, sincerely, and mean it.",
+          "prob": {
+            "base": 0.72,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.005
+              }
+            ]
+          },
+          "success": {
+            "text": "You get in. Mara cries a little and pretends it's allergies. For a moment the fixer life feels like something you could actually leave.",
+            "deltas": {
+              "Family_Friction": -20,
+              "Meaning": 10,
+              "Wealth": -50
+            },
+            "flags_set": [
+              "apprenticeship_accepted"
+            ],
+            "rel_deltas": {
+              "Mara (Sister)": 14
+            }
+          },
+          "failure": {
+            "text": "The screening flags your Heat history and quietly declines you. You don't tell Mara the real reason.",
+            "deltas": {
+              "Family_Friction": 6,
+              "Meaning": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 4
+            }
+          }
+        },
+        {
+          "id": "humor_mara_apply",
+          "text": "Apply just to make her stop worrying, without really meaning it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The application goes in half-meant, a gift of paperwork to make her stop worrying. Then, eleven days later, the guild calls back -- the city took your irony at face value and accepted it. Mara grins like she has won something. Maybe she has. The placement sits open now, waiting to find out if you were joking.",
+            "deltas": {
+              "Family_Friction": -6,
+              "Meaning": -4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -2
+            },
+            "flags_set": [
+              "apprenticeship_accepted"
+            ]
+          }
+        },
+        {
+          "id": "refuse_apprenticeship",
+          "text": "Tell her plainly you're not applying. The fixer life is yours, chosen.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Her face falls in a way she tries hard to hide. 'Okay,' is all she says. It is not okay.",
+            "deltas": {
+              "Family_Friction": 16,
+              "Meaning": -8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_mara_birthday",
+      "title": "Mara's Birthday",
+      "body": "It's Mara's birthday, and the Steward's civic calendar has helpfully reminded your comms three separate times, as if you'd forget the one date that's meant something your whole life.",
+      "weight": 6,
+      "cooldown": 8,
+      "max_fires": 0,
+      "tags": [
+        "family"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "throw_mara_a_real_celebration",
+          "text": "Spend real money on a real celebration -- food she can't ration for, a gift that isn't practical.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "For one evening, scarcity isn't the whole story. She laughs until she's crying about something completely unimportant.",
+            "deltas": {
+              "Wealth": -300,
+              "Family_Friction": -20,
+              "Meaning": 14
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 18
+            }
+          }
+        },
+        {
+          "id": "send_mara_a_gift",
+          "text": "Send a modest gift and a message. You can't make it in person.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She thanks you warmly over comms, and you both pretend the distance in her voice is just bad signal.",
+            "deltas": {
+              "Wealth": -60,
+              "Family_Friction": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 6
+            }
+          }
+        },
+        {
+          "id": "forget_mara_birthday",
+          "text": "Let it slip past unmarked. There'll be other years.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She doesn't mention it. That's how you know she noticed.",
+            "deltas": {
+              "Family_Friction": 22,
+              "Meaning": -10
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -15
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_mara_ubi_shortfall",
+      "title": "Mara's UBI Shortfall",
+      "body": "A Steward recalibration quietly trims Mara's stipend this cycle -- an algorithmic 'household efficiency adjustment' that leaves her short on rent with no appeal process faster than the deadline itself.",
+      "weight": 7,
+      "cooldown": 4,
+      "max_fires": 0,
+      "tags": [
+        "family"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "cover_mara_shortfall",
+          "text": "Cover the shortfall yourself, no strings, no lecture.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She takes it with visible reluctance and quiet gratitude in roughly equal measure.",
+            "deltas": {
+              "Wealth": -250,
+              "Family_Friction": -14,
+              "Meaning": 6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 12
+            }
+          }
+        },
+        {
+          "id": "help_mara_appeal",
+          "text": "Help her file an appeal through Steward channels instead of just paying.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "Against long odds, the appeal actually clears in time. She gets her stipend restored and a small sense that the system can be fought.",
+            "deltas": {
+              "Family_Friction": -10,
+              "Meaning": 8,
+              "Heat": 2
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 8
+            }
+          },
+          "failure": {
+            "text": "The appeal queue outlasts the rent deadline. You end up covering it anyway, just later and more stressfully.",
+            "deltas": {
+              "Wealth": -250,
+              "Family_Friction": -4,
+              "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 2
+            }
+          }
+        },
+        {
+          "id": "cant_help_mara_now",
+          "text": "Tell her you can't help right now. Your own finances are too thin.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She says she'll figure it out. She always says that. It's rarely entirely true.",
+            "deltas": {
+              "Family_Friction": 12,
+              "Meaning": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_mara_old_photo",
+      "title": "The Photo From Before",
+      "body": "Sorting through a box of pre-Accord belongings, Mara finds an actual printed photograph -- your whole family, before it was smaller, before the Steward, before either of you had to be this tired this young.",
+      "weight": 6,
+      "cooldown": 5,
+      "max_fires": 0,
+      "tags": [
+        "family",
+        "existential"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "sit_with_the_photo",
+          "text": "Sit with her and actually look at it, all the way through.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You both go quiet in the way that means something's actually landing. It hurts. It's supposed to.",
+            "deltas": {
+              "Family_Friction": -16,
+              "Meaning": 10,
+              "Mental_Decay": -4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 10
+            }
+          }
+        },
+        {
+          "id": "glance_and_move_on",
+          "text": "Glance at it, say something kind, and change the subject fast.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She notices the deflection but lets you have it. Some doors you're allowed to keep half-closed.",
+            "deltas": {
+              "Family_Friction": 2,
+              "Meaning": -2
+            }
+          }
+        },
+        {
+          "id": "ask_mara_to_put_it_away",
+          "text": "Ask her to put it away. You're not ready for that particular ghost tonight.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She slides it back into the box without argument, but you catch her looking at you like she's filing something away too.",
+            "deltas": {
+              "Family_Friction": 6,
+              "Meaning": -4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -6
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_mara_asks_you_to_stop",
+      "title": "Mara Asks You to Stop",
+      "body": "No preamble, no ambush -- just Mara, tired, asking you directly and plainly to stop whatever it is you've been doing down in the sublevels, before it stops being your choice to make.",
+      "weight": 7,
+      "cooldown": 6,
+      "max_fires": 1,
+      "tags": [
+        "family",
+        "vice"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 35
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "promise_mara_youll_try",
+          "text": "Promise her you'll try to cut back, and mean it right now, at least.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Substance_Reliance",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Something in her shoulders unclenches. Whether the promise holds is a problem for tomorrow-you, but tonight it's enough.",
+            "deltas": {
+              "Family_Friction": -18,
+              "Meaning": 8,
+              "Substance_Reliance": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 14
+            }
+          },
+          "failure": {
+            "text": "You mean it when you say it and break it within days. She sees the pattern before you're willing to admit it.",
+            "deltas": {
+              "Family_Friction": 10,
+              "Meaning": -8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -4
+            }
+          }
+        },
+        {
+          "id": "tell_mara_you_have_it_handled",
+          "text": "Tell her you've got it handled. You don't need saving.",
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "She doesn't believe you, but she nods and lets the conversation end. Neither of you is satisfied with that.",
+            "deltas": {
+              "Family_Friction": 8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -4
+            }
+          },
+          "failure": {
+            "text": "'That's exactly what someone who doesn't have it handled says,' she snaps, and for once she's completely right.",
+            "deltas": {
+              "Family_Friction": 22,
+              "Meaning": -10
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -8
+            }
+          }
+        },
+        {
+          "id": "walk_out_on_mara",
+          "text": "Walk out rather than have this conversation at all.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You leave her standing in the doorway, mid-sentence. It is the kind of exit you'll replay later, badly.",
+            "deltas": {
+              "Family_Friction": 26,
+              "Meaning": -12
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -18
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_mara_meets_vint",
+      "title": "Mara Meets Vint",
+      "body": "Against your better judgment, Mara and Vint end up in the same room -- your sister and your informant, sizing each other up over lukewarm synth-coffee, each one clearly trying to decide how worried they should be about you.",
+      "weight": 5,
+      "cooldown": 8,
+      "max_fires": 1,
+      "tags": [
+        "family",
+        "npc"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "let_them_talk",
+          "text": "Let them talk freely without steering the conversation.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "They compare notes on you like old colleagues and end up liking each other more than they expected to.",
+            "deltas": {
+              "Family_Friction": -8,
+              "Social_Capital": 4,
+              "Meaning": 4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 8,
+              "Vint (Informant)": 6
+            }
+          },
+          "failure": {
+            "text": "Vint says something about a job gone sideways that Mara was never supposed to hear. The car ride home is silent.",
+            "deltas": {
+              "Family_Friction": 16,
+              "Social_Capital": -3
+            }
+          }
+        },
+        {
+          "id": "steer_the_conversation",
+          "text": "Steer the conversation hard away from anything work-related.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You keep it to weather and old neighborhood gossip. Awkward, but survivable, and nobody learns anything they shouldn't.",
+            "deltas": {
+              "Family_Friction": -2
+            }
+          },
+          "failure": {
+            "text": "Vint gets bored of small talk and drifts into shop talk anyway. You spend the rest of dinner doing damage control.",
+            "deltas": {
+              "Family_Friction": 10,
+              "Social_Capital": -2
+            }
+          }
+        },
+        {
+          "id": "cut_the_meeting_short",
+          "text": "Cut the meeting short with an excuse.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You get them out the door fast. Nothing revealed, nothing resolved, everyone a little suspicious of everyone else.",
+            "deltas": {
+              "Family_Friction": 4,
+              "Social_Capital": -1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_niece_nephew_visit",
+      "title": "A Small Visitor",
+      "body": "Mara brings her kid along this time -- your niece or nephew, all restless energy and blunt questions, staring at the calluses on your hands like they're trying to solve a puzzle they're too young to be shown the whole picture of.",
+      "weight": 6,
+      "cooldown": 6,
+      "max_fires": 0,
+      "tags": [
+        "family"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "spend_the_day_with_kid",
+          "text": "Clear your whole day and actually spend it with them.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You end up teaching them a card game instead of anything true about your life, and it's the best afternoon either of you has had in weeks.",
+            "deltas": {
+              "Family_Friction": -16,
+              "Meaning": 12,
+              "Mental_Decay": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 12
+            }
+          }
+        },
+        {
+          "id": "dodge_kids_questions",
+          "text": "Deflect their questions with jokes and keep the visit shallow.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep it light. Mara watches you do it and says nothing, filing it away for later.",
+            "deltas": {
+              "Family_Friction": 2,
+              "Meaning": -2
+            }
+          }
+        },
+        {
+          "id": "make_excuse_leave_early",
+          "text": "Make an excuse and cut the visit short.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You're gone before the visit really starts. Mara's face does something complicated as the door closes.",
+            "deltas": {
+              "Family_Friction": 14,
+              "Meaning": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_mara_worried_about_heat",
+      "title": "Mara Notices the Drones",
+      "body": "Mara mentions, too casually, that she's seen the same patrol drone pass her block three times this week -- and she's fairly sure it isn't her the Steward's watching.",
+      "weight": 6,
+      "cooldown": 5,
+      "max_fires": 0,
+      "tags": [
+        "family"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Heat",
+            "op": ">=",
+            "value": 40
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "reassure_mara_heat",
+          "text": "Reassure her it's nothing, even though it probably isn't nothing.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "She wants to believe you and mostly manages to. The drone keeps circling regardless of what either of you believes.",
+            "deltas": {
+              "Family_Friction": -4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 4
+            }
+          },
+          "failure": {
+            "text": "Your reassurance falls flat. She's not stupid, and pretending she is only makes it worse.",
+            "deltas": {
+              "Family_Friction": 12,
+              "Meaning": -4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -6
+            }
+          }
+        },
+        {
+          "id": "warn_mara_lay_low",
+          "text": "Tell her honestly to keep her distance from you for a while.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She doesn't like it, but she respects the honesty enough to actually take the precaution seriously.",
+            "deltas": {
+              "Family_Friction": 6,
+              "Meaning": 4,
+              "Heat": -4
+            }
+          }
+        },
+        {
+          "id": "relocate_mara_temporarily",
+          "text": "Pay to relocate her somewhere quieter for a while, no explanations offered.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Wealth",
+                "coef": 1e-05
+              }
+            ]
+          },
+          "success": {
+            "text": "She goes, grumbling, to a cousin's place two districts over. The drone loses interest in her block within days.",
+            "deltas": {
+              "Wealth": -300,
+              "Family_Friction": -6,
+              "Heat": -10
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 10
+            }
+          },
+          "failure": {
+            "text": "She refuses to move without a real explanation, and you're not ready to give her one. The drone keeps circling.",
+            "deltas": {
+              "Wealth": -100,
+              "Family_Friction": 8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_mara_wants_out_together",
+      "title": "Mara Talks About Leaving",
+      "body": "Late, over cold tea, Mara floats an idea she's clearly turned over for weeks -- what if the two of you saved up and actually left the arcology together, off-grid, before either of you gets too tangled up to leave at all.",
+      "weight": 5,
+      "cooldown": 8,
+      "max_fires": 1,
+      "tags": [
+        "family",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Meaning",
+            "op": ">=",
+            "value": 30
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "commit_to_plan_with_mara",
+          "text": "Commit to the plan. Start actually saving toward it together.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "For the first time in a long time, you both have the same shape of future in mind. It's fragile. It's real.",
+            "deltas": {
+              "Family_Friction": -20,
+              "Meaning": 14
+            },
+            "flags_set": [
+              "shared_exit_plan"
+            ],
+            "rel_deltas": {
+              "Mara (Sister)": 15
+            }
+          }
+        },
+        {
+          "id": "humor_mara_leaving",
+          "text": "Agree it sounds nice, without really committing to anything.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She hears the noncommittal tone under the agreement. She's heard it before.",
+            "deltas": {
+              "Family_Friction": 4,
+              "Meaning": -4
+            }
+          }
+        },
+        {
+          "id": "shut_down_leaving_idea",
+          "text": "Tell her plainly it's not realistic and she should stop thinking about it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Something closes in her expression. She doesn't bring it up again, which is its own kind of answer.",
+            "deltas": {
+              "Family_Friction": 18,
+              "Meaning": -10
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -14
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_market_smuggled_liquor",
+      "title": "Pre-Accord Whiskey, Allegedly",
+      "body": "A dealer swears the sealed bottle in his coat is genuine pre-Accord whiskey, smuggled out of a collector's estate -- decades-old, undiluted, and priced like it, though the label's condition suggests either a miracle or a very good forger.",
+      "weight": 6,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "substance",
+        "undercity"
+      ],
+      "preconditions": {},
+      "choices": [
+        {
+          "id": "buy_the_whiskey",
+          "text": "Buy the bottle at asking price and trust the story.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "It's real. Smoky, old, genuinely from a world that doesn't exist anymore. Worth every credit, once.",
+            "deltas": {
+              "Wealth": -400,
+              "Mental_Decay": -10,
+              "Meaning": 6
+            }
+          },
+          "failure": {
+            "text": "It's convincingly-aged rotgut in a real bottle. The forger clearly put more work into the label than the contents.",
+            "deltas": {
+              "Wealth": -400,
+              "Physical_Integrity": -8,
+              "Mental_Decay": 2
+            }
+          }
+        },
+        {
+          "id": "haggle_whiskey_price",
+          "text": "Haggle the price down before committing either way.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "You get it for half the asking price. Real or not, that's a bottle you can afford to be wrong about.",
+            "deltas": {
+              "Wealth": -180,
+              "Social_Capital": 1
+            }
+          },
+          "failure": {
+            "text": "The dealer won't budge and gets prickly about the insinuation. You walk away, bottle-less.",
+            "deltas": {
+              "Social_Capital": -2
+            }
+          }
+        },
+        {
+          "id": "skip_the_whiskey",
+          "text": "Pass. A story that good is usually exactly that.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep your credits and your skepticism. The dealer moves on to a more hopeful customer.",
+            "deltas": {
+              "Meaning": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_market_tattoo_parlor_debt_mark",
+      "title": "The Debt-Mark Tattoo",
+      "body": "An undercity tattooist offers a subdermal ink pattern that flags you, to those who know how to read it, as someone currently under a syndicate's protection -- and someone else's debt. Kael's people use it. So do people who owe Kael's people.",
+      "weight": 5,
+      "cooldown": 6,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "undercity",
+        "npc"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Fame",
+            "op": ">=",
+            "value": 15
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "get_the_debt_mark",
+          "text": "Get the mark. Protection's worth the visible debt.",
+          "prob": {
+            "base": 0.7,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The needle stings for an hour and the mark settles under your skin, quiet and permanent. Fewer people bother you on principle now.",
+            "deltas": {
+              "Wealth": -200,
+              "Social_Capital": 5,
+              "Heat": 4
+            },
+            "flags_set": [
+              "debt_marked"
+            ]
+          },
+          "failure": {
+            "text": "The ink reacts badly to something in your system. It heals wrong, blurred, and half-readable -- worse than no mark at all.",
+            "deltas": {
+              "Wealth": -200,
+              "Physical_Integrity": -10,
+              "Social_Capital": -2
+            }
+          }
+        },
+        {
+          "id": "ask_about_mark_meaning",
+          "text": "Ask exactly what obligations the mark actually carries before agreeing to anything.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The tattooist lays it out plainly: protection, yes, but also permanent visibility to anyone who knows Kael's ledger. You decide with open eyes.",
+            "deltas": {
+              "Meaning": 2
+            }
+          }
+        },
+        {
+          "id": "refuse_debt_mark",
+          "text": "Refuse. Permanent and readable isn't a combination you want on your skin.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You leave unmarked and unaffiliated, for whatever that's worth down here.",
+            "deltas": {
+              "Meaning": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_market_withdrawal_night",
+      "title": "A Bad Night to Quit",
+      "body": "You told yourself tonight was the night you'd go without, and your body has other, louder opinions about that decision -- sweats, shakes, and a craving that's stopped being subtle about what it wants.",
+      "weight": 7,
+      "cooldown": 2,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "substance"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 40
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "ride_out_withdrawal",
+          "text": "Ride it out, all the way through, without giving in.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "It's a genuinely miserable night, but you come out the other side of it with the habit's grip just slightly loosened.",
+            "deltas": {
+              "Mental_Decay": 8,
+              "Substance_Reliance": -10,
+              "Meaning": 6
+            }
+          },
+          "failure": {
+            "text": "You white-knuckle it for hours before your body simply overrides the decision. You end up buying anyway, at 3am, at a worse price.",
+            "deltas": {
+              "Wealth": -70,
+              "Mental_Decay": 4,
+              "Substance_Reliance": 4
+            }
+          }
+        },
+        {
+          "id": "call_mara_for_support",
+          "text": "Call Mara and ask her to just stay on the line with you through it.",
+          "prob": {
+            "base": 0.65,
+            "mods": [
+              {
+                "stat": "Family_Friction",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "She stays on the comm for three hours straight, half-asleep, murmuring you through the worst of it. You make it.",
+            "deltas": {
+              "Mental_Decay": 4,
+              "Substance_Reliance": -8,
+              "Family_Friction": -10,
+              "Meaning": 8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 10
+            }
+          },
+          "failure": {
+            "text": "She tries, but you're too far into it to be talked down, and you end up snapping at her before hanging up ashamed.",
+            "deltas": {
+              "Family_Friction": 12,
+              "Mental_Decay": 6,
+              "Meaning": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -4
+            }
+          }
+        },
+        {
+          "id": "give_in_tonight",
+          "text": "Give in. Tonight just isn't the night.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The relief is instant and familiar and quietly disappointing in a way you're getting used to.",
+            "deltas": {
+              "Wealth": -50,
+              "Mental_Decay": -12,
+              "Substance_Reliance": 5,
+              "Meaning": -4
+            },
+            "dose": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_vice_market_fence_stolen_meds",
+      "title": "Fencing Stolen Clinic Stock",
+      "body": "A jittery contact offers a case of stolen Steward clinic medication -- legitimate, effective, and diverted from a supply run meant for a wellness center two districts over. The undercity's black-market pharmacy would pay well for it.",
+      "weight": 5,
+      "cooldown": 5,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "contraband",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Fame",
+            "op": ">=",
+            "value": 12
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "fence_the_stolen_meds",
+          "text": "Fence the whole case through your usual contacts.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "It moves fast -- clinic-grade meds are always in demand down here. The margin is excellent. The wellness center two districts over runs short this month.",
+            "deltas": {
+              "Wealth": 500,
+              "Heat": 10,
+              "Meaning": -4
+            }
+          },
+          "failure": {
+            "text": "The stolen batch is traced faster than expected. Steward auditors start asking your contacts pointed questions.",
+            "deltas": {
+              "Heat": 26,
+              "Social_Capital": -6
+            }
+          }
+        },
+        {
+          "id": "redirect_meds_to_needy",
+          "text": "Quietly redirect the case to people who actually need it instead of selling it for profit.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "No profit, but a dozen undercity families get medication the Steward's queue would've made them wait months for.",
+            "deltas": {
+              "Meaning": 12,
+              "Social_Capital": 5,
+              "Wealth": -30
+            },
+            "faction_deltas": {
+              "Undercity": 6
+            }
+          },
+          "failure": {
+            "text": "Word of the giveaway spreads faster than you'd like, and it draws exactly the kind of attention a stolen case shouldn't.",
+            "deltas": {
+              "Heat": 14,
+              "Meaning": 4
+            }
+          }
+        },
+        {
+          "id": "refuse_stolen_meds",
+          "text": "Refuse the case outright. Medication theft crosses a line jobs shouldn't.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You leave the contact and the case behind. Somewhere, a wellness center gets its shipment a little late instead of never.",
+            "deltas": {
+              "Meaning": 4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "volume_family_mara_relapse_support",
+      "title": "Mara's Own Bad Night",
+      "body": "The roles reverse for once -- Mara calls shaking, not about you, about her own quiet struggle with the same undercity vices she's spent months lecturing you about, too ashamed to call anyone else.",
+      "weight": 6,
+      "cooldown": 6,
+      "max_fires": 1,
+      "tags": [
+        "family",
+        "vice"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Family_Friction",
+            "op": "<=",
+            "value": 40
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "go_to_mara_immediately",
+          "text": "Drop everything and go to her immediately.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You sit with her through the worst of it, no lectures, no hypocrisy she has to hear about. Just presence. It matters more than either of you says out loud.",
+            "deltas": {
+              "Family_Friction": -22,
+              "Meaning": 14,
+              "Mental_Decay": -4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 16
+            }
+          }
+        },
+        {
+          "id": "talk_mara_through_comms",
+          "text": "Talk her through it over comms -- you can't get there fast enough in person.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "It's not the same as being there, but your voice steadies her enough to get through the night intact.",
+            "deltas": {
+              "Family_Friction": -10,
+              "Meaning": 6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 8
+            }
+          },
+          "failure": {
+            "text": "Comms aren't enough tonight. She hangs up mid-sentence and doesn't answer again until morning.",
+            "deltas": {
+              "Family_Friction": 4,
+              "Meaning": -4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -4
+            }
+          }
+        },
+        {
+          "id": "cant_help_mara_tonight",
+          "text": "Tell her you can't help tonight -- you're dealing with your own mess.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She says she understands. The unspoken hypocrisy of it sits between you for a long time after.",
+            "deltas": {
+              "Family_Friction": 18,
+              "Meaning": -10
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -12
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

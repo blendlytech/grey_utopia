@@ -1,0 +1,294 @@
+{
+  "events": [
+    {
+      "id": "synthetic_vice_vendor",
+      "title": "A Dose of Oblivion",
+      "body": "In the shadow of Node 7, a street dealer offers 'Lethe-9', a synthetic euphoric neuro-stimulant.",
+      "weight": 10,
+      "cooldown": 2,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "substance"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Mental_Decay",
+            "op": ">=",
+            "value": 15
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "buy_high_dose",
+          "text": "Buy a heavy dose (40 cr). Wipe away the day's rot.",
+          "prob": {
+            "base": 0.9,
+            "mods": [
+              {
+                "stat": "Tolerance",
+                "coef": -0.05
+              }
+            ]
+          },
+          "success": {
+            "text": "Warm light floods your brain. Stress melts away, but your hands tremble as the surge fades.",
+            "deltas": {
+              "Wealth": -40,
+              "Mental_Decay": -25,
+              "Substance_Reliance": 10,
+              "Physical_Integrity": -5
+            },
+            "dose": 12
+          },
+          "failure": {
+            "text": "The batch is cut with industrial solvent. You vomit violently in the alley.",
+            "deltas": {
+              "Wealth": -40,
+              "Physical_Integrity": -18,
+              "Mental_Decay": 10
+            },
+            "dose": 18
+          }
+        },
+        {
+          "id": "buy_micro_dose",
+          "text": "Buy a micro-dose (15 cr) just to edge off withdrawal.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "A brief buzz takes off the sharpest edges.",
+            "deltas": {
+              "Wealth": -15,
+              "Mental_Decay": -8,
+              "Substance_Reliance": 3
+            },
+            "dose": 4
+          }
+        },
+        {
+          "id": "resist_temptation",
+          "text": "Pass by without looking. Suffer through the raw clarity.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Your head aches viciously, but your mind remains your own.",
+            "deltas": {
+              "Meaning": 2,
+              "Mental_Decay": 5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "sister_family_visit",
+      "title": "A Voice From Home",
+      "body": "Your sister Mara reaches out over encrypted comms. She worries about your growing distance.",
+      "weight": 7,
+      "cooldown": 4,
+      "max_fires": 0,
+      "tags": [
+        "family"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Family_Friction",
+            "op": ">=",
+            "value": 10
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "spend_time_family",
+          "text": "Spend the afternoon with Mara. Talk about life before UBI.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You share a real meal. The bond tightens and your purpose feels grounded.",
+            "deltas": {
+              "Family_Friction": -15,
+              "Meaning": 10,
+              "Mental_Decay": -10
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 15
+            }
+          }
+        },
+        {
+          "id": "send_money_family",
+          "text": "Transfer credits and make an excuse.",
+          "prob": {
+            "base": 0.8,
+            "mods": [
+              {
+                "stat": "Wealth",
+                "coef": 1e-05
+              }
+            ]
+          },
+          "success": {
+            "text": "She accepts the credits silently. Money pays bills, but it doesn't build trust.",
+            "deltas": {
+              "Wealth": -200,
+              "Family_Friction": -5
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 4
+            }
+          },
+          "failure": {
+            "text": "She refuses the transfer: 'I don't want your blood money, brother.'",
+            "deltas": {
+              "Family_Friction": 12,
+              "Mental_Decay": 5
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -4
+            }
+          }
+        },
+        {
+          "id": "ignore_mara",
+          "text": "Ignore the call. You have work to do.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The channel times out. Silence settles like frost.",
+            "deltas": {
+              "Family_Friction": 10,
+              "Meaning": -3
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "offgrid_smuggler",
+      "title": "The Boundary Crossing",
+      "body": "An off-grid smuggler captain offers a single berth outside the Steward's arcology network.",
+      "weight": 6,
+      "cooldown": 5,
+      "max_fires": 0,
+      "tags": [
+        "existential",
+        "ending_trigger"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Meaning",
+            "op": ">=",
+            "value": 50
+          },
+          {
+            "stat": "Wealth",
+            "op": ">=",
+            "value": 1000
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "buy_offgrid_pass",
+          "text": "Pay for off-grid passage tokens (800 cr).",
+          "prob": {
+            "base": 0.7,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The captain hands over hard-copy security passes and perimeter maps.",
+            "deltas": {
+              "Wealth": -800,
+              "Meaning": 15
+            },
+            "flags_set": [
+              "exit_ready"
+            ]
+          },
+          "failure": {
+            "text": "The smuggler takes your credits and disappears down a side corridor.",
+            "deltas": {
+              "Wealth": -800,
+              "Social_Capital": -8,
+              "Mental_Decay": 10
+            }
+          }
+        },
+        {
+          "id": "bribe_smuggler_family",
+          "text": "Pay double to secure passage for your sister Mara as well.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.006
+              },
+              {
+                "stat": "Family_Friction",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "Two verified passes secured. Freedom is within reach.",
+            "deltas": {
+              "Wealth": -1600,
+              "Family_Friction": -20,
+              "Meaning": 20
+            },
+            "flags_set": [
+              "exit_ready"
+            ]
+          },
+          "failure": {
+            "text": "The smuggler balks: 'Two people is too much heat. Single passenger only.'",
+            "deltas": {
+              "Heat": 10
+            }
+          }
+        },
+        {
+          "id": "decline_passage",
+          "text": "Decline. You're not ready to abandon the city yet.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You turn back toward the neon-drenched undercity.",
+            "deltas": {
+              "Meaning": -2
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

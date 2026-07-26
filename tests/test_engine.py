@@ -1,0 +1,473 @@
+"""test_engine.py -- Comprehensive unit test suite for GREY UTOPIA simulation engine."""
+import unittest
+import math
+import os
+import json
+
+from engine.stats import Character, create_starter_fixer, STAT_SPEC, clamp
+from engine.decay import (
+    update_mood, relationship_retention, dose_effect,
+    escalate_tolerance, recover_tolerance, withdrawal_severity,
+    overdose_probability, end_of_day_decay
+)
+from engine.events import Event, Choice, Insert, load_events, eval_conditions
+from engine.selector import select_event
+from engine.resolver import (
+    choice_probability, resolve_choice, check_endings,
+    eligible_choices, apply_dose, build_epilogue,
+    desperation_edge, apply_rest, EDGE_STEP, EDGE_CAP, REST_DELTAS,
+    MD_COLLAPSE_DAYS, SWITCH_SETTLE_DAY,
+    SMALL_LIFE_SETTLE_DAY, SMALL_LIFE_MIN_MEANING, SMALL_LIFE_MIN_BODY
+)
+
+
+class TestStats(unittest.TestCase):
+    def test_stat_clamping(self):
+        c = Character()
+        c.set("Wealth", -500)
+        self.assertEqual(c.get("Wealth"), 0.0)
+
+        c.set("Mental_Decay", 150)
+        self.assertEqual(c.get("Mental_Decay"), 100.0)
+
+        c.set("Tolerance", 15.0)
+        self.assertEqual(c.get("Tolerance"), 10.0)
+
+    def test_relationship_reinforce(self):
+        c = create_starter_fixer()
+        initial_sat = c.relationships["Mara (Sister)"].satisfaction
+        initial_strength = c.relationships["Mara (Sister)"].strength
+
+        c.reinforce("Mara (Sister)", 15.0)
+        self.assertGreater(c.relationships["Mara (Sister)"].satisfaction, initial_sat)
+        self.assertGreater(c.relationships["Mara (Sister)"].strength, initial_strength)
+
+    def test_json_serialization(self):
+        c = create_starter_fixer()
+        c.apply_deltas({"Wealth": 250, "Heat": 15})
+        json_str = c.to_json()
+        data = json.loads(json_str)
+
+        c2 = Character.from_dict(data)
+        self.assertEqual(c2.get("Wealth"), c.get("Wealth"))
+        self.assertEqual(c2.get("Heat"), c.get("Heat"))
+        self.assertIn("Mara (Sister)", c2.relationships)
+
+
+class TestDecayMath(unittest.TestCase):
+    def test_ema_mood_smoothing(self):
+        md = 20.0
+        stress = 80.0
+        new_md = update_mood(md, stress, alpha=0.30)
+        self.assertAlmostEqual(new_md, 38.0, places=2)
+
+    def test_ebbinghaus_retention(self):
+        sat_base = 80.0
+        strength = 10.0
+        # t = 0
+        self.assertAlmostEqual(relationship_retention(sat_base, 0, strength), 80.0, places=2)
+        # t = 10 (crosses e^-1 factor = ~29.43)
+        ret_10 = relationship_retention(sat_base, 10, strength)
+        self.assertAlmostEqual(ret_10, 80.0 * math.exp(-1), places=2)
+
+    def test_dose_effect_hill_curve(self):
+        # Zero tolerance
+        eff_0 = dose_effect(10.0, 0.0)
+        self.assertAlmostEqual(eff_0, 50.0, places=2)
+
+        # Tolerance = 1.0 (ED50 doubles to 20)
+        eff_1 = dose_effect(10.0, 1.0)
+        self.assertAlmostEqual(eff_1, 100.0 * 10 / 30.0, places=2)
+        self.assertLess(eff_1, eff_0)
+
+    def test_overdose_probability(self):
+        p_normal = overdose_probability(10.0, 5.0, 90.0)
+        self.assertLess(p_normal, 0.05)
+
+        p_dangerous = overdose_probability(80.0, 90.0, 10.0)
+        self.assertGreater(p_dangerous, 0.25)
+
+        p_lethal = overdose_probability(150.0, 90.0, 5.0)
+        self.assertGreater(p_lethal, 0.80)
+
+
+class TestResolverAndEndings(unittest.TestCase):
+    def test_choice_probability_bounds(self):
+        ch = Choice(
+            id="test",
+            text="test choice",
+            prob={"base": 0.5, "mods": [{"stat": "Recklessness", "coef": 0.01}]}
+        )
+        c = Character()
+        c.set("Recklessness", 100.0)
+        p = choice_probability(ch, c)
+        self.assertLessEqual(p, 0.98)
+        self.assertGreaterEqual(p, 0.02)
+
+    def test_institutionalized_ending(self):
+        c = Character()
+        c.md_high_streak = MD_COLLAPSE_DAYS
+        ending = check_endings(c)
+        self.assertEqual(ending, "TERMINAL_institutionalized")
+
+    def test_institutionalized_needs_streak_to_outlast_the_crisis(self):
+        """One bad week is a breakdown, not a diagnosis -- the streak must hold."""
+        c = Character()
+        c.md_high_streak = MD_COLLAPSE_DAYS - 1
+        self.assertIsNone(check_endings(c))
+
+    def test_switch_is_carried_before_it_becomes_an_ending(self):
+        """Holding the off-switch is a thing in a drawer until it outlasts you."""
+        c = Character()
+        c.set("Meaning", 60.0)   # keep the long-grey road out of this test
+        c.flags.add("keeper_of_switch")
+        c.day = SWITCH_SETTLE_DAY - 1
+        self.assertIsNone(check_endings(c))
+        c.day = SWITCH_SETTLE_DAY
+        self.assertEqual(check_endings(c), "NEUTRAL_keeper_of_the_switch")
+
+    def test_switch_distributed_settles_the_same_way(self):
+        c = Character()
+        c.set("Meaning", 60.0)
+        c.flags.add("switch_distributed")
+        c.day = SWITCH_SETTLE_DAY
+        self.assertEqual(check_endings(c), "NEUTRAL_keeper_of_the_switch")
+
+    def test_offgrid_ending(self):
+        c = Character()
+        c.flags.add("crossed_wire")
+        ending = check_endings(c)
+        self.assertEqual(ending, "GOOD_offgrid_escape")
+
+    def test_offgrid_ending_requires_the_crossing(self):
+        # exit_ready alone must never win -- only surviving The Crossing does.
+        c = Character()
+        c.day = 30
+        c.set("Meaning", 90.0)
+        c.set("Family_Friction", 5.0)
+        c.set("Substance_Reliance", 5.0)
+        c.set("Heat", 5.0)
+        c.flags.add("exit_ready")
+        self.assertIsNone(check_endings(c))
+
+
+class TestConditionsAndRequires(unittest.TestCase):
+    def test_item_faction_relationship_conditions(self):
+        c = create_starter_fixer()
+        c.add_item("burner_deck")
+        c.factions["Resistance"] = 25.0
+        self.assertTrue(eval_conditions({"all": [{"item": "burner_deck"}]}, c))
+        self.assertFalse(eval_conditions({"all": [{"item": "signal_ghost"}]}, c))
+        self.assertTrue(eval_conditions({"all": [{"item": "signal_ghost", "value": False}]}, c))
+        self.assertTrue(eval_conditions({"all": [{"faction": "Resistance", "op": ">=", "value": 20}]}, c))
+        self.assertTrue(eval_conditions(
+            {"all": [{"relationship": "Mara (Sister)", "op": ">=", "value": 70}]}, c))
+        self.assertFalse(eval_conditions(
+            {"all": [{"relationship": "Echo (Resistance)", "op": ">=", "value": 1}]}, c))
+
+    def test_clock_conditions(self):
+        c = Character()
+        self.assertFalse(eval_conditions({"all": [{"clock": "debt", "op": "<=", "value": 5}]}, c))
+        self.assertTrue(eval_conditions({"all": [{"clock": "debt", "running": False}]}, c))
+        c.start_clock("debt", 3)
+        self.assertTrue(eval_conditions({"all": [{"clock": "debt", "op": "<=", "value": 5}]}, c))
+        self.assertTrue(eval_conditions({"all": [{"clock": "debt", "running": True}]}, c))
+
+    def test_requires_filters_choices(self):
+        rich_only = Choice(id="a", text="a", prob={"base": 1.0},
+                           requires={"all": [{"stat": "Wealth", "op": ">=", "value": 10000}]})
+        always = Choice(id="b", text="b", prob={"base": 1.0})
+        c = Character()
+        visible = eligible_choices([rich_only, always], c)
+        self.assertEqual([ch.id for ch in visible], ["b"])
+        c.set("Wealth", 20000)
+        visible = eligible_choices([rich_only, always], c)
+        self.assertEqual([ch.id for ch in visible], ["a", "b"])
+
+
+class TestEventInserts(unittest.TestCase):
+    def test_compose_body_appends_matching_inserts_in_order(self):
+        c = Character()
+        c.set("Heat", 50.0)
+        ev = Event(
+            id="ev1", title="t", body="Base body.",
+            inserts=[
+                Insert(text="Low heat line.", when={"all": [{"stat": "Heat", "op": "<", "value": 10}]}),
+                Insert(text="High heat line.", when={"all": [{"stat": "Heat", "op": ">=", "value": 10}]}),
+                Insert(text="Always shown."),
+            ]
+        )
+        composed = ev.compose_body(c)
+        self.assertEqual(composed, "Base body.\n\nHigh heat line.\n\nAlways shown.")
+
+    def test_compose_body_with_no_active_inserts_returns_bare_body(self):
+        c = Character()
+        ev = Event(id="ev2", title="t", body="Just this.",
+                   inserts=[Insert(text="never", when={"all": [{"flag": "nope"}]})])
+        self.assertEqual(ev.compose_body(c), "Just this.")
+
+    def _minimal_choices(self):
+        return [
+            {"id": "a", "text": "a", "prob": {"base": 1.0}},
+            {"id": "b", "text": "b", "prob": {"base": 1.0}},
+            {"id": "c", "text": "c", "prob": {"base": 1.0}},
+        ]
+
+    def test_load_events_parses_inserts(self):
+        payload = {"events": [{
+            "id": "ins_ev", "title": "T", "body": "B",
+            "inserts": [
+                {"text": "conditional", "when": {"all": [{"stat": "Wealth", "op": ">=", "value": 100}]}},
+                {"text": "unconditional"},
+            ],
+            "choices": self._minimal_choices(),
+        }]}
+        events = load_events(payload)
+        self.assertEqual(len(events[0].inserts), 2)
+        self.assertEqual(events[0].inserts[0].text, "conditional")
+        self.assertEqual(events[0].inserts[1].when, {})
+
+    def test_load_events_rejects_insert_missing_text(self):
+        payload = {"events": [{
+            "id": "bad1", "title": "T", "body": "B",
+            "inserts": [{"when": {}}],
+            "choices": self._minimal_choices(),
+        }]}
+        with self.assertRaises(AssertionError):
+            load_events(payload)
+
+    def test_load_events_rejects_insert_with_invalid_op(self):
+        payload = {"events": [{
+            "id": "bad2", "title": "T", "body": "B",
+            "inserts": [{"text": "x", "when": {"all": [{"stat": "Heat", "op": "lte", "value": 5}]}}],
+            "choices": self._minimal_choices(),
+        }]}
+        with self.assertRaises(AssertionError):
+            load_events(payload)
+
+    def test_load_events_rejects_insert_with_non_numeric_day(self):
+        payload = {"events": [{
+            "id": "bad3", "title": "T", "body": "B",
+            "inserts": [{"text": "x", "when": {"all": [{"day": "soon"}]}}],
+            "choices": self._minimal_choices(),
+        }]}
+        with self.assertRaises(AssertionError):
+            load_events(payload)
+
+
+class TestClocksAndDose(unittest.TestCase):
+    def test_clock_ticks_and_expires(self):
+        import random as _r
+        c = Character()
+        c.start_clock("syndicate_consignment", 2)
+        end_of_day_decay(c, stress_today=10.0)
+        self.assertEqual(c.clocks["syndicate_consignment"], 1)
+        end_of_day_decay(c, stress_today=10.0)
+        self.assertNotIn("syndicate_consignment", c.clocks)
+        self.assertIn("clock_syndicate_consignment_expired", c.flags)
+        c.start_clock("syndicate_consignment", 5)   # restarting clears the expiry flag
+        c.stop_clock("syndicate_consignment")
+        self.assertNotIn("clock_syndicate_consignment_expired", c.flags)
+
+    def test_dose_accumulates_and_feeds_decay(self):
+        import random as _r
+        rng = _r.Random(1)
+        c = Character()
+        c.days_since_use = 5
+        apply_dose(c, 10.0, rng)
+        self.assertEqual(c.pending_dose, 10.0)
+        end_of_day_decay(c, stress_today=10.0)
+        self.assertEqual(c.days_since_use, 0)            # the day counted as a use day
+        self.assertGreater(c.get("Tolerance"), 0.0)      # tolerance escalated
+        self.assertEqual(c.pending_dose, 0.0)            # dose consumed
+
+    def test_overdose_warning_then_death(self):
+        import random as _r
+        c = Character()
+        c.set("Substance_Reliance", 95.0)
+        c.set("Physical_Integrity", 5.0)
+        c.set("Tolerance", 10.0)
+
+        class AlwaysOD:
+            def random(self):
+                return 0.0
+        outcome1 = apply_dose(c, 80.0, AlwaysOD())
+        self.assertEqual(outcome1, "collapse")
+        self.assertIn("near_overdose", c.flags)
+        outcome2 = apply_dose(c, 80.0, AlwaysOD())
+        self.assertEqual(outcome2, "death")
+        self.assertEqual(check_endings(c), "TERMINAL_overdose_death")
+
+    def test_naloxinol_patch_saves_once(self):
+        c = Character()
+        c.flags.add("near_overdose")
+        c.add_item("naloxinol_patch")
+
+        class AlwaysOD:
+            def random(self):
+                return 0.0
+        outcome = apply_dose(c, 80.0, AlwaysOD())
+        self.assertEqual(outcome, "collapse")
+        self.assertFalse(c.has_item("naloxinol_patch"))
+
+
+class TestResolverEffects(unittest.TestCase):
+    def test_rel_deltas_and_rel_add(self):
+        import random as _r
+        c = create_starter_fixer()
+        ch = Choice(id="x", text="x", prob={"base": 1.0}, success={
+            "rel_deltas": {"Mara (Sister)": 10, "Vint (Informant)": -20},
+            "rel_add": [{"name": "Echo (Resistance)", "satisfaction": 35}]
+        })
+        before_mara = c.relationships["Mara (Sister)"].satisfaction
+        before_vint = c.relationships["Vint (Informant)"].satisfaction
+        resolve_choice(ch, c, _r.Random(0))
+        self.assertGreater(c.relationships["Mara (Sister)"].satisfaction, before_mara)
+        self.assertLess(c.relationships["Vint (Informant)"].satisfaction, before_vint)
+        self.assertIn("Echo (Resistance)", c.relationships)
+
+    def test_clock_effects_from_branch(self):
+        import random as _r
+        c = Character()
+        start = Choice(id="s", text="s", prob={"base": 1.0},
+                       success={"clocks_start": {"loan_shark": 8}})
+        resolve_choice(start, c, _r.Random(0))
+        self.assertEqual(c.clocks["loan_shark"], 8)
+        stop = Choice(id="t", text="t", prob={"base": 1.0},
+                      success={"clocks_stop": ["loan_shark"]})
+        resolve_choice(stop, c, _r.Random(0))
+        self.assertNotIn("loan_shark", c.clocks)
+
+    def test_new_endings(self):
+        for flag, ending in [
+            ("flag_syndicate_execution", "TERMINAL_syndicate_ledger"),
+            ("became_ferryman", "NEUTRAL_the_open_door"),
+            ("shepherd_accepted", "NEUTRAL_stewards_shepherd"),
+        ]:
+            c = Character()
+            c.flags.add(flag)
+            self.assertEqual(check_endings(c), ending, flag)
+
+    def _small_life_character(self) -> Character:
+        """A run that chose the workshop life and is still living it."""
+        c = Character()
+        c.flags.add("chose_small_life")
+        c.day = SMALL_LIFE_SETTLE_DAY
+        c.set("Meaning", SMALL_LIFE_MIN_MEANING + 5.0)
+        c.set("Physical_Integrity", SMALL_LIFE_MIN_BODY + 20.0)
+        return c
+
+    def test_small_life_ending_when_the_life_held(self):
+        self.assertEqual(check_endings(self._small_life_character()),
+                         "GOOD_small_real_things")
+
+    def test_small_life_must_be_lived_before_it_resolves(self):
+        c = self._small_life_character()
+        c.day = SMALL_LIFE_SETTLE_DAY - 1
+        self.assertNotEqual(check_endings(c), "GOOD_small_real_things")
+
+    def test_small_life_does_not_resolve_once_it_hollows_out(self):
+        """Choosing the quiet life is not a shield; it has to stay worth living."""
+        c = self._small_life_character()
+        c.set("Meaning", SMALL_LIFE_MIN_MEANING - 5.0)
+        self.assertNotEqual(check_endings(c), "GOOD_small_real_things")
+
+        c = self._small_life_character()
+        c.set("Physical_Integrity", SMALL_LIFE_MIN_BODY - 5.0)
+        self.assertNotEqual(check_endings(c), "GOOD_small_real_things")
+
+    def test_epilogue_composition(self):
+        c = create_starter_fixer()
+        c.flags.add("mara_coming")
+        ending_data = {
+            "epilogues": [
+                {"when": {"all": [{"flag": "mara_coming"}]}, "text": "Together."},
+                {"when": {"all": [{"flag": "left_mara_behind"}]}, "text": "Alone."},
+            ]
+        }
+        self.assertEqual(build_epilogue(ending_data, c), ["Together."])
+
+
+class TestDesperationEdgeAndRest(unittest.TestCase):
+    def _gamble(self, base=0.5):
+        return Choice(id="g", text="g", prob={"base": base, "mods": []},
+                      success={"text": "ok"}, failure={"text": "no"})
+
+    def test_edge_grows_with_failures_and_caps(self):
+        c = Character()
+        self.assertEqual(desperation_edge(c), 0.0)
+        c.fail_streak = 2
+        self.assertAlmostEqual(desperation_edge(c), 2 * EDGE_STEP)
+        c.fail_streak = 50
+        self.assertAlmostEqual(desperation_edge(c), EDGE_CAP)
+
+    def test_edge_raises_gamble_probability_only(self):
+        c = Character()
+        gamble = self._gamble(0.5)
+        safe = Choice(id="s", text="s", prob={"base": 0.5, "mods": []},
+                      success={"text": "ok"})   # no failure branch: not a gamble
+        base_p = choice_probability(gamble, c)
+        c.fail_streak = 3
+        self.assertAlmostEqual(choice_probability(gamble, c), base_p + EDGE_CAP)
+        self.assertAlmostEqual(choice_probability(safe, c), 0.5)
+
+    def test_streak_updates_on_genuine_rolls_only(self):
+        import random as _r
+
+        class AlwaysFail:
+            def random(self):
+                return 0.999
+        c = Character()
+        resolve_choice(self._gamble(0.5), c, AlwaysFail())
+        resolve_choice(self._gamble(0.5), c, AlwaysFail())
+        self.assertEqual(c.fail_streak, 2)
+
+        # A safe choice resolves without touching the streak
+        safe = Choice(id="s", text="s", prob={"base": 1.0}, success={"text": "ok"})
+        resolve_choice(safe, c, _r.Random(0))
+        self.assertEqual(c.fail_streak, 2)
+
+        class AlwaysWin:
+            def random(self):
+                return 0.0
+        resolve_choice(self._gamble(0.5), c, AlwaysWin())
+        self.assertEqual(c.fail_streak, 0)
+
+    def test_fail_streak_survives_serialization(self):
+        c = Character()
+        c.fail_streak = 2
+        c2 = Character.from_dict(json.loads(c.to_json()))
+        self.assertEqual(c2.fail_streak, 2)
+
+    def test_apply_rest_recovers_and_costs_meaning(self):
+        import random as _r
+        c = Character()
+        c.set("Physical_Integrity", 50.0)
+        c.set("Mental_Decay", 60.0)
+        c.set("Heat", 30.0)
+        before_meaning = c.get("Meaning")
+        text = apply_rest(c, _r.Random(0))
+        self.assertTrue(isinstance(text, str) and text)
+        self.assertEqual(c.get("Physical_Integrity"), 50.0 + REST_DELTAS["Physical_Integrity"])
+        self.assertEqual(c.get("Mental_Decay"), 60.0 + REST_DELTAS["Mental_Decay"])
+        self.assertEqual(c.get("Heat"), 30.0 + REST_DELTAS["Heat"])
+        self.assertEqual(c.get("Meaning"), before_meaning + REST_DELTAS["Meaning"])
+
+
+class TestInventoryAndFactions(unittest.TestCase):
+    def test_inventory_management(self):
+        c = Character()
+        self.assertFalse(c.has_item("burner_deck"))
+        c.add_item("burner_deck")
+        self.assertTrue(c.has_item("burner_deck"))
+        c.remove_item("burner_deck")
+        self.assertFalse(c.has_item("burner_deck"))
+
+    def test_faction_standing(self):
+        c = Character()
+        c.add_faction("Steward", 25.0)
+        self.assertEqual(c.factions["Steward"], 15.0)  # Started at -10.0 + 25.0
+
+
+if __name__ == "__main__":
+    unittest.main()

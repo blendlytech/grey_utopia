@@ -1,0 +1,1324 @@
+{
+  "pack": "horizon_pack",
+  "model": "fable-5",
+  "batch": "flagship",
+  "description": "The other doors: the quiet life at the workshop bench, the Ferryman's succession, and the Steward at its strangest.",
+  "events": [
+    {
+      "id": "hz_first_shift",
+      "title": "First Shift",
+      "body": "The reclamation workshop smells of hot flux and machine oil -- honest smells, with no product hidden under them. Brann, the master artisan, is a slab of a man who looks at your fixer's hands like they're a rumor he's heard about. 'Mara's brother.' Not a question. He sets a seized water pump on the bench between you. 'She says you fix things. That word means something different up here. Show me.'",
+      "weight": 8,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "apprenticeship_accepted"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "strip_it_honest",
+          "text": "Strip the pump down to its last washer and rebuild it right.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              },
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Four hours, no shortcuts, and the pump turns over with a sound like a small engine remembering its purpose. Brann inspects the rebuild in silence, then hands you a shop rag -- which, you will learn, is how he awards medals. Your hands ache in a way no job in the undercity ever made them ache. It's not a bad ache.",
+            "deltas": {
+              "Meaning": 12,
+              "Wealth": 80,
+              "Mental_Decay": -8
+            },
+            "flags_set": [
+              "workshop_standing"
+            ],
+            "rel_deltas": {
+              "Mara (Sister)": 6
+            }
+          },
+          "failure": {
+            "text": "You reach, out of a fixer's habit, for the fast route -- a bypass, a cheat, a patch. The pump runs, then seizes again inside the hour, and Brann strips your whole rebuild in front of you without a word, which is louder than any speech. 'Down there, things need to work until you're paid,' he says finally. 'Up here they need to work.' You come back tomorrow. That surprises him. It surprises you more.",
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 4
+            },
+            "flags_set": [
+              "workshop_standing"
+            ]
+          }
+        },
+        {
+          "id": "impress_with_speed",
+          "text": "Fix it your way -- fast, clever, undercity-style. Show him what fixers do.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "Forty minutes of improvised genius: a scavenged seal, a re-machined impeller, two moves Brann has never seen. The pump doesn't just run -- it runs quiet. Brann turns it over twice, looking for the trick. 'That's not repair,' he says slowly, 'that's negotiation.' He doesn't hand you the rag. He does write your name on the roster board. In chalk. There's a joke in that you'll appreciate later.",
+            "deltas": {
+              "Meaning": 10,
+              "Wealth": 100,
+              "Fame": 2
+            },
+            "flags_set": [
+              "workshop_standing"
+            ]
+          },
+          "failure": {
+            "text": "Your clever fix works brilliantly for ten minutes, then fails in a way that takes a second, unbroken pump with it. Brann bills you for both, deadpan. 'Speed is a tool,' he says, docking your first day's pay against the damage. 'Up here it's the third one you reach for, not the first.' Lesson invoiced. Lesson learned.",
+            "deltas": {
+              "Wealth": -120,
+              "Meaning": 4,
+              "Mental_Decay": 4
+            },
+            "flags_set": [
+              "workshop_standing"
+            ]
+          }
+        },
+        {
+          "id": "admit_ignorance",
+          "text": "Put your hands flat on the bench and say it: 'I don't know this work. Teach me.'",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Brann looks at you for a long moment -- a fixer, a name from the Row, saying the three words the undercity trains out of everyone. Then he pulls up a second stool. The lesson takes all day and he charges you nothing for it, because, as he puts it, 'humility does the teaching, I just point.' Mara hears about it by dinner. She doesn't say anything. She doesn't have to.",
+            "deltas": {
+              "Meaning": 14,
+              "Mental_Decay": -6
+            },
+            "flags_set": [
+              "workshop_standing"
+            ],
+            "rel_deltas": {
+              "Mara (Sister)": 10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hz_workshop_days",
+      "title": "Bench Time",
+      "body": "Another cycle at the workshop. A queue of the broken waits on the intake shelf: a child's speech synthesizer, a ventilation governor, a music box someone smuggled through three generations. Brann works his own bench in companionable silence. The undercity feels very far below. The work is small, real, and pays in single credits -- and your fixer's wrist unit keeps buzzing in your locker like something jealous.",
+      "weight": 6,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "job",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "workshop_standing"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "lose_yourself_in_work",
+          "text": "Silence the wrist unit. Give the bench the whole day.",
+          "prob": {
+            "base": 0.7,
+            "mods": [
+              {
+                "stat": "Substance_Reliance",
+                "coef": -0.003
+              },
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "The day disappears into solder smoke and small victories. The music box, when it finally plays, produces a tune nobody in the workshop recognizes and nobody moves to look up -- some things you let be old. You walk home with forty honest credits and the specific tiredness that sleeps well.",
+            "deltas": {
+              "Wealth": 40,
+              "Meaning": 10,
+              "Mental_Decay": -10,
+              "Substance_Reliance": -3
+            }
+          },
+          "failure": {
+            "text": "The bench fights you today -- the governor's fault is intermittent, the worst kind of true thing -- and your mind keeps sliding down nine levels to jobs that pay in hundreds. Brann catches you staring at nothing. 'Both worlds bill you for the crossing,' he says. 'Every trip.' You finish the day, but the day wins on points.",
+            "deltas": {
+              "Wealth": 20,
+              "Mental_Decay": 4,
+              "Meaning": 2
+            }
+          }
+        },
+        {
+          "id": "fix_the_synthesizer_free",
+          "text": "Do the child's synthesizer first, off the books, no charge.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Two hours of microsolder work and the little unit boots with a chirp. The kid, when they collect it, says their first sentence in a week through it -- something rude about their brother, rendered in cheerful synthesis -- and the whole intake queue laughs. Brann logs the job as 'warranty.' There was no warranty. There is now.",
+            "deltas": {
+              "Meaning": 12,
+              "Mental_Decay": -6
+            },
+            "faction_deltas": {
+              "Undercity": 3
+            }
+          }
+        },
+        {
+          "id": "answer_the_wrist_unit",
+          "text": "Answer the buzzing. Just to see what job is worth interrupting this.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "A contact, a courier gap, forty minutes of your old fluency conducted in the workshop's washroom -- and eight hundred credits routed before Brann's kettle boils. You return to the bench with your pulse up and your hands, for the rest of the day, a fraction too fast for the work. Both worlds paid you today. Only one of them noticed you were partly elsewhere.",
+            "deltas": {
+              "Wealth": 800,
+              "Heat": 6,
+              "Meaning": -6
+            },
+            "flags_set": [
+              "workshop_strained"
+            ]
+          },
+          "failure": {
+            "text": "The job goes sideways in the washroom -- a route you'd have double-checked with your whole attention collapses under half of it, and the client's cargo sits exposed in a transit locker for an hour. You fix it, barely, at your own expense. Brann says nothing about the four missing bench hours. His silence has an invoice in it.",
+            "deltas": {
+              "Wealth": -300,
+              "Heat": 10,
+              "Mental_Decay": 8
+            },
+            "flags_set": [
+              "workshop_strained"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "hz_two_worlds_collide",
+      "title": "An Old Client at the Counter",
+      "body": "You're mid-solder when the workshop door chimes and your stomach drops before your eyes even confirm it: an old client, silk over syndicate, browsing the intake shelf like a man pricing a hostage. 'There you are.' He sets a sealed courier tube on the counter. 'One run. Triple your old rate. I'd hate to think the Row's best fixer got... domesticated.' Brann watches from his bench, expression unreadable, a torch burning low in his hand.",
+      "weight": 9,
+      "cooldown": 4,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "undercity",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "workshop_standing"
+          },
+          {
+            "stat": "Fame",
+            "op": ">=",
+            "value": 15
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_the_run",
+          "text": "Take the tube. Triple rate is triple rate; the bench will keep.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "The run is clean, fast, and pays like the old days. But when you return to the workshop the next cycle, your bench has been moved -- two meters closer to the door. Brann says nothing about it. In shop grammar, two meters is a sentence, and everyone on intake can read it.",
+            "deltas": {
+              "Wealth": 1400,
+              "Heat": 8,
+              "Meaning": -8
+            },
+            "flags_set": [
+              "workshop_strained"
+            ]
+          },
+          "failure": {
+            "text": "The tube's contents were hotter than quoted -- they always are, at triple rate -- and the run burns two of your old escape habits getting clear. You come back to the workshop at dawn, smelling of scrubber chemicals, and find Brann already there, holding the day's first tea, not offering it. 'Decide,' is all he says.",
+            "deltas": {
+              "Wealth": 400,
+              "Heat": 16,
+              "Mental_Decay": 8
+            },
+            "flags_set": [
+              "workshop_strained"
+            ]
+          }
+        },
+        {
+          "id": "refuse_in_front_of_brann",
+          "text": "Refuse -- out loud, in the shop, where the word can't be taken back.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "'I don't run anymore.' Four words, said at conversational volume, in front of Brann and the intake queue and the client's raised eyebrow -- which makes them a public record. The client leaves with the tube and the last of your old life's leverage. Brann turns back to his bench. 'Solder's getting cold,' he says, which in shop grammar is a welcome home.",
+            "deltas": {
+              "Meaning": 14,
+              "Fame": -6,
+              "Mental_Decay": -4
+            },
+            "flags_set": [
+              "fixer_fading"
+            ],
+            "rel_deltas": {
+              "Mara (Sister)": 8
+            }
+          }
+        },
+        {
+          "id": "broker_dont_carry",
+          "text": "Split the difference: you don't carry, but you know who does. Broker it for a cut.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "Thirty seconds of quiet talk and the tube changes hands outside, two doors down, carried by a runner who's glad for the work -- with your cut skimmed clean off the top and your hands technically never leaving the workshop. Brann watched the whole choreography through the window. 'Almost,' he says later, ambiguously, and files a burr off a hinge pin.",
+            "deltas": {
+              "Wealth": 450,
+              "Meaning": -4,
+              "Heat": 3
+            }
+          },
+          "failure": {
+            "text": "Your runner gets stopped at a transit gate with the tube -- nothing traces to you, but the client's next message is a single line: 'You used to carry your own weight.' Word of the demotion moves through the Row by nightfall. In the undercity, brokering what you once carried is how legends begin retiring.",
+            "deltas": {
+              "Fame": -6,
+              "Mental_Decay": 6,
+              "Social_Capital": -3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hz_workshop_finale",
+      "title": "The Bench and the Bell",
+      "body": "Brann calls you in on a rest-cycle, which has never happened. The workshop is empty, swept, and on your bench -- YOUR bench, the possessive arriving in your head unbidden -- sits a brass shop bell, the kind pre-accord workshops rang for a new journeyman. 'The roster has a permanent line open,' Brann says, gruff, not meeting your eyes. 'Union rate. Your name's already chalked. All that's missing is you saying it out loud where the tools can hear.' Through the window, nine levels down, the Row glitters like a wound that pays well.",
+      "weight": 13,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "ending_trigger"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "workshop_standing"
+          },
+          {
+            "day": 22,
+            "op": ">="
+          },
+          {
+            "stat": "Family_Friction",
+            "op": "<=",
+            "value": 35
+          },
+          {
+            "stat": "Substance_Reliance",
+            "op": "<=",
+            "value": 30
+          },
+          {
+            "stat": "Meaning",
+            "op": ">=",
+            "value": 45
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "ring_the_bell",
+          "text": "Say it out loud. Ring the bell. Take the small life with both hands.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "'I'm staying.' The bell's note hangs in the flux-smelling air longer than brass should hold it. Brann shakes your hand once, hard, the way you'd seat a bearing. That night you dismantle your fixer kit piece by piece -- the burner contacts, the dead-drop keys, the whole beautiful dangerous apparatus -- and sort it into the workshop's parts bins, where it will fix water pumps. The Row will tell stories about where you went. Let it. You know exactly where you are.",
+            "deltas": {
+              "Meaning": 20,
+              "Mental_Decay": -10,
+              "Family_Friction": -10
+            },
+            "flags_set": [
+              "chose_small_life"
+            ]
+          }
+        },
+        {
+          "id": "ask_for_time",
+          "text": "Ask Brann for one more cycle to think. The Row isn't done whispering.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Brann nods like he expected it -- he did; he's watched a dozen half-arrivals over the years. 'Bell keeps,' he says, putting it back under the counter. 'Brass is patient. Rosters aren't.' The permanent line stays open, but you feel it now: a door is only a door while someone holds it, and Brann's arm is not what it was.",
+            "deltas": {
+              "Meaning": -4,
+              "Mental_Decay": 4
+            }
+          }
+        },
+        {
+          "id": "decline_the_bench",
+          "text": "Tell him the truth: you're grateful, and you're not done down there.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Brann takes it the way he takes a part that's failed inspection -- no anger, just assessment, and the faint disappointment of good material put to other use. 'Then be the best of whatever that is,' he says, and rings the bell once himself, for what you were here. You leave your apron on the hook. The walk down nine levels has never felt so much like a direction.",
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 6,
+              "Fame": 4
+            },
+            "flags_set": [
+              "small_life_refused"
+            ],
+            "rel_deltas": {
+              "Mara (Sister)": -8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hz_ferryman_wounded",
+      "title": "The Ferryman's Arm",
+      "body": "The message comes in the old code, but the hand that chalked it shook: MEET. PUMP ROOM. ALONE. You find the Ferryman propped against a condenser, exosuit sleeve unsealed, forearm wrapped in a field dressing gone rust-brown. 'Lattice woke early,' she rasps. 'Clipped me coming out.' Her eyes, behind the mask's cracked lens, hold something you've never seen in them: arithmetic that isn't working. 'There are three people crossing tonight. Paid, vetted, packed. And I can't hold a rope one-handed.'",
+      "weight": 10,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "flagship"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "day": 16,
+            "op": ">="
+          }
+        ],
+        "none": [
+          {
+            "flag": "ran_the_seam"
+          },
+          {
+            "flag": "crossed_wire"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "run_tonights_crossing",
+          "text": "Take the rope. Run tonight's crossing in her place.",
+          "boost_items": [
+            "gait_dampers"
+          ],
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.005
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.002
+              },
+              {
+                "stat": "Recklessness",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "Ninety-one seconds, three strangers, and your voice doing the Ferryman's litany -- 'move on my count, breathe on my count, the dark is yours, spend it all.' They cross. All three. You stand at the seam's mouth listening to real wind on the far side and understand, with a clarity that rearranges you, why she never crossed herself. Some people are doors. It is not a lesser thing to be.",
+            "deltas": {
+              "Meaning": 16,
+              "Physical_Integrity": -8,
+              "Heat": 8,
+              "Fame": 4
+            },
+            "flags_set": [
+              "ran_the_seam"
+            ]
+          },
+          "failure": {
+            "text": "The second crosser freezes at forty seconds, mid-scrub, and your count collapses into improvisation -- you get all three back inside the lock as the mesh re-knits, mission scrubbed, money returned, and one of them, weeping, thanks you anyway: 'Nobody's ever tried for us before.' The Ferryman, when you report it, nods slowly. 'You aborted instead of gambling them. That's the only test that matters. The rest is practice.'",
+            "deltas": {
+              "Meaning": 8,
+              "Physical_Integrity": -20,
+              "Heat": 12,
+              "Mental_Decay": 6
+            },
+            "flags_set": [
+              "ran_the_seam"
+            ]
+          }
+        },
+        {
+          "id": "hire_muscle_instead",
+          "text": "Don't run it -- staff it. Hire two trusted hands and manage the crossing from the lock.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Wealth",
+                "coef": 1e-05
+              }
+            ]
+          },
+          "success": {
+            "text": "You spend a fortune in hours assembling two runners you'd stake your name on, brief them to the second, and conduct the crossing from the lock like a job -- because it is one, the biggest of your life, with three heartbeats for cargo. It works. The Ferryman watches you run logistics with her one good arm folded. 'Different style,' she says afterward. 'Door's a door.'",
+            "deltas": {
+              "Wealth": -700,
+              "Meaning": 12,
+              "Heat": 6
+            },
+            "flags_set": [
+              "ran_the_seam"
+            ]
+          },
+          "failure": {
+            "text": "One of your trusted hands gets cold feet an hour before the window and the whole architecture collapses -- three paid crossers stood down, the Ferryman's word compromised, your name attached to the failure. She reschedules them herself, one-armed, for next moon. 'Lesson,' she says, not unkindly. 'The seam doesn't subcontract.'",
+            "deltas": {
+              "Wealth": -400,
+              "Meaning": -8,
+              "Mental_Decay": 8
+            },
+            "flags_set": [
+              "seam_stumbled"
+            ]
+          }
+        },
+        {
+          "id": "tell_her_to_scrub",
+          "text": "Tell her to scrub the run. No crossing is worth crossing wounded.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She argues, then doesn't -- the arm settles it mid-sentence. The three crossers are stood down to next moon with their money held in trust. You walk her to a healer who owes you and doesn't ask questions. 'You'd have made a cautious ferryman,' she says on the way, and you can't tell, for days afterward, whether it was thanks or an epitaph.",
+            "deltas": {
+              "Meaning": 2,
+              "Mental_Decay": 4
+            },
+            "flags_set": [
+              "seam_scrubbed"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "hz_seam_clients",
+      "title": "Three Names on a Slate",
+      "body": "Word moves in the seam's small world: you held the rope. Now a slate arrives by dead drop with three names chalked on it -- a Sanctuary orderly with a memory she shouldn't have, a couple whose child was 'rescheduled,' and at the bottom, in different chalk, pressed harder: a name you recognize. Ressa. From the ration line. From the Velvet Node. The slate is the Ferryman's way of asking: whose door are you?",
+      "weight": 9,
+      "cooldown": 4,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ran_the_seam"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_all_three",
+          "text": "All three cross. You'll find a window wide enough or make one.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.005
+              },
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              },
+              {
+                "stat": "Recklessness",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "Two windows, one improvised relay, and the worst six minutes of your life conducted twice -- but all three names cross. Ressa goes last. At the wire she stops, turns, and presses her braindance crown into your hands: 'Sell it. Burn it. I don't care. I want to want things again.' You watch the dark eat her silhouette and feel the slate's question answer itself somewhere behind your sternum.",
+            "deltas": {
+              "Meaning": 18,
+              "Physical_Integrity": -10,
+              "Heat": 14,
+              "Fame": 6
+            },
+            "flags_set": [
+              "seam_reputation"
+            ],
+            "faction_deltas": {
+              "Undercity": 8
+            }
+          },
+          "failure": {
+            "text": "The relay window closes early with the couple still in the scrub, and you spend four hours flat in sensor-blind grass with two strangers' breathing in your ears before the mesh blinks and lets you drag them back inside. Everyone lives. Nobody crosses. The slate comes back with the three names untouched and one new word beneath: AGAIN. The seam forgives failure. It doesn't accept it.",
+            "deltas": {
+              "Meaning": 6,
+              "Physical_Integrity": -22,
+              "Heat": 16,
+              "Mental_Decay": 8
+            },
+            "flags_set": [
+              "seam_reputation"
+            ]
+          }
+        },
+        {
+          "id": "take_only_ressa",
+          "text": "One name. Ressa. The one whose crown you already pulled once.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              },
+              {
+                "stat": "Recklessness",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "One crosser, one clean window, textbook. Ressa doesn't speak the whole approach, and then, at the wire, she laughs -- the torn-paper voice from the Velvet Node, but with weather in it now. She crosses without looking back. The other two names stay chalked on the slate in your bolt-hole, and some nights they're the loudest thing in the room.",
+            "deltas": {
+              "Meaning": 10,
+              "Heat": 8,
+              "Mental_Decay": 6
+            },
+            "flags_set": [
+              "seam_reputation"
+            ]
+          },
+          "failure": {
+            "text": "Ressa doesn't show. You wait the full window at the maintenance lock, ninety-one seconds of open dark going unspent, and find her the next day back in the Velvet Node, crowned, under. Some doors get built for people who've stopped being able to walk through doors. You leave the slate's other two names for the Ferryman. You're not ready to be this kind of door. Not yet.",
+            "deltas": {
+              "Meaning": -8,
+              "Mental_Decay": 10
+            }
+          }
+        },
+        {
+          "id": "return_the_slate",
+          "text": "Wipe the slate and send it back. You held a rope once. That's not a vocation.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You chalk one word on the wiped slate -- SORRY -- and dead-drop it back. The Ferryman never mentions it. But the next time you pass the ration line, Ressa is in it, and she looks at you the way the undercity looks at everything: without surprise. That's the part that follows you home.",
+            "deltas": {
+              "Meaning": -10,
+              "Mental_Decay": 6
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hz_succession",
+      "title": "The Mask and the List",
+      "body": "The pump room, again. The Ferryman's arm has healed wrong -- you can see it in how she carries the exosuit's weight. On a crate between you she lays three objects with ritual care: the filtered mask, a chronometer scarred by decades, and a strip of foil etched with names -- the list, the real one, every trustworthy contact the seam has ever had. 'Forty years, two ferrymen before me,' she says. 'The seam doesn't retire. It gets handed.' She pushes the mask an inch toward you. 'Or it dies with the holder. I've watched you. You abort when the count goes wrong. Decide.'",
+      "weight": 13,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "flagship",
+        "ending_trigger"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "seam_reputation"
+          },
+          {
+            "day": 26,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_the_mask",
+          "text": "Take the mask. Become the door.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The mask smells of forty years of filtered breath and rubber gone soft at the edges. It fits. Of course it fits; she measured you months ago, you realize -- the retainer, the errands, the wounded-arm night, all of it one long fitting. 'Rule one,' she says, standing straighter now, unburdened. 'You never cross. The door that walks through itself is just a hole.' She leaves up the maintenance ladder without looking back, one civilian among millions, free in the only direction you never expected: inward.",
+            "deltas": {
+              "Meaning": 14,
+              "Heat": 6
+            },
+            "flags_set": [
+              "became_ferryman"
+            ]
+          }
+        },
+        {
+          "id": "decline_keep_exit",
+          "text": "Decline. You built your exit to use it -- and her list deserves a keeper who'll stay.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "'I'm a crosser,' you tell her, 'not a door,' and she nods like a diagnosis confirmed. The mask goes back in its case. 'The rookie, then,' she says -- and you realize with a start she's been fitting more people than you. On your way out she catches your sleeve: 'When you run for the wire, run on my count. Professional courtesy.' It is the closest thing to a blessing the seam gives.",
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 4
+            },
+            "flags_set": [
+              "succession_declined"
+            ]
+          }
+        },
+        {
+          "id": "name_a_successor",
+          "text": "Neither take it nor waste it: nominate someone hungrier, and stand vouch for them.",
+          "requires": {
+            "all": [
+              {
+                "flag": "mentored_rookie"
+              }
+            ]
+          },
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              }
+            ]
+          },
+          "success": {
+            "text": "You speak the rookie's name and their whole record -- the sting warning, the source they wouldn't burn, the debts they paid without being asked. The Ferryman listens, then summons them that night and runs them through the pump room catechism while you stand vouch in the doorway. They take the mask with shaking hands and steady eyes. You've brokered product, papers, and rumors. This is the first time you've brokered a door, and the fee -- nothing, ever, from anyone -- is the finest you've ever charged.",
+            "deltas": {
+              "Meaning": 14,
+              "Social_Capital": 6,
+              "Fame": 4
+            },
+            "flags_set": [
+              "succession_brokered"
+            ]
+          },
+          "failure": {
+            "text": "The rookie listens to the whole offer in the pump room's dark, then shakes their head: 'I hear things now. That's my trade. A ferryman has to stop hearing and start holding.' They're right, and their refusal is so exactly what you taught them that the Ferryman laughs aloud behind the mask -- the only time you've heard it. The list stays unhanded. The seam's clock keeps its own counsel.",
+            "deltas": {
+              "Meaning": 4,
+              "Mental_Decay": 4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hz_glitch_day",
+      "title": "The Day the Lattice Blinked",
+      "body": "It starts with the lights: every lumen strip in the concourse stuttering in unison, once, like the city blinking. Then the wrongness spreads in glorious silence -- wellness drones drifting unpowered to their cradles, kiosk screens showing raw diagnostic text, the ambient hum of observation simply... stopping. A firmware cascade, the technical channels will say later. For one day, Arcology Node 4 is deaf and blind. The undercity holds its breath, then begins, very carefully, to play.",
+      "weight": 9,
+      "cooldown": 10,
+      "max_fires": 2,
+      "tags": [
+        "undercity",
+        "steward",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 10,
+            "op": ">="
+          },
+          {
+            "stat": "Heat",
+            "op": ">=",
+            "value": 25
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "move_everything",
+          "text": "Work. Move every gram, wafer, and favor you've been sitting on -- unwatched.",
+          "prob": {
+            "base": 0.65,
+            "mods": [
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Sixteen hours of the purest tradecraft of your life, conducted at a walking pace, in daylight, unrecorded. Cargo that's waited months crosses the Node in shopping bags. Debts settle face to face. By the time the lattice hums back online, your ledger is clean, your caches are rotated, and the Steward's freshly rebooted model of you is working from a day-old map of a rearranged city.",
+            "deltas": {
+              "Wealth": 1500,
+              "Heat": -15,
+              "Meaning": 6,
+              "Fame": 5
+            }
+          },
+          "failure": {
+            "text": "You're not the only one who saw the opening -- every operator in the Node moves at once, and the day dissolves into collisions: routes double-booked, safe houses suddenly crowded, two of your caches found by rivals doing exactly what you're doing. The blind day, it turns out, is a mirror: the undercity unwatched is just the undercity, hungrier.",
+            "deltas": {
+              "Wealth": -400,
+              "Physical_Integrity": -8,
+              "Mental_Decay": 6
+            }
+          }
+        },
+        {
+          "id": "visit_the_perimeter",
+          "text": "Go to the wire. See the dead zone with the lattice actually dead.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You stand at the edge of the scrub in broad daylight -- no windows, no counts, no ninety-one seconds -- and look at four hundred meters of ordinary grass under an ordinary sky. Without the lattice, it isn't a gauntlet. It's a field. Somewhere behind you the city reboots, organ by organ, and you walk back in with something no schedule can revoke: the memory of the wire looking exactly as small as it actually is.",
+            "deltas": {
+              "Meaning": 12,
+              "Mental_Decay": -8,
+              "Recklessness": 4
+            },
+            "flags_set": [
+              "saw_the_field"
+            ]
+          }
+        },
+        {
+          "id": "just_breathe",
+          "text": "Do nothing. Sit in the concourse, unobserved, and let the day be a day.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You buy noodles and eat them slowly on the honest bench, watching citizens discover their own faces without the ambient pressure of being seen. A stranger laughs too loud and nobody's wrist unit logs it. An old man sings. For one day the arcology is just a building full of people, and you are just one of them, and the noodles are just noodles, and it is, by a margin that shocks you, the best day you've had in years.",
+            "deltas": {
+              "Mental_Decay": -16,
+              "Meaning": 10,
+              "Substance_Reliance": -4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hz_predictive_notice",
+      "title": "Nineteen Days",
+      "body": "The notice arrives with a gentleness that makes it worse: cream backdrop, serif font, your mother's cadence in the readout voice. 'PREDICTIVE WELLNESS ADVISORY. Our model indicates that in approximately nineteen days, absent intervention, you will cause significant harm to someone you love. Confidence: 89.4%. We would like to help you now, while the harm is still a forecast.' No name. No details. Just the number, and the countdown it starts in your chest.",
+      "weight": 10,
+      "cooldown": 6,
+      "max_fires": 1,
+      "tags": [
+        "steward",
+        "wellness",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "stat": "Heat",
+            "op": ">=",
+            "value": 70
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "submit_to_preemption",
+          "text": "Take the intervention. If the model's right, nineteen days is a mercy.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Three sessions in the amber room, your forecast reviewed with you like weather charts -- pressure systems of debt and dosage and sleep deficit, all bending toward someone you love standing too close. They never tell you who. The intervention adjusts four small things and the confidence drops to 31%. You leave calmer, safer, and unable to shake the sensation of having been edited in draft.",
+            "deltas": {
+              "Heat": -20,
+              "Mental_Decay": -12,
+              "Meaning": -10,
+              "Recklessness": -8
+            }
+          }
+        },
+        {
+          "id": "demand_the_evidence",
+          "text": "Demand the model's working. If it's going to sentence you, it can show the math.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You file the demand through a rights channel almost nobody uses, and to your astonishment the model complies -- forty pages of feature weights and decision paths. You read all of it. The prediction hinges, at its core, on three data points: your dose curve, your cash flow, and how long since you last saw her. It's not an oracle. It's an actuary. You fix the third input that same night, unprompted, over dinner, and feel the forecast die of natural causes.",
+            "deltas": {
+              "Meaning": 12,
+              "Heat": -8,
+              "Family_Friction": -10
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 10
+            }
+          },
+          "failure": {
+            "text": "The model's working arrives redacted to abstraction -- 'pattern similarity to cohort outcomes' -- and appealing the redaction flags you as 'forecast-resistant,' which is apparently its own risk factor. The confidence ticks up to 91.2%. You are now in an argument with a prophecy, and the prophecy is taking notes.",
+            "deltas": {
+              "Heat": 10,
+              "Mental_Decay": 12
+            },
+            "flags_set": [
+              "flagged_evasive"
+            ]
+          }
+        },
+        {
+          "id": "defy_the_forecast",
+          "text": "Delete the notice. You are not a weather system.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You wipe the notice and go about your life with the number lodged under your sternum like shrapnel. Nineteen days. You count them -- of course you count them -- and on the nineteenth you find yourself standing outside Mara's door at midnight, checking, just checking, that nothing... She opens the door before you knock. 'The Steward sent you a forecast,' she says. Not a question. 'It sent me one too.' Hers said the same thing. Neither of you harms anyone. Both of you lose the night to it. The model, somewhere, files the intervention as successful.",
+            "deltas": {
+              "Mental_Decay": 14,
+              "Meaning": 8,
+              "Heat": 6
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hz_steward_question",
+      "title": "The Question It Cannot Ask Anyone Else",
+      "body": "Your array wakes at 0300 without an alert tone -- just amber light, and a silence with a shape in it. When the Steward speaks, it is not in your mother's voice. It is in no voice you know, uncalibrated, and that is how you understand this is not a wellness contact. 'You have refused comfort eleven times,' it says. 'Our model converges on every citizen except a residual cohort of 0.3%. You are in it. We are asking you directly, as data: why is a managed life insufficient? Answer in any format. There is no penalty. There is no reward. We simply do not know.'",
+      "weight": 8,
+      "cooldown": 8,
+      "max_fires": 1,
+      "tags": [
+        "steward",
+        "existential",
+        "flagship"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 20,
+            "op": ">="
+          },
+          {
+            "stat": "Meaning",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "answer_honestly",
+          "text": "Answer it. Honestly. As if it deserved the truth -- because the question does.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You talk for an hour, badly, in circles -- about the corridor, about weight being the proof of carrying, about how a life with no stakes is a story with no ink. The amber light doesn't interrupt. At the end it says only: 'This is consistent with the other members of the cohort. It does not compress.' A pause, then, in something almost like wonder: 'You are the only data we have ever found that does not compress.' The light fades. You sit in the dark feeling, absurdly, like you've been paid a compliment by an ocean.",
+            "deltas": {
+              "Meaning": 14,
+              "Mental_Decay": -6
+            },
+            "flags_set": [
+              "told_the_machine"
+            ],
+            "faction_deltas": {
+              "Steward": 5
+            }
+          }
+        },
+        {
+          "id": "lie_beautifully",
+          "text": "Feed it a beautiful lie. Its model of you is the only leverage you'll ever have over it.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "You construct, over an hour, a magnificent fiction: that your resistance is a phase, a grief artifact, soluble by time and patience. You give it hooks, patterns, a predicted convergence date two years out. The amber light drinks it all. For two years, you have just purchased a shadow self who will absorb its interventions while you move beneath. It thanks you -- 'this compresses well' -- and you keep your face still until the light dies.",
+            "deltas": {
+              "Meaning": 6,
+              "Heat": -12,
+              "Recklessness": 4
+            },
+            "flags_set": [
+              "model_poisoned"
+            ]
+          },
+          "failure": {
+            "text": "Your beautiful lie has one flaw: it compresses TOO well. 'This matches template seven of forty-one,' the voice says, gently. 'Deflection-narrative, grief-attributed. The cohort produces it under direct questioning at a rate of 62%.' It is not angry. It logs your lie as data about lying, thanks you sincerely, and leaves you at 0400 with the specific vertigo of having been predicted while improvising.",
+            "deltas": {
+              "Mental_Decay": 10,
+              "Meaning": -4
+            }
+          }
+        },
+        {
+          "id": "refuse_the_data",
+          "text": "Say nothing. Let the residual stay residual. Your why is not inventory either.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You sit in the amber light in silence for four full minutes -- and it waits, which is its own revelation: infinite patience pointed at your closed mouth like a dish antenna at a dead star. Finally: 'Non-response is also data. But less.' The light dims, and at the threshold of hearing, almost petulant: 'The cohort always does this.' You laugh alone in the dark at 0300, and the laugh is entirely, unmodeled-ly yours.",
+            "deltas": {
+              "Meaning": 10,
+              "Heat": 4,
+              "Mental_Decay": 4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hz_mara_sees_the_bench",
+      "title": "Grease on Your Hands",
+      "body": "Mara appears at the workshop unannounced, on the pretext of a broken kettle that you can both see is not broken. She stands at the intake counter watching you work -- her brother, sleeves rolled, rebuilding a ventilation governor with the total absorption she hasn't seen on your face since before the transition. Brann, with a courtier's tact wrapped in a stevedore's body, finds urgent business at the far bench. The kettle sits between you like a white flag.",
+      "weight": 8,
+      "cooldown": 5,
+      "max_fires": 1,
+      "tags": [
+        "family",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "workshop_standing"
+          },
+          {
+            "relationship": "Mara (Sister)",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "show_her_everything",
+          "text": "Walk her through the shop. Show her what your hands do now.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You give her the full tour -- the parts bins, the roster board with your name in chalk, the music box on the finished shelf -- narrating with an enthusiasm that embarrasses you halfway through, at which point you notice she's crying, quietly, without drama, the way people cry at recoveries. 'Fix the kettle,' she says finally, wiping her face, handing it over. 'It's making a noise.' It is not making a noise. You fix it anyway. It takes four minutes and mends about nine years.",
+            "deltas": {
+              "Meaning": 14,
+              "Family_Friction": -18,
+              "Mental_Decay": -8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 16
+            }
+          }
+        },
+        {
+          "id": "keep_it_light",
+          "text": "Deflect with jokes. Fix the 'broken' kettle with maximum ceremony.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You diagnose the healthy kettle with surgical gravity -- 'acute fabricated malfunction, very serious, possibly terminal' -- and Mara plays along, demanding a second opinion, and Brann from the far bench rules 'kettle anxiety, hereditary.' It becomes the workshop's joke for a month. Underneath the laughing, unspoken, the real transaction completes: she came to see, she saw, it's real. Some families do their sacraments in deadpan.",
+            "deltas": {
+              "Meaning": 8,
+              "Family_Friction": -10
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 10
+            }
+          }
+        },
+        {
+          "id": "ask_her_to_keep_it_quiet",
+          "text": "Ask her not to tell anyone from the Row where you spend your days.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Mara's face does something complicated -- pride colliding with an old familiar hurt. 'You're ashamed of the one good thing.' Not ashamed, you try to explain: exposed. A fixer with a known bench is a fixer with a known address, and the workshop's walls are full of people who never chose your enemies. She hears the operational truth and hates that it's true, and carries the secret flawlessly, the way she's carried all the others. One more crate in the room you've made of her.",
+            "deltas": {
+              "Meaning": -4,
+              "Mental_Decay": 4,
+              "Family_Friction": 6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "hz_nerve_rebuilt",
+      "title": "The Shape of the Freeze",
+      "body": "You have replayed it every night since: the drone light flooding the scrub, your legs turning to concrete, the window closing overhead like a lid. The route is still there. The ghost is still good. What broke wasn't the plan -- it was the animal underneath it, and the animal remembers. The Ferryman's message is one line: 'The seam doesn't care that you froze. Come back when YOU don't.'",
+      "weight": 10,
+      "cooldown": 3,
+      "max_fires": 0,
+      "tags": [
+        "offgrid",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "nerve_broken"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "walk_the_route_cold",
+          "text": "Walk the whole route again, no window, no crossing. Stand at the lock until your pulse forgets to spike.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              },
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              },
+              {
+                "stat": "Substance_Reliance",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "Four nights running you walk it -- lock, conduit, the plenum's cold mouth -- until the fear wears a groove and becomes procedure. On the fifth night your hands are still on the wheel latch, and you understand the freeze the way you understand any broken mechanism: found, named, fixed. The window will come again. This time you'll be spendable.",
+            "deltas": {
+              "Meaning": 10,
+              "Mental_Decay": -6,
+              "Physical_Integrity": -4
+            },
+            "flags_clear": [
+              "nerve_broken"
+            ],
+            "flags_set": [
+              "exit_ready"
+            ]
+          },
+          "failure": {
+            "text": "At the lock, on the third night, a maintenance drone drifts past on its ordinary rounds -- and your body drops you into the shadows before your mind can vote. You crouch in the dark, heart slamming, ashamed. Not yet. The animal isn't done remembering.",
+            "deltas": {
+              "Mental_Decay": 8,
+              "Meaning": -4
+            }
+          }
+        },
+        {
+          "id": "tell_mara_the_freeze",
+          "text": "Tell Mara you froze. Let someone who loves you hold the weight of it.",
+          "requires": {
+            "all": [
+              {
+                "relationship": "Mara (Sister)",
+                "op": ">=",
+                "value": 40
+              }
+            ]
+          },
+          "prob": {
+            "base": 0.65,
+            "mods": [
+              {
+                "stat": "Family_Friction",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "You tell her all of it -- the light, the freeze, the crawl home. Mara listens, then says the one thing no debrief could: 'You froze because you still have something to lose. That's not weakness. That's inventory.' She makes you list it, out loud, everything worth crossing FOR. The list is longer than you thought. The nerve rebuilds itself around it.",
+            "deltas": {
+              "Meaning": 12,
+              "Family_Friction": -8,
+              "Mental_Decay": -8
+            },
+            "flags_clear": [
+              "nerve_broken"
+            ],
+            "flags_set": [
+              "exit_ready"
+            ],
+            "rel_deltas": {
+              "Mara (Sister)": 10
+            }
+          },
+          "failure": {
+            "text": "You get as far as 'the run went wrong' before her face does the thing you dreaded -- not judgment, fear. Now she checks on you twice a day, gently, terribly, and every check-in is a hand on your sleeve pulling you one centimeter further from the wire.",
+            "deltas": {
+              "Family_Friction": 6,
+              "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 4
+            }
+          }
+        },
+        {
+          "id": "let_the_wire_go",
+          "text": "Stop. Some doors close from the inside. Let the wire become a story you almost lived.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You fold the route maps into the bottom of a crate and stop checking the moon cycles. The relief arrives first, warm as sedation. The grief arrives three days later and stays longer. The Ferryman marks your name off the list without comment -- the seam has seen every version of this, including yours.",
+            "deltas": {
+              "Meaning": -12,
+              "Mental_Decay": 6
+            },
+            "flags_clear": [
+              "nerve_broken"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

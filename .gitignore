@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+saves/
+build/
+dist/
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
