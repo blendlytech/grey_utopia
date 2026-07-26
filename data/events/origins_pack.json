@@ -2,66 +2,8 @@
   "pack": "origins_pack",
   "model": "fable-5",
   "batch": "flagship",
-  "description": "The Day-0 opening: who you were before the Row decides how the city fights you. Four origins, four builds, four different first weeks.",
+  "description": "Origin follow-ups: how the city answers who you were. The origin choice itself now lives in prologue_pack (the Day-0 Continuity Review); these events pick up the origin flags it sets.",
   "events": [
-    {
-      "id": "origin_before_the_row",
-      "title": "Before the Row",
-      "body": "Vint asks it the way he asks everything -- sideways, over solder smoke, while his hands work on something else. 'Everybody down here walked away from a life up there. Kael was somebody's accountant. I indexed archives for the transition committee.' He tests a connection, doesn't look at you. 'You've been on the Row three months and nobody knows your before. That's not privacy, friend, that's inventory nobody's priced yet.' The workbench hums. The question stands. Who were you, back when the city still thought it knew what you were for?",
-      "weight": 100,
-      "cooldown": 1,
-      "max_fires": 1,
-      "tags": ["intro", "flagship", "existential"],
-      "preconditions": {
-        "all": [ { "day": 0, "op": "<=" } ]
-      },
-      "choices": [
-        {
-          "id": "origin_auditor",
-          "text": "A Steward compliance auditor. You read the system from inside for nine years -- then read your own file.",
-          "prob": { "base": 1.0, "mods": [] },
-          "success": {
-            "text": "You tell him about the audit floors: nine years verifying that the machine's kindness balanced, until the cycle you found your own behavioral file open on a colleague's desk, annotated, predicted, three years into your future and correct so far. You resigned by walking to the undercity mid-shift, still holding your credentials. Vint whistles low. 'An auditor.' He files it where he files valuable things. You still know how the surface thinks. It still doesn't know you left angry.",
-            "deltas": { "Social_Capital": 15, "Wealth": 200, "Meaning": 5, "Recklessness": -5 },
-            "flags_set": [ "origin_auditor" ],
-            "faction_deltas": { "Steward": 10 }
-          }
-        },
-        {
-          "id": "origin_pit",
-          "text": "A fighter in the unsanctioned pits. The last legal way to bleed, until it wasn't, until you weren't.",
-          "prob": { "base": 1.0, "mods": [] },
-          "success": {
-            "text": "You show him instead of telling him: the knuckles, the shoulder that clicks, the ear. Four years in the pits under Parlor Row, back when the crowds paid to watch someone consent to consequences. You were good. You were, briefly, famous in the way the undercity is famous -- one level deep and one year long. The pits taught you the only economics that never deprecated: someone always pays to see nerve. Vint nods slowly. 'I remember you,' he says. 'Third bracket, the southpaw.' It's the first time in months anyone has remembered you correctly.",
-            "deltas": { "Physical_Integrity": 10, "Recklessness": 20, "Fame": 8, "Wealth": -200 },
-            "flags_set": [ "origin_pit" ],
-            "faction_deltas": { "Undercity": 8 }
-          }
-        },
-        {
-          "id": "origin_archivist",
-          "text": "A grief archivist. You catalogued pre-accord media -- the raw, unedited feeling -- until they optimized the archive.",
-          "prob": { "base": 1.0, "mods": [] },
-          "success": {
-            "text": "You tell him about the stacks: three sublevels of pre-accord recordings, human feeling in its original packaging, and your job -- the best job anyone ever had -- reading it, tagging it, keeping it findable. Then the directive: the archive was 'a wellness hazard,' and you watched the optimization crews soften it shelf by shelf. You saved what you could carry. One spike rides against your chest right now -- the realest night of your old life, unedited, yours. Vint's hands stop working. 'Show me sometime,' he says, and means it like a prayer.",
-            "deltas": { "Meaning": 15, "Mental_Decay": 10, "Wealth": -100, "Social_Capital": 5 },
-            "flags_set": [ "origin_archivist", "memory_secured" ]
-          }
-        },
-        {
-          "id": "origin_chemist",
-          "text": "A synth chemist. You cooked the cleanest product on three levels -- and sampled the inventory one year too long.",
-          "prob": { "base": 1.0, "mods": [] },
-          "success": {
-            "text": "You give him the resume the Row already half knows: the cleanest Lethe derivatives three levels ever tasted, a lab that never once poisoned a customer, margins that made Kael's people court you like a diplomat. And the other ledger, the private one: your own dose curve, climbing that whole final year, until you were your own best customer and the lab's silence started sounding like the corridor of a hospital. You walked away with your reputation, your tolerance, and a test kit you never work without. Vint slides you a drink and doesn't make it synthetic. 'Chemists who quit their own supply,' he says, 'are the only experts I trust.'",
-            "deltas": { "Wealth": 400, "Substance_Reliance": 15, "Tolerance": 2, "Fame": 5 },
-            "flags_set": [ "origin_chemist" ],
-            "item_rewards": [ "lethe_test_kit" ],
-            "faction_deltas": { "Undercity": 10 }
-          }
-        }
-      ]
-    },
     {
       "id": "origin_auditor_recognized",
       "title": "The Colleague",
