@@ -2915,6 +2915,117 @@
           }
         }
       ]
+    },
+    {
+      "id": "reck_undercity_vice_reputation",
+      "title": "The House Remembers Your Face",
+      "body": "Kael's people don't run the fight pit or the lottery window themselves -- they just own a percentage of everyone who does. A runner finds you between jobs holding a ledger you've never seen, with a tally that's somehow exact: the bets, the augment, the patrol officer you squared away with a folded stack. 'You've been a good customer all month,' she says, in the tone of someone about to explain why that's a problem now.",
+      "weight": 7,
+      "cooldown": 4,
+      "max_fires": 1,
+      "tags": [
+        "vice",
+        "undercity",
+        "job"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "undercity_vice_reputation"
+          },
+          {
+            "day": 7,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "pay_the_house_cut",
+          "text": "Pay the house's retroactive cut. Buy the silence outright.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You count it out without arguing the math. She doesn't recount it either -- professional courtesy, one regular to another. You're not free of the ledger. You're just current.",
+            "deltas": {
+              "Wealth": -350,
+              "Meaning": -2
+            },
+            "flags_clear": [
+              "undercity_vice_reputation"
+            ]
+          }
+        },
+        {
+          "id": "push_back_on_house",
+          "text": "Push back. You're a customer, not an asset on anyone's books.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Recklessness",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "She hears you out, shrugs, and closes the ledger. 'Your money, your funeral,' she says, already walking away. No cut taken -- this time.",
+            "deltas": {
+              "Social_Capital": 2
+            },
+            "flags_clear": [
+              "undercity_vice_reputation"
+            ]
+          },
+          "failure": {
+            "text": "She doesn't argue. She just makes a call, and the fight pit, the lottery window, and the augment broker all get quietly less friendly to you, all at once.",
+            "deltas": {
+              "Social_Capital": -6,
+              "Heat": 8,
+              "Wealth": -150
+            }
+          }
+        },
+        {
+          "id": "lean_into_house",
+          "text": "Ask what 'good customer' actually gets you.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "Turns out 'good customer' is a tier, not a compliment -- better odds at the pit, a discount at the organ ledger, a nod from Kael himself next time your name comes up. You just bought a leash with a longer chain.",
+            "deltas": {
+              "Wealth": -150,
+              "Social_Capital": 4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 8
+            },
+            "flags_clear": [
+              "undercity_vice_reputation"
+            ]
+          },
+          "failure": {
+            "text": "The runner isn't authorized to offer favors, only collect them. You ask for nothing and get a number to reach her at instead. Somehow that feels like the more expensive option.",
+            "deltas": {
+              "Social_Capital": -2,
+              "Heat": 4
+            }
+          }
+        }
+      ]
     }
   ]
 }

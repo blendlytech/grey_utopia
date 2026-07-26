@@ -47,7 +47,10 @@
               "Substance_Reliance": 10,
               "Physical_Integrity": -6
             },
-            "dose": 10
+            "dose": 10,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "Whatever's in the cut disagrees violently with your bloodstream. You spend the night on a stranger's bathroom floor.",
@@ -56,7 +59,10 @@
               "Physical_Integrity": -20,
               "Mental_Decay": 8
             },
-            "dose": 15
+            "dose": 15,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -73,14 +79,20 @@
               "Mental_Decay": -14,
               "Substance_Reliance": 6
             },
-            "dose": 6
+            "dose": 6,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "Even the 'standard' vial is thinner than usual this week. Someone's skimming somewhere up the chain.",
             "deltas": {
               "Wealth": -40,
               "Mental_Decay": -4
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -138,14 +150,20 @@
             "deltas": {
               "Wealth": 350,
               "Recklessness": 3
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           },
           "failure": {
             "text": "The underdog folds in round two, exactly like the odds said he would. You knew better and bet anyway.",
             "deltas": {
               "Wealth": -200,
               "Mental_Decay": 4
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           }
         },
         {
@@ -170,14 +188,20 @@
               "Wealth": 450,
               "Physical_Integrity": -22,
               "Fame": 3
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           },
           "failure": {
             "text": "You're outclassed fast and hard. The crowd gets its money's worth out of your face.",
             "deltas": {
               "Physical_Integrity": -30,
               "Mental_Decay": 8
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           }
         },
         {
@@ -237,7 +261,10 @@
               "Wealth": -600,
               "Physical_Integrity": 12,
               "Substance_Reliance": -4
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           },
           "failure": {
             "text": "The augment is rejected mid-install. You're bedridden a week and the broker keeps the deposit regardless.",
@@ -245,7 +272,10 @@
               "Wealth": -600,
               "Physical_Integrity": -20,
               "Mental_Decay": 8
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           }
         },
         {
@@ -265,13 +295,19 @@
             "deltas": {
               "Wealth": -350,
               "Social_Capital": 2
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           },
           "failure": {
             "text": "Your questions kill the deal. The broker closes the ledger and politely asks you to leave.",
             "deltas": {
               "Meaning": -2
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           }
         },
         {
@@ -492,7 +528,10 @@
               "Substance_Reliance": 4,
               "Social_Capital": 2
             },
-            "dose": 3
+            "dose": 3,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "This batch is harsher than usual. You cough through half the lounge's attention and half your dignity.",
@@ -500,7 +539,10 @@
               "Wealth": -30,
               "Physical_Integrity": -4
             },
-            "dose": 5
+            "dose": 5,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -557,13 +599,19 @@
             "deltas": {
               "Wealth": 900,
               "Meaning": 2
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           },
           "failure": {
             "text": "Nothing. As expected, as always, as the whole point of a lottery.",
             "deltas": {
               "Wealth": -50
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           }
         },
         {
@@ -578,13 +626,19 @@
             "deltas": {
               "Wealth": 900,
               "Meaning": 4
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           },
           "failure": {
             "text": "It doesn't hit. You didn't really expect it to.",
             "deltas": {
               "Wealth": -10
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           }
         },
         {
@@ -643,7 +697,10 @@
               "Wealth": -60,
               "Meaning": 6,
               "Mental_Decay": 6
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "The spike overwhelms the safety cutoffs and loops twice before it releases you. You surface hollowed out.",
@@ -651,7 +708,10 @@
               "Wealth": -60,
               "Mental_Decay": 12,
               "Physical_Integrity": -4
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -726,7 +786,10 @@
             "deltas": {
               "Wealth": -150,
               "Heat": -15
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           },
           "failure": {
             "text": "Wrong officer, wrong day. He's offended, not tempted, and the citation gets a bribery-attempt addendum.",
@@ -734,7 +797,10 @@
               "Wealth": -150,
               "Heat": 20,
               "Social_Capital": -4
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           }
         },
         {
@@ -753,13 +819,19 @@
             "text": "A convincing story about a sick relative and a wrong turn buys you a warning instead of a citation.",
             "deltas": {
               "Heat": -5
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           },
           "failure": {
             "text": "He's heard every version of that story. The citation goes through, verbatim, with your name spelled correctly.",
             "deltas": {
               "Heat": 15
-            }
+            },
+            "flags_set": [
+              "undercity_vice_reputation"
+            ]
           }
         },
         {
@@ -806,7 +878,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 12
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -824,7 +899,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 2
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "You cut it shorter than she wanted. The silence before she hangs up says more than the goodbye did.",
@@ -834,7 +912,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -5
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -852,7 +933,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -10
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         }
       ]
@@ -894,7 +978,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 10
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -917,7 +1004,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -2
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "She sees straight through the softening. 'Don't do that,' she says. 'Don't lie to make it easier for me.'",
@@ -927,7 +1017,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -8
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -950,7 +1043,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -4
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "She already knew. The denial is the thing that actually breaks something between you.",
@@ -961,7 +1057,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -12
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         }
       ]
@@ -1097,7 +1196,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 18
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1115,7 +1217,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 6
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1133,7 +1238,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -15
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         }
       ]
@@ -1166,7 +1274,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 12
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1190,7 +1301,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 8
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "The appeal queue outlasts the rent deadline. You end up covering it anyway, just later and more stressfully.",
@@ -1201,7 +1315,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 2
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1219,7 +1336,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -8
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         }
       ]
@@ -1253,7 +1373,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 10
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1268,7 +1391,10 @@
             "deltas": {
               "Family_Friction": 2,
               "Meaning": -2
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1286,7 +1412,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -6
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         }
       ]
@@ -1333,7 +1462,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 14
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "You mean it when you say it and break it within days. She sees the pattern before you're willing to admit it.",
@@ -1343,7 +1475,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -4
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1365,7 +1500,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -4
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "'That's exactly what someone who doesn't have it handled says,' she snaps, and for once she's completely right.",
@@ -1375,7 +1513,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -8
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1393,7 +1534,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -18
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         }
       ]
@@ -1433,14 +1577,22 @@
             "rel_deltas": {
               "Mara (Sister)": 8,
               "Vint (Informant)": 6
-            }
+            },
+            "flags_set": [
+              "mara_known",
+              "vint_known"
+            ]
           },
           "failure": {
             "text": "Vint says something about a job gone sideways that Mara was never supposed to hear. The car ride home is silent.",
             "deltas": {
               "Family_Friction": 16,
               "Social_Capital": -3
-            }
+            },
+            "flags_set": [
+              "mara_known",
+              "vint_known"
+            ]
           }
         },
         {
@@ -1459,14 +1611,22 @@
             "text": "You keep it to weather and old neighborhood gossip. Awkward, but survivable, and nobody learns anything they shouldn't.",
             "deltas": {
               "Family_Friction": -2
-            }
+            },
+            "flags_set": [
+              "mara_known",
+              "vint_known"
+            ]
           },
           "failure": {
             "text": "Vint gets bored of small talk and drifts into shop talk anyway. You spend the rest of dinner doing damage control.",
             "deltas": {
               "Family_Friction": 10,
               "Social_Capital": -2
-            }
+            },
+            "flags_set": [
+              "mara_known",
+              "vint_known"
+            ]
           }
         },
         {
@@ -1481,7 +1641,11 @@
             "deltas": {
               "Family_Friction": 4,
               "Social_Capital": -1
-            }
+            },
+            "flags_set": [
+              "mara_known",
+              "vint_known"
+            ]
           }
         }
       ]
@@ -1514,7 +1678,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 12
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1529,7 +1696,10 @@
             "deltas": {
               "Family_Friction": 2,
               "Meaning": -2
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1547,7 +1717,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -8
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         }
       ]
@@ -1591,7 +1764,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 4
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "Your reassurance falls flat. She's not stupid, and pretending she is only makes it worse.",
@@ -1601,7 +1777,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -6
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1617,7 +1796,10 @@
               "Family_Friction": 6,
               "Meaning": 4,
               "Heat": -4
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1641,14 +1823,20 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 10
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "She refuses to move without a real explanation, and you're not ready to give her one. The drone keeps circling.",
             "deltas": {
               "Wealth": -100,
               "Family_Friction": 8
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         }
       ]
@@ -1762,7 +1950,10 @@
               "Wealth": -400,
               "Mental_Decay": -10,
               "Meaning": 6
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "It's convincingly-aged rotgut in a real bottle. The forger clearly put more work into the label than the contents.",
@@ -1770,7 +1961,10 @@
               "Wealth": -400,
               "Physical_Integrity": -8,
               "Mental_Decay": 2
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -1790,13 +1984,19 @@
             "deltas": {
               "Wealth": -180,
               "Social_Capital": 1
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "The dealer won't budge and gets prickly about the insinuation. You walk away, bottle-less.",
             "deltas": {
               "Social_Capital": -2
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -1971,7 +2171,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 10
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "She tries, but you're too far into it to be talked down, and you end up snapping at her before hanging up ashamed.",
@@ -1982,7 +2185,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -4
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -2000,7 +2206,10 @@
               "Substance_Reliance": 5,
               "Meaning": -4
             },
-            "dose": 6
+            "dose": 6,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         }
       ]
@@ -2049,14 +2258,20 @@
               "Wealth": 500,
               "Heat": 10,
               "Meaning": -4
-            }
+            },
+            "flags_set": [
+              "vice_reseller_network"
+            ]
           },
           "failure": {
             "text": "The stolen batch is traced faster than expected. Steward auditors start asking your contacts pointed questions.",
             "deltas": {
               "Heat": 26,
               "Social_Capital": -6
-            }
+            },
+            "flags_set": [
+              "vice_reseller_network"
+            ]
           }
         },
         {
@@ -2080,14 +2295,20 @@
             },
             "faction_deltas": {
               "Undercity": 6
-            }
+            },
+            "flags_set": [
+              "vice_reseller_network"
+            ]
           },
           "failure": {
             "text": "Word of the giveaway spreads faster than you'd like, and it draws exactly the kind of attention a stolen case shouldn't.",
             "deltas": {
               "Heat": 14,
               "Meaning": 4
-            }
+            },
+            "flags_set": [
+              "vice_reseller_network"
+            ]
           }
         },
         {
@@ -2143,7 +2364,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 16
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -2166,7 +2390,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 8
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "Comms aren't enough tonight. She hangs up mid-sentence and doesn't answer again until morning.",
@@ -2176,7 +2403,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -4
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -2194,7 +2424,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -12
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         }
       ]

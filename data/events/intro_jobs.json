@@ -18,11 +18,6 @@
             "op": ">=",
             "value": 0
           }
-        ],
-        "none": [
-          {
-            "flag": "client_dead"
-          }
         ]
       },
       "choices": [
@@ -182,7 +177,10 @@
               "Mental_Decay": 18,
               "Substance_Reliance": 5
             },
-            "dose": 6
+            "dose": 6,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "Neural feedback sears your optic pathway. You collapse on the grime-stained tile.",
@@ -190,7 +188,10 @@
               "Physical_Integrity": -20,
               "Mental_Decay": 25
             },
-            "dose": 10
+            "dose": 10,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {

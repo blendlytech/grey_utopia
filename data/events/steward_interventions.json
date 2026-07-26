@@ -35,7 +35,10 @@
               "Heat": -12,
               "Meaning": -5,
               "Recklessness": -8
-            }
+            },
+            "flags_set": [
+              "steward_biometric_dossier"
+            ]
           }
         },
         {
@@ -59,14 +62,20 @@
             "deltas": {
               "Heat": -10,
               "Meaning": 2
-            }
+            },
+            "flags_set": [
+              "steward_biometric_dossier"
+            ]
           },
           "failure": {
             "text": "The Steward notes telemetry discrepancy #8491. Surveillance priority escalates.",
             "deltas": {
               "Heat": 18,
               "Mental_Decay": 6
-            }
+            },
+            "flags_set": [
+              "steward_biometric_dossier"
+            ]
           },
           "boost_items": [
             "signal_ghost"

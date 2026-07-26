@@ -382,14 +382,20 @@
               "Wealth": 260,
               "Meaning": 8,
               "Social_Capital": 4
-            }
+            },
+            "flags_set": [
+              "vint_known"
+            ]
           },
           "failure": {
             "text": "A component you sourced is subtly wrong. The radio plays one station forever, warped and wrong, and she asks you to just take it away.",
             "deltas": {
               "Wealth": -60,
               "Social_Capital": -3
-            }
+            },
+            "flags_set": [
+              "vint_known"
+            ]
           }
         },
         {
@@ -456,14 +462,20 @@
               "Wealth": 240,
               "Fame": 2,
               "Heat": 4
-            }
+            },
+            "flags_set": [
+              "undercity_smuggling_rep"
+            ]
           },
           "failure": {
             "text": "The buyer turns out to be a Steward memory-provenance researcher building a fraud case. You get out before questions start, barely.",
             "deltas": {
               "Heat": 16,
               "Social_Capital": -3
-            }
+            },
+            "flags_set": [
+              "undercity_smuggling_rep"
+            ]
           }
         },
         {
@@ -484,14 +496,20 @@
               "Wealth": 200,
               "Meaning": -3,
               "Mental_Decay": 4
-            }
+            },
+            "flags_set": [
+              "undercity_smuggling_rep"
+            ]
           },
           "failure": {
             "text": "The spike's compression is unstable. The playback stutters and loops the argument fifty times before you rip the jack free.",
             "deltas": {
               "Mental_Decay": 8,
               "Physical_Integrity": -3
-            }
+            },
+            "flags_set": [
+              "undercity_smuggling_rep"
+            ]
           }
         },
         {
@@ -558,14 +576,20 @@
               "Wealth": 400,
               "Fame": 4,
               "Heat": 8
-            }
+            },
+            "flags_set": [
+              "undercity_smuggling_rep"
+            ]
           },
           "failure": {
             "text": "A drone sweep clips your position on the way down. You're not caught, but your silhouette is now a data point somewhere.",
             "deltas": {
               "Heat": 24,
               "Physical_Integrity": -10
-            }
+            },
+            "flags_set": [
+              "undercity_smuggling_rep"
+            ]
           }
         },
         {
@@ -586,14 +610,20 @@
               "Wealth": 320,
               "Social_Capital": 3,
               "Heat": 5
-            }
+            },
+            "flags_set": [
+              "undercity_smuggling_rep"
+            ]
           },
           "failure": {
             "text": "The lookout miscounts the sweep interval. You make it back down, but only just, heart slamming.",
             "deltas": {
               "Heat": 14,
               "Wealth": -50
-            }
+            },
+            "flags_set": [
+              "undercity_smuggling_rep"
+            ]
           }
         },
         {
@@ -762,7 +792,10 @@
               "Substance_Reliance": 9,
               "Physical_Integrity": -4
             },
-            "dose": 8
+            "dose": 8,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "This batch is under-cooked. Your stomach revolts and your vision swims for an ugly hour.",
@@ -771,7 +804,10 @@
               "Physical_Integrity": -16,
               "Mental_Decay": 6
             },
-            "dose": 12
+            "dose": 12,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -787,7 +823,10 @@
               "Mental_Decay": -4,
               "Substance_Reliance": 2
             },
-            "dose": 3
+            "dose": 3,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -849,7 +888,10 @@
               "Substance_Reliance": 6,
               "Meaning": -2
             },
-            "dose": 6
+            "dose": 6,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "The loop glitches on a stranger's grief instead of their joy -- a wiring error nobody caught. You surface shaking.",
@@ -858,7 +900,10 @@
               "Mental_Decay": 10,
               "Physical_Integrity": -4
             },
-            "dose": 9
+            "dose": 9,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -937,7 +982,10 @@
               "Wealth": -350,
               "Tolerance": -6,
               "Physical_Integrity": -8
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "Your system doesn't reset so much as revolt. A full day lost to fever and shakes on a stranger's floor.",
@@ -945,7 +993,10 @@
               "Wealth": -350,
               "Physical_Integrity": -22,
               "Mental_Decay": 10
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -966,7 +1017,10 @@
               "Wealth": -180,
               "Tolerance": -3,
               "Physical_Integrity": -3
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "Even the half-dose fights you. A rough night, but you wake up in your own bed at least.",
@@ -974,7 +1028,10 @@
               "Wealth": -180,
               "Physical_Integrity": -10,
               "Mental_Decay": 5
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -1034,7 +1091,10 @@
             "dose": 8,
             "rel_deltas": {
               "Mara (Sister)": -10
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "The broker recognizes the piece and refuses -- 'stolen goods carry a scent, friend' -- and you leave empty-handed and humiliated.",
@@ -1045,7 +1105,10 @@
             "dose": 8,
             "rel_deltas": {
               "Mara (Sister)": -10
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -1067,13 +1130,19 @@
               "Substance_Reliance": 3,
               "Meaning": 2
             },
-            "dose": 4
+            "dose": 4,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "Nobody's buying spare gear tonight. You go home with the craving and the keepsake both, which is its own kind of misery.",
             "deltas": {
               "Mental_Decay": 8
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -1245,7 +1314,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 15
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1263,7 +1335,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 5
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "She catches you checking a job ping mid-sentence and goes quiet for the rest of the meal. You both pretend it's fine.",
@@ -1273,7 +1348,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -4
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1292,7 +1370,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -10
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         }
       ]
@@ -1571,7 +1652,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 15
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "The unit you sourced is a convincing fake. Mara doesn't find out until it fails when she needs it most, and neither of you says much after.",
@@ -1582,7 +1666,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 5
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1606,7 +1693,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 8
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "The fast option is junk. Mara's disappointment is quieter and worse than anger would have been.",
@@ -1617,7 +1707,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -6
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1635,7 +1728,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -12
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         }
       ]
@@ -1666,7 +1762,10 @@
               "Meaning": 6,
               "Heat": 6,
               "Mental_Decay": -2
-            }
+            },
+            "flags_set": [
+              "steward_civic_dossier"
+            ]
           }
         },
         {
@@ -1686,14 +1785,20 @@
             "deltas": {
               "Heat": -8,
               "Meaning": -4
-            }
+            },
+            "flags_set": [
+              "steward_civic_dossier"
+            ]
           },
           "failure": {
             "text": "The system cross-references your survey against your biometric stress log and flags the mismatch as 'concerning cheerfulness.'",
             "deltas": {
               "Heat": 10,
               "Mental_Decay": 4
-            }
+            },
+            "flags_set": [
+              "steward_civic_dossier"
+            ]
           }
         },
         {
@@ -1708,7 +1813,10 @@
             "deltas": {
               "Heat": 3,
               "Meaning": 1
-            }
+            },
+            "flags_set": [
+              "steward_civic_dossier"
+            ]
           }
         }
       ]
@@ -1748,7 +1856,10 @@
               "Meaning": 8,
               "Recklessness": 4,
               "Heat": 6
-            }
+            },
+            "flags_set": [
+              "steward_biometric_dossier"
+            ]
           },
           "failure": {
             "text": "You dent a piece of city property in full view of a pedestrian sensor cluster. A very polite notice of 'restitution owed' arrives within the hour.",
@@ -1756,7 +1867,10 @@
               "Heat": 16,
               "Wealth": -80,
               "Mental_Decay": 4
-            }
+            },
+            "flags_set": [
+              "steward_biometric_dossier"
+            ]
           }
         },
         {
@@ -1772,14 +1886,20 @@
               "Meaning": 6,
               "Mental_Decay": 3,
               "Physical_Integrity": -2
-            }
+            },
+            "flags_set": [
+              "steward_biometric_dossier"
+            ]
           },
           "failure": {
             "text": "You get thoroughly soaked, catch a chill, and spend the next day sniffling in a way that feels like a moral victory anyway.",
             "deltas": {
               "Physical_Integrity": -6,
               "Meaning": 4
-            }
+            },
+            "flags_set": [
+              "steward_biometric_dossier"
+            ]
           }
         },
         {
@@ -1795,7 +1915,10 @@
               "Mental_Decay": -6,
               "Meaning": -4,
               "Heat": -2
-            }
+            },
+            "flags_set": [
+              "steward_biometric_dossier"
+            ]
           }
         }
       ]
@@ -1842,14 +1965,20 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 6
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "Nobody picks up. The unanswered chime is somehow lonelier than the empty plaza was.",
             "deltas": {
               "Meaning": -6,
               "Mental_Decay": 6
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -1932,14 +2061,20 @@
               "Wealth": -150,
               "Social_Capital": 3,
               "Fame": 1
-            }
+            },
+            "flags_set": [
+              "undercity_fixer_rep"
+            ]
           },
           "failure": {
             "text": "The vendor gets insulted by your lowball and doubles the price out of spite. You pay full price just to save face.",
             "deltas": {
               "Wealth": -400,
               "Social_Capital": -2
-            }
+            },
+            "flags_set": [
+              "undercity_fixer_rep"
+            ]
           }
         },
         {
@@ -1954,7 +2089,10 @@
             "deltas": {
               "Wealth": -320,
               "Social_Capital": 1
-            }
+            },
+            "flags_set": [
+              "undercity_fixer_rep"
+            ]
           }
         },
         {

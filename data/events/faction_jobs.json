@@ -43,7 +43,10 @@
             },
             "faction_deltas": {
               "Steward": 15.0
-            }
+            },
+            "flags_set": [
+              "steward_civic_dossier"
+            ]
           },
           "failure": {
             "text": "The fine clears, but the drone flags your transaction history for secondary review.",
@@ -53,7 +56,10 @@
             },
             "faction_deltas": {
               "Steward": 5.0
-            }
+            },
+            "flags_set": [
+              "steward_civic_dossier"
+            ]
           }
         },
         {
@@ -77,7 +83,10 @@
             "faction_deltas": {
               "Resistance": 10.0,
               "Steward": -10.0
-            }
+            },
+            "flags_set": [
+              "steward_civic_dossier"
+            ]
           },
           "failure": {
             "text": "The spoof fails! The Auditor emits a piercing alarm pulse, instantly broadcasting your co-ordinates to district enforcement.",
@@ -87,7 +96,10 @@
             },
             "faction_deltas": {
               "Steward": -25.0
-            }
+            },
+            "flags_set": [
+              "steward_civic_dossier"
+            ]
           }
         },
         {
@@ -110,7 +122,10 @@
             },
             "faction_deltas": {
               "Undercity": 15.0
-            }
+            },
+            "flags_set": [
+              "vint_known"
+            ]
           },
           "failure": {
             "text": "Vint's signal jammer triggers an immediate emergency lockdown sweep in your sector.",
@@ -120,7 +135,10 @@
             },
             "faction_deltas": {
               "Undercity": -10.0
-            }
+            },
+            "flags_set": [
+              "vint_known"
+            ]
           }
         }
       ]
@@ -229,7 +247,10 @@
             },
             "faction_deltas": {
               "Undercity": 10.0
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "The Lotus enforcer weighs the canister upon delivery. He notices the missing volume and takes your cut as penance.",

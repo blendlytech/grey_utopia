@@ -41,7 +41,10 @@
               "Substance_Reliance": 10,
               "Physical_Integrity": -5
             },
-            "dose": 12
+            "dose": 12,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "The batch is cut with industrial solvent. You vomit violently in the alley.",
@@ -50,7 +53,10 @@
               "Physical_Integrity": -18,
               "Mental_Decay": 10
             },
-            "dose": 18
+            "dose": 18,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -67,7 +73,10 @@
               "Mental_Decay": -8,
               "Substance_Reliance": 3
             },
-            "dose": 4
+            "dose": 4,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -123,7 +132,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 15
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -146,7 +158,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 4
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "She refuses the transfer: 'I don't want your blood money, brother.'",
@@ -156,7 +171,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -4
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -174,7 +192,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -10
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         }
       ]

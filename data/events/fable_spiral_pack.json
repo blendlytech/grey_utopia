@@ -51,7 +51,10 @@
               "Substance_Reliance": 14,
               "Tolerance": 1
             },
-            "dose": 8
+            "dose": 8,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "The firmware hooks deeper than advertised. You claw out of the dance twice and slide back under twice, and when the attendant finally pulls the crown your hands are shaking and the real world looks like a rough draft of somewhere better.",
@@ -62,7 +65,10 @@
               "Tolerance": 1,
               "Physical_Integrity": -8
             },
-            "dose": 14
+            "dose": 14,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -83,7 +89,10 @@
               "Mental_Decay": -10,
               "Meaning": -6,
               "Substance_Reliance": 8
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "The timer chimes and you pay for another track. Then one more. The 'free hour' costs you three, plus a docking fee the house invented while you were under.",
@@ -92,7 +101,10 @@
               "Meaning": -10,
               "Substance_Reliance": 12,
               "Wealth": -200
-            }
+            },
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -258,7 +270,10 @@
               "Meaning": -10,
               "Substance_Reliance": 6
             },
-            "dose": 6
+            "dose": 6,
+            "flags_set": [
+              "steward_biometric_dossier"
+            ]
           },
           "failure": {}
         },
@@ -284,7 +299,10 @@
               "Mental_Decay": -8,
               "Meaning": 10,
               "Recklessness": 4
-            }
+            },
+            "flags_set": [
+              "steward_biometric_dossier"
+            ]
           },
           "failure": {
             "text": "You bat the dispenser away and the shaking gets worse, not better. You come to with a split lip and a circle of onlookers filming. The drone hovers, patient as gravity: 'This event has been added to your file.'",
@@ -292,7 +310,10 @@
               "Mental_Decay": 12,
               "Physical_Integrity": -10,
               "Heat": 10
-            }
+            },
+            "flags_set": [
+              "steward_biometric_dossier"
+            ]
           }
         },
         {
@@ -316,7 +337,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 12
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "'You only call me when you're broken.' Her voice is tired in a way that frightens you more than the whiteout did. She stays on the line anyway, out of duty, and you can hear the difference.",
@@ -326,7 +350,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -6
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         }
       ]
@@ -398,7 +425,10 @@
               "Mental_Decay": -10,
               "Substance_Reliance": 8
             },
-            "dose": 5
+            "dose": 5,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           },
           "failure": {
             "text": "Your burned receptors shrug off the standard dose, so you take a third tab, and the sleep that finally comes is shallow and full of drowned things. You wake more tired than you lay down.",
@@ -407,7 +437,10 @@
               "Substance_Reliance": 12,
               "Tolerance": 1
             },
-            "dose": 9
+            "dose": 9,
+            "flags_set": [
+              "vice_personal_habit"
+            ]
           }
         },
         {
@@ -715,7 +748,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 18
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "You get as far as the product before her face closes like a blast door. 'Our mother's ration card. That's what you cut it with, the first time.' She leaves the food. Somehow that's worse than taking it.",
@@ -726,7 +762,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -6
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -750,7 +789,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": 4
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {
             "text": "She refunds the transfer before she's out of the corridor. No message attached. The absence of the message is the message.",
@@ -761,7 +803,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -8
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           }
         },
         {
@@ -780,7 +825,10 @@
             },
             "rel_deltas": {
               "Mara (Sister)": -12
-            }
+            },
+            "flags_set": [
+              "mara_known"
+            ]
           },
           "failure": {}
         }
@@ -945,7 +993,10 @@
               "Fame": 6,
               "Wealth": 300,
               "Physical_Integrity": -4
-            }
+            },
+            "flags_set": [
+              "undercity_fixer_rep"
+            ]
           },
           "failure": {
             "text": "The stim vendor's bodyguard reads your approach as a lunge. The scuffle is short, stupid, and filmed from at least nine angles. You limp out having fixed nothing but the crowd's evening.",
@@ -953,7 +1004,10 @@
               "Physical_Integrity": -14,
               "Heat": 8,
               "Fame": -2
-            }
+            },
+            "flags_set": [
+              "undercity_fixer_rep"
+            ]
           }
         },
         {
@@ -979,7 +1033,10 @@
               "Heat": 8,
               "Substance_Reliance": 3,
               "Meaning": -4
-            }
+            },
+            "flags_set": [
+              "undercity_smuggling_rep"
+            ]
           },
           "failure": {
             "text": "The tout has friends you didn't map -- syndicate-adjacent friends. Your interference gets flagged, your name gets said in a back room, and the vendor suddenly doesn't know you.",
@@ -987,7 +1044,10 @@
               "Heat": 16,
               "Wealth": -300,
               "Social_Capital": -5
-            }
+            },
+            "flags_set": [
+              "undercity_smuggling_rep"
+            ]
           }
         },
         {
