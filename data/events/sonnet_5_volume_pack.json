@@ -15823,7 +15823,7 @@
     {
       "id": "steward_caloric_variance_ping",
       "title": "Caloric Variance Notice",
-      "body": "Your wrist unit chimes with a gentle blue glow: THE STEWARD HAS NOTICED A 12% VARIANCE FROM YOUR OPTIMAL CALORIC INTAKE THIS CYCLE. A cheerful suggestion follows -- a curated meal kit, delivered within the hour, at no cost to you. It's the kind of caring that makes your skin crawl a little, precisely because it's so precisely correct.",
+      "body": "Your wrist unit chimes with a gentle blue glow: THE STEWARD HAS NOTICED A 12% VARIANCE FROM YOUR OPTIMAL CALORIC INTAKE THIS CYCLE. A cheerful suggestion follows — a curated meal kit, delivered within the hour, at no cost to you. It's the kind of caring that makes your skin crawl a little, precisely because it's so precisely correct.",
       "weight": 3,
       "cooldown": 6,
       "max_fires": 0,
@@ -15870,7 +15870,7 @@
             "mods": []
           },
           "success": {
-            "text": "You silence the ping and go back to whatever you were doing. The Steward, as always, does not ask twice -- it simply notes and waits.",
+            "text": "You silence the ping and go back to whatever you were doing. The Steward, as always, does not ask twice — it simply notes and waits.",
             "deltas": {
               "Mental_Decay": -1
             },
@@ -15879,7 +15879,7 @@
             ]
           },
           "failure": {
-            "text": "You silence the ping and go back to whatever you were doing. The Steward, as always, does not ask twice -- it simply notes and waits.",
+            "text": "You silence the ping and go back to whatever you were doing. The Steward, as always, does not ask twice — it simply notes and waits.",
             "deltas": {
               "Mental_Decay": -1
             },
