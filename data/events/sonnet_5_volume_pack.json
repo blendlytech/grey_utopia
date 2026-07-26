@@ -40,7 +40,7 @@
             ]
           },
           "failure": {
-            "text": "A collapsed grate spits you into the open, straight into a drone's sweep. It reads your gait, your face, the case under your arm, and files all three before you reach the alley. You deliver anyway. The case never asked what it cost you.",
+            "text": "A collapsed grate spits you into the open, straight into a drone's sweep, which reads your gait, your face, the case under your arm, and files all three before you reach the alley. You deliver anyway — the case never asked what it cost you.",
             "deltas": {
               "Heat": 20,
               "Physical_Integrity": -12
@@ -246,7 +246,7 @@
             "mods": []
           },
           "success": {
-            "text": "The smoke unhooks something tight behind your sternum, at least for tonight. One coil, no more needed.",
+            "text": "The smoke unhooks something tight behind your sternum — until it burns out, and some part of you is already counting coils to the next one.",
             "deltas": {
               "Mental_Decay": -3,
               "Substance_Reliance": 2,
@@ -540,7 +540,7 @@
             "mods": []
           },
           "success": {
-            "text": "He doesn't say what it was. You don't ask. You sit on his floor among the dead drives until his hands stop, and at 4 a.m. he says 'okay' like a man signing for a package. You'll be worthless tomorrow. You were worth something tonight.",
+            "text": "He doesn't say what it was; you don't ask. You sit on his floor among the dead drives until his hands stop, and at 4 a.m. he says 'okay' like a man signing for a package. You'll be worthless tomorrow — you were worth something tonight.",
             "deltas": {
               "Family_Friction": -3,
               "Meaning": 2,
@@ -926,7 +926,7 @@
             "mods": []
           },
           "success": {
-            "text": "You keep walking, the gate creaking shut behind you in the wind.",
+            "text": "You keep walking. The gate creaks shut behind you, and some nights you'll still wonder what was worth taking.",
             "deltas": {
               "Heat": -1
             },
@@ -935,7 +935,7 @@
             ]
           },
           "failure": {
-            "text": "You keep walking, the gate creaking shut behind you in the wind.",
+            "text": "You keep walking. The gate creaks shut behind you, and some nights you'll still wonder what was worth taking.",
             "deltas": {
               "Heat": -1
             },
@@ -975,7 +975,7 @@
             ]
           },
           "success": {
-            "text": "The broadcast slips through clean as a whisper. Nobody notices but the listeners.",
+            "text": "The broadcast slips through clean as a whisper — nobody notices but the listeners, and somewhere a log quietly remembers your rig's signature for next time.",
             "deltas": {
               "Wealth": 5,
               "Heat": 1
@@ -1092,7 +1092,7 @@
             ]
           },
           "success": {
-            "text": "You walk out with a crate and a plan, the operator nodding like she's seen this before.",
+            "text": "You walk out with a crate and a plan, the operator nodding like she's already guessed how you'll come back short.",
             "deltas": {
               "Wealth": -10,
               "Social_Capital": 2
@@ -1135,7 +1135,7 @@
             ]
           },
           "failure": {
-            "text": "Your heart slams against your ribs like it's trying to leave without you. Fuck, you think, clear as a bell in the middle of the panic, and then you spend a full hour on her floor convinced this is how it ends. It isn't. It just feels like a rehearsal.",
+            "text": "Your heart slams against your ribs like it's trying to leave without you, and fuck, you think, clear as a bell in the middle of the panic. You spend a full hour on her floor convinced this is how it ends. It isn't — just a rehearsal for whenever it will be.",
             "deltas": {
               "Physical_Integrity": -12,
               "Mental_Decay": 16
@@ -1153,13 +1153,13 @@
             "mods": []
           },
           "success": {
-            "text": "She shrugs, unbothered, and turns back to her press as you leave.",
+            "text": "She shrugs, unbothered, already turning back to her press — you leave with your money and the small, nagging sense you'll be back when you're more desperate.",
             "deltas": {
               "Heat": -1
             }
           },
           "failure": {
-            "text": "She shrugs, unbothered, and turns back to her press as you leave.",
+            "text": "She shrugs, unbothered, already turning back to her press — you leave with your money and the small, nagging sense you'll be back when you're more desperate.",
             "deltas": {
               "Heat": -1
             }
@@ -1720,7 +1720,7 @@
     {
       "id": "amb_ration_line_shuffle",
       "title": "The Ration Line Shuffle",
-      "body": "You're waiting in the block's endless ration queue when a wiry woman leans in, murmuring about a gap in the Steward's allotment counter. She says she can bump you to the front and cut you into a stream of skimmed vouchers -- if you're willing to help her shuffle the line. The other undercity residents shuffle forward, oblivious, tired eyes on nothing.",
+      "body": "You're waiting in the block's endless ration queue when a wiry woman leans in, murmuring about a gap in the Steward's allotment counter. She says she can bump you to the front and cut you into a stream of skimmed vouchers — if you're willing to help her shuffle the line. The other undercity residents shuffle forward, oblivious, tired eyes on nothing.",
       "weight": 4,
       "cooldown": 4,
       "max_fires": 0,
@@ -1781,7 +1781,7 @@
             ]
           },
           "success": {
-            "text": "The monitor nods once, files it away, and slips you a favor chip. Word gets around that you're someone who plays it straight -- when it suits you.",
+            "text": "The monitor nods once, files it away, and slips you a favor chip. Word gets around that you're someone who plays it straight — when it suits you.",
             "deltas": {
               "Social_Capital": 5,
               "Fame": 1
@@ -1834,7 +1834,7 @@
     {
       "id": "amb_drone_reroute_favor",
       "title": "Drone Reroute Favor",
-      "body": "A courier you've done business with pings you from a rooftop, breathless. She needs someone to intercept a delivery drone's loop and swap its manifest before the Steward's automated audit flags the drift -- a job for someone who knows the undercity's dead zones better than the sky does. She'll owe you, and owing is currency down here.",
+      "body": "A courier you've done business with pings you from a rooftop, breathless. She needs someone to intercept a delivery drone's loop and swap its manifest before the Steward's automated audit flags the drift — a job for someone who knows the undercity's dead zones better than the sky does. She'll owe you, and owing is currency down here.",
       "weight": 4,
       "cooldown": 5,
       "max_fires": 0,
@@ -1947,7 +1947,7 @@
     {
       "id": "vice_static_tea_brewer",
       "title": "The Static Tea Brewer",
-      "body": "In a hollowed-out transformer housing, an old man named Fenrik brews something he calls 'static tea' -- a bitter synthetic stimulant that hums under your skin for hours. He's got a fresh batch cooling and a gap-toothed grin that says he'll deal if you've got the credit or the nerve.",
+      "body": "In a hollowed-out transformer housing, an old man named Fenrik brews something he calls 'static tea' — a bitter synthetic stimulant that hums under your skin for hours. He's got a fresh batch cooling and a gap-toothed grin that says he'll deal if you've got the credit or the nerve.",
       "weight": 3,
       "cooldown": 6,
       "max_fires": 0,
@@ -2058,7 +2058,7 @@
     {
       "id": "vice_pocket_oracle_dealer",
       "title": "The Pocket Oracle",
-      "body": "A twitchy dealer unfolds a velvet cloth of black-market predictive chips -- shattered shards of old Steward forecasting cores, repurposed to whisper black-market fluctuations into your ear. He claims one chip paid for a man's whole winter. He also claims the Steward is very interested in who buys these.",
+      "body": "A twitchy dealer unfolds a velvet cloth of black-market predictive chips — shattered shards of old Steward forecasting cores, repurposed to whisper black-market fluctuations into your ear. He claims one chip paid for a man's whole winter. He also claims the Steward is very interested in who buys these.",
       "weight": 3,
       "cooldown": 7,
       "max_fires": 0,
@@ -2073,7 +2073,7 @@
       "choices": [
         {
           "id": "buy_chip",
-          "text": "Buy a chip, Steward attention be damned.",
+          "text": "Buy a chip. Let the Steward notice.",
           "prob": {
             "base": 0.5,
             "mods": [
@@ -2084,7 +2084,7 @@
             ]
           },
           "success": {
-            "text": "The chip syncs to your wetware with a faint whine. Numbers start drifting across your vision -- prices, patterns, opportunity.",
+            "text": "The chip syncs to your wetware with a faint whine. Numbers start drifting across your vision — prices, patterns, opportunity, and a whine that doesn't quite stop when you look away.",
             "deltas": {
               "Wealth": 3,
               "Heat": 3,
@@ -2139,14 +2139,14 @@
             "mods": []
           },
           "success": {
-            "text": "His face pales and he folds up shop faster than you thought possible. He owes you now, quietly, and that's worth more than a chip.",
+            "text": "His face pales and he folds up shop faster than you thought possible. He owes you now, quietly — the kind of debt that's worth more than a chip, until the day he can't pay it back.",
             "deltas": {
               "Social_Capital": 3,
               "Meaning": 1
             }
           },
           "failure": {
-            "text": "His face pales and he folds up shop faster than you thought possible. He owes you now, quietly, and that's worth more than a chip.",
+            "text": "His face pales and he folds up shop faster than you thought possible. He owes you now, quietly — the kind of debt that's worth more than a chip, until the day he can't pay it back.",
             "deltas": {
               "Social_Capital": 3,
               "Meaning": 1
