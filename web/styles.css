@@ -487,7 +487,9 @@ body {
 .scene-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(12, 16, 24, 0.95) 0%, transparent 65%);
+  /* Tight ramp: enough scrim for the caption and the terminal readout, but it
+     clears the frame fast so the painted scene behind it stays visible. */
+  background: linear-gradient(0deg, rgba(12, 16, 24, 0.95) 0%, rgba(12, 16, 24, 0.45) 26%, transparent 58%);
 }
 
 .scene-caption {
@@ -1086,7 +1088,7 @@ body {
 }
 
 /* ============================================================
-   PROCEDURAL SCENES -- hand-authored CSS/SVG, zero raster art
+   SCENES -- painted art base, hand-authored CSS/SVG atmosphere on top
    ============================================================ */
 .scene-stage { position: absolute; inset: 0; overflow: hidden; background: #06080d; }
 .ending-scene-wrap {
@@ -1096,6 +1098,42 @@ body {
 .ending-scene-wrap .scene-stage { position: absolute; inset: 0; }
 .sc-layer { position: absolute; inset: 0; }
 .sc-svg { position: absolute; inset: auto 0 0 0; width: 100%; height: 78%; }
+
+/* -- painted base layer -- */
+.sc-art {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  animation: artDrift 48s ease-in-out infinite alternate;
+}
+/* Unifies five paintings of very different key, and keeps the caption legible. */
+.sc-art-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(6,8,13,0.42) 0%, rgba(6,8,13,0.12) 40%, rgba(6,8,13,0.62) 100%);
+}
+@keyframes artDrift {
+  from { transform: scale(1.04) translate3d(-0.6%, 0, 0); }
+  to   { transform: scale(1.09) translate3d(0.6%, -1%, 0); }
+}
+/* With art behind them the procedural bases stop being backdrops and become
+   a colour grade -- their opaque fill drops out, their neon tints stay. */
+.scene-stage.has-art { --sc-base: none; }
+/* Signage the painting already carries in-frame. */
+.scene-stage.has-art .sc-art-hide { display: none; }
+/* The painted perimeter has its own skyline and fence -- the procedural
+   silhouette would sit on top of them as a second, flatter horizon.
+   Lightning and ash still drift over it. */
+.scene-stage.has-art .sc-svg { display: none; }
+/* The sanctuary reads as sterile brightness against everything else, and the
+   painting already carries its warm light. The standard veil plus the amber
+   wash bury both, turning cream into mud -- so here the veil only darkens
+   enough for the caption and the wash drops out entirely. */
+.scene-steward.has-art .sc-art-veil {
+  background: linear-gradient(180deg, rgba(6,8,13,0.04) 0%, transparent 45%, rgba(6,8,13,0.42) 100%);
+}
+.scene-steward.has-art .sc-calm { background: none; }
+/* Terminal endings sit on empty asphalt -- storefront neon has nothing to
+   hang from down there. */
+.scene-stage.art-collapse .sc-sign { display: none; }
 
 /* -- shared neon signage -- */
 .sc-sign {
@@ -1134,7 +1172,7 @@ body {
   background:
     radial-gradient(120% 90% at 30% 110%, rgba(0,240,255,0.13), transparent 55%),
     radial-gradient(100% 70% at 78% 105%, rgba(245,158,11,0.10), transparent 50%),
-    linear-gradient(180deg, #05070c 0%, #0a0f1a 55%, #131a28 100%);
+    var(--sc-base, linear-gradient(180deg, #05070c 0%, #0a0f1a 55%, #131a28 100%));
 }
 .sc-bench::after { /* bench edge */
   content: ""; position: absolute; left: 0; right: 0; bottom: 26%;
@@ -1153,7 +1191,7 @@ body {
   background:
     radial-gradient(90% 80% at 70% 20%, rgba(240,0,255,0.16), transparent 60%),
     radial-gradient(80% 90% at 20% 80%, rgba(168,85,247,0.18), transparent 55%),
-    linear-gradient(180deg, #0b0410 0%, #150822 60%, #1d0b2e 100%);
+    var(--sc-base, linear-gradient(180deg, #0b0410 0%, #150822 60%, #1d0b2e 100%));
 }
 .sc-smoke {
   position: absolute; width: 55%; height: 60%; border-radius: 50%;
@@ -1169,7 +1207,7 @@ body {
 .sc-calm {
   background:
     radial-gradient(120% 100% at 50% 0%, rgba(229,192,123,0.20), transparent 60%),
-    linear-gradient(180deg, #171310 0%, #241d14 55%, #2e2519 100%);
+    var(--sc-base, linear-gradient(180deg, #171310 0%, #241d14 55%, #2e2519 100%));
 }
 .sc-ring {
   position: absolute; left: 50%; top: 52%; width: 130px; height: 130px;
@@ -1198,7 +1236,7 @@ body {
 .sc-storm {
   background:
     radial-gradient(140% 60% at 50% 108%, rgba(229,192,123,0.16), transparent 55%),
-    linear-gradient(180deg, #0a0d14 0%, #131926 45%, #1a2233 100%);
+    var(--sc-base, linear-gradient(180deg, #0a0d14 0%, #131926 45%, #1a2233 100%));
 }
 .sc-city { fill: #e5c07b; opacity: 0.5; filter: drop-shadow(0 0 6px rgba(229,192,123,0.7)); }
 .sc-fence line { stroke: #05070c; stroke-width: 3; }
@@ -1228,7 +1266,7 @@ body {
 .sc-night {
   background:
     radial-gradient(100% 55% at 50% 112%, rgba(0,240,255,0.10), transparent 60%),
-    linear-gradient(180deg, #05070d 0%, #0b101c 60%, #121a2a 100%);
+    var(--sc-base, linear-gradient(180deg, #05070d 0%, #0b101c 60%, #121a2a 100%));
 }
 .sc-rain {
   position: absolute; inset: -20% 0;

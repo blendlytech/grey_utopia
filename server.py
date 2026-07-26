@@ -29,6 +29,8 @@ BASE_DIR = paths.app_root()
 DATA_DIR = os.path.join(BASE_DIR, "data")
 WEB_DIR = os.path.join(BASE_DIR, "web")
 ASSETS_DIR = os.path.join(DATA_DIR, "assets")
+IMAGE_TYPES = {".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+               ".png": "image/png", ".webp": "image/webp"}
 SAVES_DIR = os.path.join(paths.user_data_dir(), "saves")
 AUTOSAVE_PATH = os.path.join(SAVES_DIR, "autosave.json")
 
@@ -285,12 +287,14 @@ class GreyUtopiaRequestHandler(SimpleHTTPRequestHandler):
             self.send_json(st)
             return
 
-        # Serve visual scene assets
+        # Serve visual scene assets. basename() keeps this flat: the crops live
+        # directly in data/assets and assets/originals/ stays unreachable.
         if parsed.path.startswith("/assets/"):
             asset_name = os.path.basename(parsed.path)
             asset_path = os.path.join(ASSETS_DIR, asset_name)
-            if os.path.exists(asset_path):
-                self.send_file(asset_path, "image/png")
+            if os.path.isfile(asset_path):
+                self.send_file(asset_path, IMAGE_TYPES.get(
+                    os.path.splitext(asset_name)[1].lower(), "application/octet-stream"))
                 return
 
         # Serve Web UI files

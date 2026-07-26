@@ -87,11 +87,17 @@ python -m unittest discover -s tests
 # Lint All Event Content (ids, flags, items, probability sanity)
 python pipeline/lint_content.py
 
+# Re-cut Scene Art from data/assets/originals/ (places-only bands -> data/assets/*.jpg)
+python pipeline/crop_scenes.py
+
 # Run Monte Carlo Balance Verification (single strategy)
 python tests/sim_bot.py random
 
 # Full Balance Regression Gate (all 4 strategies + assertions; CI-ready)
 python tests/sim_bot.py all --assert
+
+# Same Gate, Parallelized (~9 min vs ~28; GU_ROOT=<path> targets another worktree)
+python tests/pargate.py
 
 # Play Game Interactively (terminal)
 python main.py

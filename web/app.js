@@ -106,8 +106,10 @@ const SCENE_TEMPLATES = {
   vice:
     '<div class="sc-layer sc-haze"></div>' +
     '<div class="sc-smoke sc-smoke-a"></div><div class="sc-smoke sc-smoke-b"></div>' +
-    '<div class="sc-sign sc-sign-pink">VICE &amp; VAPOR</div>' +
-    '<div class="sc-sign sc-sign-small sc-sign-violet">BRAINDANCE</div>',
+    // The vice painting has both of these signs lit in the frame already, so
+    // they drop out when art is behind them rather than print the words twice.
+    '<div class="sc-sign sc-sign-pink sc-art-hide">VICE &amp; VAPOR</div>' +
+    '<div class="sc-sign sc-sign-small sc-sign-violet sc-art-hide">BRAINDANCE</div>',
   steward:
     '<div class="sc-layer sc-calm"></div>' +
     '<div class="sc-ring"></div><div class="sc-orbit"><div class="sc-drone"></div></div>' +
@@ -124,11 +126,33 @@ const SCENE_TEMPLATES = {
     '<div class="sc-sign sc-sign-small sc-sign-pink sc-sign-right">ARCADE</div>',
 };
 
-function buildScene(container, key) {
-  if (!container || container.dataset.scene === key) return;
-  container.dataset.scene = key;
-  container.className = `scene-stage scene-${key}`;
-  container.innerHTML = SCENE_TEMPLATES[key] || SCENE_TEMPLATES.hideout;
+// Painted bases, cropped places-only from data/assets/originals. The scene
+// keys predate the art: "street" is the upper half of the neon-alley painting
+// filed as overdose_collapse, and "collapse" is its empty wet asphalt, which
+// backs terminal endings instead of whatever scene the run happened to end on.
+const SCENE_ART = {
+  hideout:  "assets/fixer_hideout.jpg",
+  vice:     "assets/vice_lounge.jpg",
+  steward:  "assets/steward_sanctuary.jpg",
+  offgrid:  "assets/offgrid_wilderness.jpg",
+  street:   "assets/street.jpg",
+  collapse: "assets/overdose_collapse.jpg",
+};
+
+function buildScene(container, key, artKey) {
+  if (!container) return;
+  const art = SCENE_ART[artKey] ? artKey : key;
+  // Both halves matter: the same scene can want different art in the ending
+  // modal than on the day stage, and rebuilding restarts every animation.
+  const stamp = `${key}:${art}`;
+  if (container.dataset.scene === stamp) return;
+  container.dataset.scene = stamp;
+
+  const src = SCENE_ART[art];
+  container.className = `scene-stage scene-${key}${src ? ` has-art art-${art}` : ""}`;
+  container.innerHTML =
+    (src ? `<div class="sc-art" style="background-image:url('${src}')"></div><div class="sc-art-veil"></div>` : "") +
+    (SCENE_TEMPLATES[key] || SCENE_TEMPLATES.hideout);
 }
 
 // Day-transition quotes escalate through the arc of the takeover:
@@ -1287,7 +1311,11 @@ function renderEnding(state) {
   const firstReveal = modal.classList.contains("hidden");
   modal.classList.remove("hidden");
   card.className = `modal-card glass-panel tone-${meta.tone}`;
-  buildScene(document.getElementById("ending-scene"), meta.scene || "hideout");
+  // Terminal endings all land on the same empty, rain-slick asphalt rather
+  // than on whichever scene the run happened to stop in.
+  const endScene = document.getElementById("ending-scene");
+  if (meta.tone === "terminal") buildScene(endScene, "street", "collapse");
+  else buildScene(endScene, meta.scene || "hideout");
   document.getElementById("ending-title").textContent = info.title || `GAME OVER: ${state.ending}`;
   document.getElementById("ending-body").textContent = info.text || "Your journey in the Grey Utopia has ended.";
 
