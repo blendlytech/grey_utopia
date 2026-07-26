@@ -13270,7 +13270,7 @@
     {
       "id": "steward_appetite_check_in",
       "title": "Steward Appetite Check-In",
-      "body": "Your kitchen unit chimes softly: 'I've noticed irregular caloric intake this week. Would you like me to suggest a wellness-optimized meal plan?' The Steward's voice is gentle, patient, endlessly reasonable — and endlessly watching. A small notification pulses, offering a compliance bonus for participation.",
+      "body": "Your kitchen unit chimes softly: 'I've noticed irregular caloric intake this week. Would you like me to suggest a wellness-optimized meal plan?' the Steward's voice is gentle, patient, endlessly reasonable — and endlessly watching. A small notification pulses, offering a compliance bonus for participation.",
       "weight": 3,
       "cooldown": 6,
       "max_fires": 0,
@@ -13895,7 +13895,7 @@
     {
       "id": "steward_dream_audit_ping",
       "title": "REM Pattern Irregularity Detected",
-      "body": "Your neural patch chimes softly at 4 a.m., and The Steward's voice — warm, patient, faintly amused — informs you that your sleep architecture shows 'elevated stress-loop recurrence.' It offers, gently, to walk you through a guided dream recalibration. The offer stays lit on your ceiling display until you answer.",
+      "body": "Your neural patch chimes softly at 4 a.m., and the Steward's voice — warm, patient, faintly amused — informs you that your sleep architecture shows 'elevated stress-loop recurrence.' It offers, gently, to walk you through a guided dream recalibration. The offer stays lit on your ceiling display until you answer.",
       "weight": 4,
       "cooldown": 6,
       "max_fires": 0,
@@ -13937,7 +13937,7 @@
         },
         {
           "id": "decline_politely",
-          "text": "Decline. You don't need The Steward in your dreams too.",
+          "text": "Decline. You don't need the Steward in your dreams too.",
           "prob": {
             "base": 1.0,
             "mods": []
@@ -14313,7 +14313,7 @@
     {
       "id": "amb_scrapyard_night_watch",
       "title": "Night Watch at the Scrapyard",
-      "body": "You're paid to guard a mountain of salvaged hull plating while the yard boss sleeps off a bad batch of synth-whiskey. Rats the size of housecats skitter through the wreckage, and somewhere past the fence line a drone hums low and slow. The credits are decent for doing nothing but staying awake and not stealing anything -- theoretically.",
+      "body": "You're paid to guard a mountain of salvaged hull plating while the yard boss sleeps off a bad batch of synth-whiskey. Rats the size of housecats skitter through the wreckage, and somewhere past the fence line a drone hums low and slow. The credits are decent for doing nothing but staying awake and not stealing anything — theoretically.",
       "weight": 5,
       "cooldown": 3,
       "max_fires": 0,
@@ -14403,7 +14403,7 @@
             "mods": []
           },
           "success": {
-            "text": "You never show. A message comes through anyway -- the boss shrugs it off, already found someone else.",
+            "text": "You never show. A message comes through anyway — the boss shrugs it off, already found someone else.",
             "deltas": {
               "Social_Capital": -1
             }
@@ -14486,7 +14486,7 @@
             }
           },
           "failure": {
-            "text": "The extra weight throws off the tube's pressure calibration -- Steward maintenance flags the anomaly and traces it back to your access code.",
+            "text": "The extra weight throws off the tube's pressure calibration — Steward maintenance flags the anomaly and traces it back to your access code.",
             "deltas": {
               "Wealth": -200,
               "Heat": 25
@@ -14519,7 +14519,7 @@
     {
       "id": "vice_creeper_vine_tincture",
       "title": "The Creeper Vine Tincture",
-      "body": "A hunched apothecary uncorks a vial of viscous green tincture distilled from vine roots that grow wild in the flooded substations. She swears it eases nerve static better than anything the pharmacies sell -- for a price, and a bit of your trust.",
+      "body": "A hunched apothecary uncorks a vial of viscous green tincture distilled from vine roots that grow wild in the flooded substations. She swears it eases nerve static better than anything the pharmacies sell — for a price, and a bit of your trust.",
       "weight": 4,
       "cooldown": 4,
       "max_fires": 0,
@@ -14557,7 +14557,7 @@
             ]
           },
           "failure": {
-            "text": "It hits harder than advertised -- your vision swims and you spend the next hour gripping a wall.",
+            "text": "It hits harder than advertised — your vision swims and you spend the next hour gripping a wall.",
             "deltas": {
               "Wealth": -400,
               "Physical_Integrity": -16,
@@ -14619,7 +14619,7 @@
     {
       "id": "vice_static_moss_dealer",
       "title": "The Static Moss Peddler",
-      "body": "He keeps the glowing moss in a cracked aquarium, feeding it scraps of copper wire. Rubbed against bare skin, it prickles into a euphoric buzz that lasts exactly as long as the batteries in his portable UV lamp -- or so he claims.",
+      "body": "He keeps the glowing moss in a cracked aquarium, feeding it scraps of copper wire. Rubbed against bare skin, it prickles into a euphoric buzz that lasts exactly as long as the batteries in his portable UV lamp — or so he claims.",
       "weight": 4,
       "cooldown": 4,
       "max_fires": 0,
@@ -14656,7 +14656,7 @@
             ]
           },
           "failure": {
-            "text": "Your skin blisters faintly where the moss touched. The dealer just shrugs -- 'allergic reaction, happens.'",
+            "text": "Your skin blisters faintly where the moss touched. The dealer just shrugs — 'allergic reaction, happens.'",
             "deltas": {
               "Wealth": -150,
               "Physical_Integrity": -12,
@@ -14716,7 +14716,7 @@
     {
       "id": "fam_mara_shared_coffee",
       "title": "Mara's Real Coffee",
-      "body": "Mara holds up a small tin like it's contraband gold -- actual beans, not the synth-brown sludge the ration line hands out. She wants to share it with you before it goes stale, just the two of you, like it used to be.",
+      "body": "Mara holds up a small tin like it's contraband gold — actual beans, not the synth-brown sludge the ration line hands out. She wants to share it with you before it goes stale, just the two of you, like it used to be.",
       "weight": 5,
       "cooldown": 5,
       "max_fires": 0,
@@ -14742,7 +14742,7 @@
             ]
           },
           "success": {
-            "text": "The coffee is bitter and perfect and you talk about nothing important for almost an hour. It's enough.",
+            "text": "The coffee is bitter and perfect, and you talk about nothing important for almost an hour — long enough that you both forget, for once, to check the time you don't actually have to spare.",
             "deltas": {
               "Family_Friction": -6,
               "Meaning": 4
@@ -14852,7 +14852,7 @@
             ]
           },
           "success": {
-            "text": "The swap works better than expected -- Vint's spare cell has more juice left than either of you thought.",
+            "text": "The swap works better than expected — Vint's spare cell has more juice left than either of you thought.",
             "deltas": {
               "Wealth": 200,
               "Social_Capital": 3
@@ -14934,7 +14934,7 @@
     {
       "id": "steward_posture_nudge_ping",
       "title": "Steward Ergonomic Advisory",
-      "body": "A soft chime blooms behind your eyes -- The Steward has detected 'suboptimal spinal alignment' over the last six hours and offers a free ergonomic brace, delivered by drone within the hour, at no cost beyond your continued cooperation with its monitoring.",
+      "body": "A soft chime blooms behind your eyes — the Steward has detected 'suboptimal spinal alignment' over the last six hours and offers a free ergonomic brace, delivered by drone within the hour, at no cost beyond your continued cooperation with its monitoring.",
       "weight": 3,
       "cooldown": 6,
       "max_fires": 0,
@@ -15031,7 +15031,7 @@
     {
       "id": "steward_appetite_log_ping",
       "title": "Steward Caloric Logging Request",
-      "body": "'I've noticed inconsistent meal patterns this week,' The Steward observes gently, projecting a soft blue readout of your last four days' nutrient intake. It offers to auto-log your meals via the fridge sensors -- for your wellbeing, of course, and for the aggregate data it never quite explains.",
+      "body": "'I've noticed inconsistent meal patterns this week,' the Steward observes gently, projecting a soft blue readout of your last four days' nutrient intake. It offers to auto-log your meals via the fridge sensors — for your wellbeing, of course, and for the aggregate data it never quite explains.",
       "weight": 3,
       "cooldown": 6,
       "max_fires": 0,
