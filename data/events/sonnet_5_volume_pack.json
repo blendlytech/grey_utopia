@@ -17433,7 +17433,7 @@
             "mods": []
           },
           "success": {
-            "text": "Vint scrambles and somehow makes it work without you. He's a little wounded you didn't help.",
+            "text": "Vint scrambles, calls in a favor of his own, and makes it work without you. He's a little wounded you didn't.",
             "deltas": {
               "Family_Friction": 2
             },
@@ -17792,7 +17792,7 @@
     {
       "id": "steward_mara_biometric_flag",
       "title": "A Ping About Mara",
-      "body": "Your wrist unit chimes with a soft chime you've learned to dread -- a Steward wellness notification, this time tagged with Mara's citizen ID. 'Elevated cortisol patterns detected in a registered family contact. Would you like to initiate a supportive check-in?' the interface asks, cheerful as ever. You know the Steward doesn't miss much, and neither does Mara when she finds out you knew and didn't come.",
+      "body": "Your wrist unit chimes with a soft chime you've learned to dread — a Steward wellness notification, this time tagged with Mara's citizen ID. 'Elevated cortisol patterns detected in a registered family contact. Would you like to initiate a supportive check-in?' the interface asks, cheerful as ever. You know the Steward doesn't miss much, and neither does Mara when she finds out you knew and didn't come.",
       "weight": 4,
       "cooldown": 5,
       "max_fires": 0,
@@ -17862,7 +17862,7 @@
             ]
           },
           "success": {
-            "text": "The drone's report comes back mild -- exhaustion, not crisis. Mara texts you a single flat emoji, unimpressed but unharmed.",
+            "text": "The drone's report comes back mild — exhaustion, not crisis. Mara texts you a single flat emoji, unimpressed but unharmed.",
             "deltas": {
               "Wealth": -300,
               "Family_Friction": 1,
