@@ -31,7 +31,7 @@
           "success": {
             "text": "The tunnels stink of standing water and something worse, but they're empty. You surface two blocks from the drop, early enough that Dex pays a bonus without being asked — and logs your face as someone who knows the tunnels now.",
             "deltas": {
-              "Wealth": 6,
+              "Wealth": 600,
               "Heat": 2,
               "Recklessness": 1
             },
@@ -60,7 +60,7 @@
           "success": {
             "text": "Slow, sanctioned, and boring enough that nothing happens — which is the whole point. Dex pays on time and files you under reliable, a label that gets you the safe runs and none of the interesting money.",
             "deltas": {
-              "Wealth": 3,
+              "Wealth": 300,
               "Social_Capital": 1
             },
             "flags_set": [
@@ -70,7 +70,7 @@
           "failure": {
             "text": "The sweep holds you forty minutes while a drone reads your gait like a ledger. Dex pays half and doesn't argue, which is how you know the case mattered — and that next time, the quiet route goes to someone else.",
             "deltas": {
-              "Wealth": 1,
+              "Wealth": 100,
               "Family_Friction": 4
             },
             "flags_set": [
@@ -137,7 +137,7 @@
           "success": {
             "text": "Four hours flat on your back in wire-dust, and the splice holds like it grew there. The super pays in paper money, which is a compliment, and tells two neighbors, which is a liability. Six families' heat now runs through work with your fingerprints on it.",
             "deltas": {
-              "Wealth": 7,
+              "Wealth": 700,
               "Social_Capital": 2
             },
             "flags_set": [
@@ -148,7 +148,7 @@
             "text": "A stray arc catches your forearm before you isolate the fault, a burn that'll blister by morning. The job gets finished anyway, on nerve alone, and the super pays for finished, not for how it felt.",
             "deltas": {
               "Physical_Integrity": -16,
-              "Wealth": 4
+              "Wealth": 400
             },
             "flags_set": [
               "undercity_fixer_rep"
@@ -170,7 +170,7 @@
           "success": {
             "text": "It holds — barely, by luck more than wiring — and you're out in twenty minutes with cash in hand and no real idea which wire you should still be worried about.",
             "deltas": {
-              "Wealth": 5,
+              "Wealth": 500,
               "Recklessness": 1
             },
             "flags_set": [
@@ -203,7 +203,7 @@
           "success": {
             "text": "She pays double without a word, jaw tight enough to crack a tooth. The job gets done. Word travels exactly as far as this building, and every unit in it now knows what you charge people with no other option.",
             "deltas": {
-              "Wealth": 10,
+              "Wealth": 1000,
               "Social_Capital": -3
             },
             "flags_set": [
@@ -250,7 +250,7 @@
             "deltas": {
               "Mental_Decay": -3,
               "Substance_Reliance": 2,
-              "Wealth": -2
+              "Wealth": -200
             },
             "flags_set": [
               "vice_personal_habit"
@@ -261,7 +261,7 @@
             "deltas": {
               "Mental_Decay": -3,
               "Substance_Reliance": 8,
-              "Wealth": -2
+              "Wealth": -200
             },
             "flags_set": [
               "vice_personal_habit"
@@ -283,7 +283,7 @@
           "success": {
             "text": "She gives you a bulk rate and a once-over that clocks you as competition now, not customer. Good margins ahead, if you don't mind being watched by someone who knows exactly what you're worth.",
             "deltas": {
-              "Wealth": -8,
+              "Wealth": -800,
               "Fame": 1
             },
             "flags_set": [
@@ -293,7 +293,7 @@
           "failure": {
             "text": "She sizes you up, decides you're competition, not customer, and won't sell past one coil at any price. You've made a rival for the cost of a single coin.",
             "deltas": {
-              "Wealth": -2,
+              "Wealth": -200,
               "Social_Capital": -1
             },
             "flags_set": [
@@ -354,7 +354,7 @@
           "success": {
             "text": "The batch is clean enough. You feel sharp and wired and briefly, chemically invincible — the kind of ready that isn't actually ready for anything, just loud about it.",
             "deltas": {
-              "Wealth": -5,
+              "Wealth": -500,
               "Substance_Reliance": 3,
               "Physical_Integrity": 1
             },
@@ -365,7 +365,7 @@
           "failure": {
             "text": "The batch is cut with something that isn't listed on anything. Your hands won't stop shaking for three hours, and your stomach files its own complaint, loudly, into a bucket.",
             "deltas": {
-              "Wealth": -5,
+              "Wealth": -500,
               "Physical_Integrity": -12,
               "Mental_Decay": 8
             },
@@ -389,14 +389,14 @@
           "success": {
             "text": "He respects the hustle enough to knock a third off — professional courtesy, one hustler to another — and you walk out having saved money you'll spend again next week.",
             "deltas": {
-              "Wealth": -2,
+              "Wealth": -200,
               "Substance_Reliance": 2
             }
           },
           "failure": {
             "text": "He shrugs, holds firm, and watches you decide you need it more than you need the principle. You pay full price and then some, because now you're buying to prove a point nobody else is keeping score of.",
             "deltas": {
-              "Wealth": -5,
+              "Wealth": -500,
               "Substance_Reliance": 8
             }
           }
@@ -449,7 +449,7 @@
           "success": {
             "text": "Ro's shoulders drop, relief she'd never say out loud. She hugs you a beat longer than usual and doesn't mention that this makes three months running.",
             "deltas": {
-              "Wealth": -12,
+              "Wealth": -1200,
               "Family_Friction": -4,
               "Meaning": 2
             }
@@ -457,7 +457,7 @@
           "failure": {
             "text": "You cover it. The math afterward doesn't add up as kindly — you're thinner in the accounts than you're telling yourself, and you do the subtraction twice hoping for a different number.",
             "deltas": {
-              "Wealth": -15,
+              "Wealth": -1500,
               "Family_Friction": -3,
               "Mental_Decay": 4
             }
@@ -503,14 +503,14 @@
             "text": "She nods, says she understands, and leaves quieter than she came. You know it isn't fine.",
             "deltas": {
               "Family_Friction": 3,
-              "Wealth": 1
+              "Wealth": 100
             }
           },
           "failure": {
             "text": "She nods, says she understands, and leaves quieter than she came. You know it isn't fine.",
             "deltas": {
               "Family_Friction": 3,
-              "Wealth": 1
+              "Wealth": 100
             }
           }
         }
@@ -750,7 +750,7 @@
           "success": {
             "text": "The credit lands quietly. You spend it before you can think too hard about why it was given.",
             "deltas": {
-              "Wealth": 4,
+              "Wealth": 400,
               "Meaning": -1
             },
             "flags_set": [
@@ -760,7 +760,7 @@
           "failure": {
             "text": "The credit lands quietly. You spend it before you can think too hard about why it was given.",
             "deltas": {
-              "Wealth": 4,
+              "Wealth": 400,
               "Meaning": -1
             },
             "flags_set": [
@@ -812,7 +812,7 @@
             "text": "The credit expires unclaimed. A small, useless act of defiance, and the one Steward transaction all week that didn't add to your file — for exactly as long as refusing it stays interesting to you.",
             "deltas": {
               "Meaning": 3,
-              "Wealth": -1
+              "Wealth": -100
             },
             "flags_set": [
               "steward_civic_dossier"
@@ -822,7 +822,7 @@
             "text": "The credit expires unclaimed. A small, useless act of defiance, and the one Steward transaction all week that didn't add to your file — for exactly as long as refusing it stays interesting to you.",
             "deltas": {
               "Meaning": 3,
-              "Wealth": -1
+              "Wealth": -100
             },
             "flags_set": [
               "steward_civic_dossier"
@@ -866,7 +866,7 @@
           "success": {
             "text": "You strip the place clean before dawn, arms screaming, pockets heavier. Nobody else's cut to split, which also means nobody to help if that shelf had gone the other way.",
             "deltas": {
-              "Wealth": 6,
+              "Wealth": 600,
               "Physical_Integrity": -3
             },
             "flags_set": [
@@ -876,7 +876,7 @@
           "failure": {
             "text": "A collapsed shelf takes your leg out from under you — 'shit,' flat and immediate, to nobody — and you limp out an hour later with half a haul and a knee that clicks wrong now, every single step home.",
             "deltas": {
-              "Wealth": 2,
+              "Wealth": 200,
               "Physical_Integrity": -25
             },
             "flags_set": [
@@ -899,7 +899,7 @@
           "success": {
             "text": "Three of you clear the yard in under an hour, splitting the take three ways and the risk with it. Good work, better company — and now two more people know exactly what you're willing to steal, and when.",
             "deltas": {
-              "Wealth": 8,
+              "Wealth": 800,
               "Social_Capital": 3
             },
             "flags_set": [
@@ -977,7 +977,7 @@
           "success": {
             "text": "The broadcast slips through clean as a whisper — nobody notices but the listeners, and somewhere a log quietly remembers your rig's signature for next time.",
             "deltas": {
-              "Wealth": 5,
+              "Wealth": 500,
               "Heat": 1
             },
             "flags_set": [
@@ -987,7 +987,7 @@
           "failure": {
             "text": "A stray harmonic pings a passive sensor at 3 a.m. — not enough to trigger a response, just enough to flag a file somewhere with your block number on it. Nothing's traced. Not yet.",
             "deltas": {
-              "Wealth": 2,
+              "Wealth": 200,
               "Heat": 16
             },
             "flags_set": [
@@ -1010,7 +1010,7 @@
           "success": {
             "text": "The broadcast reaches three districts over. The pirate crew treats you like a legend for the length of one good night, and the Steward's network logs a signal anomaly with your rig's fingerprint on it.",
             "deltas": {
-              "Wealth": 9,
+              "Wealth": 900,
               "Fame": 3,
               "Heat": 3
             },
@@ -1021,7 +1021,7 @@
           "failure": {
             "text": "The rig fries in a shower of sparks loud enough to wake the floor below, and a patrol drone three blocks out banks around for a second look.",
             "deltas": {
-              "Wealth": 1,
+              "Wealth": 100,
               "Heat": 25
             },
             "flags_set": [
@@ -1094,7 +1094,7 @@
           "success": {
             "text": "You walk out with a crate and a plan, the operator nodding like she's already guessed how you'll come back short.",
             "deltas": {
-              "Wealth": -10,
+              "Wealth": -1000,
               "Social_Capital": 2
             },
             "flags_set": [
@@ -1104,7 +1104,7 @@
           "failure": {
             "text": "Half the case turns out to be chalk and filler under the coating. You paid full price to learn that in this economy, being had is practically a service industry.",
             "deltas": {
-              "Wealth": -10,
+              "Wealth": -1000,
               "Mental_Decay": 8
             },
             "flags_set": [
@@ -1197,7 +1197,7 @@
           "success": {
             "text": "One vial, one full night of actual sleep. You'd almost forgotten the shape of that — waking up without the day already exhausting you.",
             "deltas": {
-              "Wealth": -4,
+              "Wealth": -400,
               "Mental_Decay": -5,
               "Substance_Reliance": 2
             },
@@ -1208,7 +1208,7 @@
           "failure": {
             "text": "You wake at 3 a.m. anyway, heart going, out four credits and one dream you can't shake and won't describe to anyone.",
             "deltas": {
-              "Wealth": -4,
+              "Wealth": -400,
               "Mental_Decay": 4
             },
             "flags_set": [
@@ -1231,14 +1231,14 @@
           "success": {
             "text": "He caves with a scowl and throws in a second vial just to end the conversation. You've made a bad impression and a good deal, in that order.",
             "deltas": {
-              "Wealth": -2,
+              "Wealth": -200,
               "Mental_Decay": -3
             }
           },
           "failure": {
             "text": "He takes the haggling personally and doubles the price out of spite. You pay it anyway, because you were never actually negotiating from a position of walking away.",
             "deltas": {
-              "Wealth": -8,
+              "Wealth": -800,
               "Social_Capital": -1
             }
           }
@@ -1331,7 +1331,7 @@
             "text": "She thanks you at the door, a little sad, a little relieved. You're already gone.",
             "deltas": {
               "Family_Friction": -2,
-              "Wealth": -3
+              "Wealth": -300
             },
             "flags_set": [
               "mara_known"
@@ -1341,7 +1341,7 @@
             "text": "She calls after you, wanting five more minutes. You don't give them to her.",
             "deltas": {
               "Family_Friction": 4,
-              "Wealth": -3
+              "Wealth": -300
             },
             "flags_set": [
               "mara_known"
@@ -1415,7 +1415,7 @@
             "text": "The rig hums back to life on the first try. Vint doesn't say thank you so much as go quiet with it — the kind of quiet that means he'll remember this longer than you will.",
             "deltas": {
               "Social_Capital": 5,
-              "Wealth": -3
+              "Wealth": -300
             },
             "flags_set": [
               "vint_known"
@@ -1425,7 +1425,7 @@
             "text": "One component's fried past saving, and no amount of skill fixes physics. You did what you could. Vint can see that, which helps him more than it helps the rig.",
             "deltas": {
               "Social_Capital": 2,
-              "Wealth": -3
+              "Wealth": -300
             },
             "flags_set": [
               "vint_known"
@@ -1447,7 +1447,7 @@
           "success": {
             "text": "He pays without complaint and won't quite meet your eyes doing it. The rig works better than before. Something between you now costs exactly what you charged for it.",
             "deltas": {
-              "Wealth": 6,
+              "Wealth": 600,
               "Social_Capital": -1
             },
             "flags_set": [
@@ -1457,7 +1457,7 @@
           "failure": {
             "text": "He pays late and grudgingly, and something between you cools a little.",
             "deltas": {
-              "Wealth": 3,
+              "Wealth": 300,
               "Social_Capital": -3
             },
             "flags_set": [
@@ -1491,7 +1491,7 @@
             "text": "He gets frustrated, fries a second component, and you end up fixing it anyway.",
             "deltas": {
               "Meaning": 1,
-              "Wealth": -2
+              "Wealth": -200
             },
             "flags_set": [
               "vint_known"
@@ -1748,7 +1748,7 @@
           "success": {
             "text": "The counter blinks a false zero and vouchers spill into your palm before anyone notices. You walk away lighter of conscience, heavier of pocket.",
             "deltas": {
-              "Wealth": 6,
+              "Wealth": 600,
               "Heat": 3,
               "Meaning": -1
             },
@@ -1862,7 +1862,7 @@
           "success": {
             "text": "Your fingers find the access panel like muscle memory. The drone dips, swaps its cargo tag, and continues on as if nothing happened.",
             "deltas": {
-              "Wealth": 4,
+              "Wealth": 400,
               "Social_Capital": 3,
               "Heat": 2
             },
@@ -1896,7 +1896,7 @@
           "success": {
             "text": "It takes twice as long, but the logs stay clean and the drone never even flickers. The courier is impressed by your patience.",
             "deltas": {
-              "Wealth": 3,
+              "Wealth": 300,
               "Social_Capital": 4
             },
             "flags_set": [
@@ -1975,7 +1975,7 @@
           "success": {
             "text": "Fenrik packs the batch in insulated foil and winks. You'll double your credit by nightfall if you move fast and quiet.",
             "deltas": {
-              "Wealth": 5,
+              "Wealth": 500,
               "Heat": 2
             },
             "flags_set": [
@@ -1985,7 +1985,7 @@
           "failure": {
             "text": "The batch turns out weaker than promised, half your buyers refuse it, and you're stuck holding a cooling bag of disappointment.",
             "deltas": {
-              "Wealth": -2,
+              "Wealth": -200,
               "Social_Capital": -1
             },
             "flags_set": [
@@ -2036,7 +2036,7 @@
           "success": {
             "text": "Fenrik likes your nerve and cuts you a recurring deal, undercutting his usual rate for loyalty. A useful vendor to have.",
             "deltas": {
-              "Wealth": -1,
+              "Wealth": -100,
               "Social_Capital": 3
             },
             "flags_set": [
@@ -2086,7 +2086,7 @@
           "success": {
             "text": "The chip syncs to your wetware with a faint whine. Numbers start drifting across your vision — prices, patterns, opportunity, and a whine that doesn't quite stop when you look away.",
             "deltas": {
-              "Wealth": 3,
+              "Wealth": 300,
               "Heat": 3,
               "Mental_Decay": 1
             },
@@ -2098,7 +2098,7 @@
             "text": "The chip fries on first contact, a puff of acrid smoke, and a notification chirps somewhere far away that shouldn't have chirped at all.",
             "deltas": {
               "Heat": 20,
-              "Wealth": -2
+              "Wealth": -200
             },
             "flags_set": [
               "vice_personal_habit"
@@ -2120,7 +2120,7 @@
           "success": {
             "text": "You talk him down to half, and he throws in a warning about which sectors are hot this week. Good information, cheaply bought.",
             "deltas": {
-              "Wealth": -2,
+              "Wealth": -200,
               "Social_Capital": 2
             }
           },
@@ -2181,7 +2181,7 @@
           "success": {
             "text": "The transfer goes through and her reply comes fast — relief wrapped in gratitude wrapped in guilt. You feel useful, for once, in the way she needs.",
             "deltas": {
-              "Wealth": -6,
+              "Wealth": -600,
               "Family_Friction": -4,
               "Meaning": 2
             },
@@ -2192,7 +2192,7 @@
           "failure": {
             "text": "The transfer goes through and her reply comes fast — relief wrapped in gratitude wrapped in guilt. You feel useful, for once, in the way she needs.",
             "deltas": {
-              "Wealth": -6,
+              "Wealth": -600,
               "Family_Friction": -4,
               "Meaning": 2
             },
@@ -2245,7 +2245,7 @@
             "text": "She says she understands. She doesn't, not really, and the silence that follows says more than her words did.",
             "deltas": {
               "Family_Friction": 5,
-              "Wealth": 1,
+              "Wealth": 100,
               "Mental_Decay": 1
             },
             "flags_set": [
@@ -2256,7 +2256,7 @@
             "text": "She says she understands. She doesn't, not really, and the silence that follows says more than her words did.",
             "deltas": {
               "Family_Friction": 5,
-              "Wealth": 1,
+              "Wealth": 100,
               "Mental_Decay": 1
             },
             "flags_set": [
@@ -2356,7 +2356,7 @@
           "success": {
             "text": "His face lights up over a busted coil array like it's a bouquet of flowers. The gesture lands exactly as intended.",
             "deltas": {
-              "Wealth": -3,
+              "Wealth": -300,
               "Social_Capital": 4,
               "Meaning": 2
             },
@@ -2367,7 +2367,7 @@
           "failure": {
             "text": "Turns out he already has three of what you brought. He's gracious about it, but the moment feels slightly deflated.",
             "deltas": {
-              "Wealth": -3,
+              "Wealth": -300,
               "Social_Capital": 1
             },
             "flags_set": [
@@ -2402,7 +2402,7 @@
           "success": {
             "text": "Twenty minutes of soothing questions and gentle affirmations later, credit lands in your account. You feel oddly hollow, like something was smoothed away without your consent.",
             "deltas": {
-              "Wealth": 4,
+              "Wealth": 400,
               "Tolerance": 3,
               "Meaning": -2
             },
@@ -2413,7 +2413,7 @@
           "failure": {
             "text": "The session glitches halfway through, looping the same question nine times. You get the stipend anyway, but the unease lingers longer than it should.",
             "deltas": {
-              "Wealth": 4,
+              "Wealth": 400,
               "Mental_Decay": 8
             },
             "flags_set": [
@@ -2630,7 +2630,7 @@
           "success": {
             "text": "The tap holds silent and steady. The stall owner pays in full and slips you an extra chit for discretion.",
             "deltas": {
-              "Wealth": 8,
+              "Wealth": 800,
               "Social_Capital": 3
             },
             "flags_set": [
@@ -2640,7 +2640,7 @@
           "failure": {
             "text": "A spark bites your forearm before you finish, but the splice holds. You get paid less for the scorch mark you leave behind.",
             "deltas": {
-              "Wealth": 3,
+              "Wealth": 300,
               "Physical_Integrity": -16,
               "Heat": 8
             },
@@ -2664,7 +2664,7 @@
           "success": {
             "text": "Sloppy but fast, the current diverts clean before anyone notices. You pocket a heavier cut for the risk.",
             "deltas": {
-              "Wealth": 14,
+              "Wealth": 1400,
               "Heat": 4
             },
             "flags_set": [
@@ -2674,7 +2674,7 @@
           "failure": {
             "text": "The box arcs and throws you back a meter. You crawl away smoking at the sleeves, cash thinner than promised.",
             "deltas": {
-              "Wealth": 2,
+              "Wealth": 200,
               "Physical_Integrity": -25,
               "Heat": 25
             },
@@ -2737,7 +2737,7 @@
           "success": {
             "text": "He waves you through with a grunt, chair unmoved, chit pocketed. Fast, quiet, expensive.",
             "deltas": {
-              "Wealth": -6,
+              "Wealth": -600,
               "Social_Capital": 1
             },
             "flags_set": [
@@ -2747,7 +2747,7 @@
           "failure": {
             "text": "He takes your chit and still makes you wait behind three other 'special cases.' The undercity has its own economy of patience.",
             "deltas": {
-              "Wealth": -6,
+              "Wealth": -600,
               "Mental_Decay": 4
             },
             "flags_set": [
@@ -2770,7 +2770,7 @@
           "success": {
             "text": "He remembers your face from last month and cuts the price in half, muttering about loyalty discounts.",
             "deltas": {
-              "Wealth": -2,
+              "Wealth": -200,
               "Social_Capital": 2
             },
             "flags_set": [
@@ -2780,7 +2780,7 @@
           "failure": {
             "text": "He's unmoved and doubles down out of spite, making an example of you for the line behind.",
             "deltas": {
-              "Wealth": -9,
+              "Wealth": -900,
               "Family_Friction": 4
             },
             "flags_set": [
@@ -2860,7 +2860,7 @@
           "success": {
             "text": "The crate moves fast through your usual channels, grief-numbed customers lining up quiet and grateful — and you don't let yourself think too hard about what you're selling them peace from.",
             "deltas": {
-              "Wealth": 12,
+              "Wealth": 1200,
               "Heat": 3,
               "Meaning": -1
             },
@@ -2871,7 +2871,7 @@
           "failure": {
             "text": "A sniffer drone tags the batch mid-transaction. You dump half the crate in a storm drain to stay clean.",
             "deltas": {
-              "Wealth": -4,
+              "Wealth": -400,
               "Heat": 24
             },
             "flags_set": [
@@ -2965,7 +2965,7 @@
           "success": {
             "text": "The laborers snap up every jar, grateful and half-addicted by the second week. Your margin is solid.",
             "deltas": {
-              "Wealth": 10,
+              "Wealth": 1000,
               "Substance_Reliance": 1,
               "Heat": 2
             },
@@ -2976,7 +2976,7 @@
           "failure": {
             "text": "A batch turns rancid in the heat before you can move it, and you eat the loss along with the smell.",
             "deltas": {
-              "Wealth": -7
+              "Wealth": -700
             },
             "flags_set": [
               "vice_reseller_network"
@@ -3025,7 +3025,7 @@
           "success": {
             "text": "You poach a handful of loyal customers with lower prices, and the vendor grudgingly respects the hustle.",
             "deltas": {
-              "Wealth": 6,
+              "Wealth": 600,
               "Social_Capital": -2
             }
           },
@@ -3033,7 +3033,7 @@
             "text": "Word gets back to the vendor's regulars that you're a shark, and they close ranks against you.",
             "deltas": {
               "Social_Capital": -5,
-              "Wealth": -2
+              "Wealth": -200
             }
           }
         }
@@ -3184,7 +3184,7 @@
             "text": "He returns it a week later with a chipped edge and an apology you can tell he means.",
             "deltas": {
               "Social_Capital": 2,
-              "Wealth": -1
+              "Wealth": -100
             },
             "flags_set": [
               "vint_known"
@@ -3207,7 +3207,7 @@
             "text": "He agrees easily and even throws in extra help on your next repair job. Fair trade, no hard feelings.",
             "deltas": {
               "Social_Capital": 3,
-              "Wealth": 2
+              "Wealth": 200
             },
             "flags_set": [
               "vint_known"
@@ -3505,7 +3505,7 @@
           "success": {
             "text": "You pry loose a coil of pristine conduit copper, worth a small fortune to the right buyer.",
             "deltas": {
-              "Wealth": 6,
+              "Wealth": 600,
               "Physical_Integrity": -2
             },
             "flags_set": [
@@ -3533,7 +3533,7 @@
           "success": {
             "text": "You gather a modest bundle of scrap metal and wiring, nothing glamorous but steady coin.",
             "deltas": {
-              "Wealth": 3
+              "Wealth": 300
             },
             "flags_set": [
               "undercity_fixer_rep"
@@ -3564,7 +3564,7 @@
           "success": {
             "text": "A rival fixer pays well for the shortcut knowledge and no risk to your own hide — though now she knows these tunnels as well as you do, and won't need you next time.",
             "deltas": {
-              "Wealth": 4,
+              "Wealth": 400,
               "Social_Capital": 1
             },
             "flags_set": [
@@ -3574,7 +3574,7 @@
           "failure": {
             "text": "They haggle you down to scraps, unimpressed by your cartography.",
             "deltas": {
-              "Wealth": 1
+              "Wealth": 100
             },
             "flags_set": [
               "undercity_fixer_rep"
@@ -3614,7 +3614,7 @@
           "success": {
             "text": "You deliver clean, fast work, and the trader pays without a second glance.",
             "deltas": {
-              "Wealth": 5,
+              "Wealth": 500,
               "Mental_Decay": 2
             },
             "flags_set": [
@@ -3624,7 +3624,7 @@
           "failure": {
             "text": "Fatigue scrambles a key phrase two-thirds through, and the buyer docks your pay hard for the error — the kind of mistake that keeps replaying behind your eyes long after the job's done.",
             "deltas": {
-              "Wealth": 1,
+              "Wealth": 100,
               "Mental_Decay": 16
             },
             "flags_set": [
@@ -3647,7 +3647,7 @@
           "success": {
             "text": "Buried in the jargon is a useful nugget about Steward supply routes — knowledge worth more than the fee.",
             "deltas": {
-              "Wealth": 3,
+              "Wealth": 300,
               "Meaning": 2,
               "Heat": 2
             },
@@ -3658,7 +3658,7 @@
           "failure": {
             "text": "You find nothing but dry logistics, and the wasted time costs you the client's patience.",
             "deltas": {
-              "Wealth": 1
+              "Wealth": 100
             },
             "flags_set": [
               "undercity_smuggling_rep"
@@ -3730,7 +3730,7 @@
           "success": {
             "text": "You move the vials fast among a hungry clientele, turning a tidy profit off borrowed lives you'll never have to live with.",
             "deltas": {
-              "Wealth": 7,
+              "Wealth": 700,
               "Heat": 3,
               "Tolerance": -1
             },
@@ -3741,7 +3741,7 @@
           "failure": {
             "text": "Word gets out you're peddling static, and a rival vendor undercuts you hard.",
             "deltas": {
-              "Wealth": -2,
+              "Wealth": -200,
               "Social_Capital": -1
             },
             "flags_set": [
@@ -3841,7 +3841,7 @@
           "success": {
             "text": "The scanners register nothing but harmless flora, and you deliver the goods without incident.",
             "deltas": {
-              "Wealth": 5,
+              "Wealth": 500,
               "Heat": 2
             },
             "flags_set": [
@@ -3852,7 +3852,7 @@
             "text": "A drone flags the shipment for secondary inspection; you ditch it and run before they can tag you.",
             "deltas": {
               "Heat": 25,
-              "Wealth": -1
+              "Wealth": -100
             },
             "flags_set": [
               "vice_reseller_network"
@@ -3874,7 +3874,7 @@
           "success": {
             "text": "He grumbles but agrees to sweeten the deal, respecting your nerve.",
             "deltas": {
-              "Wealth": 2,
+              "Wealth": 200,
               "Social_Capital": 1
             }
           },
@@ -3896,7 +3896,7 @@
             "text": "The tea brings a strange, gentle calm that lingers pleasantly into the next day.",
             "deltas": {
               "Mental_Decay": -3,
-              "Wealth": -2
+              "Wealth": -200
             },
             "flags_set": [
               "vice_personal_habit"
@@ -3905,7 +3905,7 @@
           "failure": {
             "text": "It tastes like pond water and does nothing but upset your stomach.",
             "deltas": {
-              "Wealth": -2
+              "Wealth": -200
             },
             "flags_set": [
               "vice_personal_habit"
@@ -3945,7 +3945,7 @@
             "text": "You find a clean batch from a trustworthy source. Mara's breathing eases within a day, and she squeezes your hand in thanks.",
             "deltas": {
               "Family_Friction": -5,
-              "Wealth": -4
+              "Wealth": -400
             },
             "flags_set": [
               "mara_known"
@@ -3955,7 +3955,7 @@
             "text": "The batch you find is weak and does little. Mara coughs through the night while you sit helpless beside her.",
             "deltas": {
               "Family_Friction": 8,
-              "Wealth": -4,
+              "Wealth": -400,
               "Meaning": -1
             },
             "flags_set": [
@@ -4055,7 +4055,7 @@
             "text": "You find exactly what he needs at a scrapyard three districts over. He's giddy with gratitude and owes you one.",
             "deltas": {
               "Social_Capital": 3,
-              "Wealth": -2
+              "Wealth": -200
             },
             "flags_set": [
               "vint_known"
@@ -4151,7 +4151,7 @@
           "success": {
             "text": "The Steward thanks you warmly and deposits a small credit bonus. It feels a little too pleased with your answers.",
             "deltas": {
-              "Wealth": 2,
+              "Wealth": 200,
               "Heat": 2
             },
             "flags_set": [
@@ -4183,7 +4183,7 @@
           "success": {
             "text": "Your fabricated answers pass without a hitch, and you pocket the supplement without a flicker of the guilt you almost expected to feel.",
             "deltas": {
-              "Wealth": 2,
+              "Wealth": 200,
               "Heat": -1
             },
             "flags_set": [
@@ -4253,7 +4253,7 @@
           "success": {
             "text": "A small credit token appears in your account, alongside a cheerful notification thanking you for 'being you.'",
             "deltas": {
-              "Wealth": 1,
+              "Wealth": 100,
               "Mental_Decay": 1
             },
             "flags_set": [
@@ -4368,7 +4368,7 @@
           "success": {
             "text": "The box hums back to life clean and quiet. The super presses a folded stack of scrip into your palm, grateful and a little less scared of the dark.",
             "deltas": {
-              "Wealth": 4,
+              "Wealth": 400,
               "Social_Capital": 2,
               "Physical_Integrity": -1
             },
@@ -4379,7 +4379,7 @@
           "failure": {
             "text": "A stray arc bites your forearm before you get the polarity right. You finish the job anyway, singed and swearing, and the super pays you half for the trouble.",
             "deltas": {
-              "Wealth": 2,
+              "Wealth": 200,
               "Physical_Integrity": -16,
               "Mental_Decay": 4
             },
@@ -4403,7 +4403,7 @@
           "success": {
             "text": "It's ugly but it holds. You're gone before the lights finish stabilizing, scrip already counted twice in your pocket.",
             "deltas": {
-              "Wealth": 3,
+              "Wealth": 300,
               "Recklessness": 1
             },
             "flags_set": [
@@ -4413,7 +4413,7 @@
           "failure": {
             "text": "The box shorts again an hour later, louder this time. A drone camera on the corner catches you walking away from the smoke.",
             "deltas": {
-              "Wealth": 1,
+              "Wealth": 100,
               "Heat": 20,
               "Social_Capital": -2
             },
@@ -4481,7 +4481,7 @@
           "success": {
             "text": "Turns out they'd been skipping meals to make rent, embarrassed to say so. You broker a payment plan and Auntie Six calls it good, tossing you an extra bowl for your trouble.",
             "deltas": {
-              "Wealth": 2,
+              "Wealth": 200,
               "Social_Capital": 3,
               "Meaning": 1
             },
@@ -4514,7 +4514,7 @@
           "success": {
             "text": "A little intimidation loosens their grip on the credits fast, their eyes on the floor the whole time. Auntie Six pays you in noodles and news, both nourishing in their own way, and doesn't ask what you said to make it work.",
             "deltas": {
-              "Wealth": 3,
+              "Wealth": 300,
               "Family_Friction": 1
             },
             "flags_set": [
@@ -4525,7 +4525,7 @@
             "text": "They call it in as harassment and a Steward mediator drone hovers by within the hour, logging your face for a file somewhere.",
             "deltas": {
               "Heat": 16,
-              "Wealth": 1
+              "Wealth": 100
             },
             "flags_set": [
               "undercity_smuggling_rep"
@@ -4542,7 +4542,7 @@
           "success": {
             "text": "Auntie Six blinks, then laughs, calling you a soft-hearted fool as she wipes the chalk clean. You've bought goodwill cheap, and a warm bowl besides.",
             "deltas": {
-              "Wealth": -3,
+              "Wealth": -300,
               "Social_Capital": 2,
               "Meaning": 1
             },
@@ -4553,7 +4553,7 @@
           "failure": {
             "text": "Auntie Six blinks, then laughs, calling you a soft-hearted fool as she wipes the chalk clean. You've bought goodwill cheap, and a warm bowl besides.",
             "deltas": {
-              "Wealth": -3,
+              "Wealth": -300,
               "Social_Capital": 2,
               "Meaning": 1
             },
@@ -4601,7 +4601,7 @@
           "success": {
             "text": "The smoke unspools your thoughts into something soft and distant. Morning comes gentler than usual, though your hands feel a half-second slow.",
             "deltas": {
-              "Wealth": -3,
+              "Wealth": -300,
               "Mental_Decay": -2,
               "Substance_Reliance": 2
             },
@@ -4612,7 +4612,7 @@
           "failure": {
             "text": "This batch is cut wrong. You spend the night gripping the sink, certain the walls are breathing.",
             "deltas": {
-              "Wealth": -3,
+              "Wealth": -300,
               "Mental_Decay": 12,
               "Physical_Integrity": -8
             },
@@ -4636,7 +4636,7 @@
           "success": {
             "text": "You flip the vials quietly over the next few days to clients who don't ask questions. The margin is decent, the risk manageable.",
             "deltas": {
-              "Wealth": 8,
+              "Wealth": 800,
               "Heat": 2
             },
             "flags_set": [
@@ -4646,7 +4646,7 @@
           "failure": {
             "text": "A buyer turns out to be a Steward informant fishing for leads. You dump the rest of the batch in a storm drain rather than get caught holding.",
             "deltas": {
-              "Wealth": -5,
+              "Wealth": -500,
               "Heat": 20
             },
             "flags_set": [
@@ -4715,7 +4715,7 @@
           "success": {
             "text": "The current washes over you in slow, pleasant waves. You step out loose-limbed and clear-headed, the day's static wiped clean.",
             "deltas": {
-              "Wealth": -4,
+              "Wealth": -400,
               "Mental_Decay": -3,
               "Substance_Reliance": 1
             },
@@ -4726,7 +4726,7 @@
           "failure": {
             "text": "The tank's regulator hiccups halfway through, sending a jolt through your spine that leaves you twitchy for hours.",
             "deltas": {
-              "Wealth": -4,
+              "Wealth": -400,
               "Physical_Integrity": -12,
               "Mental_Decay": 4
             },
@@ -4745,7 +4745,7 @@
           "success": {
             "text": "Ten minutes of gentle hum takes the edge off without draining your wallet too badly.",
             "deltas": {
-              "Wealth": -1,
+              "Wealth": -100,
               "Mental_Decay": -1
             },
             "flags_set": [
@@ -4755,7 +4755,7 @@
           "failure": {
             "text": "It's over almost before you feel it, and the mild static-cling headache isn't worth what you paid.",
             "deltas": {
-              "Wealth": -1,
+              "Wealth": -100,
               "Mental_Decay": 4
             },
             "flags_set": [
@@ -4932,7 +4932,7 @@
             "text": "He waves off the thanks but the corner of his mouth twitches into something like pride. The badge feels heavier than its weight suggests.",
             "deltas": {
               "Social_Capital": 3,
-              "Wealth": 1,
+              "Wealth": 100,
               "Meaning": 1
             },
             "flags_set": [
@@ -4943,7 +4943,7 @@
             "text": "He waves off the thanks but the corner of his mouth twitches into something like pride. The badge feels heavier than its weight suggests.",
             "deltas": {
               "Social_Capital": 3,
-              "Wealth": 1,
+              "Wealth": 100,
               "Meaning": 1
             },
             "flags_set": [
@@ -4966,7 +4966,7 @@
           "success": {
             "text": "He grumbles but pockets the credits, and something in the exchange feels more balanced, less like charity.",
             "deltas": {
-              "Wealth": -2,
+              "Wealth": -200,
               "Social_Capital": 2,
               "Family_Friction": -1
             },
@@ -4977,7 +4977,7 @@
           "failure": {
             "text": "He gets oddly offended, like you've turned a gift into a transaction. The badge sits between you a beat too long before he shrugs it off.",
             "deltas": {
-              "Wealth": -2,
+              "Wealth": -200,
               "Social_Capital": -1
             },
             "flags_set": [
@@ -5286,7 +5286,7 @@
           "success": {
             "text": "You're down before the drones round the corner, credits already pinging your ledger. Your knees will hate you tomorrow, but tomorrow isn't now.",
             "deltas": {
-              "Wealth": 6,
+              "Wealth": 600,
               "Heat": -2,
               "Physical_Integrity": -3
             },
@@ -5299,7 +5299,7 @@
             "deltas": {
               "Physical_Integrity": -25,
               "Heat": 16,
-              "Wealth": 2
+              "Wealth": 200
             },
             "flags_set": [
               "undercity_fixer_rep"
@@ -5321,7 +5321,7 @@
           "success": {
             "text": "Slower, but clean. You finish with two minutes to spare and slip out before the drones ever know you were there.",
             "deltas": {
-              "Wealth": 5,
+              "Wealth": 500,
               "Heat": -1
             },
             "flags_set": [
@@ -5331,7 +5331,7 @@
           "failure": {
             "text": "The stairwell door jams and you're forced to rush the last leg anyway, arriving flustered and empty-handed on payment.",
             "deltas": {
-              "Wealth": 1,
+              "Wealth": 100,
               "Physical_Integrity": -8
             },
             "flags_set": [
@@ -5394,7 +5394,7 @@
           "success": {
             "text": "She waves you through with a gap-toothed grin, and marks something favorable beside your name in her ledger.",
             "deltas": {
-              "Wealth": -4,
+              "Wealth": -400,
               "Social_Capital": 2
             },
             "flags_set": [
@@ -5404,7 +5404,7 @@
           "failure": {
             "text": "She waves you through with a gap-toothed grin, and marks something favorable beside your name in her ledger.",
             "deltas": {
-              "Wealth": -4,
+              "Wealth": -400,
               "Social_Capital": 2
             },
             "flags_set": [
@@ -5427,7 +5427,7 @@
           "success": {
             "text": "She sighs theatrically but cuts the price in half, muttering about softhearted fools like herself.",
             "deltas": {
-              "Wealth": -2,
+              "Wealth": -200,
               "Social_Capital": 1
             },
             "flags_set": [
@@ -5437,7 +5437,7 @@
           "failure": {
             "text": "She's unmoved and doubles the toll out of spite for wasting her time.",
             "deltas": {
-              "Wealth": -7,
+              "Wealth": -700,
               "Social_Capital": -1
             },
             "flags_set": [
@@ -5475,7 +5475,7 @@
             "text": "Her people are faster than they look. You're dragged back and made an example of, minus your coat and some dignity.",
             "deltas": {
               "Physical_Integrity": -24,
-              "Wealth": -3,
+              "Wealth": -300,
               "Social_Capital": -4
             },
             "flags_set": [
@@ -5523,7 +5523,7 @@
             "text": "You walk past two Steward checkpoints like a rumor. The tailor is delighted with your report and cuts you a real price on the finished version.",
             "deltas": {
               "Heat": -6,
-              "Wealth": -3,
+              "Wealth": -300,
               "Social_Capital": 2
             },
             "flags_set": [
@@ -5535,7 +5535,7 @@
             "deltas": {
               "Heat": 20,
               "Physical_Integrity": -8,
-              "Wealth": -3
+              "Wealth": -300
             },
             "flags_set": [
               "vice_personal_habit"
@@ -5552,14 +5552,14 @@
           "success": {
             "text": "Full price, no surprises. The coat works exactly as advertised, which almost feels like cheating down here.",
             "deltas": {
-              "Wealth": -12,
+              "Wealth": -1200,
               "Heat": -5
             }
           },
           "failure": {
             "text": "Full price, no surprises. The coat works exactly as advertised, which almost feels like cheating down here.",
             "deltas": {
-              "Wealth": -12,
+              "Wealth": -1200,
               "Heat": -5
             }
           }
@@ -5617,7 +5617,7 @@
           "success": {
             "text": "The broadcast noise in your skull goes quiet for the first time in weeks. It's terrifying how good that feels.",
             "deltas": {
-              "Wealth": -3,
+              "Wealth": -300,
               "Mental_Decay": -4,
               "Substance_Reliance": 3
             },
@@ -5628,7 +5628,7 @@
           "failure": {
             "text": "It hits wrong, your pulse spiking instead of settling. You spend an hour convinced the walls are listening back.",
             "deltas": {
-              "Wealth": -3,
+              "Wealth": -300,
               "Mental_Decay": 20,
               "Physical_Integrity": -8
             },
@@ -5652,7 +5652,7 @@
           "success": {
             "text": "You move the tins quietly through people who trust you. Modest profit, no questions asked.",
             "deltas": {
-              "Wealth": 9,
+              "Wealth": 900,
               "Heat": 2
             },
             "flags_set": [
@@ -5662,7 +5662,7 @@
           "failure": {
             "text": "One buyer turns out to be an informant testing the market. You lose the batch and some standing to avoid worse.",
             "deltas": {
-              "Wealth": -5,
+              "Wealth": -500,
               "Heat": 24,
               "Social_Capital": -2
             },
@@ -5785,7 +5785,7 @@
           "success": {
             "text": "The credits go through. She doesn't say thank you, and you don't blame her.",
             "deltas": {
-              "Wealth": -8,
+              "Wealth": -800,
               "Family_Friction": 1
             },
             "flags_set": [
@@ -5795,7 +5795,7 @@
           "failure": {
             "text": "The credits go through. She doesn't say thank you, and you don't blame her.",
             "deltas": {
-              "Wealth": -8,
+              "Wealth": -800,
               "Family_Friction": 1
             },
             "flags_set": [
@@ -5845,7 +5845,7 @@
           "failure": {
             "text": "You fry a capacitor and Vint has to redo half your work, laughing at you the whole time. Still good company, though.",
             "deltas": {
-              "Wealth": -2,
+              "Wealth": -200,
               "Social_Capital": 1
             }
           }
@@ -5925,7 +5925,7 @@
           "success": {
             "text": "You stretch through the guided routine, the credits landing as promised. Your back does feel a little better, annoyingly.",
             "deltas": {
-              "Wealth": 3,
+              "Wealth": 300,
               "Physical_Integrity": 2,
               "Tolerance": 1
             },
@@ -5936,7 +5936,7 @@
           "failure": {
             "text": "You stretch through the guided routine, the credits landing as promised. Your back does feel a little better, annoyingly.",
             "deltas": {
-              "Wealth": 3,
+              "Wealth": 300,
               "Physical_Integrity": 2,
               "Tolerance": 1
             },
@@ -6162,7 +6162,7 @@
           "success": {
             "text": "The tap bites clean. Data floods your relay drive in under a minute and you're gone before the steam clears.",
             "deltas": {
-              "Wealth": 12,
+              "Wealth": 1200,
               "Heat": 4,
               "Recklessness": 2
             },
@@ -6197,7 +6197,7 @@
           "success": {
             "text": "Patience pays. The relay yields a steady trickle of clean data, no alarms, no scars.",
             "deltas": {
-              "Wealth": 8,
+              "Wealth": 800,
               "Meaning": 2
             },
             "flags_set": [
@@ -6280,7 +6280,7 @@
           "success": {
             "text": "The gum crackles pleasantly on your tongue, static warmth spreading through your jaw and up into your skull. The world sharpens for a few good hours.",
             "deltas": {
-              "Wealth": -8,
+              "Wealth": -800,
               "Substance_Reliance": 4,
               "Mental_Decay": -2
             },
@@ -6291,7 +6291,7 @@
           "failure": {
             "text": "You bite down wrong and a jolt of raw current numbs half your face for an hour. She refunds nothing.",
             "deltas": {
-              "Wealth": -8,
+              "Wealth": -800,
               "Physical_Integrity": -12,
               "Mental_Decay": 8
             },
@@ -6315,7 +6315,7 @@
           "success": {
             "text": "She laughs, impressed, and slides two pieces across for the price of one. 'Come back when you're desperate,' she says.",
             "deltas": {
-              "Wealth": -3,
+              "Wealth": -300,
               "Substance_Reliance": 2,
               "Social_Capital": 1
             }
