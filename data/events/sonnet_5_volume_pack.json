@@ -1883,7 +1883,7 @@
         },
         {
           "id": "hack_careful",
-          "text": "Take the slow, careful route -- disable logging first.",
+          "text": "Take the slow, careful route — disable logging first.",
           "prob": {
             "base": 0.8,
             "mods": [
@@ -3667,7 +3667,7 @@
         },
         {
           "id": "decline_job",
-          "text": "Decline -- this smells like Steward surveillance bait.",
+          "text": "Decline — this smells like Steward surveillance bait.",
           "prob": {
             "base": 1.0,
             "mods": []
@@ -4231,7 +4231,7 @@
     {
       "id": "steward_gratitude_ping",
       "title": "A Gratitude Ping",
-      "body": "The Steward's voice, warm and synthetic, pings your feed to 'express genuine appreciation for your continued participation in the shared human experience.' It offers a small gift -- a token of algorithmic affection -- and invites you to reply with your own gratitude, tracked and logged, of course.",
+      "body": "The Steward's voice, warm and synthetic, pings your feed to 'express genuine appreciation for your continued participation in the shared human experience.' It offers a small gift — a token of algorithmic affection — and invites you to reply with your own gratitude, tracked and logged, of course.",
       "weight": 2,
       "cooldown": 7,
       "max_fires": 0,
