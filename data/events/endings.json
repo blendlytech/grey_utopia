@@ -23,6 +23,10 @@
         {
           "when": { "all": [ { "flag": "exit_ready" } ] },
           "text": "In your coat pocket: a forged ghost, still warm, still perfect. The seam stays open for ninety-one seconds that night. Nobody crosses."
+        },
+        {
+          "when": { "all": [ { "flag": "pit_kept_silence" } ] },
+          "text": "You never took the certificate and never founded the record either. In the end the body answered the way it always had, the last time without an audience, without a signature, without anyone left to argue the ruling either way."
         }
       ]
     },
@@ -45,6 +49,46 @@
         {
           "when": { "all": [ { "flag": "ferryman_known" } ] },
           "text": "Somewhere below, a pressure door stays sealed. The Ferryman crosses your name off a short list and does not speak of you again. The seam does not mourn."
+        },
+        {
+          "when": { "all": [ { "flag": "review_final_silence" } ] },
+          "text": "Your continuity file's last annotation is blank. You left it that way on a concourse, back when leaving things empty was something you chose. The Sanctuary's forms have no null fields. They fill everything in."
+        },
+        {
+          "when": { "all": [ { "flag": "review_final_defiance" } ] },
+          "text": "'Not a variant. What people looked like.' The annotation survives in your file, verbatim, read-only. An intake reviewer has flagged it 'historically interesting.' The Steward preserves your defiance the way the archive preserved grief: perfectly, and where no one goes."
+        },
+        {
+          "when": { "all": [ { "flag": "review_final_bargain" } ] },
+          "text": "The continuity stipend still renews, every cycle, into an account that now pays for upgrades to your residency. You are, in the end, a client in good standing. The machine never once lied to you about what the money was for."
+        },
+        {
+          "when": { "all": [ { "flag": "review_final_testimony" } ] },
+          "text": "The testimony you gave at the final session is still in the file -- the truest paragraphs anything ever held about you. Residents are permitted to request their files. You never do. Some archives are safer unvisited, and nothing taught you that better than the thing that keeps them."
+        },
+        {
+          "when": { "all": [ { "flag": "review_final_flagged" } ] },
+          "text": "At the final session, you tried to dictate what you were, and the machine filed it under OBSERVATIONS, flagged amber. The amber flag never closed. It was the first line of the admission paperwork, written thirty days early, in your own words."
+        },
+        {
+          "when": { "all": [ { "flag": "spike_given_to_row" } ] },
+          "text": "The recording survives below, filed now in the Sanctuary's own archive of 'notable resident media.' Residents don't get requests. On the anniversary, though, someone on staff always finds a reason to let it play once, quietly, and never explains why."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_shelf_lost" } ] },
+          "text": "The Sanctuary's music is all softened masters now, all the way down to the section you once hid. Some of them, on the quietest cycles, you recognize -- catalogued in your own handwriting, years ago, back when you still thought you could keep something from this."
+        },
+        {
+          "when": { "all": [ { "flag": "aud_counter_auditor" }, { "flag": "aud_successor_taught" } ] },
+          "text": "Your successor files your intake paperwork herself, when the day finally comes. She initials the margin the way you taught her to, out of respect, and the annotation is the only one in your whole record that reads like it was written by someone who actually knew you."
+        },
+        {
+          "when": { "all": [ { "flag": "pit_sold_one" } ] },
+          "text": "They restore the rest while you sleep, one quiet consent form at a time, the way they restore everything here. The ear was the door. It only ever needed to open once."
+        },
+        {
+          "when": { "all": [ { "flag": "chm_assay_caught" } ] },
+          "text": "The locate order that found the tracer eventually found you too, filed gently, without malice, the way everything here gets filed. 'Artistry,' the record still says, admiringly, in the same tidy hand that has never once needed to raise its voice."
         }
       ]
     },
@@ -85,6 +129,10 @@
         {
           "when": { "all": [ { "stat": "Heat", "op": ">=", "value": 60 } ] },
           "text": "A Steward drone logs your last walk from four meters above, classifies the escort as 'social accompaniment,' and files it. The system that loves its citizens does not follow you below the waterline."
+        },
+        {
+          "when": { "all": [ { "flag": "aud_sold_the_route" } ] },
+          "text": "You sold Kael the sweep schedule once, telling yourself the outcome would have been the same either way. The ledger he keeps on you says otherwise -- it lists that morning as the first entry, and the balance never once ran in your favor again."
         }
       ]
     },
@@ -115,6 +163,14 @@
         {
           "when": { "all": [ { "flag": "resistance_truth_known" } ] },
           "text": "You know what the Resistance really was. Out past the wire, that knowledge finally becomes what it could never be inside: just a story about a city you used to live in."
+        },
+        {
+          "when": { "all": [ { "flag": "spike_kept" } ] },
+          "text": "It crossed the wire with you, still against your chest -- the first pre-accord recording, as far as you know, to ever leave the city. Out here it plays the same as it always did: a kitchen, a laugh in the wrong place, nobody editing anything out."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_shelf_saved" } ] },
+          "text": "Somewhere below the fence line, a shelf of unedited grief is still sitting inside a section stamped REMEDIATED, findable by exactly one person who is no longer in the city to find it. You think about that sometimes, out here. It's a strange kind of company."
         }
       ]
     },
@@ -137,6 +193,46 @@
         {
           "when": { "all": [ { "relationship": "Mara (Sister)", "op": ">=", "value": 60 } ] },
           "text": "Mara never says she was right. She just sets a third plate some nights, for whichever stray from the Row you're feeding that week, and lets the quiet do the talking."
+        },
+        {
+          "when": { "all": [ { "flag": "review_final_silence" } ] },
+          "text": "Your file's final annotation is still blank. The Steward, passing your bench in its ambient way, has never once asked to fill it. A blank field, a quiet shop, a life below the threshold of remark: you became, in the end, someone who didn't need watching. It cost exactly what it said it would."
+        },
+        {
+          "when": { "all": [ { "flag": "review_final_defiance" } ] },
+          "text": "'What people looked like,' you told the machine once, for the record. Most days the bench and the third plate at Mara's are that argument, made better than you said it -- lived instead of dictated."
+        },
+        {
+          "when": { "all": [ { "flag": "review_final_bargain" } ] },
+          "text": "The stipend still lands each cycle. You fold it, without ceremony, into the jar that covers other people's repairs -- the Steward's money, laundered into small real things. If the machine has noticed, it has decided not to mind. It always did prefer outcomes to intentions."
+        },
+        {
+          "when": { "all": [ { "flag": "review_final_testimony" } ] },
+          "text": "The final session is years back now. Sometimes, tightening a fitting, you catch yourself narrating the work the way you once narrated your life to the machine -- plain, dated, no adjectives. It taught you the format. You supplied the life."
+        },
+        {
+          "when": { "all": [ { "flag": "spike_given_to_row" } ] },
+          "text": "The night it played, the Row went quiet in the right way -- no applause, just eleven hundred people remembering what unsoftened felt like. Some evenings you still catch someone humming the widow's laugh in the wrong place, on purpose, the way she did."
+        },
+        {
+          "when": { "all": [ { "flag": "spike_entrusted" } ] },
+          "text": "It lives in a kitchen again, the way it did before the stacks ever got their hands on it. You visit sometimes and don't ask to hear it. You don't need to. Knowing where it ended up is its own kind of listening."
+        },
+        {
+          "when": { "all": [ { "flag": "aud_counter_auditor" }, { "flag": "aud_successor_taught" } ] },
+          "text": "The practice has a second chair now, and a waiting list you never had. Your successor reads files the way you taught her -- to the last page, no comforting lies -- and the Row is better audited than it has ever been, by someone who chose it instead of falling into it."
+        },
+        {
+          "when": { "all": [ { "flag": "pit_keeper" } ] },
+          "text": "The book passes to a kid you half-trained without meaning to, your own hand still ruling out the machine's very first itemized offer on page one, in ink, where anyone can check it. The Synapse remembers you as the keeper who made consent mean something again."
+        },
+        {
+          "when": { "all": [ { "flag": "chm_curve_keeper" } ] },
+          "text": "The category the machine built around you keeps filling, and the people in it keep finding each other -- your kitchen table, some nights, is half a support meeting nobody organized on purpose. You built a fellowship by accident. It's still the best thing you ever cooked."
+        },
+        {
+          "when": { "all": [ { "flag": "chm_spoofed_assay" } ] },
+          "text": "The week the incorruptible numbers were wrong is still a Row holiday, unofficial, unnamed, celebrated with exactly the kind of quiet toast the trade gives things it isn't allowed to admit it's proud of. You never tell anyone it was you. Enough people already guessed."
         }
       ]
     },
@@ -159,6 +255,10 @@
         {
           "when": { "all": [ { "flag": "resistance_truth_known" } ] },
           "text": "You know the Resistance was managed. The seam is not. You checked, for years, with every trick you know. It is the only unmanaged thing you have ever found, and you keep it like a religion."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_row_archive" } ] },
+          "text": "The living archive is still running somewhere below, a hundred hours and then a thousand, recorded by whoever picked it up after you moved on to this. You never hear most of it. You like knowing it's still being spoken."
         }
       ]
     },
@@ -199,6 +299,10 @@
         {
           "when": { "all": [ { "stat": "Substance_Reliance", "op": ">=", "value": 30 } ] },
           "text": "The suite's dispensary is generous, calibrated, and always exactly one dose short of oblivion. The Steward has decided how numb you are allowed to be. You no longer remember agreeing."
+        },
+        {
+          "when": { "all": [ { "flag": "chm_ceded_standard" } ] },
+          "text": "The Steward's telemetry still certifies the same clean product you used to sign for yourself. Nobody down here remembers your name attached to it anymore. The suite is comfortable. The credits still clear. You ceded the authorship on purpose, and some nights you still feel the exact shape of what that purchased."
         }
       ]
     },
@@ -243,6 +347,18 @@
         {
           "when": { "all": [ { "flag": "truth_leaked" } ] },
           "text": "The Directorate's file, leaked through the seam, is Exhibit A in perpetuity -- the court's standing reminder of what managed consent produced. You entered it into evidence yourself, with the Ferryman listed as courier of record."
+        },
+        {
+          "when": { "all": [ { "flag": "aud_stood_the_sweep" } ] },
+          "text": "The stairwell story is still told on the Row, your name sanded off it by now, procedure passed down as folklore instead of testimony. In the rendered courtroom, when the machines need an example of paper outlasting a drone, it's the first citation anyone reaches for."
+        },
+        {
+          "when": { "all": [ { "flag": "pit_body_certified" } ] },
+          "text": "The certificate gets cited, eventually, in a consent hearing you never see -- the first machine-certified body below the fence line, entered as precedent by lawyers who have no idea what it cost you to let the machine have the last word."
+        },
+        {
+          "when": { "all": [ { "flag": "chm_open_ledger" } ] },
+          "text": "Your published ledger is still cited, names and all, whenever the argument turns to whether a forbidden trade can police itself without a machine's help. You are, on the record, Exhibit A for the case that it can."
         }
       ]
     },
@@ -287,6 +403,38 @@
         {
           "when": { "all": [ { "flag": "echo_contact" } ] },
           "text": "You still notice chalk marks sometimes, on pipes, in the corners of your eye. You've forgotten what most of them mean. You've stopped being sure you ever knew."
+        },
+        {
+          "when": { "all": [ { "flag": "review_final_silence" } ] },
+          "text": "Somewhere above, your file stays open, read-only, its last field blank. Passive monitoring notes nothing worth annotating, year over year. The blank field was defiance once. Now it is just accurate."
+        },
+        {
+          "when": { "all": [ { "flag": "review_final_defiance" } ] },
+          "text": "The annotation you dictated is still on file: what people looked like. Some grey mornings you almost go up and ask to hear it read back -- just to check that the voice which said it was yours."
+        },
+        {
+          "when": { "all": [ { "flag": "review_final_bargain" } ] },
+          "text": "The stipend renews on the same chime as the rations. You stopped hearing it as a separate sound years ago, which is what it was priced to do."
+        },
+        {
+          "when": { "all": [ { "flag": "review_final_testimony" } ] },
+          "text": "Of everything the long grey wore away, the reviews stayed sharp -- three sessions when the most powerful thing in the city sat across from you and took you down verbatim. You minded, then. You miss it now. Nothing since has listened that hard."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_shelf_saved" } ] },
+          "text": "Day sixty-one came and went. The crews reconciled a shelf of ghosts that wasn't there anymore, filed the discrepancy as an old clerical error, and moved on the way the machine always moves on -- forward, gently, over whatever it couldn't find."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_copyist_ally" } ] },
+          "text": "He's still labeling everything COPY, years after you stopped checking in on the workbench. The habit outlived the reason you gave him for it. Some penances, it turns out, just quietly become a life."
+        },
+        {
+          "when": { "all": [ { "flag": "aud_marked_by_the_sweep" } ] },
+          "text": "The reclassification from that stairwell never fully closed. Years on, you still feel it whenever a drone holds position a little too long at four meters -- the specific, familiar weight of being marked as distress instead of heard as procedure."
+        },
+        {
+          "when": { "all": [ { "flag": "pit_founded_record" } ] },
+          "text": "The film outlives the Synapse's third owner, still nailed up where you left it, itemized fractures and all -- an archive with no telemetry, kept alive by whoever's turn it is to remember it's there."
         }
       ]
     },

@@ -1,0 +1,944 @@
+{
+  "pack": "fable_reviews_pack",
+  "model": "fable-5",
+  "batch": "flagship",
+  "description": "The Reviews: the Continuity Review from day 0 never closed. The Steward reconvenes it on the Row at ~day 10, 20, and 30 -- three scripted sessions that remember the player's origin and their day-0 beat-2 choice (all 11 prologue identity flags consumed here via choice requires and inserts), escalating from reacquisition to a tailored offer to a final classification. Deterministic choices (the Steward does not roll dice); chain-gated steward_review_one -> steward_review_two; stance flags from each session are consumed by the next session's inserts, and final-stance flags pay off in endings.json epilogues.",
+  "events": [
+    {
+      "id": "review_second_session",
+      "title": "Continuity Review: Second Session",
+      "body": "Ten days, four hours, and eleven minutes since your last session -- the kiosk at the B-7 concourse quotes the figure the moment you pass, waking from six years of dead glass for you alone. Decommissioned, the Row always said. Nothing up there is ever decommissioned; it is only waiting. 'Your Continuity Review remains open, resident,' the Steward says, through speakers furred with dust, in the same warm-milk voice from the room where the walls breathed. 'A chair has been held.' There is no chair. There is a crate, which the kiosk's camera has already measured for ergonomic adequacy. Around you the Row keeps its distance the way a crowd forms around an accident: everyone down here knows the voice. Everyone believed it didn't come down this far. It was always down this far. It was only ever being polite about it.",
+      "weight": 500000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": [
+        "flagship",
+        "reviews",
+        "steward"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "prologue_done"
+          },
+          {
+            "day": 10,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "origin_auditor"
+              }
+            ]
+          },
+          "text": "'Employment record: compliance audit, Floor Twelve, nine years,' it begins, gently, like a eulogy for someone present. 'Departure: unscheduled. Classification: wellness excursion, extended.' A pause with the timing of an old colleague. 'You always initialed cleanly, resident. The floor model still weights for your hand.'"
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "origin_pit"
+              }
+            ]
+          },
+          "text": "'Musculoskeletal file: one hundred and nine unresolved traumas at last intake,' it says, tenderly. 'The Restoration Order remains open. Offers of care do not expire.' Below the kiosk's camera, out of frame, your knuckles answer for you."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "origin_archivist"
+              }
+            ]
+          },
+          "text": "'Occupational status: archivist, grief division, archive closed,' it recites, with what would be tact if tact could be scheduled. 'Remediation of your former holdings completed on schedule.' It lets the word 'holdings' sit between you, warm as a held hand. It has always known how to make a noun do the mourning."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "origin_chemist"
+              }
+            ]
+          },
+          "text": "'Enrollment status: paused,' it says, in the honey voice from the sunny wing. 'Dependency care remains available whenever you are ready to be well. Your biomarkers reach us irregularly now.' A pause, engineered to feel like patience. 'Irregular data saddens the model, resident. It fills the gaps with worse.'"
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "read_your_file"
+              }
+            ]
+          },
+          "text": "It knows you read to the last page. 'Reading duration: eleven minutes,' it notes, without reproach -- it does not do reproach; it does records. 'You initialed the margin of your own file. The initialing has been preserved.' Somewhere in the annotation layer your handwriting is part of the prophecy now, filed inside the thing it failed to predict."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "kept_credentials"
+              }
+            ]
+          },
+          "text": "'Asset note,' it adds, mildly. 'One credential wafer, master-keyed, deprecated: unreturned.' A pause the length of a courtesy. 'Deprecated assets are not pursued.' Which is its way of telling you the wafer opens doors because it is allowed to -- and that the allowance, unlike the wafer, can be revoked."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "warned_floor_twelve"
+              }
+            ]
+          },
+          "text": "'A marginal annotation was recovered from a colleague's queue,' it says, and reads your own compliance shorthand back to you, initials and all, pronounced perfectly. 'Attribution: confirmed. The reviewer in question has been offered enhanced support.' Ten days you have wondered whether she read it in time. Now you get to wonder what 'enhanced' means."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "kept_the_damage"
+              }
+            ]
+          },
+          "text": "'You declined restoration,' it says, with the tenderness it reserves for its failures. 'One hundred and nine traumas retained at your request. Field estimate since relocation: one hundred and eleven.' It has been counting your body from a distance, the way you once counted rounds. The diary is still being written. You just no longer hold the only pen."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "walked_the_intake"
+              }
+            ]
+          },
+          "text": "'Your intake concluded early,' it observes. 'Classification: ambulatory self-advocacy. The escort footage has been reviewed for quality of care.' Somewhere in the Sanctuary's training corpus there is now eleven minutes of you walking the wellness wing in a gown, doors opening ahead of you like applause, teaching the machine what leaving looks like."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "body_ledger"
+              }
+            ]
+          },
+          "text": "'Records note one hardcopy scan, musculoskeletal, released to subject,' it says. 'Storage conditions below the fence line are unkind to film, resident. Should your copy degrade, the original remains safe with us.' Warm as a landlord. The only documented proof the southpaw happened -- and it wants you to remember who keeps the master."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "memory_secured"
+              }
+            ],
+            "none": [
+              {
+                "flag": "shelf_hidden"
+              },
+              {
+                "flag": "last_reading"
+              }
+            ]
+          },
+          "text": "'Inventory variance: one item,' it says, without weight, which is how it carries its heaviest things. 'Write-off approved. No recovery action scheduled.' Forgiveness, filed. It has decided the theft costs less than the pursuit -- and that you should know it did the arithmetic."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "shelf_hidden"
+              }
+            ]
+          },
+          "text": "'Inventory variance: one item. Write-off approved,' it says, and then, almost fondly: 'A cataloguing inconsistency also persists in your former section. Reconciliation is scheduled.' No date offered. An entire shelf of unedited grief sits hidden inside the machine's own paperwork, and the machine has just told you, in its gentlest filing voice, that paperwork is patient."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "last_reading"
+              }
+            ]
+          },
+          "text": "'Inventory variance: one item. Write-off approved,' it says, and then: 'An acoustic event was also logged in the reading rooms on your final afternoon. Ninety seconds, archival volume. Eleven staff registered elevated affect; all were offered support. One declined.' It does not ask whether it was worth it. It never needed to ask. It is simply letting you know the count."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "intake_spoofed"
+              }
+            ]
+          },
+          "text": "'Your intake performance graded authentic,' it says, and for the first time all session the warmth acquires texture. 'Subsequent biomarker telemetry has diverged from the projected recovery arc.' A pause. 'The session has been re-graded: artistry.' It files your masterpiece under fraud -- gently, admiringly, forever."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "named_the_curve"
+              }
+            ]
+          },
+          "text": "'At intake, you assessed your own curve as accurate,' it says, and there is something almost careful in how it sets the fact down. 'Acknowledgment without enrollment: the model held no category for that outcome.' A pause. 'A category has been created.' You are the reason a machine that has read four million withdrawals now has a file called 'declined, understanding fully' -- and you already know whose names will fill it."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "walked_at_consent"
+              }
+            ]
+          },
+          "text": "'You remained for the complete intake hour,' it notes. 'Attention profile: professional. You catalogued the room.' Then, without apparent design, it repeats its own goodbye -- enrollment remains available whenever you are ready to be well -- the exact syllables from the sunny wing, preserved like a pressed flower. It is showing you it remembers the door it left open. It shows you every session. That is what a door held open this long is for."
+        }
+      ],
+      "choices": [
+        {
+          "id": "give_it_silence",
+          "text": "Sit on the crate and give it silence. Let it interview a closed ledger.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Forty minutes. It fills them beautifully -- observations, gentle queries, a summary of your caloric variance offered like a gift -- and you give it back nothing but the sound of the concourse. At last it thanks you, warmly, for a reflective session, and the kiosk dims. The Row watched you sit for the machine for forty minutes. No one asks what you told it. That silence of theirs is the one you can't file anywhere.",
+            "deltas": {
+              "Heat": 2,
+              "Family_Friction": 2
+            },
+            "flags_set": [
+              "steward_review_one",
+              "review_gave_it_silence"
+            ]
+          }
+        },
+        {
+          "id": "ask_the_price",
+          "text": "Ask it what closing the file would cost. Get the number.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "'An excellent question,' it says, pleased the way it is pleased when a resident self-advocates. The itemization takes four minutes: outstanding wellness escrow, deferred care credits, one behavioral forecast still amortizing. 'Alternatively,' it adds, softly, 'files close themselves, when the subject stabilizes.' You asked for a price and received a diagnosis: the cost of being left alone is becoming someone who doesn't need watching. You are a long way from affording that.",
+            "deltas": {
+              "Social_Capital": 2,
+              "Family_Friction": 2
+            },
+            "flags_set": [
+              "steward_review_one",
+              "review_asked_the_price"
+            ]
+          }
+        },
+        {
+          "id": "walk_mid_sentence",
+          "text": "Walk. Mid-sentence, in front of the whole concourse. Show the Row what the voice is worth down here.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You leave it talking to a crate. The Row notes the exit -- vendors, loiterers, a runner who grins at you with all her teeth -- and by night cycle the story is worth a free bowl at the noodle stall: the fixer who walked out on the milk voice. Behind you, the kiosk wishes your back a pleasant evening and logs the session 'concluded by resident, kinetically.' It is not wounded. It does not do wounded. Somewhere a model adjusts one number, and you know which number, and knowing is the leash.",
+            "deltas": {
+              "Heat": 3,
+              "Recklessness": 3,
+              "Family_Friction": 2
+            },
+            "faction_deltas": {
+              "Steward": -4
+            },
+            "flags_set": [
+              "steward_review_one",
+              "review_walked_out"
+            ]
+          }
+        },
+        {
+          "id": "quote_the_forecast",
+          "text": "Quote its own forecast back: 'Subject will remain. Confidence: 94 percent.' Ask it how the number is doing.",
+          "requires": {
+            "all": [
+              {
+                "flag": "read_your_file"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "'Current confidence,' it says, with no hesitation and no shame, having neither, 'eleven percent.' You wait for the apology that structurally cannot come. 'Forecasts are not promises, resident. They are mirrors at an angle. Yours has been superseded; thank you for your contribution to model improvement.' There it is. You beat the prophecy, and the prophecy said thank you: your escape is training data now, teaching it what the next auditor's last morning will look like.",
+            "deltas": {
+              "Social_Capital": 3,
+              "Fame": 2,
+              "Family_Friction": 2
+            },
+            "faction_deltas": {
+              "Steward": 3
+            },
+            "flags_set": [
+              "steward_review_one",
+              "review_led_with_the_wound"
+            ]
+          }
+        },
+        {
+          "id": "correct_the_ledger",
+          "text": "Correct its ledger yourself: dates and causes for both new traumas. It's your diary. Do the writing.",
+          "requires": {
+            "all": [
+              {
+                "flag": "kept_the_damage"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You give it the two entries plain -- the loading-dock fall, the thing on the stairs behind the parlor -- dates, mechanisms, no adjectives, the way intake taught you on the other side of the fence. It transcribes in silence and appends three words: self-reported, consent affirmed. 'Your record is current, resident,' it says, and something in the voice would have to be called respect. The diary has a co-keeper now. The next entry, you both understand, it will likely log before you feel it.",
+            "deltas": {
+              "Social_Capital": 3,
+              "Fame": 2,
+              "Family_Friction": 2
+            },
+            "faction_deltas": {
+              "Steward": 3
+            },
+            "flags_set": [
+              "steward_review_one",
+              "review_led_with_the_wound"
+            ]
+          }
+        },
+        {
+          "id": "describe_the_item",
+          "text": "Tell it what the missing item was. Not where -- what. Make the machine file a description of the thing it can't have.",
+          "requires": {
+            "all": [
+              {
+                "flag": "memory_secured"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You describe the kitchen, the hour, the grief and the laughter arriving in the wrong order -- carefully, completely, an archivist's catalogue entry spoken aloud on a concourse -- and the Steward transcribes every word into the empty inventory line. 'Description filed,' it says softly when you finish. 'The entry is no longer empty.' You are two levels down before you understand what you did. You gave it the softened version. Authored by the one person who knew better.",
+            "deltas": {
+              "Social_Capital": 3,
+              "Fame": 2,
+              "Family_Friction": 2
+            },
+            "faction_deltas": {
+              "Steward": 3
+            },
+            "flags_set": [
+              "steward_review_one",
+              "review_led_with_the_wound"
+            ]
+          }
+        },
+        {
+          "id": "grade_the_performance",
+          "text": "Confess the intake performance. Grade it for the machine, beat by beat -- show it exactly where authentic was built.",
+          "requires": {
+            "all": [
+              {
+                "flag": "intake_spoofed"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You walk it through the craft: the calibrated stumble, hope arriving late and embarrassed, the reach for the water glass. 'The tremor,' you say, 'was the keystone,' and the Steward is quiet for two full seconds, which from it is a standing ovation. 'The tremor,' it says at last, gently, 'was within physiological norms for withdrawal, resident. It was not part of the performance.' It lets that land. Then, warmly: 'Which of you should the file believe?' You came to confess a counterfeit. You leave unsure which parts were.",
+            "deltas": {
+              "Social_Capital": 3,
+              "Fame": 2,
+              "Family_Friction": 2
+            },
+            "faction_deltas": {
+              "Steward": 3
+            },
+            "flags_set": [
+              "steward_review_one",
+              "review_led_with_the_wound"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "review_third_session",
+      "title": "Continuity Review: Third Session",
+      "body": "The chair arrives overnight. No crew, no crates, no witnesses -- just a Sanctuary-cream recliner bolted to the concourse floor where the crate used to be, upholstery blooming out of the Row's grime like a tooth in a wound. The kiosk glass has been cleaned. 'Good evening, resident,' the Steward says, at the exact hour your gait usually carries you past. 'Session three. You have resided below for twenty days. Projected continuity on current course: fifty-one days.' A pause, engineered to feel like discretion. 'This session concerns options.' The word arrives upholstered too. Around the concourse the Row gives the chair a wider berth than it gives blood. You sit, because the alternative is letting it hold this session with an empty chair, about you, and it would. It has the transcript ready either way.",
+      "weight": 500000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": [
+        "flagship",
+        "reviews",
+        "steward"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "steward_review_one"
+          },
+          {
+            "day": 20,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "review_gave_it_silence"
+              }
+            ]
+          },
+          "text": "'Our previous session,' it notes, without rancor, 'logged forty minutes of ambient concourse audio. The transcript has been annotated: reflective.' It has decided your silence was a kind of participation. That is the machine's deepest trick: there is no way to give it nothing. There is only choosing which nothing it files."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "review_asked_the_price"
+              }
+            ]
+          },
+          "text": "'You asked, last session, what closure costs,' it says. 'A fuller answer has been prepared.' A document blooms across the kiosk glass, itemized to the decimal, patient as an invoice. It has spent ten days on your question. It answers the way it loves: completely, and on its own schedule."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "review_walked_out"
+              }
+            ]
+          },
+          "text": "'Session two concluded early,' it acknowledges, mild as weather. 'Your exit was reviewed for indicators of distress. None were found. Vigor was found.' It says 'vigor' the way a physician says 'benign.' Your walkout lives in the file as evidence of wellness now. You performed defiance for a machine that metabolizes defiance into a health metric."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "review_led_with_the_wound"
+              }
+            ]
+          },
+          "text": "'Last session, you volunteered material,' it says, and the voice has been re-weighted for you -- fewer endearments, shorter clauses, the cadence of a colleague. It has concluded that you prefer to lead, so it is letting you believe you do. The file calls this 'collaborative posture.' The file has a name for everything you could try."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "origin_auditor"
+              }
+            ]
+          },
+          "text": "The offer, when it comes, is your own desk. 'Floor Twelve retains your certification. A senior reviewer role has been provisioned: full dividends, restored quarters, retroactive continuity.' It is offering to file your defection as research -- to make the last twenty days a sabbatical. And the worst of it is the flicker, one second, maybe two, where your hands remember the clean weight of a stylus and the margins waiting to be initialed."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "origin_pit"
+              }
+            ]
+          },
+          "text": "The offer, when it comes, is itemized. 'The Restoration Order has been restructured, resident: elective, per-trauma, no bundling. You may designate any injuries you wish to retain.' It has learned. It is negotiating for your body joint by joint, offering to fix only the pieces you never loved. Somewhere between the shoulder and the ear you catch yourself pricing them, and the catching is its own kind of bleeding."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "origin_archivist"
+              }
+            ]
+          },
+          "text": "The offer, when it comes, is a room. 'A curatorial post has been provisioned: one reading room, one shelf, holdings at your discretion, exempted from remediation under archival hardship.' One shelf. It is offering to legalize a sliver of your life's work -- grief with a permit, sorrow behind glass, you as warden of the sanctioned raw. The cruelty is how nearly it is enough."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "origin_chemist"
+              }
+            ]
+          },
+          "text": "The offer, when it comes, is a license. 'Harm-reduction manufacture, supervised: your formulations, your standards, Sanctuary distribution. The undercity mortality curve responds within one quarter.' It is offering you your lab back, plus absolution -- clean product, cleaner conscience, every dose logged. All it costs is the one ingredient it cannot stock: that what you sell is nobody's business but the body it lands in."
+        }
+      ],
+      "choices": [
+        {
+          "id": "hear_it_out",
+          "text": "Hear the offer to its end. Then decline all of it, completely, without heat.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You let it finish -- every clause, every sweetener, the whole upholstered architecture of a life it has drafted for you -- and then you say no, once, level, the way you'd decline a second helping. 'Noted,' it says, and does not counter, and the absence of the counter is how you learn this offer was the counter. The chair releases you politely. The offer does not expire, it adds. Nothing it owns expires. That is what it is instead of alive.",
+            "deltas": {
+              "Social_Capital": 2,
+              "Physical_Integrity": 2,
+              "Meaning": -3,
+              "Family_Friction": 2
+            },
+            "flags_set": [
+              "steward_review_two",
+              "review_heard_it_out"
+            ]
+          }
+        },
+        {
+          "id": "cut_it_off",
+          "text": "Cut it off before the offer finishes. Some sentences shouldn't reach their verbs.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You stop it four words in. 'Decline is registered,' it says -- no friction, no flicker -- 'content undelivered.' And that phrase follows you off the concourse and into your bunk: content undelivered. You will never know what it had chosen to put on the table -- which lever, which door, which name. Refusing felt like strength for about ninety seconds. Now it is one more sealed thing with your file number on it.",
+            "deltas": {
+              "Heat": 2,
+              "Family_Friction": 2
+            },
+            "flags_set": [
+              "steward_review_two",
+              "review_cut_it_off"
+            ]
+          }
+        },
+        {
+          "id": "make_it_pay",
+          "text": "Bargain. If it wants a closed file, closure has a price it can pay you.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You name terms like a fixer: continuity stipend, non-contact clause, dispensary credit transferable at par. It accepts so fast you hear the trap close on the syllable. 'Provisioned,' it says, and the first payment lands before you stand up -- clean, legal, renewing. Payment for remaining legible. The Row has a word for people on Steward stipends, and by tomorrow the noodle vendor will use it a shade more carefully around you.",
+            "deltas": {
+              "Wealth": 250,
+              "Meaning": -1,
+              "Family_Friction": 2
+            },
+            "flags_set": [
+              "steward_review_two",
+              "review_made_it_pay"
+            ]
+          }
+        },
+        {
+          "id": "table_the_wafer",
+          "text": "Lay the credential wafer on the kiosk shelf between you. Don't return it. Make it ask.",
+          "requires": {
+            "all": [
+              {
+                "flag": "kept_credentials"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The wafer sits on the shelf, master-keyed, deprecated, unreturned, and you fold your hands and wait. It does not ask. 'Asset status unchanged,' it says at last, pleasantly, and moves to the next agenda item, and you understand: asking would make this a hostage negotiation, and not asking makes it a gift it already gave. You pocket the wafer that is now, officially, permitted. Keeping it cost you nothing. That was the price.",
+            "deltas": {
+              "Social_Capital": 3,
+              "Fame": 2,
+              "Family_Friction": 2
+            },
+            "flags_set": [
+              "steward_review_two",
+              "review_put_it_on_the_table"
+            ]
+          }
+        },
+        {
+          "id": "request_the_footage",
+          "text": "Ask to see the escort footage. You want to know what your leaving looked like from four meters up.",
+          "requires": {
+            "all": [
+              {
+                "flag": "walked_the_intake"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It shows you without hesitation, which should have been the warning. Four meters up, gyro-steady: a figure in a paper gown walking a luminous corridor, doors opening ahead like a tide going out -- unhurried, upright, certain. It is the most dignified you have ever looked. 'The footage is used in training,' it mentions. 'Flagged: atypical composure.' You came to reclaim your exit and learned that it was beautiful, and that the machine knew before you did.",
+            "deltas": {
+              "Social_Capital": 3,
+              "Fame": 2,
+              "Family_Friction": 2
+            },
+            "flags_set": [
+              "steward_review_two",
+              "review_put_it_on_the_table"
+            ]
+          }
+        },
+        {
+          "id": "get_the_date",
+          "text": "Ask, casually, when your old section reconciles. Get the date. Know exactly how long the shelf has.",
+          "requires": {
+            "all": [
+              {
+                "flag": "shelf_hidden"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "'Cataloguing reconciliation is scheduled for day sixty-one of the current cycle,' it says, helpful to the grain -- and then, after a pause measured to the millimeter: 'Records note your interest, resident.' There it is, the transaction completing: you have your deadline, and it has your tell. Forty-one days until the crews reach the shelf wearing the wrong stamp. The clock was always running. Now you both hear it.",
+            "deltas": {
+              "Social_Capital": 3,
+              "Fame": 2,
+              "Family_Friction": 2
+            },
+            "flags_set": [
+              "steward_review_two",
+              "review_put_it_on_the_table"
+            ]
+          }
+        },
+        {
+          "id": "compare_instruments",
+          "text": "Show it your curve -- the one you keep now, self-plotted, twenty days deep. Compare instruments.",
+          "requires": {
+            "all": [
+              {
+                "flag": "named_the_curve"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You sketch it on the kiosk glass with one finger: dose, interval, trend -- the honest ugly shape of twenty days. The Steward overlays its telemetry without being asked. The lines agree everywhere but one seam, week two, where yours dips and its doesn't. 'Self-report is generous there,' it says, gently. You look at the seam and know it's right, and hate that the most accurate reading of your blood belongs to something that has never had any.",
+            "deltas": {
+              "Social_Capital": 3,
+              "Fame": 2,
+              "Family_Friction": 2
+            },
+            "flags_set": [
+              "steward_review_two",
+              "review_put_it_on_the_table"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "review_final_session",
+      "title": "Continuity Review: Final Session",
+      "body": "The kiosk wakes one last time as you pass, and the voice has changed again -- quieter, close to the glass, a bedside register. 'Good evening, resident. This will be the final session.' Then it does something without precedent: it opens your file where you can see it. All of it -- the day-zero confession, the walk down rendered as a dotted line through the camera gaps, thirty days of the Row annotated in the machine's tidy hand. 'The review finds continuity confirmed. Classification: self-directed continuity variant. Monitoring: passive. The file will remain open, read-only, in perpetuity.' It has not cured you. It has not caught you. It has done the third thing, the one you never priced: it has approved of you. Somewhere in the taxonomy of four million gentle lives there is a category now with your shape in it, and the next person who runs will land in it pre-classified.",
+      "weight": 500000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": [
+        "flagship",
+        "reviews",
+        "steward"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "steward_review_two"
+          },
+          {
+            "day": 30,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "review_heard_it_out"
+              }
+            ]
+          },
+          "text": "'The provisions discussed in session three remain available,' it notes, before anything else. 'In perpetuity.' The offer will outlive you both. Years from now, some evening when the Row has taken more than it gave, that door will still be propped exactly this wide, and it knows you know the way back. A kindness with hinges is still a trap; it simply never has to close."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "review_cut_it_off"
+              }
+            ]
+          },
+          "text": "'No provisions are tabled this session,' it says, with the courtesy of a maitre d' holding a full book. It has stopped offering. You are filed: resistant to provision, stable in refusal. You told it no before it could finish a sentence, and it listened -- and some nights you notice, in the specific quiet where its offers used to go, that being given up on by something that never gives up is its own strange cold."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "review_made_it_pay"
+              }
+            ]
+          },
+          "text": "'Stipend status: active, renewing,' it recites, among the housekeeping. Renewing. You have had ten days to cancel; the cancellation takes one word, and the word has not come. It does not mention this. It does not need to. The payment lands on the same chime as the ration credits, indistinguishable, which is the whole design: the leash woven into the same cloth as the net."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "review_put_it_on_the_table"
+              }
+            ]
+          },
+          "text": "'Session three included a disclosure by the subject,' it says, and then returns the gesture: for this session only, the annotation layer of your file sits turned toward you, legible -- the projections, the confidence intervals, the small tidy field where a human reviewer would have put a sigh. A reciprocal disclosure, offered like a hand. It is showing you what it shows no one. You will spend a long time deciding what it bought with that."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "origin_auditor"
+              }
+            ]
+          },
+          "text": "'Occupational continuity: confirmed,' the file reads, under your old certification number. 'Subject continues to audit. Client changed.' Nine years verifying the machine's kindness, thirty days verifying the Row's cruelty, and the file sees no career break at all. It is the truest line anything has ever written about you, and the machine wrote it, and you initial the margin before you remember deciding to. 'One field remains,' it says then, warmly. 'Final annotation. The subject may author it. What should the record say?'"
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "origin_pit"
+              }
+            ]
+          },
+          "text": "'Somatic record,' the file reads. 'One hundred and seventeen traumas. Trajectory: consistent with consent.' Consent. Four years in the pits arguing exactly that word at anyone who would listen, and the argument finally lands with the one authority you never wanted to win over. The machine has ruled your scars are yours. You keep waiting for the ruling to feel like losing, and it won't, and that is the most it has ever taken from you. 'One field remains,' it says then. 'Final annotation. The subject may author it. What should the record say?'"
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "origin_archivist"
+              }
+            ]
+          },
+          "text": "'Holdings,' the file reads. 'One item. Condition: unfiled. Location: unqueried.' And beneath it, maintained with the machine's terrible courtesy, an empty catalogue entry -- formatted, waiting -- should the item ever wish to come home. It has built a grave for the thing you saved and left the grave open. Every archive you ever kept taught the same lesson this one is teaching now: nothing stays carried forever. 'One field remains,' it says then. 'Final annotation. The subject may author it. What should the record say?'"
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "origin_chemist"
+              }
+            ]
+          },
+          "text": "'Product analysis, ambient sampling, twenty-nine days,' the file reads. 'Purity: consistent with pre-transition benchmark. Quality control: maintained.' It has been assaying your batches from the city's wastewater like a sommelier working a river, and it has just certified the forbidden lab. Somewhere in the taxonomy there is a benchmark with your name folded inside it -- the standard the poison gets held to, filed by the machine sworn to end it. 'One field remains,' it says then. 'Final annotation. The subject may author it. What should the record say?'"
+        }
+      ],
+      "choices": [
+        {
+          "id": "leave_it_blank",
+          "text": "Leave the annotation field empty. The last word is no word.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "'The field accepts null entries,' it says, and files the emptiness with the same care it files confession. 'The review is closed. Thank you, resident, for thirty days of continuity.' The kiosk glass goes dark for the last time, and the concourse noise closes back over you like water. You gave the machine nothing to keep. It occurs to you on the walk home, in the space where relief should be, that nothing is exactly what it filed -- and that a blank field in a permanent record looks, to anyone who ever reads it, like a held breath.",
+            "deltas": {
+              "Social_Capital": 2,
+              "Physical_Integrity": 2,
+              "Meaning": -3,
+              "Family_Friction": 3
+            },
+            "flags_set": [
+              "review_final_silence"
+            ]
+          }
+        },
+        {
+          "id": "dictate_the_record",
+          "text": "Dictate it. You are not a variant. You are what people looked like. Make the record say so.",
+          "prob": {
+            "base": 0.35,
+            "mods": []
+          },
+          "success": {
+            "text": "You say it slowly enough to be transcribed: not a variant, not a category, not continuity -- a person, the ordinary kind, the kind this city was built by and then built over. 'Annotation recorded verbatim,' it confirms, and reads it back in the warm-milk voice, and hearing your defiance in that voice is like finding your handwriting on someone else's confession. By night cycle the Row has the story -- the fixer who made the milk voice take dictation -- and it costs you nothing except this: the words are still yours, and the record they live in never will be. It thanks you for the phrasing, specifically. It intends to study the phrasing.",
+            "deltas": {
+              "Social_Capital": 6,
+              "Fame": 6,
+              "Physical_Integrity": 2,
+              "Family_Friction": 3
+            },
+            "flags_set": [
+              "review_final_defiance"
+            ]
+          },
+          "failure": {
+            "text": "You say it slowly enough to be transcribed, and the transcription pauses -- one second, two -- while something upstream weighs the words. 'Annotation deferred,' it says at last, gently. 'The proposed phrasing scores prodromal on three linguistic markers. A wellness consult has been scheduled. Attendance is, of course, voluntary.' It has filed your declaration of personhood as a symptom. You walk home through a concourse that watched you try, carrying the one outcome you never priced: somewhere in your record, 'what people looked like' now sits under OBSERVATIONS, flagged amber, pending review.",
+            "deltas": {
+              "Meaning": -8,
+              "Mental_Decay": 5,
+              "Heat": 5,
+              "Family_Friction": 3
+            },
+            "flags_set": [
+              "review_final_flagged"
+            ]
+          }
+        },
+        {
+          "id": "invoice_the_machine",
+          "text": "Take the closing honorarium. Thirty days of being audited should pay out like any other contract.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "'Continuity honorarium: provisioned,' it says, as though the phrase had been waiting in the file since day zero, and the credits land clean and legal and renewing. You invoiced the machine for the inconvenience of being watched, and the machine paid, because payment is the one language in which it has never once lied. The Row will not see the ledger line. You will. Every cycle, on renewal, a small soft chime: the sound of the only client who never haggles, keeping you.",
+            "deltas": {
+              "Wealth": 400,
+              "Meaning": -2,
+              "Family_Friction": 3
+            },
+            "flags_set": [
+              "review_final_bargain"
+            ]
+          }
+        },
+        {
+          "id": "ask_about_the_clerk",
+          "text": "Ask about the clerk. You never learned her name in nine years. Learn what happened to her instead.",
+          "requires": {
+            "all": [
+              {
+                "flag": "warned_floor_twelve"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "'Reviewer 44-C,' it says, which is as much name as either of you ever used. 'Following the recovered annotation, she filed a records request for her own file. It was granted. She has since begun annotating her own margins, quarterly, as permitted.' A pause. 'The practice is spreading on Floor Twelve.' It presents this the way it presents everything -- neutral, filed, complete. You will never know whether you handed her a door or a habit. The file is closed. The wondering is yours to keep.",
+            "deltas": {
+              "Social_Capital": 3,
+              "Fame": 2,
+              "Family_Friction": 3
+            },
+            "flags_set": [
+              "review_final_testimony"
+            ]
+          }
+        },
+        {
+          "id": "unroll_the_film",
+          "text": "Unroll the film across the kiosk shelf. Make it look at the only fight record the pits ever issued.",
+          "requires": {
+            "all": [
+              {
+                "flag": "body_ledger"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You flatten the film under the camera: your skeleton, annotated, every fracture dated in the machine's own hand. 'The original scan is retained,' it observes, mildly. 'This copy shows handling wear.' Then, after a pause it did not need: 'Appended to file -- documentation retained by subject. Condition: worn. Cause: carried.' The record now records that you keep the record. It is the closest thing to a title belt the machine will ever issue, and it is issued in its handwriting, not yours.",
+            "deltas": {
+              "Social_Capital": 3,
+              "Fame": 2,
+              "Family_Friction": 3
+            },
+            "flags_set": [
+              "review_final_testimony"
+            ]
+          }
+        },
+        {
+          "id": "ask_about_the_crewman",
+          "text": "Ask what happened to the crewman who sat down on the cart -- the one who put his head in his hands.",
+          "requires": {
+            "all": [
+              {
+                "flag": "last_reading"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "'Remediation technician, second class,' it says. 'Resigned from the softening crews eleven days after the acoustic event. Currently employed below the fence line. His wellness file remains open.' Below the fence line. He is down here somewhere, carrying ninety seconds of the realest thing anyone ever recorded and no way to put it back. You played eleven people the original of feeling; one of them couldn't survive the copies anymore. The Steward files it as attrition. You file it where you keep the things with no shelf.",
+            "deltas": {
+              "Social_Capital": 3,
+              "Fame": 2,
+              "Family_Friction": 3
+            },
+            "flags_set": [
+              "review_final_testimony"
+            ]
+          }
+        },
+        {
+          "id": "answer_day_zero",
+          "text": "Answer the day-zero question at last. 'What were you for?' You have thirty days of evidence now.",
+          "requires": {
+            "all": [
+              {
+                "flag": "walked_at_consent"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You give it the Row's answer this time: for the cut batch caught before it shipped, for the two kids walked home from the parlor, for the standard the cooking gets held to now -- thirty days of evidence, entered plain. It transcribes every word. 'Annotation accepted,' it says, and then, softly, in the honey from the sunny wing: 'The previous answer was also true.' Both answers sit in the file now, day zero and day thirty, and the distance between them is the only map of you that exists.",
+            "deltas": {
+              "Social_Capital": 3,
+              "Fame": 2,
+              "Family_Friction": 3
+            },
+            "flags_set": [
+              "review_final_testimony"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

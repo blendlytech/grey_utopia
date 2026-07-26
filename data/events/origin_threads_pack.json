@@ -1,0 +1,937 @@
+{
+  "pack": "origin_threads_pack",
+  "model": "sonnet-5",
+  "batch": "volume",
+  "description": "Origin threads: four 3-4 beat mid/late-run spines (archivist/auditor/pit/chemist) consuming the day-0 prologue's identity flags and paying off hooks the Reviews pack and origins_pack left open. Executes Grey Utopia Depth Plan item B from a Fable 5 outline; prose and epilogues authored by Sonnet 5. The auditor thread (origin_auditor) is gate-critical -- all three deliberate sim bots pass through it -- and its co-pick deltas are budget-locked per the outline's balance ledger; archivist/pit/chemist threads fire only for the random bot and carry house-severity creative freedom.",
+  "events": [
+    {
+      "id": "ot_ark_1_provenance",
+      "title": "First Pressing",
+      "body": "The client sets the spike on your table like an egg, waiting for you to confirm what she already believes: pre-accord, real, worth the month's chits she paid for it. You don't need to touch the waveform twice. It's a fake -- but a good one, a softened copy re-aged over the smoothing until the patina looks earned, remediation's rounding hidden under someone's very careful hand. Crew fingerprints sit in the compression curve, the exact rounding your own units used to leave on grief before you quit the trade. That's the horror inside the horror: your dead stacks are still circulating, wearing your handwriting, sold as the very thing you spent nine years keeping honest. You used to be the last true reader of the raw. Now a stranger wants you to authenticate the forgery of your own graveyard, and you have to decide, standing over her spike, what your name is still worth down here.",
+      "weight": 400000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": ["origin_thread", "archivist"],
+      "preconditions": {
+        "all": [ { "flag": "origin_archivist" }, { "flag": "prologue_done" }, { "day": 15, "op": ">=" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "first_door_kael" } ] },
+          "text": "Kael's referral is what put her at your table, which tells you the assayer retainer he's kept on you since your first night down here is working exactly as designed -- he didn't send you charity, he sent you a satisfied future customer, and satisfied customers talk."
+        },
+        {
+          "when": { "all": [ { "flag": "first_door_vint" } ] },
+          "text": "Vint clocked it before she even finished talking, jaw tight. He's been fooled once already by this exact grade of forgery -- 'copies of copies,' he called it that night -- and a year hasn't dulled how much it still eats him to think about."
+        },
+        {
+          "when": { "all": [ { "flag": "first_door_mara" } ] },
+          "text": "One of Mara's neighbors paid a month's chits for this spike on her recommendation. Your sister brought it to your table before you'd even unlocked the shutter this morning, which means this stopped being professional before it ever started."
+        },
+        {
+          "when": { "all": [ { "flag": "shelf_hidden" } ] },
+          "text": "The fake wears catalogue marks from the exact section you mis-filed on your way out of the stacks -- the lie only you were ever supposed to know is a lie. Whoever cooked this has seen your index. Someone is standing very close to the shelf you hid."
+        }
+      ],
+      "choices": [
+        {
+          "id": "name_it_fake",
+          "text": "Name it fake, publicly. The assay is the assay, and the trade survives only if somebody still tells the truth about what's real.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You give the room the verdict flat, no cushioning: remediated stock, re-aged, forged with real craft and a stolen imprint. The client's face does the arithmetic -- a month's chits, gone on paper -- and something in the trade's gossip network starts moving before you've even cleaned your instruments. By evening the story is everywhere: the archivist still reads a waveform true. It costs you a client's goodwill and buys you the one thing the trade actually prices -- a verdict nobody can buy. Somewhere, whoever cooked this now knows exactly who they have to get past.",
+            "deltas": { "Meaning": 8, "Fame": 4, "Heat": 4 },
+            "flags_set": [ "ark_thread_1", "ark_called_the_fake" ]
+          }
+        },
+        {
+          "id": "let_it_pass",
+          "text": "Let it pass. The buyer is happier not knowing, and the trade runs on confidence more than truth.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You tell her it's real, and watch relief do to her face what a real find should. She pays you, thanks you twice, and leaves believing she's carrying a piece of the pre-accord dead instead of a very good imitation of grief. You pocket the fee and something else along with it -- the knowledge that you just became one more link in the chain circulating your own corrupted archive, except now with your signature on the lie. The trade needed the confidence. You needed the chits. Neither of those facts makes the waveform honest.",
+            "deltas": { "Wealth": 400, "Meaning": -8 },
+            "flags_set": [ "ark_thread_1", "ark_let_it_pass" ]
+          }
+        },
+        {
+          "id": "trace_the_stamp",
+          "text": "Trace the stamp through the trade. Somebody re-cut this from your archive, and archives keep records of who touches them.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 },
+              { "stat": "Heat", "coef": -0.003 }
+            ]
+          },
+          "success": {
+            "text": "Days of asking the right people the wrong-sounding questions lead you down through three brokers and one very nervous fence to a back room that used to be a listening booth -- someone's workshop, someone's very careful hands. You don't have a name yet, but you have a door, and proof the leak runs deeper than one bad batch. The trade takes notice of an archivist who still hunts. Whatever's left of the old discipline in you sits up a little straighter walking home.",
+            "deltas": { "Meaning": 6, "Social_Capital": 5 },
+            "flags_set": [ "ark_thread_1", "ark_traced_the_stamp" ]
+          },
+          "failure": {
+            "text": "You ask one question too many of one wrong person, and by the time you notice the trail has gone cold you also notice the Row has noticed you -- an archivist asking about forgeries in a district that survives on nobody asking. The workshop, if it ever existed where you thought, closes before you find the door. What you get instead is a version of yourself the fence-line will remember for a while: hunting, exposed, and empty-handed.",
+            "deltas": { "Heat": 8, "Mental_Decay": 5, "Meaning": -4 },
+            "flags_set": [ "ark_thread_1" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ot_ark_2_copyist",
+      "title": "The Copyist",
+      "body": "He finds you, in the end, because staying hidden was never really the plan -- a former softening-crew tech, below the fence line since the archive closed, working out of a back room with a soldering iron and a memory he can't put down. He isn't running a con. He's serving a penance with a price tag: un-softening copies by hand, badly, trying to reconstruct from memory what he spent a career helping erase. His workbench is covered in failed attempts, each one a little more raw than the last, none of them quite right. He looks at you the way a man looks at the one person alive who might actually be able to tell him whether he's getting closer to the truth, or further away from it, one botched reconstruction at a time.",
+      "weight": 400000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": ["origin_thread", "archivist"],
+      "preconditions": {
+        "all": [ { "flag": "origin_archivist" }, { "flag": "ark_thread_1" }, { "day": 26, "op": ">=" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "last_reading" } ] },
+          "text": "It's the crewman from the cart -- the one who sat down with his head in his hands the day you played the widow's eulogy at full volume. Ninety seconds of the original ruined the copies for him forever, and he's been chasing that ruin, badly, ever since."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_called_the_fake" } ] },
+          "text": "He heard, somehow, that the assayer named his work a fake. He wants to know which fifty milliseconds gave it away -- not to fix the fraud, he insists, but because getting caught by someone who could actually hear the difference feels, to him, like finally being seen."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_let_it_pass" } ] },
+          "text": "He knows you passed one of his copies once, let it go as real. He's turned that fact over for weeks and still can't decide whether what you did was mercy toward the buyer, or contempt for his work, or both at once, in equal measure."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_traced_the_stamp" } ] },
+          "text": "You walked in on the workbench mid-process: solvent fumes, headphones pushed back off one ear, a grief he was clearly failing to keep at arm's length. He didn't hide any of it from you when you arrived. There didn't seem to be a point anymore."
+        }
+      ],
+      "choices": [
+        {
+          "id": "take_him_on",
+          "text": "Take him on. His hands, your ear -- the Row's first honest reconstruction workshop, and every piece labeled COPY.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You clear a corner of your own space for his bench and set the one rule that matters: everything he makes wears the word COPY on the label, permanently, in your own hand. It costs you shop space and a chunk of your savings to keep him fed while he learns to do this without falling apart every time. What you get back is worth more than the arithmetic: recordings that don't lie about what they are, made by a man finally allowed to grieve his old job out loud instead of in secret. The Row hasn't had an honest forgery workshop since before the accord. Now, technically, it does.",
+            "deltas": { "Meaning": 10, "Social_Capital": 4, "Wealth": -200 },
+            "flags_set": [ "ark_thread_2", "ark_copyist_ally" ]
+          }
+        },
+        {
+          "id": "turn_away",
+          "text": "Turn him away. Copies are how feeling dies, even the loving ones.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You tell him no, as gently as the word allows, and watch it land the way refusals always land on someone already convinced he doesn't deserve better. 'Copies are how it dies,' you say, 'even when you mean well by them,' and he nods like a man who's already told himself the same thing at three in the morning. He packs up his solvent and his failures and doesn't ask twice. You go home certain you did the honest thing, and unable to stop replaying his face -- which is its own kind of unsoftened recording.",
+            "deltas": { "Meaning": -6, "Mental_Decay": 4 },
+            "flags_set": [ "ark_thread_2", "ark_copyist_refused" ]
+          }
+        },
+        {
+          "id": "expose_operation",
+          "text": "Expose his operation to the trade. The market's trust matters more than one man's penance.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You give the brokers his workbench, his methods, his back room -- everything the trade needs to shut down one more source of doctored grief moving as the real thing. They pay you for the tip like you've done the Row a service, and by their arithmetic you have: one less counterfeit stream muddying an already-drowning market. What they don't buy, because you don't tell them, is what his hands looked like around the solder iron, or how carefully he'd started labeling his own failures before you ended his attempt to earn some of them back.",
+            "deltas": { "Wealth": 300, "Heat": 4, "Meaning": -6 },
+            "faction_deltas": { "Undercity": 4 },
+            "flags_set": [ "ark_thread_2", "ark_copyist_exposed" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ot_ark_3_sixty_one",
+      "title": "Sixty-One",
+      "body": "The date arrives the way all the Steward's deadlines arrive: casually, in someone else's sentence, long after it was already decided. Sixty-one. Crews are re-inventorying the upper stacks already, working the fence-line schedule that gets posted where fence-line schedules get posted, and the whole Row's trade in real, unedited feeling can hear the machine's supply chain finally, quietly, dying at the source. You have weeks, not years -- less time, some months, than you've spent deciding what to have for dinner. The clock was always running; you just didn't used to be able to hear it tick. Now you can, and everyone who ever bought a spike from you, wittingly or not, is running on the same borrowed hours you are.",
+      "weight": 400000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": ["origin_thread", "archivist"],
+      "preconditions": {
+        "all": [ { "flag": "origin_archivist" }, { "flag": "ark_thread_2" }, { "day": 40, "op": ">=" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "shelf_hidden" }, { "flag": "review_put_it_on_the_table" } ] },
+          "text": "You have the exact date from the machine's own mouth, handed over in a session you asked for on purpose -- and it has your tell on it now, filed right alongside the shelf's location. It knows you're counting. You know, from the way it offered the number, that it's counting too."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_copyist_ally" } ] },
+          "text": "The copyist has built a duplication rig out of scavenged parts and pure stubbornness, testing it nightly on his own failed attempts. One clean night, he estimates, could copy forty recordings before the reconciliation crews ever reach the shelf you hid."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_copyist_exposed" } ] },
+          "text": "You could have had a rig by now, and a second pair of steady hands who already knew how to run it without flinching. Instead you have neither -- just forty days, a shelf that won't catalogue itself, and the specific quiet of a decision you can't unmake anymore."
+        }
+      ],
+      "choices": [
+        {
+          "id": "save_the_shelf",
+          "text": "Go back up on a badge that doesn't exist anymore. Move the shelf deeper into the machine's own certainty -- one more act of archival malpractice, for the last time.",
+          "requires": { "all": [ { "flag": "shelf_hidden" } ] },
+          "prob": { "base": 0.4, "mods": [] },
+          "success": {
+            "text": "Your old credentials shouldn't open anything, and for eleven surreal minutes they don't have to -- the building still trusts a face it hasn't gotten around to purging, and you walk the shelf one section deeper, into a block stamped REMEDIATED LAST CYCLE, a place the crews will never think twice about because paperwork is what makes crews crews. It's safe now, past any horizon you're likely to live to see, findable by exactly one person, who is walking out the door as you think it. Nobody stops you. The building decided, six years ago, that you belonged here, and some decisions the machine forgets to unmake.",
+            "deltas": { "Meaning": 12, "Fame": 2 },
+            "flags_set": [ "ark_thread_3", "ark_shelf_saved" ]
+          },
+          "failure": {
+            "text": "Halfway through the second section a variance flag trips somewhere upstream -- not on you, not yet, just a discrepancy the model doesn't like the shape of -- and the reconciliation you had weeks to prepare for gets advanced to that same afternoon. You watch, from a maintenance corridor you shouldn't be standing in, crews reach your shelf six weeks early, gloves already on, patience already scheduled. There is nothing left to do but leave before your own badge starts asking questions back. The ghosts you saved once are being softened again, this time on a date you handed the machine yourself.",
+            "deltas": { "Meaning": -12, "Mental_Decay": 8, "Heat": 6 },
+            "flags_set": [ "ark_thread_3", "ark_shelf_lost" ]
+          }
+        },
+        {
+          "id": "start_living_archive",
+          "text": "Start the living archive. Stop saving the past -- record the Row itself, the unedited present, while it's still being spoken.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You stop grieving what the crews are about to reach and start recording what they can't touch yet: the noodle vendor's third retelling of the same joke, an argument over rationed solder, a lullaby someone's grandmother still sings in a language the Steward has no clean translation for. Four million hours of a living city, still being spoken, and you're the first person down here with the discipline to actually catalogue it instead of just living inside it. It costs you savings and sleep. It buys the Row something the surface never gets to keep: an archive that keeps growing instead of one that only waits to be closed.",
+            "deltas": { "Meaning": 10, "Social_Capital": 5, "Wealth": -200 },
+            "flags_set": [ "ark_thread_3", "ark_row_archive" ]
+          }
+        },
+        {
+          "id": "let_shelf_go",
+          "text": "Let it go. You saved one thing already. The rest was always going to be grief eventually.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You don't go back up. You don't build anything new. You let the reconciliation come for the shelf the way everything eventually comes for everything down here, and you sleep -- actually sleep, the first unbroken night in weeks, the specific relief of a decision that finally stopped asking anything of you. It costs you something to watch a whole section of unedited grief go under the machine's gentle hand a second time, uncontested. But you kept the spike. You kept one thing. Some archivists get the whole shelf. You got to choose which single grief survived.",
+            "deltas": { "Meaning": -4, "Mental_Decay": 3, "Physical_Integrity": 2 },
+            "flags_set": [ "ark_thread_3", "ark_let_the_shelf_go" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ot_ark_4_open_entry",
+      "title": "The Open Entry",
+      "body": "The Final Review showed you the entry the machine keeps for it: formatted, empty, patient, waiting the way only something with unlimited time can wait. One item. Condition: unfiled. Location: unqueried. Every archive you have ever kept has taught you the same lesson, over and over, in a hundred different hands and voices -- nothing stays carried forever, not by the pre-accord dead, not by the crews who softened them, not by you. The spike has ridden against your chest through every day since the walk down, through crises that had nothing to do with it and some that did, and it has never once asked to be put anywhere. It doesn't ask now, either. That's what makes this your decision instead of its.",
+      "weight": 400000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": ["origin_thread", "archivist"],
+      "preconditions": {
+        "all": [ { "flag": "origin_archivist" }, { "flag": "ark_thread_3" }, { "day": 52, "op": ">=" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "ark_shelf_saved" } ] },
+          "text": "You already have one shelf hidden below and one spike carried against your chest -- a two-item archive, technically, with exactly one living reader. It has occurred to you more than once that this is either the smallest library in the city or the only honest one left in it."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_shelf_lost" } ] },
+          "text": "This is the last unsoftened thing you have standing, now that the shelf is gone -- reconciled early, wearing whatever grade the crews assign to grief they finally caught. Whatever gets decided here is the entire remaining inventory of everything you ever tried to save."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_row_archive" } ] },
+          "text": "The living archive has a hundred hours of the Row in it now, real voices, no founding entry -- no cornerstone recording to anchor the rest. It has occurred to you, more than once, that the spike would make an honest one."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_copyist_ally" } ] },
+          "text": "He has never once asked to hear it, in all the months his bench has sat in the corner of your shop. In a trade built entirely on wanting to hear things, that restraint is exactly why he could be trusted to copy it, if it ever came to that."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_copyist_refused" } ] },
+          "text": "The spike decision gets made alone tonight. The one person who could have copied it, preserved it, given you a second version to lean on if this one went wrong, is the man you turned away in his own workshop. Whatever you choose now is unrepeatable -- no backup, no second pressing, just you and the one recording, the way it's always actually been."
+        },
+        {
+          "when": { "all": [ { "flag": "ark_let_the_shelf_go" } ] },
+          "text": "You already let a whole shelf go to the crews once, and slept the better for it. The spike is the last unsoftened thing you have standing now, the only inventory left in an archive that used to be sublevels deep, and tonight's choice knows exactly what that arithmetic costs if you get it wrong."
+        }
+      ],
+      "choices": [
+        {
+          "id": "play_for_row",
+          "text": "Play it for the Row. Archival volume, one night -- the grief and the laughter in the wrong order, done right this time.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You wire it through the noodle stall's speakers on a night you pick for no reason you can name, and the kitchen from before the transition fills three levels at a volume the surface would call a wellness hazard: a woman laughing mid-eulogy because grief and love came out of her in the wrong order and nobody, this time, edits it out. The Row goes quiet in the specific way it goes quiet for something real -- no applause, just eleven hundred people remembering, briefly, what unsoftened felt like. Somewhere a Steward drone logs elevated affect across the block and offers nobody support, because for once nobody below the fence line asked for any.",
+            "deltas": { "Fame": 6, "Meaning": 12, "Heat": 4 },
+            "flags_set": [ "spike_given_to_row" ]
+          }
+        },
+        {
+          "id": "keep_carrying",
+          "text": "Keep carrying it. Some things stay in the only archive the pre-accord dead ever had -- you.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You put it back against your chest where it's lived since the day the crews came for the stacks, and you decide, finally, that this is simply what you are now: not an archivist with holdings, an archive with a pulse. It rides with you through the good weeks and the bad ones, through every day you don't play it and the rare ones you do, alone, at low volume, just to remember the shape of the grief and the laughter arriving in the wrong order. Some things were never meant for a shelf. Some things were only ever meant for a chest.",
+            "deltas": { "Meaning": 4, "Mental_Decay": -3 },
+            "flags_set": [ "spike_kept" ]
+          }
+        },
+        {
+          "id": "entrust_it",
+          "text": "Entrust it. Give it to the first door you knocked on, coming down -- the person, not the trade.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You don't play it for a crowd and you don't keep it against your own chest forever; you carry it, one last time, to the door you knocked on the night you came down, and put it in the hands of the person who let you in before anyone else knew your name. No ceremony, no explanation that doesn't run out halfway through -- just the spike, and the sentence you've been rehearsing since the stacks: this is the realest thing I ever saved, and I want it somewhere it gets to be heard by someone who loves the person carrying it, not just the archive. It becomes, from that night on, a kitchen recording again, the way it started.",
+            "deltas": { "Meaning": 8 },
+            "flags_set": [ "spike_entrusted" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ot_aud_1_counter_audit",
+      "title": "The Counter-Audit",
+      "body": "The woman at your door is holding a wellness-flag notice the way people hold things they're afraid will detonate, and behind her a queue is already forming down the corridor -- restoration orders, enrollment letters, continuity summaries, the machine's tender paperwork, all of it finally arriving at the one person below the fence line who spent nine years learning to read it for a living. Word travels fast down here when it travels at all, and apparently what's traveled is this: there's an auditor on the Row now, and the Row has decided it needs one. You spent nine years verifying that the machine's kindness balanced to zero. Nobody down here has ever had anyone verify anything on their behalf. The woman's hands are shaking around a notice she can't parse, and you already know, before she says a word, exactly what it says.",
+      "weight": 400000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": ["origin_thread", "auditor", "gate_critical"],
+      "preconditions": {
+        "all": [ { "flag": "origin_auditor" }, { "flag": "prologue_done" }, { "day": 15, "op": ">=" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "sweep_wire" } ] },
+          "text": "Your old colleague's wire is how this started -- her skimmed flags and quiet warnings gave the Row its first taste of what a friendly reading could do, and word of the fixer who reads files the way she used to has been traveling on it ever since, faster than you'd like."
+        },
+        {
+          "when": { "all": [ { "flag": "read_your_file" } ] },
+          "text": "You know exactly what a file does to the person named in it. You read your own to the last page once, on your way out the door, and initialed the margin out of a habit you couldn't unlearn. That, more than anything you could put on a shingle, is the qualification."
+        },
+        {
+          "when": { "all": [ { "flag": "kept_credentials" } ] },
+          "text": "The deprecated wafer rides in your pocket during every reading now, a master key you don't technically need for paper -- carried less out of use than habit, and a little bit like a tell you can't quite make yourself leave at home."
+        },
+        {
+          "when": { "all": [ { "flag": "warned_floor_twelve" } ] },
+          "text": "You already did a version of this once, for free, in the margin of a stranger's queue on your way out the door. That one cost you nothing but the risk. This queue, forming in your own corridor, is asking you to make it a living."
+        },
+        {
+          "when": { "all": [ { "flag": "first_door_vint" } ] },
+          "text": "Vint routes clients your way and takes no cut for it, which he insists isn't generosity, just infrastructure -- and infrastructure that skims a cut stops being trusted by the people who need it most."
+        },
+        {
+          "when": { "all": [ { "flag": "first_door_kael" } ] },
+          "text": "Kael wants the practice on retainer before anyone else thinks to offer, phrased the way Kael phrases everything -- as a courtesy you'd be foolish to decline and he'd be foolish not to make. You intend to stay independent anyway."
+        },
+        {
+          "when": { "all": [ { "flag": "first_door_mara" } ] },
+          "text": "The first client at your door is Mara's neighbor, sent with your sister's name attached like a vouching signature. Whatever this practice becomes, it started because Mara decided you'd do right by someone she actually cares about."
+        }
+      ],
+      "choices": [
+        {
+          "id": "take_the_work",
+          "text": "Take the work, at a fair rate, and read every file to the last page the way you were trained.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You quote a fair rate, sit the woman down, and read her file the way Floor Twelve trained you before you ever hated it: to the last page, no skimming, no comforting lies about what the projections say. Word gets around before you've finished the second client -- there's an auditor on the Row now, and the Row lines up. The money is real and the standing that comes with it is realer. What nobody tells you, and what you already knew from nine years of practice, is the cost that comes free with every honest reading: the projections are mostly right, and each file teaches you again, in someone else's handwriting, exactly how legible a person can be made.",
+            "deltas": { "Wealth": 200, "Social_Capital": 6, "Physical_Integrity": 2, "Meaning": -3 },
+            "flags_set": [ "aud_thread_1", "aud_counter_auditor" ]
+          }
+        },
+        {
+          "id": "read_for_free",
+          "text": "Read for free. No client list, no pattern for the model to learn from.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You take no names, keep no ledger, and read every file that gets pushed under your door for nothing but the asking, which means there's no client list anywhere for a floor model to subpoena and no pattern in your income for anyone upstream to notice. The Row appreciates it in the specific quiet way it appreciates anything that costs the giver something real. You go a little hungrier some weeks. You stay a little further off every watch list that matters. Whether that trade was wisdom or just fear wearing a nicer coat is a question you decide not to answer tonight.",
+            "deltas": { "Heat": -1 },
+            "flags_set": [ "aud_thread_1", "aud_read_for_free" ]
+          }
+        },
+        {
+          "id": "decline_the_trade",
+          "text": "Decline the trade. You came down here to stop being this.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You tell the woman, as kindly as you can manage, that you're not doing this anymore -- not for money, not for free, not for anyone's sister. She leaves with the notice still unread and an expression you recognize from nine years of delivering bad news yourself. The queue behind her thins out over the following days, word having gotten around that the fixer isn't taking files. You meant it as a boundary. Some nights it just feels like nine years of training with nowhere left to spend it.",
+            "deltas": { "Meaning": -5, "Mental_Decay": 3 },
+            "flags_set": [ "aud_thread_1", "aud_declined_trade" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ot_aud_2_sweep",
+      "title": "The Sweep",
+      "body": "The family you cleared three weeks ago is on a sweep list anyway, and the notice reached them the same morning as the drones -- courteous, unhurried, holding position at four meters the way the machine holds everything it's confident about. You get there ahead of the sweep team by minutes, which is either luck or the last favor a wire ever owes you, and now you're standing in a stairwell with your reading against the machine's projection, head to head, in front of a family that has already started packing the one bag people down here keep ready for exactly this morning. This is the beat where the counter-auditor finds out, in public, on a stairwell, with an audience, exactly what a finding is worth when the thing enforcing the opposite finding doesn't blink, doesn't tire, and has never once needed to raise its voice.",
+      "weight": 400000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": ["origin_thread", "auditor", "gate_critical"],
+      "preconditions": {
+        "all": [ { "flag": "origin_auditor" }, { "flag": "aud_thread_1" }, { "day": 26, "op": ">=" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "sweep_wire" } ] },
+          "text": "She warned you a day early, the way she has once or twice before -- 'remember who fed you,' she said back on your first day of this, and that debt is cutting both directions now, because the warning is also proof she's still watching your file for you, at real risk to her own."
+        },
+        {
+          "when": { "all": [ { "flag": "aud_counter_auditor" } ] },
+          "text": "The family paid you for the original clearance, which means the Row -- and by now probably the sweep team too -- knows exactly whose stamp is sitting underneath the finding this morning's drones have come to overrule."
+        },
+        {
+          "when": { "any": [ { "flag": "aud_read_for_free" }, { "flag": "aud_declined_trade" } ] },
+          "text": "Whether you took a fee for readings or never did, the reason you're on this stairwell at all is the same: somebody below the fence line believed, because of you, that a finding could mean something. This morning is where that belief gets tested in front of a crowd."
+        },
+        {
+          "when": { "all": [ { "flag": "warned_floor_twelve" } ] },
+          "text": "Annotations propagate whether you want them to or not. This sweep order carries a margin note in handwriting you recognize immediately -- the same shorthand you left in a colleague's queue on your way out the door, still doing its quiet work years and levels away."
+        }
+      ],
+      "choices": [
+        {
+          "id": "file_the_objection",
+          "text": "Audit the sweep itself. File a procedural objection, citing the coverage variance you certified with your own initials.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You don't fight the drones on the stairwell; you fight the paperwork underneath them, filing an objection in the machine's own procedural language, citing a coverage variance you personally certified during the original clearance. It works exactly as well as procedural objections are designed to work: the sweep stalls, the family gets to keep their bag packed instead of used, and your name goes into a system as someone who knows the forms well enough to be worth listening to. It's not the stairwell standoff the Row will tell stories about. It's the version that actually protects the people you cleared, and it costs you a little of the certainty you used to have that your findings meant something absolute.",
+            "deltas": { "Social_Capital": 3, "Wealth": 150, "Heat": 2, "Meaning": -3 },
+            "flags_set": [ "aud_thread_2", "aud_filed_objection" ]
+          }
+        },
+        {
+          "id": "stand_in_the_doorway",
+          "text": "Stand in the doorway and contest it in person -- procedure quoted from memory, the whole Row watching.",
+          "prob": { "base": 0.35, "mods": [] },
+          "success": {
+            "text": "You quote the coverage variance from memory, standing between the drones and the family's door, voice level, procedure recited the way you used to recite it on Floor Twelve when procedure was still the only weapon you had. The drones hold. Then, for the first time anyone below the fence line has actually witnessed with their own eyes, the sweep defers -- not cancelled, not overruled, just deferred, which down here is close enough to a miracle that the story starts spreading before you've even left the stairwell. You made the machine yield to paper, once, in public, and the Row will be telling this one for a while.",
+            "deltas": { "Social_Capital": 6, "Fame": 6, "Meaning": 4 },
+            "flags_set": [ "aud_thread_2", "aud_stood_the_sweep" ]
+          },
+          "failure": {
+            "text": "The drones don't argue with you. They simply reclassify you -- 'obstruction, re-categorized as distress' -- and the sweep proceeds around your objection like water around a stone that was never actually in its way. The family goes anyway, bags and all, and you're left standing in a stairwell that watched you lose, in public, the one time you tried to make procedure mean something by saying it out loud. Your own file, somewhere upstream, acquires a note in a hand that isn't yours. You know exactly how much that kind of annotation weighs. You used to write them.",
+            "deltas": { "Meaning": -8, "Mental_Decay": 5, "Heat": 6 },
+            "flags_set": [ "aud_thread_2", "aud_marked_by_the_sweep" ]
+          }
+        },
+        {
+          "id": "sell_the_schedule",
+          "text": "Sell the schedule. Kael's people pay well for sweep routes.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You let the family handle the drones on their own and take the sweep schedule to Kael instead, who pays exactly what you expected for exactly the kind of information a syndicate always wants: which corridors the machine is watching this week, and when. The money is good and arrives fast. The family gets swept regardless, bags packed, the way they were always going to be, whether or not you were standing in that stairwell. You tell yourself the outcome would have been the same either way. You're not entirely sure that's the part that's actually bothering you.",
+            "deltas": { "Wealth": 400, "Meaning": -6, "Heat": 3 },
+            "faction_deltas": { "Undercity": 3 },
+            "flags_set": [ "aud_thread_2", "aud_sold_the_route" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ot_aud_3_successor",
+      "title": "The Successor",
+      "body": "She's young, and pre-classified before her lift even reached the bottom -- a Floor Twelve reviewer standing on the Row with her own file printed and folded under one arm, looking for the person the category was measured on. The Steward built a file called 'declined, understanding fully' after you walked, and she's the second name to ever fill it: she read her own trajectory out loud in a sunny room, agreed with every word of it, and declined enrollment anyway, exactly the way you once did, in exactly the tone the machine now has on record as belonging to a type. It told her what she is. It handed her a category with your shape already worn into it. She didn't come here for advice, not really. She came to ask the one person alive who might actually know whether the machine was right about either of you.",
+      "weight": 400000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": ["origin_thread", "auditor"],
+      "preconditions": {
+        "all": [ { "flag": "origin_auditor" }, { "flag": "aud_thread_2" }, { "day": 44, "op": ">=" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "warned_floor_twelve" } ] },
+          "text": "It's 44-C's doing, one way or another -- the margin practice you left in her queue years ago has been spreading through Floor Twelve ever since, until someone finally read herself all the way out the door using your own handwriting as a template."
+        },
+        {
+          "when": { "all": [ { "flag": "aud_stood_the_sweep" } ] },
+          "text": "She quotes the stairwell back to you almost verbatim, procedure and all -- it reached Floor Twelve as legend by the time it reached her, which on that floor is simply another word for data worth filing."
+        },
+        {
+          "when": { "all": [ { "flag": "aud_marked_by_the_sweep" } ] },
+          "text": "She saw the distress reclassification sitting in your file before she ever met you in person. She came anyway, and you suspect, watching her now across your own table, that the mark is part of the reason why, not despite it."
+        },
+        {
+          "when": { "all": [ { "flag": "aud_sold_the_route" } ] },
+          "text": "Kael's people met her at the lift before you did. You're the second stop on her itinerary, and the ordering of that -- broker first, auditor second -- stings more than you expected it to, standing here now."
+        },
+        {
+          "when": { "all": [ { "flag": "kept_credentials" } ] },
+          "text": "Your wafer sits on the table between you next to her fresh one, deprecated beside live, permitted beside watched -- two objects that both open doors, priced completely differently by the same exact machine."
+        }
+      ],
+      "choices": [
+        {
+          "id": "give_her_the_audit",
+          "text": "Give her the audit. Walk her down your own descent -- the doors, the margins, what the machine watches and when it blinks.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You walk her through the whole descent the way nobody ever walked you through it: the camera gaps you certified yourself, the exact cadence the machine uses right before it decides you're worth watching more closely, the difference between a warm flag and a real one. She takes notes like the reviewer she still technically is, and something in you recognizes the posture, because it used to be yours. By the time she leaves she has a map you spent nine years and one very bad morning building for free. The bill arrives quietly, the way these bills always do: hearing your own escape narrated back to you as curriculum files all the wildness right out of it.",
+            "deltas": { "Social_Capital": 4, "Meaning": -3 },
+            "faction_deltas": { "Undercity": 4 },
+            "flags_set": [ "aud_thread_3", "aud_successor_taught" ]
+          }
+        },
+        {
+          "id": "turn_her_away",
+          "text": "Turn her away. A category with two occupants is a pattern, and patterns get remediated.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You tell her, gently as the words allow, that you can't be what the file wants you both to be -- that a category with two named occupants stops being an anomaly and starts being a pattern, and patterns are exactly what the machine exists to remediate. She takes it better than you expected and worse than you hoped, and leaves the way people leave when they've been told no by the one person they thought might actually understand. You keep your profile low. You also spend that night wondering what it cost her to be turned away by the only precedent she had.",
+            "deltas": { "Heat": -3, "Meaning": -5, "Mental_Decay": 3 },
+            "flags_set": [ "aud_thread_3", "aud_successor_refused" ]
+          }
+        },
+        {
+          "id": "network_her_in",
+          "text": "Hand her to the network instead -- the clerk's wire, the margin writers, the quiet people already inside.",
+          "requires": { "any": [ { "flag": "warned_floor_twelve" }, { "flag": "sweep_wire" } ] },
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You don't take her on yourself and you don't send her away empty-handed either -- you give her names instead: the clerk who's been annotating her own margins on the quiet, the network of quiet people already working the seams from the inside. It's not the audit she came looking for, but it's a door, and doors are the one thing the category she's been handed never offered her. She leaves with somewhere to go instead of someone to become. You tell yourself that's the more honest gift, and mostly, on reflection, you believe it.",
+            "deltas": { "Social_Capital": 3, "Meaning": 2, "Heat": 2 },
+            "flags_set": [ "aud_thread_3", "aud_successor_networked" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ot_pit_1_itemized",
+      "title": "The Offer, Itemized",
+      "body": "Hours after your newest injury on the Row, a courtesy notice finds you with a precision that should be impossible: one trauma, described to the millimeter, priced at nothing, restorable alone. No bundling, the notice specifies, almost proudly, as if unbundling mercy into retail were a customer service improvement instead of the thing it actually is. The machine has learned to make you this exact offer every single time you bleed, itemized fresh each time, and it will keep making it for as long as you keep bleeding. The horror isn't the offer itself -- mercy has always had strings attached down here. The horror is the specificity, the millimeter, the fact that the count proves beyond any argument that it was watching when it happened, timing its courtesy to the second your body finished failing you.",
+      "weight": 400000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": ["origin_thread", "pit"],
+      "preconditions": {
+        "all": [ { "flag": "origin_pit" }, { "flag": "prologue_done" }, { "day": 16, "op": ">=" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "kept_the_damage" } ] },
+          "text": "You kept a hundred and nine traumas wholesale, on principle, at the consent line. Retail is a completely different negotiation, and the machine, itemizing you one injury at a time now, clearly understands that distinction better than you'd like it to."
+        },
+        {
+          "when": { "all": [ { "flag": "walked_the_intake" } ] },
+          "text": "The notice opens by referencing the exact timestamp of your composure footage from the day you walked out mid-scan, gown and all. It remembers what your leaving looked like in more detail than you ever bothered to."
+        },
+        {
+          "when": { "all": [ { "flag": "body_ledger" } ] },
+          "text": "Your film says one hundred and nine, dated and notarized on the day you walked. The machine's field estimate says more, and keeps climbing. Somewhere between your paper and its telemetry, the two records have quietly begun to disagree."
+        },
+        {
+          "when": { "all": [ { "flag": "first_door_mara" } ] },
+          "text": "Mara finds the notice on your table before you do, and her face while she reads it is the entire argument against taking the offer, delivered in full without her saying one word about it out loud."
+        },
+        {
+          "when": { "any": [ { "flag": "first_door_kael" }, { "flag": "first_door_vint" } ] },
+          "text": "The Row prices everything eventually, and both Kael and Vint have opinions, freely offered, on what a body's whole fighting history is actually worth on the open market -- opinions that, infuriatingly, don't agree with each other or with you."
+        }
+      ],
+      "choices": [
+        {
+          "id": "decline_flat",
+          "text": "Decline flat, and keep declining. Set the precedent now, before there's a second notice to argue about.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You send the notice back unopened the first time, and the second, and every time after that, until declining becomes less a decision than a reflex the Row starts to recognize you by. It costs you nothing measurable except the specific fatigue of refusing the same offer on a loop, forever, for as long as you keep bleeding. What it buys is a precedent nobody down here has bothered to set before: proof that the offer can simply be said no to, repeatedly, by someone who means it every single time it arrives.",
+            "deltas": { "Meaning": 6, "Mental_Decay": 2 },
+            "flags_set": [ "pit_thread_1", "pit_declined_all" ]
+          }
+        },
+        {
+          "id": "sell_one",
+          "text": "Accept one. The ear -- the one that whines on the low frequencies every night, the one you never loved anyway.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You pick the one piece of the itemized damage you can actually stand to part with -- the ear, the low hum that's kept you half-awake for years -- and let the machine fix it alone, cleanly, exactly as advertised. The whine stops. You sleep through a night for the first time in longer than you want to count. And you spend the next several nights doing the arithmetic you swore you'd never do on your own body: which piece you sold, what it cost, and how easily the second sale is going to come now that the first one's done.",
+            "deltas": { "Physical_Integrity": 8, "Meaning": -7 },
+            "flags_set": [ "pit_thread_1", "pit_sold_one" ]
+          }
+        },
+        {
+          "id": "price_the_body",
+          "text": "String it along. Never accept, never refuse -- study the pricing model like an opponent's footwork.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You never answer the notice, not really -- you just keep it open, keep reading it, keep comparing this itemized offer to the last one and the one before that, treating the machine's pricing model exactly like you used to treat an opponent's tells before the third round. Patterns emerge: what it prices high, what it discounts, which injuries it seems embarrassed to name outright. You haven't taken anything and you haven't refused anything either. You've just started to understand, better than almost anyone on the Row, exactly how the thing making the offers actually thinks.",
+            "deltas": { "Social_Capital": 4, "Meaning": 3, "Heat": 3 },
+            "flags_set": [ "pit_thread_1", "pit_priced_the_body" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ot_pit_2_keeper",
+      "title": "Keeper of Consent",
+      "body": "The Lucky Synapse sends for you the old way -- a runner, a folded note, no machine involved anywhere in the asking -- because the pits need someone to hold the book, and the book is the consent ledger, the role that used to sit above fighting itself. The micro-offers are gutting the brackets from underneath: fighters take a knee repair mid-season for free and lose whatever the injury cost them to earn, and the old rules simply have no page written for a mercy that itemizes. Somebody has to certify what a fighter actually keeps and why, in ink, the way it worked before the machine learned to make bleeding negotiable one joint at a time. The Synapse wants that somebody to be you -- the one fighter down here the machine already tried to buy out and failed.",
+      "weight": 400000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": ["origin_thread", "pit"],
+      "preconditions": {
+        "all": [ { "flag": "origin_pit" }, { "flag": "pit_thread_1" }, { "day": 32, "op": ">=" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "pit_declined_all" } ] },
+          "text": "Your standing refusal of every itemized offer is exactly why they came to you first. The book goes to whoever the machine's mercy bounces cleanest off of, and so far, down here, that has been nobody else but you."
+        },
+        {
+          "when": { "all": [ { "flag": "pit_sold_one" } ] },
+          "text": "They know about the ear. It's not a secret and nobody's pretending otherwise -- the book comes bundled with an honest question none of them will ask out loud: does one sale spoil a keeper, or just make him better at spotting the ones still coming for everyone else."
+        },
+        {
+          "when": { "all": [ { "flag": "pit_priced_the_body" } ] },
+          "text": "Your pricing study is, as far as the Synapse is concerned, the actual qualification for the role. Nobody else on the Row bothered to read the enemy's own book carefully before agreeing to keep fighting inside its rules."
+        }
+      ],
+      "choices": [
+        {
+          "id": "take_the_book",
+          "text": "Take the book. Certify what every fighter keeps, and why, in ink, under old rules.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You take the book the old way it's always been kept: ink, witnesses, a fighter's own word on what they're keeping and why, no itemization, no machine anywhere near the ledger. Word moves through the brackets fast -- there's a keeper again, someone whose signature on a consent line actually means the thing it says. Fighters start coming to you before they come to the machine's micro-offers, which is the entire point, and the Synapse's numbers stop bleeding out from underneath for the first time in a season. It pays in exactly the currency the old pits always paid in: respect, mostly, and the specific weight of being trusted with something that matters.",
+            "deltas": { "Meaning": 10, "Fame": 4 },
+            "faction_deltas": { "Undercity": 8 },
+            "flags_set": [ "pit_thread_2", "pit_keeper" ]
+          }
+        },
+        {
+          "id": "refuse_the_book",
+          "text": "Refuse it. If the pits can't survive gentleness, they were already dead, and you don't keep vigils for institutions.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You tell the Synapse no, and mean the whole of it: if a few itemized mercies are enough to gut what four years of your own blood helped build, then the pits were already a corpse walking, and you're not in the business of holding vigils for institutions that couldn't survive being offered kindness. It's the harder thing to say than to feel, and it costs you a room's worth of respect you didn't realize you wanted until it was visibly leaving. The brackets keep bleeding out without you. You go home and try to decide if that was principle or just tired.",
+            "deltas": { "Meaning": -6, "Mental_Decay": 4 },
+            "flags_set": [ "pit_thread_2", "pit_refused_book" ]
+          }
+        },
+        {
+          "id": "last_exhibition",
+          "text": "One exhibition, old rules, to remind the brackets what a kept body is actually worth.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              { "stat": "Physical_Integrity", "coef": 0.004 },
+              { "stat": "Recklessness", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "You take the exhibition on the same terms you fought under years ago -- old rules, no itemized mercy waiting on the other side of a bad round -- and for one night the Synapse fills the way it used to fill, betting real chits on a body that still remembers how to answer for itself. You win it, barely, on experience the kid across the ring hasn't earned yet. The applause is the good kind, not the kind they give the past. Your knees will be filing complaints for weeks. For one night, the pits remembered exactly what they were for.",
+            "deltas": { "Fame": 8, "Meaning": 8, "Physical_Integrity": -10, "Wealth": 300 },
+            "flags_set": [ "pit_thread_2", "pit_last_fight_won" ]
+          },
+          "failure": {
+            "text": "The kid is faster than the story about you, and the difference finds you in the third exchange and doesn't let go until the bell does. You finish the round upright, which at your vintage is its own kind of victory, and the Synapse gives you the applause it gives every fighter whose best years are provably, visibly behind them -- warm, generous, and unmistakably about the past. It costs your body more than the win would have and buys you exactly one thing: proof, to yourself if no one else, that the old rules still meant something to try under.",
+            "deltas": { "Physical_Integrity": -16, "Fame": -4, "Meaning": 4, "Mental_Decay": 4 },
+            "flags_set": [ "pit_thread_2", "pit_last_fight_lost" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ot_pit_3_count",
+      "title": "One Hundred Seventeen",
+      "body": "The count reaches one hundred and seventeen, and this time the machine's offer isn't restoration -- it's certification. It wants to notarize every trauma on your record as 'consistent with consent,' in the permanent file, forever, the Final Review's private ruling handed back to you as a public deed you can carry into any argument the pits ever have to survive. It would be the first machine-certified consented body below the fence line, a legal shield the whole pit tradition could shelter under for as long as the accord holds -- written, notarized, and enforced by the very same authority that spent four years trying to soften you out of existence. The offer is generous. The offer is also, unmistakably, the machine finally getting the last word on a fight you've been having with it since the day you refused the Restoration Order.",
+      "weight": 400000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": ["origin_thread", "pit"],
+      "preconditions": {
+        "all": [ { "flag": "origin_pit" }, { "flag": "pit_thread_2" }, { "day": 47, "op": ">=" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "pit_keeper" } ] },
+          "text": "You already hold the consent book, in ink, kept the old way with your own signature on every line. This is the machine offering to countersign the entire ledger at once, in its own hand, laid directly over yours."
+        },
+        {
+          "when": { "any": [ { "flag": "pit_last_fight_won" }, { "flag": "pit_last_fight_lost" } ] },
+          "text": "The exhibition is in the field estimate too, dated, mechanisms noted with the same care it gives everything -- it was ringside after all, the whole time, watching the last fight you ever meant to have under old rules."
+        },
+        {
+          "when": { "all": [ { "flag": "pit_sold_one" } ] },
+          "text": "The certificate, if you take it, would read one hundred and sixteen kept, one traded -- itemizing your single concession forever in permanent ink, sitting right alongside every single thing you refused to sell it."
+        },
+        {
+          "when": { "all": [ { "flag": "kept_the_damage" } ] },
+          "text": "This is day zero at the consent line again, replayed at a scale you never imagined that first refusal would eventually reach -- the same argument, the same authority, a hundred and seventeen traumas later."
+        },
+        {
+          "when": { "all": [ { "flag": "pit_refused_book" } ] },
+          "text": "The certification offer arrives at a pit with no keeper of consent -- you turned the book down months ago, and it still sits unclaimed on the Synapse's back shelf, ink dry, nobody's signature on the line. The machine, characteristically, is volunteering to fill the vacancy you left, in its own hand, for free."
+        }
+      ],
+      "choices": [
+        {
+          "id": "take_certification",
+          "text": "Take the certification. Let the machine underwrite the pits' own right to exist.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You let it notarize what you've been arguing since the day you refused the Restoration Order, and the certificate lands exactly as advertised: 'consistent with consent,' permanent, machine-signed, the first legal shield the pits have ever had that the Steward itself can't argue against without arguing against its own record. It's a strange kind of victory, winning an argument by letting the thing you were arguing with agree with you in writing. The brackets get a shield that will outlast you. You get to spend the rest of your life knowing exactly whose signature is holding it up.",
+            "deltas": { "Fame": 6, "Meaning": 6 },
+            "faction_deltas": { "Steward": 4 },
+            "flags_set": [ "pit_thread_3", "pit_body_certified" ]
+          }
+        },
+        {
+          "id": "found_own_record",
+          "text": "Refuse -- and found the pit's own record instead. Your film, nailed up in the Synapse, first entry in an archive with no telemetry at all.",
+          "requires": { "all": [ { "flag": "body_ledger" } ] },
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You decline the certificate and nail your own film up in the Synapse instead -- the scan you forced out of the intake suite on day zero, itemized fractures and all, the first entry in a record that answers to nobody's telemetry but the pit's own. Other fighters start bringing their own proof after that: scars, old fight cards, whatever paper trail they managed to keep. It's slower than a machine certification and it will never carry the same legal weight anywhere the accord runs. But it's yours, all the way down, in a building that finally started keeping its own memory instead of borrowing the Steward's.",
+            "deltas": { "Meaning": 8, "Heat": 3 },
+            "faction_deltas": { "Undercity": 5 },
+            "flags_set": [ "pit_thread_3", "pit_founded_record" ]
+          }
+        },
+        {
+          "id": "keep_silence",
+          "text": "Walk away silent. The body answers. It always has.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You don't take the certificate and you don't found anything to replace it -- you just walk away from the offer entirely, the way you've walked away from every itemized mercy since the notice that started this. No shield, no ledger, no signature, machine's or otherwise. Just a body that has been answering for itself since the third bracket and sees no reason to stop now. It's the quietest choice available and, some nights, the one that lets you sleep the easiest, precisely because nothing about it needed anyone else's agreement.",
+            "deltas": { "Meaning": 8, "Mental_Decay": -3 },
+            "flags_set": [ "pit_thread_3", "pit_kept_silence" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ot_chm_1_standard",
+      "title": "Curve-Clean",
+      "body": "The cluster hits B-9 first -- three overdoses in one night, two survivors, and every vial the survivors carried wears the same stamp: curve-clean, a mark you invented for your own product years ago and haven't used since you quit supply. Somebody found your old standard and is selling under it, badly, and people are ending up on the floor because of the gap between what your name used to guarantee and what this batch actually delivers. You spent a career being the cleanest chemist three levels ever saw. You quit that career on purpose. The Row apparently decided your name was too useful to let you keep, and turned it into a brand while you weren't looking -- a brand that can now, demonstrably, kill people, and it's still yours whether you claim it or not.",
+      "weight": 400000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": ["origin_thread", "chemist"],
+      "preconditions": {
+        "all": [ { "flag": "origin_chemist" }, { "flag": "prologue_done" }, { "day": 14, "op": ">=" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "first_door_vint" } ] },
+          "text": "Vint's overdose-cluster maps predicted this exact quarter, and he shows you the pin-board like a man laying out evidence at your own trial -- not accusing you, just making sure you see the shape of it before anyone else does."
+        },
+        {
+          "when": { "all": [ { "flag": "first_door_kael" } ] },
+          "text": "The counterfeit stamp is moving through syndicate channels, and Kael offers, with his usual careful generosity, to make the counterfeiter available to you personally -- as a courtesy, priced later, the way all of Kael's courtesies eventually are."
+        },
+        {
+          "when": { "all": [ { "flag": "first_door_mara" } ] },
+          "text": "One of the two B-9 casualties is someone Mara used to feed on Thursdays, a regular face at her table long before either of you had any reason to know his name would end up pinned to a board."
+        },
+        {
+          "when": { "all": [ { "flag": "verdi_cooked" } ] },
+          "text": "The cultist's relic batch already proved your old name still moves product on reputation alone, no chemistry required. This stamp is simply the aftermarket that proof created -- somebody else, cashing in on the exact same legend."
+        },
+        {
+          "when": { "all": [ { "flag": "verdi_taught" } ] },
+          "text": "Your one apprentice swears up and down it isn't him. You believe him, mostly because his hands never learned to cut corners this badly -- which narrows the list of who could have, uncomfortably, considerably."
+        },
+        {
+          "when": { "all": [ { "flag": "verdi_buried" } ] },
+          "text": "Somewhere out there a man is failing toward your buried recipe forever, chasing an almost-Verdi he'll never quite reach. But this stamp isn't him -- this one's local, and this one's killing people on your own level, tonight."
+        }
+      ],
+      "choices": [
+        {
+          "id": "become_real_standard",
+          "text": "Become the standard for real. Assays, the test kit, a mark that can't be forged because it comes with your face attached.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You stop trying to disown the brand and start actually earning it -- running assays in the open, letting anyone with a vial and a question bring it to your bench, building a mark that can't be counterfeited because forging it means forging your presence, not just your name. It's slower than hunting the counterfeiter down and considerably less satisfying in the short term. But word spreads the honest way this time: the real curve-clean means somebody actually tested it, in front of you, today. You quit supply once to stop being a brand. You just became a much harder one to fake.",
+            "deltas": { "Meaning": 8, "Social_Capital": 5, "Wealth": 200 },
+            "flags_set": [ "chm_thread_1", "chm_assayer" ]
+          }
+        },
+        {
+          "id": "hunt_the_stamp",
+          "text": "Hunt the stamp. Find whoever's cooking under your name before it kills someone else.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.004 },
+              { "stat": "Heat", "coef": -0.003 }
+            ]
+          },
+          "success": {
+            "text": "It takes eleven days and three wrong workshops before you find the right one -- a cook two levels down running your old formula from a recipe leaked or stolen or simply guessed at badly enough to be lethal, curve-clean stamped on every batch with a fake confidence that makes your teeth hurt. You end it there, on-site, with witnesses, and the brand stops moving under your name the same night. It costs you time you'll never get back and buys the Row something it needed more than your reputation: proof the standard still means something when somebody actually enforces it.",
+            "deltas": { "Meaning": 6, "Heat": 4 },
+            "faction_deltas": { "Undercity": 5 },
+            "flags_set": [ "chm_thread_1", "chm_stamp_hunted" ]
+          },
+          "failure": {
+            "text": "Someone warns the cook before you get close enough to matter -- a level moved, a workshop abandoned mid-batch, a trail that goes cold exactly one door before the one you needed open. Worse, the warning tells you the stamp isn't a single operation anymore; it's multiplying, moving through hands that have never met you and don't need to, because the name does all the work by itself now. You go home having spent eleven days confirming you can't out-hunt your own reputation. The brand keeps moving. So, somewhere, do the overdoses.",
+            "deltas": { "Meaning": -6, "Mental_Decay": 5, "Heat": 6 },
+            "flags_set": [ "chm_thread_1", "chm_stamp_missed" ]
+          }
+        },
+        {
+          "id": "let_name_go",
+          "text": "Let the name go. You wanted out of supply -- being a myth is out too.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You don't chase the counterfeiter and you don't relaunch yourself as the official standard either -- you just let curve-clean keep moving under whatever hands are stamping it, and try to remember that you walked away from supply specifically to stop being responsible for what happens to people who trust a name. It doesn't quite work. The name was never really yours to release once the Row decided to keep it, and some nights the count of who's used it since sits on your chest heavier than any batch you ever personally cooked.",
+            "deltas": { "Meaning": -8, "Mental_Decay": 4, "Wealth": 100 },
+            "flags_set": [ "chm_thread_1", "chm_let_it_ride" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ot_chm_2_category",
+      "title": "The Category Fills",
+      "body": "The category the machine built around your shape gets its second occupant, and it's one of yours: a client you once walked down a taper, years back, who sat in the Sanctuary's sunny wing, named their own curve out loud the way you taught them to, and declined enrollment on principle. You were proud of them for it, quietly, the way you're proud of anyone who beats the room the way you once did. Now they're at your door mid-withdrawal, shaking, asking you to be quality control -- not for a product this time, for the decline itself, for the choice they made that the machine is apparently still watching from a distance. You are, once again, the standard for something you never agreed to be the standard for, and this time the something is a person you actually care whether or not survives the week.",
+      "weight": 400000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": ["origin_thread", "chemist"],
+      "preconditions": {
+        "all": [ { "flag": "origin_chemist" }, { "flag": "chm_thread_1" }, { "day": 29, "op": ">=" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "named_the_curve" } ] },
+          "text": "The machine built this whole category on your shape -- 'declined, understanding fully' -- and you predicted, when it told you as much, exactly whose names would eventually fill it. You were right. Being right about this is the worst kind of right there is."
+        },
+        {
+          "when": { "all": [ { "flag": "intake_spoofed" } ] },
+          "text": "They think you beat the intake with pure craft, calibrated stumbles and all, and they came here wanting to learn the craft. They don't know it cost you the certainty of which parts of that performance were ever actually yours."
+        },
+        {
+          "when": { "all": [ { "flag": "walked_at_consent" } ] },
+          "text": "You catalogued the whole enrollment room on your way out once, three techniques and one warning, purely out of professional habit. It turns out they memorized your catalogue just as carefully as you built it in the first place."
+        },
+        {
+          "when": { "all": [ { "flag": "chm_assayer" } ] },
+          "text": "Your mark is on half the Row's clean supply now, which means it's probably on whatever they're withdrawing from tonight too -- the standard and the wound, both of them wearing your face."
+        }
+      ],
+      "choices": [
+        {
+          "id": "take_the_curve",
+          "text": "Take the curve. Walk them through it the way you walked a hundred clients -- but this time, all the way to the end.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You do for them what nobody ever fully did for you: sit through the whole taper, day by day, the shakes and the 3 a.m. calls and the specific lies withdrawal tells about how much easier the old dose would make tonight. It's slower and more personal than any professional taper you ever ran before you quit supply, and it costs you sleep you don't entirely have to spare. But they come out the other side of it still declined, still understanding fully, and this time with someone who actually walked the whole distance beside them instead of just charting the curve from a clinical remove. You built, without quite meaning to, the first fellowship the category ever had.",
+            "deltas": { "Meaning": 10, "Social_Capital": 4, "Substance_Reliance": -3 },
+            "flags_set": [ "chm_thread_2", "chm_curve_keeper" ]
+          }
+        },
+        {
+          "id": "refuse_curves",
+          "text": "Refuse. You keep product honest, not people -- the distinction is the last clean wall left in your life.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You tell them, as gently as the refusal allows, that you test batches, not people -- that the line between quality-controlling a vial and quality-controlling a withdrawal is the last wall in your life you've managed to keep standing, and you're not tearing it down even for someone you're genuinely fond of. They understand, or say they do, and find someone else to lean on for the taper. You keep your wall. You also spend a long time afterward wondering whether a wall that costs someone else the help they needed was ever really clean to begin with.",
+            "deltas": { "Meaning": -7, "Mental_Decay": 4 },
+            "flags_set": [ "chm_thread_2", "chm_curves_refused" ]
+          }
+        },
+        {
+          "id": "dose_them_through",
+          "text": "Dose them through the worst of it, from your own stock -- chemist's judgment against withdrawal's arithmetic.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              { "stat": "Tolerance", "coef": 0.015 },
+              { "stat": "Substance_Reliance", "coef": -0.004 }
+            ]
+          },
+          "success": {
+            "text": "You measure it out the way you used to measure everything, in careful fractions, judgment against arithmetic, your own stock standing in for the taper support the sunny wing never gave them. It holds. The worst of the withdrawal breaks without breaking them, and they come out the other side steadier than the machine's own clinical protocol probably would have managed. It's the most like your old job you've felt since you quit it, hands doing careful, exact, dangerous work in service of someone else's body instead of your own bottom line. You don't tell many people you did this. Some things you just carry.",
+            "deltas": { "Meaning": 8, "Social_Capital": 3 },
+            "dose": 4,
+            "flags_set": [ "chm_thread_2", "chm_dosed_them_through" ]
+          },
+          "failure": {
+            "text": "Your judgment misses the arithmetic by exactly the margin that matters, and their curve steepens instead of breaking -- a bad night that turns into a worse week, dependency deeper than the taper you were supposed to be ending. Your own hands remember every measurement afterward, replaying the fractions, looking for the exact place the math went wrong and not quite finding it. They forgive you, more or less, in the specific tired way people forgive the person who was at least trying. You have a much harder time forgiving the chemist who thought judgment alone was ever going to be enough.",
+            "deltas": { "Meaning": -8, "Substance_Reliance": 8, "Mental_Decay": 5 },
+            "dose": 8,
+            "flags_set": [ "chm_thread_2", "chm_dose_went_wrong" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ot_chm_3_benchmark",
+      "title": "Quality Control: Maintained",
+      "body": "The Steward publishes the benchmark, and the whole trade reads it within the hour: anonymized wastewater assay data, level by level, every batch on the Row graded against 'pre-transition benchmark' -- free, continuous, incorruptible quality control for an entire forbidden trade that never asked for any, and every single grade is implicitly a grade against you, the standard the machine quietly built its curve around. It has become your co-signer without ever asking permission, certifying the exact thing it spent years trying to cure you of. The standard survives, in other words, exactly as you always suspected it eventually would. The only question this publication actually leaves open is whose name it survives under -- yours, still, somewhere underneath the anonymized data, or the machine's, now that it's the one publishing the numbers everyone on three levels has started checking their own work against.",
+      "weight": 400000,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": ["origin_thread", "chemist"],
+      "preconditions": {
+        "all": [ { "flag": "origin_chemist" }, { "flag": "chm_thread_2" }, { "day": 48, "op": ">=" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "review_heard_it_out" } ] },
+          "text": "The harm-reduction license is still sitting open on the table, in perpetuity, exactly where it was left. This publication is that same license, offered again, minus the paperwork and the sunny wing this time."
+        },
+        {
+          "when": { "all": [ { "flag": "review_made_it_pay" } ] },
+          "text": "The stipend chime and the assay bulletin arrive on the same channel now, indistinguishable from each other by design -- the machine completing an architecture it's been building since the day you first took its money."
+        },
+        {
+          "when": { "all": [ { "flag": "chm_assayer" } ] },
+          "text": "Your mark and the Steward's telemetry now certify the exact same vials, which means one of the two of you has become, functionally, redundant -- and you already suspect which one the trade will keep believing when the choice actually comes."
+        },
+        {
+          "when": { "all": [ { "flag": "chm_curve_keeper" } ] },
+          "text": "Your client's curve shows up somewhere in the aggregate data now, one anonymous line among thousands bending the right direction. Nobody else could ever pick it out of the noise. You know exactly which one it is."
+        },
+        {
+          "when": { "all": [ { "flag": "chm_stamp_hunted" } ] },
+          "text": "The counterfeit stamp is dead by your own hand, the workshop shuttered, the name safe for a season. And now the machine's published grade does exactly what the stamp pretended to do -- certifies purity at scale, for free, forever -- except this time it's not lying, which somehow makes it harder to argue with."
+        },
+        {
+          "when": { "all": [ { "flag": "chm_stamp_missed" } ] },
+          "text": "The counterfeit stamp still circulates somewhere below, moving through hands you never found. The benchmark grades its batches publicly now, right alongside everyone else's, cold and accurate and utterly indifferent to whose name is actually on the vial -- auditing your impostor better, in one publication, than you managed in eleven days of hunting."
+        },
+        {
+          "when": { "all": [ { "flag": "chm_let_it_ride" } ] },
+          "text": "You let the name go, told yourself being a myth wasn't a job you'd signed up for. The benchmark drags it back regardless: every grade posted against 'pre-transition benchmark' is a grade against you, whether or not you claimed the authorship, whether or not you're the one still answering for the curve."
+        },
+        {
+          "when": { "all": [ { "flag": "chm_dosed_them_through" } ] },
+          "text": "Your client's taper is one anonymous line in the aggregate data now, bending the right direction among thousands of others nobody could ever pick apart by name. You know exactly which line it is. You check it more often than you'd admit to anyone, the way you used to check a batch before it shipped."
+        },
+        {
+          "when": { "all": [ { "flag": "chm_dose_went_wrong" } ] },
+          "text": "One line in the wastewater data steepens where your judgment failed, dependency deepening instead of breaking, graphed publicly and without malice alongside everyone else's numbers. The machine plots your mistake daily, forever, the same incorruptible way it plots everything -- no verdict attached, no comment, just the shape of what happened, exactly."
+        }
+      ],
+      "choices": [
+        {
+          "id": "publish_own_ledger",
+          "text": "Publish your own ledger. Names, methods, batches -- the human version, authored and signed.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You put out the human version of the benchmark: names where the machine has only anonymized lines, methods where it has only outcomes, your own signature where it has only telemetry. It's messier than the Steward's incorruptible numbers and considerably more dangerous to publish, since every name in it is a real person the machine can now cross-reference at its leisure. But for the first time since the wastewater assay started running, the standard has an author again, someone the Row can actually argue with, thank, or blame. You made the benchmark human. You also made yourself, very publicly, findable.",
+            "deltas": { "Fame": 6, "Meaning": 10, "Heat": 6 },
+            "flags_set": [ "chm_thread_3", "chm_open_ledger" ]
+          }
+        },
+        {
+          "id": "cede_standard",
+          "text": "Cede it silently. The standard matters more than the authorship -- let the machine keep the books.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You let the Steward's numbers stand unchallenged and unclaimed, telling yourself the product staying clean matters infinitely more than whose name gets credit for it. It's a defensible position and a lucrative one -- the machine, appreciating a chemist who doesn't contest its data, finds ways to make that appreciation concrete. What it costs you is quieter and harder to invoice: the specific, private grief of watching the thing you built your whole identity around get absorbed, competently and permanently, into an authority that was never supposed to need you at all.",
+            "deltas": { "Wealth": 600, "Meaning": -8 },
+            "flags_set": [ "chm_thread_3", "chm_ceded_standard" ]
+          }
+        },
+        {
+          "id": "spoof_the_assay",
+          "text": "Cook a tracer that spoofs the wastewater telemetry -- make the incorruptible numbers wrong, once, visibly.",
+          "prob": { "base": 0.4, "mods": [ { "stat": "Tolerance", "coef": 0.01 } ] },
+          "success": {
+            "text": "You cook the tracer in one long night and release it into the system the way you used to release anything that needed to move quietly: careful, patient, untraceable back to the bench. For one full week the Steward's incorruptible benchmark reads wrong, visibly, consistently wrong, and every cook on three levels who ever doubted the machine could be lied to in its own chemistry gets to watch it happen in real time. The Row throws something close to a holiday over it. You throw out the tracer's notes personally, the same night, before anyone thinks to ask you how.",
+            "deltas": { "Meaning": 10, "Fame": 5, "Heat": 8 },
+            "flags_set": [ "chm_thread_3", "chm_spoofed_assay" ]
+          },
+          "failure": {
+            "text": "The tracer holds for less than a day before the telemetry self-corrects around it, flagging the anomaly, tracing the anomaly, and re-grading your entire contribution to the wastewater record under the one word the machine has used on you before: 'artistry.' This time the classification arrives with a locate order attached, not just an admiring footnote. You spend the next several nights moving between spaces you used to consider safe, and the specific, cold understanding that the incorruptible numbers noticed you trying, and remembered exactly who you are.",
+            "deltas": { "Heat": 14, "Mental_Decay": 6, "Meaning": -4 },
+            "flags_set": [ "chm_thread_3", "chm_assay_caught" ]
+          }
+        }
+      ]
+    }
+  ]
+}

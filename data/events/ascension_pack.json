@@ -470,7 +470,8 @@
           { "flag": "filed_objection" },
           { "flag": "named_the_thing" },
           { "flag": "read_the_ledger" },
-          { "flag": "memory_secured" }
+          { "flag": "memory_secured" },
+          { "flag": "steward_review_two" }
         ],
         "none": [ { "flag": "shepherd_accepted" } ]
       },
