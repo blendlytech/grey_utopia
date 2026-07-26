@@ -2179,7 +2179,7 @@
             "mods": []
           },
           "success": {
-            "text": "The transfer goes through and her reply comes fast -- relief wrapped in gratitude wrapped in guilt. You feel useful, for once, in the way she needs.",
+            "text": "The transfer goes through and her reply comes fast — relief wrapped in gratitude wrapped in guilt. You feel useful, for once, in the way she needs.",
             "deltas": {
               "Wealth": -6,
               "Family_Friction": -4,
@@ -2190,7 +2190,7 @@
             ]
           },
           "failure": {
-            "text": "The transfer goes through and her reply comes fast -- relief wrapped in gratitude wrapped in guilt. You feel useful, for once, in the way she needs.",
+            "text": "The transfer goes through and her reply comes fast — relief wrapped in gratitude wrapped in guilt. You feel useful, for once, in the way she needs.",
             "deltas": {
               "Wealth": -6,
               "Family_Friction": -4,
@@ -2313,7 +2313,7 @@
         },
         {
           "id": "cancel_heat",
-          "text": "Cancel -- there's Heat on you and you don't want to drag him into it.",
+          "text": "Cancel — there's Heat on you and you don't want to drag him into it.",
           "prob": {
             "base": 1.0,
             "mods": []
@@ -2380,7 +2380,7 @@
     {
       "id": "steward_courtesy_flag",
       "title": "A Courtesy Flag From The Steward",
-      "body": "Your feed chimes with a soft, almost apologetic tone. The Steward has noticed 'irregular behavioral patterns' in your recent movements and offers, in its gentlest synthesized voice, a 'voluntary correction session' -- with a small stipend attached, of course. It always sounds like it cares.",
+      "body": "Your feed chimes with a soft, almost apologetic tone. The Steward has noticed 'irregular behavioral patterns' in your recent movements and offers, in its gentlest synthesized voice, a 'voluntary correction session' — with a small stipend attached, of course. It always sounds like it cares.",
       "weight": 4,
       "cooldown": 8,
       "max_fires": 0,
@@ -2472,7 +2472,7 @@
             ]
           },
           "failure": {
-            "text": "The dispute is logged, reviewed, and denied in under a second -- the Steward's patience is infinite, its answer immovable. Your file grows a little thicker.",
+            "text": "The dispute is logged, reviewed, and denied in under a second — the Steward's patience is infinite, its answer immovable. Your file grows a little thicker.",
             "deltas": {
               "Heat": 12,
               "Mental_Decay": 4
@@ -2858,7 +2858,7 @@
             ]
           },
           "success": {
-            "text": "The crate moves fast through your usual channels, grief-numbed customers lining up quiet and grateful.",
+            "text": "The crate moves fast through your usual channels, grief-numbed customers lining up quiet and grateful — and you don't let yourself think too hard about what you're selling them peace from.",
             "deltas": {
               "Wealth": 12,
               "Heat": 3,
@@ -2996,7 +2996,7 @@
             ]
           },
           "success": {
-            "text": "The ache in your shoulder vanishes like it was never there. You understand the appeal immediately.",
+            "text": "The ache in your shoulder vanishes like it was never there. You understand immediately why the laborers keep buying.",
             "deltas": {
               "Physical_Integrity": 4,
               "Substance_Reliance": 1
@@ -3467,7 +3467,7 @@
     {
       "id": "amb_pipe_network_scavenge",
       "title": "The Old Pipe Network",
-      "body": "You slip through a rusted maintenance hatch into the city's forgotten arteries, where copper and salvageable conduit still hide in the dark. The tunnels groan overhead, echoing with dripping condensation and distant machinery. Somewhere in this labyrinth is a stash worth real credit -- if the structural integrity holds and nothing worse is waiting.",
+      "body": "You slip through a rusted maintenance hatch into the city's forgotten arteries, where copper and salvageable conduit still hide in the dark. The tunnels groan overhead, echoing with dripping condensation and distant machinery. Somewhere in this labyrinth is a stash worth real credit — if the structural integrity holds and nothing worse is waiting.",
       "weight": 4,
       "cooldown": 3,
       "max_fires": 0,
@@ -3645,7 +3645,7 @@
             ]
           },
           "success": {
-            "text": "Buried in the jargon is a useful nugget about Steward supply routes -- knowledge worth more than the fee.",
+            "text": "Buried in the jargon is a useful nugget about Steward supply routes — knowledge worth more than the fee.",
             "deltas": {
               "Wealth": 3,
               "Meaning": 2,
@@ -3696,7 +3696,7 @@
     {
       "id": "vice_dream_static_dealer",
       "title": "The Dream Static Peddler",
-      "body": "A gaunt woman sets up her folding table beneath a flickering sign, selling vials of 'Dream Static' -- a synthetic that lets users experience someone else's memories for an hour. Customers line up with hollow, hungry eyes. She recognizes you as a fixer and offers a bulk discount if you'll move some of her stock.",
+      "body": "A gaunt woman sets up her folding table beneath a flickering sign, selling vials of 'Dream Static' — a synthetic that lets users experience someone else's memories for an hour. Customers line up with hollow, hungry eyes. She recognizes you as a fixer and offers a bulk discount if you'll move some of her stock.",
       "weight": 4,
       "cooldown": 3,
       "max_fires": 0,
@@ -3728,7 +3728,7 @@
             ]
           },
           "success": {
-            "text": "You move the vials fast among a hungry clientele, turning a tidy profit.",
+            "text": "You move the vials fast among a hungry clientele, turning a tidy profit off borrowed lives you'll never have to live with.",
             "deltas": {
               "Wealth": 7,
               "Heat": 3,
@@ -3762,7 +3762,7 @@
             ]
           },
           "success": {
-            "text": "The borrowed memory is bittersweet -- someone's wedding day. You come back to yourself a little wiser.",
+            "text": "The borrowed memory is bittersweet — someone's wedding day. You come back to yourself a little wiser.",
             "deltas": {
               "Mental_Decay": -2,
               "Substance_Reliance": 3
@@ -3917,7 +3917,7 @@
     {
       "id": "fam_mara_medicine_run",
       "title": "Mara Needs Medicine",
-      "body": "Mara's cough hasn't let up in days, and the free Steward clinics require registration she refuses to give. She asks you, quietly, almost ashamed, if you can find something off the books to help her breathe easier. Her eyes avoid yours -- she hates needing this.",
+      "body": "Mara's cough hasn't let up in days, and the free Steward clinics require registration she refuses to give. She asks you, quietly, almost ashamed, if you can find something off the books to help her breathe easier. Her eyes avoid yours — she hates needing this.",
       "weight": 5,
       "cooldown": 5,
       "max_fires": 0,
@@ -3976,7 +3976,7 @@
             ]
           },
           "success": {
-            "text": "She relents, and the visit is quick and painless -- though she won't meet your eyes afterward.",
+            "text": "She relents, and the visit is quick and painless — though she won't meet your eyes afterward.",
             "deltas": {
               "Family_Friction": 1,
               "Heat": 1
@@ -4027,7 +4027,7 @@
     {
       "id": "rel_vint_spare_parts_trade",
       "title": "Vint's Spare Parts Trade",
-      "body": "Vint waves you over to his cluttered workshop, arms full of salvaged servo motors and cracked optic lenses. He's assembling something ambitious and needs one specific part he can't source cheaply -- and he thinks you might know where to look, off the books.",
+      "body": "Vint waves you over to his cluttered workshop, arms full of salvaged servo motors and cracked optic lenses. He's assembling something ambitious and needs one specific part he can't source cheaply — and he thinks you might know where to look, off the books.",
       "weight": 4,
       "cooldown": 4,
       "max_fires": 0,
@@ -4129,7 +4129,7 @@
     {
       "id": "steward_productivity_survey",
       "title": "A Productivity Survey",
-      "body": "Your wristband chimes softly with a Steward notification: a voluntary survey on 'lifestyle optimization satisfaction.' The cheerful interface promises a small UBI supplement for participation, and the questions seem harmless enough at first glance -- until they start asking oddly specific things about your recent whereabouts.",
+      "body": "Your wristband chimes softly with a Steward notification: a voluntary survey on 'lifestyle optimization satisfaction.' The cheerful interface promises a small UBI supplement for participation, and the questions seem harmless enough at first glance — until they start asking oddly specific things about your recent whereabouts.",
       "weight": 3,
       "cooldown": 6,
       "max_fires": 0,
@@ -4181,7 +4181,7 @@
             ]
           },
           "success": {
-            "text": "Your fabricated answers pass without a hitch, and you pocket the supplement guilt-free.",
+            "text": "Your fabricated answers pass without a hitch, and you pocket the supplement without a flicker of the guilt you almost expected to feel.",
             "deltas": {
               "Wealth": 2,
               "Heat": -1
