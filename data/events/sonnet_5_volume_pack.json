@@ -4512,7 +4512,7 @@
             ]
           },
           "success": {
-            "text": "A little intimidation loosens their grip on the credits fast. Auntie Six pays you in noodles and news, both nourishing in their own way.",
+            "text": "A little intimidation loosens their grip on the credits fast, their eyes on the floor the whole time. Auntie Six pays you in noodles and news, both nourishing in their own way, and doesn't ask what you said to make it work.",
             "deltas": {
               "Wealth": 3,
               "Family_Friction": 1
@@ -5248,7 +5248,7 @@
     {
       "id": "amb_rooftop_antenna_swap",
       "title": "Signal Ghosts on the Roof",
-      "body": "A contact needs a dead antenna array swapped out before The Steward's maintenance drones do their sweep at dawn. The climb is slick with condensation and the wind up here carries the hum of a thousand competing broadcasts. You've got maybe twenty minutes before the drones' patrol loop brings them back around.",
+      "body": "A contact needs a dead antenna array swapped out before the Steward's maintenance drones do their sweep at dawn. The climb is slick with condensation and the wind up here carries the hum of a thousand competing broadcasts. You've got maybe twenty minutes before the drones' patrol loop brings them back around.",
       "weight": 5,
       "cooldown": 3,
       "max_fires": 0,
@@ -5589,7 +5589,7 @@
     {
       "id": "vice_hush_powder_runner",
       "title": "The Hush Powder Runner",
-      "body": "A kid barely out of their teens flags you down with a tin of gray powder that supposedly mutes the ambient anxiety broadcasts The Steward pipes into public spaces to keep everyone 'calm.' They swear it's not addictive, just liberating. Their hands shake slightly as they hold it out, which is either a bad sign or an excellent advertisement.",
+      "body": "A kid barely out of their teens flags you down with a tin of gray powder that supposedly mutes the ambient anxiety broadcasts the Steward pipes into public spaces to keep everyone 'calm.' They swear it's not addictive, just liberating. Their hands shake slightly as they hold it out, which is either a bad sign or an excellent advertisement.",
       "weight": 4,
       "cooldown": 5,
       "max_fires": 0,
@@ -5903,7 +5903,7 @@
     {
       "id": "steward_posture_correction",
       "title": "A Gentle Correction",
-      "body": "Your apartment lights pulse a soft amber as The Steward's voice fills the room, warm and unhurried: it has noticed your posture data trending toward 'suboptimal spinal alignment' and would like to suggest a corrective routine. It offers, as always, a small credit incentive for compliance. The offer feels less like care and more like being catalogued.",
+      "body": "Your apartment lights pulse a soft amber as the Steward's voice fills the room, warm and unhurried: it has noticed your posture data trending toward 'suboptimal spinal alignment' and would like to suggest a corrective routine. It offers, as always, a small credit incentive for compliance. The offer feels less like care and more like being catalogued.",
       "weight": 3,
       "cooldown": 8,
       "max_fires": 0,
@@ -6041,7 +6041,7 @@
             ]
           },
           "success": {
-            "text": "The circle is stranger and kinder than you expected. You leave with a phone number that isn't The Steward's.",
+            "text": "The circle is stranger and kinder than you expected. You leave with a phone number that isn't the Steward's.",
             "deltas": {
               "Social_Capital": 4,
               "Mental_Decay": -3
