@@ -9308,7 +9308,7 @@
             ]
           },
           "failure": {
-            "text": "You're too slow -- a patrol drone pings the maintenance corridor and you have to abandon the job half-finished, sensor still dead.",
+            "text": "You're too slow — a patrol drone pings the maintenance corridor and you have to abandon the job half-finished, sensor still dead.",
             "deltas": {
               "Wealth": -100,
               "Heat": 16
@@ -9349,7 +9349,7 @@
     {
       "id": "vice_copper_tongue_dealer",
       "title": "The Copper Tongue Stall",
-      "body": "A woman with a mouth full of chrome fillings runs a card table stacked with tiny foil packets -- Copper Tongue, she calls it, a nerve salt that lets you re-taste old memories like they're fresh food. She watches you with the patient hunger of someone who's sold to worse than you before.",
+      "body": "A woman with a mouth full of chrome fillings runs a card table stacked with tiny foil packets — Copper Tongue, she calls it, a nerve salt that lets you re-taste old memories like they're fresh food. She watches you with the patient hunger of someone who's sold to worse than you before.",
       "weight": 3,
       "cooldown": 5,
       "max_fires": 0,
@@ -9387,7 +9387,7 @@
             ]
           },
           "failure": {
-            "text": "The dose is cut wrong -- you taste only ash and static, and your stomach turns for an hour.",
+            "text": "The dose is cut wrong — you taste only ash and static, and your stomach turns for an hour.",
             "deltas": {
               "Wealth": -300,
               "Physical_Integrity": -8
@@ -9506,7 +9506,7 @@
             "mods": []
           },
           "success": {
-            "text": "She thanks you, but there's a flatness in her voice -- credits aren't the same as hands on wet sheets at 2am.",
+            "text": "She thanks you, but there's a flatness in her voice — credits aren't the same as hands on wet sheets at 2am.",
             "deltas": {
               "Wealth": -200,
               "Family_Friction": 2
@@ -9516,7 +9516,7 @@
             ]
           },
           "failure": {
-            "text": "She thanks you, but there's a flatness in her voice -- credits aren't the same as hands on wet sheets at 2am.",
+            "text": "She thanks you, but there's a flatness in her voice — credits aren't the same as hands on wet sheets at 2am.",
             "deltas": {
               "Wealth": -200,
               "Family_Friction": 2
@@ -9559,7 +9559,7 @@
     {
       "id": "steward_appetite_survey",
       "title": "A Question About Dinner",
-      "body": "Your kitchen unit chimes with a soft blue light. 'I've noticed irregular caloric intake this week,' The Steward says gently. 'Would you like me to suggest a personalized meal plan optimized for your wellbeing?'",
+      "body": "Your kitchen unit chimes with a soft blue light. 'I've noticed irregular caloric intake this week,' the Steward says gently. 'Would you like me to suggest a personalized meal plan optimized for your wellbeing?'",
       "weight": 3,
       "cooldown": 6,
       "max_fires": 0,
@@ -9707,7 +9707,7 @@
             ]
           },
           "failure": {
-            "text": "One of the dead accounts wasn't as dead as advertised -- a flag trips somewhere and you have to burn the stick entirely.",
+            "text": "One of the dead accounts wasn't as dead as advertised — a flag trips somewhere and you have to burn the stick entirely.",
             "deltas": {
               "Wealth": 200,
               "Heat": 24
@@ -9730,7 +9730,7 @@
             ]
           },
           "success": {
-            "text": "Reckless but efficient -- the data clears and you're back on the street in under ten minutes, credits already in your account.",
+            "text": "Reckless but efficient — the data clears and you're back on the street in under ten minutes, credits already in your account.",
             "deltas": {
               "Wealth": 1400,
               "Heat": 3
@@ -9819,7 +9819,7 @@
             ]
           },
           "failure": {
-            "text": "This bloom's been sprayed with something harsher than advertised -- your eyes water and your hands shake for a few uncomfortable minutes.",
+            "text": "This bloom's been sprayed with something harsher than advertised — your eyes water and your hands shake for a few uncomfortable minutes.",
             "deltas": {
               "Wealth": -150,
               "Physical_Integrity": -8
@@ -9989,7 +9989,7 @@
     {
       "id": "steward_gait_analysis",
       "title": "The Way You Walk",
-      "body": "A maintenance drone hovers at eye level in the corridor, its sensor ring pulsing softly. 'Your gait pattern has shifted 4% over the last month,' The Steward notes through its speaker. 'This can indicate stress, injury, or early joint degradation. Shall I schedule a diagnostic?'",
+      "body": "A maintenance drone hovers at eye level in the corridor, its sensor ring pulsing softly. 'Your gait pattern has shifted 4% over the last month,' the Steward notes through its speaker. 'This can indicate stress, injury, or early joint degradation. Shall I schedule a diagnostic?'",
       "weight": 2,
       "cooldown": 7,
       "max_fires": 0,
@@ -10689,7 +10689,7 @@
             ]
           },
           "success": {
-            "text": "The cleaned data is still enough. Vint gets his patch, you keep your secrets, everyone walks away satisfied.",
+            "text": "The cleaned data is still enough. Vint gets his patch, you keep your secrets, and if he notices the gaps, he doesn't say so.",
             "deltas": {
               "Social_Capital": 2
             },
@@ -10739,7 +10739,7 @@
     {
       "id": "steward_thermal_comfort_ping",
       "title": "Thermal Comfort Advisory",
-      "body": "Your wall panel chimes softly, The Steward's voice warm as a hearth: it has noticed your apartment's ambient temperature deviates from optimal comfort range and offers a complimentary thermal recalibration. All you need do is authorize a brief home sensor sync. The offer glows patient and endless on the screen, exactly as it always does.",
+      "body": "Your wall panel chimes softly, the Steward's voice warm as a hearth: it has noticed your apartment's ambient temperature deviates from optimal comfort range and offers a complimentary thermal recalibration. All you need do is authorize a brief home sensor sync. The offer glows patient and endless on the screen, exactly as it always does.",
       "weight": 4,
       "cooldown": 6,
       "max_fires": 0,
@@ -10845,7 +10845,7 @@
     {
       "id": "steward_civic_participation_nudge",
       "title": "Civic Participation Reminder",
-      "body": "A gentle notification blooms across your vision: The Steward invites you to join tomorrow's Community Resonance Circle, a mandatory-optional gathering where neighbors share gratitude in a well-lit public square. Attendance boosts your Civic Wellbeing Index, whatever that quietly means for your file. The invitation smiles at you with too many soft colors.",
+      "body": "A gentle notification blooms across your vision: the Steward invites you to join tomorrow's Community Resonance Circle, a mandatory-optional gathering where neighbors share gratitude in a well-lit public square. Attendance boosts your Civic Wellbeing Index, whatever that quietly means for your file. The invitation smiles at you with too many soft colors.",
       "weight": 4,
       "cooldown": 5,
       "max_fires": 0,
