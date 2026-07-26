@@ -64,9 +64,17 @@ SWITCH_SETTLE_DAY: int = 76
 # underneath this one -- and because 'chose_small_life' still counts as a
 # completion, such a run is barred from the Sanctuary and has to find that
 # reckoning, or the attrition, on its own.
+#
+# The body bar is the bench-work bar: 25 was 'not actively dying', which nobody
+# ever failed, so the clause did nothing. 40 is 'can still do the work' -- the
+# thing the ending is actually about. Note that neither bar is a one-shot test:
+# the endgame check runs every day, so a run held back by either one keeps
+# playing and resolves later if it recovers. That is why moving them separates
+# the strategies far less than their raw distributions suggest, and why the
+# body bar is the milder of the two despite the larger jump.
 SMALL_LIFE_SETTLE_DAY: int = 44
-SMALL_LIFE_MIN_MEANING: float = 74.0
-SMALL_LIFE_MIN_BODY: float = 25.0
+SMALL_LIFE_MIN_MEANING: float = 76.0
+SMALL_LIFE_MIN_BODY: float = 40.0
 
 # Consecutive days at Mental_Decay >= 90 before the Sanctuary takes you. Three
 # was a single bad week: a mind can spike that high on one catastrophic run of

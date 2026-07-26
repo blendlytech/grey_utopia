@@ -602,7 +602,8 @@
         "all": [
           { "day": 30, "op": ">=" },
           { "flag": "world_successor" },
-          { "stat": "Meaning", "op": ">=", "value": 55 }
+          { "stat": "Meaning", "op": ">=", "value": 55 },
+          { "stat": "Mental_Decay", "op": "<=", "value": 55 }
         ],
         "any": [
           { "flag": "told_the_machine" },

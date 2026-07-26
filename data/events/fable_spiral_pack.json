@@ -1100,7 +1100,7 @@
             "deltas": {
               "Heat": 24,
               "Mental_Decay": 10,
-              "Physical_Integrity": -22
+              "Physical_Integrity": -8
             },
             "flags_clear": [
               "exit_ready"
