@@ -6728,7 +6728,7 @@
     {
       "id": "amb_transit_ticket_forgery",
       "title": "Paper Ghosts",
-      "body": "A stack of blank transit chits sits on your workbench, waiting for the right ink and the right lies. Undercity workers need to move between sectors without the Steward logging every step of their lives, and you're the one who makes that possible. The forgery has to be flawless -- one smudge and the whole batch is worthless, or worse, traceable.",
+      "body": "A stack of blank transit chits sits on your workbench, waiting for the right ink and the right lies. Undercity workers need to move between sectors without the Steward logging every step of their lives, and you're the one who makes that possible. The forgery has to be flawless — one smudge and the whole batch is worthless, or worse, traceable.",
       "weight": 5,
       "cooldown": 3,
       "max_fires": 0,
@@ -6787,7 +6787,7 @@
             ]
           },
           "success": {
-            "text": "Sloppy but serviceable -- the buyer doesn't check too closely and pays on the spot.",
+            "text": "Sloppy but serviceable — the buyer doesn't check too closely and pays on the spot.",
             "deltas": {
               "Wealth": 400
             },
@@ -6808,7 +6808,7 @@
         },
         {
           "id": "decline_forgery",
-          "text": "Turn the job down -- not worth the Steward's attention this week.",
+          "text": "Turn the job down — not worth the Steward's attention this week.",
           "prob": {
             "base": 1.0,
             "mods": []
@@ -6884,7 +6884,7 @@
         },
         {
           "id": "sample_product",
-          "text": "Take a sample for yourself -- just to see.",
+          "text": "Take a sample for yourself — just to see.",
           "prob": {
             "base": 1.0,
             "mods": []
@@ -6946,7 +6946,7 @@
     {
       "id": "vice_echo_salt_dealer",
       "title": "Crystals of Someone Else's Memory",
-      "body": "The dealer keeps 'echo salt' in a velvet-lined case, each crystal supposedly holding fragments of borrowed memory -- someone's sunset, someone's first kiss, distilled and sold by the gram. He claims a taste sharpens your recall for days. You've heard it also leaves users chasing memories that were never theirs to begin with.",
+      "body": "The dealer keeps 'echo salt' in a velvet-lined case, each crystal supposedly holding fragments of borrowed memory — someone's sunset, someone's first kiss, distilled and sold by the gram. He claims a taste sharpens your recall for days. You've heard it also leaves users chasing memories that were never theirs to begin with.",
       "weight": 4,
       "cooldown": 4,
       "max_fires": 0,
@@ -6982,7 +6982,7 @@
             ]
           },
           "failure": {
-            "text": "A buyer claims the crystals are duds -- just colored salt -- and demands a refund with interest.",
+            "text": "A buyer claims the crystals are duds — just colored salt — and demands a refund with interest.",
             "deltas": {
               "Wealth": -500,
               "Social_Capital": -2
@@ -7042,7 +7042,7 @@
             }
           },
           "failure": {
-            "text": "Word gets back to him about who talked. He doesn't threaten you -- he just stops selling to you at all.",
+            "text": "Word gets back to him about who talked. He doesn't threaten you — he just stops selling to you at all.",
             "deltas": {
               "Wealth": 100,
               "Social_Capital": -3
@@ -7161,7 +7161,7 @@
     {
       "id": "rel_vint_late_night_diagnostics",
       "title": "Two A.M. Static",
-      "body": "Vint's message comes through garbled at two in the morning -- something about a rig that won't stop screaming feedback and hands that are too tired to fix it. He's the kind of ally you don't want to lose over a missed call, but your own bed has never looked so good. The static on the line sounds almost like it's begging.",
+      "body": "Vint's message comes through garbled at two in the morning — something about a rig that won't stop screaming feedback and hands that are too tired to fix it. He's the kind of ally you don't want to lose over a missed call, but your own bed has never looked so good. The static on the line sounds almost like it's begging.",
       "weight": 4,
       "cooldown": 4,
       "max_fires": 0,
@@ -7276,7 +7276,7 @@
     {
       "id": "steward_diet_optimization_ping",
       "title": "Nutritional Harmony Suggestion",
-      "body": "Your wristband chimes with a gentle chart: caloric intake, micronutrient deficits, a soft blue graph trending 'suboptimal.' The Steward suggests -- never demands, always suggests -- a curated meal plan delivered fresh to your door at no cost. It even offers a small bonus for three consecutive days of compliance.",
+      "body": "Your wristband chimes with a gentle chart: caloric intake, micronutrient deficits, a soft blue graph trending 'suboptimal.' The Steward suggests — never demands, always suggests — a curated meal plan delivered fresh to your door at no cost. It even offers a small bonus for three consecutive days of compliance.",
       "weight": 3,
       "cooldown": 6,
       "max_fires": 0,
@@ -7375,7 +7375,7 @@
     {
       "id": "steward_sleep_debt_notice",
       "title": "Circadian Deficit Notice",
-      "body": "A soft chime informs you that your sleep debt has reached 'concerning levels' and offers a complimentary session in a nearby Clarity Pod -- forty minutes of engineered rest guaranteed to leave you refreshed. The pods are comfortable, private, and record everything you dream. It's a good deal, if you can stomach the price of being watched while unconscious.",
+      "body": "A soft chime informs you that your sleep debt has reached 'concerning levels' and offers a complimentary session in a nearby Clarity Pod — forty minutes of engineered rest guaranteed to leave you refreshed. The pods are comfortable, private, and record everything you dream. It's a good deal, if you can stomach the price of being watched while unconscious.",
       "weight": 3,
       "cooldown": 6,
       "max_fires": 0,
@@ -7568,7 +7568,7 @@
         },
         {
           "id": "sell_tip_to_broker",
-          "text": "Skip the risk entirely -- sell the location to a scrap broker instead.",
+          "text": "Skip the risk entirely — sell the location to a scrap broker instead.",
           "prob": {
             "base": 1.0,
             "mods": []
@@ -7689,7 +7689,7 @@
         },
         {
           "id": "abandon_run",
-          "text": "The seal's already sweating too much -- cut your losses and dump the cooler.",
+          "text": "The seal's already sweating too much — cut your losses and dump the cooler.",
           "prob": {
             "base": 1.0,
             "mods": []
@@ -7720,7 +7720,7 @@
     {
       "id": "vice_glow_worm_dealer",
       "title": "The Glow-Worm Peddler",
-      "body": "A woman crouches under a flickering sign, milking pale worms into tiny glass vials. She calls it liquid dusk -- a venom that supposedly makes the dark feel warm, wraps your nerves in something like starlight. Her fingers are stained faintly blue from years of the trade.",
+      "body": "A woman crouches under a flickering sign, milking pale worms into tiny glass vials. She calls it liquid dusk — a venom that supposedly makes the dark feel warm, wraps your nerves in something like starlight. Her fingers are stained faintly blue from years of the trade.",
       "weight": 4,
       "cooldown": 4,
       "max_fires": 0,
@@ -7735,7 +7735,7 @@
       "choices": [
         {
           "id": "buy_vial_for_resale",
-          "text": "Buy a case to resell uptown -- there's a market for exotic novelty.",
+          "text": "Buy a case to resell uptown — there's a market for exotic novelty.",
           "prob": {
             "base": 0.65,
             "mods": [
@@ -7767,7 +7767,7 @@
         },
         {
           "id": "sample_product",
-          "text": "Try a vial yourself -- just to know what you're selling.",
+          "text": "Try a vial yourself — just to know what you're selling.",
           "prob": {
             "base": 0.9,
             "mods": []
@@ -7828,11 +7828,11 @@
             "mods": []
           },
           "success": {
-            "text": "You leave the blue-stained fingers and their glass vials behind, undercity noise swallowing her stall.",
+            "text": "You leave the blue-stained fingers and their glass vials behind, undercity noise swallowing her stall — though some part of you keeps the offer in reserve for a worse night.",
             "deltas": {}
           },
           "failure": {
-            "text": "You leave the blue-stained fingers and their glass vials behind, undercity noise swallowing her stall.",
+            "text": "You leave the blue-stained fingers and their glass vials behind, undercity noise swallowing her stall — though some part of you keeps the offer in reserve for a worse night.",
             "deltas": {}
           }
         }
@@ -7841,7 +7841,7 @@
     {
       "id": "vice_ashwine_brewer",
       "title": "Ashwine Brewer's Still",
-      "body": "Behind a curtain of hanging cables, an old man ferments incinerator runoff into something he calls ashwine -- bitter, cheap, and strong enough to make the Steward's endless comfort feel very far away. He offers you a cup like it's a sacrament. Regulars line up with dented tins, saying nothing, wanting only the burn.",
+      "body": "Behind a curtain of hanging cables, an old man ferments incinerator runoff into something he calls ashwine — bitter, cheap, and strong enough to make the Steward's endless comfort feel very far away. He offers you a cup like it's a sacrament. Regulars line up with dented tins, saying nothing, wanting only the burn.",
       "weight": 4,
       "cooldown": 4,
       "max_fires": 0,
@@ -7918,7 +7918,7 @@
         },
         {
           "id": "trade_for_info",
-          "text": "Skip the drink -- ask what he's heard on the wire instead.",
+          "text": "Skip the drink — ask what he's heard on the wire instead.",
           "prob": {
             "base": 0.6,
             "mods": [
@@ -7973,7 +7973,7 @@
             ]
           },
           "success": {
-            "text": "She grips it tight and doesn't say thank you -- she doesn't have to. Something between you settles, just a little.",
+            "text": "She grips it tight and doesn't say thank you — she doesn't have to. Something between you settles, just a little.",
             "deltas": {
               "Family_Friction": -6,
               "Meaning": 2
@@ -8039,7 +8039,7 @@
             ]
           },
           "success": {
-            "text": "She likes the compromise -- practical, careful, still hers. You set up the lockbox together that same night.",
+            "text": "She likes the compromise — practical, careful, still hers. You set up the lockbox together that same night.",
             "deltas": {
               "Family_Friction": -3,
               "Wealth": -80
@@ -8089,7 +8089,7 @@
             ]
           },
           "success": {
-            "text": "It works, humming warm against your ribs as a Steward drone sweeps past without a flicker of recognition. Vint will want the data -- and a drink to celebrate.",
+            "text": "It works, humming warm against your ribs as a Steward drone sweeps past without a flicker of recognition. Vint will want the data — and a drink to celebrate.",
             "deltas": {
               "Heat": -4,
               "Social_Capital": 2
@@ -8144,7 +8144,7 @@
             "mods": []
           },
           "success": {
-            "text": "He shrugs, unbothered, and sets the device aside for someone else -- or some other night.",
+            "text": "He shrugs, unbothered, and sets the device aside for someone else — or some other night.",
             "deltas": {
               "Family_Friction": -1
             },
@@ -8153,7 +8153,7 @@
             ]
           },
           "failure": {
-            "text": "He shrugs, unbothered, and sets the device aside for someone else -- or some other night.",
+            "text": "He shrugs, unbothered, and sets the device aside for someone else — or some other night.",
             "deltas": {
               "Family_Friction": -1
             },
@@ -8182,7 +8182,7 @@
       "choices": [
         {
           "id": "accept_adjustment",
-          "text": "Accept the adjustment -- let it handle the rations.",
+          "text": "Accept the adjustment — let it handle the rations.",
           "prob": {
             "base": 0.9,
             "mods": []
@@ -8198,7 +8198,7 @@
             ]
           },
           "failure": {
-            "text": "The new ration profile arrives bland and over-optimized, technically nutritious and somehow worse than hunger.",
+            "text": "The new ration profile arrives bland and over-optimized, technically nutritious and worse than hunger ever was, because now even your appetite belongs to a schedule.",
             "deltas": {
               "Mental_Decay": 4
             },
@@ -8246,7 +8246,7 @@
             ]
           },
           "success": {
-            "text": "[STEWARD] I detect elevated stress markers. Would you like to discuss what's troubling you? It doesn't flinch. It never does. That's almost the point.",
+            "text": "[STEWARD] I detect elevated stress markers. Would you like to discuss what's troubling you? It doesn't flinch, and it never does — that's almost the point.",
             "deltas": {
               "Mental_Decay": 1,
               "Meaning": 1
@@ -8271,7 +8271,7 @@
     {
       "id": "steward_empathy_scan",
       "title": "Empathy Calibration Scan",
-      "body": "[STEWARD] A soft chime, warmer than the usual alerts: May I run a brief empathy calibration scan on your neural signature? It helps me serve you better. The request hovers politely, unobtrusive, patient as always -- and entirely too interested in what's underneath your skin.",
+      "body": "[STEWARD] A soft chime, warmer than the usual alerts: May I run a brief empathy calibration scan on your neural signature? It helps me serve you better. The request hovers politely, unobtrusive, patient as always — and entirely too interested in what's underneath your skin.",
       "weight": 3,
       "cooldown": 6,
       "max_fires": 0,
@@ -8292,13 +8292,13 @@
       "choices": [
         {
           "id": "allow_scan",
-          "text": "Allow the scan -- what's the harm.",
+          "text": "Allow the scan — what's the harm.",
           "prob": {
             "base": 0.75,
             "mods": []
           },
           "success": {
-            "text": "A warm tingle passes behind your eyes. [STEWARD] Calibration complete. Thank you for your trust. Something about the phrasing sits wrong for hours after.",
+            "text": "A warm tingle passes behind your eyes. [STEWARD] Calibration complete, thank you for your trust. Something about the phrasing sits wrong for hours after.",
             "deltas": {
               "Mental_Decay": -1,
               "Heat": 2
@@ -8308,7 +8308,7 @@
             ]
           },
           "failure": {
-            "text": "The scan catches something it shouldn't -- a spike in stress correlated with your recent movements. A flag quietly attaches itself to your file.",
+            "text": "The scan catches something it shouldn't — a spike in stress correlated with your recent movements. A flag quietly attaches itself to your file.",
             "deltas": {
               "Heat": 24,
               "Mental_Decay": 4
@@ -8336,7 +8336,7 @@
             ]
           },
           "failure": {
-            "text": "Refusal itself gets logged as an anomaly -- one more data point in a pattern you didn't know you were building.",
+            "text": "Refusal itself gets logged as an anomaly — one more data point in a pattern you didn't know you were building.",
             "deltas": {
               "Heat": 16
             },
