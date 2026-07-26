@@ -1,0 +1,2552 @@
+{
+  "pack": "cast_expansion_pack",
+  "model": "sonnet-5",
+  "batch": "volume",
+  "description": "Cast promotions and warmth pass: 25 events executing Grey Utopia Depth Plan item C from a Fable 5 outline (docs/CAST_BIBLE.md). Promotes five recurring minor names -- Brann, the Ferryman, Dex, Auntie Six, Denny -- into full four-beat arcs about the small human ledgers they each keep under the Steward's big one, and gives the core four (Mara, Vint, Kael, Echo) one warm scene each under the doctrine that warmth here is competence, specificity, and things given at a named price. Prose and balance authored by Sonnet 5.",
+  "events": [
+    {
+      "id": "cx_brann_rag_drawer",
+      "title": "Ink Is for Finished Things",
+      "body": "Brann sends you for flux and you open the wrong drawer. Dozens of shop rags inside, folded square, each tagged in his blocky hand with a name and a date range -- every apprentice he ever kept. Three tags end mid-date, no closing number, just a dash into nothing. Yours is already in there, folded with the rest, tagged in pencil. You're still holding the drawer open when his shadow crosses the light. He doesn't raise his voice. \"Ink's for finished things,\" he says, and takes the flux from your other hand like the drawer was never open at all.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "workshop_standing"
+          },
+          {
+            "day": 10,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "ask_midrange_tag",
+          "text": "Ask about one of the mid-date tags.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "He doesn't tell a story. He gives you a part number -- a bearing size not stocked anywhere in the shop anymore -- and lets you work out on your own that it's the exact bearing the man was reaching for when his heart quit mid-reach. Brann has kept that number in stock for six years for no reason a ledger would accept.",
+            "deltas": {
+              "Meaning": 0,
+              "Social_Capital": 1
+            },
+            "flags_set": [
+              "brann_rag_drawer"
+            ],
+            "rel_add": [
+              {
+                "name": "Brann (Artisan)",
+                "satisfaction": 40.0,
+                "strength": 6.0
+              }
+            ]
+          }
+        },
+        {
+          "id": "put_it_back",
+          "text": "Put the drawer back and say nothing about what's inside it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You slide it shut the way you found it and hand over the flux like the last ninety seconds didn't happen. He lets you have the lie. That night you keep thinking about the pencil on your own tag -- how easy it would be to erase, and how much you didn't ask him to.",
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 2
+            },
+            "flags_set": [
+              "brann_rag_drawer"
+            ],
+            "rel_add": [
+              {
+                "name": "Brann (Artisan)",
+                "satisfaction": 40.0,
+                "strength": 6.0
+              }
+            ]
+          }
+        },
+        {
+          "id": "ask_why_pencil",
+          "text": "Ask him straight why yours is the only tag still in pencil.",
+          "prob": {
+            "base": 0.55,
+            "mods": []
+          },
+          "success": {
+            "text": "\"Pencil erases,\" he says, which from Brann counts as a vow -- the closest thing to a promise you'll get from a man who thinks promises are just verdicts made too early. You don't ask him to say it plainer. He wouldn't.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "rel_deltas": {
+              "Brann (Artisan)": 3
+            },
+            "flags_set": [
+              "brann_rag_drawer"
+            ],
+            "rel_add": [
+              {
+                "name": "Brann (Artisan)",
+                "satisfaction": 40.0,
+                "strength": 6.0
+              }
+            ]
+          },
+          "failure": {
+            "text": "\"Pencil erases,\" he says again, and this time it doesn't land like a vow -- it lands like a man keeping his options open on you the way he never had to with the ones already in ink. You go back to your bench with an answer you didn't want and can't unhear.",
+            "deltas": {
+              "Meaning": -6,
+              "Mental_Decay": 4
+            },
+            "flags_set": [
+              "brann_rag_drawer"
+            ],
+            "rel_add": [
+              {
+                "name": "Brann (Artisan)",
+                "satisfaction": 40.0,
+                "strength": 6.0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_brann_bad_arm_day",
+      "title": "The Arm Quits",
+      "body": "The arm quits mid-lift -- no warning, no shake first, just gone -- and a governor's worth of scalding coolant tips toward the floor an inch from his boot. You're moving before you decide to. Whether you catch it or not, you saw his face in the half-second his body stopped answering him: not pain. Arithmetic. He clamps the valve one-handed like nothing happened and looks at you the way a man looks at a witness he didn't choose. \"Say something and I'll charge you for it,\" he says. It isn't a joke. Brann prices what people see the way Kael prices debt.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "workshop_standing"
+          },
+          {
+            "day": 18,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "brann_rag_drawer"
+              }
+            ]
+          },
+          "text": "You think of the drawer -- three tags ending mid-date, no closing number -- and understand for the first time that they weren't accidents of filing. He outlived them. Now you're watching the bench start to outlive him."
+        }
+      ],
+      "choices": [
+        {
+          "id": "cover_the_log",
+          "text": "Cover for him on the intake log -- take the delay under your own name.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You sign the batch off under your own initials and say the hold-up was yours. He doesn't thank you and doesn't correct the story -- just signs where you point -- and the practiced ease of it tells you this isn't the first name he's borrowed to keep a bad day off the books.",
+            "deltas": {
+              "Meaning": 0,
+              "Heat": 1
+            },
+            "rel_deltas": {
+              "Brann (Artisan)": 2
+            },
+            "flags_set": [
+              "brann_arm_seen",
+              "brann_arm_covered"
+            ]
+          }
+        },
+        {
+          "id": "name_it_straight",
+          "text": "Name it to him straight, once, quietly.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"That arm's not coming back,\" you say, once, plain. He doesn't flinch and doesn't thank you for the honesty either -- just says \"Didn't ask\" and goes back to the valve -- but something in how carefully he doesn't look at you afterward says the true thing landed exactly where you aimed it.",
+            "deltas": {
+              "Meaning": 0,
+              "Mental_Decay": 1
+            },
+            "rel_deltas": {
+              "Brann (Artisan)": 4
+            },
+            "flags_set": [
+              "brann_arm_seen"
+            ]
+          }
+        },
+        {
+          "id": "pretend_at_nothing",
+          "text": "Pretend you didn't see anything.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You busy yourself with the flux like the last thirty seconds didn't happen, and he lets you have that too -- easier for both of you, and worse for it. It's the kind of silence that costs nothing today and adds up to something you'll have to explain to yourself later.",
+            "deltas": {
+              "Meaning": 0,
+              "Mental_Decay": 2
+            },
+            "flags_set": [
+              "brann_arm_seen"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_brann_the_chalk_line",
+      "title": "No Is a Tool",
+      "body": "He sends you to refuse a job on the workshop's behalf -- a silk-over-syndicate client wanting reclamation work the shop doesn't do for people like him, the kind of no that needs saying face to face or it isn't really a no. \"No's a tool,\" Brann says, not looking up from the bench. \"Third one you reach for.\" He doesn't explain the first two. You're expected to have been paying attention long enough to already know them.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "workshop_standing"
+          },
+          {
+            "day": 26,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "brann_arm_seen"
+              }
+            ]
+          },
+          "text": "You've seen the arm fail once already, and some part of you is doing the client's math for him before you even open your mouth -- wondering if a workshop that's weakening can still afford the kind of no that makes enemies."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "brann_arm_covered"
+              }
+            ]
+          },
+          "text": "The cover you gave him on the intake log sits between you now, unspoken -- you know something about this shop's condition the client doesn't, and you're about to decide how much of that shows in the room."
+        }
+      ],
+      "choices": [
+        {
+          "id": "deliver_flat",
+          "text": "Deliver the no flat, no cushioning. The client can file your face for it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You say no the way Brann would: once, plain, no apology built in. The client's smile doesn't move but something behind it does -- a name going into a ledger you'll never see, filed under people who cost him money today. It's clean. It's also a face he'll remember the next time you need a room to like you.",
+            "deltas": {
+              "Meaning": 0,
+              "Heat": 4
+            },
+            "flags_set": [
+              "brann_refusal_learned"
+            ]
+          }
+        },
+        {
+          "id": "soften_into_maybe",
+          "text": "Soften the no into a maybe. Buy today some peace.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You leave room in the sentence you weren't supposed to leave room in, and the client hears exactly the crack he was listening for. It costs the workshop nothing today. It costs you knowing, walking back, that you did that on purpose.",
+            "deltas": {
+              "Meaning": -3,
+              "Heat": -1
+            },
+            "flags_set": [
+              "brann_refusal_learned"
+            ]
+          }
+        },
+        {
+          "id": "add_fixer_leverage",
+          "text": "Add your own fixer leverage to make the no stick for good.",
+          "requires": {
+            "any": [
+              {
+                "flag": "undercity_fixer_rep"
+              },
+              {
+                "flag": "undercity_smuggling_rep"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You spend a favor the client doesn't know you're owed to make sure this no has teeth past today -- word gets back through channels he can't trace to you, and the silk-over-syndicate client quietly stops asking the Row for reclamation work at all. Brann never asks how you did it. He just re-chalks the roster board like the matter's closed, which for him it is.",
+            "deltas": {
+              "Meaning": 0,
+              "Social_Capital": 2,
+              "Heat": 2
+            },
+            "rel_deltas": {
+              "Brann (Artisan)": 5
+            },
+            "flags_set": [
+              "brann_refusal_learned"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_brann_ink",
+      "title": "The Rag in Ink",
+      "body": "He inks your tag. No ceremony -- you find it already done, ink still wet, tucked back in the drawer where you first found it wrong. His own rag hangs beside it now with an end date freshly written in the same hand, same steadiness the arm doesn't have anymore for anything else. You can still see the pencil ghost faintly under the ink, two versions of your name sitting one on top of the other. He doesn't ask if you noticed. He never asks anything he's already watched you answer.",
+      "weight": 7,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "workshop_standing"
+          },
+          {
+            "day": 34,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "brann_refusal_learned"
+              }
+            ]
+          },
+          "text": "\"You said no like a tool last week,\" he says, not turning around. \"That's why.\" It's the only sentence of explanation he's ever going to give you, and it's more than he gave the others."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "brann_arm_covered"
+              }
+            ]
+          },
+          "text": "He never once mentions the log you signed for him. The never-mentioning, it turns out, was always the payment -- you just didn't know the currency until now."
+        }
+      ],
+      "choices": [
+        {
+          "id": "accept_silently",
+          "text": "Accept it the way the shop accepts everything -- silently.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You put the rag back exactly where you found it and say nothing, because saying something would be the kind of ceremony he's spent his whole life refusing to hold. He nods once, the closest thing to applause this shop has ever produced.",
+            "deltas": {
+              "Meaning": 0,
+              "Social_Capital": 1
+            },
+            "flags_set": [
+              "brann_inked"
+            ]
+          }
+        },
+        {
+          "id": "argue_years_left",
+          "text": "Argue that he's got years left in that arm yet.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"Roster says different,\" he says, and turns it so you can see: three tags ending mid-date, and under them, dated in his own hand, a line reserving the fourth slot -- not for you, for whoever comes after you. He was never arguing about the arm. He was telling you the shop outlives its hands on purpose.",
+            "deltas": {
+              "Meaning": 0,
+              "Mental_Decay": 1
+            },
+            "flags_set": [
+              "brann_inked"
+            ]
+          }
+        },
+        {
+          "id": "offer_intake_permanently",
+          "text": "Offer to take the intake queue permanently. Say the quiet part.",
+          "requires": {
+            "all": [
+              {
+                "flag": "brann_arm_seen"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You say it plainly, because plainly is the only register this shop respects: \"I'll take the queue. Permanently.\" He doesn't answer for a long moment -- long enough that the silence is doing the work sentences usually do in other shops -- and when he finally nods it costs him visibly more than the arm ever did.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -100
+            },
+            "rel_deltas": {
+              "Brann (Artisan)": 4
+            },
+            "flags_set": [
+              "brann_inked"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_mara_wrong_noodles",
+      "title": "Wrong Noodles",
+      "body": "Auntie Six's counter, Mara across from you, and she orders your childhood order wrong on purpose -- the sauce you've both hated since you were nine, ordered like she forgot, watching you over the bowl to see what you do with it. It isn't dinner. It's a test dressed as dinner: correct her and you're still her brother; let it slide and you're just another thing she has to manage.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "ambient"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "mara_known"
+          },
+          {
+            "day": 10,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "correct_the_order",
+          "text": "Correct the order. Tell her she got it wrong.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"You hate that sauce,\" you say, and she laughs like she's been caught, which she has -- on purpose, to see if you'd still bother. You reorder, and the hour it costs you against tonight's job window is the smallest bill you've ever been glad to pay.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -80
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 4
+            },
+            "flags_set": [
+              "mara_dinner_test"
+            ]
+          }
+        },
+        {
+          "id": "eat_heroically",
+          "text": "Eat the wrong noodles. Don't say anything.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You choke down the sauce you've hated since you were nine and call it fine, and watching you do it tires her in a way real anger never has. \"You'd eat fucking anything and call it fine,\" she says, quiet, which is worse than shouting, and pushes her bowl away half-finished.",
+            "deltas": {
+              "Meaning": -3
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -3
+            },
+            "flags_set": [
+              "mara_dinner_test"
+            ]
+          }
+        },
+        {
+          "id": "counter_test",
+          "text": "Counter-test: order her childhood order back, also wrong.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Auntie Six ends up ruling on it from the burners, flat, over both your heads -- \"wrong sauce, wrong sauce, you're both idiots, that's forty each\" -- and somewhere between the second wrong bowl and the argument about whose memory is worse, you're both crying-laughing over food neither of you can stand.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -60
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 5
+            },
+            "flags_set": [
+              "mara_dinner_test"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_vint_archive_night",
+      "title": "People Sounding Like Weather",
+      "body": "2 a.m. on his floor, dead drives stacked like furniture. Vint plays you the one file he says he'll never sell: forty seconds of pre-accord street noise, a market, rain starting, four hundred strangers arguing about umbrellas. \"people sounding like weather,\" he types, even now, even speaking out loud he can't stop typing the register, \"before weather got a subscription tier.\" He doesn't charge you. For weeks after, he'll be unbearable about having let you see it.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "ambient",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "vint_known"
+          },
+          {
+            "day": 12,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "listen_say_nothing",
+          "text": "Listen. Say nothing after.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You don't ask what it cost him to keep this one instead of selling it, and he doesn't offer. The silence afterward is the most honest conversation you've ever had with him.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 4
+            },
+            "flags_set": [
+              "vint_weather_heard"
+            ]
+          }
+        },
+        {
+          "id": "ask_for_copy",
+          "text": "Ask him for a copy.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"No,\" he types, fast, before he's decided to say it out loud at all -- then, quieter, lowercase even in his own mouth: \"that one's not inventory. shit, no.\" Some things in his archive still aren't for sale. You just found the one.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "flags_set": [
+              "vint_weather_heard"
+            ]
+          }
+        },
+        {
+          "id": "fall_asleep_to_it",
+          "text": "Fall asleep to it. Let the loop run.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "He lets it loop rather than wake you, the kind of decorum failure that is, from Vint, the warmest thing he knows how to do. Tomorrow you'll be worthless at everything that isn't this. Today, apparently, was worth something.",
+            "deltas": {
+              "Meaning": 0,
+              "Mental_Decay": 3
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 3
+            },
+            "flags_set": [
+              "vint_weather_heard"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_ferry_toll_book",
+      "title": "The Toll Book",
+      "body": "She shows you the book of crossings. Not names -- weights. Kilograms, to the gram, of what each crosser carried through, because the seam prices bodies and she prices what they couldn't leave behind. One entry is circled: 0.31 kg, eleven years old, never collected. She charges you for the lesson, exact change, counted one-handed against the mask's rasp. \"Wanting is cheap,\" she says. \"Carrying isn't.\" You didn't ask for a price and got billed for one anyway, which is the entire grammar of this conversation.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "day": 14,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "pay_and_ask_nothing",
+          "text": "Pay and ask nothing.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You hand over the fee and don't reach for the question sitting right behind your teeth. She marks you up a gram in the book without being asked -- the seam's version of a compliment, and the warmest thing you'll get out of this arc for a while.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -50
+            },
+            "flags_set": [
+              "ferry_toll_read"
+            ],
+            "rel_add": [
+              {
+                "name": "The Ferryman (Seam)",
+                "satisfaction": 30.0,
+                "strength": 5.0
+              }
+            ]
+          }
+        },
+        {
+          "id": "ask_about_circled_entry",
+          "text": "Ask about the circled entry -- 0.31 kg, eleven years old.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She names a price for the answer instead of the answer itself -- payable later, her terms, no due date given, because a door doesn't need one. You'll find out exactly what that costs somewhere down the line, at a time she picks. Not you.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -30
+            },
+            "flags_set": [
+              "ferry_toll_read"
+            ],
+            "rel_add": [
+              {
+                "name": "The Ferryman (Seam)",
+                "satisfaction": 30.0,
+                "strength": 5.0
+              }
+            ]
+          }
+        },
+        {
+          "id": "decline_to_pay",
+          "text": "Decline to pay.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"The seam doesn't run tabs,\" she says. \"Neither do I.\" She closes the book before you've finished refusing, and you understand, walking away, that you didn't just decline a transaction -- you declined a door, and doors like this one don't reopen because you changed your mind later.",
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 1
+            },
+            "flags_set": [
+              "ferry_toll_read"
+            ],
+            "rel_add": [
+              {
+                "name": "The Ferryman (Seam)",
+                "satisfaction": 30.0,
+                "strength": 5.0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_ferry_the_no",
+      "title": "The No",
+      "body": "You watch her refuse a crossing. A desperate client, funds already in hand, the window open and counting -- and she says no, and eats what the no costs in front of you without flinching. The no is mercy: the client would freeze at forty seconds, she's seen the exact tremor before, on someone else, a long time ago. It doesn't look like mercy. It looks like a woman turning away money from someone begging for it. She doesn't explain, because she never explains twice, and the first explanation already went to somebody eleven years gone.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "day": 20,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "ferry_toll_read"
+              }
+            ]
+          },
+          "text": "You catch her weighing the client's bag by eye before she even opens her mouth to refuse -- the same look from the toll book, and suddenly its grammar is legible: she isn't guessing. She's counting."
+        }
+      ],
+      "choices": [
+        {
+          "id": "hold_the_light",
+          "text": "Hold the light and say nothing.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You do the one useful thing available to you -- hold the lamp steady while she delivers a refusal that costs her something you can't see the bottom of. It's a small job. It's also the only one she asked for, and she tolls you for it anyway, on principle.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -20
+            },
+            "flags_set": [
+              "ferry_watched_the_no"
+            ]
+          }
+        },
+        {
+          "id": "walk_client_home",
+          "text": "Walk the client home after. Somebody should.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You walk them back through streets that don't care either way, listening to the refusal turned over and over, looking for the angle where it isn't cruel and never quite finding it. It costs you the rest of the night and whatever coin you spend keeping them fed on the way.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -60
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 1
+            },
+            "flags_set": [
+              "ferry_watched_the_no"
+            ]
+          }
+        },
+        {
+          "id": "argue_the_case",
+          "text": "Argue the client's case. Make her reverse it.",
+          "prob": {
+            "base": 0.35,
+            "mods": []
+          },
+          "success": {
+            "text": "She reverses -- on the condition that you stand at the lock yourself and carry the count, all ninety-one seconds of it, no looking away. \"Wanting is cheap,\" she says, handing you the job like a debt. \"Now you pay for wanting it too.\"",
+            "deltas": {
+              "Meaning": 9
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 4
+            },
+            "flags_set": [
+              "ferry_watched_the_no",
+              "ferry_argued"
+            ]
+          },
+          "failure": {
+            "text": "She's right, and you watch it prove her right in real time -- the tremor arriving at the lock's threshold exactly on the schedule she already knew by heart. The client's break is on your ledger now, not hers, because you're the one who argued it open.",
+            "deltas": {
+              "Meaning": -8,
+              "Mental_Decay": 5
+            },
+            "flags_set": [
+              "ferry_watched_the_no"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_ferry_mask_off",
+      "title": "Doors Don't Have Faces",
+      "body": "Auntie Six's stall, 3 a.m. The mask is off. She's eating noodles like an ordinary person, one arm, and she has opinions -- the broth ratio, the criminal under-salting -- delivered in the same rasped koan cadence, which is suddenly, catastrophically funny. The mask was never for the air. \"Doors don't have faces,\" she says. \"People keep trying to knock on mine.\"",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "day": 28,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "ferry_watched_the_no"
+              }
+            ]
+          },
+          "text": "She pays for the refused client's standing bowl without being asked -- the chalk mark on the board is in her handwriting, which means she's been coming here longer than you knew, paying down a debt nobody billed her for."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "ferry_argued"
+              }
+            ]
+          },
+          "text": "She's already told Auntie about you. Your bowl arrives pre-salted, which is a security breach and, from her, a compliment you're not meant to say thank you for."
+        }
+      ],
+      "choices": [
+        {
+          "id": "sit_and_eat",
+          "text": "Sit and eat. Say nothing about the face.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You eat across from a woman instead of a mask and let the ordinary thing be ordinary. It's the least dramatic thing that's happened to you down here, and you already know it's the one you'll remember longest.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -40
+            },
+            "flags_set": [
+              "ferry_mask_seen"
+            ]
+          }
+        },
+        {
+          "id": "ask_about_shoe",
+          "text": "Ask about the 0.31 kg.",
+          "requires": {
+            "all": [
+              {
+                "flag": "ferry_toll_read"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"A shoe,\" she says, finally, plain, no rasp left to hide behind. \"Child's. I keep it because the seam doesn't mourn and somebody has to.\" She goes back to her noodles like she didn't just hand you the one thing she's never said to anyone crossing for real.",
+            "deltas": {
+              "Meaning": 0,
+              "Mental_Decay": 2
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 3
+            },
+            "flags_set": [
+              "ferry_mask_seen"
+            ]
+          }
+        },
+        {
+          "id": "joke_about_salt",
+          "text": "Make a joke about the salt.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She laughs once -- actual laugh, ugly and real, gone almost before the mask is back on -- and you understand you just spent several good days of standing with her on hearing four seconds of an unguarded sound. Worth it. You'd do it again for less.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -20
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 2
+            },
+            "flags_set": [
+              "ferry_mask_seen"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_ferry_last_toll",
+      "title": "The Last Toll",
+      "body": "The book comes out one more time. She crosses one name off -- hers isn't in it; the book prices cargo, and she was never cargo. What she's doing, you realize watching her work, is naming what the door needs next: not nerve, not hunger -- arithmetic. Somebody who counts what people carry and charges honestly for the weight of it. She doesn't say she's dying. She doesn't have to. The book does the saying for her, the way it's always done the saying for everyone else.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "day": 38,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "ferry_mask_seen"
+              }
+            ]
+          },
+          "text": "The mask stays on for this. You understand now, finally, that it's load-bearing -- not armor, not distance, just the one part of her that was never meant to retire."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "brann_inked"
+              }
+            ]
+          },
+          "text": "\"The bench man inked you,\" she says, not a question. \"Benches and doors keep different books. Same ink.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "accept_the_page",
+          "text": "Accept the page she tears out for you.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It isn't succession. It's a rate card -- weights, prices, the exact arithmetic of what a door is allowed to charge and what it isn't -- handed over like a tool, not a crown. You fold it into your coat the way you'd fold anything you're not ready to read twice yet.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -30
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 3
+            },
+            "flags_set": [
+              "ferry_named_you"
+            ]
+          }
+        },
+        {
+          "id": "tell_her_not_a_door",
+          "text": "Tell her you're not a door.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"Most aren't,\" she says, and nods like you've passed something rather than declined it. \"Costs nothing to know it early.\" You leave with both hands empty and your feet under you, which after four beats of her arithmetic feels like the better trade.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 1
+            },
+            "flags_set": [
+              "ferry_crossed_off"
+            ]
+          }
+        },
+        {
+          "id": "ask_who_page_was_for",
+          "text": "Ask who the page was going to before you.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"Nobody,\" she says, and for once the rasp doesn't sound like a test -- it sounds like a woman finally setting down something she's been carrying alone since a shoe she keeps for a client who never collected. She was never choosing you. She'd just run out of other names to try.",
+            "deltas": {
+              "Meaning": 0,
+              "Mental_Decay": 2
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_dex_the_list",
+      "title": "The List",
+      "body": "Waiting out a checkpoint cycle in his booth, you see the list -- paper, handwritten, annotated. Not weights and rates: load limits of the soul. \"No organics -- mother died of a recall.\" \"Night runs only. Daylight makes him honest.\" \"Pays her cut to her sister first. Don't schedule against visiting hours.\" He's been routing people around their own damage for years and calling it dispatch. Your entry exists. He catches you reading upside down and doesn't cover it.",
+      "weight": 7,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "ambient"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 8,
+            "op": ">="
+          }
+        ],
+        "any": [
+          {
+            "flag": "undercity_smuggling_rep"
+          },
+          {
+            "flag": "undercity_fixer_rep"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "ask_own_annotation",
+          "text": "Ask what your annotation says.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "He reads someone else's line instead -- a runner's, not yours -- and when you point that out he just says, \"That's the whole answer,\" and goes back to the manifest. You don't get yours. You get proof he's decided you don't need it yet.",
+            "deltas": {
+              "Meaning": 0,
+              "Social_Capital": 1
+            },
+            "flags_set": [
+              "dex_list_seen"
+            ],
+            "rel_add": [
+              {
+                "name": "Dex (Dispatcher)",
+                "satisfaction": 45.0,
+                "strength": 5.0
+              }
+            ]
+          }
+        },
+        {
+          "id": "offer_update_entry",
+          "text": "Offer to update someone's entry -- a runner whose situation you know went bad.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You give him the update, useful and true, and watch him write it down in the same hand as everything else. It helps her. It also means you just became a source, and Dex's list has a long memory for where its information comes from.",
+            "deltas": {
+              "Meaning": 0,
+              "Heat": 1
+            },
+            "rel_deltas": {
+              "Dex (Dispatcher)": 3
+            },
+            "flags_set": [
+              "dex_list_seen"
+            ],
+            "rel_add": [
+              {
+                "name": "Dex (Dispatcher)",
+                "satisfaction": 45.0,
+                "strength": 5.0
+              }
+            ]
+          }
+        },
+        {
+          "id": "pretend_duty_roster",
+          "text": "Pretend you were reading a duty roster.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"Sure,\" he says, in the tone of a man filing the lie next to the truth without comment. You didn't get caught. You also didn't get anything, and some part of you knows he clocked the flinch anyway and wrote that down instead.",
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 1
+            },
+            "flags_set": [
+              "dex_list_seen"
+            ],
+            "rel_add": [
+              {
+                "name": "Dex (Dispatcher)",
+                "satisfaction": 45.0,
+                "strength": 5.0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_dex_slow_day",
+      "title": "Slow Day",
+      "body": "The Deprecation bites: no freight worth moving. Dex invents a run -- sealed case, three checkpoints, dawn deadline -- for an old courier whose hands have started shaking on empty days, and asks you to play the receiving contact. Make it look real. The case is empty. The countdown is real because he made it real, on paper, with the same care he gives an actual manifest.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "ambient"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "dex_list_seen"
+          },
+          {
+            "day": 16,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "dex_list_seen"
+              }
+            ]
+          },
+          "text": "You know her annotation now. The run is built around it like a splint -- shaped exactly to the damage, so precisely it can only have come from someone who's been reading this list a long time."
+        }
+      ],
+      "choices": [
+        {
+          "id": "play_it_straight",
+          "text": "Play it straight to the drop.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You run the fiction exactly as written and let her have the whole dawn deadline, real as anything. Dex can't pay you for theater and doesn't insult you by pretending otherwise -- the case is empty, so is the fee.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -40
+            },
+            "flags_set": [
+              "dex_prop_run"
+            ]
+          }
+        },
+        {
+          "id": "improve_the_fiction",
+          "text": "Improve the fiction -- add a hostile tail she has to shake.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You build in a tail, footsteps timed a block behind hers the whole route, and she comes alive running from something that isn't there -- faster, sharper, twenty years younger for six blocks. Dex's look when you report back says you understood the assignment better than he wanted anyone to.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -40
+            },
+            "rel_deltas": {
+              "Dex (Dispatcher)": 2
+            },
+            "flags_set": [
+              "dex_prop_run"
+            ]
+          }
+        },
+        {
+          "id": "tell_him_cruel",
+          "text": "Tell him this is cruel.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"Cruel is the empty day,\" he says, flat, not even looking up. \"I just route around it.\" You don't have an answer for that, and neither, it turns out, does the rest of the Deprecation.",
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 1
+            },
+            "flags_set": [
+              "dex_prop_run"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_dex_the_offer",
+      "title": "Continuity of Community Function",
+      "body": "A Steward logistics liaison at the transit gap, warm as invoicing: dispatch optimization, the list digitized, \"continuity of your community function.\" Everyone routed efficiently. Nobody routed around anything. Dex's face does nothing for a long time, which from him is a scream.",
+      "weight": 7,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "steward"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "dex_prop_run"
+          },
+          {
+            "day": 24,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "dex_prop_run"
+              }
+            ]
+          },
+          "text": "The liaison cites the empty-case run as an \"efficiency anomaly\" in the same warm register -- the kindest thing Dex ever did with that paper is now the evidence being used against it."
+        }
+      ],
+      "choices": [
+        {
+          "id": "advise_hand_over_clean",
+          "text": "Advise him to hand it over clean.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You tell him the sane thing: let it go, take the continuity credit, keep his name off any list that matters now. He does it, and you watch him start scrolling for the next name with nothing left worth scrolling for.",
+            "deltas": {
+              "Meaning": 0,
+              "Mental_Decay": 1
+            }
+          }
+        },
+        {
+          "id": "stall_fixer_procedure",
+          "text": "Stall the liaison with fixer procedure.",
+          "requires": {
+            "all": [
+              {
+                "flag": "undercity_fixer_rep"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You run enough undercity red tape at the liaison to buy the list a season it wasn't going to get -- procedural, deniable, expensive in a currency that isn't money. Your name goes into the same file as the list, right where the liaison can find it later.",
+            "deltas": {
+              "Meaning": 0,
+              "Heat": 3,
+              "Wealth": -100
+            },
+            "rel_deltas": {
+              "Dex (Dispatcher)": 3
+            }
+          }
+        },
+        {
+          "id": "forge_decoy_list",
+          "text": "Forge a decoy list for the intake.",
+          "prob": {
+            "base": 0.35,
+            "mods": []
+          },
+          "success": {
+            "text": "The Steward ingests a plausible fiction whole, no flags, no follow-up -- and the paper list stays paper, stays his, stays true. Dex doesn't say thank you. He starts a new annotation instead, which from him is the same thing.",
+            "deltas": {
+              "Meaning": 9
+            },
+            "rel_deltas": {
+              "Dex (Dispatcher)": 4
+            },
+            "flags_set": [
+              "dex_list_saved"
+            ]
+          },
+          "failure": {
+            "text": "The cross-check catches the forgery inside a day and pulls three real annotations into the file to prove it -- three runners, their damage now typed, searchable, filed under a system that never forgets and never once raises its voice about it.",
+            "deltas": {
+              "Meaning": -8,
+              "Mental_Decay": 5,
+              "Heat": 6
+            },
+            "flags_set": [
+              "dex_list_leaked"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_dex_tuesday",
+      "title": "You're a Tuesday Courier",
+      "body": "Your label changes. You catch it upside down across the counter -- the old annotation struck through, a new one in fresh ink -- and it's the truest one-line review of your run so far, whether or not you wanted a review at all.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "ambient"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "dex_prop_run"
+          },
+          {
+            "day": 32,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "dex_list_saved"
+              }
+            ]
+          },
+          "text": "\"Forged me a future,\" it reads. \"Bill open.\""
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "dex_list_leaked"
+              }
+            ]
+          },
+          "text": "\"Cost three names. Still routing him. Decide why,\" it reads, and he doesn't tell you which way he's leaning."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "brann_inked"
+              }
+            ]
+          },
+          "text": "\"Bench found him,\" it reads. \"Route accordingly.\" The bench man inked you weeks ago. Dex, apparently, reads more than manifests."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "ferry_named_you"
+              }
+            ]
+          },
+          "text": "\"Carries a rate card now,\" it reads. \"Don't schedule against the moon.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_him_read_aloud",
+          "text": "Ask him to read it aloud.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "He reads it flat, deadpan, no performance in it at all, and the lack of performance is exactly what makes it land like an audit instead of an insult. You've been reviewed. There's no appeal process listed.",
+            "deltas": {
+              "Meaning": 0,
+              "Social_Capital": 1
+            },
+            "flags_set": [
+              "dex_label_known"
+            ]
+          }
+        },
+        {
+          "id": "trade_reviews",
+          "text": "Trade -- your honest one-line review of him for his of you.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You give him yours; he gives you his. Both lines sting exactly as much as they're supposed to, which turns out to be the actual shape of respect in this booth -- not comfort, just accuracy, delivered both directions at once.",
+            "deltas": {
+              "Meaning": 0,
+              "Mental_Decay": 1
+            },
+            "rel_deltas": {
+              "Dex (Dispatcher)": 3
+            },
+            "flags_set": [
+              "dex_label_known"
+            ]
+          }
+        },
+        {
+          "id": "leave_unread",
+          "text": "Leave it unread on purpose.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You don't turn the label over. Whatever he wrote about you keeps existing, upside down, unconfirmed, and you walk out having chosen not to know exactly what you're worth to the one man down here who actually files it.",
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 1
+            },
+            "flags_set": [
+              "dex_label_known"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_auntie_the_board",
+      "title": "The Board",
+      "body": "She teaches you to read the board -- the marks aren't amounts, they're histories. A hook means fed on credit the week of a death. A double strike means paid off in work. A spiral means don't ask, feed them anyway. Your mark is already up there, from before you ever knew her name -- she's been carrying you at a loss since a night you don't remember and she does, in order-level detail.",
+      "weight": 7,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "ambient",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 8,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "ask_what_you_ordered",
+          "text": "Ask what you ordered that night.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"Double broth, no protein, paid in a ring you said wasn't yours to sell,\" she says, without checking anything, and hands you back a version of yourself from before the Row finished the job it started -- someone who still had a ring to lose.",
+            "deltas": {
+              "Meaning": 0,
+              "Social_Capital": 1
+            },
+            "flags_set": [
+              "auntie_board_read"
+            ],
+            "rel_add": [
+              {
+                "name": "Auntie Six (Stallkeeper)",
+                "satisfaction": 50.0,
+                "strength": 6.0
+              }
+            ]
+          }
+        },
+        {
+          "id": "settle_mark_in_full",
+          "text": "Settle your mark in full.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She takes your chits, counts them twice out of habit, and re-chalks the mark right back where it was. \"Money settles,\" she says. \"Board remembers.\" You're square and marked, both, which turns out to be exactly how this works.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -60
+            },
+            "flags_set": [
+              "auntie_board_read"
+            ],
+            "rel_add": [
+              {
+                "name": "Auntie Six (Stallkeeper)",
+                "satisfaction": 50.0,
+                "strength": 6.0
+              }
+            ]
+          }
+        },
+        {
+          "id": "just_eat",
+          "text": "Just eat.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You eat and don't ask, don't settle, don't test the board at all -- the easiest bowl you've had all week, and the mark stays exactly where it was, quietly outliving another chance to close it.",
+            "deltas": {
+              "Meaning": -1,
+              "Wealth": -40
+            },
+            "flags_set": [
+              "auntie_board_read"
+            ],
+            "rel_add": [
+              {
+                "name": "Auntie Six (Stallkeeper)",
+                "satisfaction": 50.0,
+                "strength": 6.0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_auntie_zero_day",
+      "title": "Settled Means Gone",
+      "body": "The clearing-at-zero reaches the overpass: a Steward notice, courteous as a hymn, declaring all informal debts \"resolved under continuity accounting.\" The Row's debts, settled by fiat, by a machine that thinks a debt is money. That night she re-chalks the entire board from memory -- four hundred marks, every hook and spiral -- and you're the only customer she lets watch.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "ambient",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "auntie_board_read"
+          },
+          {
+            "day": 18,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "auntie_board_read"
+              }
+            ]
+          },
+          "text": "She calls the marks out loud as she works, and you can follow the grammar now -- a census of everyone the Row almost lost, recited from memory because memory is the only ledger the notice couldn't touch."
+        }
+      ],
+      "choices": [
+        {
+          "id": "chalk_what_she_dictates",
+          "text": "Chalk what she dictates.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Your hand does the marks; her memory does the counting. Four hundred debts go back up in a night, none of them yours to forgive, all of them now partly in your handwriting -- which is its own kind of citizenship.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "flags_set": [
+              "auntie_rechalked"
+            ]
+          }
+        },
+        {
+          "id": "argue_let_it_go",
+          "text": "Argue she should let it go -- the notice frees her too.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"Settled means gone,\" she says, and doesn't stop chalking to say it. You don't have an answer for a woman rebuilding four hundred debts by hand rather than let a machine's idea of mercy erase the fact that people owed each other anything at all.",
+            "deltas": {
+              "Meaning": -2
+            },
+            "flags_set": [
+              "auntie_rechalked"
+            ]
+          }
+        },
+        {
+          "id": "stand_lookout",
+          "text": "Stand lookout for wellness drones while she works.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You watch the alley instead of the board, which is its own kind of faith -- trusting a stranger's memory over your own eyes for a whole night. Nothing comes. You still don't relax until the last mark goes up.",
+            "deltas": {
+              "Meaning": 0,
+              "Heat": 2
+            },
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": 3
+            },
+            "flags_set": [
+              "auntie_rechalked"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_auntie_the_name",
+      "title": "One Bowl, Never Collected",
+      "body": "Top of the board, oldest chalk, one bowl, never collected. Her son took Sanctuary intake nine years ago -- voluntarily, smiling, the way they do -- and his debt is one bowl of the good broth, ordered and never eaten, the night before. She keeps it chalked because settled means gone, and gone is the one thing the board won't say about him. Then she comps your bowl and charges you for the napkin, because grief is not a discount.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "ambient",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "auntie_rechalked"
+          },
+          {
+            "day": 26,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "auntie_rechalked"
+              }
+            ]
+          },
+          "text": "His mark was the first one she re-chalked that night. You watched her do it and didn't know, until right now, that you were standing at a funeral."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_about_him",
+          "text": "Ask about him.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She tells you about the time he traded a whole week's rations for a busted radio that only ever played one station, and grins telling it, and the grin doesn't reach anywhere near her eyes. Funny stories about the dead-not-dead come out sounding like eulogies whether she means them to or not.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "flags_set": [
+              "auntie_grief_known"
+            ]
+          }
+        },
+        {
+          "id": "offer_find_out_inside",
+          "text": "Offer to find out how he's doing inside.",
+          "requires": {
+            "any": [
+              {
+                "flag": "steward_biometric_dossier"
+              },
+              {
+                "flag": "walked_the_intake"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"The board knows him,\" she says. \"Their file knows a resident.\" She refuses the offer flat, and the refusal costs her exactly as much as an answer would have -- you watch her choose the son she remembers over the stranger a file would hand you instead.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": 2
+            },
+            "flags_set": [
+              "auntie_grief_known"
+            ]
+          }
+        },
+        {
+          "id": "eat_comped_bowl_silence",
+          "text": "Eat the comped bowl in silence.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You eat without asking anything, and she rings up a napkin like it's the only honest charge left in the building. \"Good,\" she says, not looking up. \"That's the right amount of talking about it.\"",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -10
+            },
+            "flags_set": [
+              "auntie_grief_known"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_auntie_collection_day",
+      "title": "The Interpretive Layer",
+      "body": "A syndicate consolidator at the stall, silk over spreadsheet: the board is intelligence -- four hundred households' pressure points, pre-sorted -- and he'd like to buy the stall as a \"community data asset,\" Auntie retained as an \"interpretive layer.\" She lets him finish. Then she prices him, out loud, in board grammar, in front of the dinner rush -- what he owes, who he stiffed, which mark his mother was -- an audit so complete the queue starts writing it down.",
+      "weight": 7,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "ambient",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "auntie_grief_known"
+          },
+          {
+            "day": 34,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "auntie_grief_known"
+              }
+            ]
+          },
+          "text": "He makes the mistake of offering to \"resolve\" the top mark. The stall goes silent the way a pressure door seals."
+        }
+      ],
+      "choices": [
+        {
+          "id": "back_her_fixer_weight",
+          "text": "Back her play with fixer weight.",
+          "requires": {
+            "any": [
+              {
+                "flag": "undercity_fixer_rep"
+              },
+              {
+                "flag": "undercity_smuggling_rep"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You step in behind her audit with weight of your own, and the consolidator leaves with a face he now has to remember alongside hers. It costs you nothing tonight and a little of your anonymity forever -- he knows your face now, and men like him keep faces filed.",
+            "deltas": {
+              "Meaning": 0,
+              "Heat": 3
+            },
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": 3
+            },
+            "flags_set": [
+              "auntie_board_kept"
+            ]
+          }
+        },
+        {
+          "id": "quietly_price_consolidator",
+          "text": "Quietly price the consolidator yourself and hand her the sheet.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You do your own version of her math on the side and slide her the sheet without a word -- one more debt entered correctly, in a hand that isn't hers, which is exactly the kind of help this board was built to take.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "flags_set": [
+              "auntie_board_kept"
+            ]
+          }
+        },
+        {
+          "id": "stay_out_of_it",
+          "text": "Stay out of it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She wins alone, easily, the way she always does -- and you watch the whole audit happen with your hands in your pockets, a spectator to the one time all night the Row actually defended itself in public.",
+            "deltas": {
+              "Meaning": -2
+            },
+            "flags_set": [
+              "auntie_board_kept"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_auntie_open_late",
+      "title": "Open Late",
+      "body": "The stall at 3 a.m., steam against the underpass dark, whoever's at the counter tonight. Auntie Six doesn't ask why you're up. She never does.",
+      "weight": 3,
+      "cooldown": 6,
+      "max_fires": 0,
+      "tags": [
+        "ambient"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 12,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "denny_hum_named"
+              }
+            ]
+          },
+          "text": "Denny's two stools down, chewing his own stock, rating the broth's frequency out loud like it owes him data."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "ferry_mask_seen"
+              }
+            ]
+          },
+          "text": "A woman with one good arm sits at the far end, mask on the counter like a third guest, salting your bowl without asking."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "dex_prop_run"
+              }
+            ]
+          },
+          "text": "Dex is off-shift, still scrolling, and orders \"whatever she had\" -- meaning the old courier, meaning he's still routing around her empty days even here."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "mara_dinner_test"
+              }
+            ]
+          },
+          "text": "Mara's order is chalked under yours now, a bracket joining the two marks like the board decided you were a matched set."
+        }
+      ],
+      "choices": [
+        {
+          "id": "the_usual",
+          "text": "Order the usual.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It's warm and it's cheap and it costs you sleep and forty credits, which is the only kind of free this city still allows -- comfort with a receipt.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -40
+            }
+          }
+        },
+        {
+          "id": "buy_the_counter_a_round",
+          "text": "Buy the counter a round.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You cover everyone at the counter for one bowl each, and the stall does the thing stalls do when someone overpays on purpose -- gets quiet, then loud, then generous back at you in ways that don't show up on any receipt.",
+            "deltas": {
+              "Wealth": -150
+            },
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": 3
+            }
+          }
+        },
+        {
+          "id": "take_it_to_go",
+          "text": "Take it to go.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You take the bowl into the dark instead of staying, and eat it walking, alone, which is the same meal everyone else at that counter is trying not to have tonight.",
+            "deltas": {
+              "Meaning": -1,
+              "Wealth": -40
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_denny_the_hum",
+      "title": "The Hum",
+      "body": "Slow night at the bead curtain. He tells you what the hum is -- his theory, polished like liturgy: it's the Steward humming to itself, the sound of a mind vast as weather doing its filing, and the root doesn't quiet the city, it quiets your listening. Then the patter stops mid-sentence -- first time you've heard silence in that booth -- and he asks, actually asks: \"You hear it too, or you buying politeness?\"",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "vice",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 8,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "buy_and_answer_honestly",
+          "text": "Buy a pinch and answer honestly.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"Yeah,\" you say, and mean it, and he nods like the coin barely mattered next to the answer. The root goes down easy and the hum goes quieter for exactly as long as advertised -- no longer, no shorter, which from Denny counts as scrupulous honesty.",
+            "deltas": {
+              "Substance_Reliance": 2,
+              "Meaning": 0
+            },
+            "flags_set": [
+              "denny_hum_named"
+            ],
+            "rel_add": [
+              {
+                "name": "Denny (Root Vendor)",
+                "satisfaction": 40.0,
+                "strength": 4.0
+              }
+            ]
+          }
+        },
+        {
+          "id": "ask_what_he_hears",
+          "text": "Ask what he hears.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The patter drops entirely. What he describes isn't ambient at all -- it has addresses in it, apartment numbers, a rhythm that repeats on people specifically, and for the first time you understand the hum isn't weather to him. It's a directory.",
+            "deltas": {
+              "Meaning": 0,
+              "Mental_Decay": 1
+            },
+            "flags_set": [
+              "denny_hum_named"
+            ],
+            "rel_add": [
+              {
+                "name": "Denny (Root Vendor)",
+                "satisfaction": 40.0,
+                "strength": 4.0
+              }
+            ]
+          }
+        },
+        {
+          "id": "neither_buy_nor_answer",
+          "text": "Neither buy nor answer.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "He grins it off, patter snapping back into place like a door closing, and the grin costs him something you both notice and neither of you names. You leave with your money and without whatever he was about to give you for free.",
+            "deltas": {
+              "Meaning": -2
+            },
+            "flags_set": [
+              "denny_hum_named"
+            ],
+            "rel_add": [
+              {
+                "name": "Denny (Root Vendor)",
+                "satisfaction": 40.0,
+                "strength": 4.0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_denny_dry_batch",
+      "title": "Dry Batch",
+      "body": "The root crop failed -- it grows in a flooded conduit off the reclamation runoff, and the runoff ran clean this month, which is the Steward improving the water and killing the crop, a kindness with a body count of one economy. Denny's facing his own empty stall the way his customers face it, which you've never seen before and he clearly hoped you never would.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "vice",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "denny_hum_named"
+          },
+          {
+            "day": 16,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "denny_hum_named"
+              }
+            ]
+          },
+          "text": "Without his own chew, the hum is louder for him tonight than he's ever admitted out loud. He keeps touching the empty cloth where the stock used to sit."
+        }
+      ],
+      "choices": [
+        {
+          "id": "front_restock_capital",
+          "text": "Front him the restock capital.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You put up the credits without making him ask twice, and he doesn't thank you the way customers thank each other -- he just remembers it, out loud, for weeks, which from Denny is closer to a debt of honor than cash ever gets repaid in this city.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -300
+            },
+            "rel_deltas": {
+              "Denny (Root Vendor)": 3
+            },
+            "flags_set": [
+              "denny_restocked"
+            ]
+          }
+        },
+        {
+          "id": "conduit_gamble",
+          "text": "Go down the conduit with him for the deep growth.",
+          "prob": {
+            "base": 0.5,
+            "mods": []
+          },
+          "success": {
+            "text": "Two fools in a flood pipe with a lantern between them, and you both come up with the good root, soaked, laughing -- the best hour of his month spent in a place that smells like the underside of everything.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "flags_set": [
+              "denny_restocked"
+            ]
+          },
+          "failure": {
+            "text": "The pipe takes a piece out of you before it gives anything back -- a slip, cold water, a gash you'll feel for a week -- and you come up empty-handed while Denny apologizes in a register you've never heard him use before: sincere.",
+            "deltas": {
+              "Physical_Integrity": -10
+            }
+          }
+        },
+        {
+          "id": "buy_out_reserve",
+          "text": "Buy out his private reserve at his named price.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "He names a price steeper than fair and you pay it without haggling, and he sells -- he'd rather eat the hum himself tonight than refuse a sale, and you watch that arithmetic happen behind his eyes in real time. His grin at the end of it is all teeth, no liturgy left in it.",
+            "deltas": {
+              "Substance_Reliance": 3,
+              "Wealth": -150
+            },
+            "flags_set": [
+              "denny_reserve_bought"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_denny_quiet_customer",
+      "title": "The Quiet Customer",
+      "body": "A Sanctuary graduate at the curtain -- the smile, the cadence, the wrongness -- with a folded request: root, for someone still inside. Denny's one hard rule surfaces: he won't sell to the graduate, because the graduate doesn't need, the need was optimized out of them, and selling to that is selling to the file. The someone inside is a different arithmetic entirely. The graduate haggles from a script anyway. Denny plays along, patter against protocol, funny right up until the exact second it stops being funny.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "undercity",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 24,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "denny_restocked"
+              }
+            ]
+          },
+          "text": "The shelf's full again since you fronted him -- the refusal to the graduate costs him nothing this time, and he knows you're the reason it's an easy no instead of a starving one."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "denny_reserve_bought"
+              }
+            ]
+          },
+          "text": "His stall's been bare since you bought him out -- this request is for the last thing he doesn't have left to give, and you watch him decide to find it anyway."
+        }
+      ],
+      "choices": [
+        {
+          "id": "run_root_inside",
+          "text": "Run the root inside yourself.",
+          "requires": {
+            "any": [
+              {
+                "flag": "walked_the_intake"
+              },
+              {
+                "flag": "steward_biometric_dossier"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You carry it in past people trained to notice exactly this, on nerve and a route you shouldn't still remember, and it works -- this once. The someone inside gets one quiet night. You get a version of your own face now filed somewhere you can't see it.",
+            "deltas": {
+              "Meaning": 0,
+              "Heat": 5
+            },
+            "flags_set": [
+              "denny_rule_seen"
+            ]
+          }
+        },
+        {
+          "id": "stake_the_deal",
+          "text": "Stake the deal so Denny can say yes without going hungry.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You cover the cost so his one hard rule doesn't have to bend around his one soft spot -- the someone inside, not the graduate wearing their face at him. It's a clean trade: your credits for his conscience staying whole.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -200
+            },
+            "flags_set": [
+              "denny_rule_seen"
+            ]
+          }
+        },
+        {
+          "id": "advise_its_a_sting",
+          "text": "Advise him it's a sting shaped like a kindness.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It isn't, and your caution is the thing that costs the someone inside the one quiet night they were ever going to get -- Denny doesn't argue, just quietly puts the root back, and the patter doesn't come back on for the rest of the shift.",
+            "deltas": {
+              "Meaning": -3
+            },
+            "flags_set": [
+              "denny_rule_seen"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_denny_the_silence",
+      "title": "The Silence",
+      "body": "The hum stops. For him. Mid-shift, mid-sentence -- his hearing's been going for a year and the exact band the Steward files itself on went first. A vendor of relief from a sound he can no longer hear, patter suddenly a script about someone else's skull. He tells only you. And he asks for the one thing he's never asked a customer: stop buying. \"Root's for the hum. You start chewing for the quiet, that's a different shop. Worse one. I've seen the shelves.\"",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "undercity",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "denny_rule_seen"
+          },
+          {
+            "day": 34,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "denny_rule_seen"
+              }
+            ]
+          },
+          "text": "The same rule that kept root out of a graduate's hands, turned on you now -- you finally have the standing to receive it instead of just watch him hand it to somebody else."
+        }
+      ],
+      "choices": [
+        {
+          "id": "promise_and_mean_it",
+          "text": "Promise, and mean it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You say it plain and he hears you say it -- close enough to true that he lets himself believe it for tonight, which is the only night he's asking about. You don't know yet if you'll keep it. Neither does he. He asked anyway.",
+            "deltas": {
+              "Meaning": 0,
+              "Substance_Reliance": -2
+            },
+            "flags_set": [
+              "denny_silence_told"
+            ]
+          }
+        },
+        {
+          "id": "buy_one_last_pinch",
+          "text": "Buy one last pinch, ceremonially, both of you knowing.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "He weighs it out slower than he's ever weighed anything, and you both know exactly what this sale is -- not commerce, a closing ceremony for a shop that's about to change what it sells. It's the saddest transaction either of you has ever conducted in kitchen light.",
+            "deltas": {
+              "Substance_Reliance": 2,
+              "Meaning": -2
+            },
+            "rel_deltas": {
+              "Denny (Root Vendor)": 2
+            },
+            "flags_set": [
+              "denny_silence_told"
+            ]
+          }
+        },
+        {
+          "id": "ask_what_hell_sell_now",
+          "text": "Ask what he'll sell now.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"Quiet,\" he says. \"Different packaging.\" And he grins, one more time, the same grin that's been doing the actual selling in this booth for years -- load-bearing right up to the end, holding up a shop that's about to become something else entirely.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "flags_set": [
+              "denny_silence_told"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_kael_the_umbrella",
+      "title": "The Umbrella",
+      "body": "Kael pays for something with no angle -- intercepts a street kid's debt to a bad collector, full freight, in front of you, and walks on. Impossible. You spend the scene auditing for the price, running his own methods against him, and the looking is the price: proof you've finally learned his accounting.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "ambient",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "kael_impressed"
+          },
+          {
+            "day": 14,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "name_what_you_saw",
+          "text": "Name what you saw.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "\"You paid a debt that wasn't yours,\" you say. He doesn't confirm it and doesn't deny it either -- just lets the silence do the pricing, which from Kael is as close to caught as anyone ever gets him.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 4
+            },
+            "flags_set": [
+              "kael_umbrella_priced"
+            ]
+          }
+        },
+        {
+          "id": "offer_cover_half",
+          "text": "Offer to cover half.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "He lets you pay him back for something you didn't do, which is either the kindest thing he's ever allowed or the cruelest -- he logs the payment in his ledger like any other transaction, and the logging is the whole lesson.",
+            "deltas": {
+              "Meaning": 0,
+              "Wealth": -200
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 2
+            },
+            "flags_set": [
+              "kael_umbrella_priced"
+            ]
+          }
+        },
+        {
+          "id": "say_nothing_ever",
+          "text": "Say nothing, ever.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You never mention it, to him or anyone. It's the smallest choice available and the cleanest -- proof that some things are worth more left unpriced, even in a ledger like Kael's, even by you.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "flags_set": [
+              "kael_umbrella_priced"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_echo_chalk_joke",
+      "title": "That One Wasn't Code",
+      "body": "A dead-drop mark in her chalk -- routine, operational -- except the third stroke is bent into, unmistakably, a tiny wellness drone with a flat tire. A joke. In tradecraft. Laughing at a dead drop is a security breach; she drew it anyway, timed to when you'd pass, erased by rain within the hour. Next contact she says only: \"that one wasn't code.\"",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "ambient"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "echo_contact"
+          },
+          {
+            "day": 12,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "leave_joke_back",
+          "text": "Leave a joke back in her grammar.",
+          "prob": {
+            "base": 0.55,
+            "mods": []
+          },
+          "success": {
+            "text": "One stroke, timed the way she timed hers, and next contact she doesn't mention it at all -- which, from Echo, is the loudest laugh available inside tradecraft.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": 2
+            },
+            "flags_set": [
+              "echo_joke_seen"
+            ]
+          },
+          "failure": {
+            "text": "\"Funny once. Dead twice,\" is the whole debrief -- she scrubs the site by the book, protocol restored, and the one unlogged thing you had between you is gone along with it.",
+            "deltas": {
+              "Meaning": -3,
+              "Heat": 2
+            },
+            "flags_set": [
+              "echo_joke_seen"
+            ]
+          }
+        },
+        {
+          "id": "say_nothing_keep_it",
+          "text": "Say nothing, keep it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You don't answer the joke and don't report it either -- you just keep it, privately, the one unlogged funny thing in a tradecraft relationship built entirely out of logged things.",
+            "deltas": {
+              "Meaning": 0
+            },
+            "flags_set": [
+              "echo_joke_seen"
+            ]
+          }
+        },
+        {
+          "id": "ask_about_it_aloud",
+          "text": "Ask her about it aloud.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Naming it kills it, immediately and completely -- she goes flat, operational, a door closing mid-swing. \"Sentiment reads as a security risk,\" she says, and you understand you just spent the one unspoken thing you had with her on a sentence you didn't need to say.",
+            "deltas": {
+              "Meaning": -3
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": -3
+            },
+            "flags_set": [
+              "echo_joke_seen"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

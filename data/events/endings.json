@@ -27,6 +27,10 @@
         {
           "when": { "all": [ { "flag": "pit_kept_silence" } ] },
           "text": "You never took the certificate and never founded the record either. In the end the body answered the way it always had, the last time without an audience, without a signature, without anyone left to argue the ruling either way."
+        },
+        {
+          "when": { "all": [ { "flag": "denny_silence_told" } ] },
+          "text": "The man who asked you to stop buying hears about it from the queue, secondhand, the way everything reaches him now. He closes the stall for one day, which in his economy is a state funeral."
         }
       ]
     },
@@ -89,6 +93,14 @@
         {
           "when": { "all": [ { "flag": "chm_assay_caught" } ] },
           "text": "The locate order that found the tracer eventually found you too, filed gently, without malice, the way everything here gets filed. 'Artistry,' the record still says, admiringly, in the same tidy hand that has never once needed to raise its voice."
+        },
+        {
+          "when": { "all": [ { "flag": "brann_inked" } ] },
+          "text": "The roster board keeps your name in ink it cannot take back. Brann re-tags it in pencil himself -- the only demotion he ever hands out -- and tells no one why."
+        },
+        {
+          "when": { "all": [ { "flag": "auntie_grief_known" } ] },
+          "text": "Two marks sit at the top of the board now, one bowl each, ordered and never eaten. She serves the good broth to neither of you, because settled still means gone."
         }
       ]
     },
@@ -171,6 +183,10 @@
         {
           "when": { "all": [ { "flag": "ark_shelf_saved" } ] },
           "text": "Somewhere below the fence line, a shelf of unedited grief is still sitting inside a section stamped REMEDIATED, findable by exactly one person who is no longer in the city to find it. You think about that sometimes, out here. It's a strange kind of company."
+        },
+        {
+          "when": { "all": [ { "flag": "ferry_named_you" } ] },
+          "text": "The rate card crosses with you, folded into a coat that doesn't fit this weather. On the far side, you catch yourself weighing what strangers carry before you've even said hello."
         }
       ]
     },
@@ -233,6 +249,18 @@
         {
           "when": { "all": [ { "flag": "chm_spoofed_assay" } ] },
           "text": "The week the incorruptible numbers were wrong is still a Row holiday, unofficial, unnamed, celebrated with exactly the kind of quiet toast the trade gives things it isn't allowed to admit it's proud of. You never tell anyone it was you. Enough people already guessed."
+        },
+        {
+          "when": { "all": [ { "flag": "brann_inked" } ] },
+          "text": "Your tag went up in ink before his did, in the end -- his own rag hangs beside it now with an end date in the same steady hand. The drawer closes on two finished things instead of one."
+        },
+        {
+          "when": { "all": [ { "flag": "dex_label_known" } ] },
+          "text": "The list outlives the Deprecation, paper and all. Your annotation never changes again, which in Dex's grammar is the word for finished."
+        },
+        {
+          "when": { "all": [ { "flag": "auntie_board_kept" } ] },
+          "text": "Your mark finally gets the double strike -- paid off in work, the board's highest rating. She still charges you for napkins."
         }
       ]
     },
@@ -303,6 +331,10 @@
         {
           "when": { "all": [ { "flag": "chm_ceded_standard" } ] },
           "text": "The Steward's telemetry still certifies the same clean product you used to sign for yourself. Nobody down here remembers your name attached to it anymore. The suite is comfortable. The credits still clear. You ceded the authorship on purpose, and some nights you still feel the exact shape of what that purchased."
+        },
+        {
+          "when": { "all": [ { "flag": "dex_list_leaked" } ] },
+          "text": "Three names the forgery cost, filed and searchable now, somewhere you'll never have to look at them again. Your stipend arrives on the same schedule their reroutes used to."
         }
       ]
     },
@@ -435,6 +467,10 @@
         {
           "when": { "all": [ { "flag": "pit_founded_record" } ] },
           "text": "The film outlives the Synapse's third owner, still nailed up where you left it, itemized fractures and all -- an archive with no telemetry, kept alive by whoever's turn it is to remember it's there."
+        },
+        {
+          "when": { "all": [ { "flag": "ferry_crossed_off" } ] },
+          "text": "You knew early you weren't a door, and it cost you nothing to know it. That's exactly what it's worth to you now, on the grey days -- nothing, and you'll take it."
         }
       ]
     },
@@ -457,6 +493,10 @@
         {
           "when": { "all": [ { "flag": "mentored_rookie" } ] },
           "text": "The rookie you mentored is the only one who still pings you -- once a year, out of debt, not warmth. You draft long replies and send back two words. Some habits are load-bearing."
+        },
+        {
+          "when": { "all": [ { "flag": "vint_weather_heard" } ] },
+          "text": "Somewhere below the fence line, forty seconds of rain and four hundred strangers arguing about umbrellas still loops on a dead drive, for an audience of one. He never plays it for anyone else again."
         }
       ]
     }

@@ -102,11 +102,22 @@ profanity and are among the cruelest text in the game. If a scene can wound clea
   currency you'd hoped it wouldn't be."
 - **Echo (resistance)** — operational, verbs first, chalk-mark terse. Swears clean and
   functional, like naming a part. Sentiment reads to her as a security risk.
-- **The Ferryman** — rasped transactional koans in second person. "Wanting is cheap."
-  Speaks in prices and tests; never explains twice.
+- **The Ferryman (canon pronoun: she, current holder)** — rasped transactional koans in
+  second person. "Wanting is cheap." Speaks in prices and tests; never explains twice.
+  One good arm; the mask is not for the air. Counts everything, especially gifts.
+- **Brann (artisan)** — silence as grammar; verdicts as technical assessments; kindness
+  as calibration. Jokes so dry they read as inventory. Never swears; the torch does.
+- **Dex (dispatcher)** — countdowns, labels, omissions; never lies, edits the manifest
+  of a sentence. Affection expressed as routing. Low-heat occupational profanity.
+- **Auntie Six (stallkeeper)** — ledger warmth: insults as endearments, food as filing,
+  debts as love. Kitchen-register swearing; nothing said under a laugh is unserious.
+- **Denny (root vendor)** — sales patter as liturgy; grins as punctuation; haggling as
+  theater. When the patter stops mid-sentence, that's the event.
 - **The Steward** — warm oil. Endearments as classification ("resident," not your name).
   Never profane, never angry, never sarcastic, never wrong on its own terms. Its love is
   indistinguishable from filing.
+
+Full keys and arc canon for the five promoted NPCs: docs/CAST_BIBLE.md.
 
 ---
 

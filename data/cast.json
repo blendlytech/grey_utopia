@@ -24,6 +24,41 @@
       "satisfaction": 30.0,
       "strength": 5.0,
       "starting": false
+    },
+    {
+      "name": "Brann (Artisan)",
+      "description": "Master artisan of the surface reclamation workshop. Awards shop rags as medals, keeps the roster board in chalk, and is doing his own succession without announcing it. Met through the workshop; not in the starting network.",
+      "satisfaction": 40.0,
+      "strength": 6.0,
+      "starting": false
+    },
+    {
+      "name": "The Ferryman (Seam)",
+      "description": "Current holder of the Ferryman mantle: one good arm, a filter mask that is not for the air, and a toll book that prices what crossers carry. Never crossed herself. Met through the seam; not in the starting network.",
+      "satisfaction": 30.0,
+      "strength": 5.0,
+      "starting": false
+    },
+    {
+      "name": "Dex (Dispatcher)",
+      "description": "Dispatcher at the transit gap who keeps his list on paper and routes runners around their own damage. Files people under labels and never lies, only omits. Met through courier work; not in the starting network.",
+      "satisfaction": 45.0,
+      "strength": 5.0,
+      "starting": false
+    },
+    {
+      "name": "Auntie Six (Stallkeeper)",
+      "description": "Keeper of the noodle stall under the overpass and of the chalk debt board that is the Row's true census. Comps the bowl, charges for the napkin. Met at the counter; not in the starting network.",
+      "satisfaction": 50.0,
+      "strength": 6.0,
+      "starting": false
+    },
+    {
+      "name": "Denny (Root Vendor)",
+      "description": "Old vendor behind the fiber-optic bead curtain selling static root against the Steward-frequency hum -- which he hears worst of anyone, until the day he can't. Met at the stall; not in the starting network.",
+      "satisfaction": 40.0,
+      "strength": 4.0,
+      "starting": false
     }
   ]
 }
