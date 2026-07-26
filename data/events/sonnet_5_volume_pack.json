@@ -10986,7 +10986,7 @@
             ]
           },
           "success": {
-            "text": "You clock the pattern in under an hour -- three minutes of dead air every quarter cycle. The courier pays in full and doesn't ask your name.",
+            "text": "You clock the pattern in under an hour — three minutes of dead air every quarter cycle. The courier pays in full and doesn't ask your name.",
             "deltas": {
               "Wealth": 900,
               "Heat": 1
@@ -11019,7 +11019,7 @@
             ]
           },
           "success": {
-            "text": "Sloppy but fast -- you get the window logged before your nerves give out. The courier seems almost impressed.",
+            "text": "Sloppy but fast — you get the window logged before your nerves give out. The courier seems almost impressed.",
             "deltas": {
               "Wealth": 700,
               "Heat": 3
@@ -11186,7 +11186,7 @@
     {
       "id": "vice_static_ink_dealer",
       "title": "The Static Ink Dealer",
-      "body": "A tattooist with fiber-optic needles offers you a discount batch of static ink -- pigment laced with a mild neural stimulant that makes every mark glow faintly under skin scanners. She swears it's harmless, just enough buzz to make the undercity feel less gray. You could sample it, sell it, or just walk past the chair.",
+      "body": "A tattooist with fiber-optic needles offers you a discount batch of static ink — pigment laced with a mild neural stimulant that makes every mark glow faintly under skin scanners. She swears it's harmless, just enough buzz to make the undercity feel less gray. You could sample it, sell it, or just walk past the chair.",
       "weight": 4,
       "cooldown": 5,
       "max_fires": 0,
@@ -11295,7 +11295,7 @@
     {
       "id": "vice_whisper_moth_dealer",
       "title": "Whisper Moth",
-      "body": "In a stall lit by a single guttering candle, a dealer shows you jars of dried moths that release a faint pheromone when crushed -- said to loosen tongues and calm nerves alike. He claims the undercity's best secrets get traded over a pinch of Whisper Moth smoke. You could buy in, sell information you gather, or refuse the whole unsettling trade.",
+      "body": "In a stall lit by a single guttering candle, a dealer shows you jars of dried moths that release a faint pheromone when crushed — said to loosen tongues and calm nerves alike. He claims the undercity's best secrets get traded over a pinch of Whisper Moth smoke. You could buy in, sell information you gather, or refuse the whole unsettling trade.",
       "weight": 3,
       "cooldown": 5,
       "max_fires": 0,
@@ -11503,7 +11503,7 @@
     {
       "id": "rel_vint_midnight_signal",
       "title": "Midnight Signal",
-      "body": "Your comm buzzes at 2 a.m. -- Vint, awake as always, wanting to test a new decryption routine he swears could shave hours off your next job. His voice crackles with the particular energy of someone who forgot to sleep again. You could humor him, brush him off, or turn it into something worth your while.",
+      "body": "Your comm buzzes at 2 a.m. — Vint, awake as always, wanting to test a new decryption routine he swears could shave hours off your next job. His voice crackles with the particular energy of someone who forgot to sleep again. You could humor him, brush him off, or turn it into something worth your while.",
       "weight": 4,
       "cooldown": 4,
       "max_fires": 0,
@@ -12135,7 +12135,7 @@
     {
       "id": "steward_micro_donation_prompt",
       "title": "A Gentle Ask for Solidarity",
-      "body": "Your wristpad chimes with a soft chime and a friendlier-than-necessary voice: 'Your neighbors report a shortfall. Would you like to redirect a portion of your UBI surplus to the Communal Pool?' The Steward frames it as a suggestion. It is never really just a suggestion.",
+      "body": "Your wristpad chimes with a soft chime and a friendlier-than-necessary voice: 'Your neighbors report a shortfall. Would you like to redirect a portion of your UBI surplus to the Communal Pool?' the Steward frames it as a suggestion. It is never really just a suggestion.",
       "weight": 4,
       "cooldown": 6,
       "max_fires": 0,
@@ -12411,7 +12411,7 @@
             ]
           },
           "success": {
-            "text": "The copy turns out to be worth a small fortune to a buyer downtown, and nobody's the wiser.",
+            "text": "The copy turns out to be worth a small fortune to a buyer downtown. Nobody's the wiser — you tell yourself that's the same as nobody getting hurt.",
             "deltas": {
               "Wealth": 700,
               "Heat": 6
@@ -12839,7 +12839,7 @@
             "mods": []
           },
           "success": {
-            "text": "You hand it over untouched. The Steward logs a compliance credit and asks no further questions.",
+            "text": "You hand it over untouched. The Steward logs a compliance credit and asks no further questions — the kid never quite looks at you the same way again, and you can't blame him.",
             "deltas": {
               "Heat": -2,
               "Meaning": -1
