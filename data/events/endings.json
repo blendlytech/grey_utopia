@@ -189,6 +189,18 @@
           "text": "You know what the Resistance really was. Out past the wire, that knowledge finally becomes what it could never be inside: just a story about a city you used to live in."
         },
         {
+          "when": { "all": [ { "flag": "sf_seam_burned" } ] },
+          "text": "You went out on the expensive window, the way she always said you had to. Fourteen people did not go out on the cheap one, because you put a budget line on a stairwell wall. You will never know their names. They will never know yours. That is the whole shape of what you did, and it is enough."
+        },
+        {
+          "when": { "all": [ { "flag": "sf_seam_taken" } ] },
+          "text": "Somewhere behind you the cheap door is still open, still serviced on schedule, still paid for out of Continuity of Civic Mood. The only thing that changed is who stands on it and whether anyone reads the relay in the morning. You told yourself that was not nothing. Out here, under weather nobody scheduled, you find you still believe it."
+        },
+        {
+          "when": { "all": [ { "flag": "sf_stayed_silent" } ] },
+          "text": "You spent the night you had bought and said nothing about the other one. The count was four when you crossed. You have no way of learning what it is now, and you understand, walking, that not learning it was the thing you actually purchased."
+        },
+        {
           "when": { "all": [ { "flag": "spike_kept" } ] },
           "text": "It crossed the wire with you, still against your chest -- the first pre-accord recording, as far as you know, to ever leave the city. Out here it plays the same as it always did: a kitchen, a laugh in the wrong place, nobody editing anything out."
         },

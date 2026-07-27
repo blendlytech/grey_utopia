@@ -1212,6 +1212,168 @@
           "failure": {}
         }
       ]
+    },
+    {
+      "id": "flagship_the_cold_run",
+      "title": "The Cold Run",
+      "body": "The pass you bought is a strip of laminate carrying somebody else's gait signature. You were told it opens the maintenance lock at the perimeter, and it does -- for ninety seconds, onto four hundred meters of open scrub where the drone mesh reads bodies by how they walk. Yours will read as yours. The man who sold it to you has stopped answering, and the moon is going new whether you are ready or not.",
+      "weight": 9,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "existential",
+        "flagship"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "exit_ready"
+          },
+          {
+            "flag": "credentials_forged",
+            "value": false
+          },
+          {
+            "day": 14,
+            "op": ">="
+          },
+          {
+            "stat": "Meaning",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "text": "The dampers in your heels are the only thing you own that argues with the mesh -- ninety seconds of randomized stride. It is not a ghost. It is not nothing.",
+          "when": {
+            "all": [
+              {
+                "item": "gait_dampers"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "go_without_the_ghost",
+          "text": "Walk it anyway. Ninety seconds is ninety seconds.",
+          "prob": {
+            "base": 0.08,
+            "mods": [
+              {
+                "stat": "Meaning",
+                "coef": 0.002
+              },
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.001
+              },
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              },
+              {
+                "stat": "Substance_Reliance",
+                "coef": -0.004
+              },
+              {
+                "stat": "Recklessness",
+                "coef": -0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "You go on the laminate alone. The lock opens on a stranger's walk and then you are in the scrub with your own underneath you, four hundred meters of it, every step a signature nobody bothered to forge. Nothing overhead decides to care. You will never learn why. On the far side the ground is only ground, and your legs will not stop shaking, and none of it was skill.",
+            "deltas": {
+              "Meaning": 8
+            },
+            "flags_set": [
+              "crossed_wire"
+            ]
+          },
+          "failure": {
+            "text": "Two hundred meters in, the mesh finds your gait and holds it -- a soft blue lock, no alarm, nothing so crude as a siren. Something comes low and unhurried across the scrub and puts you face-down in wet dirt with a knee you never see coming. You wake on the wrong side of the wire with the pass gone, your ribs wrong, and a case number you did not have yesterday.",
+            "deltas": {
+              "Heat": 30,
+              "Physical_Integrity": -25,
+              "Mental_Decay": 14
+            },
+            "flags_clear": [
+              "exit_ready"
+            ],
+            "flags_set": [
+              "nerve_broken"
+            ]
+          },
+          "boost_items": [
+            "gait_dampers"
+          ]
+        },
+        {
+          "id": "ask_who_runs_the_seam",
+          "text": "The pass came from a middleman. Find out who it came from.",
+          "prob": {
+            "base": 0.25,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.002
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The Row gives it up for two drinks and a favor you will regret: the laminate came off a middleman, and the middleman buys from the woman who actually owns those ninety seconds. She works new moons. She does not sell laminate, and she has never once been asked twice.",
+            "deltas": {
+              "Heat": 8,
+              "Social_Capital": -3,
+              "Meaning": 3
+            },
+            "flags_set": [
+              "ferryman_known"
+            ]
+          },
+          "failure": {
+            "text": "You ask three times, and the third time the question gets somewhere ahead of you. Nobody sells you a name. A week later your file carries a new line about associations, and the drinks were still your money.",
+            "deltas": {
+              "Heat": 12,
+              "Wealth": -500,
+              "Mental_Decay": 4
+            }
+          }
+        },
+        {
+          "id": "sell_the_pass",
+          "text": "Sell it on to someone with a ghost and a death wish.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You sell it to a kid on the eastern stack who has a ghost, no route, and absolutely no idea. He pays without haggling, which is how you know he will be dead or filed by the next new moon. The credits are real. You put the wire out of your mind and it stays out for nearly a week.",
+            "deltas": {
+              "Wealth": 2200,
+              "Meaning": -9,
+              "Mental_Decay": 3
+            },
+            "flags_clear": [
+              "exit_ready"
+            ]
+          },
+          "failure": {}
+        }
+      ]
     }
   ]
 }

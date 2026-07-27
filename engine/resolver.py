@@ -72,6 +72,19 @@ SWITCH_SETTLE_DAY: int = 76
 # playing and resolves later if it recovers. That is why moving them separates
 # the strategies far less than their raw distributions suggest, and why the
 # body bar is the milder of the two despite the larger jump.
+#
+# MEASURED DEAD LEVER, 2026-07-27: 76 -> 80 was tried at full N to pull greedy's
+# good-ending rate back under GOOD_CAP, and it does not reach greedy at all --
+# greedy small-life fell 29.4% -> 28.8% (-0.6) while CAUTIOUS fell 36.2% ->
+# 30.9% (-5.3), nine times the effect on the wrong strategy. The reason is
+# structural and applies to any future attempt: `DELTA_UTILITY["Meaning"]` is
+# 1.0, the highest weight in the bots' scoring, so greedy is the strategy that
+# maximizes Meaning and arrives at the settle day well clear of any bar that
+# cautious can still survive. A Meaning bar can only ever select against the
+# strategies that were not optimizing for Meaning. Reverted to 76; if greedy's
+# share of this ending has to come down, the lever is making the
+# apprenticeship -> workshop_standing -> chose_small_life chain genuinely
+# fallible (today no step in it can fail), not this constant.
 SMALL_LIFE_SETTLE_DAY: int = 44
 SMALL_LIFE_MIN_MEANING: float = 76.0
 SMALL_LIFE_MIN_BODY: float = 40.0

@@ -9,7 +9,7 @@ import sys
 import json
 import glob
 import argparse
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List, Optional, Set
 
 # Add parent directory to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -18,21 +18,28 @@ from engine.events import load_events
 
 DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data"))
 
-# Model Pricing Matrix (per Million Tokens as of July 2026)
+# Model Pricing Matrix (per Million Tokens). Rates of None are unconfirmed:
+# estimate_cost returns None for those and the banner says so, rather than
+# printing a made-up figure. Fill them in from the provider console.
+#
+# Gemini 3.6 Flash High is deliberately NOT listed here: it is driven
+# interactively through Antigravity and there is no API key for it, so it has
+# no batch route. Bulk mechanical sweeps on that model are run from the IDE,
+# then verified with pipeline/lint_content.py like any other content pass.
 PRICING_MATRIX = {
-    "fable-5":        {"input": 10.0, "output": 50.0, "role": "Flagship Narrative & World Architecture"},
+    "opus-5":         {"input": None, "output": None, "role": "Flagship Narrative, World Architecture & Balance Audit"},
     "sonnet-5":       {"input": 2.0,  "output": 10.0, "role": "Bulk Storylet Generation & Flavor Expansion"},
-    "opus-4.8":       {"input": 5.0,  "output": 25.0, "role": "Balance Audit & System Design"},
-    "gemini-3.1-pro": {"input": 2.0,  "output": 12.0, "role": "Ambient Barks & High-Volume Localization"},
+    "gemini-3.1-pro": {"input": 2.0,  "output": 12.0, "role": "Volume Overflow & High-Context Validation"},
 }
 
 # API model identifiers (kept separate from the friendly names above)
 ANTHROPIC_MODEL_IDS = {
-    "fable-5": "claude-fable-5",
+    "opus-5": "claude-opus-5",
     "sonnet-5": "claude-sonnet-5",
-    "opus-4.8": "claude-opus-4-8",
 }
-GEMINI_MODEL_ID = "gemini-3.1-pro"
+GEMINI_MODEL_IDS = {
+    "gemini-3.1-pro": "gemini-3.1-pro",
+}
 
 EVENTS_PER_CHUNK = 8       # Small enough that a chunk never truncates
 MAX_TOKENS_PER_CHUNK = 16000
@@ -62,8 +69,11 @@ VOLUME_PROMPT = """Generate {n} standard volume storylet cards in JSON under key
 Do NOT reuse any of these existing event ids: {existing_ids}"""
 
 
-def estimate_cost(model_name: str, input_tokens: int, output_tokens: int) -> float:
-    rates = PRICING_MATRIX.get(model_name, {"input": 2.0, "output": 10.0})
+def estimate_cost(model_name: str, input_tokens: int, output_tokens: int) -> Optional[float]:
+    """Estimated USD cost, or None when this model's rates are unconfirmed."""
+    rates = PRICING_MATRIX.get(model_name, {})
+    if rates.get("input") is None or rates.get("output") is None:
+        return None
     return (input_tokens / 1e6) * rates["input"] + (output_tokens / 1e6) * rates["output"]
 
 
@@ -122,27 +132,27 @@ def generate_with_anthropic(model_key: str, api_key: str, prompt: str) -> str:
     return "".join(parts)
 
 
-def generate_with_gemini(api_key: str, prompt: str) -> str:
+def generate_with_gemini(model_key: str, api_key: str, prompt: str) -> str:
     try:
         import google.generativeai as genai
     except ImportError:
         print("Please install google-generativeai SDK: pip install google-generativeai")
         sys.exit(1)
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel(GEMINI_MODEL_ID, system_instruction=SYSTEM_PROMPT)
+    model = genai.GenerativeModel(GEMINI_MODEL_IDS[model_key], system_instruction=SYSTEM_PROMPT)
     response = model.generate_content(prompt)
     return response.text
 
 
 def generate_chunk(model_key: str, api_key: str, prompt: str) -> str:
     if "gemini" in model_key:
-        return generate_with_gemini(api_key, prompt)
+        return generate_with_gemini(model_key, api_key, prompt)
     return generate_with_anthropic(model_key, api_key, prompt)
 
 
 def main():
     parser = argparse.ArgumentParser(description="Multi-Model Storylet Deck Generator for GREY UTOPIA")
-    parser.add_argument("--model", default="fable-5", choices=list(PRICING_MATRIX.keys()), help="LLM Model choice")
+    parser.add_argument("--model", default="sonnet-5", choices=list(PRICING_MATRIX.keys()), help="LLM Model choice")
     parser.add_argument("--batch", default="flagship", choices=["flagship", "volume"], help="Batch type to generate")
     parser.add_argument("--count", type=int, default=None, help="Total events to generate (default: 10 flagship / 20 volume)")
     parser.add_argument("--output", help="Custom output JSON path")
@@ -165,26 +175,29 @@ def main():
     print("  GREY UTOPIA MULTI-MODEL GENERATION PIPELINE")
     print("=" * 80)
     print(f"  Target Model: {model_key.upper()} ({PRICING_MATRIX[model_key]['role']})")
-    print(f"  API Model ID: {GEMINI_MODEL_ID if 'gemini' in model_key else ANTHROPIC_MODEL_IDS[model_key]}")
+    print(f"  API Model ID: {GEMINI_MODEL_IDS[model_key] if 'gemini' in model_key else ANTHROPIC_MODEL_IDS[model_key]}")
     print(f"  Batch:        {batch_type.upper()} -- {total_count} events in {n_chunks} chunk(s) of <= {EVENTS_PER_CHUNK}")
-    print(f"  Est. Cost:    ~${est_cost:.2f} USD (in ~{est_input_tokens:,} t, out ~{est_output_tokens:,} t)")
+    cost_line = (f"~${est_cost:.2f} USD" if est_cost is not None
+                 else "unavailable -- rates unconfirmed in PRICING_MATRIX")
+    print(f"  Est. Cost:    {cost_line} (in ~{est_input_tokens:,} t, out ~{est_output_tokens:,} t)")
     print(f"  Existing IDs: {len(known_ids)} (will be excluded)")
     print(f"  Target File:  {output_path}")
     print("=" * 80 + "\n")
 
     if args.dry_run:
         print("=== DRY RUN COMPLETE ===")
-        if model_key == "fable-5" and batch_type == "volume":
-            print("  WARNING: Fable 5 volume generation is NOT cost-effective ($50/Mtok output).")
+        if model_key == "opus-5" and batch_type == "volume":
+            print("  WARNING: Opus 5 is the costliest model in the roster; volume generation there")
+            print("  is not cost-effective.")
             print("  RECOMMENDATION: python pipeline/generate_deck.py --model sonnet-5 --batch volume")
         return
 
     # Model Switching Checkpoint Rule
-    if model_key == "fable-5" and batch_type == "volume":
+    if model_key == "opus-5" and batch_type == "volume":
         print("MODEL SWITCHING CHECKPOINT TRIGGERED")
-        print("Fable 5 is reserved for flagship narrative architecture.")
+        print("Opus 5 is reserved for flagship narrative architecture and balance audits.")
         print("  --> python pipeline/generate_deck.py --model sonnet-5 --batch volume\n")
-        confirm = input("Override checkpoint and continue with Fable 5 anyway? (y/N): ").strip().lower()
+        confirm = input("Override checkpoint and continue with Opus 5 anyway? (y/N): ").strip().lower()
         if confirm != "y":
             print("Generation halted by Model Switch Checkpoint.")
             sys.exit(0)
@@ -257,10 +270,10 @@ def main():
     print("Next: python pipeline/lint_content.py  &&  python tests/sim_bot.py all --assert")
 
     # Post-Generation Checkpoint Guidance
-    if model_key == "fable-5" and batch_type == "flagship":
+    if model_key == "opus-5" and batch_type == "flagship":
         print("\n" + "-" * 80)
         print("MODEL SWITCH CHECKPOINT REACHED")
-        print("Flagship narrative core completed with Fable 5!")
+        print("Flagship narrative core completed with Opus 5!")
         print("Next Step: switch to Sonnet 5 / Gemini 3.1 Pro for volume expansion:")
         print("  --> python pipeline/generate_deck.py --model sonnet-5 --batch volume --count 60")
         print("-" * 80 + "\n")

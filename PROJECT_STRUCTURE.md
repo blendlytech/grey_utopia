@@ -37,7 +37,7 @@ c:\Users\DELL\Dice_Roll_2\
 │   ├── selector.py                   # Weighted selector: instability bias, story momentum, repetition damping
 │   └── resolver.py                   # Probability + gear boosts, dose/OD pipeline, 11 endings, reactive epilogues
 ├── pipeline/
-│   ├── generate_deck.py              # Chunked LLM batch generator (Fable 5 / Sonnet 5 / Gemini)
+│   ├── generate_deck.py              # Chunked LLM batch generator (Opus 5 / Sonnet 5 / Gemini)
 │   └── lint_content.py               # Static content linter (ids, flags, items, prob sanity)
 ├── ui/
 │   ├── __init__.py

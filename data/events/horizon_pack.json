@@ -54,13 +54,13 @@
             }
           },
           "failure": {
-            "text": "You reach, out of a fixer's habit, for the fast route -- a bypass, a cheat, a patch. The pump runs, then seizes again inside the hour, and Brann strips your whole rebuild in front of you without a word, which is louder than any speech. 'Down there, things need to work until you're paid,' he says finally. 'Up here they need to work.' You come back tomorrow. That surprises him. It surprises you more.",
+            "text": "You reach, out of a fixer's habit, for the fast route -- a bypass, a cheat, a patch. The pump runs, then seizes again inside the hour, and Brann strips your whole rebuild in front of you without a word, which is louder than any speech. 'Down there, things need to work until you're paid,' he says finally. 'Up here they need to work.' The roster board stays blank. You come back tomorrow anyway. That surprises him. It surprises you more.",
             "deltas": {
               "Meaning": 6,
               "Mental_Decay": 4
             },
             "flags_set": [
-              "workshop_standing"
+              "workshop_probation"
             ]
           }
         },
@@ -92,14 +92,14 @@
             ]
           },
           "failure": {
-            "text": "Your clever fix works brilliantly for ten minutes, then fails in a way that takes a second, unbroken pump with it. Brann bills you for both, deadpan. 'Speed is a tool,' he says, docking your first day's pay against the damage. 'Up here it's the third one you reach for, not the first.' Lesson invoiced. Lesson learned.",
+            "text": "Your clever fix works brilliantly for ten minutes, then fails in a way that takes a second, unbroken pump with it. Brann bills you for both, deadpan. 'Speed is a tool,' he says, docking your first day's pay against the damage. 'Up here it's the third one you reach for, not the first.' Lesson invoiced. Lesson learned. The chalk stays in his pocket.",
             "deltas": {
               "Wealth": -120,
               "Meaning": 4,
               "Mental_Decay": 4
             },
             "flags_set": [
-              "workshop_standing"
+              "workshop_probation"
             ]
           }
         },
@@ -111,18 +111,162 @@
             "mods": []
           },
           "success": {
-            "text": "Brann looks at you for a long moment -- a fixer, a name from the Row, saying the three words the undercity trains out of everyone. Then he pulls up a second stool. The lesson takes all day and he charges you nothing for it, because, as he puts it, 'humility does the teaching, I just point.' Mara hears about it by dinner. She doesn't say anything. She doesn't have to.",
+            "text": "Brann looks at you for a long moment -- a fixer, a name from the Row, saying the three words the undercity trains out of everyone. Then he pulls up a second stool. The lesson takes all day and he charges you nothing for it, because, as he puts it, 'humility does the teaching, I just point.' Mara hears about it by dinner. She doesn't say anything. She doesn't have to. What he does not do, at any point, is reach for the chalk -- a stool is not a bench, and both of you know the difference.",
             "deltas": {
               "Meaning": 14,
               "Mental_Decay": -6
             },
             "flags_set": [
-              "workshop_standing"
+              "workshop_probation"
             ],
             "rel_deltas": {
               "Mara (Sister)": 10
             }
           }
+        }
+      ]
+    },
+    {
+      "id": "hz_second_shift",
+      "title": "The Second Pump",
+      "body": "There is another pump on the bench when you arrive, seized the same way, and Brann does not look up when you come in. The roster board carries nineteen names in chalk and a blank line at the bottom that has been blank for as long as you have been coming here. 'Same job,' he says. 'Different man doing it, maybe.' It is the closest thing to encouragement this workshop has ever produced, and it is also, unmistakably, the last time he intends to set this particular test.",
+      "weight": 8,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "workshop_probation"
+          }
+        ],
+        "none": [
+          {
+            "flag": "workshop_standing"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "second_pump_his_way",
+          "text": "His way. Slow, complete, every washer accounted for.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              },
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.004
+              },
+              {
+                "stat": "Substance_Reliance",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Six hours. You take it apart twice, because the second time you notice something you had decided not to notice the first time, and that -- not the rebuild -- is the thing Brann is watching. When it turns over he says nothing at all. He takes the chalk out of his pocket, writes your name on the twentieth line, and goes back to his own bench, and the workshop keeps making its ordinary noise around a thing that has just permanently changed.",
+            "deltas": {
+              "Meaning": 11,
+              "Wealth": 90,
+              "Mental_Decay": -6,
+              "Physical_Integrity": -3
+            },
+            "flags_set": [
+              "workshop_standing"
+            ],
+            "rel_deltas": {
+              "Mara (Sister)": 6
+            }
+          },
+          "failure": {
+            "text": "Six hours, and by the fifth your hands are doing the undercity thing again -- close enough, good enough, it will hold long enough. It holds until Brann tests it. He does not strip this one down in front of you. He sets it aside gently, the way you set aside something that is not going to be needed. 'You are welcome here,' he says, and means it, and that is the whole problem. Welcome is not the same as chalked.",
+            "deltas": {
+              "Meaning": -7,
+              "Mental_Decay": 8
+            },
+            "flags_clear": [
+              "workshop_probation"
+            ],
+            "flags_set": [
+              "workshop_washed_out"
+            ]
+          }
+        },
+        {
+          "id": "second_pump_ask_him_to_watch",
+          "text": "Ask him to stand there and watch you do it. All of it.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.004
+              },
+              {
+                "stat": "Family_Friction",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "It is a humiliating way to work and you chose it on purpose. He stands at your shoulder for four hours saying almost nothing, and the three times he does say something you do not argue, which is the actual test and you both know it. At the end he says 'again tomorrow' -- and then, at the door, without turning round: 'bring your own rag.'",
+            "deltas": {
+              "Meaning": 8,
+              "Wealth": 40,
+              "Mental_Decay": -3
+            },
+            "flags_set": [
+              "workshop_standing"
+            ],
+            "rel_deltas": {
+              "Mara (Sister)": 4
+            }
+          },
+          "failure": {
+            "text": "He watches for two hours and then stops watching, and you keep working another hour before you understand that the stopping was the verdict. When you finally look up he is at his own bench with his back to you, and the pump in your hands is still in pieces, and neither of those facts is going to change today or on any day after it. You asked him to witness it. He did.",
+            "deltas": {
+              "Meaning": -9,
+              "Mental_Decay": 8
+            },
+            "flags_clear": [
+              "workshop_probation"
+            ],
+            "flags_set": [
+              "workshop_washed_out"
+            ]
+          }
+        },
+        {
+          "id": "second_pump_take_the_hint",
+          "text": "Nineteen names and a blank line. Take the hint and stop coming.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You hang the apron on its hook on a morning when Brann has not come in yet, which is cowardice, and you know it while you are doing it. The workshop will go on smelling of hot flux for other people. Down on the Row the work is waiting, and it has never once asked whether you were any good at it -- only whether you would do it. You will wonder about the second pump for a long time. Not knowing is the part you chose.",
+            "deltas": {
+              "Meaning": -12,
+              "Mental_Decay": 6
+            },
+            "flags_clear": [
+              "workshop_probation"
+            ],
+            "flags_set": [
+              "workshop_washed_out"
+            ],
+            "rel_deltas": {
+              "Mara (Sister)": -6
+            }
+          },
+          "failure": {}
         }
       ]
     },

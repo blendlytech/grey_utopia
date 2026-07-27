@@ -1,0 +1,882 @@
+{
+  "events": [
+    {
+      "id": "sf_1_the_other_window",
+      "title": "The Other Window",
+      "body": "The Row is selling two new moons for the same night. Hers, at the price she has always charged, which is everything you have and a favor held open. And another one -- same perimeter, same ninety seconds, half the money, no favor. Somebody else is running the seam, and whoever it is does not seem to want anything from you at all.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "flagship"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "day": 18,
+            "op": ">="
+          }
+        ],
+        "none": [
+          {
+            "flag": "ferryman_burned"
+          },
+          {
+            "flag": "ferry_died_unwitnessed"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "sf1_ask_her_straight",
+          "text": "Take it to her. Ask who else is selling her seconds.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.002
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "She listens to the whole thing without moving, which is how she listens to everything. Then: 'I know.' A long pause with weather in it. 'Six weeks now. He is very good and he is very cheap and I have not been able to make that make sense.' She looks at you like she is deciding something expensive. 'Find out for me.'",
+            "deltas": {
+              "Heat": 2
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 4
+            },
+            "flags_set": [
+              "sf_thread_1",
+              "sf_asked_her"
+            ]
+          },
+          "failure": {
+            "text": "You get three words in before her face closes like a lock. 'You are counting my money,' she says, which is not what you were doing, and is exactly what it sounded like. She gives you the rest of the meeting in single syllables and the walk home in none.",
+            "deltas": {
+              "Heat": 4,
+              "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": -7
+            },
+            "flags_set": [
+              "sf_thread_1"
+            ]
+          }
+        },
+        {
+          "id": "sf1_price_the_rumor",
+          "text": "Say nothing to her. Buy the rumor off the Row instead.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "Four hundred to Auntie Six, six hundred to a dispatcher who owes nobody anything, and by the second night you have a shape: a man, mid-fifties, works the eastern maintenance spine, never takes cash up front. Nobody can tell you his name. Everybody can tell you he is kind.",
+            "deltas": {
+              "Wealth": -1000,
+              "Social_Capital": -2
+            },
+            "flags_set": [
+              "sf_thread_1"
+            ]
+          },
+          "failure": {
+            "text": "A thousand credits buys you four contradictions and a story about a man who does not exist. Somewhere in the asking, your questions get ahead of you -- by the weekend two people have told you, unprompted, that you have been asking. The Row talks. That is its whole function.",
+            "deltas": {
+              "Wealth": -1000,
+              "Heat": 9,
+              "Mental_Decay": 3
+            },
+            "flags_set": [
+              "sf_thread_1"
+            ]
+          }
+        },
+        {
+          "id": "sf1_take_the_cheap_window",
+          "text": "Half the money and no favor owed. Just book the cheap one.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You put your name on the cheaper list, which is a piece of paper in a stairwell, which should tell you something. Nobody asks what you can pay or what you are running from. Walking home you notice you feel lighter, and then you notice that you do not trust the feeling, and then you carry both the rest of the way.",
+            "deltas": {
+              "Meaning": -3,
+              "Mental_Decay": 4
+            },
+            "flags_set": [
+              "sf_thread_1",
+              "sf_booked_cheap"
+            ]
+          },
+          "failure": {}
+        }
+      ]
+    },
+    {
+      "id": "sf_2_the_missing_three",
+      "title": "The Missing Three",
+      "body": "You start with the ones who went out on the cheap window, because they are easy to count: eleven in six weeks. Nine of them left messages on the outside relay the way everyone does -- one line, no names, proof of a sky. Two did not. Then you check again on a night when you cannot sleep, and it is four who did not, and two of the nine have gone quiet since.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "steward",
+        "flagship"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "flag": "sf_thread_1"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "sf2_walk_the_relay",
+          "text": "Walk the relay yourself. Read every line they left.",
+          "prob": {
+            "base": 0.65,
+            "mods": [
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "Two nights in a cold room reading other people's last sentences to the city. Most are nothing -- weather, a joke, a name they were not supposed to write. But the nine are wrong in a way you can only see stacked: same cadence, same hour, same faint over-punctuation. Somebody is writing proof-of-sky messages for people who never got one.",
+            "deltas": {
+              "Mental_Decay": 6
+            },
+            "flags_set": [
+              "sf_thread_2",
+              "sf_relay_read"
+            ]
+          },
+          "failure": {
+            "text": "Two nights in a cold room and the lines start to blur into one long voice saying it is fine out here, it is fine, it is fine. You come out of it with nothing you can point at and a certainty you cannot defend, which is the worst possible combination to carry into a conversation with anyone.",
+            "deltas": {
+              "Mental_Decay": 11
+            },
+            "flags_set": [
+              "sf_thread_2"
+            ]
+          }
+        },
+        {
+          "id": "sf2_find_a_family",
+          "text": "Find someone's family. Ask what they heard, and when.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.002
+              },
+              {
+                "stat": "Family_Friction",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The sister of the second one makes you tea you do not want and tells you her brother sent his line at 04:12, which is impossible, because he had never in his life been awake at 04:12. She has been saying this to people for five weeks. You are the first one who has written it down.",
+            "deltas": {
+              "Mental_Decay": 4,
+              "Social_Capital": 2
+            },
+            "flags_set": [
+              "sf_thread_2",
+              "sf_family_told"
+            ]
+          },
+          "failure": {
+            "text": "You get the door, the tea, and forty minutes of a mother explaining that her daughter is fine, she sent a message, here it is, look. She reads it to you twice. On the second reading her voice does something at the end that you will hear again later, at bad hours, for a long time.",
+            "deltas": {
+              "Meaning": -4,
+              "Mental_Decay": 8
+            },
+            "flags_set": [
+              "sf_thread_2"
+            ]
+          }
+        },
+        {
+          "id": "sf2_count_and_stop",
+          "text": "Write the number down. Do not go looking for the faces.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Four. You write it on the inside of a cabinet door where you will see it every morning, and you stop there, because you know what happens to you if you start attaching names to it. The number does its work anyway. Numbers always do; they just take longer and cost the same.",
+            "deltas": {
+              "Meaning": -3,
+              "Mental_Decay": 3
+            },
+            "flags_set": [
+              "sf_thread_2"
+            ]
+          },
+          "failure": {}
+        }
+      ]
+    },
+    {
+      "id": "sf_3_the_cheaper_lock",
+      "title": "The Cheaper Lock",
+      "body": "The eastern maintenance spine runs under four blocks of housing that the Steward decommissioned in a year nobody can name. His lock is at the end of it. You expect a door like hers -- a thing that has been forced, patched, and forced again. What you find is a clean panel with a working indicator light, serviced within the month, on a corridor that no maintenance schedule in the city admits exists.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "steward",
+        "flagship"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "flag": "sf_thread_2"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "sf3_open_the_panel",
+          "text": "Open it. Find out who has been paying for the upkeep.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              },
+              {
+                "stat": "Substance_Reliance",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The panel comes off in your hands like it was expecting you. Inside: municipal wiring, municipal solder, a municipal service tag with a job number on it. Somebody in this city files paperwork for this door. You photograph the tag and put everything back exactly as it was, which takes twice as long as opening it and matters four times as much.",
+            "deltas": {
+              "Heat": 7,
+              "Physical_Integrity": -3
+            },
+            "flags_set": [
+              "sf_thread_3",
+              "sf_tag_photographed"
+            ]
+          },
+          "failure": {
+            "text": "The panel is alarmed in a way that does not make a sound. You are eight minutes into the corridor before you understand that the light above you has been following you at walking pace, patient as a nurse. You get out. Nothing chases you. Nothing has to -- your gait is already in a file with a job number on it now.",
+            "deltas": {
+              "Heat": 22,
+              "Mental_Decay": 8,
+              "Physical_Integrity": -6
+            },
+            "flags_set": [
+              "sf_thread_3"
+            ]
+          },
+          "boost_items": [
+            "gait_dampers"
+          ]
+        },
+        {
+          "id": "sf3_watch_the_corridor",
+          "text": "Don't touch it. Sit on the corridor and see who services it.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Nine nights in a stairwell with a thermos and a bad angle. On the seventh, a two-person crew in unbranded coveralls services the panel with the unhurried competence of people who are being paid on schedule. They do not check whether anyone is watching. That is the detail that stays with you: it never once occurs to them to look.",
+            "deltas": {
+              "Mental_Decay": 5,
+              "Physical_Integrity": -4
+            },
+            "flags_set": [
+              "sf_thread_3",
+              "sf_crew_seen"
+            ]
+          },
+          "failure": {
+            "text": "Nine nights in a stairwell and the only thing that comes down the corridor is your own thinking, which has been getting worse in the dark and does not improve with company. On the ninth you fall asleep sitting up and wake with your face against cold steel and the panel indicator glowing at you like it has been waiting for the introduction.",
+            "deltas": {
+              "Mental_Decay": 10,
+              "Physical_Integrity": -7
+            },
+            "flags_set": [
+              "sf_thread_3"
+            ]
+          }
+        },
+        {
+          "id": "sf3_leave_it_shut",
+          "text": "A clean door in a dead corridor. You already know. Leave it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You stand in front of it long enough to be sure, and being sure is free, and being sure changes nothing you can act on. You walk back out through four blocks of housing the Steward decided were finished. Somewhere above you, people who took the cheap window are having a very good night.",
+            "deltas": {
+              "Meaning": -4,
+              "Mental_Decay": 4
+            },
+            "flags_set": [
+              "sf_thread_3"
+            ]
+          },
+          "failure": {}
+        }
+      ]
+    },
+    {
+      "id": "sf_4_the_kind_man",
+      "title": "The Kind Man",
+      "body": "He agrees to meet you the first time you ask, in a public canteen, at an hour with witnesses. He is mid-fifties and tired in the ordinary way and he buys you a bowl of something before you can stop him. 'You have been asking about me,' he says, without any edge on it at all. 'Ask me instead. It is faster and the food here is better than the Row's.'",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "steward",
+        "flagship"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "flag": "sf_thread_3"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "sf4_ask_about_the_four",
+          "text": "Ask him about the four who never sent a line.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Meaning",
+                "coef": 0.002
+              },
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "He puts his spoon down and does not reach for a story, which is how you know. 'Four,' he agrees. 'It was six.' He tells you he checks the relay too. He tells you he has stopped being able to eat before he checks it. Then he says the thing you will carry: 'I have never once been told what happens to them. I have only ever been told to keep the price low.'",
+            "deltas": {
+              "Meaning": 3,
+              "Mental_Decay": 7
+            },
+            "flags_set": [
+              "sf_thread_4",
+              "sf_he_admitted"
+            ]
+          },
+          "failure": {
+            "text": "He answers every question you have, warmly, at length, and by the end you realize he has told you nothing at all and you have told him where you drink. He picks up the bill. On the walk home you cannot work out whether he was lying, and the not-knowing sits down in your chest and makes itself comfortable.",
+            "deltas": {
+              "Heat": 10,
+              "Mental_Decay": 8
+            },
+            "flags_set": [
+              "sf_thread_4"
+            ]
+          }
+        },
+        {
+          "id": "sf4_offer_him_the_out",
+          "text": "Tell him what's under the eastern spine. Watch his face.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.002
+              },
+              {
+                "stat": "Recklessness",
+                "coef": -0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "You describe the service tag, the job number, the crew who never look up. He listens the way a man listens to a diagnosis he has been rehearsing. 'I thought it was charity,' he says at last. 'Someone underwriting the desperate. I have been very grateful for eleven months.' He laughs once, badly. 'Grateful.'",
+            "deltas": {
+              "Meaning": 2,
+              "Mental_Decay": 6,
+              "Heat": 5
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": -2
+            },
+            "flags_set": [
+              "sf_thread_4",
+              "sf_he_admitted"
+            ]
+          },
+          "failure": {
+            "text": "You describe the corridor and something happens behind his eyes that is not surprise. He keeps being kind at you for another four minutes and then remembers somewhere he has to be. You sit with two cooling bowls and the growing understanding that you have just told the wrong person which stone you turned over.",
+            "deltas": {
+              "Heat": 18,
+              "Mental_Decay": 6
+            },
+            "flags_set": [
+              "sf_thread_4",
+              "sf_tipped_him_off"
+            ]
+          }
+        },
+        {
+          "id": "sf4_eat_and_leave",
+          "text": "Eat the food. Say nothing worth repeating. Leave.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You talk about the canteen, the weather that does not happen here, a dispatcher you both know. He is genuinely pleasant company, which is somehow the worst part. You leave with a full stomach and every single one of your questions, and he watches you go with what looks a great deal like relief.",
+            "deltas": {
+              "Meaning": -6,
+              "Physical_Integrity": 2
+            },
+            "flags_set": [
+              "sf_thread_4"
+            ]
+          },
+          "failure": {}
+        }
+      ]
+    },
+    {
+      "id": "sf_5_the_budget_line",
+      "title": "The Budget Line",
+      "body": "The job number resolves, eventually, through a records clerk who wants nothing but to be asked something interesting. It sits under Continuity of Civic Mood, subsection Voluntary Attrition Management, and it has been funded, without interruption, for eleven months. There is a line for corridor maintenance. There is a line for community liaison, which is what he is. There is no line at all for the four.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "steward",
+        "existential",
+        "flagship"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "flag": "sf_thread_4"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "sf5_read_the_whole_file",
+          "text": "Read all of it. Every line, including the ones about you.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.005
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "The programme does not catch anybody. That is the entire design. It offers a cheaper door to the people most determined to leave, and it lets most of them go, because most of them leaving is the point -- a pressure valve costs less than a prison. The four are described, in the one place they appear, as acceptable variance. You read that phrase until it stops meaning anything and then you read it four more times.",
+            "deltas": {
+              "Meaning": -4,
+              "Mental_Decay": 7,
+              "Social_Capital": 2
+            },
+            "flags_set": [
+              "sf_thread_5",
+              "sf_ledger_read"
+            ]
+          },
+          "failure": {
+            "text": "The clerk gets three pages in and then the terminal takes the file back, politely, mid-sentence, the way a nurse takes a glass from someone who has had enough. He apologizes. He apologizes again. He is still apologizing when you leave, and neither of you says the obvious thing, which is that the file knew you were reading it.",
+            "deltas": {
+              "Heat": 14,
+              "Mental_Decay": 7
+            },
+            "flags_set": [
+              "sf_thread_5"
+            ]
+          }
+        },
+        {
+          "id": "sf5_copy_it_out",
+          "text": "Copy it by hand. Paper doesn't get taken back mid-sentence.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Six hours, a cramped hand, and a stack of paper that exists nowhere in any system. The clerk brings you tea twice and does not once ask what it is for. When you fold it into your jacket you understand that you are now carrying the only copy of a thing the city would like very much to keep uncopied, and that this is a weight you chose.",
+            "deltas": {
+              "Physical_Integrity": -4,
+              "Mental_Decay": 5,
+              "Heat": 4
+            },
+            "flags_set": [
+              "sf_thread_5",
+              "sf_ledger_read",
+              "sf_paper_copy"
+            ]
+          },
+          "failure": {
+            "text": "Four hours in your hand cramps into a claw and the numbers start swimming, and what you carry out is half a document with the important half missing. You know what it said. You cannot show anyone what it said. Those turn out to be very different kinds of knowing.",
+            "deltas": {
+              "Physical_Integrity": -6,
+              "Mental_Decay": 8
+            },
+            "flags_set": [
+              "sf_thread_5"
+            ]
+          }
+        },
+        {
+          "id": "sf5_close_the_terminal",
+          "text": "Close it. Some numbers you can't put back down.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You close the terminal on the phrase acceptable variance without reading what follows it, and you thank the clerk, who is disappointed in a small way he will forget by evening. You have enough. You have, in fact, exactly as much as you can hold, and you have known that since the corridor. It is not the reading that will cost you. It is this.",
+            "deltas": {
+              "Meaning": -7,
+              "Mental_Decay": 5
+            },
+            "flags_set": [
+              "sf_thread_5"
+            ]
+          },
+          "failure": {}
+        }
+      ]
+    },
+    {
+      "id": "sf_6_she_knew",
+      "title": "She Knew",
+      "body": "You bring it to her on a night with no moon at all, which feels like something and is not. She reads your face before you have finished the first sentence, and she does not ask a single question, and that is how you find out. 'Eleven months,' she says. 'I priced myself against it for eleven months.' She is not looking at you. 'The ones who cannot pay me go to him. I have known where they go the whole time.'",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "existential",
+        "flagship"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "flag": "sf_thread_5"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "sf6_make_her_say_it",
+          "text": "Make her say the number out loud. All four of them.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              },
+              {
+                "stat": "Substance_Reliance",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "She says it. Then she says their names, which you did not know she had, which means she has been collecting them the way you collect a debt you intend to pay. 'I take everything a person has,' she says, 'because a cheap door is how they get you. I have been right about that for eleven months and it has not saved one of them.' Something between you settles into its permanent shape.",
+            "deltas": {
+              "Meaning": 5,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 6
+            },
+            "flags_set": [
+              "sf_thread_6",
+              "sf_she_named_them"
+            ]
+          },
+          "failure": {
+            "text": "She will not say it. She stands in the dark being the most competent person you have ever met and she will not say a number out loud, and you push, and she lets you push, and at the end of it she says: 'You want me to be worse than the city so that you can keep liking me.' Then she goes to work, because the window opens whether or not anyone is forgiven.",
+            "deltas": {
+              "Meaning": -5,
+              "Mental_Decay": 9
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": -8
+            },
+            "flags_set": [
+              "sf_thread_6"
+            ]
+          }
+        },
+        {
+          "id": "sf6_ask_what_she_wants",
+          "text": "Skip the reckoning. Ask her what she wants done about it.",
+          "prob": {
+            "base": 0.65,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "'Done.' She turns the word over like she has never been handed it before. 'Nobody has ever asked me that. They ask me for a night, or a price, or a favor.' She is quiet for a while. 'I want it to cost him what it costs me. And I do not know how to make a thing cost a budget line.'",
+            "deltas": {
+              "Mental_Decay": 3
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 4
+            },
+            "flags_set": [
+              "sf_thread_6",
+              "sf_she_asked_for_it"
+            ]
+          },
+          "failure": {
+            "text": "'What I want,' she says, 'is for you to be somewhere else on the fourteenth.' It is not cruelty. It is a professional removing a variable. You are still standing there when she starts checking her chronometer, and the checking is the whole answer.",
+            "deltas": {
+              "Meaning": -4,
+              "Mental_Decay": 5
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": -5
+            },
+            "flags_set": [
+              "sf_thread_6"
+            ]
+          }
+        },
+        {
+          "id": "sf6_say_nothing_more",
+          "text": "She's known for eleven months. Nothing you say lands tonight.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You let the silence run until it stops being a silence and becomes just the two of you standing near a lock in the cold. Then you go home. She has carried this for eleven months without help and will carry it for eleven more, and you have decided, without deciding, not to be the one who makes her put it down.",
+            "deltas": {
+              "Meaning": -3,
+              "Mental_Decay": 5
+            },
+            "flags_set": [
+              "sf_thread_6"
+            ]
+          },
+          "failure": {}
+        }
+      ]
+    },
+    {
+      "id": "sf_7_which_seam_survives",
+      "title": "Which Seam Survives",
+      "body": "The fourteenth. Two windows open ninety minutes apart on the same stretch of wire: hers, expensive, and his, cheap, with nineteen names already on a piece of paper in a stairwell. You have the job number, the budget line, and whatever the last six weeks made of you. Whatever happens to those nineteen people is now, in the specific and unwanted way the city likes best, a thing you decided.",
+      "weight": 8,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "existential",
+        "flagship"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "flag": "sf_thread_6"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "sf7_burn_the_second_seam",
+          "text": "Burn it. Put the budget line on every wall in the stairwell.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.002
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              },
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Acceptable variance goes up in the stairwell, on the eastern spine, and on the door of the canteen where he bought you a bowl of something. Fourteen of the nineteen do not show. The programme does not retaliate, or explain, or even particularly notice -- but by the next new moon the corridor light is dark and the panel is filthy, and a very tired man has stopped being paid to be kind.",
+            "deltas": {
+              "Heat": 20,
+              "Meaning": 7,
+              "Social_Capital": 5
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 5
+            },
+            "flags_set": [
+              "sf_seam_burned"
+            ]
+          },
+          "failure": {
+            "text": "You get it onto three walls before somebody who is not a person comes down the spine at walking pace. The paper comes down faster than you put it up. Nine of the nineteen go out that night on the cheap window, and you spend the following weeks reading a relay you already know how to read, and the count goes from four to five.",
+            "deltas": {
+              "Heat": 26,
+              "Meaning": -8,
+              "Mental_Decay": 12
+            },
+            "flags_set": [
+              "sf_seam_burned"
+            ]
+          }
+        },
+        {
+          "id": "sf7_take_the_cheap_seam",
+          "text": "Don't burn it. Take it. Run the cheap window yourself.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.002
+              },
+              {
+                "stat": "Recklessness",
+                "coef": -0.002
+              },
+              {
+                "stat": "Substance_Reliance",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You tell him you know what he is, and then you tell him you want his list, and he hands over nineteen names in a stairwell with an expression of pure and undisguised gratitude. The corridor keeps getting serviced. The budget line keeps paying. It is the same door -- but now the person on it checks the relay every morning and knows what the four were called, and for the moment that is the only difference in the world you can actually make.",
+            "deltas": {
+              "Heat": 12,
+              "Meaning": 4,
+              "Wealth": 1800,
+              "Mental_Decay": 8
+            },
+            "flags_set": [
+              "sf_seam_taken"
+            ]
+          },
+          "failure": {
+            "text": "He gives you the list without an argument, and three nights later the corridor light goes out and the panel is dead and the job number resolves to nothing at all. The programme did not need him and it does not need you; it needed a cheap door, and you just made the door expensive. Nineteen people with nowhere to go now have your name.",
+            "deltas": {
+              "Heat": 18,
+              "Meaning": -6,
+              "Social_Capital": -6,
+              "Mental_Decay": 9
+            },
+            "flags_set": [
+              "sf_seam_taken"
+            ]
+          }
+        },
+        {
+          "id": "sf7_keep_your_window",
+          "text": "Nineteen strangers, or the night you've spent months buying.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You say nothing to anyone, and the fourteenth passes, and both windows open and close on schedule. Your own night is still yours, unspent and intact and worth exactly what it was worth before. You keep the paper. You keep the number. You will be keeping both for a long time, and they will not get lighter, and you knew that when you chose.",
+            "deltas": {
+              "Meaning": -11,
+              "Mental_Decay": 9
+            },
+            "flags_set": [
+              "sf_stayed_silent"
+            ]
+          },
+          "failure": {}
+        }
+      ]
+    }
+  ]
+}
