@@ -57,6 +57,14 @@ inventory). This is the only structural item on the list; everything else is
 tuning.
 
 ### S2 -- Two of every three storylets are filler
+> **CORRECTED 2026-07-27 (F1 window), measured by `tests/coverage_audit.py`.** The
+> conclusion holds but the cause below is wrong. `ambient`+`micro` is only **20.8%**
+> of eligible draw weight; arc is 24.6%; the untagged middle (`job`, `undercity`,
+> `existential`, `steward`, `vice`, `family`, `vendor`) is **55.8%**. Budgeting
+> ambient therefore redistributes ~2.3:1 into that middle, and arc draw-share is
+> capped near 30.6% even by a total ambient ban. Also note only 16 events in the
+> whole deck have no preconditions -- "~150 always-eligible ambient events" below is
+> not accurate. See §3 of `BACKLOG_HANDOFF.md` for the full F1 result.
 Median eligible pool 207/day; only 22.5% of draw weight reaches arc/NPC/relationship
 content. `DEPTH_SCALE ** depth` (`engine/selector.py:115`) boosts chain
 *continuations* but cannot help a chain's **first link**, which competes flat
@@ -65,6 +73,13 @@ against ~150 always-eligible ambient events. Median weights are actually sane
 weight problem.
 
 ### S3 -- ~20% of written content is unreachable
+
+> **CORRECTED 2026-07-27 (F1 window).** The count is right but N-dependent -- 97 at
+> n=40, 69 at n=100 -- so it must always be quoted with its run count. More
+> importantly, this is an **eligibility** problem, not a selection one: 50 of the 54
+> unreached non-legacy storylets are gated behind a flag only another storylet can
+> grant, so they never enter the pool and no weighting change can reach them. The
+> real levers are shorter chains, earlier first-link flags, or A1's district shelves.
 100 of 483 events never fired across 40 complete runs:
 
 | Pack | Unreached | Note |
@@ -131,9 +146,18 @@ support, no localization scaffolding.
 
 ## 2. Fixes to existing systems
 
-### F1 -- Per-day ambient quota
+### F1 -- Per-day ambient quota  *(CLOSED 2026-07-27 -- premise disproved)*
 **Addresses:** S2, S3
 **Effort:** ~1 weekend. Highest impact-to-effort ratio in this document.
+
+> **Built, measured, and shipped disabled.** The quota works exactly as specified
+> and misses every acceptance criterion below, because the tag set it budgets is
+> only 20.8% of draw weight (see the S2 correction) and because unreached content is
+> gated, not out-competed (see the S3 correction). It also cost a balance gate --
+> reckless terminal rate fell to 21.8%, under sim_bot's 25% floor. The mechanism is
+> retained in `engine/selector.py` behind `AMBIENT_SLOTS_PER_DAY = None` because it
+> is the right shape for budgeting A1's district shelves. Full result and numbers:
+> §3 of `BACKLOG_HANDOFF.md`. **Do not re-open without reading that entry.**
 
 Cap ambient/micro-tagged events at 1 of the 3 daily slots. Implementation lives in
 `engine/selector.py` -- `select_event` already receives `exclude_ids`; add an
@@ -288,9 +312,14 @@ Sunless Sea ($19).
 
 ## 6. Recommended sequencing
 
-1. **F1 + F2** -- one weekend. Surfaces ~20% more content and stops the dice from
-   lying.
-2. **A1 (the map)** -- the big build. Retroactively fixes S2, S3, S7, S8.
+1. ~~**F1 + F2** -- one weekend. Surfaces ~20% more content and stops the dice from
+   lying.~~ **F1 closed 2026-07-27 without surfacing content** -- the selector was
+   never what was hiding it. F2 stands on its own and is unaffected.
+2. **A1 (the map)** -- the big build. Retroactively fixes S2, S3, S7, S8. **F1's
+   result promotes this from "the big one" to the only structural fix on the list
+   for S2/S3**: giving a chain its own district shelf is what stops arc first-links
+   competing with the general deck, and the per-shelf budgeting mechanism F1 left
+   behind in `engine/selector.py` is the hook it needs.
 3. **A3 + A4** -- makes the world feel inhabited rather than simulated.
 4. **Shipping block** -- settings, saves, achievements, content warning, art.
 5. **F3 / F4** -- economy and stat pass. Best done *after* the map exists, since

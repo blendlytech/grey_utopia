@@ -13,7 +13,8 @@ from engine.decay import (
 from engine.events import Event, Choice, Insert, load_events, eval_conditions
 from engine.selector import (
     select_event, effective_weight, chain_depth, index_library,
-    DEPTH_SCALE, MAX_DEPTH, DEADLINE_BONUS
+    eligible_pool, is_ambient,
+    DEPTH_SCALE, MAX_DEPTH, DEADLINE_BONUS, AMBIENT_TAGS, AMBIENT_SLOTS_PER_DAY
 )
 from engine.resolver import (
     choice_probability, resolve_choice, check_endings,
@@ -539,6 +540,89 @@ class TestChainDepthScheduling(unittest.TestCase):
         c.flags.update({"step1_done", "step2_done"})
         select_event(events, c, day=1, rng=_r.Random(0))
         self.assertEqual(chain_depth(self._by_id(events)["step3"]), 2)
+
+
+class TestAmbientQuota(unittest.TestCase):
+    """Ambient filler is budgeted per day so arc first-links can win a draw."""
+
+    def _event(self, eid: str, tags: list) -> Event:
+        return Event(id=eid, title=eid, body="b", weight=1.0, tags=tags,
+                     choices=[Choice(id="c", text="c", prob={"base": 1.0})])
+
+    def _mixed(self):
+        return [
+            self._event("noise", ["ambient"]),
+            self._event("chatter", ["micro"]),
+            self._event("thread", ["arc"]),
+        ]
+
+    def _ids(self, pool):
+        return {e.id for e in pool}
+
+    def test_is_ambient_covers_both_budgeted_tags(self):
+        self.assertEqual(AMBIENT_TAGS, frozenset({"ambient", "micro"}))
+        self.assertTrue(is_ambient(self._event("a", ["ambient"])))
+        self.assertTrue(is_ambient(self._event("m", ["micro", "vice"])))
+        self.assertFalse(is_ambient(self._event("j", ["job", "arc"])))
+
+    def test_unbudgeted_pool_keeps_everything(self):
+        pool = eligible_pool(self._mixed(), Character(), day=1)
+        self.assertEqual(self._ids(pool), {"noise", "chatter", "thread"})
+
+    def test_remaining_budget_keeps_ambient_in_the_draw(self):
+        pool = eligible_pool(self._mixed(), Character(), day=1, ambient_budget=1)
+        self.assertEqual(self._ids(pool), {"noise", "chatter", "thread"})
+
+    def test_budget_helper_tracks_the_shipped_setting(self):
+        """One switch drives every caller, so main/server/sim_bot cannot disagree."""
+        import engine.selector as sel
+        original = sel.AMBIENT_SLOTS_PER_DAY
+        try:
+            sel.AMBIENT_SLOTS_PER_DAY = None
+            self.assertIsNone(sel.ambient_budget_for(0))
+            self.assertIsNone(sel.ambient_budget_for(3))
+            sel.AMBIENT_SLOTS_PER_DAY = 1
+            self.assertEqual(sel.ambient_budget_for(0), 1)
+            self.assertEqual(sel.ambient_budget_for(1), 0)
+            self.assertEqual(sel.ambient_budget_for(2), -1)   # spent, and then some
+        finally:
+            sel.AMBIENT_SLOTS_PER_DAY = original
+
+    def test_quota_ships_disabled(self):
+        """Measured decision, not an oversight -- see the note in engine/selector.py.
+        Flipping this to an int is a balance change and requires a pargate run."""
+        self.assertIsNone(AMBIENT_SLOTS_PER_DAY)
+
+    def test_spent_budget_drops_ambient_and_micro(self):
+        pool = eligible_pool(self._mixed(), Character(), day=1, ambient_budget=0)
+        self.assertEqual(self._ids(pool), {"thread"})
+
+    def test_spent_budget_falls_back_rather_than_burning_the_slot(self):
+        """The quota must never starve the day. Early game is the live trigger:
+        almost everything eligible on day 1 carries an ambient tag, so a strict
+        filter would hand back None and silently eat the player's action."""
+        ambient_only = [self._event("noise", ["ambient"]), self._event("chatter", ["micro"])]
+        pool = eligible_pool(ambient_only, Character(), day=1, ambient_budget=0)
+        self.assertEqual(self._ids(pool), {"noise", "chatter"})
+
+        import random as _r
+        picked = select_event(ambient_only, Character(), day=1, rng=_r.Random(0),
+                              ambient_budget=0)
+        self.assertIsNotNone(picked)
+
+    def test_exclusions_still_apply_under_the_quota(self):
+        pool = eligible_pool(self._mixed(), Character(), day=1,
+                             exclude_ids={"thread"}, ambient_budget=0)
+        # 'thread' is excluded and the ambient pair is over budget: falling back
+        # beats returning nothing, but the exclusion is never overridden.
+        self.assertEqual(self._ids(pool), {"noise", "chatter"})
+
+    def test_select_event_honours_a_spent_budget(self):
+        import random as _r
+        for seed in range(8):
+            picked = select_event(self._mixed(), Character(), day=1,
+                                  rng=_r.Random(seed), ambient_budget=0)
+            self.assertEqual(picked.id, "thread")
 
 
 class TestInventoryAndFactions(unittest.TestCase):

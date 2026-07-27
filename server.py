@@ -12,7 +12,7 @@ from urllib.parse import urlparse
 
 from engine.stats import create_starter_fixer, Character
 from engine.events import Event, load_events
-from engine.selector import select_event
+from engine.selector import select_event, is_ambient, ambient_budget_for
 from engine.resolver import (
     choice_probability, resolve_choice, check_endings,
     eligible_choices, build_epilogue, build_run_memories,
@@ -48,6 +48,7 @@ class GameSession:
         self.current_slots: int = 3
         self.used_slots_today: int = 0
         self.fired_today: set[str] = set()
+        self.ambient_today: int = 0
         self.last_outcome: dict | None = None
         self.day_report: dict | None = None
         self.last_day_report: dict | None = None
@@ -82,6 +83,7 @@ class GameSession:
             "character": json.loads(self.character.to_json()),
             "used_slots_today": self.used_slots_today,
             "fired_today": sorted(self.fired_today),
+            "ambient_today": self.ambient_today,
             "event_state": {
                 e.id: {"fire_count": e.fire_count, "last_fired_day": e.last_fired_day}
                 for e in self.events if e.fire_count > 0 or e.last_fired_day > -9999
@@ -100,6 +102,7 @@ class GameSession:
             self.character = Character.from_dict(data["character"])
             self.used_slots_today = int(data.get("used_slots_today", 0))
             self.fired_today = set(data.get("fired_today", []))
+            self.ambient_today = int(data.get("ambient_today", 0))
             event_state = data.get("event_state", {})
             for e in self.events:
                 st = event_state.get(e.id)
@@ -136,6 +139,7 @@ class GameSession:
             end_of_day_decay(self.character, stress_today=stress)
             self.used_slots_today = 0
             self.fired_today.clear()
+            self.ambient_today = 0
             self.current_slots = self.calculate_slots()
             self.day_report = build_day_report(self.character, stress, stats_before, clocks_before)
             self.last_day_report = self.day_report
@@ -151,10 +155,11 @@ class GameSession:
         # Pick the next storylet, skipping any whose choices are all locked
         # (a soft-lock guard; the linter forbids authoring such events).
         skip = set(self.fired_today)
+        budget = ambient_budget_for(self.ambient_today)
         for _ in range(8):
             candidate = select_event(
                 self.events, self.character, self.character.day, self.rng,
-                exclude_ids=skip
+                exclude_ids=skip, ambient_budget=budget
             )
             if candidate is None or eligible_choices(candidate.choices, self.character):
                 self.current_event = candidate
@@ -169,6 +174,7 @@ class GameSession:
             print("[The file precedes you. The city has adjusted your terms.]")
         self.used_slots_today = 0
         self.fired_today = set()
+        self.ambient_today = 0
         self.last_outcome = None
         self.day_report = None
         self.last_day_report = None
@@ -442,6 +448,8 @@ class GreyUtopiaRequestHandler(SimpleHTTPRequestHandler):
             session.current_event.last_fired_day = session.character.day
             session.current_event.fire_count += 1
             session.fired_today.add(session.current_event.id)
+            if is_ambient(session.current_event):
+                session.ambient_today += 1
             session.used_slots_today += 1
 
             session.last_outcome = {

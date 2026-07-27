@@ -22,6 +22,46 @@ MAX_DEPTH: int = 3
 DEADLINE_BONUS: float = 0.8
 MAX_DEADLINE_CONDS: int = 3
 
+# Per-day budget for the city's background noise: the 88 storylets tagged
+# ambient or micro, none of which are attached to a thread.
+#
+# Shipped disabled (None), and that is a measured decision rather than an
+# unfinished one. `tests/coverage_audit.py` was built to test the premise that
+# filler was crowding arc content out of the draw, and it does not hold:
+#
+#   ambient+micro is only 20.8% of eligible draw weight. Arc content is 24.6%.
+#   The other 55.8% is the untagged middle -- job, undercity, existential,
+#   steward, vice, family, vendor -- which this tag set does not budget. So
+#   suppressing ambient redistributes roughly 2.3:1 into that middle, not into
+#   arc: banning ambient outright (budget 0) still tops arc draw-share out at
+#   30.2%, and at one slot a day it moves 25.2% -> 25.4%.
+#
+# Meanwhile the events that never fire are not losing draws, they are never
+# eligible: of the 54 unreached non-legacy storylets, 50 are gated behind a flag
+# only another storylet can grant. Pool composition cannot reach them.
+#
+# The quota also cost a balance gate on the way through -- reckless terminal
+# rate fell to 21.8%, under sim_bot's 25% floor -- because ambient events are the
+# low-consequence content that lets a run coast, so removing them shortened the
+# median random run 43 -> 36 days and cut unique events seen per run 113 -> 92.
+#
+# The mechanism is kept and tested because it is the right shape for budgeting a
+# *shelf* (see A1's districts); the tag set it was pointed at is simply not where
+# this deck's filler lives. Set to an int to re-enable, then re-run pargate.
+AMBIENT_TAGS: frozenset = frozenset({"ambient", "micro"})
+AMBIENT_SLOTS_PER_DAY: Optional[int] = None
+
+
+def ambient_budget_for(ambient_today: int) -> Optional[int]:
+    """Ambient slots left in a day that has already spent `ambient_today` of them.
+
+    None -- the quota disabled -- when AMBIENT_SLOTS_PER_DAY is None, so callers
+    thread this through unconditionally and the switch lives in exactly one place.
+    """
+    if AMBIENT_SLOTS_PER_DAY is None:
+        return None
+    return AMBIENT_SLOTS_PER_DAY - ambient_today
+
 
 # Flag provenance for the currently indexed library: flag -> ids of the events
 # that can grant it. Rebuilt whenever select_event is handed a different deck.
@@ -126,22 +166,53 @@ def effective_weight(event: Event, character: Character) -> float:
     return max(w, 0.0)
 
 
+def is_ambient(event: Event) -> bool:
+    """True for background filler, the content the per-day quota budgets."""
+    return bool(AMBIENT_TAGS.intersection(event.tags))
+
+
+def eligible_pool(
+    events: Sequence[Event],
+    character: Character,
+    day: int,
+    exclude_ids: Optional[Set[str]] = None,
+    ambient_budget: Optional[int] = None,
+) -> List[Event]:
+    """Every storylet that could fire right now, after exclusions and the quota.
+
+    `ambient_budget` is how many ambient slots the caller has left today; None
+    disables the quota, which is what a caller that does not track days wants.
+    Once the budget is spent, ambient events drop out of the draw -- unless
+    removing them would empty the pool, in which case the unbudgeted pool is
+    handed back. Returning nothing would silently burn the player's action slot,
+    and the early game is the realistic trigger: almost everything eligible on
+    day 1 is ambient.
+    """
+    exclude_ids = exclude_ids or set()
+    # Never repeat a storylet within the same day.
+    pool = [e for e in events if e.id not in exclude_ids and e.eligible(character, day)]
+    if ambient_budget is not None and ambient_budget <= 0:
+        budgeted = [e for e in pool if not is_ambient(e)]
+        if budgeted:
+            return budgeted
+    return pool
+
+
 def select_event(
     events: List[Event],
     character: Character,
     day: int,
     rng: Optional[random.Random] = None,
     exclude_ids: Optional[Set[str]] = None,
+    ambient_budget: Optional[int] = None,
 ) -> Optional[Event]:
     """Select a single eligible storylet based on state-influenced weighted probability."""
     rng = rng or random.Random()
-    exclude_ids = exclude_ids or set()
 
     if _token(events) != _index_token:
         index_library(events)
 
-    # Filter eligible pool (never repeat a storylet within the same day)
-    pool = [e for e in events if e.id not in exclude_ids and e.eligible(character, day)]
+    pool = eligible_pool(events, character, day, exclude_ids, ambient_budget)
     if not pool:
         return None
 

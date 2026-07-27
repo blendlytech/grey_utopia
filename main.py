@@ -9,7 +9,7 @@ from typing import List, Dict
 
 from engine.stats import create_starter_fixer, Character
 from engine.events import Event, load_events
-from engine.selector import select_event
+from engine.selector import select_event, is_ambient, ambient_budget_for
 from engine.resolver import (
     resolve_choice, check_endings, eligible_choices, build_epilogue,
     build_run_memories, last_resolution, apply_rest
@@ -145,9 +145,11 @@ def run_game_loop(auto_play: bool = False, max_days: int = 30) -> None:
 
         # Execute daily action slots
         fired_today: set[str] = set()
+        ambient_today = 0
         slot = 0
         while slot < slots:
-            ev = select_event(all_events, character, character.day, rng, exclude_ids=fired_today)
+            ev = select_event(all_events, character, character.day, rng, exclude_ids=fired_today,
+                              ambient_budget=ambient_budget_for(ambient_today))
             if not ev:
                 if not auto_play:
                     print("\n[No eligible events available today. Resting...]")
@@ -184,6 +186,8 @@ def run_game_loop(auto_play: bool = False, max_days: int = 30) -> None:
             ev.last_fired_day = character.day
             ev.fire_count += 1
             fired_today.add(ev.id)
+            if is_ambient(ev):
+                ambient_today += 1
             slot += 1
 
             if not auto_play:
