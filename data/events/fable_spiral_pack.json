@@ -1088,6 +1088,9 @@
             "flag": "exit_ready"
           },
           {
+            "flag": "credentials_forged"
+          },
+          {
             "day": 14,
             "op": ">="
           },
