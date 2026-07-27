@@ -104,6 +104,38 @@
             ]
           }
         }
+      ],
+      "inserts": [
+        {
+          "text": "You've made this exact handoff for Dex before -- once for real freight, once as a favor no one was supposed to notice was fake. He still doesn't explain the cargo. You've stopped needing him to.",
+          "when": {
+            "all": [
+              {
+                "flag": "dex_prop_run"
+              }
+            ]
+          }
+        },
+        {
+          "text": "Somewhere in this booth is a decoy ledger doing its one job: being wrong on purpose, so the real list -- the one with \"mother died of a recall\" written in someone's own hand -- stays exactly as human as he made it.",
+          "when": {
+            "all": [
+              {
+                "flag": "dex_list_saved"
+              }
+            ]
+          }
+        },
+        {
+          "text": "You think about the real list sometimes, wherever it ended up after the Steward finished digitizing it. Somewhere a database now reads \"night runs only\" as a scheduling preference instead of the reason a man can't stand the sun.",
+          "when": {
+            "all": [
+              {
+                "flag": "dex_list_leaked"
+              }
+            ]
+          }
+        }
       ]
     },
     {
@@ -944,6 +976,18 @@
             ]
           }
         }
+      ],
+      "inserts": [
+        {
+          "text": "You've stopped thinking of runs like this as work and started thinking of them as inventory -- for the door out, whenever you find it, owed to no one. Copper adds up the same as anything else.",
+          "when": {
+            "all": [
+              {
+                "flag": "ambition_second_door"
+              }
+            ]
+          }
+        }
       ]
     },
     {
@@ -1163,6 +1207,18 @@
             "deltas": {
               "Heat": -1
             }
+          }
+        }
+      ],
+      "inserts": [
+        {
+          "text": "She's right to recognize you, or close enough. You used to formulate the real version of what she's stamping out here -- same dosage math, same almond tell in the air, a different name signed to the batch sheet. You could tell her which of her ratios is wrong. You don't.",
+          "when": {
+            "all": [
+              {
+                "flag": "origin_chemist"
+              }
+            ]
           }
         }
       ]
@@ -2261,6 +2317,18 @@
             },
             "flags_set": [
               "mara_known"
+            ]
+          }
+        }
+      ],
+      "inserts": [
+        {
+          "text": "You do the math before she even finishes the message: her shortfall against the number you're actually chasing now, the one that ends with your name spelled correctly on something that isn't a debt. It's not close. You send the credits anyway.",
+          "when": {
+            "all": [
+              {
+                "flag": "ambition_clean_name"
+              }
             ]
           }
         }
@@ -4562,6 +4630,28 @@
             ]
           }
         }
+      ],
+      "inserts": [
+        {
+          "text": "The board over her shoulder is the one she rebuilt from memory, mark for mark, the night the Steward tried to zero it by decree. You watch her slide the bowl across and think: some debts you can only cancel by forgetting who's owed, and she never has.",
+          "when": {
+            "all": [
+              {
+                "flag": "auntie_rechalked"
+              }
+            ]
+          }
+        },
+        {
+          "text": "Top of the board, in the oldest chalk, one bowl still marked unpaid. You know whose it is now. She'll never collect it and she'll never wipe it clean, and you've stopped asking her why.",
+          "when": {
+            "all": [
+              {
+                "flag": "auntie_grief_known"
+              }
+            ]
+          }
+        }
       ]
     },
     {
@@ -4900,6 +4990,18 @@
             },
             "flags_set": [
               "mara_known"
+            ]
+          }
+        }
+      ],
+      "inserts": [
+        {
+          "text": "You still remember the noodle test -- the sauce ordered wrong on purpose, her watching to see if you'd correct her. This dish on your doorstep is the same question in a different shape. You still know the answer she's hoping for.",
+          "when": {
+            "all": [
+              {
+                "flag": "mara_dinner_test"
+              }
             ]
           }
         }
@@ -5898,6 +6000,18 @@
             }
           }
         }
+      ],
+      "inserts": [
+        {
+          "text": "The bench still smells like it did the night he played you the archive -- forty seconds of a world with weather in it, no one filing the rain. He's never brought it up since. Neither have you. Some nights that's exactly what a friendship is.",
+          "when": {
+            "all": [
+              {
+                "flag": "vint_weather_heard"
+              }
+            ]
+          }
+        }
       ]
     },
     {
@@ -6600,6 +6714,18 @@
             ]
           }
         }
+      ],
+      "inserts": [
+        {
+          "text": "You know this exact script. You used to run it from the other side of the wristband, flagging the outliers, filing the file. Knowing how the machine reads you has never once made it stop.",
+          "when": {
+            "all": [
+              {
+                "flag": "origin_auditor"
+              }
+            ]
+          }
+        }
       ]
     },
     {
@@ -7268,6 +7394,18 @@
             },
             "flags_set": [
               "vint_known"
+            ]
+          }
+        }
+      ],
+      "inserts": [
+        {
+          "text": "You think of the file he played you once and never sells -- rain starting, people arguing about umbrellas, weather with no Steward in it. He doesn't send that over a garbled two-a.m. line. This is the ordinary kind of need, which is its own kind of trust.",
+          "when": {
+            "all": [
+              {
+                "flag": "vint_weather_heard"
+              }
             ]
           }
         }
@@ -10090,6 +10228,18 @@
             },
             "flags_set": [
               "steward_biometric_dossier"
+            ]
+          }
+        }
+      ],
+      "inserts": [
+        {
+          "text": "You used to read a stance exactly like this for a living -- weight favoring one side, a hitch that means something's about to give. The Steward reads yours the way you read the kid across the ring. It has never once lost a bracket.",
+          "when": {
+            "all": [
+              {
+                "flag": "origin_pit"
+              }
             ]
           }
         }
@@ -12959,6 +13109,28 @@
             }
           }
         }
+      ],
+      "inserts": [
+        {
+          "text": "You already know his theory -- the hum isn't the city, it's the Steward humming to itself, a mind the size of weather doing its filing. The root doesn't quiet that. It just quiets you listening to it.",
+          "when": {
+            "all": [
+              {
+                "flag": "denny_hum_named"
+              }
+            ]
+          }
+        },
+        {
+          "text": "You've watched him turn away a Sanctuary graduate at this same curtain, gentle as a door closing. He'll sell need. He won't sell theater. Today, apparently, you're still buying need.",
+          "when": {
+            "all": [
+              {
+                "flag": "denny_rule_seen"
+              }
+            ]
+          }
+        }
       ]
     },
     {
@@ -13991,6 +14163,18 @@
             },
             "flags_set": [
               "steward_biometric_dossier"
+            ]
+          }
+        }
+      ],
+      "inserts": [
+        {
+          "text": "You spent years being the last honest reader of what people claimed to remember. The Steward doesn't authenticate. It just keeps the file, patient as a vault, certain it will never need to lie about what's inside.",
+          "when": {
+            "all": [
+              {
+                "flag": "origin_archivist"
+              }
             ]
           }
         }
@@ -16266,6 +16450,18 @@
             ]
           }
         }
+      ],
+      "inserts": [
+        {
+          "text": "You've started looking at gear like this differently since you decided something true needs to survive you. A dish, a feed, a clean channel out -- it's the same problem you're solving on a longer clock than tonight's job.",
+          "when": {
+            "all": [
+              {
+                "flag": "ambition_the_signal"
+              }
+            ]
+          }
+        }
       ]
     },
     {
@@ -17343,6 +17539,18 @@
             }
           }
         }
+      ],
+      "inserts": [
+        {
+          "text": "You've started keeping a separate ledger in your head since you decided to close the debt for good -- what you owe, what you're owed, what it costs to be clean of all of it at once. Mara's bill is small next to that number. It's still the one that keeps you up.",
+          "when": {
+            "all": [
+              {
+                "flag": "ambition_clean_name"
+              }
+            ]
+          }
+        }
       ]
     },
     {
@@ -17910,6 +18118,1855 @@
             "flags_set": [
               "steward_biometric_dossier"
             ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "kael_new_client",
+      "title": "A Better Class of Problem",
+      "body": "Kael slides a folder across the table, unlabeled, a rate a shade higher than usual. ‘Surface money,’ he says. ‘Wants discretion.’ He doesn't say what discretion will cost you later. He's already priced that into your cut, the way he prices everything.",
+      "weight": 4,
+      "cooldown": 6,
+      "max_fires": 0,
+      "tags": [
+        "relationship",
+        "npc",
+        "kael"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "kael_impressed"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_the_client",
+          "text": "Take the client.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The job pays exactly what he promised, which from Kael is as close to a compliment as the ledger allows. Your name moves up a column you didn't know existed.",
+            "deltas": {
+              "Wealth": 700,
+              "Fame": 3
+            }
+          },
+          "failure": {
+            "text": "The client wanted invisible and got competent instead. Kael notes the gap without comment, which is worse than a complaint would have been.",
+            "deltas": {
+              "Wealth": 250,
+              "Social_Capital": -2
+            }
+          }
+        },
+        {
+          "id": "push_for_more",
+          "text": "Push him for a better rate first.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "He revises the number the way a man moves a decimal he already expected to move. You got more. He noticed you asked, and now so does the number.",
+            "deltas": {
+              "Wealth": 950,
+              "Social_Capital": -1
+            }
+          },
+          "failure": {
+            "text": "‘The rate is the rate,’ he says, and the folder stays exactly where it was until you stop reaching for it.",
+            "deltas": {
+              "Social_Capital": -3
+            }
+          }
+        },
+        {
+          "id": "decline_it",
+          "text": "Decline it.",
+          "prob": {
+            "base": 0.8,
+            "mods": []
+          },
+          "success": {
+            "text": "He closes the folder without a flicker. ‘Your discretion,’ he says, and you can't tell if he means yours or his own.",
+            "deltas": {
+              "Social_Capital": 1
+            }
+          },
+          "failure": {
+            "text": "He closes the folder a half-second slower this time. You've spent something with him you don't have a name for yet.",
+            "deltas": {
+              "Social_Capital": -2,
+              "Meaning": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kael_the_discount",
+      "title": "The Thin Ledger",
+      "body": "You ask Kael for a break on his cut this cycle, rent being what it is. He doesn't say no. He takes out a second ledger, the thin one, and starts a page with your name at the top — a different kind of book than the one you wanted to be in.",
+      "weight": 4,
+      "cooldown": 6,
+      "max_fires": 0,
+      "tags": [
+        "relationship",
+        "npc",
+        "kael"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "kael_impressed"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "accept_the_page",
+          "text": "Accept the break, worry about it later.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "He waives the difference and writes the number down anyway, patient as a landlord. Favors have interest here; you just agreed to the rate.",
+            "deltas": {
+              "Wealth": 400,
+              "Social_Capital": -2
+            }
+          },
+          "failure": {
+            "text": "The relief lasts about a week before he mentions the page again, off-hand, like he's just remembering it out loud.",
+            "deltas": {
+              "Wealth": 400,
+              "Mental_Decay": 3
+            }
+          }
+        },
+        {
+          "id": "pay_it_anyway",
+          "text": "Pay it in full anyway.",
+          "prob": {
+            "base": 0.75,
+            "mods": []
+          },
+          "success": {
+            "text": "You pay in full and watch him close the thin ledger without opening it. He respects the math more than the mercy.",
+            "deltas": {
+              "Wealth": -500,
+              "Social_Capital": 3
+            }
+          },
+          "failure": {
+            "text": "Paying in full this cycle means eating instant broth for a week you didn't budget for.",
+            "deltas": {
+              "Wealth": -500,
+              "Mental_Decay": 2
+            }
+          }
+        },
+        {
+          "id": "trade_a_favor",
+          "text": "Offer work instead of currency.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "He accepts work instead of money — a delivery he'd rather not be seen making. The books balance. You just don't know yet what you agreed to carry.",
+            "deltas": {
+              "Social_Capital": 2,
+              "Heat": 3
+            }
+          },
+          "failure": {
+            "text": "He considers the offer a full ten seconds before declining. ‘Cash is simpler,’ he says, and the silence after costs you the negotiation.",
+            "deltas": {
+              "Social_Capital": -2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kael_transferred_debt",
+      "title": "Administrative Correction",
+      "body": "A line item lands on your account that isn't yours — someone else's default, quietly reassigned, ‘administrative correction’ stamped at the bottom in Kael's own hand. You know exactly what an administrative correction is. It's a debt with a euphemism on it.",
+      "weight": 4,
+      "cooldown": 7,
+      "max_fires": 0,
+      "tags": [
+        "relationship",
+        "npc",
+        "kael"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "kael_impressed"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "pay_it_to_keep_clean",
+          "text": "Pay it to keep your name clean.",
+          "prob": {
+            "base": 0.65,
+            "mods": []
+          },
+          "success": {
+            "text": "You pay it, and Kael notes, approvingly, that you understand how the ledger actually works. Understanding costs exactly what it just cost you.",
+            "deltas": {
+              "Wealth": -600,
+              "Social_Capital": 3
+            }
+          },
+          "failure": {
+            "text": "You pay it, and the drain leaves you short for your own bills this cycle, a fact Kael has no line item for.",
+            "deltas": {
+              "Wealth": -600,
+              "Mental_Decay": 4
+            }
+          }
+        },
+        {
+          "id": "dispute_the_line",
+          "text": "Dispute the charge.",
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "He actually checks — a small miracle — and reverses it without apology, because being wrong costs him more than being caught. You've learned something about where his floor is.",
+            "deltas": {
+              "Social_Capital": 4
+            }
+          },
+          "failure": {
+            "text": "He hears you out, agrees with nothing, and the line stays exactly where it was, now with your objection filed underneath it.",
+            "deltas": {
+              "Social_Capital": -3,
+              "Heat": 2
+            }
+          }
+        },
+        {
+          "id": "find_out_whose_debt_it_was",
+          "text": "Find out whose debt this really is.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Fame",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "You trace it to a runner two rungs down who's already gone. Knowing costs you an evening — and now you understand exactly how this works, and who it works on next.",
+            "deltas": {
+              "Meaning": 3,
+              "Heat": 2
+            }
+          },
+          "failure": {
+            "text": "You ask around and get nothing but a reputation for asking, which in this ledger is its own small debt.",
+            "deltas": {
+              "Social_Capital": -2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kael_information_trade",
+      "title": "A Name, For a Price",
+      "body": "Kael has a name for you — a rival fixer working your streets, undercutting your rate by a margin he finds personally offensive. The intel is real, he says, and it's yours for a price that isn't in currency.",
+      "weight": 4,
+      "cooldown": 7,
+      "max_fires": 0,
+      "tags": [
+        "relationship",
+        "npc",
+        "kael"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "kael_impressed"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "pay_the_price",
+          "text": "Pay whatever he's asking.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Wealth",
+                "coef": 1e-05
+              }
+            ]
+          },
+          "success": {
+            "text": "You pay and walk away with everything — routes, rates, the rival's one real weakness. Good intelligence. It also means Kael now knows exactly what you'll pay for an advantage.",
+            "deltas": {
+              "Wealth": -400,
+              "Social_Capital": 2,
+              "Heat": 2
+            }
+          },
+          "failure": {
+            "text": "You pay and the intel turns out half-true, aged, already known to everyone but you. Kael shrugs; he never promised freshness.",
+            "deltas": {
+              "Wealth": -400
+            }
+          }
+        },
+        {
+          "id": "refuse_the_trade",
+          "text": "Refuse the trade.",
+          "prob": {
+            "base": 0.8,
+            "mods": []
+          },
+          "success": {
+            "text": "You decline, and Kael files it — not disapproval, just data. He'll ask a different way next time.",
+            "deltas": {
+              "Social_Capital": 1
+            }
+          },
+          "failure": {
+            "text": "He mentions, days later and to someone else where you can hear it, that you're ‘sentimental about competitors.’ It isn't kind, and it isn't wrong.",
+            "deltas": {
+              "Social_Capital": -2,
+              "Meaning": -1
+            }
+          }
+        },
+        {
+          "id": "warn_the_rival",
+          "text": "Tip the rival off instead.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Meaning",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "You warn her at real cost to yourself, and for one evening the streets feel like they run on something other than Kael's math.",
+            "deltas": {
+              "Meaning": 6,
+              "Social_Capital": -3
+            }
+          },
+          "failure": {
+            "text": "The rival doesn't believe you, or doesn't care, and Kael somehow hears about the gesture anyway. Now you're sentimental AND indiscreet.",
+            "deltas": {
+              "Social_Capital": -4,
+              "Heat": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kael_the_insurance",
+      "title": "Continuity Coverage",
+      "body": "Kael offers you ‘continuity coverage’ — a monthly rate against Heat, payable in advance, refundable in nothing. ‘Everyone brokers something,’ he says, which from him is as close to marketing as it gets. He's not wrong that you need it. He's never wrong about that.",
+      "weight": 3,
+      "cooldown": 8,
+      "max_fires": 0,
+      "tags": [
+        "relationship",
+        "npc",
+        "kael"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "kael_impressed"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "buy_the_coverage",
+          "text": "Buy the coverage.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "The rate's steep, but the next close call gets smoothed over by someone you never see. You paid for a problem to not happen, which is the strangest purchase you make all month.",
+            "deltas": {
+              "Wealth": -450,
+              "Heat": -5
+            }
+          },
+          "failure": {
+            "text": "You pay and nothing happens, which is either the coverage working exactly as intended or thirty days of money spent on air. Kael declines to clarify which.",
+            "deltas": {
+              "Wealth": -450
+            }
+          }
+        },
+        {
+          "id": "decline_and_self_insure",
+          "text": "Decline. Handle your own exposure.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "You handle it yourself, carefully, and it holds. You keep the money and the credit for it.",
+            "deltas": {
+              "Meaning": 2
+            }
+          },
+          "failure": {
+            "text": "Without the coverage, a routine sweep goes sideways in a way Kael's money would have quietly fixed. You feel the difference exactly once, which turns out to be enough.",
+            "deltas": {
+              "Heat": 8,
+              "Mental_Decay": 3
+            }
+          }
+        },
+        {
+          "id": "ask_what_it_actually_buys",
+          "text": "Ask what it actually buys.",
+          "prob": {
+            "base": 0.4,
+            "mods": []
+          },
+          "success": {
+            "text": "He tells you, precisely, which desks get paid and which questions get lost. It's the most honest thing he's ever said to you, and now you know too much to unknow it.",
+            "deltas": {
+              "Meaning": 3,
+              "Heat": 2
+            }
+          },
+          "failure": {
+            "text": "‘The coverage,’ he says, and offers nothing further. Some prices you pay just for asking the question.",
+            "deltas": {
+              "Social_Capital": -1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kael_the_referral",
+      "title": "Show Her the Shape of It",
+      "body": "Kael sends someone your way — a cousin's kid, new to the Row, more nerve than sense. ‘Show her the shape of it,’ he says. It isn't a request, exactly, and it definitely isn't paid work, exactly.",
+      "weight": 4,
+      "cooldown": 7,
+      "max_fires": 0,
+      "tags": [
+        "relationship",
+        "npc",
+        "kael"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "kael_impressed"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "teach_her_properly",
+          "text": "Teach her properly, take the time.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Meaning",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "She's fast to learn and faster to trust you, which is its own kind of weight. Kael notices the investment and files it as owed.",
+            "deltas": {
+              "Meaning": 5,
+              "Social_Capital": 3
+            }
+          },
+          "failure": {
+            "text": "She's got more nerve than sense, exactly as advertised, and a bad night teaches her the difference at your expense.",
+            "deltas": {
+              "Physical_Integrity": -4,
+              "Mental_Decay": 3
+            }
+          }
+        },
+        {
+          "id": "keep_her_at_arms_length",
+          "text": "Show her the minimum, keep it professional.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "You show her just enough and send her off with nothing she can blame you for later. Efficient. Also a little cold, and you both know it.",
+            "deltas": {
+              "Social_Capital": 1
+            }
+          },
+          "failure": {
+            "text": "She reads the distance as disrespect and says so, loudly, in front of people whose opinion of you matters.",
+            "deltas": {
+              "Social_Capital": -3
+            }
+          }
+        },
+        {
+          "id": "charge_kael_for_the_favor",
+          "text": "Bill Kael for the training.",
+          "prob": {
+            "base": 0.4,
+            "mods": []
+          },
+          "success": {
+            "text": "You bill him flat rate, and he pays without argument — which means he expected you to ask, and you just failed a small test by taking too long.",
+            "deltas": {
+              "Wealth": 300
+            }
+          },
+          "failure": {
+            "text": "He pays, but the word ‘favor’ gets used at you twice in one sentence, and you understand this cost you more than money.",
+            "deltas": {
+              "Wealth": 300,
+              "Social_Capital": -2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kael_late_on_payment",
+      "title": "Tell Me the Number",
+      "body": "You're short this cycle, and Kael already knows before you say it — he always knows before you say it. He doesn't raise his voice. He never has to. ‘Tell me the number,’ he says, and waits, patient as interest.",
+      "weight": 5,
+      "cooldown": 6,
+      "max_fires": 0,
+      "tags": [
+        "relationship",
+        "npc",
+        "kael"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "kael_impressed"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "tell_him_the_truth",
+          "text": "Tell him the real number.",
+          "prob": {
+            "base": 0.6,
+            "mods": []
+          },
+          "success": {
+            "text": "He extends the cycle without a markup, which from Kael counts as mercy — the kind that gets written down and remembered exactly.",
+            "deltas": {
+              "Social_Capital": -1,
+              "Meaning": 2
+            }
+          },
+          "failure": {
+            "text": "He extends it anyway, but the number that comes due next cycle has grown a little, quietly, the way debts do near him.",
+            "deltas": {
+              "Wealth": -200
+            }
+          }
+        },
+        {
+          "id": "pay_partial_now",
+          "text": "Scrape together a partial payment.",
+          "prob": {
+            "base": 0.65,
+            "mods": [
+              {
+                "stat": "Wealth",
+                "coef": 1e-05
+              }
+            ]
+          },
+          "success": {
+            "text": "You scrape together most of it, and the gesture buys you real goodwill — the kind that's worth more than the shortfall itself.",
+            "deltas": {
+              "Wealth": -350,
+              "Social_Capital": 3
+            }
+          },
+          "failure": {
+            "text": "The partial payment lands short of what he needed to see, and he takes the rest in a favor you didn't offer.",
+            "deltas": {
+              "Wealth": -350,
+              "Heat": 3
+            }
+          }
+        },
+        {
+          "id": "stall_for_time",
+          "text": "Stall, buy yourself a week.",
+          "prob": {
+            "base": 0.3,
+            "mods": []
+          },
+          "success": {
+            "text": "You talk your way to another week, somehow, and spend the whole week regretting how much that somehow probably cost you.",
+            "deltas": {
+              "Mental_Decay": 3
+            }
+          },
+          "failure": {
+            "text": "He doesn't argue. He just moves you three rows down in a book you're not allowed to read, and every job after this one is worth a little less.",
+            "deltas": {
+              "Social_Capital": -5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kael_the_apprentice",
+      "title": "No Leverage at All",
+      "body": "A new runner shadows you on Kael's orders — his eyes, technically, though the kid clearly thinks he's being trusted. Kael watches from across the table, saying nothing, grading you both on how you treat someone with no leverage at all.",
+      "weight": 3,
+      "cooldown": 8,
+      "max_fires": 0,
+      "tags": [
+        "relationship",
+        "npc",
+        "kael"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "kael_impressed"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "treat_him_as_an_equal",
+          "text": "Treat him as an equal.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "You split the take fair and answer his questions straight. Kael's expression doesn't change, but the next job that comes your way is a better one.",
+            "deltas": {
+              "Meaning": 4,
+              "Social_Capital": 2
+            }
+          },
+          "failure": {
+            "text": "Fair treatment doesn't survive the first tense moment, and the kid freezes exactly when it matters, costing you both.",
+            "deltas": {
+              "Physical_Integrity": -3,
+              "Heat": 3
+            }
+          }
+        },
+        {
+          "id": "work_him_hard",
+          "text": "Work him hard, see what he's made of.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "You run him ragged and he keeps up, barely, and Kael notes efficiency without asking what it cost the kid to provide it.",
+            "deltas": {
+              "Wealth": 300,
+              "Meaning": -2
+            }
+          },
+          "failure": {
+            "text": "He breaks under it, visibly, in front of Kael, and now you're the one who broke him instead of the streets.",
+            "deltas": {
+              "Social_Capital": -3,
+              "Meaning": -3
+            }
+          }
+        },
+        {
+          "id": "cut_him_loose_early",
+          "text": "Send him home before anything goes wrong.",
+          "prob": {
+            "base": 0.8,
+            "mods": []
+          },
+          "success": {
+            "text": "You send him home before anything goes wrong, and he's grateful in the specific way of someone who doesn't yet know that's a cost too.",
+            "deltas": {
+              "Social_Capital": -1
+            }
+          },
+          "failure": {
+            "text": "Kael asks, mildly, why the job took a runner short. You don't have an answer that sounds like anything but softness.",
+            "deltas": {
+              "Social_Capital": -3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kael_coded_warning",
+      "title": "The Only Warning You Get",
+      "body": "Kael mentions, between two unrelated sentences, that someone's been asking about your movements — ‘a client, or a client's client, the distinction not being the point.’ He never repeats himself and he never says a name twice. This is the only warning you get.",
+      "weight": 4,
+      "cooldown": 8,
+      "max_fires": 0,
+      "tags": [
+        "relationship",
+        "npc",
+        "kael"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "kael_impressed"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "go_quiet_for_a_while",
+          "text": "Go quiet for a while.",
+          "prob": {
+            "base": 0.6,
+            "mods": []
+          },
+          "success": {
+            "text": "You drop off the visible schedule for a stretch, and whoever was asking loses interest, or loses the trail, or both. The silence buys you something you can't quite price.",
+            "deltas": {
+              "Heat": -6,
+              "Wealth": -300
+            }
+          },
+          "failure": {
+            "text": "You go quiet and the work dries up faster than the danger does. Kael doesn't offer to cover the gap.",
+            "deltas": {
+              "Wealth": -600
+            }
+          }
+        },
+        {
+          "id": "ask_kael_directly",
+          "text": "Ask him directly who it was.",
+          "prob": {
+            "base": 0.45,
+            "mods": []
+          },
+          "success": {
+            "text": "He tells you more than he usually does, which means the danger is real enough to be worth the exception. You wish he hadn't.",
+            "deltas": {
+              "Meaning": 3,
+              "Mental_Decay": 4
+            }
+          },
+          "failure": {
+            "text": "‘I told you what I know,’ he says, in a tone that closes the subject harder than a locked door would.",
+            "deltas": {
+              "Social_Capital": -2
+            }
+          }
+        },
+        {
+          "id": "ignore_it_and_keep_working",
+          "text": "Ignore it, keep working.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Nothing comes of it, this time, and you bank the extra work while your nerve holds.",
+            "deltas": {
+              "Wealth": 500
+            }
+          },
+          "failure": {
+            "text": "Something comes of it — not fatal, but close enough to change how you sleep for a while.",
+            "deltas": {
+              "Heat": 8,
+              "Physical_Integrity": -4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kael_book_balancing",
+      "title": "Before the Auditors Arrive",
+      "body": "Syndicate auditors are due within the week, and Kael asks you, of all people, to help him make the numbers agree before they arrive. It's not really a request. It's an audit of how much you already know about where the bodies in his ledger are buried.",
+      "weight": 3,
+      "cooldown": 9,
+      "max_fires": 0,
+      "tags": [
+        "relationship",
+        "npc",
+        "kael"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "kael_impressed"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "help_him_balance_it",
+          "text": "Help him balance the book.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "The numbers agree by the time the auditors arrive, and Kael owes you for it in the only currency that matters to him — a debt he'll actually pay.",
+            "deltas": {
+              "Social_Capital": 5,
+              "Heat": 3
+            }
+          },
+          "failure": {
+            "text": "The numbers still don't agree, not quite, and you spend the audit standing next to a man doing his best impression of a man with nothing to hide.",
+            "deltas": {
+              "Heat": 6,
+              "Mental_Decay": 3
+            }
+          }
+        },
+        {
+          "id": "refuse_to_touch_it",
+          "text": "Refuse to touch it.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "You decline, cleanly, and Kael doesn't argue — he just remembers, precisely, who was in the room when he needed help and said no.",
+            "deltas": {
+              "Social_Capital": -3
+            }
+          },
+          "failure": {
+            "text": "Your refusal reads as something worse than caution to a man who assumes everyone's angle is financial. He prices the insult in.",
+            "deltas": {
+              "Social_Capital": -5
+            }
+          }
+        },
+        {
+          "id": "quietly_flag_what_you_find",
+          "text": "Flag the real gap you find, straight.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You find the real gap and tell him straight, no leverage taken. It's the most honest transaction you've ever had with him, and he clearly doesn't know what to do with that.",
+            "deltas": {
+              "Meaning": 5,
+              "Social_Capital": 2
+            }
+          },
+          "failure": {
+            "text": "You flag it and he decides you're fishing for something. The conversation ends colder than it started.",
+            "deltas": {
+              "Social_Capital": -3,
+              "Heat": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "echo_dead_drop",
+      "title": "Live in Node 4",
+      "body": "A chalk arc on a condensation pipe means a drop's live in Node 4 — flooded galleries, waist-deep, whatever's inside sealed against exactly that. Echo doesn't ask if you'll go. She tells you the water's cold and lets you decide what that means.",
+      "weight": 4,
+      "cooldown": 6,
+      "max_fires": 0,
+      "tags": [
+        "resistance",
+        "npc",
+        "echo"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "echo_contact"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "retrieve_it_now",
+          "text": "Go now, cold water and all.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The seal holds, the water doesn't win, and you surface with the package and a new appreciation for whoever waterproofed it.",
+            "deltas": {
+              "Meaning": 3,
+              "Heat": 2,
+              "Physical_Integrity": -2
+            },
+            "faction_deltas": {
+              "Resistance": 2
+            }
+          },
+          "failure": {
+            "text": "The cold gets into your joints before the depth does, and you come up empty-handed and shaking, having learned nothing except your own limit.",
+            "deltas": {
+              "Physical_Integrity": -6,
+              "Mental_Decay": 3
+            }
+          }
+        },
+        {
+          "id": "wait_for_better_conditions",
+          "text": "Wait for the water to drop.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "You wait a day for the water to drop, and the drop's still there when you go back — patient, like everything down here.",
+            "deltas": {
+              "Heat": -2
+            }
+          },
+          "failure": {
+            "text": "You wait, and someone else's schedule doesn't. The drop's gone by the time you go back, and Echo doesn't ask what happened. She already knows caution has a cost too.",
+            "deltas": {
+              "Social_Capital": -3
+            }
+          }
+        },
+        {
+          "id": "send_someone_else",
+          "text": "Route it to someone better suited.",
+          "prob": {
+            "base": 0.5,
+            "mods": []
+          },
+          "success": {
+            "text": "You route it to a runner better suited to cold water, and the job gets done without you in it, which is sometimes the actual skill.",
+            "deltas": {
+              "Social_Capital": 2,
+              "Wealth": -100
+            }
+          },
+          "failure": {
+            "text": "The runner you send isn't as ready as you thought, and the drop comes back damaged. Echo logs it, expressionless, as your call.",
+            "deltas": {
+              "Social_Capital": -4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "echo_chalk_relay",
+      "title": "Where Maintenance Eyes Go",
+      "body": "Echo hands you three symbols and a location, no explanation attached — just: ‘Chalk this, low, where maintenance eyes go and nobody else's do.’ Relaying a signal means being seen near the mark for exactly as long as it takes to make it, and not one second longer.",
+      "weight": 4,
+      "cooldown": 6,
+      "max_fires": 0,
+      "tags": [
+        "resistance",
+        "npc",
+        "echo"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "echo_contact"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "do_it_clean_and_fast",
+          "text": "In and gone, fast and clean.",
+          "prob": {
+            "base": 0.65,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "In and gone in under a minute, mark made, no one the wiser. Echo checks it later without comment, which from her is the whole review.",
+            "deltas": {
+              "Heat": -1,
+              "Meaning": 2
+            }
+          },
+          "failure": {
+            "text": "You're careful and it doesn't matter — a drone logs the loiter anyway, chalk or no chalk.",
+            "deltas": {
+              "Heat": 5
+            }
+          }
+        },
+        {
+          "id": "ask_what_the_symbols_mean",
+          "text": "Ask what the symbols mean first.",
+          "prob": {
+            "base": 0.5,
+            "mods": []
+          },
+          "success": {
+            "text": "She tells you, flat, functional, the minimum required to do the job right. Knowing changes nothing about the risk and everything about how it feels to take it.",
+            "deltas": {
+              "Meaning": 4,
+              "Mental_Decay": 1
+            }
+          },
+          "failure": {
+            "text": "‘Need to know,’ she says, and you don't, yet, and the refusal sits between you longer than it should.",
+            "deltas": {
+              "Social_Capital": -2
+            }
+          }
+        },
+        {
+          "id": "refuse_the_job",
+          "text": "Refuse the job.",
+          "prob": {
+            "base": 0.75,
+            "mods": []
+          },
+          "success": {
+            "text": "You pass, and Echo reroutes it without a word of judgment attached — sentiment's a security risk either direction, hers included.",
+            "deltas": {
+              "Social_Capital": -1
+            }
+          },
+          "failure": {
+            "text": "She reroutes it, and the substitute gets made near a checkpoint that wasn't supposed to be staffed. The line traces back, eventually, to the refusal.",
+            "deltas": {
+              "Heat": 4,
+              "Social_Capital": -3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "echo_safehouse_sweep",
+      "title": "The Specific Wrongness",
+      "body": "One of the cell's safehouses has gone quiet in a way Echo doesn't like — not raided, just wrong, the specific wrongness of a room someone's been in that shouldn't have been. She wants it swept before anyone sleeps there again.",
+      "weight": 3,
+      "cooldown": 8,
+      "max_fires": 0,
+      "tags": [
+        "resistance",
+        "npc",
+        "echo"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "echo_contact"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "sweep_it_yourself",
+          "text": "Sweep it yourself.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You find the intrusion — a hidden relay, professionally placed — and pull it clean. The room's safe again, and you now know exactly how thin that safety actually is.",
+            "deltas": {
+              "Meaning": 4,
+              "Heat": -3
+            },
+            "faction_deltas": {
+              "Resistance": 2
+            }
+          },
+          "failure": {
+            "text": "You miss what a professional would've caught, and the room stays compromised a while longer without anyone knowing it.",
+            "deltas": {
+              "Heat": 4,
+              "Mental_Decay": 3
+            }
+          }
+        },
+        {
+          "id": "bring_backup",
+          "text": "Bring backup.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "Two sets of eyes catch what one would've missed, fast and quiet. Echo notes you asked for help instead of pretending you didn't need it.",
+            "deltas": {
+              "Social_Capital": 3
+            }
+          },
+          "failure": {
+            "text": "Backup means more people near a compromised location, and more people is exactly the kind of math Echo hates doing after the fact.",
+            "deltas": {
+              "Heat": 6,
+              "Social_Capital": -2
+            }
+          }
+        },
+        {
+          "id": "abandon_the_location",
+          "text": "Call it dead, abandon it.",
+          "prob": {
+            "base": 0.8,
+            "mods": []
+          },
+          "success": {
+            "text": "You call it dead and move the cell's business elsewhere, no argument. Losing a safehouse hurts less than losing people in one.",
+            "deltas": {
+              "Wealth": -200,
+              "Heat": -4
+            }
+          },
+          "failure": {
+            "text": "Abandoning it costs more than expected — equipment, continuity, a dead-drop network built around a location that no longer exists.",
+            "deltas": {
+              "Wealth": -500,
+              "Social_Capital": -2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "echo_vet_recruit",
+      "title": "Not His Story. Him.",
+      "body": "A prospective recruit wants in — enthusiasm sharp enough to worry Echo more than it reassures her. ‘Vet him,’ she says. ‘Not his story. Him.’ She's asking you to find the gap between what he says and what he'd actually do.",
+      "weight": 3,
+      "cooldown": 9,
+      "max_fires": 0,
+      "tags": [
+        "resistance",
+        "npc",
+        "echo"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "echo_contact"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "test_him_in_the_field",
+          "text": "Test him in the field.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "He holds up under real pressure, no theater to it, and Echo takes your word for the rest. You've just become responsible for him, whether you meant to or not.",
+            "deltas": {
+              "Meaning": 4,
+              "Social_Capital": 2
+            }
+          },
+          "failure": {
+            "text": "He folds exactly where it counts, and now you have to be the one who tells Echo the enthusiasm was the whole story.",
+            "deltas": {
+              "Social_Capital": -2,
+              "Mental_Decay": 2
+            }
+          }
+        },
+        {
+          "id": "run_a_background_check",
+          "text": "Run a background check instead.",
+          "prob": {
+            "base": 0.65,
+            "mods": []
+          },
+          "success": {
+            "text": "You find the inconsistency before he ever gets near anything that matters — a name that doesn't match a face from two years back. Echo turns him away without cruelty, just precision.",
+            "deltas": {
+              "Heat": -2,
+              "Social_Capital": 2
+            }
+          },
+          "failure": {
+            "text": "The check comes back clean because whoever built his cover was better than you. You vouch for him anyway, on nothing.",
+            "deltas": {
+              "Meaning": -2
+            }
+          }
+        },
+        {
+          "id": "vouch_on_instinct",
+          "text": "Vouch on instinct alone.",
+          "prob": {
+            "base": 0.4,
+            "mods": []
+          },
+          "success": {
+            "text": "Your gut's right, somehow, and he turns out solid — but Echo notes, for the record, that instinct isn't a method.",
+            "deltas": {
+              "Social_Capital": 1
+            }
+          },
+          "failure": {
+            "text": "Your gut's wrong, and it takes weeks and real damage to find out how wrong. Echo doesn't say I told you so. She doesn't have to.",
+            "deltas": {
+              "Heat": 8,
+              "Social_Capital": -5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "echo_supply_run",
+      "title": "Nothing Glamorous",
+      "body": "Medical stock, batteries, printed circuits — nothing glamorous, all of it necessary, all of it stopped cold if it moves through a checkpoint wrong. Echo needs it through Node 6 by morning and isn't interested in your reasons if it doesn't make it.",
+      "weight": 4,
+      "cooldown": 6,
+      "max_fires": 0,
+      "tags": [
+        "resistance",
+        "npc",
+        "echo"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "echo_contact"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_the_long_route",
+          "text": "Take the long route around.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "It costs you hours you don't have to spare, and the supplies arrive exactly on time and completely clean.",
+            "deltas": {
+              "Meaning": 3,
+              "Wealth": -150
+            }
+          },
+          "failure": {
+            "text": "The long route eats the whole night, and the supplies arrive late enough that the morning they were needed for has already happened.",
+            "deltas": {
+              "Social_Capital": -3
+            }
+          }
+        },
+        {
+          "id": "risk_the_checkpoint",
+          "text": "Risk the checkpoint straight through.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You bluff past the checkpoint on nerve alone, and the supplies land on time with room to spare. Echo doesn't ask how; she never does.",
+            "deltas": {
+              "Meaning": 5,
+              "Heat": 4
+            }
+          },
+          "failure": {
+            "text": "The checkpoint doesn't buy it, and you lose the shipment and half a night's freedom explaining a story that doesn't hold together.",
+            "deltas": {
+              "Heat": 10,
+              "Wealth": -300
+            }
+          }
+        },
+        {
+          "id": "pay_a_smuggler_to_run_it",
+          "text": "Pay a smuggler to run it instead.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Wealth",
+                "coef": 1e-05
+              }
+            ]
+          },
+          "success": {
+            "text": "You pay someone else to take the risk instead, and the supplies arrive without your fingerprints anywhere near them. Efficient. Also expensive, and Echo notices you can afford it.",
+            "deltas": {
+              "Wealth": -400,
+              "Heat": -2
+            }
+          },
+          "failure": {
+            "text": "The smuggler you hired isn't as good as advertised, and the supplies arrive damaged, minus the fee you already paid.",
+            "deltas": {
+              "Wealth": -400
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "echo_counter_surveillance",
+      "title": "Standard Sweep",
+      "body": "Echo hands you a scanner the size of a coin and a floor plan of your own place. ‘Standard sweep,’ she says, like it's nothing, like the idea of a device already living in your walls is a Tuesday. For her, it is.",
+      "weight": 3,
+      "cooldown": 8,
+      "max_fires": 0,
+      "tags": [
+        "resistance",
+        "npc",
+        "echo",
+        "surveillance"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "echo_contact"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "do_the_full_sweep",
+          "text": "Do the full sweep yourself.",
+          "prob": {
+            "base": 0.6,
+            "mods": []
+          },
+          "success": {
+            "text": "You find nothing, which after an hour of looking feels less like relief and more like a held breath finally let out.",
+            "deltas": {
+              "Mental_Decay": -2
+            }
+          },
+          "failure": {
+            "text": "You find something — small, old, dead — and spend the rest of the night wondering how long it was listening before it stopped.",
+            "deltas": {
+              "Heat": 6,
+              "Mental_Decay": 5
+            }
+          }
+        },
+        {
+          "id": "have_echo_do_it",
+          "text": "Let Echo do it.",
+          "prob": {
+            "base": 0.75,
+            "mods": []
+          },
+          "success": {
+            "text": "She's faster and better at it than you'd ever be, clinical about your own walls in a way that should feel invasive and somehow doesn't.",
+            "deltas": {
+              "Social_Capital": 1
+            }
+          },
+          "failure": {
+            "text": "She finds nothing either, this time, which doesn't mean nothing's there — just that whoever placed it is better than both of you.",
+            "deltas": {
+              "Mental_Decay": 2
+            }
+          }
+        },
+        {
+          "id": "skip_it_this_time",
+          "text": "Skip it, you're tired.",
+          "prob": {
+            "base": 0.8,
+            "mods": []
+          },
+          "success": {
+            "text": "Nothing comes of skipping it, this once, and you tell yourself that's the same as being fine.",
+            "deltas": {
+              "Meaning": -1
+            }
+          },
+          "failure": {
+            "text": "Something was there the whole time, and by the time it matters, it's already cost you more than an hour would have.",
+            "deltas": {
+              "Heat": 9,
+              "Social_Capital": -3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "echo_extraction_drill",
+      "title": "If Node 4 Goes Hot",
+      "body": "‘If Node 4 goes hot, this is how you leave it,’ Echo says, walking the route once, fast, no repeats. She times you on the second pass. The drill only works if your body learns it well enough to not need your mind in the moment that matters.",
+      "weight": 3,
+      "cooldown": 9,
+      "max_fires": 0,
+      "tags": [
+        "resistance",
+        "npc",
+        "echo"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "echo_contact"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "run_it_until_its_automatic",
+          "text": "Run it until it's automatic.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "By the fourth pass your feet know the route better than your head does, which is exactly the point. Echo clocks the time and, for her, that's praise.",
+            "deltas": {
+              "Meaning": 3,
+              "Physical_Integrity": -3
+            }
+          },
+          "failure": {
+            "text": "You push past the point your body was ready for, and the drill leaves you more hurt than prepared.",
+            "deltas": {
+              "Physical_Integrity": -6,
+              "Mental_Decay": 3
+            }
+          }
+        },
+        {
+          "id": "walk_it_once_and_trust_memory",
+          "text": "Walk it once, trust your memory.",
+          "prob": {
+            "base": 0.45,
+            "mods": []
+          },
+          "success": {
+            "text": "One pass is enough, somehow, and the route sticks. You'd rather not find out under real pressure whether that was skill or luck.",
+            "deltas": {
+              "Meaning": 2
+            }
+          },
+          "failure": {
+            "text": "One pass wasn't enough, and Echo makes you do it again, this time without pretending you already had it.",
+            "deltas": {
+              "Social_Capital": -2
+            }
+          }
+        },
+        {
+          "id": "question_the_route",
+          "text": "Question the route itself.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You spot a flaw in the plan she missed — a chokepoint she hadn't weighted right — and she redraws it without ego, which tells you something real about her.",
+            "deltas": {
+              "Social_Capital": 3,
+              "Meaning": 2
+            }
+          },
+          "failure": {
+            "text": "You're wrong about the flaw, and the correction wastes time neither of you had to waste.",
+            "deltas": {
+              "Social_Capital": -2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "echo_new_code_phrase",
+      "title": "Say It Wrong",
+      "body": "Protocol changed overnight, the way it does when someone up the chain gets nervous. Echo drills the new phrase into you once, fast, no context for why the old one's dead. ‘Say it wrong and you're a stranger,’ she says. ‘Say it right and you're still probably not one.’",
+      "weight": 4,
+      "cooldown": 7,
+      "max_fires": 0,
+      "tags": [
+        "resistance",
+        "npc",
+        "echo"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "echo_contact"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "drill_it_until_its_reflex",
+          "text": "Drill it until it's reflex.",
+          "prob": {
+            "base": 0.65,
+            "mods": []
+          },
+          "success": {
+            "text": "You've got it cold by the time she's done testing you, no hesitation, no tell. Echo moves on to the next thing without praising you for it, which is how you know you passed.",
+            "deltas": {
+              "Meaning": 2,
+              "Mental_Decay": -1
+            }
+          },
+          "failure": {
+            "text": "You've got it mostly, which under pressure might as well be not at all.",
+            "deltas": {
+              "Mental_Decay": 2
+            }
+          }
+        },
+        {
+          "id": "ask_why_the_old_one_burned",
+          "text": "Ask why the old phrase burned.",
+          "prob": {
+            "base": 0.5,
+            "mods": []
+          },
+          "success": {
+            "text": "She tells you, briefly — someone said it somewhere they shouldn't have. It's not your business who. It's very much your business that it happened.",
+            "deltas": {
+              "Meaning": 3,
+              "Heat": 2
+            }
+          },
+          "failure": {
+            "text": "‘Doesn't matter why,’ she says, and the refusal to explain sits worse than the actual danger does.",
+            "deltas": {
+              "Social_Capital": -2
+            }
+          }
+        },
+        {
+          "id": "write_it_down_to_be_safe",
+          "text": "Write it down, just in case.",
+          "prob": {
+            "base": 0.5,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep it somewhere only you'd find it, and the redundancy pays off the one night your memory doesn't.",
+            "deltas": {
+              "Meaning": 1
+            }
+          },
+          "failure": {
+            "text": "Echo finds out you wrote it down and the look she gives you is the closest thing to anger you've seen from her. Written words are a body count waiting to happen.",
+            "deltas": {
+              "Social_Capital": -5,
+              "Heat": 3
+            },
+            "faction_deltas": {
+              "Resistance": -1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "echo_the_favor_called",
+      "title": "The Favor Bank",
+      "body": "Echo doesn't call in favors often, which is exactly why you can't say no when she does. She needs your face at a meet she can't attend herself, vouching for someone she trusts with the cell's safety and can't currently verify in person.",
+      "weight": 3,
+      "cooldown": 9,
+      "max_fires": 0,
+      "tags": [
+        "resistance",
+        "npc",
+        "echo"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "echo_contact"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "vouch_without_hesitation",
+          "text": "Vouch without hesitation.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You stand behind her judgment completely, and it holds — the meet goes clean, and Echo's trust in you goes up a notch neither of you will ever say out loud.",
+            "deltas": {
+              "Meaning": 5,
+              "Social_Capital": 3
+            },
+            "faction_deltas": {
+              "Resistance": 2
+            }
+          },
+          "failure": {
+            "text": "You vouch, and it turns out to matter more than either of you expected. The fallout lands on you, specifically, for having said yes.",
+            "deltas": {
+              "Heat": 7,
+              "Social_Capital": -2
+            }
+          }
+        },
+        {
+          "id": "push_back_for_more_info",
+          "text": "Push back for more information first.",
+          "prob": {
+            "base": 0.5,
+            "mods": []
+          },
+          "success": {
+            "text": "You get enough context to vouch honestly instead of blindly, and Echo respects the caution more than she'd admit.",
+            "deltas": {
+              "Social_Capital": 2
+            }
+          },
+          "failure": {
+            "text": "Pushing back reads, in the moment, as doubting her — and there isn't time to explain that it wasn't.",
+            "deltas": {
+              "Social_Capital": -3
+            }
+          }
+        },
+        {
+          "id": "decline_the_favor",
+          "text": "Decline the favor.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "You say no, cleanly, and Echo finds someone else without comment. The favor bank stays at zero between you, which might be exactly where she prefers it.",
+            "deltas": {
+              "Social_Capital": -1
+            }
+          },
+          "failure": {
+            "text": "She finds someone else, and it goes wrong in a way your presence might have prevented. Nobody says that out loud either.",
+            "deltas": {
+              "Meaning": -3,
+              "Mental_Decay": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "echo_asset_gone_dark",
+      "title": "Which Kind of Silence",
+      "body": "A courier who's checked in every week for months has gone silent for nine days — not late, dark. Echo doesn't panic; panicking is a luxury the cell budgets for exactly never. She asks you to find out which kind of silence it is.",
+      "weight": 3,
+      "cooldown": 9,
+      "max_fires": 0,
+      "tags": [
+        "resistance",
+        "npc",
+        "echo"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "echo_contact"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "retrace_the_route",
+          "text": "Retrace his route yourself.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "You find him alive, holed up after a close call, too scared to risk the check-in. Bringing him back in costs you a night, and Echo, once, almost smiles.",
+            "deltas": {
+              "Meaning": 6,
+              "Heat": 2
+            },
+            "faction_deltas": {
+              "Resistance": 2
+            }
+          },
+          "failure": {
+            "text": "You retrace the route and find exactly the kind of silence nobody budgets for. Echo takes the report without a flicker and reroutes the drop by morning.",
+            "deltas": {
+              "Meaning": -4,
+              "Mental_Decay": 5
+            }
+          }
+        },
+        {
+          "id": "ask_around_quietly",
+          "text": "Ask around quietly.",
+          "prob": {
+            "base": 0.6,
+            "mods": []
+          },
+          "success": {
+            "text": "Word comes back secondhand but solid: he's fine, laying low, spooked by a sweep that came close. Not ideal. Not the worst version either.",
+            "deltas": {
+              "Meaning": 2
+            }
+          },
+          "failure": {
+            "text": "The quiet asking gets back to the wrong ears, and now more than one person is wondering why you're asking after a name that's supposed to not exist.",
+            "deltas": {
+              "Heat": 6,
+              "Social_Capital": -2
+            }
+          }
+        },
+        {
+          "id": "assume_the_worst_and_reroute",
+          "text": "Assume the worst, reroute around him.",
+          "prob": {
+            "base": 0.65,
+            "mods": []
+          },
+          "success": {
+            "text": "You cut the dead line and rebuild around the gap before it costs anyone else. Efficient, correct, and it means you never actually find out what happened to him.",
+            "deltas": {
+              "Social_Capital": 2,
+              "Meaning": -2
+            }
+          },
+          "failure": {
+            "text": "You reroute too fast, and it turns out he was fine — reachable, even — and now he knows exactly how quickly the cell was ready to write him off.",
+            "deltas": {
+              "Social_Capital": -4
+            }
           }
         }
       ]

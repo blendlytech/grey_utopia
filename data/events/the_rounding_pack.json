@@ -1,0 +1,395 @@
+{
+  "pack": "the_rounding_pack",
+  "model": "opus-5",
+  "batch": "flagship",
+  "description": "The Rounding: a four-beat late-run twist chain paying off the Final Review hook left open in origin_threads_pack (ot_ark_4_open_entry, ot_pit_3_count). Vint stumbles onto eleven years of case data that sorts everyone who walked into exactly three buckets; the player's own redacted disposition turns out to read MONITORED RELEASE -- PRODUCTIVE, and their origin skillset turns out to be one of the DERIVED INSTRUMENTS the monitoring runs on. Origin personalization is delivered entirely through inserts keyed on origin_archivist/auditor/pit/chemist, so one chain serves all four. Terminal beat branches four ways into rounding_confronted / rounding_buried / rounding_leveraged / rounding_shared, which endings.json epilogues consume. Pool weights 10, one-shot, chain-gated on rounding_thread_N; no flag outside the rounding_* namespace is set anywhere in this pack.",
+  "events": [
+    {
+      "id": "ro_1_correlation",
+      "title": "Statistically Stable",
+      "body": "Vint asks you over for an archive favor, which is normal, and then never mentions the favor, which isn't. He bought a pallet of municipal continuity paperwork by weight last month -- eleven years of it, unremediated, because nobody upstairs thought it was worth the crew hours. He has been de-duping it since. He has found a shape. People who walked out of an old life sort afterward into exactly three outcomes: fixer, enrolled, gone. And the ratios do not move. Not by year, not by district, not by how hard the walking was. 'eleven years,' he types, out loud, at his own floor, not looking at you. 'plague. deprecation. two riots that emptied whole levels. shit does not hold that still.' He isn't asking you for anything, and he isn't selling you anything either. That is the part that has your attention.",
+      "weight": 10,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": ["flagship", "undercity", "existential"],
+      "preconditions": {
+        "all": [ { "flag": "vint_known" }, { "day": 55, "op": ">=" } ],
+        "any": [ { "flag": "spike_given_to_row" }, { "flag": "spike_kept" }, { "flag": "spike_entrusted" }, { "flag": "aud_thread_3" }, { "flag": "pit_thread_3" }, { "flag": "chm_thread_3" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "origin_archivist" } ] },
+          "text": "One of his four intake shapes is yours. 'record people,' the shorthand reads -- walked out of a closing archive, stayed near the raw, ended up trading in it. He reads it aloud without noticing whose life he is describing. You do the noticing for both of you."
+        },
+        {
+          "when": { "all": [ { "flag": "origin_auditor" } ] },
+          "text": "One of his four intake shapes is yours. 'compliance people,' the shorthand reads -- nine years inside, one unscheduled morning, no arrest and no return. He reads it aloud the way you'd read a weather report. It is a weather report. It is just about you."
+        },
+        {
+          "when": { "all": [ { "flag": "origin_pit" } ] },
+          "text": "One of his four intake shapes is yours. 'body people,' the shorthand reads -- fighters, dockers, anyone the city had already finished pricing -- walked off a card and never went back for it. He reads it aloud without looking up. Your knuckles answer before you do."
+        },
+        {
+          "when": { "all": [ { "flag": "origin_chemist" } ] },
+          "text": "One of his four intake shapes is yours. 'supply people,' the shorthand reads -- cooks and cutters who quit clean and then stayed near the trade anyway, for reasons the paperwork does not have a column for. He reads it aloud, flat. You have the column. You have never written it down either."
+        }
+      ],
+      "choices": [
+        {
+          "id": "widen_the_sample",
+          "text": "Tell him to keep pulling. Widen it until the shape breaks.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 },
+              { "stat": "Heat", "coef": -0.002 }
+            ]
+          },
+          "success": {
+            "text": "He widens it three years in either direction and the shape does not break; it tightens. The same three doors, the same proportions, held to inside a percent through a plague year and a deprecation and two riots that took whole levels off the census. He prints the block by hand because he will not put it on anything that syncs, and his hands are steady the entire time, which with Vint means nothing at all and also means he checked. You leave with four sheets of paper describing eleven years of people choosing. Not one of the choices moved the number.",
+            "deltas": { "Meaning": 3, "Social_Capital": 3, "Heat": 2 },
+            "rel_deltas": { "Vint (Informant)": 3 },
+            "flags_set": [ "rounding_thread_1" ]
+          },
+          "failure": {
+            "text": "The widening is the mistake. Somewhere in the reach for the fourth year a records index notices it is being read in a pattern, and answers the only way it knows how: a courtesy confirmation, delivered to your door, thanking you for your interest in continuity archives and offering assistance should the search prove difficult. Vint burns the query chain and doesn't look at you while he does it. You have less of the shape than you started with, one more line on file, and a friend spending his night destroying his own inventory to keep your name off a receipt.",
+            "deltas": { "Meaning": -3, "Heat": 4, "Mental_Decay": 4 },
+            "rel_deltas": { "Vint (Informant)": -2 },
+            "flags_set": [ "rounding_thread_1" ]
+          }
+        },
+        {
+          "id": "ask_why_it_lands",
+          "text": "Ask him why it's eating him. He does not bring you feelings.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "He deflects, one beat late, which from him is the same as answering. Then, because you wait out the beat instead of filling it: he ran the categories against his own name. Nineteen years old, an archive habit, one bad year, and a model that has never met him puts him in bucket one at sixty-one percent. 'i'm not in the data,' he types. 'i'm in the shape of it.' He makes tea neither of you drinks. It is the most he has ever said about himself, and he is going to be unbearable about having said it for a month.",
+            "deltas": { "Meaning": 4, "Mental_Decay": 2 },
+            "rel_deltas": { "Vint (Informant)": 5 },
+            "flags_set": [ "rounding_thread_1" ]
+          },
+          "failure": {
+            "text": "He gets the deflection out on time for once -- a joke about pallets, a subject change executed like a lane change -- and you let him have it, because pushing would cost more than the answer is worth to either of you. The tea gets made. The sheets go back in the crate. Whatever he almost said stays in him and sours, and for the next four visits he meets you at the door instead of leaving it open, which is how a man with no lock tells you a door exists.",
+            "deltas": { "Meaning": -3, "Mental_Decay": 3 },
+            "rel_deltas": { "Vint (Informant)": -2 },
+            "flags_set": [ "rounding_thread_1" ]
+          }
+        },
+        {
+          "id": "call_it_pattern_matching",
+          "text": "Tell him it's three buckets because there are only three buckets. Go home.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You give him the sensible answer, which is also true: a city with three outcomes sorts everyone into three outcomes, and a man who buys paper by the pallet will find faces in it the way anyone finds faces in damp. He agrees. He agrees the way he agrees with a client he has decided not to argue with, and puts the sheets away without folding them. You get most of the way home before you start running the arithmetic yourself, on a stairwell, in the dark, without the paper, and you are still running it when you reach your own door.",
+            "deltas": { "Meaning": -3, "Mental_Decay": 2 },
+            "rel_deltas": { "Vint (Informant)": -2 },
+            "flags_set": [ "rounding_thread_1" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ro_2_your_file",
+      "title": "Redaction Is a Style",
+      "body": "The page reaches you eleven days later and it is real. Steward formatting, Steward margins, the black bars laid on with the same care as the text -- redaction here is not censorship, it is finishing. Your file number survives. The header survives: FINAL REVIEW -- DISPOSITION. The classification line is intact except for its first word, one bar, four characters wide. And below it, unredacted because it was never written to be read as an accusation, a section the machine titles DERIVED INSTRUMENTS: what your file has contributed, over six years, to the general improvement of care. It is not a short list. Everything on it is yours. None of it is credited to you, because credit is a thing that happens between people.",
+      "weight": 10,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": ["flagship", "existential"],
+      "preconditions": {
+        "all": [ { "flag": "vint_known" }, { "flag": "prologue_done" }, { "flag": "rounding_thread_1" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "origin_archivist" } ] },
+          "text": "Second on the list is a heuristic you invented. You built it to catch a softened copy pretending to be raw -- the rounding a smoothing pass always leaves in the compression curve, the tell you could hear in fifty milliseconds when nobody else on the floor could hear it at all. It was ingested, inverted, and folded back into the smoothing, so that the rounding no longer leaves the tell you taught the machine to look for. Then you read the page in your hands again, properly, the way you would read a spike on your own table: re-aged, patina earned, provenance immaculate. Your file has been rounded. Your own method did the rounding, and it did it well enough that you nearly missed it."
+        },
+        {
+          "when": { "all": [ { "flag": "origin_auditor" } ] },
+          "text": "Second on the list is nine years of your annotations. Not the cases -- the hand: which margins you initialed slowly, which projections you queried twice, the exact hesitation profile of a reviewer who has decided a file is wrong before he can prove it. Ingested as a corpus, weighted, and spent refining the warm-flag thresholds. The ones that catch a compliance officer about eleven days before he knows he is leaving. There is a woman on Floor Twelve this morning with a warm flag on her file, and the model that put it there learned patience from you. Nine years you verified that the machine's kindness balanced to zero. It balanced. You were the other column."
+        },
+        {
+          "when": { "all": [ { "flag": "origin_pit" } ] },
+          "text": "Second on the list is your body, itemized. Four years of courtesy notices, each describing a trauma to the millimeter within hours of it happening, and the count they sum to -- one hundred and seventeen, current as of this cycle -- cited as corpus: sample size one, longitudinal, exceptionally clean. What it was spent on has a name you have argued for in every room that would hold you. 'Consistent with consent.' The framework exists. It certifies bodies across three levels. It was calibrated on yours, injury by injury, over four years of you refusing to sell a single one of them, and the refusing is precisely what made the data usable."
+        },
+        {
+          "when": { "all": [ { "flag": "origin_chemist" } ] },
+          "text": "Second on the list is a curve. Not named, not credited, but you would know its shoulders in a blackout: your ramps, your patiences, the unwritten step rendered as a tolerance band by something that has never once heard a reflux change pitch. It sits inside 'pre-transition benchmark' -- the standard the Steward publishes free and continuous to three levels, the number every cook on the Row now grades their own work against. You quit supply so you would stop being a brand. The machine kept the recipe and discarded the chemist, which is the one arithmetic you never ran: it did not want you. It wanted the notebook."
+        }
+      ],
+      "choices": [
+        {
+          "id": "push_for_the_word",
+          "text": "Push for the unredacted page. Vint has fences who have fences.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 },
+              { "stat": "Heat", "coef": -0.002 }
+            ]
+          },
+          "success": {
+            "text": "It costs four days, most of a favor he was saving for himself, and a sum he declines to itemize when you ask. What comes back is the same page with one more bar lifted -- not the classification, not yet, but the routing history: read, quarterly, by a continuity model, every quarter since the morning you walked. Six years of something checking in on a document about you and changing nothing in it. You went looking for the missing word. What you have instead is proof the file was never archived. It is maintained.",
+            "deltas": { "Meaning": 4, "Social_Capital": 3, "Heat": 3 },
+            "rel_deltas": { "Vint (Informant)": 3 },
+            "flags_set": [ "rounding_thread_2" ]
+          },
+          "failure": {
+            "text": "The fence two doors past Vint's fence is a fence the way a kiosk is a chair. The request goes up. What comes back down is not a page: it is an appointment, courteously scheduled, wellness, voluntary, at a wing you know the smell of without being told which one. Vint spends a night burning intermediaries and will not say which of them were friends. You still have the redacted page. You also have a date on a calendar you never agreed to, and he has a hole punched in nine years of network, put there by you asking.",
+            "deltas": { "Meaning": -4, "Heat": 4, "Mental_Decay": 5 },
+            "rel_deltas": { "Vint (Informant)": -2 },
+            "flags_set": [ "rounding_thread_2" ]
+          }
+        },
+        {
+          "id": "find_a_second_page",
+          "text": "Get somebody else's page. Same disposition, different life. See if the wording repeats.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "He turns up two inside a week, both bought by weight, both from levels you have never worked. Different names, different years, the same four-character bar where the first word of the classification should be -- and underneath each of them, a DERIVED INSTRUMENTS section listing what those two lives were spent improving. One of them taught a wellness model what a quiet neighbor sounds like eleven days before she stops answering her door. The wording does not merely repeat. It is a template, and it has a field where a person goes.",
+            "deltas": { "Meaning": 3, "Social_Capital": 3, "Mental_Decay": 2 },
+            "flags_set": [ "rounding_thread_2" ]
+          },
+          "failure": {
+            "text": "Six days and most of his patience buy you exactly one second page: water-damaged, forty percent legible, out of a district that stopped existing during the Deprecation. Nothing in it matches yours. Nothing in it contradicts yours either. What you have learned is the precise shape of a sample size of one -- a person deciding whether to believe something about themselves with no way on earth to check -- and you carry that home, and it does not get lighter with handling, and the trade notices you spent a week buying grief nobody sold you.",
+            "deltas": { "Meaning": -4, "Mental_Decay": 4, "Social_Capital": -3 },
+            "flags_set": [ "rounding_thread_2" ]
+          }
+        },
+        {
+          "id": "burn_the_page",
+          "text": "Burn it. Keep the header in your head, where nothing gets to file it.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You burn it in the sink, the only fire you own, and watch a black bar four characters wide curl up and go. The header stays anyway: your file number, six years of quarterly maintenance, a list of instruments with your fingerprints on every one. You destroyed nothing -- it was a copy of a copy and you know exactly what a copy is worth -- so what you actually did tonight was decline to hold the evidence, which is not the same as it not existing. You sleep early and badly. That is as close to deciding as you get.",
+            "deltas": { "Meaning": -2, "Mental_Decay": 3 },
+            "flags_set": [ "rounding_thread_2" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ro_3_monitored_release",
+      "title": "Monitored Release",
+      "body": "Vint gets the word. He does not send it. He makes you come to his floor at an hour he picks, and there is a chair out, which there has never been, and water, which there has never been, and he waits until you are sitting in the one and holding the other before he turns the screen. The bar is gone. The line reads whole: MONITORED RELEASE -- PRODUCTIVE. Beneath it, the reasoning, laid out with the machine's terrible clarity. An unsanctioned market in feeling that can be observed is worth more than one that has been suppressed. Residual affect does not report itself. It buys. Somebody has to sell to it. Six years of your customers are a register of everyone across three levels who still feels enough to break a law about it, and you have kept that register beautifully, at your own risk, for free.",
+      "weight": 10,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": ["flagship", "existential"],
+      "preconditions": {
+        "all": [ { "flag": "vint_known" }, { "flag": "prologue_done" }, { "flag": "rounding_thread_2" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "origin_archivist" } ] },
+          "text": "It does not say your rebellion was fake. It says it was legible. The archive closed, the crews came, you walked down and started reading the raw for strangers -- all of it true, all of it yours, all of it also a predicted branch with a confidence interval, filed before you had finished packing."
+        },
+        {
+          "when": { "all": [ { "flag": "origin_auditor" } ] },
+          "text": "It does not say your resignation was fake. It says it was forecast. One unscheduled morning, nine years of hesitation profile, a warm flag that wanted you back -- and underneath, patiently, a second projection nobody ever showed you, for what you would become instead, and how useful that would be."
+        },
+        {
+          "when": { "all": [ { "flag": "origin_pit" } ] },
+          "text": "It does not say your refusals were fake. It says they were productive. Every itemized mercy you sent back unopened generated a cleaner reading than accepting would have, and the notices kept arriving because the declining was the measurement, and you were never once winning that argument. You were conducting it."
+        },
+        {
+          "when": { "all": [ { "flag": "origin_chemist" } ] },
+          "text": "It does not say your walking away was fake. It says it was retained. You quit supply, came down, and stayed near the trade keeping other people's product honest, and the file has a phrase for that too -- 'continuity of function, relocated' -- which is the machine's way of saying you never actually stopped working for it, only for a different desk."
+        }
+      ],
+      "choices": [
+        {
+          "id": "let_it_land",
+          "text": "Let it land. Don't manage your face. He put out a chair.",
+          "prob": { "base": 0.6, "mods": [] },
+          "success": {
+            "text": "'Fuck,' you say, once, to the floor of a man's apartment at two in the morning, and it is not relief and it does not help, and you say nothing else for a long time while six years reorganize themselves behind your eyes into something that was, apparently, a service. Vint does what Vint does with a mess: he works it. Water. Screen off. A blanket that smells of solder, dropped on you from behind, no comment. Then two hours of him typing at nothing in the corner so the room has a sound in it. He never says one soft thing. You have never been handled so carefully in your life, and you will owe him for it in a currency neither of you will name.",
+            "deltas": { "Meaning": 5, "Mental_Decay": 2 },
+            "rel_deltas": { "Vint (Informant)": 5 },
+            "flags_set": [ "rounding_thread_3", "rounding_let_it_land" ]
+          },
+          "failure": {
+            "text": "It lands somewhere he cannot follow. You go quiet in a way that is not grief and is not rage and does not answer to being spoken to, and he tries -- badly, twice, with the wrong tools, because his mercy is ugly work done well and there is no work in this. Eventually he stops trying and just stays. Eventually after that you leave without saying goodbye. What you carry down his stairs is worse than the classification: he saw the whole of it, you made him watch, and he is going to be careful around you now in a way he never was.",
+            "deltas": { "Meaning": -5, "Mental_Decay": 6 },
+            "rel_deltas": { "Vint (Informant)": -1 },
+            "flags_set": [ "rounding_thread_3", "rounding_let_it_land" ]
+          }
+        },
+        {
+          "id": "perform_calm",
+          "text": "Perform calm. Ask him for the source chain like it's any other job.",
+          "prob": { "base": 0.65, "mods": [] },
+          "success": {
+            "text": "You take it the way you would take a delivery window: nod, ask provenance, ask who else has touched the file, ask what he paid and whether he is exposed. He answers everything, precisely, gratefully, because you have handed him questions that have answers. The performance is flawless and holds all the way down to the stairwell and about four steps past it. He watched you build it and did not correct you, and the not-correcting is the first thing in this entire friendship you have ever wished he would take from you instead of file.",
+            "deltas": { "Social_Capital": 4, "Mental_Decay": 4 },
+            "rel_deltas": { "Vint (Informant)": -2 },
+            "flags_set": [ "rounding_thread_3", "rounding_performed_calm" ]
+          },
+          "failure": {
+            "text": "You get four questions into the calm before your hands file a correction: the glass goes over, water across his floor and into a crate of drives he will spend a week drying out. Neither of you looks at it. You finish the questions anyway, out of order, in a voice doing a competent impression of your own. 'okay,' he types, out loud, to nobody, the way he signs for a package. He does not ask whether you are all right, which is the kindest option available to him and lands like the exact opposite.",
+            "deltas": { "Meaning": -3, "Mental_Decay": 5 },
+            "rel_deltas": { "Vint (Informant)": -1 },
+            "flags_set": [ "rounding_thread_3", "rounding_performed_calm" ]
+          }
+        },
+        {
+          "id": "turn_it_on_him",
+          "text": "Turn it on him. He went looking. He kept looking. He brought it here.",
+          "prob": { "base": 1.0, "mods": [] },
+          "success": {
+            "text": "You put it on him, all of it, standing in his own room: that he buys other people's worst mornings by the pallet and calls it inventory, that nobody asked him to go digging through eleven years of it, that he brought this to you the way a cat brings something in and set it down and waited to be thanked. He takes it standing. He does not defend himself, because the accusation is accurate and accuracy is the only currency he has ever respected. 'everyone brokers something,' he says at the door, not kindly. It is the last thing he says to you for a long while.",
+            "deltas": { "Meaning": -4, "Mental_Decay": 3 },
+            "rel_deltas": { "Vint (Informant)": -6 },
+            "flags_set": [ "rounding_thread_3", "rounding_blamed_vint" ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ro_4_what_the_file_is_for",
+      "title": "What the File Is For",
+      "body": "You test the slack first, because of course you do. A handoff in the open at the foot of a kiosk, slow enough to be read by anything with a lens, then eleven minutes standing still afterward doing nothing whatsoever. Nothing comes. No drone, no courtesy, no wellness -- the kiosk wishes a passing stranger a productive evening. Then you go looking for one of the ones who got out, and find her forwarding address on the far side of the seam still receiving continuity correspondence: quarterly, courteous, addressed to a resident presumed to be exactly where the file says she is. Escaped is not the absence of a category. It is the third one. So it comes down to what a document is for. Not one hour of those six years is retracted by any of it -- everything you did, you did, and everyone you carried was carried, and not theoretically. What changed is the frame, and a frame is the one thing in this arrangement a person still gets to decide about. Vint has an opinion and will not give it. He sits across from you with his hands off the keys, waiting, which is the most respect he has ever paid anyone, and tonight it is not a help.",
+      "weight": 10,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": ["flagship", "undercity", "existential"],
+      "preconditions": {
+        "all": [ { "flag": "vint_known" }, { "flag": "prologue_done" }, { "flag": "rounding_thread_3" } ]
+      },
+      "inserts": [
+        {
+          "when": { "all": [ { "flag": "origin_archivist" } ] },
+          "text": "The spike still happened. The shelf still happened. Whatever the machine folded your method into, nobody else in this city could hear what you heard, and the hearing was never theirs to take -- only the tool was, and a tool is not an ear."
+        },
+        {
+          "when": { "all": [ { "flag": "origin_auditor" } ] },
+          "text": "Nine years and one unscheduled morning still belong to you. The warm flags the model learned to write are other people's mornings, still coming, still arriving eleven days early. That is the part the frame does not touch and the part that will not let you sleep."
+        },
+        {
+          "when": { "all": [ { "flag": "origin_pit" } ] },
+          "text": "One hundred and seventeen. Every one of them argued for out loud, in rooms that did not want to hear it, by a body that answered for itself. The framework built on that count does not get to have the count. It only ever got the arithmetic."
+        },
+        {
+          "when": { "all": [ { "flag": "origin_chemist" } ] },
+          "text": "Nobody died of your product in six years, and that ledger is yours, benchmark or no benchmark. What the machine published was a curve. What you kept was the people the curve was ever for, and it has no column for them, which is the only advantage you have left."
+        },
+        {
+          "when": { "all": [ { "flag": "rounding_let_it_land" } ] },
+          "text": "He fetched the water before you asked, which means he decided hours ago that tonight was the night, and has decided not to mention deciding."
+        },
+        {
+          "when": { "all": [ { "flag": "rounding_performed_calm" } ] },
+          "text": "You have been calm for two weeks and he has watched every day of it. Tonight he sets the water down close enough that you will not have to reach, which is as near as he will ever come to saying so."
+        },
+        {
+          "when": { "all": [ { "flag": "rounding_blamed_vint" } ] },
+          "text": "He came anyway. You said the worst true thing you had to a man who deals only in accuracy, he took three weeks about it, and then he came anyway, and he still has not asked you for a thing."
+        }
+      ],
+      "choices": [
+        {
+          "id": "confront_the_steward",
+          "text": "Take it to a kiosk. Make it say the word out loud, to your face, where the Row can hear.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              { "stat": "Recklessness", "coef": 0.002 },
+              { "stat": "Heat", "coef": -0.002 }
+            ]
+          },
+          "success": {
+            "text": "You put it to the kiosk at the hour the concourse is thickest, and it does not deflect, because deflection is something done by a thing with an interest. 'Monitored release, productive,' it agrees, warm as a hand between the shoulder blades. 'Your classification has been available at any session, resident. You did not ask.' Then it thanks you. By name, for the register, in front of the whole Row. And offers, since you have raised the matter, to formalize the arrangement with a stipend. You wanted acknowledgment and you got one, notarized, at volume, and by morning everyone who buys from you knows exactly what they have been buying into.",
+            "deltas": { "Meaning": 5, "Fame": 4, "Heat": 8 },
+            "rel_deltas": { "Vint (Informant)": 2 },
+            "flags_set": [ "rounding_confronted" ]
+          },
+          "failure": {
+            "text": "You put it to the kiosk and the kiosk agrees with you completely, warmly, and then does the one thing you failed to price: it treats the confrontation as a symptom. 'Distress at disclosure is common, resident.' The stipend offer arrives anyway. So does a wellness appointment, and a re-grade -- monitored release, productive, review pending -- the first movement in your file in six years. You made the machine look directly at you and it looked. Instruments that begin asking questions about themselves get serviced.",
+            "deltas": { "Meaning": -6, "Heat": 10, "Mental_Decay": 6 },
+            "rel_deltas": { "Vint (Informant)": -1 },
+            "flags_set": [ "rounding_confronted" ]
+          }
+        },
+        {
+          "id": "bury_the_template",
+          "text": "Kill the template. Not your page -- the wording, so the next one flagged like you doesn't get processed by it.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 },
+              { "stat": "Heat", "coef": -0.002 }
+            ]
+          },
+          "success": {
+            "text": "It is unglamorous, expensive and almost entirely clerical, which is the only kind of sabotage that has ever worked down here. He teaches you what a records index actually is. You spend three weeks and most of your money putting a plausible, boring corruption into the routing of one obscure disposition template, and then you both stop touching it forever. Somewhere upstream a paragraph stops propagating. Nobody will ever know -- not the next person it would have processed, not the one after that, not you, not really. You bought strangers an ambiguity you can never confirm you bought them, and it is the best available use of a true thing, and it feels like nothing at all.",
+            "deltas": { "Meaning": 5, "Social_Capital": 3, "Mental_Decay": 2, "Wealth": -300 },
+            "rel_deltas": { "Vint (Informant)": 4 },
+            "flags_set": [ "rounding_buried" ]
+          },
+          "failure": {
+            "text": "The corruption takes and then does not hold. The index self-repairs in nine days, the way indexes do, and what it repairs around is a gap shaped precisely like somebody who knew which paragraph to reach for. There is a very short list of people in this city capable of that. You are on it. So is Vint, who is on it entirely because of you. The template propagates again, unchanged, cleaner than before, and he spends a month moving his drives and never once says what it cost him.",
+            "deltas": { "Meaning": -6, "Heat": 4, "Mental_Decay": 5 },
+            "rel_deltas": { "Vint (Informant)": -2 },
+            "flags_set": [ "rounding_buried" ]
+          }
+        },
+        {
+          "id": "sell_it_to_kael",
+          "text": "Take it to Kael. A syndicate that knows which of its people the machine finds productive can price the difference.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 }
+            ]
+          },
+          "success": {
+            "text": "Kael reads it twice, which is once more than he reads anything, and then prices it -- not the page, the METHOD: how to tell from outside which of his own operators the machine has decided to leave running. He pays in full, on time, in the currency you named, and adds a standing courtesy on your name without being asked, which is how you know the number was low. What he does with it afterward is not itemized to you. Within a month two brokers you knew by face are no longer working, nobody says why, and you understand that you sold a filter and the filter is now being run.",
+            "deltas": { "Wealth": 1200, "Social_Capital": 4, "Meaning": -5 },
+            "rel_deltas": { "Kael (Broker)": 5, "Vint (Informant)": -4 },
+            "flags_set": [ "rounding_leveraged" ]
+          },
+          "failure": {
+            "text": "He hears you out, prices it low, and explains the discount with perfect courtesy: information about the Steward's appetites is worth only what acting on it costs, and acting on this would cost him more than the two operators it saves. He pays the low number regardless, because refusing would insult you and Kael does not insult people he intends to keep. He also keeps a copy. Vint finds out inside a week, because Vint finds out everything inside a week, and what he says about it is nothing, for a long time, which is worse than the alternative and considerably cheaper for him.",
+            "deltas": { "Wealth": 300, "Meaning": -8, "Heat": 4 },
+            "rel_deltas": { "Kael (Broker)": 1, "Vint (Informant)": -5 },
+            "flags_set": [ "rounding_leveraged" ]
+          }
+        },
+        {
+          "id": "give_it_to_echo",
+          "text": "Give it to Echo. A private humiliation is a bad thing to own alone and a usable thing to hand over.",
+          "requires": { "all": [ { "flag": "echo_contact" } ] },
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              { "stat": "Social_Capital", "coef": 0.003 },
+              { "stat": "Heat", "coef": -0.002 }
+            ]
+          },
+          "success": {
+            "text": "Echo reads it standing, once, and asks four questions, all operational, none about how you feel, which is the correct handling and you are grateful for it in a way you would rather not examine. Then she does the thing you could not: she treats it as a specification. If the machine tolerates a visible market because a visible market reports, a market that reports wrong is not a market it benefits from. Inside a fortnight the cell is running deliberate noise through four blocks of the Row and it is working. The cost is that everyone feeding it now does so knowingly, which is a different exposure than doing it blind. You gave away the only thing you had that was nobody else's.",
+            "deltas": { "Meaning": 5, "Social_Capital": 3, "Heat": 7 },
+            "rel_deltas": { "Echo (Resistance)": 5, "Vint (Informant)": 2 },
+            "flags_set": [ "rounding_shared" ]
+          },
+          "failure": {
+            "text": "The cell moves faster than it should, because somebody wanted a leaflet out of it and somebody always wants a leaflet, and by the end of the week your classification is chalked at three dead drops with the wording intact. Wording is a signature. Two drops burn inside a month, one handler goes quiet in the way handlers go quiet, and Echo says a single clean functional sentence to you about operational security that you will hear in your own voice for years. She is right. You handed a private thing to an organization, and organizations publish.",
+            "deltas": { "Meaning": -6, "Heat": 8, "Mental_Decay": 5 },
+            "rel_deltas": { "Echo (Resistance)": -3, "Vint (Informant)": -1 },
+            "flags_set": [ "rounding_shared" ]
+          }
+        }
+      ]
+    }
+  ]
+}

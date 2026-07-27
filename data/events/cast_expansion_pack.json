@@ -2547,6 +2547,1190 @@
           }
         }
       ]
+    },
+    {
+      "id": "cx_brann_the_last_season",
+      "title": "Ink's for Finished Things",
+      "body": "The date on his own rag arrives the way he does everything — without announcement. He's at the bench same as always, except the bench is doing more of the work than his arm is now, and everyone in the shop has started pretending not to notice at the same volume. Ink's for finished things. He never said the date was a deadline. He also never said it wasn't.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "brann_inked"
+          },
+          {
+            "day": 50,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_the_queue_for_real",
+          "text": "Take the intake queue for real, starting today.",
+          "prob": {
+            "base": 0.6,
+            "mods": []
+          },
+          "requires": {
+            "all": [
+              {
+                "relationship": "Brann (Artisan)",
+                "op": ">=",
+                "value": 60
+              }
+            ]
+          },
+          "success": {
+            "text": "You take it, and he lets you — no ceremony, just a nod and the drawer sliding open for your rag to move from pencil to ink beside his. The workshop keeps his name on the door and his hands off the bench, which is exactly the kind of ending he'd never ask for and clearly wanted.",
+            "deltas": {
+              "Meaning": 5,
+              "Social_Capital": 3,
+              "Wealth": -200
+            },
+            "rel_deltas": {
+              "Brann (Artisan)": 5
+            },
+            "flags_set": [
+              "brann_workshop_endures"
+            ]
+          },
+          "failure": {
+            "text": "You take it, and the transition is rougher than either of you planned — a bad week, a missed order, his voice sharper than it's been in months because watching is worse than doing. It settles. It costs both of you the easy version of this.",
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 5
+            },
+            "rel_deltas": {
+              "Brann (Artisan)": 1
+            },
+            "flags_set": [
+              "brann_workshop_endures"
+            ]
+          }
+        },
+        {
+          "id": "find_him_real_help",
+          "text": "Find him real help for the arm, whatever it costs.",
+          "prob": {
+            "base": 0.55,
+            "mods": []
+          },
+          "requires": {
+            "all": [
+              {
+                "relationship": "Brann (Artisan)",
+                "op": ">=",
+                "value": 35
+              }
+            ]
+          },
+          "success": {
+            "text": "You track down a mechanist who still does real work, not Steward-subsidized parts. It's not a cure. It buys him a season, maybe two, of the bench instead of the chair. He never thanks you in words. He starts keeping your flux where he can reach it one-handed, which is the same thing.",
+            "deltas": {
+              "Meaning": 4,
+              "Wealth": -600
+            },
+            "rel_deltas": {
+              "Brann (Artisan)": 4
+            },
+            "flags_set": [
+              "brann_arm_bought_time"
+            ]
+          },
+          "failure": {
+            "text": "The mechanist takes the money and the arm doesn't come back with it — too far gone, too long ignored, the kind of thing money buys time on but not outcomes. He tells you it was a good try, which from Brann is close to gratitude.",
+            "deltas": {
+              "Meaning": 1,
+              "Wealth": -600,
+              "Mental_Decay": 2
+            },
+            "rel_deltas": {
+              "Brann (Artisan)": 2
+            },
+            "flags_set": [
+              "brann_arm_bought_time"
+            ]
+          }
+        },
+        {
+          "id": "let_the_date_come",
+          "text": "Let the date come. You've got your own work.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The arm goes for good on a Tuesday with no one else in the shop to catch what falls. By the time you hear about it, the bench is cold and the drawer of finished rags has one more in it, folded by someone else's hands. You never got to not-say-goodbye.",
+            "deltas": {
+              "Meaning": -3,
+              "Mental_Decay": 3
+            },
+            "rel_deltas": {
+              "Brann (Artisan)": -5
+            },
+            "flags_set": [
+              "brann_hand_lost_alone"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_ferry_stand_the_door",
+      "title": "Three Nights Untended",
+      "body": "Word reaches you the way it reaches everyone down here — sideways, through someone who owes someone. The seam's been quiet for three nights running. Not closed. Untended. The one good arm isn't lifting the mask lately, and the toll book hasn't moved.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "flag": "ferry_mask_seen"
+          },
+          {
+            "day": 50,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "stand_the_door_yourself",
+          "text": "Stand the door yourself, exactly by her price book.",
+          "prob": {
+            "base": 0.55,
+            "mods": []
+          },
+          "requires": {
+            "all": [
+              {
+                "flag": "ferry_named_you"
+              },
+              {
+                "relationship": "The Ferryman (Seam)",
+                "op": ">=",
+                "value": 60
+              }
+            ]
+          },
+          "success": {
+            "text": "You run the count the way she taught you, to the gram, and get it right — close enough that whoever crosses never knows the hand at the seam wasn't hers. Somewhere behind you, in the dark past the lock, you'd swear you hear something like approval, rasped and brief.",
+            "deltas": {
+              "Meaning": 6,
+              "Heat": 4
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 5
+            },
+            "flags_set": [
+              "ferry_witnessed_stand"
+            ]
+          },
+          "failure": {
+            "text": "You get the weight wrong — not by much, but the seam doesn't grade on effort. Someone crosses carrying something they shouldn't have been allowed to keep, and you understand, too late, exactly what her arithmetic was protecting people from.",
+            "deltas": {
+              "Meaning": -4,
+              "Mental_Decay": 4,
+              "Heat": 6
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 1
+            },
+            "flags_set": [
+              "ferry_stand_faltered"
+            ]
+          }
+        },
+        {
+          "id": "go_to_her_no_performance",
+          "text": "Go to her. Don't perform anything. Just be there.",
+          "prob": {
+            "base": 0.6,
+            "mods": []
+          },
+          "requires": {
+            "all": [
+              {
+                "relationship": "The Ferryman (Seam)",
+                "op": ">=",
+                "value": 35
+              }
+            ]
+          },
+          "success": {
+            "text": "She's smaller than the mask makes her look, and for once she doesn't reach for it when you sit down. She talks — actually talks, no koan, no price attached — about a door she almost walked through once, a long time before she started counting other people's weight instead of her own.",
+            "deltas": {
+              "Meaning": 5,
+              "Mental_Decay": -2
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": 4
+            },
+            "flags_set": [
+              "ferry_final_words"
+            ]
+          },
+          "failure": {
+            "text": "She hears you at the threshold and the mask goes back on before you're through the door. 'Not this part,' she says, and it isn't cruelty, it's the last boundary she gets to keep. You leave without having been let in.",
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 2
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": -1
+            },
+            "flags_set": [
+              "ferry_sent_away"
+            ]
+          }
+        },
+        {
+          "id": "stay_away_not_your_business",
+          "text": "Stay away. The seam isn't your business to tend.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The seam finds a new holder within the month, someone whose name you never learn, and the toll book's arithmetic continues under a stranger's hand as if the woman who taught it to grieve in kilograms had never held it at all. Doors don't mourn. Somebody has to, and it isn't going to be the door.",
+            "deltas": {
+              "Meaning": -3,
+              "Mental_Decay": 2
+            },
+            "rel_deltas": {
+              "The Ferryman (Seam)": -5
+            },
+            "flags_set": [
+              "ferry_died_unwitnessed"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_dex_the_replacement",
+      "title": "No Name on the Line",
+      "body": "The liaison's back, and this time there's no offer attached to the visit — just a routing memo, effective the first of the month, and a new voice on the dispatch line that says please and thank you and never once says a name. Dex reads it twice, folds it into the same pocket as the list, and doesn't say a word for the length of a checkpoint cycle.",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "steward",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "dex_label_known"
+          },
+          {
+            "day": 50,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "vouch_to_whoevers_listening",
+          "text": "Vouch for him yourself, to whoever's actually listening.",
+          "prob": {
+            "base": 0.55,
+            "mods": []
+          },
+          "requires": {
+            "all": [
+              {
+                "relationship": "Dex (Dispatcher)",
+                "op": ">=",
+                "value": 60
+              }
+            ]
+          },
+          "success": {
+            "text": "It shouldn't work — one fixer's word against a routing memo — but you cite three runs the algorithm would have flagged and killed, three people the paper list quietly saved, and somewhere a metric gets recalculated. Dex keeps the booth. He doesn't thank you. He updates your label instead, which is the same thing in his language.",
+            "deltas": {
+              "Meaning": 5,
+              "Social_Capital": 3
+            },
+            "rel_deltas": {
+              "Dex (Dispatcher)": 5
+            },
+            "flags_set": [
+              "dex_kept_the_post"
+            ]
+          },
+          "failure": {
+            "text": "You make the case and it lands nowhere — efficiency doesn't argue, it just waits you out. The booth stays his for one more cycle on a technicality, and you both know the technicality has an expiration date now.",
+            "deltas": {
+              "Meaning": -3,
+              "Mental_Decay": 5,
+              "Heat": 3
+            },
+            "rel_deltas": {
+              "Dex (Dispatcher)": 2
+            },
+            "flags_set": [
+              "dex_post_lost_witnessed"
+            ]
+          }
+        },
+        {
+          "id": "build_his_case_quietly",
+          "text": "Help him build the case in his own paperwork, quietly.",
+          "prob": {
+            "base": 0.5,
+            "mods": []
+          },
+          "requires": {
+            "all": [
+              {
+                "relationship": "Dex (Dispatcher)",
+                "op": ">=",
+                "value": 35
+              }
+            ]
+          },
+          "success": {
+            "text": "You spend two nights turning his handwritten annotations into something a review board can read without flinching — not the souls, just the outcomes, the recalls avoided, the runs that would've killed someone efficient. It's dishonest by omission and it works exactly as well as honesty would have.",
+            "deltas": {
+              "Meaning": 4,
+              "Wealth": -100
+            },
+            "rel_deltas": {
+              "Dex (Dispatcher)": 4
+            },
+            "flags_set": [
+              "dex_case_built"
+            ]
+          },
+          "failure": {
+            "text": "The file you help him build gets read the wrong way around — his compassion logged as inefficiency, annotated exactly where it should've been invisible. You handed them the evidence yourself, formatted for easy reading.",
+            "deltas": {
+              "Meaning": -4,
+              "Heat": 4
+            },
+            "rel_deltas": {
+              "Dex (Dispatcher)": -2
+            },
+            "flags_set": [
+              "dex_case_used_against"
+            ]
+          }
+        },
+        {
+          "id": "its_his_booth_stay_out",
+          "text": "It's his booth, his business. Stay out of it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The routing memo takes effect on schedule. Dex gets reassigned somewhere with a screen instead of a counter, and the new voice on the line is, by every measurable metric, an improvement. You never find out what happened to the list.",
+            "deltas": {
+              "Meaning": -3,
+              "Mental_Decay": 2
+            },
+            "rel_deltas": {
+              "Dex (Dispatcher)": -5
+            },
+            "flags_set": [
+              "dex_replaced"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_auntie_passing_the_board",
+      "title": "Question's Who Reads It After",
+      "body": "She's slower on the ladle than she used to be, and she catches you noticing, and she doesn't deny it — just chalks a new mark at the bottom of the board where the newest debts go, small, in a hand that shakes a little now. 'Board's outlasted better women than me,' she says. 'Question's who reads it after.'",
+      "weight": 6,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "ambient",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "auntie_board_kept"
+          },
+          {
+            "day": 50,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "find_an_apprentice",
+          "text": "Help her find someone worth apprenticing the board to.",
+          "prob": {
+            "base": 0.55,
+            "mods": []
+          },
+          "requires": {
+            "all": [
+              {
+                "relationship": "Auntie Six (Stallkeeper)",
+                "op": ">=",
+                "value": 60
+              }
+            ]
+          },
+          "success": {
+            "text": "You bring her a kid from three streets over who already reads people the way Auntie reads chalk, and you watch the old woman test her for a month before she says a single approving word. The board gets a second hand on it before it needs one, which turns out to be exactly early enough.",
+            "deltas": {
+              "Meaning": 6,
+              "Wealth": -150
+            },
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": 5
+            },
+            "flags_set": [
+              "auntie_board_passed"
+            ]
+          },
+          "failure": {
+            "text": "The apprentice you find has the instinct but not the years, and the board's grammar doesn't translate on a deadline. Auntie keeps working past when her hands wanted to stop, patient with the kid in a way she's never been patient with anyone else.",
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": 2
+            },
+            "flags_set": [
+              "auntie_board_alone_still"
+            ]
+          }
+        },
+        {
+          "id": "buy_her_a_real_retirement",
+          "text": "Buy her a real retirement, no strings, no conditions.",
+          "prob": {
+            "base": 0.5,
+            "mods": []
+          },
+          "requires": {
+            "all": [
+              {
+                "relationship": "Auntie Six (Stallkeeper)",
+                "op": ">=",
+                "value": 35
+              }
+            ]
+          },
+          "success": {
+            "text": "She argues with you about the number for a solid ten minutes out of pure principle, then takes it, because principle doesn't reheat broth. She closes the stall on a Tuesday of her own choosing, which — for a woman who's spent her whole life on other people's schedules — is the whole point.",
+            "deltas": {
+              "Meaning": 5,
+              "Wealth": -800
+            },
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": 4
+            },
+            "flags_set": [
+              "auntie_retired_whole"
+            ]
+          },
+          "failure": {
+            "text": "The number's real but it isn't enough to outrun the Row's math, and she's back behind the counter within the season, a little more tired, chalking marks with the same stubborn hand. She thanks you for trying in a tone that makes it worse.",
+            "deltas": {
+              "Meaning": -1,
+              "Wealth": -800,
+              "Mental_Decay": 2
+            },
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": 1
+            },
+            "flags_set": [
+              "auntie_retirement_short"
+            ]
+          }
+        },
+        {
+          "id": "keep_coming_for_noodles",
+          "text": "Keep coming for the noodles. That's what you're good for.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep showing up, same order, same counter, and she keeps serving it, and neither of you says anything about the shaking hand or the slower ladle or the fact that someday soon the board just won't get read the way she reads it — as a history instead of a number.",
+            "deltas": {
+              "Meaning": -2
+            },
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": -5
+            },
+            "flags_set": [
+              "auntie_board_lost_meaning"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_denny_the_new_shop",
+      "title": "Reading Your Mouth Instead",
+      "body": "The curtain's still there, the beads still catching what light makes it under the overpass, but the patter's different now — shorter, watching your mouth instead of listening past it, reading you instead of the room. He's figuring out how to sell a thing he built his whole trade on hearing, without the hearing left to check his own work.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "undercity",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "denny_silence_told"
+          },
+          {
+            "day": 50,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "help_rebuild_the_pitch",
+          "text": "Help him rebuild the pitch around what he's got left.",
+          "prob": {
+            "base": 0.55,
+            "mods": []
+          },
+          "requires": {
+            "all": [
+              {
+                "relationship": "Denny (Root Vendor)",
+                "op": ">=",
+                "value": 60
+              }
+            ]
+          },
+          "success": {
+            "text": "You spend a slow week teaching him to read a face instead of a tone, and it turns out he's better at it than he ever was at the old way — the root becomes a smaller, honester business, sold to people he actually watches instead of half-listens to. He grins the real one, not the sales one, for the first time in a while.",
+            "deltas": {
+              "Meaning": 6,
+              "Wealth": -100
+            },
+            "rel_deltas": {
+              "Denny (Root Vendor)": 5
+            },
+            "flags_set": [
+              "denny_new_trade"
+            ]
+          },
+          "failure": {
+            "text": "The new pitch doesn't land — customers miss the old patter more than they wanted the honesty, and the stall's take drops enough to worry about. He's proud of trying it anyway, in the specific way of a man who'd rather fail at something true than keep succeeding at the old lie.",
+            "deltas": {
+              "Meaning": -2,
+              "Wealth": -100,
+              "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Denny (Root Vendor)": 2
+            },
+            "flags_set": [
+              "denny_new_trade_failed_proud"
+            ]
+          }
+        },
+        {
+          "id": "just_keep_visiting",
+          "text": "Just keep visiting. Let him talk even if he can't hear you answer.",
+          "prob": {
+            "base": 0.6,
+            "mods": []
+          },
+          "requires": {
+            "all": [
+              {
+                "relationship": "Denny (Root Vendor)",
+                "op": ">=",
+                "value": 35
+              }
+            ]
+          },
+          "success": {
+            "text": "You show up on no schedule and no purchase and just let him talk at you, and it turns out the hum was never really the product — the company was, and he's had a line of customers this whole time and somehow still lonely inside it. You're the one who noticed the difference.",
+            "deltas": {
+              "Meaning": 4,
+              "Mental_Decay": -2
+            },
+            "rel_deltas": {
+              "Denny (Root Vendor)": 4
+            },
+            "flags_set": [
+              "denny_company_kept"
+            ]
+          },
+          "failure": {
+            "text": "You visit, but the visits get shorter, harder to sustain when half the conversation has to be read off his face and the other half shouted at a man who's stopped trusting his own hearing enough to nod along. Some distances don't close just because you show up.",
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 2
+            },
+            "rel_deltas": {
+              "Denny (Root Vendor)": -2
+            },
+            "flags_set": [
+              "denny_drifted"
+            ]
+          }
+        },
+        {
+          "id": "move_on_to_other_vendors",
+          "text": "Move on to other vendors. He'll figure it out.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You stop coming around, and the curtain stops moving on any schedule you'd notice, and by the time someone mentions the stall's been dark a while you can't remember exactly when you last checked. The beads are still there. Nobody's behind them.",
+            "deltas": {
+              "Meaning": -3,
+              "Mental_Decay": 2
+            },
+            "rel_deltas": {
+              "Denny (Root Vendor)": -5
+            },
+            "flags_set": [
+              "denny_stall_closed"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_web_kael_and_the_board",
+      "title": "A Number That Doesn't Match His Math",
+      "body": "Kael mentions the consolidator's failed play at the noodle stall like he's reading a stock report, not gossip. ‘Word is you backed the old woman.’ He doesn't ask why. He's already pricing what it cost you and what it bought her, and the two numbers don't match his usual math.",
+      "weight": 4,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": [
+        "relationship",
+        "npc",
+        "web"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "auntie_board_kept"
+          },
+          {
+            "flag": "kael_impressed"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "call_it_business",
+          "text": "Tell him it was business, nothing more.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "He nods, accepts the frame, files it under ‘fixer discretion’ — the version of you he can price without adjusting the model. Simpler for both of you, and something in the simplicity costs you a little with Auntie, who'd have wanted you to say otherwise.",
+            "deltas": {},
+            "rel_deltas": {
+              "Kael (Broker)": 3,
+              "Auntie Six (Stallkeeper)": -2
+            }
+          },
+          "failure": {
+            "text": "He doesn't buy the frame — Kael always knows when a number's been rounded for his benefit — and files the correction anyway: ‘Business,’ he repeats, flat, and you both know what he actually thinks.",
+            "deltas": {},
+            "rel_deltas": {
+              "Kael (Broker)": 1
+            }
+          }
+        },
+        {
+          "id": "call_it_personal",
+          "text": "Tell him it was personal.",
+          "prob": {
+            "base": 0.55,
+            "mods": []
+          },
+          "success": {
+            "text": "He absorbs that without comment, recalculating something behind his eyes. ‘Noted,’ he says, which from Kael is either respect or a new variable in a future negotiation — you'll find out which eventually.",
+            "deltas": {
+              "Meaning": 2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 1,
+              "Auntie Six (Stallkeeper)": 4
+            }
+          },
+          "failure": {
+            "text": "Sentiment, to Kael, is a liability with your name on it now, and he says so — not cruelly, just accurately: ‘Everyone brokers something. Now I know what yours costs.’",
+            "deltas": {},
+            "rel_deltas": {
+              "Kael (Broker)": -3,
+              "Auntie Six (Stallkeeper)": 2
+            }
+          }
+        },
+        {
+          "id": "ask_why_he_cares",
+          "text": "Ask him why he cares.",
+          "prob": {
+            "base": 0.5,
+            "mods": []
+          },
+          "success": {
+            "text": "He tells you, once, flatly: the Row's economy is his economy too, further down the chain than he usually admits. Auntie's board not getting bought is good for him in a way he doesn't like owing anyone for.",
+            "deltas": {
+              "Meaning": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 2
+            }
+          },
+          "failure": {
+            "text": "‘I don't,’ he says, and changes the subject fast enough that you know exactly how much he does.",
+            "deltas": {},
+            "rel_deltas": {
+              "Kael (Broker)": -1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_web_brann_and_mara",
+      "title": "Didn't Come In",
+      "body": "Brann calls you Mara's brother the way other people say your name, and today he adds something to it — off-hand, mid-measurement, like it costs him nothing to have noticed: ‘She walked past the shop twice last week. Didn't come in.’ He doesn't ask why. He goes back to the bench.",
+      "weight": 4,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": [
+        "relationship",
+        "npc",
+        "web"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "brann_rag_drawer"
+          },
+          {
+            "flag": "mara_known"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "ask_him_to_watch",
+          "text": "Ask him to tell you if she comes by again.",
+          "prob": {
+            "base": 0.6,
+            "mods": []
+          },
+          "success": {
+            "text": "He agrees, once, and means it in the specific way Brann means things — you'll hear about it exactly once, unembellished, and that will be the whole report. It's not surveillance. It's a workshop keeping an eye on family the way it keeps an eye on tools.",
+            "deltas": {},
+            "rel_deltas": {
+              "Brann (Artisan)": 3,
+              "Mara (Sister)": 3
+            }
+          },
+          "failure": {
+            "text": "He agrees, but the watching makes him uncomfortable in a way he doesn't say — Brann's kindness is calibration, not habit, and you've just asked him to keep a ledger he didn't want.",
+            "deltas": {},
+            "rel_deltas": {
+              "Brann (Artisan)": -2
+            }
+          }
+        },
+        {
+          "id": "tell_him_mind_the_shop",
+          "text": "Tell him to mind the shop, not your sister.",
+          "prob": {
+            "base": 0.65,
+            "mods": []
+          },
+          "success": {
+            "text": "He takes the correction the way he takes everything, without visible reaction, and never mentions her again. You've drawn a line. He respects lines. You also just told a man who's never asked you for anything that his noticing wasn't wanted.",
+            "deltas": {},
+            "rel_deltas": {
+              "Brann (Artisan)": -1
+            }
+          },
+          "failure": {
+            "text": "The line lands harder than you meant it to — Brann goes quiet in the specific way that means the sentence cost more than it should have, and the shop is colder for a week.",
+            "deltas": {},
+            "rel_deltas": {
+              "Brann (Artisan)": -4
+            }
+          }
+        },
+        {
+          "id": "go_find_her_yourself",
+          "text": "Go find her yourself.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "You catch up with Mara before the week's out, and whatever kept her from the door gets said out loud instead of walked past twice more. Brann never brings it up again, which is his way of saying it worked.",
+            "deltas": {
+              "Meaning": 3
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 4
+            }
+          },
+          "failure": {
+            "text": "You go looking and she's already moved past whatever it was, mildly annoyed you noticed secondhand instead of just calling. Brann's tip cost you nothing. Following it up wrong cost you a little.",
+            "deltas": {
+              "Mental_Decay": 1
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_web_echo_and_the_list",
+      "title": "Cell-Grade Work",
+      "body": "Echo doesn't do compliments, but she brings up the Dex situation unprompted, which for her is the same thing. ‘Paper list against a digitizing intake.’ She's not asking for details. She's deciding something about you based on ones she already has.",
+      "weight": 4,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": [
+        "relationship",
+        "npc",
+        "web"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "echo_contact"
+          }
+        ],
+        "any": [
+          {
+            "flag": "dex_list_saved"
+          },
+          {
+            "flag": "dex_list_leaked"
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "text": "‘Forged a decoy and it held,’ she says, filing it next to whatever she keeps at that word. ‘That's cell-grade work. Nobody taught you that.’",
+          "when": {
+            "all": [
+              {
+                "flag": "dex_list_saved"
+              }
+            ]
+          }
+        },
+        {
+          "text": "‘Three names, though,’ she says, not unkindly, which somehow makes it worse. ‘Forgery's a skill. Knowing when not to try it is a different one. You'll need both eventually.’",
+          "when": {
+            "all": [
+              {
+                "flag": "dex_list_leaked"
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_what_shed_differently",
+          "text": "Ask her what she'd have done differently.",
+          "prob": {
+            "base": 0.5,
+            "mods": []
+          },
+          "success": {
+            "text": "She tells you, precisely, the version of the plan that doesn't fail — and you understand, hearing it, that she's just handed you tradecraft she doesn't hand out for free. It costs her something to have decided you're worth the lesson.",
+            "deltas": {
+              "Meaning": 3
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": 4,
+              "Dex (Dispatcher)": 1
+            }
+          },
+          "failure": {
+            "text": "‘Not my op to refight,’ she says, which isn't a no so much as a door she's decided to leave shut this time.",
+            "deltas": {},
+            "rel_deltas": {
+              "Echo (Resistance)": -1
+            }
+          }
+        },
+        {
+          "id": "say_it_worked_out",
+          "text": "Say it worked out the way it worked out.",
+          "prob": {
+            "base": 0.7,
+            "mods": []
+          },
+          "success": {
+            "text": "She accepts that without pushing, which from Echo is its own kind of respect — she doesn't waste time relitigating outcomes, only methods. ‘Fair,’ she says, and moves on to the actual reason she found you.",
+            "deltas": {},
+            "rel_deltas": {
+              "Echo (Resistance)": 2
+            }
+          },
+          "failure": {
+            "text": "The deflection reads, to her, as avoiding an after-action review, and Echo does not trust people who skip those. ‘Fine,’ she says, in a tone that means it isn't.",
+            "deltas": {},
+            "rel_deltas": {
+              "Echo (Resistance)": -2
+            }
+          }
+        },
+        {
+          "id": "ask_why_dex_matters",
+          "text": "Ask why Dex matters to her.",
+          "prob": {
+            "base": 0.55,
+            "mods": []
+          },
+          "success": {
+            "text": "‘He routes people who can't route themselves,’ she says. ‘That's half of what we do, minus the paperwork.’ It's the closest thing to an org chart she's ever handed you — the dispatch booth and the resistance cell, running the same math in different currencies.",
+            "deltas": {
+              "Meaning": 2
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": 3,
+              "Dex (Dispatcher)": 2
+            }
+          },
+          "failure": {
+            "text": "‘He doesn't,’ she says, too fast, and the fastness is the actual answer.",
+            "deltas": {},
+            "rel_deltas": {
+              "Echo (Resistance)": -1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_web_vint_and_the_seam",
+      "title": "Not in My Archive",
+      "body": "Vint goes very still when the Ferryman comes up in conversation, the stillness of a man deciding how much of what he knows is safe to type out loud. ‘She's not in my archive,’ he says, eventually. ‘On purpose. Some things I don't keep copies of.’ It's the nearest he's come to admitting there's a line even he won't cross for a good file.",
+      "weight": 4,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": [
+        "relationship",
+        "npc",
+        "web"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "vint_known"
+          },
+          {
+            "flag": "ferry_mask_seen"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "ask_what_he_knows",
+          "text": "Ask him what he does know.",
+          "prob": {
+            "base": 0.5,
+            "mods": []
+          },
+          "success": {
+            "text": "He tells you a little — old, secondhand, careful — and charges you nothing for it, which from Vint is the tell that he's scared of the topic, not protecting it for profit. ‘That's all I've got,’ he types, lowercase, and for once you believe the modesty.",
+            "deltas": {
+              "Meaning": 2
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 3,
+              "The Ferryman (Seam)": 1
+            }
+          },
+          "failure": {
+            "text": "He deflects into a joke a beat too late, per his usual register, except this time the joke doesn't land and you both notice it didn't.",
+            "deltas": {},
+            "rel_deltas": {
+              "Vint (Informant)": -1
+            }
+          }
+        },
+        {
+          "id": "tell_him_keep_it_that_way",
+          "text": "Tell him to keep it that way.",
+          "prob": {
+            "base": 0.65,
+            "mods": []
+          },
+          "success": {
+            "text": "He looks almost relieved, which is unusual enough on Vint's face that you file it away yourself. Some archives are safer empty. He agrees, for once, without an angle attached.",
+            "deltas": {},
+            "rel_deltas": {
+              "Vint (Informant)": 2,
+              "The Ferryman (Seam)": 2
+            }
+          },
+          "failure": {
+            "text": "He hears the request as a challenge instead of a mercy, and now you've made the one thing he wasn't going to look into into something he can't stop thinking about.",
+            "deltas": {},
+            "rel_deltas": {
+              "Vint (Informant)": -2,
+              "The Ferryman (Seam)": -1
+            }
+          }
+        },
+        {
+          "id": "ask_if_hed_ever_needed_it",
+          "text": "Ask if he's ever needed the seam himself.",
+          "prob": {
+            "base": 0.55,
+            "mods": []
+          },
+          "success": {
+            "text": "The typing stops for a long moment. ‘Once,’ he says, out loud, no keyboard between him and the word. He doesn't finish the story. You don't ask him to.",
+            "deltas": {
+              "Meaning": 3,
+              "Mental_Decay": 1
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 4
+            }
+          },
+          "failure": {
+            "text": "He laughs it off, too quick, too practiced, and changes the subject with the specific speed of a man who has in fact thought about it more than once.",
+            "deltas": {
+              "Mental_Decay": 1
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cx_web_auntie_checks_on_denny",
+      "title": "Quiet-Quiet",
+      "body": "Auntie Six brings up Denny without you asking — ‘Boy's gone quiet at the curtain, you know. Quiet-quiet, not busy-quiet.’ She's not asking you to fix it. She's telling you the Row already knows, and the Row is deciding, collectively and without a meeting, whether to do anything about it.",
+      "weight": 4,
+      "cooldown": 3,
+      "max_fires": 1,
+      "tags": [
+        "relationship",
+        "npc",
+        "web"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "denny_silence_told"
+          },
+          {
+            "flag": "auntie_board_read"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "ask_her_to_watch_him",
+          "text": "Ask her to keep an eye on him.",
+          "prob": {
+            "base": 0.65,
+            "mods": []
+          },
+          "success": {
+            "text": "‘That's the whole job,’ she says, like you've just asked the noodle stall to keep serving noodles. She adds his name to whoever gets the extra bowl on slow nights, no chalk mark, no discount code — just the Row doing what the Row does when the big ledger's stopped counting.",
+            "deltas": {},
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": 3,
+              "Denny (Root Vendor)": 2
+            }
+          },
+          "failure": {
+            "text": "She agrees, but says it flat, and you understand you've asked her to carry one more name on a board that's already heavier than her hands can hold much longer.",
+            "deltas": {
+              "Mental_Decay": 1
+            },
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": -1
+            }
+          }
+        },
+        {
+          "id": "tell_her_you_got_it",
+          "text": "Tell her you've already got it handled.",
+          "prob": {
+            "base": 0.6,
+            "mods": []
+          },
+          "success": {
+            "text": "She lets that stand, once, and doesn't check your work — a rare thing from a woman whose entire trade is checking work. It's a real vote of confidence, priced in the not-asking.",
+            "deltas": {},
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": 2,
+              "Denny (Root Vendor)": 1
+            }
+          },
+          "failure": {
+            "text": "You didn't, in fact, have it handled as well as you said, and she finds out the way she finds out everything — the board tells her. She doesn't call you on it. She just re-chalks something quietly.",
+            "deltas": {},
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": -3,
+              "Denny (Root Vendor)": -1
+            }
+          }
+        },
+        {
+          "id": "say_not_your_business",
+          "text": "Say it's not really your business.",
+          "prob": {
+            "base": 0.8,
+            "mods": []
+          },
+          "success": {
+            "text": "‘Didn't say it was,’ she says, unbothered, already moving on to the next name on a list she keeps entirely from memory. The Row doesn't need your permission to look after its own.",
+            "deltas": {},
+            "rel_deltas": {}
+          },
+          "failure": {
+            "text": "Something in the way you said it lands wrong, and Auntie Six, who forgives almost everything, files this one somewhere she doesn't forget from.",
+            "deltas": {},
+            "rel_deltas": {
+              "Auntie Six (Stallkeeper)": -3
+            }
+          }
+        }
+      ]
     }
   ]
 }

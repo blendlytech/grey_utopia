@@ -1118,11 +1118,11 @@
           "id": "make_the_run",
           "text": "Go. Now. Four hundred meters to a real sky.",
           "prob": {
-            "base": 0.05,
+            "base": 0.5,
             "mods": [
               {
                 "stat": "Meaning",
-                "coef": 0.003
+                "coef": 0.004
               },
               {
                 "stat": "Physical_Integrity",
@@ -1130,7 +1130,7 @@
               },
               {
                 "stat": "Mental_Decay",
-                "coef": -0.009
+                "coef": -0.006
               },
               {
                 "stat": "Heat",
@@ -1138,11 +1138,11 @@
               },
               {
                 "stat": "Substance_Reliance",
-                "coef": -0.004
+                "coef": -0.005
               },
               {
                 "stat": "Recklessness",
-                "coef": -0.005
+                "coef": -0.004
               }
             ]
           },

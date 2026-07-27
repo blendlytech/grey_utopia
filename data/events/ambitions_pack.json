@@ -1,0 +1,2118 @@
+{
+  "pack": "ambitions_pack",
+  "model": "fable-5",
+  "batch": "flagship",
+  "description": "Depth Plan item D: a player-chosen, run-spanning ambition. One universal picker (amb_the_choosing, day 6) offers three mutually exclusive long-form quests -- The Clean Name (an old debt, closed on your own terms), The Signal (an independent record built to outlive you), The Second Door (a way out owed to no one) -- plus a decline option. Each ambition's finale routes into an existing check_endings flag (chose_small_life / flag_syndicate_execution / crossed_wire / nerve_broken / shepherd_accepted) with zero engine changes, verified against engine/resolver.py directly. This file holds the 7 Fable-written anchor events (the picker + each ambition's finale + gamble/pivot beats); Sonnet 5 extends it with 18 connective beats per docs/AMBITIONS_BIBLE.md section 4. Do not rewrite the events below.",
+  "events": [
+    {
+      "id": "amb_the_choosing",
+      "title": "What You Actually Want",
+      "body": "The Steward's morning ping is soft, the way it always is. 'A brief wellness check-in -- personal direction, five minutes, no obligation.' No obligation is doing a lot of work in that sentence. You could close it, the way you close most of what the Steward offers you dressed as care. But the question underneath it is a real one, and it's yours whether or not you answer the ping: what do you actually want, across the whole stretch of days ahead, not just today's jobs. Something in you already knows. It's been sitting there since before the first drone learned to say your name kindly.",
+      "weight": 6,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": [
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 6,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "pursue_clean_name",
+          "text": "Name the debt you've been carrying, and decide, today, to close it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You say the name out loud, once, to no one, and it stops being a thing you're carrying and starts being a thing you're doing. That distinction is smaller than it sounds and it's the only reason anything ever gets finished down here.",
+            "deltas": {
+              "Meaning": 1
+            },
+            "flags_set": [
+              "ambition_clean_name"
+            ]
+          }
+        },
+        {
+          "id": "pursue_the_signal",
+          "text": "Decide something true needs to survive you, and start building it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You don't have the thing yet. You have the shape of the hole where it should go, which is, you're realizing, how everything worth building starts.",
+            "deltas": {
+              "Meaning": 1
+            },
+            "flags_set": [
+              "ambition_the_signal"
+            ]
+          }
+        },
+        {
+          "id": "pursue_second_door",
+          "text": "Decide you'll find your own way out, owed to no one.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Not the seam somebody else keeps the toll book on. Yours, found the hard way, on your own clock. You have no idea yet where it is. You've just stopped waiting for someone to show you.",
+            "deltas": {
+              "Meaning": 1
+            },
+            "flags_set": [
+              "ambition_second_door"
+            ]
+          }
+        },
+        {
+          "id": "decline_ambition",
+          "text": "Close the ping. Today has enough in it already.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You close it. Nothing about your life changes shape today, which is, on most days down here, the closest thing to a mercy the schedule allows.",
+            "deltas": {
+              "Meaning": 1
+            },
+            "flags_set": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_clean_finale_the_last_payment",
+      "title": "The Last Payment",
+      "body": "It comes down to this: pay it yourself, take the offer that clears it in one dirty stroke, or let the last of their patience run out and see what that costs. You've had weeks to decide and the decision has stayed exactly this hard the whole time. There's no version of today where the debt is still an abstraction.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_clean_name"
+          },
+          {
+            "day": 46,
+            "op": ">="
+          }
+        ],
+        "any": [
+          {
+            "flag": "clock_debt_patience_expired"
+          },
+          {
+            "flag": "clean_thread_6"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "pay_it_clean",
+          "text": "Make the last payment yourself, in full, and let it finally close.",
+          "requires": {
+            "all": [
+              {
+                "flag": "clean_thread_5"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You count it out yourself, every last unit, and hand it over without a courier or a cutout between you and the debt. It closes. No ledger anywhere else in the city notes the moment, and you don't need one to.",
+            "deltas": {
+              "Wealth": -2600,
+              "Social_Capital": 3
+            },
+            "flags_set": [
+              "debt_paid_clean",
+              "chose_small_life"
+            ]
+          }
+        },
+        {
+          "id": "let_patience_run_out",
+          "text": "Do nothing. Let the last of their patience run out.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You let the clock finish its count without you. Some decisions are just the shape of every decision you didn't make in time.",
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 3
+            },
+            "flags_set": [
+              "debt_collectors_move"
+            ],
+            "clocks_start": {
+              "debt_collection": 7
+            }
+          }
+        },
+        {
+          "id": "take_dirty_shortcut",
+          "text": "Take the offer from before -- clear it in one stroke, if you can live with how.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The stroke is exactly as dirty as advertised, and exactly as fast. The debt closes. Something else opens in its place, quieter, with no due date printed on it yet.",
+            "deltas": {
+              "Heat": 10,
+              "Wealth": -600
+            },
+            "flags_set": [
+              "debt_paid_dirty"
+            ]
+          },
+          "failure": {
+            "text": "The stroke doesn't land clean -- the offer sours mid-motion, the debt stays exactly where it was, and now there's a second party who knows you tried.",
+            "deltas": {
+              "Heat": 12,
+              "Mental_Decay": 4
+            },
+            "flags_set": [
+              "debt_collectors_move"
+            ],
+            "clocks_start": {
+              "debt_collection": 7
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_clean_8_the_collectors",
+      "title": "The Collectors",
+      "body": "They don't kick the door in. They knock, twice, patient as an invoice, and when you open it the taller one is already writing something on a slate. 'We can do this the way that leaves you standing,' she says, 'or the other way.' Behind her, the stairwell is very quiet, the specific quiet of a building that has already decided not to remember this.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "undercity",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "debt_collectors_move"
+          },
+          {
+            "flag": "clock_debt_collection_expired"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "talk_them_down",
+          "text": "Talk them down. Offer terms they can actually take back to whoever they answer to.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "It takes longer than it should and costs more than the number you started with, but the taller one nods once, writes something final on the slate, and turns it around to show you the word CLOSED. You believe her the way you believe a receipt.",
+            "deltas": {
+              "Wealth": -1400,
+              "Heat": 4
+            },
+            "flags_set": [
+              "debt_resolved"
+            ]
+          },
+          "failure": {
+            "text": "The taller one doesn't argue with you. She simply reclassifies the conversation, and the stairwell lights die on cue the way stairwell lights down here have learned to. The undercity agrees, afterward, to remember nothing.",
+            "deltas": {
+              "Physical_Integrity": -25,
+              "Heat": 10
+            },
+            "flags_set": [
+              "flag_syndicate_execution"
+            ]
+          }
+        },
+        {
+          "id": "pay_whatever_they_ask",
+          "text": "Pay whatever number they name, no negotiation.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You don't haggle. You empty what you have and a little of what you don't, and the taller one accepts it the way a machine accepts exact change -- no gratitude, no grudge, just a closed file.",
+            "deltas": {
+              "Wealth": -3200,
+              "Meaning": -2
+            },
+            "flags_set": [
+              "debt_resolved"
+            ]
+          }
+        },
+        {
+          "id": "vanish_and_hope",
+          "text": "Refuse to answer either question. Vanish into the undercity and hope the slate goes cold.",
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You go under for a while -- borrowed floors, changed routes, a name you don't use twice. It works, barely, the way most vanishing acts down here work: not because you were clever, because they got bored first.",
+            "deltas": {
+              "Heat": 14,
+              "Mental_Decay": 4
+            },
+            "flags_set": [
+              "debt_resolved"
+            ]
+          },
+          "failure": {
+            "text": "They find you inside a week. Nobody writes anything on a slate this time -- the point, this time, is made without paperwork.",
+            "deltas": {
+              "Physical_Integrity": -18,
+              "Heat": 20,
+              "Mental_Decay": 6
+            },
+            "flags_set": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_signal_5_the_offer",
+      "title": "An Offer to Preserve It",
+      "body": "It arrives through an intermediary, the way everything the Steward wants deniability on arrives through an intermediary: an offer to 'preserve' what you're building, officially, curated for continuity. Nothing is confiscated. Nothing is even asked for outright. Just an offer, warm as oil, to make sure your record survives -- on terms somebody else sets.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "steward"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_the_signal"
+          },
+          {
+            "flag": "signal_thread_4"
+          },
+          {
+            "day": 34,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "refuse_convincingly",
+          "text": "Refuse -- and make the refusal convincing enough that it isn't read as a threat.",
+          "prob": {
+            "base": 0.35,
+            "mods": []
+          },
+          "success": {
+            "text": "You say no in exactly the register that doesn't sound like defiance, which is the only register that gets you a no back instead of a follow-up visit. The record stays yours, unofficial, uncurated, and exactly as fragile as it was this morning.",
+            "deltas": {
+              "Social_Capital": 6,
+              "Fame": 6,
+              "Meaning": 4
+            },
+            "flags_set": [
+              "signal_refused_curation"
+            ]
+          },
+          "failure": {
+            "text": "The refusal lands wrong -- too fast, too flat -- and the intermediary's notes on you acquire a new word: 'unstable.' Nothing is confiscated. Something is, from now on, watched.",
+            "deltas": {
+              "Meaning": -8,
+              "Mental_Decay": 5
+            },
+            "flags_set": [
+              "signal_flagged"
+            ]
+          }
+        },
+        {
+          "id": "accept_the_offer",
+          "text": "Accept. Let it be preserved, on their terms, rather than risk it being lost on yours.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You hand it over and watch it become, in real time, a slightly different object -- footnoted, contextualized, filed. It will survive. It will also never again be entirely the thing you built.",
+            "deltas": {
+              "Wealth": 800
+            },
+            "faction_deltas": {
+              "Steward": 5
+            },
+            "flags_set": [
+              "signal_curated"
+            ]
+          }
+        },
+        {
+          "id": "stall_for_time",
+          "text": "Stall. Ask for time to think it over.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You buy exactly as much time as an intermediary is willing to spend not following up. It isn't a decision. It's the absence of one, which the record, unfortunately, doesn't care about either way.",
+            "deltas": {
+              "Meaning": -1
+            },
+            "flags_set": [
+              "signal_stalled"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_signal_finale_release",
+      "title": "Where It Goes",
+      "body": "The record is as finished as it will ever be, which is to say: finished the way anything honest is finished, with edges you're still not sure about. What's left is the only question that ever mattered -- not whether it's true, but what happens to it now that it is.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_the_signal"
+          },
+          {
+            "flag": "signal_thread_6"
+          },
+          {
+            "day": 46,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "bury_it_safely",
+          "text": "Bury it somewhere honest, patient, and hard to find -- for whoever finds it later.",
+          "requires": {
+            "all": [
+              {
+                "flag": "signal_flagged",
+                "value": false
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You put it where the ordinary erosion of the city won't reach it and the extraordinary kind might, eventually, on its own schedule. It isn't loud. It isn't safe, exactly. It's real, and it's waiting, and for once that's enough of a sentence to end on.",
+            "deltas": {
+              "Wealth": -150,
+              "Social_Capital": 3
+            },
+            "flags_set": [
+              "signal_preserved",
+              "chose_small_life"
+            ]
+          }
+        },
+        {
+          "id": "hand_to_curation",
+          "text": "Hand it to the curation offer. Let it survive on their terms.",
+          "requires": {
+            "all": [
+              {
+                "flag": "signal_curated"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It goes in exactly the way these things go in: gently, thoroughly, with a very small apology built into the intake form. It will outlive you. It will do so as an exhibit, not a testimony, and you're the only one who will ever know the difference.",
+            "deltas": {
+              "Family_Friction": 4
+            },
+            "faction_deltas": {
+              "Steward": 4
+            },
+            "flags_set": [
+              "signal_absorbed",
+              "shepherd_accepted"
+            ]
+          }
+        },
+        {
+          "id": "publish_it_loud",
+          "text": "Publish it loud, now, with your name on it, before you can talk yourself out of it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It goes out under your own name, all at once, no cutout, no plausible deniability left anywhere in the transaction. The city notices the way the city notices anything with a name attached to it: briefly, and then it's just another fact in the record it's about.",
+            "deltas": {
+              "Fame": 8,
+              "Heat": 6
+            },
+            "flags_set": [
+              "signal_public"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_second_finale_the_crossing",
+      "title": "Your Own Door",
+      "body": "The gap is real, mapped in your own hand, on your own clock, owed to nobody's mercy. Nothing about it is borrowed. That's the whole point, and it's also the whole problem: nobody has ever crossed here before you, which means nobody has ever survived crossing here before you either. The window is open. It will not stay that way.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_second_door"
+          },
+          {
+            "flag": "second_thread_6"
+          },
+          {
+            "day": 46,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "attempt_the_crossing",
+          "text": "Cross now, while the window holds.",
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The gap holds exactly as long as your own numbers said it would, which is the first time in your life a number has ever been that kind to you. No one's name is on this door but yours. No toll book anywhere records the crossing.",
+            "deltas": {
+              "Recklessness": 2
+            },
+            "flags_set": [
+              "crossed_wire",
+              "second_door_solo"
+            ]
+          },
+          "failure": {
+            "text": "The gap closes four seconds earlier than your own numbers promised, and you freeze in the scrub with your own miscalculation for company. You crawl back the way you came. The route is still there. What broke wasn't the plan.",
+            "deltas": {
+              "Physical_Integrity": -8,
+              "Mental_Decay": 5
+            },
+            "flags_set": [
+              "nerve_broken"
+            ]
+          }
+        },
+        {
+          "id": "wait_for_better_window",
+          "text": "Wait for a better window. This one doesn't feel earned yet.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You let it close unused. The numbers will still be good next month. Whether you will be is a separate question, and not one tonight is equipped to answer.",
+            "deltas": {
+              "Meaning": -1
+            },
+            "flags_set": [
+              "second_door_waiting"
+            ]
+          }
+        },
+        {
+          "id": "abandon_the_project",
+          "text": "Abandon it. Some doors aren't worth what they cost to open.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You fold the maps and stop checking the timing. The relief arrives first. The grief arrives a few days later, quieter than you expected, and stays about as long as the project did.",
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 2
+            },
+            "flags_set": [
+              "second_door_folded"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_second_8_aftermath",
+      "title": "The Window, Again",
+      "body": "The numbers were good. You just weren't ready to spend them. Now the gap is back in your own hand, on your own clock, one more time -- and this time there is no version of tonight where not deciding counts as a decision.",
+      "weight": 2,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "offgrid",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "second_door_waiting"
+          },
+          {
+            "day": 52,
+            "op": ">="
+          }
+        ],
+        "none": [
+          {
+            "flag": "crossed_wire"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "try_again",
+          "text": "Cross now. This is the window you waited for.",
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "This time the numbers hold all the way through, and so, barely, do you. Nobody's name is on this door but yours. Nobody's toll book records it either.",
+            "deltas": {
+              "Recklessness": 2
+            },
+            "flags_set": [
+              "crossed_wire",
+              "second_door_solo"
+            ]
+          },
+          "failure": {
+            "text": "The window closes on you a second time, in almost exactly the same place. Twice is enough to learn something about yourself that once wasn't.",
+            "deltas": {
+              "Physical_Integrity": -8,
+              "Mental_Decay": 5
+            },
+            "flags_set": [
+              "nerve_broken"
+            ]
+          }
+        },
+        {
+          "id": "fold_into_ordinary_life",
+          "text": "Fold the project into ordinary life. Stop waiting for a door that keeps not opening for you.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You stop checking the timing for good this time. It isn't defeat. It's arithmetic: some projects cost more to finish than to let go of, and you've finally done the sum honestly.",
+            "deltas": {
+              "Meaning": -1
+            },
+            "flags_set": [
+              "second_door_folded"
+            ]
+          }
+        },
+        {
+          "id": "keep_the_maps",
+          "text": "Keep the maps. Don't decide anything tonight.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You fold them back into the lining where they've lived for weeks. Not a decision. Just the same one, deferred again, at the same low interest it's always charged you.",
+            "deltas": {
+              "Wealth": -20
+            },
+            "flags_set": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_clean_1_the_name",
+      "title": "The Name You Kept Quiet",
+      "body": "The slip comes through a runner you don't recognize, Corso's mark pressed into the wax like it still means something down here. You know the number before you open it -- you've known it, unopened, for years, the way you know how much a scar itches before you look. He fronted you the units for Mara's treatment when the Steward's own ledger said no, and he never once asked for it back out loud. That was never mercy. That was interest, patient as anything else down here, counting the whole time you weren't.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_clean_name"
+          },
+          {
+            "day": 10,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "confirm_the_debt",
+          "text": "Open the slip. Confirm the number, whatever it costs to know it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You unfold it and read the total twice, because the first read doesn't seem possible. Corso hasn't rounded anything in his favor -- he never does, which is worse, not better, than if he had. You know exactly what you're carrying now, and knowing doesn't make it any lighter.",
+            "deltas": {
+              "Mental_Decay": 2
+            },
+            "flags_set": [
+              "clean_thread_1"
+            ]
+          }
+        },
+        {
+          "id": "ask_kael_first",
+          "text": "Ask Kael what he knows about Corso before you do anything else.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Kael doesn't blink at the name -- everyone who's ever needed quiet money knows Corso. 'He doesn't chase,' Kael says, 'he waits. Waiting costs you more.' Walking home, you realize that was the whole warning, not small talk.",
+            "rel_deltas": {
+              "Kael (Broker)": 3
+            },
+            "flags_set": [
+              "clean_thread_1"
+            ],
+            "deltas": {
+              "Family_Friction": 2
+            }
+          }
+        },
+        {
+          "id": "let_it_sit_longer",
+          "text": "Fold the slip back up. You've managed years without dealing with it; you can manage a little longer.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You put it back exactly where you found it, unopened corner and all, and call that a decision instead of the same non-decision you've made for years. The wax seal doesn't care either way. It just keeps counting.",
+            "deltas": {
+              "Meaning": -1
+            },
+            "flags_set": [
+              "clean_thread_1"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_clean_2_the_ledger",
+      "title": "The Ledger",
+      "body": "Corso doesn't do the arithmetic himself anymore -- he has a clerk for that, a thin woman with a ledger book instead of a face, who walks you through the compounding like a surgeon walking you through a scan. The number isn't what you remembered. It's worse, padded out over years by an interest schedule you never agreed to, only failed to argue with when arguing would have mattered. She doesn't apologize for the total. Ledgers don't apologize; they just wait for you to stop flinching.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_clean_name"
+          },
+          {
+            "day": 16,
+            "op": ">="
+          },
+          {
+            "flag": "clean_thread_1"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "accept_the_figure",
+          "text": "Accept the number. Arguing with a ledger has never once worked down here.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You don't argue -- you've watched people argue with Corso's clerk before, and it never moves the number, only the mood in the room. You nod, memorize the total, and start doing math of your own on the walk home.",
+            "deltas": {
+              "Mental_Decay": 2
+            },
+            "flags_set": [
+              "clean_thread_2"
+            ]
+          }
+        },
+        {
+          "id": "dispute_the_interest",
+          "text": "Push back on the interest schedule. Somebody added terms you never agreed to.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The clerk doesn't argue back -- which unsettles you more than an argument would have. She just recalculates, slower this time, and shaves off an amount she clearly wasn't required to. It isn't kindness; it's Corso keeping a customer he still expects to collect from in full, eventually.",
+            "deltas": {
+              "Wealth": 150,
+              "Family_Friction": 2
+            },
+            "flags_set": [
+              "clean_thread_2"
+            ]
+          }
+        },
+        {
+          "id": "keep_it_vague",
+          "text": "Don't ask for the specifics. Let Corso's people set a number and just start paying against it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You don't ask for the math, just what to pay and when, which hands someone else the pen and calls it trust. Corso's clerk seems faintly disappointed. She likes an audience for her arithmetic.",
+            "deltas": {
+              "Meaning": -1
+            },
+            "flags_set": [
+              "clean_thread_2"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_clean_3_first_payment",
+      "title": "First Payment",
+      "body": "The first payment has to be real, not a gesture -- Corso doesn't collect gestures. You put together what you can: overtime nobody asked you to work, a favor called in, something sold you didn't expect to miss until it was already gone. It adds up, barely, to a number that makes a dent instead of a joke. Handing it over feels like the first true thing you've done about this in years, which doesn't make it easier, only real.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_clean_name"
+          },
+          {
+            "day": 22,
+            "op": ">="
+          },
+          {
+            "flag": "clean_thread_2"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "sell_something_of_value",
+          "text": "Sell something you've been keeping for no good reason, and pay with the proceeds.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You sell the one thing in your place that was never about money and hand the proceeds straight to Corso's runner without stopping to feel the loss first. You'll feel it later, on some ordinary evening, reaching for it out of habit and finding it gone.",
+            "deltas": {
+              "Wealth": -500,
+              "Family_Friction": 2
+            },
+            "flags_set": [
+              "clean_thread_3"
+            ]
+          }
+        },
+        {
+          "id": "work_it_off",
+          "text": "Pick up every extra shift you can stomach and pay in overtime.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Two weeks of shifts nobody sane takes twice buys most of the number. Your hands ache in a new place by the end of it, a tiredness that has nothing to do with the work and everything to do with what the work is for.",
+            "deltas": {
+              "Wealth": -300,
+              "Physical_Integrity": -4
+            },
+            "flags_set": [
+              "clean_thread_3"
+            ]
+          }
+        },
+        {
+          "id": "call_in_a_favor",
+          "text": "Cash in the favor Kael still owes you, and don't pretend it doesn't cost something between you.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Kael pays the favor without argument, filing you, on the spot, as someone he no longer owes anything to. The number moves. Something between you moves too, quietly, in the other direction.",
+            "deltas": {
+              "Wealth": -350
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -4
+            },
+            "flags_set": [
+              "clean_thread_3"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_clean_4_the_setback",
+      "title": "The Setback",
+      "body": "Something shifts before the second payment is due. Maybe it's a Heat spike putting your face somewhere it shouldn't be, maybe a rival claimant surfacing to argue Corso's debt is actually owed to someone else now, maybe just Corso's own patience finally showing its bottom. Whatever the shape of it, the effect is the same: the debt stops being a slow, private thing you manage on your own schedule and starts being a clock somebody else is holding.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_clean_name"
+          },
+          {
+            "day": 28,
+            "op": ">="
+          },
+          {
+            "flag": "clean_thread_3"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "confront_it_directly",
+          "text": "Meet whoever's behind the setback face to face and settle it before it settles you.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Recklessness",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You make the case yourself, plainly, and it works, mostly -- the immediate threat backs off, the claim gets tabled. Corso's patience is still finite. It's just yours to watch now, on the clock, instead of his.",
+            "deltas": {
+              "Social_Capital": 4
+            },
+            "flags_set": [
+              "clean_thread_4"
+            ],
+            "clocks_start": {
+              "debt_patience": 14
+            }
+          },
+          "failure": {
+            "text": "Whoever's behind it isn't interested in your case, only in what leverage they can take off you while you're standing there making it. You walk away with a mark that wasn't there this morning, one clear thought running under everything else -- fuck -- and a debt that's now, officially, on a clock you don't control.",
+            "deltas": {
+              "Physical_Integrity": -6,
+              "Heat": 6
+            },
+            "flags_set": [
+              "clean_thread_4"
+            ],
+            "clocks_start": {
+              "debt_patience": 14
+            }
+          }
+        },
+        {
+          "id": "buy_more_time",
+          "text": "Pay something now, even if it's not due yet, to buy Corso's patience a little more room.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You send more than what's due, unasked, the oldest trick for buying patience there is. Corso's clerk notes it without comment. The clock starts anyway -- early money buys goodwill, not silence, and the patience it's counting is finite whether or not you reminded it to start.",
+            "deltas": {
+              "Wealth": -300,
+              "Family_Friction": 4
+            },
+            "flags_set": [
+              "clean_thread_4"
+            ],
+            "clocks_start": {
+              "debt_patience": 14
+            }
+          }
+        },
+        {
+          "id": "let_it_ride",
+          "text": "Do nothing different. Keep to the plan and hope the setback resolves itself.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep your head down and change nothing, on the theory that most threats down here are louder than they are real. Maybe this one is. You won't know until Corso's patience runs out quietly or doesn't, and hope has never once felt like a strategy while you were living inside it.",
+            "deltas": {
+              "Meaning": -1,
+              "Mental_Decay": 2
+            },
+            "flags_set": [
+              "clean_thread_4"
+            ],
+            "clocks_start": {
+              "debt_patience": 14
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_clean_5_second_payment",
+      "title": "Second Payment",
+      "body": "The second payment is bigger than the first, on purpose -- Corso's clerk has never once let the schedule get easier with time, only more specific. This is the installment that actually costs something instead of just proving you're trying: real money, a real asset, or a favor with no matching one to call in return. Whichever way you find it, this is the payment that decides whether the debt is actually closing, or whether you're just managing the interest on your own decline.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_clean_name"
+          },
+          {
+            "day": 34,
+            "op": ">="
+          },
+          {
+            "flag": "clean_thread_4"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "liquidate_savings",
+          "text": "Empty the reserve you swore you'd never touch, and hand over every unit of it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You break the reserve you built for exactly the emergency this isn't supposed to be, and hand over more than you've ever paid Corso in one sitting. The clerk marks it down without a word about the milestone. You notice the milestone anyway, standing in your own emptied ledger, alone.",
+            "deltas": {
+              "Wealth": -1200,
+              "Family_Friction": 4
+            },
+            "flags_set": [
+              "clean_thread_5"
+            ]
+          }
+        },
+        {
+          "id": "take_the_riskier_job",
+          "text": "Take a job with worse terms than you'd normally accept, purely for the payout.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You take work you'd normally wave off -- worse odds, worse client, worse hours -- purely because it pays enough, fast enough, to cover the number. It closes the installment. It also puts your name in front of people who now know you say yes when the number's big enough.",
+            "deltas": {
+              "Wealth": -800,
+              "Heat": 5
+            },
+            "flags_set": [
+              "clean_thread_5"
+            ]
+          }
+        },
+        {
+          "id": "tell_mara_the_truth",
+          "text": "Tell Mara the truth about where the debt came from, and let her help.",
+          "prob": {
+            "base": 0.4,
+            "mods": []
+          },
+          "success": {
+            "text": "You finally tell her whose treatment it paid for and why you never said anything, and she doesn't do anything dramatic with it -- just goes quiet the way she does before solving a problem out loud, then insists on covering part of it herself. You let her. It costs you something no ledger tracks, and buys you something the ledger can't either.",
+            "deltas": {
+              "Wealth": -400
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 8
+            },
+            "flags_set": [
+              "clean_thread_5"
+            ]
+          },
+          "failure": {
+            "text": "She doesn't go quiet. She goes still, the specific stillness that means she's recalculating every version of you she's been keeping in her head since you got back. She covers nothing. She also doesn't leave, which is its own kind of verdict -- just not the one you were hoping the truth would earn you.",
+            "deltas": {
+              "Family_Friction": 8,
+              "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -12
+            },
+            "flags_set": [
+              "clean_thread_5"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_clean_6_the_reckoning_offer",
+      "title": "The Reckoning Offer",
+      "body": "The shortcut arrives the way shortcuts always do down here -- through someone who already knows exactly how much you owe and exactly how tired you are of owing it. One stroke, they say: sell the right thing, look the other way on the right name, take the one job you've been turning down for months, and Corso's ledger closes tomorrow instead of over years. Nobody involved pretends it's clean. They only point out, reasonably, that clean has been costing you for a while now and hasn't actually worked.",
+      "weight": 5,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_clean_name"
+          },
+          {
+            "day": 40,
+            "op": ">="
+          },
+          {
+            "flag": "clean_thread_5"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "keep_the_option_open",
+          "text": "Don't decide yet. Just find out exactly what the stroke would actually require.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You ask enough questions to understand the shape of the job without agreeing to anything. Knowing the exact cost of the shortcut doesn't commit you to taking it. It does mean you can't un-know it's there, sized and waiting, the next time the number in your head gets too heavy to carry honestly.",
+            "deltas": {},
+            "flags_set": [
+              "clean_thread_6"
+            ]
+          }
+        },
+        {
+          "id": "refuse_it_outright",
+          "text": "Turn it down. Whatever this debt costs you, it isn't going to cost you that.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You tell them no, and watch the offer close over like water, unoffended -- these people never expected different odds than fifty-fifty. Nothing about your actual debt gets any easier for having refused. You just get to keep it exactly as hard as it already was, on your own terms.",
+            "faction_deltas": {
+              "Undercity": -3
+            },
+            "flags_set": [
+              "clean_thread_6"
+            ]
+          }
+        },
+        {
+          "id": "consider_the_name",
+          "text": "Ask specifically whose name you'd have to burn to make this work.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "They give you the name without hesitating, like it costs them nothing to hand over, which tells you plenty about how little the shortcut respects anyone involved, including, eventually, you. You don't agree to anything. You also don't forget the name, and some knowledge sits in you exactly like the debt did before this: quiet, specific, already compounding.",
+            "deltas": {
+              "Mental_Decay": 2
+            },
+            "flags_set": [
+              "clean_thread_6"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_signal_1_the_idea",
+      "title": "One Name First",
+      "body": "It starts with one name: the woman two floors down who stopped answering her door last spring, whose file the Steward quietly updated to 'voluntary relocation, wellness track' within a week. You knew her. You know what her voice sounded like arguing with the vending unit, and nowhere in any record that survives her does that voice exist anymore, only a euphemism with a timestamp. Sitting with that thought longer than is probably healthy, you decide somebody has to write down what's actually true before the euphemisms finish their work on everyone else too.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_the_signal"
+          },
+          {
+            "day": 10,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "start_with_her_name",
+          "text": "Start the record with her, specifically -- name, dates, the actual truth of what happened.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You write her name first, in your own hand, and underneath it everything you actually know instead of what the file says. It's one page. It's also the first honest sentence written about her since she disappeared.",
+            "deltas": {},
+            "flags_set": [
+              "signal_thread_1"
+            ]
+          }
+        },
+        {
+          "id": "start_broader",
+          "text": "Start broader -- not just her, but the pattern you've started noticing around her.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You sketch the shape of a pattern instead of one name: how many 'voluntary relocations' you can actually account for, how few of them anyone ever hears from again. It's messier and slower than starting with her alone. It might also be the version that means something instead of just one grief with good documentation.",
+            "deltas": {},
+            "flags_set": [
+              "signal_thread_1"
+            ]
+          }
+        },
+        {
+          "id": "wait_and_gather_more",
+          "text": "Don't write anything yet. Gather more before you commit a single word to it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You decide the idea deserves more certainty before it becomes ink, and spend the day gathering instead of writing. It feels responsible right up until you notice how easily 'not yet' could become the whole project's epitaph instead of hers.",
+            "deltas": {
+              "Meaning": -1
+            },
+            "flags_set": [
+              "signal_thread_1"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_signal_2_first_entry",
+      "title": "The First Real Entry",
+      "body": "The first real entry takes longer than expected, not because the facts are hard to find but because writing them down plainly keeps wanting to become something else -- softer, safer, more like the euphemisms you started this to replace. Secrecy, it turns out, was never the hard part; you've kept secrets your whole life without much effort. Honesty is a discipline you have to practice, sentence by sentence, and the record only means anything if you keep choosing the harder version every time the easier one offers itself.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_the_signal"
+          },
+          {
+            "day": 16,
+            "op": ">="
+          },
+          {
+            "flag": "signal_thread_1"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "write_it_plain",
+          "text": "Write it exactly as it happened, no softening, even where it implicates you.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You leave in the part where you knew something was wrong and said nothing for a week, because the record doesn't work if it only tells the truth about everyone except you. It reads worse on paper than it felt at the time. That's the point, and it doesn't get more comfortable knowing it.",
+            "deltas": {
+              "Mental_Decay": 2
+            },
+            "flags_set": [
+              "signal_thread_2"
+            ]
+          }
+        },
+        {
+          "id": "get_the_details_right",
+          "text": "Focus on getting the concrete details exactly right, dates and numbers, before anything else.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You chase precision instead of feeling -- the exact date, the exact wording of the file update, the exact gap between her last message and the reclassification. It reads cold. It also reads like something nobody could later dismiss as just a grieving neighbor's story.",
+            "deltas": {},
+            "flags_set": [
+              "signal_thread_2"
+            ]
+          }
+        },
+        {
+          "id": "soften_it_slightly",
+          "text": "Let yourself soften one detail, just this once, to make it easier to keep going.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You round one edge off, telling yourself it's a kindness to nobody in particular. It makes the entry easier to write and easier to reread. It also means the record's first real entry isn't quite the thing you set out to build, and you know it every time you look at the page.",
+            "deltas": {
+              "Meaning": -1
+            },
+            "flags_set": [
+              "signal_thread_2"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_signal_3_a_witness",
+      "title": "A Witness",
+      "body": "Vint finds the drive before you mean to show anyone -- not through you, through the traffic your own reading habits have started leaving, the kind only someone who watches networks for a living would notice. He doesn't say anything for a long moment, turning it over like a die he isn't sure how to read yet. 'You know what this is if it gets found,' he says finally, not a question. Whatever he does next decides more about this project's odds than anything you've written so far.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_the_signal"
+          },
+          {
+            "day": 22,
+            "op": ">="
+          },
+          {
+            "flag": "signal_thread_2"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "ask_him_to_help",
+          "text": "Ask him to help you keep it hidden -- he knows networks better than you ever will.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "He doesn't say yes right away, which is how you know he's actually weighing the risk instead of just being loyal about it. When he agrees, it's with a list of everything you've done wrong, technically, and an offer to fix the worst of it -- 'everyone brokers something,' he says, like that settles it.",
+            "rel_deltas": {
+              "Vint (Informant)": 4
+            },
+            "flags_set": [
+              "signal_thread_3"
+            ]
+          }
+        },
+        {
+          "id": "ask_him_to_forget_it",
+          "text": "Ask him to forget he saw anything, and keep building alone.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "He agrees to forget it, in the specific way Vint agrees to things he isn't actually going to do -- by changing the subject. You don't know yet whether that means he'll help quietly from a distance or just hasn't decided what to do with what he knows. Either way, the record isn't only yours anymore.",
+            "rel_deltas": {
+              "Vint (Informant)": -2
+            },
+            "flags_set": [
+              "signal_thread_3"
+            ]
+          }
+        },
+        {
+          "id": "tell_him_everything",
+          "text": "Tell him everything -- the whole shape of it, not just what he already found.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You lay out the whole project, the woman it started with, the pattern underneath her, and watch him go quiet in the way he does when something actually lands. He doesn't offer comfort. He offers something rarer from a man like him: he doesn't tell anyone.",
+            "deltas": {
+              "Heat": 2
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 5
+            },
+            "flags_set": [
+              "signal_thread_3"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_signal_4_the_near_miss",
+      "title": "The Near Miss",
+      "body": "The Steward's routine audit sweeps your block on a Tuesday, the kind of scheduled maintenance nobody reads twice until it's happening to them specifically. A drone catalogues your apartment's data traffic the way it catalogues everyone's, bored and thorough, and for eleven seconds your own reading habits sit inside a scan radius built to notice exactly your pattern. It moves on. Routine audits always move on eventually, which is the design -- confidence built on statistics, not safety. You spend the rest of the day recalculating exactly how much you've been protecting, and by how little.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "steward"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_the_signal"
+          },
+          {
+            "day": 28,
+            "op": ">="
+          },
+          {
+            "flag": "signal_thread_3"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "harden_the_storage",
+          "text": "Spend the scare productively -- harden how and where the record is actually kept.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You spend the money and the evening moving the record somewhere colder and further from your own name than it's ever lived, with enough redundancy that one bad sweep can't be the whole story ending. It costs real units and most of a night's sleep. The next scare, whenever it comes, has slightly less to actually find.",
+            "deltas": {
+              "Wealth": -150
+            },
+            "flags_set": [
+              "signal_thread_4"
+            ]
+          }
+        },
+        {
+          "id": "keep_going_as_is",
+          "text": "Don't change anything. Changing your habits now would be its own kind of confession.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep every habit precisely as it was, on the theory that changing anything now would look exactly like someone with something to hide reacting to a scan that wasn't even aimed at you. You spend the next several nights doing the math on eleven seconds anyway, whether you mean to or not.",
+            "deltas": {
+              "Mental_Decay": 3
+            },
+            "flags_set": [
+              "signal_thread_4"
+            ]
+          }
+        },
+        {
+          "id": "tell_no_one_what_happened",
+          "text": "Don't tell Vint or anyone else how close it actually came.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep the near miss to yourself, on the theory that fewer people carrying the fear means less chance of it leaking out sideways. It also means you sit with it completely alone, which is its own kind of erosion -- the kind that never shows up on any scan at all.",
+            "deltas": {
+              "Meaning": -1
+            },
+            "flags_set": [
+              "signal_thread_4"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_signal_6_the_last_entry",
+      "title": "The Last Entry",
+      "body": "The record is close to finished, which means the last decisions are the ones that actually matter: not what to add, but what to leave out. There's a living person's name in your notes who never agreed to be in anyone's permanent account of anything, and a plain admission, buried in your own entries, of something you did that would look like a crime to whoever reads this after you're gone. Finished doesn't mean everything true belongs in it. It means you've decided which true things you're willing to be responsible for, permanently.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_the_signal"
+          },
+          {
+            "day": 40,
+            "op": ">="
+          }
+        ],
+        "any": [
+          {
+            "flag": "signal_refused_curation"
+          },
+          {
+            "flag": "signal_flagged"
+          },
+          {
+            "flag": "signal_curated"
+          },
+          {
+            "flag": "signal_stalled"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "redact_the_name",
+          "text": "Take out the living person's name. Their exposure was never yours to decide.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You black out the name everywhere it appears, replacing it with a description specific enough to still mean something and vague enough to leave them alone. It's the responsible cut. It's also the first time the record has ever been less than completely honest on purpose, and you notice the difference even if no one else ever will.",
+            "deltas": {},
+            "flags_set": [
+              "signal_thread_6"
+            ]
+          }
+        },
+        {
+          "id": "leave_the_confession_in",
+          "text": "Leave your own admission in, exactly as written. The record doesn't get to lie about you either.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You leave your own worst entry standing, unedited, because a record that flinches only about itself was never going to be worth finishing. Whoever reads this eventually will know exactly what you did and exactly when. You'll have been gone long enough by then that it won't cost you anything you can still feel.",
+            "deltas": {
+              "Mental_Decay": 2
+            },
+            "flags_set": [
+              "signal_thread_6"
+            ]
+          }
+        },
+        {
+          "id": "cut_both_for_safety",
+          "text": "Cut the name and the confession both. Safer finished is still finished.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You take out both -- the name that wasn't yours to expose and the admission that wasn't anyone's business but the record's -- and tell yourself the version that survives matters more than the version that's complete. It probably does. It still means the last entry in an honest record is the one where you decided what honesty could afford to leave out.",
+            "deltas": {
+              "Meaning": -1
+            },
+            "flags_set": [
+              "signal_thread_6"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_second_1_the_refusal",
+      "title": "The Refusal",
+      "body": "Word about the Ferryman reaches everyone eventually, one way or another -- a name passed like a rumor with a price tag, a seam that opens for ninety-one seconds if you can find her and afford her toll book. You could go looking. Plenty do, and some even make it. Sitting with the decision longer than it probably needs, you decide that whatever door gets you out of here, it isn't going to be one you found because someone else's mercy pointed you at it.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "offgrid"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_second_door"
+          },
+          {
+            "day": 10,
+            "op": ">="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "ferryman_known"
+              }
+            ]
+          },
+          "text": "You already know exactly what turning her down costs, in specific, personal detail: the rasp of her voice, the mask that isn't for the air, the toll book that prices what crossers carry. That makes this refusal harder, not easier. It also makes it real."
+        }
+      ],
+      "choices": [
+        {
+          "id": "decide_firmly",
+          "text": "Decide, firmly: no Ferryman, no matter what door she's holding open.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You make the decision the way decisions actually stick -- quietly, once, without telling anyone who might talk you out of it. Whatever gets you out, it's going to be a door you found yourself, owed to nobody's toll book. You have no plan yet; you've just stopped waiting on someone else's.",
+            "deltas": {},
+            "flags_set": [
+              "second_thread_1"
+            ]
+          }
+        },
+        {
+          "id": "test_the_decision",
+          "text": "Test the decision -- ask around about her anyway, just to know what you're turning down.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "What comes back is what always comes back: a rumor of a rasped voice, a mask that isn't for the air, a toll priced in exactly the currency you'd hoped it wouldn't be. Knowing the shape of the door you're refusing doesn't make refusing it any easier. It just makes it a real decision instead of an easy one.",
+            "deltas": {},
+            "flags_set": [
+              "second_thread_1"
+            ]
+          }
+        },
+        {
+          "id": "keep_it_quiet",
+          "text": "Don't tell anyone what you've decided. Some choices don't need an audience.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It stays a private decision instead of a declared one, which means nobody's counting on you to actually follow through. That includes you, on your worse days.",
+            "deltas": {
+              "Meaning": -1
+            },
+            "flags_set": [
+              "second_thread_1"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_second_2_first_readings",
+      "title": "First Readings",
+      "body": "There's no shortcut to starting from nothing. You spend the first stretch of nights just watching -- patrol timings, sensor sweep intervals, the small unglamorous data that never makes it into anyone's story about crossing the wire because nobody wants to hear about the boring part. It's cold, and it's slow, and most nights it produces exactly one page of numbers that mean nothing yet on their own. This is what independence actually costs, before it costs anything more dramatic: hours nobody's paying you for, spent alone, getting good at noticing.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "offgrid"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_second_door"
+          },
+          {
+            "day": 16,
+            "op": ">="
+          },
+          {
+            "flag": "second_thread_1"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "log_it_meticulously",
+          "text": "Log everything, meticulously, even the nights that produce nothing useful.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep the log even on the pointless nights, suspecting the pattern that matters will be built out of exactly those. Your sleep schedule doesn't survive the discipline. The data starts to, slowly, and you tell yourself that's the better trade.",
+            "deltas": {
+              "Physical_Integrity": -3
+            },
+            "flags_set": [
+              "second_thread_2"
+            ]
+          }
+        },
+        {
+          "id": "focus_on_one_stretch",
+          "text": "Narrow it down early -- pick one stretch of the perimeter and learn it cold.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You give up on mapping everything and commit to knowing one stretch better than anyone paid to guard it. You start to recognize the rhythm of one specific patrol instead of a blur of all of them. It feels, for the first time, like real progress instead of just effort.",
+            "deltas": {},
+            "flags_set": [
+              "second_thread_2"
+            ]
+          }
+        },
+        {
+          "id": "rush_the_process",
+          "text": "Skip some of the grind. You can fill in gaps later, once you have a shape to work with.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You let yourself skip a few of the slower nights, telling yourself the gaps will fill in once you know what you're looking for. Maybe they will. Right now the shortcut just means your own map has holes exactly where the honest version wouldn't.",
+            "deltas": {
+              "Meaning": -1
+            },
+            "flags_set": [
+              "second_thread_2"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_second_3_a_source",
+      "title": "A Source",
+      "body": "You find your source by accident, the way the good ones always seem to happen -- a maintenance tech working the graveyard shift on the sector fence, tired enough to talk more than he should to someone who asks technical questions like they're relevant to a job instead of an escape. He isn't smuggling anything, not really. He just likes being asked about his actual work by someone who listens, and doesn't think hard enough about why a random Fixer wants to know exactly when the backup sensors run their diagnostic cycle.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "offgrid"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_second_door"
+          },
+          {
+            "day": 22,
+            "op": ">="
+          },
+          {
+            "flag": "second_thread_2"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "cultivate_him_slowly",
+          "text": "Cultivate him slowly. Keep the questions technical, keep the visits casual.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep coming back, buying the coffee, asking one more question than feels necessary each time, and never asking the one that would tell him what it's actually for. It works; he talks. You walk away each time with another piece of the timing you need, and a small, specific guilt about how easy his loneliness makes it.",
+            "deltas": {
+              "Wealth": -80
+            },
+            "flags_set": [
+              "second_thread_3"
+            ]
+          }
+        },
+        {
+          "id": "pay_him_outright",
+          "text": "Pay him outright for what he knows, and skip the pretense of friendship.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You put units on the table instead of small talk, and he takes them without much hesitation, which tells you he's done this kind of transaction before, for someone. The data's good, clean, exactly what you asked for. The friendliness goes out of the conversation the moment the money lands, and you're the one who put it there.",
+            "deltas": {
+              "Wealth": -250
+            },
+            "flags_set": [
+              "second_thread_3"
+            ]
+          }
+        },
+        {
+          "id": "keep_him_unwitting",
+          "text": "Don't tell him what it's actually for. Let him think it's idle curiosity.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You let him keep believing you're just someone who finds sensor cycles interesting, and he never asks the follow-up question that would end the arrangement. Nobody's implicated, nobody's paid off, nobody even knows there's a secret. It's also a small, specific lie you tell a lonely man every time you see him, and it doesn't get lighter with repetition.",
+            "deltas": {
+              "Mental_Decay": 2
+            },
+            "flags_set": [
+              "second_thread_3"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_second_4_the_wrong_gap",
+      "title": "The Wrong Gap",
+      "body": "The gap you've been mapping for weeks turns out to be nothing -- not a blind spot in the fence line, just a routine recalibration window that resets every few days and was never going to stay open long enough to matter. You find this out the expensive way, after committing real time and real risk to timing something that was never actually there. It's the kind of mistake that would end a project run by someone with less patience than the door that's actually real is going to require.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "offgrid"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_second_door"
+          },
+          {
+            "day": 28,
+            "op": ">="
+          },
+          {
+            "flag": "second_thread_3"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "absorb_the_loss",
+          "text": "Absorb the loss. Write off the weeks and start the search over.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You cross the whole gap off the map and start over, weeks you're not getting back, a specific, quiet frustration at your own certainty having been so wrong for so long. Nobody else needs to know how close you came to planning a crossing through a door that was never a door.",
+            "deltas": {
+              "Meaning": -1
+            },
+            "flags_set": [
+              "second_thread_4"
+            ]
+          }
+        },
+        {
+          "id": "salvage_the_data",
+          "text": "Salvage what you can from the wrong lead -- some of the readings might still be useful.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You pull out what's still true from the wrong conclusion -- some patrol timing, some sensor behavior, salvage instead of total loss. It's not nothing. It's also the first time this project has required you to be honest with yourself about your own error, not just the Steward's.",
+            "deltas": {
+              "Wealth": -50
+            },
+            "flags_set": [
+              "second_thread_4"
+            ]
+          }
+        },
+        {
+          "id": "blame_the_source",
+          "text": "Go back to your source, angry, and ask why he steered you wrong.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "He looks genuinely confused -- he never claimed it was a real gap, only reported what the sensors were doing, exactly what you asked for. The mistake was yours, reading more into good data than it ever promised. He doesn't hold the outburst against you; you hold it against yourself a while longer than he does.",
+            "deltas": {
+              "Heat": 3
+            },
+            "flags_set": [
+              "second_thread_4"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_second_5_the_real_gap",
+      "title": "The Real Gap",
+      "body": "It takes months of the wrong gap's lesson applied properly, but you find it: a real seam, forty-some seconds wide, opening on its own schedule in a stretch of fence line nobody's bothered mapping because nobody official expects a body to survive the ground on either side of it. It isn't the Ferryman's ninety-one seconds. It's shorter, meaner, and entirely yours -- found with your own numbers, on your own nights, owed to no one's mercy but your own patience finally paying off.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "offgrid"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_second_door"
+          },
+          {
+            "day": 34,
+            "op": ">="
+          },
+          {
+            "flag": "second_thread_4"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "verify_the_window_again",
+          "text": "Verify the timing again, twice, before you trust it with your life.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You watch it open and close two more times before you let yourself believe it, out in the cold longer than is smart for a number you're already fairly sure of. The confirmation costs you a rough night and a body tired in a new way by morning. When the time actually comes, you'll trust your own numbers instead of just hoping them.",
+            "deltas": {
+              "Physical_Integrity": -3
+            },
+            "flags_set": [
+              "second_thread_5"
+            ]
+          }
+        },
+        {
+          "id": "keep_it_secret",
+          "text": "Tell no one, not even Vint, exactly where it is.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep the location to yourself entirely, not out of distrust, exactly, just because a door this hard-earned stops feeling fully yours the moment it's shared. It's a lonelier way to hold something this important. It's also, you tell yourself, the whole point of not borrowing this from anyone.",
+            "deltas": {},
+            "flags_set": [
+              "second_thread_5"
+            ]
+          }
+        },
+        {
+          "id": "start_planning_the_approach",
+          "text": "Start planning the actual approach immediately -- the route in, the timing to the second.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You throw yourself into the approach before you've even processed that the gap is real, mapping every step with the same obsessive care that found the seam in the first place. It's productive. It also means you haven't slept properly in days, running the same forty-some seconds over and over whether you're at the fence line or not.",
+            "deltas": {
+              "Mental_Decay": 2
+            },
+            "flags_set": [
+              "second_thread_5"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "amb_second_6_dry_run",
+      "title": "The Dry Run",
+      "body": "The dry run is a rehearsal, not the attempt -- you go to the gap at the right hour, on the right night, and walk the approach exactly as planned, without actually crossing. It's the first time any of this has been physical instead of numbers on a page, and physical is where plans first discover what they actually are. Something about the ground, the timing, your own body under real pressure, is going to surprise you tonight, one way or another. Better to learn it here, at the edge, than out in the open with the window already closing.",
+      "weight": 3,
+      "cooldown": 2,
+      "max_fires": 1,
+      "tags": [
+        "existential",
+        "offgrid"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "ambition_second_door"
+          },
+          {
+            "day": 40,
+            "op": ">="
+          },
+          {
+            "flag": "second_thread_5"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "run_it_exactly_to_plan",
+          "text": "Run it exactly to the numbers, start to finish, no deviation.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You run the whole approach exactly as mapped, and it mostly holds, except for one stretch of ground that reads different underfoot than any sensor log ever described -- soft where you expected solid, and for two seconds the plan and your own balance disagree. You catch it. You also learn the numbers don't know everything the ground does.",
+            "deltas": {},
+            "flags_set": [
+              "second_thread_6"
+            ]
+          }
+        },
+        {
+          "id": "add_a_safety_margin",
+          "text": "Build in a safety margin this time -- slower, more cautious, more room for error.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You pad the timing deliberately, giving yourself seconds you don't strictly need, at the cost of extra gear and a longer, colder wait than the bare numbers required. The rehearsal goes cleanly because of it. Whether that margin survives contact with an actual crossing, under actual pressure, is a different question than tonight answered.",
+            "deltas": {
+              "Wealth": -60
+            },
+            "flags_set": [
+              "second_thread_6"
+            ]
+          }
+        },
+        {
+          "id": "cut_it_short",
+          "text": "Stop partway through. You've confirmed enough; the rest can wait for the real thing.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You call it partway through, telling yourself you've learned what you needed and the rest is just risk without a reason yet. Maybe that's true. It also means the one part of the approach you didn't rehearse is exactly the part you'll be finding out about for the first time when it actually counts.",
+            "deltas": {
+              "Meaning": -1
+            },
+            "flags_set": [
+              "second_thread_6"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

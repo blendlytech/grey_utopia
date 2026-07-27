@@ -31,6 +31,10 @@
         {
           "when": { "all": [ { "flag": "denny_silence_told" } ] },
           "text": "The man who asked you to stop buying hears about it from the queue, secondhand, the way everything reaches him now. He closes the stall for one day, which in his economy is a state funeral."
+        },
+        {
+          "when": { "all": [ { "flag": "denny_stall_closed" } ] },
+          "text": "Somewhere under the overpass a curtain of fiber-optic beads hangs still. He asked you to stop buying, once, and you did -- you just never noticed you'd stopped visiting too."
         }
       ]
     },
@@ -101,6 +105,10 @@
         {
           "when": { "all": [ { "flag": "auntie_grief_known" } ] },
           "text": "Two marks sit at the top of the board now, one bowl each, ordered and never eaten. She serves the good broth to neither of you, because settled still means gone."
+        },
+        {
+          "when": { "all": [ { "flag": "rounding_confronted" } ] },
+          "text": "'Review pending,' it wrote -- the first movement in your file in six years. Reviews conclude. Your intake paperwork carries the classification you demanded to hear, corrected to past tense, and it is the only line in the whole record that is still exactly what you asked for."
         }
       ]
     },
@@ -145,6 +153,10 @@
         {
           "when": { "all": [ { "flag": "aud_sold_the_route" } ] },
           "text": "You sold Kael the sweep schedule once, telling yourself the outcome would have been the same either way. The ledger he keeps on you says otherwise -- it lists that morning as the first entry, and the balance never once ran in your favor again."
+        },
+        {
+          "when": { "all": [ { "flag": "rounding_leveraged" } ] },
+          "text": "You sold Kael a way to tell which of his operators the machine had decided to leave running. He ran it. By the time it reached your own name the answer was already priced, and he settled it the way he settles everything -- completely, courteously, on his own schedule."
         }
       ]
     },
@@ -187,6 +199,14 @@
         {
           "when": { "all": [ { "flag": "ferry_named_you" } ] },
           "text": "The rate card crosses with you, folded into a coat that doesn't fit this weather. On the far side, you catch yourself weighing what strangers carry before you've even said hello."
+        },
+        {
+          "when": { "all": [ { "flag": "ferry_witnessed_stand" } ] },
+          "text": "Somewhere behind you, past the lock, a book with your handwriting in it now keeps counting what people carry. You never asked to learn her arithmetic. You use it anyway."
+        },
+        {
+          "when": { "all": [ { "flag": "rounding_confronted" } ] },
+          "text": "You made it say the word out loud, in front of everyone who would stand still for it, and then you crossed anyway. Out here there is no kiosk to ask, which means you will never learn whether the crossing was the one thing that wasn't in the file, or simply the third bucket, filed on schedule, the morning you went over."
         }
       ]
     },
@@ -261,6 +281,26 @@
         {
           "when": { "all": [ { "flag": "auntie_board_kept" } ] },
           "text": "Your mark finally gets the double strike -- paid off in work, the board's highest rating. She still charges you for napkins."
+        },
+        {
+          "when": { "all": [ { "flag": "brann_workshop_endures" } ] },
+          "text": "The shop keeps his name on the door long after his hands leave the bench; somewhere in a drawer of finished rags, yours and his hang folded side by side, ink dry on both."
+        },
+        {
+          "when": { "all": [ { "flag": "dex_kept_the_post" } ] },
+          "text": "The booth's still his, label current, list still paper. Somewhere in a filing system that almost swallowed him, a metric quietly agrees you were right."
+        },
+        {
+          "when": { "all": [ { "flag": "auntie_board_passed" } ] },
+          "text": "The board's in newer hands now, chalk fresher, grammar intact. Someone still reads the marks as histories instead of amounts, which was always the only thing worth passing on."
+        },
+        {
+          "when": { "all": [ { "flag": "denny_new_trade" } ] },
+          "text": "The curtain still moves. The patter's shorter now, honester, built around a face instead of a hum he can't hear anymore -- and somehow it sells better than the old lie ever did."
+        },
+        {
+          "when": { "all": [ { "flag": "rounding_buried" } ] },
+          "text": "Somewhere upstream a paragraph stopped propagating, and you will never know whose morning it failed to arrive on. You have the bench, the hours, the same three faces on rest-cycles. A small life built on one good deed nobody can verify, which is the only kind that was ever going to hold."
         }
       ]
     },
@@ -335,6 +375,10 @@
         {
           "when": { "all": [ { "flag": "dex_list_leaked" } ] },
           "text": "Three names the forgery cost, filed and searchable now, somewhere you'll never have to look at them again. Your stipend arrives on the same schedule their reroutes used to."
+        },
+        {
+          "when": { "all": [ { "flag": "dex_replaced" } ] },
+          "text": "The new dispatch line is polite and efficient and routes everyone exactly where the numbers say they should go. Nobody there has ever read your gait like a ledger and decided to lie about what it meant."
         }
       ]
     },
@@ -391,6 +435,10 @@
         {
           "when": { "all": [ { "flag": "chm_open_ledger" } ] },
           "text": "Your published ledger is still cited, names and all, whenever the argument turns to whether a forbidden trade can police itself without a machine's help. You are, on the record, Exhibit A for the case that it can."
+        },
+        {
+          "when": { "all": [ { "flag": "rounding_shared" } ] },
+          "text": "You gave Echo the page and she turned a private humiliation into four blocks of deliberate noise. It is in the record now, cited, with your name on it: the first evidence anyone entered that permitted and free were ever two different findings. Everyone feeding that noise does it knowingly. You are the reason they had to know."
         }
       ]
     },
@@ -471,6 +519,22 @@
         {
           "when": { "all": [ { "flag": "ferry_crossed_off" } ] },
           "text": "You knew early you weren't a door, and it cost you nothing to know it. That's exactly what it's worth to you now, on the grey days -- nothing, and you'll take it."
+        },
+        {
+          "when": { "all": [ { "flag": "brann_hand_lost_alone" } ] },
+          "text": "You hear about the workshop closing secondhand, the way you hear most things now. Ink's for finished things. Nobody was there to watch his get inked."
+        },
+        {
+          "when": { "all": [ { "flag": "ferry_died_unwitnessed" } ] },
+          "text": "The seam still runs, under someone else's hand now, arithmetic intact and unremembered. You think about her sometimes, mask on, alone, and you never find out if that's how it went."
+        },
+        {
+          "when": { "all": [ { "flag": "auntie_board_lost_meaning" } ] },
+          "text": "The stall's still there under the overpass. The board is, technically, still chalked. Nobody left reads it as anything but a running total."
+        },
+        {
+          "when": { "all": [ { "flag": "rounding_leveraged" } ] },
+          "text": "Kael's people still run the filter you sold him, refined now by hands you never met. The credits went the way credits go. On the grey days you do the arithmetic anyway: your classification never once changed, because a man who sells the shape of the leash is precisely the kind of productive the word was written for."
         }
       ]
     },

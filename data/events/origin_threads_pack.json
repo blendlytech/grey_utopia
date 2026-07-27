@@ -399,7 +399,7 @@
           },
           "failure": {
             "text": "The drones don't argue with you. They simply reclassify you -- 'obstruction, re-categorized as distress' -- and the sweep proceeds around your objection like water around a stone that was never actually in its way. The family goes anyway, bags and all, and you're left standing in a stairwell that watched you lose, in public, the one time you tried to make procedure mean something by saying it out loud. Your own file, somewhere upstream, acquires a note in a hand that isn't yours. You know exactly how much that kind of annotation weighs. You used to write them.",
-            "deltas": { "Meaning": -12, "Mental_Decay": 7, "Heat": 8 },
+            "deltas": { "Meaning": -20, "Mental_Decay": 11, "Heat": 11 },
             "flags_set": [ "aud_thread_2", "aud_marked_by_the_sweep" ]
           }
         },

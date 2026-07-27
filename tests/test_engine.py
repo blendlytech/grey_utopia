@@ -11,7 +11,10 @@ from engine.decay import (
     overdose_probability, end_of_day_decay
 )
 from engine.events import Event, Choice, Insert, load_events, eval_conditions
-from engine.selector import select_event
+from engine.selector import (
+    select_event, effective_weight, chain_depth, index_library,
+    DEPTH_SCALE, MAX_DEPTH, DEADLINE_BONUS
+)
 from engine.resolver import (
     choice_probability, resolve_choice, check_endings,
     eligible_choices, apply_dose, build_epilogue,
@@ -452,6 +455,90 @@ class TestDesperationEdgeAndRest(unittest.TestCase):
         self.assertEqual(c.get("Mental_Decay"), 60.0 + REST_DELTAS["Mental_Decay"])
         self.assertEqual(c.get("Heat"), 30.0 + REST_DELTAS["Heat"])
         self.assertEqual(c.get("Meaning"), before_meaning + REST_DELTAS["Meaning"])
+
+
+class TestChainDepthScheduling(unittest.TestCase):
+    """Arc steps are scheduled on how deep a chain they sit in, not on flag count alone."""
+
+    def _library(self):
+        def granter(eid, flag, requires=None):
+            return Event(
+                id=eid, title=eid, body="b", weight=1.0,
+                preconditions={"all": [{"flag": f} for f in (requires or [])]},
+                choices=[Choice(id="c", text="c", prob={"base": 1.0},
+                                success={"flags_set": [flag]})],
+            )
+
+        filler = Event(id="filler", title="f", body="b", weight=1.0)
+        origin_gated = Event(
+            id="origin_gated", title="o", body="b", weight=1.0,
+            # 'origin_auditor' is handed out at character creation, not by a
+            # storylet, so it buys no momentum.
+            preconditions={"all": [{"flag": "origin_auditor"}]},
+            choices=[Choice(id="c", text="c", prob={"base": 1.0})],
+        )
+        self_gated = Event(
+            id="self_gated", title="s", body="b", weight=1.0,
+            preconditions={"all": [{"flag": "loop"}]},
+            choices=[Choice(id="c", text="c", prob={"base": 1.0},
+                            success={"flags_set": ["loop"]})],
+        )
+        return [
+            filler, origin_gated, self_gated,
+            granter("step1", "step1_done"),
+            granter("step2", "step2_done", ["step1_done"]),
+            granter("step3", "step3_done", ["step1_done", "step2_done"]),
+            granter("step4", "step4_done", ["step1_done", "step2_done", "step3_done"]),
+            granter("step5", "step5_done",
+                    ["step1_done", "step2_done", "step3_done", "step4_done"]),
+        ]
+
+    def _by_id(self, events):
+        return {e.id: e for e in events}
+
+    def test_chain_depth_counts_only_event_granted_flags(self):
+        events = self._library()
+        index_library(events)
+        ev = self._by_id(events)
+        self.assertEqual(chain_depth(ev["filler"]), 0)
+        self.assertEqual(chain_depth(ev["origin_gated"]), 0)   # not granted by any storylet
+        self.assertEqual(chain_depth(ev["self_gated"]), 0)     # grants its own gate
+        self.assertEqual(chain_depth(ev["step1"]), 0)
+        self.assertEqual(chain_depth(ev["step2"]), 1)
+        self.assertEqual(chain_depth(ev["step3"]), 2)
+        self.assertEqual(chain_depth(ev["step4"]), 3)
+        self.assertEqual(chain_depth(ev["step5"]), MAX_DEPTH)  # capped
+
+    def test_deep_steps_outweigh_depth_zero_filler(self):
+        events = self._library()
+        index_library(events)
+        ev = self._by_id(events)
+        c = Character()
+        c.flags.update({"step1_done", "step2_done", "step3_done", "step4_done"})
+        base = effective_weight(ev["filler"], c)
+        weights = [effective_weight(ev[f"step{i}"], c) for i in range(1, 5)]
+        self.assertEqual(weights[0], base)
+        for shallower, deeper in zip(weights, weights[1:]):
+            self.assertGreater(deeper, shallower)
+        self.assertAlmostEqual(weights[3], base * DEPTH_SCALE ** 3)
+
+    def test_deadline_pressure_survives_independent_of_depth(self):
+        c = Character()
+        c.start_clock("debt", 2)
+        urgent = Event(id="urgent", title="u", body="b", weight=1.0,
+                       preconditions={"all": [{"clock": "debt", "op": "<=", "value": 3}]})
+        index_library([urgent])
+        self.assertEqual(chain_depth(urgent), 0)
+        self.assertAlmostEqual(effective_weight(urgent, c), 1.0 + DEADLINE_BONUS)
+
+    def test_select_event_indexes_the_deck_it_is_handed(self):
+        import random as _r
+        events = self._library()
+        index_library([])            # stale index: nothing is event-granted
+        c = Character()
+        c.flags.update({"step1_done", "step2_done"})
+        select_event(events, c, day=1, rng=_r.Random(0))
+        self.assertEqual(chain_depth(self._by_id(events)["step3"]), 2)
 
 
 class TestInventoryAndFactions(unittest.TestCase):
