@@ -13,7 +13,7 @@ from engine.decay import (
 from engine.events import Event, Choice, Insert, load_events, eval_conditions
 from engine.selector import (
     select_event, effective_weight, chain_depth, index_library,
-    eligible_pool, is_ambient,
+    eligible_pool, is_ambient, on_shelf,
     DEPTH_SCALE, MAX_DEPTH, DEADLINE_BONUS, AMBIENT_TAGS, AMBIENT_SLOTS_PER_DAY
 )
 from engine.resolver import (
@@ -623,6 +623,134 @@ class TestAmbientQuota(unittest.TestCase):
             picked = select_event(self._mixed(), Character(), day=1,
                                   rng=_r.Random(seed), ambient_budget=0)
             self.assertEqual(picked.id, "thread")
+
+
+class TestDistrictShelves(unittest.TestCase):
+    """A1: a placed action slot draws a district's shelf, not the whole deck."""
+
+    def _event(self, eid: str, tags: list, district=None) -> Event:
+        return Event(id=eid, title=eid, body="b", weight=1.0, tags=tags, district=district,
+                     choices=[Choice(id="c", text="c", prob={"base": 1.0})])
+
+    def _mixed(self):
+        return [
+            self._event("chain_a", ["arc"], district="the_archive"),
+            self._event("chain_b", ["arc"], district="the_archive"),
+            self._event("elsewhere", ["arc"], district="the_terraces"),
+            self._event("noise", ["ambient"]),
+            self._event("job", ["job"]),
+        ]
+
+    def _ids(self, pool):
+        return {e.id for e in pool}
+
+    def test_district_defaults_to_neutral_and_loads_from_json(self):
+        self.assertIsNone(self._event("x", []).district)
+        loaded = load_events(json.dumps([{
+            "id": "shelved", "title": "t", "body": "b", "district": "the_archive",
+            "choices": [{"id": c, "text": c, "prob": {"base": 1.0}} for c in "abc"],
+        }]))
+        self.assertEqual(loaded[0].district, "the_archive")
+
+    def test_unplaced_slot_does_not_filter_at_all(self):
+        """Districted events stay drawable from an unplaced slot. Exclusivity would
+        make every shelved event unreachable whenever placement is off -- a live
+        footgun while PROTOTYPE_DISTRICT ships as None. See docs/A1_DESIGN.md §2."""
+        pool = eligible_pool(self._mixed(), Character(), day=1, district=None)
+        self.assertEqual(self._ids(pool),
+                         {"chain_a", "chain_b", "elsewhere", "noise", "job"})
+
+    def test_placed_slot_draws_only_the_shelf(self):
+        pool = eligible_pool(self._mixed(), Character(), day=1, district="the_archive")
+        # own content only: not the other district, not the job, not the filler
+        self.assertEqual(self._ids(pool), {"chain_a", "chain_b"})
+
+    def test_shelf_ships_without_the_neutral_ambient_pool(self):
+        """Measured, not assumed: mixing all ~88 neutral ambient events into every
+        placed draw took ambient from 21.3% to 45.7% of picks and pushed never-fired
+        103 -> 134. See the note in engine/selector.py and BACKLOG_HANDOFF.md §3."""
+        import engine.selector as sel
+        self.assertFalse(sel.SHELF_INCLUDES_AMBIENT)
+
+    def test_shelf_can_carry_neutral_ambient_when_enabled(self):
+        import engine.selector as sel
+        original = sel.SHELF_INCLUDES_AMBIENT
+        try:
+            sel.SHELF_INCLUDES_AMBIENT = True
+            pool = eligible_pool(self._mixed(), Character(), day=1, district="the_archive")
+            self.assertEqual(self._ids(pool), {"chain_a", "chain_b", "noise"})
+        finally:
+            sel.SHELF_INCLUDES_AMBIENT = original
+
+    def test_empty_shelf_falls_back_rather_than_burning_the_slot(self):
+        """Same discipline as the ambient quota's fallback: a district whose chain
+        is exhausted or still day-gated degrades into the general deck, never into
+        a dead slot."""
+        import engine.selector as sel
+        original = sel.SHELF_INCLUDES_AMBIENT
+        try:
+            sel.SHELF_INCLUDES_AMBIENT = False
+            events = self._mixed()
+            pool = eligible_pool(events, Character(), day=1, district="nowhere_at_all")
+            self.assertEqual(len(pool), len(events))
+            import random as _r
+            self.assertIsNotNone(
+                select_event(events, Character(), day=1, rng=_r.Random(0),
+                             district="nowhere_at_all"))
+        finally:
+            sel.SHELF_INCLUDES_AMBIENT = original
+
+    def test_exclusions_and_ambient_budget_compose_with_the_shelf(self):
+        pool = eligible_pool(self._mixed(), Character(), day=1,
+                             exclude_ids={"chain_a"}, ambient_budget=0,
+                             district="the_archive")
+        # chain_a is spent for the day and the ambient quota is exhausted: what is
+        # left is the rest of the shelf, and no filter overrides another.
+        self.assertEqual(self._ids(pool), {"chain_b"})
+
+    def test_select_event_stays_on_the_shelf(self):
+        import random as _r
+        for seed in range(8):
+            picked = select_event(self._mixed(), Character(), day=1, rng=_r.Random(seed),
+                                  district="the_archive")
+            self.assertIn(picked.id, {"chain_a", "chain_b"})
+
+    def test_placement_helper_tracks_the_shipped_setting(self):
+        """One switch drives every caller, so main/server/sim_bot cannot disagree."""
+        import engine.selector as sel
+        original = sel.PROTOTYPE_DISTRICT
+        try:
+            sel.PROTOTYPE_DISTRICT = None
+            self.assertIsNone(sel.district_for_slot(0))
+            self.assertIsNone(sel.district_for_slot(2))
+            sel.PROTOTYPE_DISTRICT = "the_archive"
+            self.assertEqual(sel.district_for_slot(0), "the_archive")
+            self.assertIsNone(sel.district_for_slot(sel.DISTRICT_SLOTS_PER_DAY))
+        finally:
+            sel.PROTOTYPE_DISTRICT = original
+
+    def test_on_shelf_ignores_other_districts_ambient(self):
+        """Ambient rides along only while it is neutral. Once Phase 3 gives filler
+        a home, it belongs to that district and nowhere else."""
+        theirs = self._event("their_noise", ["ambient"], district="the_terraces")
+        self.assertFalse(on_shelf(theirs, "the_archive"))
+        self.assertTrue(on_shelf(theirs, "the_terraces"))
+
+    def test_every_shelved_event_names_a_registered_district(self):
+        """The lint check's runtime twin: a typo'd district id is worse than none,
+        because the shelf it names is one no placement can ever reach."""
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        with open(os.path.join(root, "data", "districts.json"), encoding="utf-8") as fh:
+            known = {d["id"] for d in json.load(fh)["districts"]}
+        import glob
+        for path in glob.glob(os.path.join(root, "data", "events", "*.json")):
+            if os.path.basename(path) == "endings.json":
+                continue
+            with open(path, encoding="utf-8") as fh:
+                for e in json.load(fh).get("events", []):
+                    if e.get("district") is not None:
+                        self.assertIn(e["district"], known,
+                                      f"{os.path.basename(path)}:{e['id']}")
 
 
 class TestInventoryAndFactions(unittest.TestCase):

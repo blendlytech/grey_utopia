@@ -168,9 +168,24 @@ analogous per-day tag budget threaded from the day loop in `main.py` and
 well below 100, and arc draw-share should rise above 22.5%. Then re-run
 `python tests/pargate.py` -- this is a balance change, so gates must still pass.
 
-### F2 -- Kill the fake dice
+### F2 -- Kill the fake dice  *(CLOSED 2026-07-27)*
 **Addresses:** S1 (partially), player-trust
 **Effort:** small
+
+> **Closed.** The 498-choice sub-item was already handled before this item was
+> written (the F1 window found the roll-suppression already in place). The real
+> defect was the other 123: `guaranteed` was defined in `engine/resolver.py` as
+> `p >= P_MAX` (a probability threshold) rather than "no reachable failure
+> branch," so 123 choices with a live failure branch were presented as certain
+> and still failed ~2% of the time. Fixed by redefining the flag as `not
+> choice.failure`, then resolving all 123 by hand: 101 had a failure branch that
+> was textually identical to (or entirely absent from) the success branch and
+> were deleted; 22 had a genuinely distinct consequence and were committed to as
+> real gambles (`prob.base` lowered to 0.80-0.90). `pipeline/lint_content.py`
+> gained a `--report-dice` mode and a standing WARN check so this defect
+> re-entering the deck (e.g. via a future Sonnet 5 / Gemini 3.1 Pro volume batch)
+> surfaces on the next lint run. Full numbers, the two-sub-defect correction, and
+> the verified `pargate` result: `BACKLOG_HANDOFF.md` §3/§4.
 
 Two sub-items:
 - For the **498 truly guaranteed choices** (base >= 1.0, no failure branch),
@@ -218,9 +233,27 @@ for exactly one of fourteen endings.
 
 ## 3. Additions
 
-### A1 -- The Row as a map  *(the big one)*
+### A1 -- The Row as a map  *(the big one)*  *(Phase 1 DONE 2026-07-27 -- premise confirmed)*
 **Addresses:** S1, S2, S3, S7, S8
 **Effort:** ~6-8 weeks
+
+> **Phase 1 (design + one measured proof-of-concept) is complete and the premise
+> holds.** Design decisions are in `docs/A1_DESIGN.md`; numbers are in
+> `BACKLOG_HANDOFF.md` §3. Headline: shelving the 24-event `ambitions_pack` on one
+> district and reserving a placed slot for it took the chain from 6/24 events
+> reachable in 19/40 runs to **23/24 in 40/40**, and took deck-wide never-fired
+> from **103 to 83** -- the first lever in three windows to move that number the
+> right way. Shipped disabled (`PROTOTYPE_DISTRICT = None`) because the winning
+> configuration depends on a *visit cadence* that is currently a test-harness
+> stand-in for a player choosing where to stand; Phase 2 builds that choice.
+>
+> Two design positions were overturned by measurement and one by a footgun:
+> shelves do **not** carry the general ambient pool (it collapses the eligible
+> pool 209 -> 74 and takes 45.7% of picks), districts are **not** exclusive (that
+> would silently orphan every shelved event while placement is off), and
+> `betrayal_pack` should **not** be migrated at all -- 16 of its 30 events are
+> never *eligible*, which is a gating problem no shelf can reach. **Do not
+> re-open any of these without reading `A1_DESIGN.md` first.**
 
 Turn 3 action slots into 3 **placements** across 6-8 districts. Each district
 carries its own Heat, its own storylet shelf, and a travel cost.
@@ -314,12 +347,15 @@ Sunless Sea ($19).
 
 1. ~~**F1 + F2** -- one weekend. Surfaces ~20% more content and stops the dice from
    lying.~~ **F1 closed 2026-07-27 without surfacing content** -- the selector was
-   never what was hiding it. F2 stands on its own and is unaffected.
-2. **A1 (the map)** -- the big build. Retroactively fixes S2, S3, S7, S8. **F1's
-   result promotes this from "the big one" to the only structural fix on the list
-   for S2/S3**: giving a chain its own district shelf is what stops arc first-links
-   competing with the general deck, and the per-shelf budgeting mechanism F1 left
-   behind in `engine/selector.py` is the hook it needs.
+   never what was hiding it. **F2 closed 2026-07-27**, independently of F1: 0/1468
+   choices now presented as certain that can still fail.
+2. **A1 (the map) -- Phase 1 DONE 2026-07-27, Phase 2 next.** The big build.
+   Retroactively fixes S2, S3, S7, S8. **F1's result promoted this from "the big
+   one" to the only structural fix on the list for S2/S3, and Phase 1 confirmed
+   it**: giving a chain its own district shelf took it from 6/24 events reachable
+   to 23/24 and moved deck-wide never-fired 103 -> 83. The per-shelf reservation
+   mechanism F1 left behind in `engine/selector.py` was indeed the hook it needed.
+   Phase 2 turns the winning visit cadence into a real player choice.
 3. **A3 + A4** -- makes the world feel inhabited rather than simulated.
 4. **Shipping block** -- settings, saves, achievements, content warning, art.
 5. **F3 / F4** -- economy and stat pass. Best done *after* the map exists, since

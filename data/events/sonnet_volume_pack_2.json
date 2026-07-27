@@ -366,11 +366,6 @@
             "clocks_start": {
               "loan_shark": 8
             }
-          },
-          "failure": {
-            "clocks_start": {
-              "loan_shark": 8
-            }
           }
         },
         {

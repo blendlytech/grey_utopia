@@ -1,0 +1,10 @@
+{
+  "_comment": "A1 district registry. An event's optional top-level 'district' field must name an id here; pipeline/lint_content.py errors otherwise, so a typo cannot create an orphan shelf no placement can reach. Events with no district are neutral and behave exactly as they did before districts existed. See docs/A1_DESIGN.md.",
+  "districts": [
+    {
+      "id": "the_archive",
+      "name": "The Archive Stacks",
+      "blurb": "Rows of dead terminals under sodium light, where the Steward keeps what it has finished reading. People come here to look up who they used to be, and to decide what to do about it."
+    }
+  ]
+}

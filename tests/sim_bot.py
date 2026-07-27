@@ -26,7 +26,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from engine.stats import create_starter_fixer, Character
 from engine.events import Event, Choice, load_events
-from engine.selector import select_event, is_ambient, ambient_budget_for
+from engine.selector import select_event, is_ambient, ambient_budget_for, district_for_slot
 from engine.resolver import resolve_choice, check_endings, choice_probability, eligible_choices
 from engine.decay import end_of_day_decay, compute_daily_stress
 
@@ -157,9 +157,10 @@ def run_single_simulation(strategy: str = "random", seed: int = 0, max_days: int
         slots = 3 if (character.get("Physical_Integrity") >= 30 and character.get("Mental_Decay") <= 80) else 2
         fired_today: set = set()
         ambient_today = 0
-        for _ in range(slots):
+        for slot in range(slots):
             ev = select_event(all_events, character, character.day, rng, exclude_ids=fired_today,
-                              ambient_budget=ambient_budget_for(ambient_today))
+                              ambient_budget=ambient_budget_for(ambient_today),
+                              district=district_for_slot(slot))
             if not ev:
                 break
             fired_today.add(ev.id)

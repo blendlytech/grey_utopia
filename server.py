@@ -12,7 +12,7 @@ from urllib.parse import urlparse
 
 from engine.stats import create_starter_fixer, Character
 from engine.events import Event, load_events
-from engine.selector import select_event, is_ambient, ambient_budget_for
+from engine.selector import select_event, is_ambient, ambient_budget_for, district_for_slot
 from engine.resolver import (
     choice_probability, resolve_choice, check_endings,
     eligible_choices, build_epilogue, build_run_memories,
@@ -156,10 +156,11 @@ class GameSession:
         # (a soft-lock guard; the linter forbids authoring such events).
         skip = set(self.fired_today)
         budget = ambient_budget_for(self.ambient_today)
+        district = district_for_slot(self.used_slots_today)
         for _ in range(8):
             candidate = select_event(
                 self.events, self.character, self.character.day, self.rng,
-                exclude_ids=skip, ambient_budget=budget
+                exclude_ids=skip, ambient_budget=budget, district=district
             )
             if candidate is None or eligible_choices(candidate.choices, self.character):
                 self.current_event = candidate

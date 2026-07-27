@@ -63,6 +63,72 @@ def ambient_budget_for(ambient_today: int) -> Optional[int]:
     return AMBIENT_SLOTS_PER_DAY - ambient_today
 
 
+# --- A1: district shelves -------------------------------------------------
+#
+# An action slot can be *placed* in a district, and a placed slot draws from that
+# district's shelf rather than from the whole deck. This is the reservation F1's
+# ambient quota was the wrong end of: budgeting a tag down redistributes weight
+# into the 55.8% untagged middle, but reserving a draw for a shelf takes the
+# general deck out of the competition entirely.
+#
+# It exists because one measurement made the case unarguable. `amb_the_choosing`
+# -- the fork that hands out all three ambitions, and so the root of 23 downstream
+# storylets -- is gated on `day >= 6` and nothing else. At n=40 it was eligible in
+# 40/40 runs, sat in the pool for 2290 draws, and won 19 of them: a 0.789% median
+# share of each draw's weight. It is not hidden, it is drowned, and no weighting
+# lever reaches something losing at that ratio. See docs/A1_DESIGN.md §0.
+#
+# Shipped disabled (PROTOTYPE_DISTRICT = None): every slot is unplaced, every
+# event is district-neutral, and behaviour is identical to pre-A1. Absent-means-
+# neutral is also what lets the deck migrate one pack at a time.
+PROTOTYPE_DISTRICT: Optional[str] = None
+DISTRICT_SLOTS_PER_DAY: int = 1
+
+# Whether a district's shelf also carries the district-neutral ambient storylets.
+#
+# Off, and that is the measurement overruling the design. The argument for On was
+# that ambient filler is the city and the city is everywhere, so a shelf holding
+# only a day-gated chain would be a vending machine with no texture. The vending
+# machine is real -- see the cadence note below -- but mixing the *whole* neutral
+# ambient pool into every placed draw is a much worse cure than the disease:
+#
+#   On, one placed slot a day: the shelf's 24 events drew against ~88 ambient, so
+#   ambient took 45.7% of all picks (from 21.3%), the median eligible pool fell
+#   209 -> 74, arc draw-share fell 24.7% -> 19.3%, and never-fired rose 103 -> 134.
+#   The chain itself only reached 16/24 events in 27/40 runs.
+#
+#   Off, same placement: the chain reached 19/24 in 40/40 runs and never-fired
+#   moved 103 -> 118 -- still a regression, but half the size, and the chain got
+#   the benefit the shelf exists to give.
+#
+# What actually fixes the vending machine is visit *cadence*, not shelf dilution:
+# at one placed slot every 5 days the chain reaches 23/24 events in 40/40 runs at
+# a 10.5% win rate on eligible draws (not 100%), and the deck-wide numbers come
+# out ahead of baseline rather than behind. Full A/B in BACKLOG_HANDOFF.md §3.
+#
+# The right texture is a district's *own* ambient, which does not exist until
+# Phase 3 distributes the volume pack across shelves. Revisit this flag then, with
+# proportionate filler rather than all of it.
+SHELF_INCLUDES_AMBIENT: bool = False
+
+
+def district_for_slot(slot_index: int) -> Optional[str]:
+    """Which district the day's `slot_index`-th action slot is placed in.
+
+    The direct analogue of ambient_budget_for: the three day loops call it
+    unconditionally and the on/off switch lives in exactly one place. None means
+    the slot is unplaced and draws from the district-neutral pool.
+
+    A placeholder for player agency. The full A1 has the player placing each of
+    the day's slots across 6-8 districts; until that UI exists, this hands the
+    first DISTRICT_SLOTS_PER_DAY slots to the prototype district so the mechanism
+    can be measured end to end.
+    """
+    if PROTOTYPE_DISTRICT is None:
+        return None
+    return PROTOTYPE_DISTRICT if slot_index < DISTRICT_SLOTS_PER_DAY else None
+
+
 # Flag provenance for the currently indexed library: flag -> ids of the events
 # that can grant it. Rebuilt whenever select_event is handed a different deck.
 _flag_sources: Dict[str, Set[str]] = {}
@@ -171,12 +237,25 @@ def is_ambient(event: Event) -> bool:
     return bool(AMBIENT_TAGS.intersection(event.tags))
 
 
+def on_shelf(event: Event, district: str) -> bool:
+    """True if a slot placed in `district` can draw this storylet.
+
+    The district's own content, plus -- when SHELF_INCLUDES_AMBIENT -- the
+    district-neutral ambient filler that belongs to the whole city rather than
+    to any one part of it.
+    """
+    if event.district == district:
+        return True
+    return SHELF_INCLUDES_AMBIENT and event.district is None and is_ambient(event)
+
+
 def eligible_pool(
     events: Sequence[Event],
     character: Character,
     day: int,
     exclude_ids: Optional[Set[str]] = None,
     ambient_budget: Optional[int] = None,
+    district: Optional[str] = None,
 ) -> List[Event]:
     """Every storylet that could fire right now, after exclusions and the quota.
 
@@ -187,6 +266,23 @@ def eligible_pool(
     handed back. Returning nothing would silently burn the player's action slot,
     and the early game is the realistic trigger: almost everything eligible on
     day 1 is ambient.
+
+    `district` is where the caller placed this action slot. A placed slot draws
+    that district's shelf instead of the general deck: this is a reservation, not
+    a nudge, and it is the only part of A1 that can move a first link losing 2271
+    of 2290 draws. If the shelf comes back empty (its chain exhausted, or every
+    link still day-gated), the unfiltered pool is handed back for the same reason
+    the ambient quota yields -- a dead slot is worse than an off-theme one.
+
+    None -- unplaced -- does not filter at all, so a districted event stays
+    drawable from unplaced slots. Deliberately *not* the stricter reading, under
+    which a district's content is invisible from outside it. Exclusivity would
+    make every shelved event unreachable the moment placement is off (a live
+    footgun while PROTOTYPE_DISTRICT ships as None, and during a migration where
+    most of the map does not exist yet), and it would buy nothing: hiding a
+    storylet from the other two slots cannot help it win the one it is reserved
+    on. Revisit in Phase 3, once every event has a home and 'neutral' means
+    ambient rather than unmigrated. See docs/A1_DESIGN.md §2.
     """
     exclude_ids = exclude_ids or set()
     # Never repeat a storylet within the same day.
@@ -194,8 +290,11 @@ def eligible_pool(
     if ambient_budget is not None and ambient_budget <= 0:
         budgeted = [e for e in pool if not is_ambient(e)]
         if budgeted:
-            return budgeted
-    return pool
+            pool = budgeted
+    if district is None:
+        return pool
+    shelf = [e for e in pool if on_shelf(e, district)]
+    return shelf or pool
 
 
 def select_event(
@@ -205,6 +304,7 @@ def select_event(
     rng: Optional[random.Random] = None,
     exclude_ids: Optional[Set[str]] = None,
     ambient_budget: Optional[int] = None,
+    district: Optional[str] = None,
 ) -> Optional[Event]:
     """Select a single eligible storylet based on state-influenced weighted probability."""
     rng = rng or random.Random()
@@ -212,7 +312,7 @@ def select_event(
     if _token(events) != _index_token:
         index_library(events)
 
-    pool = eligible_pool(events, character, day, exclude_ids, ambient_budget)
+    pool = eligible_pool(events, character, day, exclude_ids, ambient_budget, district)
     if not pool:
         return None
 

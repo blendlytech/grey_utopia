@@ -27,8 +27,16 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from engine.events import load_events
 from engine.stats import STAT_SPEC
+from engine.resolver import P_MAX
 
 DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data"))
+
+
+def event_pack_files() -> List[str]:
+    return sorted(
+        f for f in glob.glob(os.path.join(DATA_DIR, "events", "*.json"))
+        if os.path.basename(f) != "endings.json"
+    )
 
 
 def practical_stat_range(stat: str) -> float:
@@ -90,11 +98,9 @@ def lint() -> int:
     items_referenced: Dict[str, List[str]] = {}
     clocks_started: Set[str] = set()
     rel_names_used: Dict[str, List[str]] = {}
+    districts_used: Dict[str, List[str]] = {}
 
-    pack_files = sorted(
-        f for f in glob.glob(os.path.join(DATA_DIR, "events", "*.json"))
-        if os.path.basename(f) != "endings.json"
-    )
+    pack_files = event_pack_files()
 
     total_events = 0
     for filepath in pack_files:
@@ -112,6 +118,9 @@ def lint() -> int:
         for e in raw:
             eid = e.get("id", "?")
             id_counts[eid] += 1
+
+            if e.get("district") is not None:
+                districts_used.setdefault(e["district"], []).append(f"{name}:{eid}")
 
             pre = e.get("preconditions", {})
             for grp in ("all", "any", "none"):
@@ -144,7 +153,14 @@ def lint() -> int:
                             f"{name}:{eid}:{ch.get('id')}: coef {mod['coef']} on {mod.get('stat')} "
                             f"can swing probability by {swing * 100:.0f}pts -- likely saturates the clamp"
                         )
-                risky = 0.0 < float(prob.get("base", 1.0)) < 1.0
+                base = float(prob.get("base", 1.0))
+                risky = 0.0 < base < 1.0
+                if base >= P_MAX and ch.get("failure"):
+                    warnings.append(
+                        f"{name}:{eid}:{ch.get('id')}: base {base} clamps to P_MAX ({P_MAX}) but still has "
+                        f"a failure branch -- presented as certain, fails ~2% of the time anyway "
+                        f"(see BACKLOG_HANDOFF.md F2: lower base below {P_MAX} or delete the failure branch)"
+                    )
                 for branch_name in ("success", "failure"):
                     branch = ch.get(branch_name, {})
                     if risky and branch and not branch.get("text"):
@@ -209,6 +225,23 @@ def lint() -> int:
         if rel_name not in known_names:
             errors.append(f"Relationship '{rel_name}' used by {sites[:3]} not defined in cast.json")
 
+    # District ids vs the registry. A typo here is invisible at runtime and
+    # strictly worse than no district at all: engine/selector.eligible_pool hides
+    # a districted event from every unplaced slot, so an event shelved in a
+    # district no placement can name becomes unreachable rather than merely
+    # off-theme. See docs/A1_DESIGN.md §1.
+    districts_path = os.path.join(DATA_DIR, "districts.json")
+    known_districts: Set[str] = set()
+    if os.path.exists(districts_path):
+        with open(districts_path, "r", encoding="utf-8") as fh:
+            known_districts = {d["id"] for d in json.load(fh).get("districts", [])}
+    for district, sites in districts_used.items():
+        if district not in known_districts:
+            errors.append(
+                f"District '{district}' assigned by {sites[:3]} is not defined in districts.json "
+                f"-- those events are unreachable, not just unplaced"
+            )
+
     # Endings coverage
     endings_path = os.path.join(DATA_DIR, "events", "endings.json")
     endings_defined: Set[str] = set()
@@ -220,7 +253,9 @@ def lint() -> int:
     for ending in endings_defined - RESOLVER_ENDINGS:
         warnings.append(f"endings.json defines '{ending}' but no code path returns it")
 
-    print(f"Linted {len(pack_files)} pack(s), {total_events} events, {len(flags_set)} distinct flags.")
+    shelved = sum(len(v) for v in districts_used.values())
+    print(f"Linted {len(pack_files)} pack(s), {total_events} events, {len(flags_set)} distinct flags, "
+          f"{shelved} event(s) on {len(districts_used)} district shelf/shelves.")
     for w in warnings:
         print(f"  WARN:  {w}")
     for e in errors:
@@ -234,5 +269,52 @@ def lint() -> int:
     return 1 if errors else 0
 
 
+def report_dice(verbose: bool = False) -> int:
+    """Partition every choice in the deck by how certain it actually is.
+
+    'truly guaranteed' = no reachable failure branch: resolve_choice falls back
+    to the success branch whenever `choice.failure` is empty, so these cannot
+    fail regardless of prob.base or stat mods. 'near-certain but fallible' = a
+    failure branch DOES exist, and prob.base alone (no mods) already clamps to
+    P_MAX -- i.e. it still fails ~2% of the time via the P_MAX ceiling in
+    engine/resolver.py, yet the OLD `guaranteed = p >= P_MAX` flag mislabeled it
+    as certain. Everything else is a genuine gamble. See BACKLOG_HANDOFF.md §4.
+    """
+    total = 0
+    truly_guaranteed: List[str] = []
+    near_certain_fallible: List[str] = []
+    gambles = 0
+
+    for filepath in event_pack_files():
+        name = os.path.basename(filepath)
+        for ev in load_events(filepath):
+            for ch in ev.choices:
+                total += 1
+                base = float((ch.prob or {}).get("base", 0.5))
+                if not ch.failure:
+                    truly_guaranteed.append(f"{name}:{ev.id}:{ch.id}")
+                elif base >= P_MAX:
+                    near_certain_fallible.append(f"{name}:{ev.id}:{ch.id}")
+                else:
+                    gambles += 1
+
+    print(f"=== dice report: {total} total choices ===")
+    print(f"  truly guaranteed (no failure branch):        {len(truly_guaranteed)}")
+    print(f"  near-certain but fallible (base >= {P_MAX}):   {len(near_certain_fallible)}")
+    print(f"  genuine gambles:                             {gambles}")
+    print(f"\n  BACKLOG_HANDOFF.md baseline: 498 truly guaranteed / 123 near-certain / 1468 total")
+    print(f"  drift vs baseline: truly_guaranteed {len(truly_guaranteed) - 498:+d}, "
+          f"near_certain {len(near_certain_fallible) - 123:+d}, total {total - 1468:+d}")
+
+    if verbose:
+        print("\n  near-certain-but-fallible ids (pack:event:choice):")
+        for tag in near_certain_fallible:
+            print(f"    {tag}")
+
+    return 0
+
+
 if __name__ == "__main__":
+    if "--report-dice" in sys.argv:
+        sys.exit(report_dice(verbose="--verbose" in sys.argv))
     sys.exit(lint())

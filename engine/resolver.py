@@ -194,8 +194,12 @@ def resolve_choice(
         if item_catalog.is_single_use(item_id):
             character.remove_item(item_id)
 
+    # 'guaranteed' means cannot fail -- no reachable failure branch -- not merely
+    # a high probability. Anything with a live failure branch still clamps to
+    # P_MAX at most, so it fails ~2% of the time; presenting that as certain is
+    # the game lying to the player (see BACKLOG_HANDOFF.md F2).
     last_resolution.clear()
-    last_resolution.update({"p": p, "roll": roll, "guaranteed": 1.0 if p >= P_MAX else 0.0})
+    last_resolution.update({"p": p, "roll": roll, "guaranteed": 0.0 if was_gamble else 1.0})
 
     # Apply stat deltas
     character.apply_deltas(branch.get("deltas", {}))

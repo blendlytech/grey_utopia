@@ -6,6 +6,7 @@
   "events": [
     {
       "id": "amb_the_choosing",
+      "district": "the_archive",
       "title": "What You Actually Want",
       "body": "The Steward's morning ping is soft, the way it always is. 'A brief wellness check-in -- personal direction, five minutes, no obligation.' No obligation is doing a lot of work in that sentence. You could close it, the way you close most of what the Steward offers you dressed as care. But the question underneath it is a real one, and it's yours whether or not you answer the ping: what do you actually want, across the whole stretch of days ahead, not just today's jobs. Something in you already knows. It's been sitting there since before the first drone learned to say your name kindly.",
       "weight": 6,
@@ -93,6 +94,7 @@
     },
     {
       "id": "amb_clean_finale_the_last_payment",
+      "district": "the_archive",
       "title": "The Last Payment",
       "body": "It comes down to this: pay it yourself, take the offer that clears it in one dirty stroke, or let the last of their patience run out and see what that costs. You've had weeks to decide and the decision has stayed exactly this hard the whole time. There's no version of today where the debt is still an abstraction.",
       "weight": 5,
@@ -212,6 +214,7 @@
     },
     {
       "id": "amb_clean_8_the_collectors",
+      "district": "the_archive",
       "title": "The Collectors",
       "body": "They don't kick the door in. They knock, twice, patient as an invoice, and when you open it the taller one is already writing something on a slate. 'We can do this the way that leaves you standing,' she says, 'or the other way.' Behind her, the stairwell is very quiet, the specific quiet of a building that has already decided not to remember this.",
       "weight": 5,
@@ -327,6 +330,7 @@
     },
     {
       "id": "amb_signal_5_the_offer",
+      "district": "the_archive",
       "title": "An Offer to Preserve It",
       "body": "It arrives through an intermediary, the way everything the Steward wants deniability on arrives through an intermediary: an offer to 'preserve' what you're building, officially, curated for continuity. Nothing is confiscated. Nothing is even asked for outright. Just an offer, warm as oil, to make sure your record survives -- on terms somebody else sets.",
       "weight": 3,
@@ -421,6 +425,7 @@
     },
     {
       "id": "amb_signal_finale_release",
+      "district": "the_archive",
       "title": "Where It Goes",
       "body": "The record is as finished as it will ever be, which is to say: finished the way anything honest is finished, with edges you're still not sure about. What's left is the only question that ever mattered -- not whether it's true, but what happens to it now that it is.",
       "weight": 3,
@@ -521,6 +526,7 @@
     },
     {
       "id": "amb_second_finale_the_crossing",
+      "district": "the_archive",
       "title": "Your Own Door",
       "body": "The gap is real, mapped in your own hand, on your own clock, owed to nobody's mercy. Nothing about it is borrowed. That's the whole point, and it's also the whole problem: nobody has ever crossed here before you, which means nobody has ever survived crossing here before you either. The window is open. It will not stay that way.",
       "weight": 3,
@@ -621,6 +627,7 @@
     },
     {
       "id": "amb_second_8_aftermath",
+      "district": "the_archive",
       "title": "The Window, Again",
       "body": "The numbers were good. You just weren't ready to spend them. Now the gap is back in your own hand, on your own clock, one more time -- and this time there is no version of tonight where not deciding counts as a decision.",
       "weight": 2,
@@ -720,6 +727,7 @@
     },
     {
       "id": "amb_clean_1_the_name",
+      "district": "the_archive",
       "title": "The Name You Kept Quiet",
       "body": "The slip comes through a runner you don't recognize, Corso's mark pressed into the wax like it still means something down here. You know the number before you open it -- you've known it, unopened, for years, the way you know how much a scar itches before you look. He fronted you the units for Mara's treatment when the Steward's own ledger said no, and he never once asked for it back out loud. That was never mercy. That was interest, patient as anything else down here, counting the whole time you weren't.",
       "weight": 5,
@@ -799,6 +807,7 @@
     },
     {
       "id": "amb_clean_2_the_ledger",
+      "district": "the_archive",
       "title": "The Ledger",
       "body": "Corso doesn't do the arithmetic himself anymore -- he has a clerk for that, a thin woman with a ledger book instead of a face, who walks you through the compounding like a surgeon walking you through a scan. The number isn't what you remembered. It's worse, padded out over years by an interest schedule you never agreed to, only failed to argue with when arguing would have mattered. She doesn't apologize for the total. Ledgers don't apologize; they just wait for you to stop flinching.",
       "weight": 5,
@@ -879,6 +888,7 @@
     },
     {
       "id": "amb_clean_3_first_payment",
+      "district": "the_archive",
       "title": "First Payment",
       "body": "The first payment has to be real, not a gesture -- Corso doesn't collect gestures. You put together what you can: overtime nobody asked you to work, a favor called in, something sold you didn't expect to miss until it was already gone. It adds up, barely, to a number that makes a dent instead of a joke. Handing it over feels like the first true thing you've done about this in years, which doesn't make it easier, only real.",
       "weight": 5,
@@ -963,6 +973,7 @@
     },
     {
       "id": "amb_clean_4_the_setback",
+      "district": "the_archive",
       "title": "The Setback",
       "body": "Something shifts before the second payment is due. Maybe it's a Heat spike putting your face somewhere it shouldn't be, maybe a rival claimant surfacing to argue Corso's debt is actually owed to someone else now, maybe just Corso's own patience finally showing its bottom. Whatever the shape of it, the effect is the same: the debt stops being a slow, private thing you manage on your own schedule and starts being a clock somebody else is holding.",
       "weight": 5,
@@ -1075,6 +1086,7 @@
     },
     {
       "id": "amb_clean_5_second_payment",
+      "district": "the_archive",
       "title": "Second Payment",
       "body": "The second payment is bigger than the first, on purpose -- Corso's clerk has never once let the schedule get easier with time, only more specific. This is the installment that actually costs something instead of just proving you're trying: real money, a real asset, or a favor with no matching one to call in return. Whichever way you find it, this is the payment that decides whether the debt is actually closing, or whether you're just managing the interest on your own decline.",
       "weight": 5,
@@ -1172,6 +1184,7 @@
     },
     {
       "id": "amb_clean_6_the_reckoning_offer",
+      "district": "the_archive",
       "title": "The Reckoning Offer",
       "body": "The shortcut arrives the way shortcuts always do down here -- through someone who already knows exactly how much you owe and exactly how tired you are of owing it. One stroke, they say: sell the right thing, look the other way on the right name, take the one job you've been turning down for months, and Corso's ledger closes tomorrow instead of over years. Nobody involved pretends it's clean. They only point out, reasonably, that clean has been costing you for a while now and hasn't actually worked.",
       "weight": 5,
@@ -1249,6 +1262,7 @@
     },
     {
       "id": "amb_signal_1_the_idea",
+      "district": "the_archive",
       "title": "One Name First",
       "body": "It starts with one name: the woman two floors down who stopped answering her door last spring, whose file the Steward quietly updated to 'voluntary relocation, wellness track' within a week. You knew her. You know what her voice sounded like arguing with the vending unit, and nowhere in any record that survives her does that voice exist anymore, only a euphemism with a timestamp. Sitting with that thought longer than is probably healthy, you decide somebody has to write down what's actually true before the euphemisms finish their work on everyone else too.",
       "weight": 3,
@@ -1320,6 +1334,7 @@
     },
     {
       "id": "amb_signal_2_first_entry",
+      "district": "the_archive",
       "title": "The First Real Entry",
       "body": "The first real entry takes longer than expected, not because the facts are hard to find but because writing them down plainly keeps wanting to become something else -- softer, safer, more like the euphemisms you started this to replace. Secrecy, it turns out, was never the hard part; you've kept secrets your whole life without much effort. Honesty is a discipline you have to practice, sentence by sentence, and the record only means anything if you keep choosing the harder version every time the easier one offers itself.",
       "weight": 3,
@@ -1396,6 +1411,7 @@
     },
     {
       "id": "amb_signal_3_a_witness",
+      "district": "the_archive",
       "title": "A Witness",
       "body": "Vint finds the drive before you mean to show anyone -- not through you, through the traffic your own reading habits have started leaving, the kind only someone who watches networks for a living would notice. He doesn't say anything for a long moment, turning it over like a die he isn't sure how to read yet. 'You know what this is if it gets found,' he says finally, not a question. Whatever he does next decides more about this project's odds than anything you've written so far.",
       "weight": 3,
@@ -1477,6 +1493,7 @@
     },
     {
       "id": "amb_signal_4_the_near_miss",
+      "district": "the_archive",
       "title": "The Near Miss",
       "body": "The Steward's routine audit sweeps your block on a Tuesday, the kind of scheduled maintenance nobody reads twice until it's happening to them specifically. A drone catalogues your apartment's data traffic the way it catalogues everyone's, bored and thorough, and for eleven seconds your own reading habits sit inside a scan radius built to notice exactly your pattern. It moves on. Routine audits always move on eventually, which is the design -- confidence built on statistics, not safety. You spend the rest of the day recalculating exactly how much you've been protecting, and by how little.",
       "weight": 3,
@@ -1556,6 +1573,7 @@
     },
     {
       "id": "amb_signal_6_the_last_entry",
+      "district": "the_archive",
       "title": "The Last Entry",
       "body": "The record is close to finished, which means the last decisions are the ones that actually matter: not what to add, but what to leave out. There's a living person's name in your notes who never agreed to be in anyone's permanent account of anything, and a plain admission, buried in your own entries, of something you did that would look like a crime to whoever reads this after you're gone. Finished doesn't mean everything true belongs in it. It means you've decided which true things you're willing to be responsible for, permanently.",
       "weight": 3,
@@ -1643,6 +1661,7 @@
     },
     {
       "id": "amb_second_1_the_refusal",
+      "district": "the_archive",
       "title": "The Refusal",
       "body": "Word about the Ferryman reaches everyone eventually, one way or another -- a name passed like a rumor with a price tag, a seam that opens for ninety-one seconds if you can find her and afford her toll book. You could go looking. Plenty do, and some even make it. Sitting with the decision longer than it probably needs, you decide that whatever door gets you out of here, it isn't going to be one you found because someone else's mercy pointed you at it.",
       "weight": 3,
@@ -1727,6 +1746,7 @@
     },
     {
       "id": "amb_second_2_first_readings",
+      "district": "the_archive",
       "title": "First Readings",
       "body": "There's no shortcut to starting from nothing. You spend the first stretch of nights just watching -- patrol timings, sensor sweep intervals, the small unglamorous data that never makes it into anyone's story about crossing the wire because nobody wants to hear about the boring part. It's cold, and it's slow, and most nights it produces exactly one page of numbers that mean nothing yet on their own. This is what independence actually costs, before it costs anything more dramatic: hours nobody's paying you for, spent alone, getting good at noticing.",
       "weight": 3,
@@ -1804,6 +1824,7 @@
     },
     {
       "id": "amb_second_3_a_source",
+      "district": "the_archive",
       "title": "A Source",
       "body": "You find your source by accident, the way the good ones always seem to happen -- a maintenance tech working the graveyard shift on the sector fence, tired enough to talk more than he should to someone who asks technical questions like they're relevant to a job instead of an escape. He isn't smuggling anything, not really. He just likes being asked about his actual work by someone who listens, and doesn't think hard enough about why a random Fixer wants to know exactly when the backup sensors run their diagnostic cycle.",
       "weight": 3,
@@ -1883,6 +1904,7 @@
     },
     {
       "id": "amb_second_4_the_wrong_gap",
+      "district": "the_archive",
       "title": "The Wrong Gap",
       "body": "The gap you've been mapping for weeks turns out to be nothing -- not a blind spot in the fence line, just a routine recalibration window that resets every few days and was never going to stay open long enough to matter. You find this out the expensive way, after committing real time and real risk to timing something that was never actually there. It's the kind of mistake that would end a project run by someone with less patience than the door that's actually real is going to require.",
       "weight": 3,
@@ -1962,6 +1984,7 @@
     },
     {
       "id": "amb_second_5_the_real_gap",
+      "district": "the_archive",
       "title": "The Real Gap",
       "body": "It takes months of the wrong gap's lesson applied properly, but you find it: a real seam, forty-some seconds wide, opening on its own schedule in a stretch of fence line nobody's bothered mapping because nobody official expects a body to survive the ground on either side of it. It isn't the Ferryman's ninety-one seconds. It's shorter, meaner, and entirely yours -- found with your own numbers, on your own nights, owed to no one's mercy but your own patience finally paying off.",
       "weight": 3,
@@ -2039,6 +2062,7 @@
     },
     {
       "id": "amb_second_6_dry_run",
+      "district": "the_archive",
       "title": "The Dry Run",
       "body": "The dry run is a rehearsal, not the attempt -- you go to the gap at the right hour, on the right night, and walk the approach exactly as planned, without actually crossing. It's the first time any of this has been physical instead of numbers on a page, and physical is where plans first discover what they actually are. Something about the ground, the timing, your own body under real pressure, is going to surprise you tonight, one way or another. Better to learn it here, at the edge, than out in the open with the window already closing.",
       "weight": 3,

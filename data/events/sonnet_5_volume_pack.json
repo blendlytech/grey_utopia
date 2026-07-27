@@ -93,15 +93,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "Dex shrugs, already scrolling for the next name on his list. You keep the night clean and the rent exactly as unpaid as it was an hour ago.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ],
@@ -345,12 +336,6 @@
             "deltas": {
               "Meaning": 2
             }
-          },
-          "failure": {
-            "text": "She tells you about the years before the Steward, when smoke like this just meant dinner was ready and nobody filed a report about it. You don't buy anything. You still leave having paid — twenty minutes you won't get back, and a story you'll be turning over at 3 a.m.",
-            "deltas": {
-              "Meaning": 2
-            }
           }
         }
       ]
@@ -445,12 +430,6 @@
             "deltas": {
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "You leave the laundromat empty-handed. Your head stays clear tonight — not cured, just postponed.",
-            "deltas": {
-              "Meaning": 1
-            }
           }
         }
       ]
@@ -532,13 +511,6 @@
             "mods": []
           },
           "success": {
-            "text": "She nods, says she understands, and leaves quieter than she came. You know it isn't fine.",
-            "deltas": {
-              "Family_Friction": 3,
-              "Wealth": 100
-            }
-          },
-          "failure": {
             "text": "She nods, says she understands, and leaves quieter than she came. You know it isn't fine.",
             "deltas": {
               "Family_Friction": 3,
@@ -636,16 +608,6 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "You wake up to a single unread message: 'nvm, figured it out.' It doesn't feel like a win.",
-            "deltas": {
-              "Family_Friction": 4,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
       ]
@@ -701,16 +663,6 @@
             "mods": []
           },
           "success": {
-            "text": "'Understood,' the Steward says — warm, unbothered, filing your refusal under a category you'll never see the name of.",
-            "deltas": {
-              "Meaning": 1,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "'Understood,' the Steward says — warm, unbothered, filing your refusal under a category you'll never see the name of.",
             "deltas": {
               "Meaning": 1,
@@ -788,16 +740,6 @@
             "flags_set": [
               "steward_civic_dossier"
             ]
-          },
-          "failure": {
-            "text": "The credit lands quietly. You spend it before you can think too hard about why it was given.",
-            "deltas": {
-              "Wealth": 400,
-              "Meaning": -1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
           }
         },
         {
@@ -841,16 +783,6 @@
             "mods": []
           },
           "success": {
-            "text": "The credit expires unclaimed. A small, useless act of defiance, and the one Steward transaction all week that didn't add to your file — for exactly as long as refusing it stays interesting to you.",
-            "deltas": {
-              "Meaning": 3,
-              "Wealth": -100
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
-          },
-          "failure": {
             "text": "The credit expires unclaimed. A small, useless act of defiance, and the one Steward transaction all week that didn't add to your file — for exactly as long as refusing it stays interesting to you.",
             "deltas": {
               "Meaning": 3,
@@ -958,15 +890,6 @@
             "mods": []
           },
           "success": {
-            "text": "You keep walking. The gate creaks shut behind you, and some nights you'll still wonder what was worth taking.",
-            "deltas": {
-              "Heat": -1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
-          },
-          "failure": {
             "text": "You keep walking. The gate creaks shut behind you, and some nights you'll still wonder what was worth taking.",
             "deltas": {
               "Heat": -1
@@ -1197,12 +1120,6 @@
             "mods": []
           },
           "success": {
-            "text": "She shrugs, unbothered, already turning back to her press — you leave with your money and the small, nagging sense you'll be back when you're more desperate.",
-            "deltas": {
-              "Heat": -1
-            }
-          },
-          "failure": {
             "text": "She shrugs, unbothered, already turning back to her press — you leave with your money and the small, nagging sense you'll be back when you're more desperate.",
             "deltas": {
               "Heat": -1
@@ -1873,16 +1790,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "You collect your standard allotment, nothing more, nothing less. Some days invisibility is its own quiet reward.",
-            "deltas": {
-              "Mental_Decay": -1,
-              "Meaning": 1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
@@ -1978,16 +1885,6 @@
             "mods": []
           },
           "success": {
-            "text": "You make a call, broker the connection, and step back from the risk entirely. The favor economy grinds on without you touching a single wire.",
-            "deltas": {
-              "Social_Capital": 2,
-              "Heat": 0
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
-          },
-          "failure": {
             "text": "You make a call, broker the connection, and step back from the risk entirely. The favor economy grinds on without you touching a single wire.",
             "deltas": {
               "Social_Capital": 2,
@@ -2200,13 +2097,6 @@
               "Social_Capital": 3,
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "His face pales and he folds up shop faster than you thought possible. He owes you now, quietly — the kind of debt that's worth more than a chip, until the day he can't pay it back.",
-            "deltas": {
-              "Social_Capital": 3,
-              "Meaning": 1
-            }
           }
         }
       ]
@@ -2235,17 +2125,6 @@
             "mods": []
           },
           "success": {
-            "text": "The transfer goes through and her reply comes fast — relief wrapped in gratitude wrapped in guilt. You feel useful, for once, in the way she needs.",
-            "deltas": {
-              "Wealth": -600,
-              "Family_Friction": -4,
-              "Meaning": 2
-            },
-            "flags_set": [
-              "mara_known"
-            ]
-          },
-          "failure": {
             "text": "The transfer goes through and her reply comes fast — relief wrapped in gratitude wrapped in guilt. You feel useful, for once, in the way she needs.",
             "deltas": {
               "Wealth": -600,
@@ -2307,17 +2186,6 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "She says she understands. She doesn't, not really, and the silence that follows says more than her words did.",
-            "deltas": {
-              "Family_Friction": 5,
-              "Wealth": 100,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         }
       ],
@@ -2366,17 +2234,6 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "Hours pass in comfortable static and idle talk. Neither of you fixes much of anything, and neither of you minds.",
-            "deltas": {
-              "Mental_Decay": -3,
-              "Social_Capital": 2,
-              "Meaning": 2
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         },
         {
@@ -2387,17 +2244,6 @@
             "mods": []
           },
           "success": {
-            "text": "He says it's fine, easy as anything, but you catch the flicker of hurt before he buries it in a joke. Some distance is protective. Some is just distance.",
-            "deltas": {
-              "Heat": -1,
-              "Social_Capital": -2,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
-          },
-          "failure": {
             "text": "He says it's fine, easy as anything, but you catch the flicker of hurt before he buries it in a joke. Some distance is protective. Some is just distance.",
             "deltas": {
               "Heat": -1,
@@ -2497,16 +2343,6 @@
             "mods": []
           },
           "success": {
-            "text": "It doesn't chime again, but you know it's still watching, patient as ever. The Steward never forgets a flag; it just waits for a better moment.",
-            "deltas": {
-              "Heat": 1,
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
-          },
-          "failure": {
             "text": "It doesn't chime again, but you know it's still watching, patient as ever. The Steward never forgets a flag; it just waits for a better moment.",
             "deltas": {
               "Heat": 1,
@@ -2755,7 +2591,7 @@
           "id": "walk_away",
           "text": "Walk away. Not worth it tonight.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -2984,7 +2820,7 @@
           "id": "decline_husk",
           "text": "Decline. This one feels like a bad trade for everyone.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -3186,7 +3022,7 @@
           "id": "ignore_text",
           "text": "Leave it on read. You'll deal with it later.",
           "prob": {
-            "base": 1.0,
+            "base": 0.8,
             "mods": []
           },
           "success": {
@@ -3295,7 +3131,7 @@
           "id": "refuse_tool",
           "text": "Refuse. You need it yourself this week.",
           "prob": {
-            "base": 1.0,
+            "base": 0.85,
             "mods": []
           },
           "success": {
@@ -3748,15 +3584,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "You walk away clean, trusting your gut over the coin.",
-            "deltas": {
-              "Heat": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
@@ -3858,10 +3685,6 @@
             "mods": []
           },
           "success": {
-            "text": "You keep your head clear and your hands clean, for now.",
-            "deltas": {}
-          },
-          "failure": {
             "text": "You keep your head clear and your hands clean, for now.",
             "deltas": {}
           }
@@ -4180,16 +4003,6 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "The conversation drifts into old memories and easy laughter, a rare pocket of peace in your week.",
-            "deltas": {
-              "Meaning": 2,
-              "Mental_Decay": -2
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
       ]
@@ -4276,15 +4089,6 @@
             "mods": []
           },
           "success": {
-            "text": "You mute the chime and go about your day, one less thread for the Steward to pull.",
-            "deltas": {
-              "Heat": -1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
-          },
-          "failure": {
             "text": "You mute the chime and go about your day, one less thread for the Steward to pull.",
             "deltas": {
               "Heat": -1
@@ -4379,15 +4183,6 @@
             "mods": []
           },
           "success": {
-            "text": "You erase it and feel a small, private satisfaction in denying it even that much.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
-          },
-          "failure": {
             "text": "You erase it and feel a small, private satisfaction in denying it even that much.",
             "deltas": {
               "Meaning": 1
@@ -4505,15 +4300,6 @@
             "flags_set": [
               "undercity_fixer_rep"
             ]
-          },
-          "failure": {
-            "text": "He curses the Steward's paperwork under his breath but doesn't argue. You keep walking, pockets a little lighter, conscience a little cleaner.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
           }
         }
       ]
@@ -4608,17 +4394,6 @@
             "mods": []
           },
           "success": {
-            "text": "Auntie Six blinks, then laughs, calling you a soft-hearted fool as she wipes the chalk clean. You've bought goodwill cheap, and a warm bowl besides.",
-            "deltas": {
-              "Wealth": -300,
-              "Social_Capital": 2,
-              "Meaning": 1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
-          },
-          "failure": {
             "text": "Auntie Six blinks, then laughs, calling you a soft-hearted fool as she wipes the chalk clean. You've bought goodwill cheap, and a warm bowl besides.",
             "deltas": {
               "Wealth": -300,
@@ -4752,13 +4527,6 @@
             "mods": []
           },
           "success": {
-            "text": "The vendor's pitch fades behind you, along with the temptation. It's a small, quiet win.",
-            "deltas": {
-              "Substance_Reliance": -1,
-              "Meaning": 1
-            }
-          },
-          "failure": {
             "text": "The vendor's pitch fades behind you, along with the temptation. It's a small, quiet win.",
             "deltas": {
               "Substance_Reliance": -1,
@@ -4953,16 +4721,6 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "It's good food and a quiet apartment. Some part of you feels guilty for not reaching back.",
-            "deltas": {
-              "Mental_Decay": -1,
-              "Family_Friction": 1
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         },
         {
@@ -4973,16 +4731,6 @@
             "mods": []
           },
           "success": {
-            "text": "By morning it's cold and the guilt is colder. Mara doesn't ask about it, but her next message is shorter than usual.",
-            "deltas": {
-              "Family_Friction": 4,
-              "Meaning": -1
-            },
-            "flags_set": [
-              "mara_known"
-            ]
-          },
-          "failure": {
             "text": "By morning it's cold and the guilt is colder. Mara doesn't ask about it, but her next message is shorter than usual.",
             "deltas": {
               "Family_Friction": 4,
@@ -5031,17 +4779,6 @@
             "mods": []
           },
           "success": {
-            "text": "He waves off the thanks but the corner of his mouth twitches into something like pride. The badge feels heavier than its weight suggests.",
-            "deltas": {
-              "Social_Capital": 3,
-              "Wealth": 100,
-              "Meaning": 1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
-          },
-          "failure": {
             "text": "He waves off the thanks but the corner of his mouth twitches into something like pride. The badge feels heavier than its weight suggests.",
             "deltas": {
               "Social_Capital": 3,
@@ -5103,16 +4840,6 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "He looks almost hurt, then nods slowly, understanding the shape of the risk you're both avoiding. The badge goes back in the drawer.",
-            "deltas": {
-              "Heat": -1,
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
       ]
@@ -5150,17 +4877,6 @@
             "flags_set": [
               "steward_biometric_dossier"
             ]
-          },
-          "failure": {
-            "text": "A small drone drops a sealed packet at your window within minutes. It tastes faintly of citrus and quiet surveillance.",
-            "deltas": {
-              "Physical_Integrity": 2,
-              "Mental_Decay": 1,
-              "Tolerance": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
           }
         },
         {
@@ -5171,16 +4887,6 @@
             "mods": []
           },
           "success": {
-            "text": "The notification fades without protest, but you swear the little blue icon lingers a half-second longer than it should.",
-            "deltas": {
-              "Mental_Decay": -1,
-              "Tolerance": -1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "The notification fades without protest, but you swear the little blue icon lingers a half-second longer than it should.",
             "deltas": {
               "Mental_Decay": -1,
@@ -5332,17 +5038,6 @@
             "flags_set": [
               "steward_biometric_dossier"
             ]
-          },
-          "failure": {
-            "text": "'Understood,' it says, without a trace of judgment — which lands worse than an argument would have. You lie awake again, stubbornly yourself.",
-            "deltas": {
-              "Mental_Decay": 1,
-              "Tolerance": -1,
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
           }
         }
       ]
@@ -5457,16 +5152,6 @@
             "flags_set": [
               "undercity_fixer_rep"
             ]
-          },
-          "failure": {
-            "text": "You leave the contact hanging and the antenna dead. Word gets around that you're picky about jobs lately.",
-            "deltas": {
-              "Social_Capital": -2,
-              "Heat": -1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
           }
         }
       ]
@@ -5494,16 +5179,6 @@
             "mods": []
           },
           "success": {
-            "text": "She waves you through with a gap-toothed grin, and marks something favorable beside your name in her ledger.",
-            "deltas": {
-              "Wealth": -400,
-              "Social_Capital": 2
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
-          },
-          "failure": {
             "text": "She waves you through with a gap-toothed grin, and marks something favorable beside your name in her ledger.",
             "deltas": {
               "Wealth": -400,
@@ -5657,13 +5332,6 @@
               "Wealth": -1200,
               "Heat": -5
             }
-          },
-          "failure": {
-            "text": "Full price, no surprises. The coat works exactly as advertised, which almost feels like cheating down here.",
-            "deltas": {
-              "Wealth": -1200,
-              "Heat": -5
-            }
           }
         },
         {
@@ -5674,12 +5342,6 @@
             "mods": []
           },
           "success": {
-            "text": "You leave the booth, the tailor's sigh following you into the curtain-dark hallway.",
-            "deltas": {
-              "Social_Capital": -1
-            }
-          },
-          "failure": {
             "text": "You leave the booth, the tailor's sigh following you into the curtain-dark hallway.",
             "deltas": {
               "Social_Capital": -1
@@ -5781,10 +5443,6 @@
             "mods": []
           },
           "success": {
-            "text": "The kid shrugs and moves to the next passerby. You keep walking, unbothered and unenriched.",
-            "deltas": {}
-          },
-          "failure": {
             "text": "The kid shrugs and moves to the next passerby. You keep walking, unbothered and unenriched.",
             "deltas": {}
           }
@@ -5893,16 +5551,6 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "The credits go through. She doesn't say thank you, and you don't blame her.",
-            "deltas": {
-              "Wealth": -800,
-              "Family_Friction": 1
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         }
       ]
@@ -5968,13 +5616,6 @@
             "flags_set": [
               "vint_established"
             ]
-          },
-          "failure": {
-            "text": "You catch up properly for the first time in weeks, the units forgotten on the bench between old jokes.",
-            "deltas": {
-              "Meaning": 2,
-              "Mental_Decay": -2
-            }
           }
         },
         {
@@ -5992,12 +5633,6 @@
             "flags_set": [
               "vint_established"
             ]
-          },
-          "failure": {
-            "text": "Vint doesn't push, just nods like he expected it. The door clicks shut a little heavier than usual behind you.",
-            "deltas": {
-              "Social_Capital": -2
-            }
           }
         }
       ],
@@ -6046,17 +5681,6 @@
             "flags_set": [
               "steward_biometric_dossier"
             ]
-          },
-          "failure": {
-            "text": "You stretch through the guided routine, the credits landing as promised. Your back does feel a little better, annoyingly.",
-            "deltas": {
-              "Wealth": 300,
-              "Physical_Integrity": 2,
-              "Tolerance": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
           }
         },
         {
@@ -6067,15 +5691,6 @@
             "mods": []
           },
           "success": {
-            "text": "The amber light fades, unbothered. It'll ask again tomorrow, and the day after, endlessly patient.",
-            "deltas": {
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "The amber light fades, unbothered. It'll ask again tomorrow, and the day after, endlessly patient.",
             "deltas": {
               "Mental_Decay": 1
@@ -6183,15 +5798,6 @@
             "mods": []
           },
           "success": {
-            "text": "\"Understood. The offer remains open,\" it says, and the room falls back into quiet you chose for yourself.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "\"Understood. The offer remains open,\" it says, and the room falls back into quiet you chose for yourself.",
             "deltas": {
               "Meaning": 1
@@ -6344,15 +5950,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "You melt back into the alley shadows, pockets empty but head clear.",
-            "deltas": {
-              "Heat": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
@@ -6449,12 +6046,6 @@
             "mods": []
           },
           "success": {
-            "text": "She shrugs and turns her cart toward easier marks. You keep walking, teeth clenched against nothing at all.",
-            "deltas": {
-              "Tolerance": 1
-            }
-          },
-          "failure": {
             "text": "She shrugs and turns her cart toward easier marks. You keep walking, teeth clenched against nothing at all.",
             "deltas": {
               "Tolerance": 1
@@ -6837,16 +6428,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "You pass the location along for a modest finder's fee. Someone else's hands get dirty tonight.",
-            "deltas": {
-              "Wealth": 200,
-              "Social_Capital": 1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
@@ -6947,15 +6528,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "You slide the blank chits back into a drawer. The workers will have to find another way through the checkpoints.",
-            "deltas": {
-              "Heat": -2
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
@@ -7016,16 +6588,6 @@
             "mods": []
           },
           "success": {
-            "text": "The world softens at the edges for a few hours. It feels good. Too good, maybe.",
-            "deltas": {
-              "Substance_Reliance": 4,
-              "Mental_Decay": -2
-            },
-            "flags_set": [
-              "vice_personal_habit"
-            ]
-          },
-          "failure": {
             "text": "The world softens at the edges for a few hours. It feels good. Too good, maybe.",
             "deltas": {
               "Substance_Reliance": 4,
@@ -7126,17 +6688,6 @@
             "mods": []
           },
           "success": {
-            "text": "A stranger's memory of rain on a rooftop floods your mind, vivid and aching. It's not yours, but it feels like it should be.",
-            "deltas": {
-              "Substance_Reliance": 5,
-              "Meaning": 2,
-              "Mental_Decay": 2
-            },
-            "flags_set": [
-              "vice_personal_habit"
-            ]
-          },
-          "failure": {
             "text": "A stranger's memory of rain on a rooftop floods your mind, vivid and aching. It's not yours, but it feels like it should be.",
             "deltas": {
               "Substance_Reliance": 5,
@@ -7271,15 +6822,6 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "The toolbox gathers dust. So does the silence between you and Mara.",
-            "deltas": {
-              "Family_Friction": 5
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         }
       ]
@@ -7385,16 +6927,6 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "Morning brings a curt message: 'Fixed it myself. Thanks for nothing.' The silence after stings more than you expected.",
-            "deltas": {
-              "Social_Capital": -4,
-              "Family_Friction": 1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
       ],
@@ -7462,13 +6994,6 @@
             "mods": []
           },
           "success": {
-            "text": "You swipe it away. The Steward doesn't push further, at least not today.",
-            "deltas": {},
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "You swipe it away. The Steward doesn't push further, at least not today.",
             "deltas": {},
             "flags_set": [
@@ -7562,13 +7087,6 @@
             "mods": []
           },
           "success": {
-            "text": "The notification fades. You'll sleep when you sleep, on your own terms.",
-            "deltas": {},
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "The notification fades. You'll sleep when you sleep, on your own terms.",
             "deltas": {},
             "flags_set": [
@@ -7719,15 +7237,6 @@
             "flags_set": [
               "undercity_fixer_rep"
             ]
-          },
-          "failure": {
-            "text": "The broker pays a flat finder's fee and sends his own crew. Clean money, no scars.",
-            "deltas": {
-              "Wealth": 350
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
           }
         }
       ]
@@ -7833,16 +7342,6 @@
             "mods": []
           },
           "success": {
-            "text": "You leave the cooler in a storm drain and walk away clean. The client will not be happy, but you're not in a cell.",
-            "deltas": {
-              "Wealth": -150,
-              "Heat": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
-          },
-          "failure": {
             "text": "You leave the cooler in a storm drain and walk away clean. The client will not be happy, but you're not in a cell.",
             "deltas": {
               "Wealth": -150,
@@ -7966,10 +7465,6 @@
             "mods": []
           },
           "success": {
-            "text": "You leave the blue-stained fingers and their glass vials behind, undercity noise swallowing her stall — though some part of you keeps the offer in reserve for a worse night.",
-            "deltas": {}
-          },
-          "failure": {
             "text": "You leave the blue-stained fingers and their glass vials behind, undercity noise swallowing her stall — though some part of you keeps the offer in reserve for a worse night.",
             "deltas": {}
           }
@@ -8289,15 +7784,6 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "He shrugs, unbothered, and sets the device aside for someone else — or some other night.",
-            "deltas": {
-              "Family_Friction": -1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
       ]
@@ -8353,15 +7839,6 @@
             "mods": []
           },
           "success": {
-            "text": "[STEWARD] Understood. I remain available should your needs change. The chime fades, and the undercity noise rushes back in to fill the silence.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "[STEWARD] Understood. I remain available should your needs change. The chime fades, and the undercity noise rushes back in to fill the silence.",
             "deltas": {
               "Meaning": 1
@@ -8730,12 +8207,6 @@
             "deltas": {
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "You keep your credits and your head clear, for whatever that's worth down here.",
-            "deltas": {
-              "Meaning": 1
-            }
           }
         }
       ]
@@ -8829,16 +8300,6 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "She goes quiet on the line, then says she'll figure it out herself, like always.",
-            "deltas": {
-              "Family_Friction": 8,
-              "Mental_Decay": 2
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         }
       ]
@@ -8895,15 +8356,6 @@
             "mods": []
           },
           "success": {
-            "text": "The overlay fades without protest, though you swear it lingered a beat too long.",
-            "deltas": {
-              "Tolerance": 1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
-          },
-          "failure": {
             "text": "The overlay fades without protest, though you swear it lingered a beat too long.",
             "deltas": {
               "Tolerance": 1
@@ -9145,16 +8597,6 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "He nods stiffly and leaves the part on the table, the warmth gone from his face.",
-            "deltas": {
-              "Social_Capital": -4,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
       ]
@@ -9250,12 +8692,6 @@
             "deltas": {
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "The hum fades behind you, and your thoughts stay stubbornly, blessedly your own.",
-            "deltas": {
-              "Meaning": 1
-            }
           }
         }
       ]
@@ -9311,15 +8747,6 @@
             "mods": []
           },
           "success": {
-            "text": "The countdown vanishes quietly, and nothing seems to happen at all. That itself feels like a small victory.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
-          },
-          "failure": {
             "text": "The countdown vanishes quietly, and nothing seems to happen at all. That itself feels like a small victory.",
             "deltas": {
               "Meaning": 1
@@ -9471,15 +8898,6 @@
             "flags_set": [
               "undercity_fixer_rep"
             ]
-          },
-          "failure": {
-            "text": "You radio the manager an excuse and slip away. Somewhere behind you, the sensor keeps blinking, someone else's problem now.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
           }
         }
       ]
@@ -9577,10 +8995,6 @@
           "success": {
             "text": "She calls after you, half-joking, half-disappointed. The foil packets glint behind you as you disappear into the crowd.",
             "deltas": {}
-          },
-          "failure": {
-            "text": "She calls after you, half-joking, half-disappointed. The foil packets glint behind you as you disappear into the crowd.",
-            "deltas": {}
           }
         }
       ]
@@ -9652,16 +9066,6 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "She thanks you, but there's a flatness in her voice — credits aren't the same as hands on wet sheets at 2am.",
-            "deltas": {
-              "Wealth": -200,
-              "Family_Friction": 2
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         },
         {
@@ -9672,16 +9076,6 @@
             "mods": []
           },
           "success": {
-            "text": "You silence the phone and roll over. In the morning there's a single unread message: 'never mind, figured it out.'",
-            "deltas": {
-              "Family_Friction": 8,
-              "Mental_Decay": -1
-            },
-            "flags_set": [
-              "mara_known"
-            ]
-          },
-          "failure": {
             "text": "You silence the phone and roll over. In the morning there's a single unread message: 'never mind, figured it out.'",
             "deltas": {
               "Family_Friction": 8,
@@ -9718,16 +9112,6 @@
             "mods": []
           },
           "success": {
-            "text": "A perfectly balanced menu appears on your wall display, cheerful and bloodless. You eat what it suggests and feel nothing in particular.",
-            "deltas": {
-              "Mental_Decay": 2,
-              "Meaning": -1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "A perfectly balanced menu appears on your wall display, cheerful and bloodless. You eat what it suggests and feel nothing in particular.",
             "deltas": {
               "Mental_Decay": 2,
@@ -9903,15 +9287,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "The courier shrugs and finds someone else. You keep your hands clean and your night boring.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
@@ -10001,12 +9376,6 @@
             "mods": []
           },
           "success": {
-            "text": "You watch the grey petals shiver in the tunnel draft and, for a minute, think of nothing at all. It doesn't fix anything. For a minute, you don't need it to.",
-            "deltas": {
-              "Meaning": 1
-            }
-          },
-          "failure": {
             "text": "You watch the grey petals shiver in the tunnel draft and, for a minute, think of nothing at all. It doesn't fix anything. For a minute, you don't need it to.",
             "deltas": {
               "Meaning": 1
@@ -10111,15 +9480,6 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "He waves you off, already half-focused back on the board. 'Yeah, no, it's fine,' he says, in the tone that means it isn't quite.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
       ]
@@ -10148,16 +9508,6 @@
             "mods": []
           },
           "success": {
-            "text": "A polite appointment slot appears in your feed for a clinic you've never asked to visit. The drone drifts off, satisfied.",
-            "deltas": {
-              "Physical_Integrity": 2,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "A polite appointment slot appears in your feed for a clinic you've never asked to visit. The drone drifts off, satisfied.",
             "deltas": {
               "Physical_Integrity": 2,
@@ -10453,15 +9803,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "They find another way, or they don't. You keep your codes secret and your conscience quieter than most nights.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
@@ -10555,10 +9896,6 @@
             "mods": []
           },
           "success": {
-            "text": "The reed smoke fades behind you, another small mercy you didn't buy and didn't sell.",
-            "deltas": {}
-          },
-          "failure": {
             "text": "The reed smoke fades behind you, another small mercy you didn't buy and didn't sell.",
             "deltas": {}
           }
@@ -10658,10 +9995,6 @@
             "mods": []
           },
           "success": {
-            "text": "You leave the moths glowing behind their glass, someone else's small addiction to manage.",
-            "deltas": {}
-          },
-          "failure": {
             "text": "You leave the moths glowing behind their glass, someone else's small addiction to manage.",
             "deltas": {}
           }
@@ -10764,15 +10097,6 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "The screen goes dark. You'll owe her an explanation eventually, but not tonight.",
-            "deltas": {
-              "Family_Friction": 2
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         }
       ]
@@ -10866,15 +10190,6 @@
             "mods": []
           },
           "success": {
-            "text": "Vint shrugs it off, though you catch the flicker of disappointment before he changes the subject.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
-          },
-          "failure": {
             "text": "Vint shrugs it off, though you catch the flicker of disappointment before he changes the subject.",
             "deltas": {
               "Social_Capital": -1
@@ -11204,15 +10519,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "He shrugs, already scanning the alley for someone hungrier than you. You keep your head down and your ledger thin.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
@@ -11313,15 +10619,6 @@
             "mods": []
           },
           "success": {
-            "text": "He mutters about fixers going soft and finds someone else. You keep your hands clean for now.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
-          },
-          "failure": {
             "text": "He mutters about fixers going soft and finds someone else. You keep your hands clean for now.",
             "deltas": {
               "Social_Capital": -1
@@ -11432,12 +10729,6 @@
             "deltas": {
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "She calls out a lower price to your back, but you don't turn around.",
-            "deltas": {
-              "Meaning": 1
-            }
           }
         }
       ]
@@ -11539,12 +10830,6 @@
             "mods": []
           },
           "success": {
-            "text": "He shrugs and returns to his candle, unbothered. You keep your head clear and your debts unwritten.",
-            "deltas": {
-              "Meaning": 1
-            }
-          },
-          "failure": {
             "text": "He shrugs and returns to his candle, unbothered. You keep your head clear and your debts unwritten.",
             "deltas": {
               "Meaning": 1
@@ -11846,15 +11131,6 @@
             "flags_set": [
               "steward_civic_dossier"
             ]
-          },
-          "failure": {
-            "text": "The drone waits a polite ten seconds, then logs your non-response and drifts away without further comment.",
-            "deltas": {
-              "Heat": 2
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
           }
         }
       ]
@@ -11949,15 +11225,6 @@
             "mods": []
           },
           "success": {
-            "text": "The notification fades quietly. No bonus, no performance, just the small dignity of refusal.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
-          },
-          "failure": {
             "text": "The notification fades quietly. No bonus, no performance, just the small dignity of refusal.",
             "deltas": {
               "Meaning": 1
@@ -12168,7 +11435,7 @@
           "id": "decline_politely",
           "text": "Pass. You've got enough vices financing your rent.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -12766,7 +12033,7 @@
           "id": "decline_politely",
           "text": "Pass on it. Your nightmares are the only thing still honest with you.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -12875,7 +12142,7 @@
           "id": "walk_away",
           "text": "Not worth the risk today.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -12985,7 +12252,7 @@
           "id": "report_to_steward",
           "text": "Quietly report the device before the sweep.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -13093,7 +12360,7 @@
           "id": "decline_politely",
           "text": "Decline — you're keeping your head clear today.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -13208,7 +12475,7 @@
           "id": "walk_past",
           "text": "Keep walking, no time for glitter tonight.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -13273,7 +12540,7 @@
           "id": "eat_no_call",
           "text": "Eat it, skip the call — you're tired.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -13518,7 +12785,7 @@
           "id": "ignore_notification",
           "text": "Ignore it entirely and go about your day.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -13750,15 +13017,6 @@
             "flags_set": [
               "undercity_fixer_rep"
             ]
-          },
-          "failure": {
-            "text": "You leave the condensers dripping and the drones circling. Somebody else will take the risk you didn't.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
           }
         }
       ]
@@ -13956,12 +13214,6 @@
             "flags_set": [
               "mara_established"
             ]
-          },
-          "failure": {
-            "text": "She lets it go, but something closes behind her eyes, filed away for later.",
-            "deltas": {
-              "Family_Friction": 3
-            }
           }
         }
       ]
@@ -14051,15 +13303,6 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "He stops texting, which feels worse than the reminders ever did.",
-            "deltas": {
-              "Social_Capital": -2
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
       ]
@@ -14115,15 +13358,6 @@
             "mods": []
           },
           "success": {
-            "text": "\"Understood,\" it says, without a trace of offense. The ceiling display dims. You lie awake a while longer anyway.",
-            "deltas": {
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "\"Understood,\" it says, without a trace of offense. The ceiling display dims. You lie awake a while longer anyway.",
             "deltas": {
               "Mental_Decay": 1
@@ -14275,13 +13509,6 @@
             "flags_set": [
               "undercity_fixer_rep"
             ]
-          },
-          "failure": {
-            "text": "You hear later that someone else took a rotor blade to the face collecting it. Could've been you.",
-            "deltas": {},
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
           }
         }
       ]
@@ -14371,12 +13598,6 @@
             "mods": []
           },
           "success": {
-            "text": "You feel a faint ghost of the resonance even from here — enough to leave your teeth humming, and to remind you why people pay for the real thing.",
-            "deltas": {
-              "Meaning": 1
-            }
-          },
-          "failure": {
             "text": "You feel a faint ghost of the resonance even from here — enough to leave your teeth humming, and to remind you why people pay for the real thing.",
             "deltas": {
               "Meaning": 1
@@ -15423,15 +14644,6 @@
             "flags_set": [
               "undercity_fixer_rep"
             ]
-          },
-          "failure": {
-            "text": "You seal the duct panel behind you and let the cold stay a while longer. Somewhere, a landlord's problem stays a landlord's problem.",
-            "deltas": {
-              "Meaning": -1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
           }
         }
       ]
@@ -15532,15 +14744,6 @@
             "mods": []
           },
           "success": {
-            "text": "You wave off the clerk, who looks almost relieved himself. Someone else will take the risk tonight.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
-          },
-          "failure": {
             "text": "You wave off the clerk, who looks almost relieved himself. Someone else will take the risk tonight.",
             "deltas": {
               "Social_Capital": -1
@@ -15652,10 +14855,6 @@
           "success": {
             "text": "You nod at Yorrick and keep walking. The shed's honeyed smoke fades behind you, unclaimed.",
             "deltas": {}
-          },
-          "failure": {
-            "text": "You nod at Yorrick and keep walking. The shed's honeyed smoke fades behind you, unclaimed.",
-            "deltas": {}
           }
         }
       ]
@@ -15752,12 +14951,6 @@
             "mods": []
           },
           "success": {
-            "text": "You leave the queue and its quiet desperation behind you, sober and a little proud of it.",
-            "deltas": {
-              "Meaning": 1
-            }
-          },
-          "failure": {
             "text": "You leave the queue and its quiet desperation behind you, sober and a little proud of it.",
             "deltas": {
               "Meaning": 1
@@ -15861,16 +15054,6 @@
             "mods": []
           },
           "success": {
-            "text": "She nods, disappointed but unsurprised, and puts the radio away for another day that may never come.",
-            "deltas": {
-              "Family_Friction": 4,
-              "Meaning": -1
-            },
-            "flags_set": [
-              "mara_known"
-            ]
-          },
-          "failure": {
             "text": "She nods, disappointed but unsurprised, and puts the radio away for another day that may never come.",
             "deltas": {
               "Family_Friction": 4,
@@ -16061,15 +15244,6 @@
             "flags_set": [
               "steward_biometric_dossier"
             ]
-          },
-          "failure": {
-            "text": "You silence the ping and go back to whatever you were doing. The Steward, as always, does not ask twice — it simply notes and waits.",
-            "deltas": {
-              "Mental_Decay": -1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
           }
         },
         {
@@ -16164,15 +15338,6 @@
             "mods": []
           },
           "success": {
-            "text": "The invitation dims without complaint. You keep your evening for yourself, undercity work waiting in the dark outside.",
-            "deltas": {
-              "Heat": 1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
-          },
-          "failure": {
             "text": "The invitation dims without complaint. You keep your evening for yourself, undercity work waiting in the dark outside.",
             "deltas": {
               "Heat": 1
@@ -16309,7 +15474,7 @@
           "id": "skip_job",
           "text": "Not worth the risk tonight. Walk away.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -16546,7 +15711,7 @@
           "id": "decline_politely",
           "text": "Thank her for the offer and keep moving.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -16646,7 +15811,7 @@
           "id": "walk_the_cloth_by",
           "text": "Admire the beads but keep your credits in your pocket.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -16752,7 +15917,7 @@
           "id": "skip_it",
           "text": "It's not the right time. Save the credits.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -16855,7 +16020,7 @@
           "id": "decline_this_time",
           "text": "Tell him you don't have time today.",
           "prob": {
-            "base": 1.0,
+            "base": 0.85,
             "mods": []
           },
           "success": {
@@ -16955,7 +16120,7 @@
           "id": "ignore_the_survey",
           "text": "Ignore the prompt entirely and go about your night.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -17307,7 +16472,7 @@
           "id": "walk_away_conduit",
           "text": "Not worth the risk tonight — walk away.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -17418,7 +16583,7 @@
           "id": "skip_rustwine",
           "text": "Pass — you're working tonight, not drinking.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -17637,7 +16802,7 @@
           "id": "let_vint_handle_it",
           "text": "Tell Vint to handle his own mess this time.",
           "prob": {
-            "base": 1.0,
+            "base": 0.8,
             "mods": []
           },
           "success": {
@@ -17738,7 +16903,7 @@
           "id": "decline_survey",
           "text": "Decline to participate.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -17983,16 +17148,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "You keep your hands clean and your name out of it, though you feel the ghost of easy credits slipping away.",
-            "deltas": {
-              "Meaning": 1,
-              "Heat": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
@@ -18100,16 +17255,6 @@
             "mods": []
           },
           "success": {
-            "text": "You bury the ping under a dozen other tasks, telling yourself she's tougher than a wellness algorithm gives her credit for.",
-            "deltas": {
-              "Family_Friction": 3,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "You bury the ping under a dozen other tasks, telling yourself she's tougher than a wellness algorithm gives her credit for.",
             "deltas": {
               "Family_Friction": 3,
