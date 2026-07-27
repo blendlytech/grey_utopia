@@ -1097,18 +1097,11 @@
             ]
           },
           "failure": {
-            "text": "The broker recognizes the piece and refuses -- 'stolen goods carry a scent, friend' -- and you leave empty-handed and humiliated.",
+            "text": "The broker recognizes the piece and refuses -- 'stolen goods carry a scent, friend' -- and you leave empty-handed and humiliated, the keepsake still warm in your fist and the craving still exactly where you left it.",
             "deltas": {
               "Meaning": -6,
               "Mental_Decay": 4
-            },
-            "dose": 8,
-            "rel_deltas": {
-              "Mara (Sister)": -10
-            },
-            "flags_set": [
-              "vice_personal_habit"
-            ]
+            }
           }
         },
         {
@@ -1214,7 +1207,7 @@
             }
           },
           "failure": {
-            "text": "They're faster and meaner than you gambled. You pay double what you owed, mostly in bruises.",
+            "text": "They're faster and meaner than you gambled. You pay what you were carrying, mostly in bruises, and the arithmetic on the rest gets explained to you slowly. The tab did not go away. It just got more expensive and started counting again.",
             "deltas": {
               "Physical_Integrity": -24,
               "Wealth": -200,
@@ -1665,7 +1658,7 @@
               "Mental_Decay": 8
             },
             "rel_deltas": {
-              "Mara (Sister)": 5
+              "Mara (Sister)": -6
             },
             "flags_set": [
               "mara_known"
