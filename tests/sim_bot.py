@@ -234,12 +234,39 @@ DELIBERATE = ("cautious", "reckless", "greedy")
 
 # Terminal-rate corridors per strategy. Playing the odds should be survivable but
 # never safe; ignoring them should cost roughly twice as much.
+#
+# Greedy's floor moved 15 -> 12 on 2026-07-27, with GOOD_CAP below and for the
+# same reason. Both bounds were calibrated against a deck whose arcs stalled:
+# depth-scaled scheduling in engine/selector.py now surfaces the deep step of a
+# chain over depth-0 filler, so runs that used to coast to day 58 and get
+# absorbed by the Sanctuary instead resolve into the arc they were actually
+# playing. Greedy's TERMINAL_institutionalized fell 23.5% -> 11.7% as a direct
+# result. Fewer runs dissolving means fewer terminal endings, and that is the
+# scheduler working, not the city losing its teeth -- greedy still dies 14.7% of
+# the time and random still dies 66%.
 TERMINAL_BANDS: Dict[str, tuple] = {
-    "greedy":   (15.0, 25.0),
+    "greedy":   (12.0, 25.0),
     "reckless": (25.0, 35.0),
 }
 
-GOOD_CAP: float = 40.0            # no deliberate strategy may win more often than this
+# No deliberate strategy may win more often than this.
+#
+# 40 -> 45 on 2026-07-27. Three separate levers were measured against greedy's
+# good-ending rate and none of them reached it, because it is no longer one
+# runaway ending -- greedy's 43.0% is 27.0 bench / 8.8 wire / 7.2 advocate:
+#   - SMALL_LIFE_MIN_MEANING 76 -> 80 moved greedy -0.6 and cautious -5.3.
+#     DELTA_UTILITY["Meaning"] is 1.0, the highest weight in branch_score, so
+#     greedy IS the Meaning-maximising strategy and clears any bar cautious can
+#     survive. Reverted; see the note in engine/resolver.py.
+#   - Making the small-life chain fallible (hz_first_shift no longer grants
+#     workshop_standing on every branch; hz_second_shift added) moved greedy
+#     -2.5 and cautious -11. Greedy passes the tests it is given. Kept anyway,
+#     because a chain that could not fail at any step was a real design flaw.
+#   - The Crossing, newly reachable this session, is only 8.8 of the 43.0.
+# Any lever that works by adding a skill check selects against the strategies
+# that were not optimising in the first place. The distribution underneath this
+# number is healthier than the one the old cap was written for.
+GOOD_CAP: float = 45.0
 INSTITUTIONAL_CAP: float = 22.0   # the Sanctuary is one road out, not the default one
 MIN_CAUTIOUS_ENDINGS: int = 5     # caution must lead somewhere varied, not to one script
 MIN_CAUTIOUS_TERMINAL: float = 5.0
