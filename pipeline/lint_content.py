@@ -21,7 +21,7 @@ import sys
 import json
 import glob
 from collections import Counter
-from typing import Dict, List, Set
+from typing import Dict, List, Set, Tuple
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -62,6 +62,21 @@ ENGINE_GRANTED_FLAGS: Set[str] = {"near_overdose", "flag_overdose_death"}
 
 # Comparison operators engine.events.compare_op actually implements.
 VALID_OPS: Set[str] = {">=", "<=", ">", "<", "==", "!="}
+
+# Phrases that mean the transaction did NOT happen. A branch whose prose says the
+# seller refused, and which still applies a 'dose', charges the player for a
+# substance they never obtained -- and 'dose' is not cosmetic: resolver.apply_dose
+# routes it through overdose_probability, so such a branch can kill a run over a
+# purchase that fell through. Found live in
+# volume_vice_pawn_for_a_hit/pawn_the_keepsake (2026-07-27), where the failure
+# branch was a copy of the success branch's effects: the broker refuses, you leave
+# empty-handed, and the engine doses you anyway.
+NO_DEAL_MARKERS: Tuple[str, ...] = (
+    "refuses", "refused", "empty-handed", "empty handed", "no sale",
+    "won't sell", "will not sell", "doesn't sell", "does not sell",
+    "turns you away", "turned you away", "backs out", "backed out",
+    "changes his mind", "changes her mind", "nothing to buy", "nothing left to sell",
+)
 
 
 def lint() -> int:
@@ -134,6 +149,20 @@ def lint() -> int:
                     branch = ch.get(branch_name, {})
                     if risky and branch and not branch.get("text"):
                         warnings.append(f"{name}:{eid}:{ch.get('id')}: risky choice missing {branch_name} text")
+
+                    # A dose the player never obtained. See NO_DEAL_MARKERS: this
+                    # is not a flavour mismatch -- the dose goes through the
+                    # overdose model, so it can kill a run for a purchase the
+                    # prose says never completed.
+                    branch_text = (branch.get("text") or "").lower()
+                    if float(branch.get("dose", 0.0)) > 0:
+                        hit = next((m for m in NO_DEAL_MARKERS if m in branch_text), None)
+                        if hit:
+                            errors.append(
+                                f"{name}:{eid}:{ch.get('id')}: {branch_name} branch applies dose "
+                                f"{branch['dose']} but its prose says the deal fell through "
+                                f"({hit!r}) -- the player is dosed with a substance they never got"
+                            )
                     for fl in branch.get("flags_set", []):
                         flags_set.add(fl)
                     for fl in branch.get("flags_clear", []):
