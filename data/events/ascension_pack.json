@@ -323,7 +323,7 @@
             "text": "Brann is at his bench, working, because of course he is. On the counter sits his COMPLETION medal, unopened in its case, being used as a paperweight. 'Forty years,' he says, not looking up, 'they told us machines would take the work. Nobody said the machines would be POLITE about it.' Then he slides a seized valve assembly across the bench to you, and the two of you fix things all afternoon, unpaid, unnecessary, and neither of you says the word that the whole city is choking on, because at this bench, for these hours, it isn't true.",
             "deltas": { "Meaning": 14, "Mental_Decay": -8 },
             "flags_set": [ "world_purpose_drought" ],
-            "rel_deltas": { "Mara (Sister)": 4 }
+            "rel_deltas": { "Brann (Artisan)": 4 }
           }
         }
       ]
