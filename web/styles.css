@@ -1607,6 +1607,9 @@ body {
 
 /* ============ Night Ledger ============ */
 .day-overlay.has-ledger { animation-duration: 3.85s; }
+/* A4: prose under the ledger needs longer than stat rows do -- see the dwell
+   calculation in showDayOverlay. */
+.day-overlay.has-morning { animation-duration: 5.55s; }
 .night-ledger {
   margin-top: 1.1rem; display: flex; flex-direction: column; gap: 3px;
   align-items: center;
@@ -1621,6 +1624,18 @@ body {
 .ledger-row.lr-pos { color: var(--tier-fav); }
 .ledger-row.lr-neg { color: var(--tier-desperate); }
 .ledger-row.lr-clock { color: var(--red); font-weight: 700; margin-top: 4px; }
+/* A4: the morning report and the Steward's ledger line. Prose, not stat rows,
+   so it wraps and sits in the body face rather than the mono one. The terminal
+   prints the morning lines dim and the ledger line cyan; these match. */
+.morning-head { margin-top: 0.9rem; }
+.ledger-row.lr-morning,
+.ledger-row.lr-steward {
+  font-family: var(--font-sans); font-size: 0.82rem;
+  letter-spacing: 0.01em; line-height: 1.45; text-align: center;
+  max-width: 46ch; text-wrap: balance;
+}
+.ledger-row.lr-morning { color: var(--text-muted); }
+.ledger-row.lr-steward { color: var(--cyan); }
 
 /* ============ Armed restart ============ */
 .btn-ghost.armed {

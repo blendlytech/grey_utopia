@@ -61,7 +61,8 @@ as non-monotonic. Two balance changes in one window cannot be attributed.
 | ~~F6~~ | ~~Re-scale the chain day ladders~~ | **CLOSED 2026-07-29 -- premise disproved, nothing built** | The "30-day median run" three windows reasoned from is the **`random` bot's** median. Deliberate strategies run 55-63 days and reach a day-46 finale 69-93% of the time, so the ladders are calibrated correctly. Scope was wrong too: only 4 packs gate past d34, and `reckoning_pack`/`npc_arcs_pack` — flagged twice as suspects — max out at d18/d16. Delivered `--union` instead. See §5. |
 | **SHIP** | Settings / saves / achievements / content warning / art | **Three blocking items CLOSED** | Content warning, settings panel, manual save slots all shipped. See below. |
 | **A3** | Make the Steward take a turn | **CLOSED -- shipped live, both gates green** | Phase 1 disproved the premise twice; Phase 2 authored the content and wired it. `STEWARD_CADENCE = 7`, five tier-selected filings from day 31, notice + `#steward-panel` in both front ends. Deliberate runs get **4.7-6.0 filings** and the ladder discriminates by strategy (cautious lives at tiers 1-2 and never closes its file; reckless at 3-4). **`pargate` GREEN first run**, `coverage_audit --assert` GREEN. See below and `A3_DESIGN.md` §8. |
-| A4 | Put the cast on screen | Not started | -- |
+| ~~A4~~ | ~~Put the cast on screen~~ | **CLOSED 2026-07-29 -- premise disproved** | The cast is already on screen: Mara **41-52%** of run-days, Vint 33-37%, Kael 21-27%, **never absent in 160 runs**. The real defect is the other end: Vint and Kael sit under 4% satisfaction on **~90%** of run-days and their bars move **1.3-3.9 points across every strategy**. Portraits would have decorated a dead readout. Delivered `tests/cast_audit.py` and shipped the one thing A4 asked for that already existed. See below and `A4_DESIGN.md`. |
+| **F7** | Make the relationship bars playable | **Next -- Step 0 already done** | Spun out of A4's census with its acceptance criterion measured. See §4. |
 | F3 | Make money a decision | Not started | -- |
 | F4 | Give Fame and Social_Capital a spend | Not started | -- |
 | F5 | Signpost the endings in-fiction | Not started | -- |
@@ -877,92 +878,212 @@ assertion.
 
 ---
 
-## 4. CURRENT TASK -- A4: put the cast on screen
+**A4 -- Put the cast on screen** *(2026-07-29, Opus 5)* -- **CLOSED, premise
+disproved in the F6 pattern. Nothing was built from the spec; one thing A4 asked
+for turned out to already exist and shipped.** Full write-up in
+`docs/A4_DESIGN.md`.
 
-**Model:** **Opus 5**, in-session. Design judgment plus a front-end pass; the
-prose it needs is one line per contact per state, not a volume batch, so this
-does not go through `generate_deck.py`.
+**Step 0 overturned the item on its first table, and this is the fifth spec in a
+row to go that way.** §4 asked how often Mara/Vint/Kael actually appear.
+n=40/strategy, 160 runs, an appearance being *named in prose the player reads*:
 
-**Read first:** `docs/STEAM_READINESS_BACKLOG.md` §A4 and its S8 diagnosis,
-`docs/CAST_BIBLE.md` (voice keys and arc canon for the five promoted NPCs),
-`data/cast.json`, and `docs/A3_DESIGN.md` §2 -- A3 already settled the column
-question and the shared constraint, do not re-derive them.
+| strategy | Mara | Vint | Kael | never appears |
+|---|---|---|---|---|
+| random | 21.0 ev/run, **52.2%** of days | 11.9, 33.5% | 7.2, 21.0% | 0/40 each |
+| cautious | 34.2 ev/run, **45.8%** of days | 26.0, 36.9% | 13.8, 21.0% | 0/40 each |
+| reckless | 29.4, 41.3% | 23.1, 33.4% | 16.0, 24.3% | 0/40 each |
+| greedy | 29.1, 42.7% | 22.8, 33.7% | 17.9, 27.4% | 0/40 each |
 
-**Do not re-derive:** coverage, reachability, or selector work. **Six**
-consecutive windows have now closed that, and A1 is finished. Also do not
-re-derive the A3/A4 overlap: it is settled in `A3_DESIGN.md` §2.
+The deck holds **77 events naming Mara, 68 Vint, 64 Kael**. "Put the cast on
+screen" describes a game this is not -- it is A3's Steward finding again.
+
+**They already interrupt unprompted, once.** The four `prologue_*_descent`
+storylets are `weight: 500000`, exactly one fires per run, and each names *and
+moves the bar for* all three. After the prologue nothing in the cast is forced --
+but cast events carry median weight **7-8 against the deck's 6**, so they are not
+drowned either. Forcing more would have been A3's near-miss repeated.
+
+**The real defect is at the other end of the system, and it is severe.**
+`end_of_day_decay` applies `R = e^(-1/S)` daily and `reinforce` (+1.5 S, warm
+interactions only) is the only thing that opposes it. Median satisfaction and
+the share of run-days below the UI's own `fading` line of 30:
+
+| contact | cautious final | reckless | greedy | random | %days < 30 | %days < 20 |
+|---|---|---|---|---|---|---|
+| Mara | **50.0** | 45.0 | 45.0 | 12.5 | 5-10% (43% random) | 0.6-2.0% |
+| Vint | **0.0** | 3.5 | 3.9 | 2.1 | **92.7-93.3%** | **88.7-89.8%** |
+| Kael | **0.7** | 1.3 | 0.6 | 1.9 | **94.0-95.0%** | **87.8-89.8%** |
+
+**The decisive number is the accumulation ratio** -- mean gap between
+reinforcements divided by the bond's own half-life (S ln 2). Above 1.0 the next
+reinforcement lands on a bond already below half of the last, and satisfaction
+can never climb:
+
+| contact | cautious | reckless | greedy | random | verdict |
+|---|---|---|---|---|---|
+| Mara | **0.32** | 0.34 | 0.36 | 0.77 | grows |
+| Vint | **5.77** | 2.44 | 2.30 | 3.37 | cannot accumulate |
+| Kael | **5.13** | 4.75 | 3.87 | 4.15 | cannot accumulate |
+
+**Not one strategy gets Vint or Kael under 1.0; not one gets Mara over 0.8.** And
+the bar does not answer to play: spread of median final satisfaction across all
+four strategies is Mara **37.50**, Vint 3.89, Kael **1.30**. A3 rejected a
+trigger at 1.12x with the line *"it measures how long you lived, not how you
+played, so there is nothing to play against"*; Kael's bar spans 1.3 points across
+every way this game can be played. **A portrait beside that number is a picture
+next to a dead readout, which is exactly what §4 said to check for.**
+
+Raising the starting strength alone fixes neither -- at Kael's 25-34 day gap,
+Mara's S of 12 still leaves a ratio of 3-4. The dominant term is reinforcement
+*frequency* (Mara 10-12/run, Kael 1.9-2.4), and the second is that `strain` moves
+satisfaction but not S, so the contacts whose content is half-adversarial never
+build the memory strength that would let a reinforcement survive to the next one.
+
+**Shipped: the one thing A4 asked for, which was already written.** A4's headline
+deliverable is *"a state-derived 'what they want from you right now' line in each
+character's voice."* **`engine/ambient.py:84`'s `_mara_signal` is that
+function** -- it reads `last_reinforced_day` and escalates at 10/20/35 days
+(*"It's been 24 days since you called Mara. She's stopped asking why."*).
+`server.py` has sent it as `state.ambient` on every state call since before the
+web front end existed and **nothing in `web/app.js` ever read the key**
+(`app.js:1077` records the fact in a comment while routing A3's notice around
+it). `showDayOverlay` now renders `morning_report` and `steward_ledger_line`
+under the night ledger, in the terminal's order and at the terminal's moment in
+the day, with the dwell extended 3900 -> **5600ms** and a matching `.has-morning`
+animation because two sentences do not fit in 3.9s. **Pure render change** -- no
+content, no preconditions, no selector, no day loop.
+
+**One real defect found in the act of rendering it.** `steward_ledger_line` dates
+its entry `character.day - 1`, and the web HUD has always shown `day + 1`, so the
+dated line arrived reading a day behind the counter three inches above it -- an
+inconsistency that could not surface while the line was terminal-only.
+`steward_ledger_line` grew an optional `day_number` defaulting to the engine
+frame (terminal unaffected, unit-tested including the `day_number=0` falsy case)
+and `server.py` passes the web's frame.
+
+**Art is not an engineering task and that is the honest scope.** `data/assets/`
+holds 6 scene jpgs and 5 pngs in `originals/`; there is **no portrait source for
+any of the nine cast members**, and `pipeline/crop_scenes.py` cuts places-only
+bands out of scene originals. Portraits are a commission of 3-9 images that do
+not exist.
+
+**`npc_arcs_pack` was diagnosed, not fixed** (§1 step 3; it is a content change
+and reckless terminal has 0.8 points of headroom). It is **two tiers of
+single-source flags**: `arc_mara_the_door` fires **0 of 160 runs** and is the
+sole source of the four flags gating four more events; `kael_impressed` has
+**one** source (`volume_npc_kael_syndicate_check_in`) gating five;
+`echo_brother_known` has one (`res_why_you_fix`). Eleven of the seventeen are
+tier-2 content whose only entrance is a tier-1 event in the same pack. Second
+entrances on the heads are the proven fix (`res_chalk_second_look`).
+
+**Verified final state:** `unittest` **124 passed** (123 + 1); `lint_content`
+**clean**, 26 packs, 503 events, 398 flags, 332 on 7 shelves, 0 warnings (no
+content touched); `coverage_audit --assert` **GREEN and byte-for-byte identical
+to the A3 baseline** -- starved **73.6**, outcompeted **35.8**, mean **109.4**,
+per-seed 116/96/131/110/94; `--parity` **3/3**. **No `pargate`**: nothing in this
+window touches content, preconditions, the selector or the day loop, and the one
+engine edit is an optional display parameter on a string formatter whose default
+preserves existing behaviour (`sim_bot` never calls `engine.ambient` at all).
+
+Verified live with Playwright against `python server.py`: 4 consecutive day
+overlays carrying the morning report and the Steward ledger line, **zero console
+errors**, the Mara silence line rendering correctly at 20-26 days of silence, and
+the ledger date agreeing with the overlay's day counter after the fix.
+Screenshot confirms the block matches the existing overlay language. The
+pre-existing `saves/autosave.json` was backed up before the test run and restored
+byte-for-byte afterwards.
+
+---
+
+## 4. CURRENT TASK -- F7: make the relationship bars playable
+
+**Model:** **Opus 5**, in-session. Engine tuning against a measured curve, plus
+possibly a small content pass; no volume batch, so this does not go through
+`generate_deck.py`.
+
+**Read first:** `docs/A4_DESIGN.md` §4 (the census that produced this item; §4.1
+is the acceptance criterion), `engine/decay.py:204` and `engine/stats.py:107-133`
+(the whole mechanism is ~25 lines), and `data/cast.json`.
+
+**Do not re-derive:** presence, coverage, reachability, or selector work. A4 just
+closed presence; **seven** consecutive windows have closed the rest. Do not
+re-measure how often the cast appears -- it is in `A4_DESIGN.md` §2 and the
+answer is "constantly."
 
 ### The state you are inheriting
 
-- All standing gates **GREEN**: `pargate` (13.7m, all assertions), `coverage_audit
-  --assert` (starved 73.6 <= 76, outcompeted 35.8 <= 42), `unittest` **123**,
-  `lint_content` clean (26 packs, 503 events, 398 flags), `--parity` 3/3.
-- **A3 is live**: `STEWARD_CADENCE = 7`, five filings from day 31, and a
-  **fourth panel in the web left column** (`#steward-panel`). That column now
-  carries Exit Chain / Deadlines / Threads / Your File.
-- The right sidebar is a tabbed Network / Gear panel (`index.html:189-209`)
-  whose Network tab already lists Mara/Vint/Kael with Ebbinghaus retention.
-  **That is A4's home** -- different column from A3, no new surface needed.
+- All standing gates **GREEN**: `pargate` (13.7m, from A3 -- A4 did not need it),
+  `coverage_audit --assert` (starved **73.6** <= 76, outcompeted **35.8** <= 42,
+  mean 109.4), `unittest` **124**, `lint_content` clean (26 packs, 503 events,
+  398 flags), `--parity` 3/3.
+- **A4 is closed and its census is the spec for this item.**
+  `tests/cast_audit.py --retention` prints the gate; run it first and confirm the
+  baseline reproduces before changing anything (§1 step 2).
+- The web day overlay now renders `state.ambient`; the Network tab still shows
+  raw percentages, and after this item those percentages will finally mean
+  something.
 
-### Step 0 -- measure before designing. This is not optional.
+### The problem, already measured
 
-**Every backlog spec that has been measured has turned out wrong. Four for
-four** (S2/S3 by F1, S8/S9 by SHIP, A3 by its own window, plus F6 closed
-unbuilt). S8 is the *only* diagnosis behind A4 and it has never been checked.
-Before writing a line of design, answer with numbers:
+Two of the three promoted contacts are a dead readout. Vint and Kael sit under
+4% satisfaction on **~90% of run-days**, and the **accumulation ratio** -- mean
+gap between reinforcements over the bond's half-life (S ln 2) -- is **2.30-5.77
+for Vint and 3.87-5.13 for Kael under every strategy**, against Mara's 0.32-0.36.
+Above 1.0 a bond mathematically cannot climb. The resulting bars move **1.3
+points (Kael) and 3.9 (Vint)** across every way the game can be played, against
+Mara's 37.5.
 
-1. **How often does each of Mara / Vint / Kael actually appear?** A3's Step 0
-   found the Steward on 54-60% of run-days when the spec said "6 events".
-   `tests/steward_audit.py --presence` is the template: it is 60 lines and it
-   overturned an entire item. Adapt it, or add a `--cast` mode.
-2. **Do they already interrupt unprompted?** Grep for `weight: 500000` and for
-   satisfaction-gated preconditions. The Steward's scheduled turn already
-   existed and A3 nearly re-invented it.
-3. **What is the actual retention curve doing?** `Character.reinforce` /
-   `relationship_retention` in `engine/decay.py`. If bonds decay to zero in
-   every run regardless of play, portraits will decorate a dead system and the
-   real item is the curve, not the sidebar.
-4. **Is `MIN_CAUTIOUS_ENDINGS` about to bite?** Cautious currently reaches
-   **exactly 5** distinct endings against a floor of 5, with 52.7% of its runs
-   in the long grey. Any A4 change that touches relationship-gated finales
-   (`horizon_pack`, `npc_arcs_pack`) can trip it. Know this before you build.
+### Step 0 -- confirm, then pick a lever
 
-If Step 0 disproves S8, **write that up and close A4 the way F6 was closed.**
-That is a successful window, not a failed one.
+The measurement is done; what is *not* done is which lever moves it. Three
+exist, and §8 of `A4_DESIGN.md` records what is already known about each:
 
-### The task, assuming Step 0 holds
+1. **Reinforcement frequency** -- the dominant term (Mara 10-12/run, Kael
+   1.9-2.4). Content change, therefore a balance change.
+2. **Memory-strength growth** -- `strain` moves satisfaction but not S, though
+   Ebbinghaus strength is memorability and not affection. Cheapest to measure,
+   no content cost, and **measured insufficient alone** (~2.0-2.8 for Kael).
+3. **Starting parameters** -- Vint S 6 / Kael S 8 against Mara's 12. Free, and
+   alone fixes neither.
 
-1. **Portraits and a "what they want from you right now" line** in the right
-   sidebar's existing Network tab. The line is state-derived, in each
-   character's voice key (`CAST_BIBLE.md`): Mara's love arrives as logistics,
-   Kael prices things, Vint deflects one beat late.
-2. **`npc_arcs_pack` is gating-shaped and is the known problem** -- 7/17 ever
-   eligible, 10 union-unreachable, hung off `vint_known` / `kael_impressed` /
-   `mara_ransomed` / `echo_brother_known` granted in other packs (§5, A1 Phase
-   2). If A4 wants visible arcs, that pack is where they already are and cannot
-   be reached. A second entrance is the proven fix (`res_chalk_second_look`,
-   `district_hazards_pack`).
-3. **Art.** `pipeline/crop_scenes.py` and `data/assets/` are the existing
-   pipeline. Portraits are the one part of this item that may need assets that
-   do not exist; scope that early and say so rather than discovering it late.
+Expect to need two of the three. **A/B each one separately**; this deck's levers
+are documented non-monotonic and two changes in one window cannot be attributed.
+
+### Acceptance criteria
+
+- **Accumulation ratio < 1.0 for Vint and Kael in at least the three deliberate
+  strategies** (`cast_audit.py --retention`, the "CAN THE BOND ACCUMULATE?"
+  table). This is the gate, not "the bars are higher."
+- **Cross-strategy spread on the order of Mara's 37.5, not Kael's 1.3** -- a bond
+  the player can lose by playing one way and keep by playing another.
+- **Mara must not be flattened.** She is the proof the system works; a global
+  softening that pins all three near the ceiling fails this item.
+- All standing gates green.
 
 ### Watch for
 
-- **A4 is a balance change if it touches preconditions or the day loop**, and
-  not otherwise. A pure sidebar render is not; a second entrance to
-  `npc_arcs_pack` is. Run `pargate` if you touch content, and note that
-  **reckless terminal sits 0.8 under the top of its band** -- there is very
-  little room above it right now.
-- **`starved` has 2.4 points of headroom** against its cap and rises by roughly
-  one per event added. Read the note above `MAX_STARVED` in
-  `tests/coverage_audit.py` *before* concluding a red gate is deck growth --
-  A3 Phase 2 nearly used that argument to explain away a real content defect.
+- **This is a balance change.** Relationships gate six events, four choice-level
+  requirements, and the Empty Suite ending. Run `pargate`, and note **reckless
+  terminal sits 0.8 under the top of its band**.
+- **`NEUTRAL_alienation_empty_suite` will move and it is worth predicting first.**
+  29/40 random runs already satisfy its "every bond under 20" clause and only 1
+  reaches the ending, because `Social_Capital < 15` is what binds. Raising Vint
+  and Kael makes the clause *harder*, in exactly the runs that satisfy it now
+  (`A4_DESIGN.md` §4.3).
+- **`MIN_CAUTIOUS_ENDINGS` is at exactly 5 against a floor of 5**, with 52.7% of
+  cautious runs in the long grey. Anything that trims that tail trips it.
+- **`starved` has 2.4 points of headroom** and rises by roughly one per event
+  added. Read the note above `MAX_STARVED` in `tests/coverage_audit.py` *before*
+  concluding a red gate is deck growth -- A3 Phase 2 nearly used that argument to
+  explain away a real content defect.
 - **Five day loops, not three**, if anything per-day is added (§5).
-- **`web/app.js` never renders `state.ambient`** -- the morning report and
-  Steward ledger line have never reached the web player. If you are in that
-  file anyway, it is a two-line fix (§5).
-- **Vertical space in the left column is now four panels.** Check at 900px
-  before anything is added there. A4 should not need to be.
+
+### The adjacent item this window should NOT absorb
+
+**`npc_arcs_pack`'s gating is diagnosed and unfixed** -- see §3's A4 entry and
+`A4_DESIGN.md` §7. It is two tiers of single-source flags with a head that fires
+0/160. It is a *content* balance change and belongs in its own window; doing it
+alongside F7 makes both unattributable.
 
 ### On completion
 
@@ -1549,6 +1670,58 @@ Triage these into the status board when they earn their place.
   Phase 1 checked the second distribution. If a later window wants the rung
   livelier the levers are lowering the tier-1 cut or lowering `FILING_ONSET`;
   both are balance changes needing their own `pargate`.
+
+- *(2026-07-29, A4)* **"How much of this is on screen?" and "does any of it
+  accumulate?" are different questions, and five specs in a row have asked the
+  first when they meant the second.** S2 said filler crowded out arc content
+  (it did not; the *middle* did). A3 said the Steward was absent (it was on 54-60%
+  of days; nothing escalated). A4 said the cast was absent (Mara is on 41-52% of
+  days; two of three bonds cannot mathematically climb). The pattern is that a
+  designer reading a play session notices *absence of consequence* and writes it
+  up as *absence of presence*, because presence is the visible half.
+  **The general instrument is a ratio, not a count**: something arriving every N
+  days against a system with a half-life of H days is a live system when N < H
+  and decoration when N > H, whatever N alone looks like. `cast_audit.py`'s
+  accumulation table is that test for bonds; A3's file/Heat spread is the same
+  test for antagonists. Reach for it before writing "there should be more of X."
+
+- *(2026-07-29, A4)* **`strain` not raising memory strength is the asymmetry that
+  singles out the adversarial cast, and it is worth deciding deliberately rather
+  than inheriting.** `Character.reinforce` adds +1.5 to S; `Character.strain`
+  explicitly does not ("without the memory-strength bonus of reinforcement").
+  Ebbinghaus strength is *memorability*, though, not affection -- a broker you
+  keep crossing remembers you vividly. The consequence is that Vint and Kael,
+  whose deck content is roughly half-adversarial (+36/-33 and +34/-28 branches),
+  never build the S that would let a reinforcement survive to the next one, while
+  Mara does. Folded into F7's lever list; recorded here because it is a modelling
+  question the codebase never asked out loud.
+
+- *(2026-07-29, A4)* **Vint's satisfaction bar gates nothing in the entire
+  503-event deck.** Six events read a relationship threshold -- four Mara, two
+  Kael, zero Vint -- and Kael's two ask for **>= 45 and >= 55** against a bar this
+  window measured at 0.6-2.2. Those are not thresholds, they are walls, and one
+  of them (`arc_mara_the_door`) sits on an event that fires 0/160 anyway. **If F7
+  succeeds, this is the follow-on**: a curve nobody reads is only half a system,
+  and the gates that do exist are calibrated for satisfaction values that have
+  never occurred.
+
+- *(2026-07-29, A4)* **A dated string crossing into a front end with different day
+  numbering is a class of bug, not an incident.** `steward_ledger_line` dated
+  entries `character.day - 1` and the web HUD has always rendered `day + 1`, so
+  the moment A4 put the line on screen it read a day behind the counter above it.
+  Fixed with an optional `day_number`. **The same hazard is live for anything
+  else that bakes a day number into player-facing prose**, and the deck does this
+  in event text; a content line that says "on the fourteenth" means a different
+  day to the two front ends. Nobody has audited that.
+
+- *(2026-07-29, A4)* **Portraits, per-ending art and scene coverage are an asset
+  commission, not an engineering item, and S8 should say so.** `data/assets/` is
+  6 jpgs cut from 5 pngs by `pipeline/crop_scenes.py`, which cuts places-only
+  bands out of scene originals. There is no portrait source for any of the nine
+  cast members and no pipeline that could produce one. **Any future window that
+  picks up "art" from the backlog will spend its first hour discovering this** --
+  the code half of S8 is small and mostly done; the rest is a purchasing
+  decision.
 
 ---
 

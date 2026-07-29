@@ -134,6 +134,19 @@ Six scene images (`data/assets/*.jpg`) for 483 events and 14 endings. No NPC
 portraits despite `data/cast.json` existing. No per-ending art. The web UI is a
 three-column meter dashboard rather than a mood.
 
+> **Corrected 2026-07-29 by A4's census.** The asset half is accurate and is
+> **not an engineering item**: `data/assets/` is 6 jpgs cut from 5 pngs by
+> `pipeline/crop_scenes.py`, which cuts places-only bands out of scene
+> originals, so there is no portrait source for any of the nine cast members
+> and no pipeline that could produce one. Portraits are a commission of 3-9
+> images. **The "meter dashboard rather than a mood" half was aimed at the wrong
+> defect**: the meters are not the problem, two of the three relationship meters
+> being mathematically unable to move is (**F7**). And the one presentational
+> gap that did exist was the reverse of what S8 assumed -- prose the engine
+> already composed (`morning_report`, `steward_ledger_line`) was being computed,
+> serialized, sent to the browser and dropped by the client. Fixed in the A4
+> window.
+
 ### S9 -- Missing shipping infrastructure
 Single autosave slot (`server.py:79-118`), no manual saves, no settings menu
 (audio is a binary ON/OFF), **no reduced-motion option** despite a full-screen CRT
@@ -366,15 +379,63 @@ offers something, corrects something, escalates. One line the player sees coming
 and can play against. An antagonist you can anticipate is worth ten atmospheric
 mentions.
 
-### A4 -- Put the cast on screen
+### A4 -- Put the cast on screen  *(CLOSED 2026-07-29 -- premise disproved)*
 **Addresses:** S8
 **Effort:** medium (needs art)
+
+> **Measured and closed without building the spec.** Every claim below except one
+> is false, and the true one is worse than stated. Full census in
+> `docs/A4_DESIGN.md`; instrument is `tests/cast_audit.py`.
+>
+> - **"Should interrupt unprompted"** -- they already do. The four
+>   `prologue_*_descent` storylets are `weight: 500000`, one fires per run, and
+>   each names and moves the bar for all three. After that nothing is forced, but
+>   cast events carry median weight **7-8 against the deck's 6**.
+> - **Implied absence** -- Mara appears on **41-52%** of run-days, Vint 33-37%,
+>   Kael 21-27%, and **none of the three is absent from a single one of 160
+>   runs**. The deck holds 77 / 68 / 64 events naming them.
+> - **"The surface is a percentage bar"** -- true, and the bar is dead for two of
+>   three. Vint and Kael sit under 4% satisfaction on **~90% of run-days**; their
+>   accumulation ratio (reinforcement gap / half-life) is **2.3-5.8 under every
+>   strategy**, so those bonds cannot mathematically climb; and their medians move
+>   **1.3 and 3.9 points** across every way the game can be played, against
+>   Mara's 37.5. **Portraits would have decorated a dead readout.** This became
+>   **F7** below.
+> - **"A 'what they want from you right now' line"** -- already written.
+>   `engine/ambient.py`'s `_mara_signal` is exactly that, state-derived and in
+>   Mara's register, and the web front end had never rendered `state.ambient` at
+>   all. That render **shipped** in the A4 window; it is the whole of what A4
+>   delivered from its own spec.
+> - **Art** -- not an engineering item. See the S8 correction above.
+>
+> `npc_arcs_pack`'s gating was diagnosed and left for its own window: two tiers
+> of single-source flags, head event `arc_mara_the_door` firing **0/160**.
 
 Mara, Vint, and Kael should interrupt unprompted, carry visible arcs, and react to
 each other. The relationship web is already wired (`docs/CAST_BIBLE.md`,
 `data/cast.json`); the player-facing surface is a percentage bar in the right
 sidebar. Portraits plus a "what they want from you right now" line converts numbers
 into people.
+
+### F7 -- Make the relationship bars playable  *(opened 2026-07-29 by A4's census)*
+**Addresses:** the real content of S8's relationship complaint
+**Effort:** small-to-medium (engine tuning; possibly a small content pass)
+
+Two of the three promoted contacts are a readout the player cannot affect. The
+diagnosis is complete and quantitative -- see `docs/A4_DESIGN.md` §4 and
+`BACKLOG_HANDOFF.md` §4 -- so this item starts at Step 1, not Step 0.
+
+**The gate:** `python tests/cast_audit.py --retention`, the "CAN THE BOND
+ACCUMULATE?" table. Ship when the ratio is **< 1.0 for Vint and Kael in the three
+deliberate strategies** and the cross-strategy spread is on the order of Mara's
+37.5 rather than Kael's 1.3. Not "the bars are higher" -- Mara must not be
+flattened, since she is the proof the system works.
+
+Three levers, all measured: reinforcement frequency (dominant, content change),
+memory-strength growth on adversarial interactions (cheapest, insufficient
+alone), and the starting parameters in `data/cast.json` (free, insufficient
+alone). Expect to need two. It is a balance change: relationships gate six
+events, four choice-level requirements, and the Empty Suite ending.
 
 ### A5 -- Achievements you already wrote
 **Addresses:** S9
@@ -436,10 +497,21 @@ Sunless Sea ($19).
    to 23/24 and moved deck-wide never-fired 103 -> 83. The per-shelf reservation
    mechanism F1 left behind in `engine/selector.py` was indeed the hook it needed.
    Phase 2 turns the winning visit cadence into a real player choice.
-3. **A3 + A4** -- makes the world feel inhabited rather than simulated.
-4. **Shipping block** -- settings, saves, achievements, content warning, art.
-5. **F3 / F4** -- economy and stat pass. Best done *after* the map exists, since
-   districts change the shape of both.
+3. ~~**A3 + A4** -- makes the world feel inhabited rather than simulated.~~
+   **A3 closed 2026-07-29** (shipped live: `STEWARD_CADENCE = 7`, five
+   tier-selected filings). **A4 closed 2026-07-29, premise disproved** -- the
+   world was already inhabited; the cast is on screen 21-52% of run-days. What
+   the item was reaching for became **F7**.
+4. ~~**Shipping block**~~ -- **the three blocking rows closed 2026-07-29**
+   (settings, saves, content warning). Achievements are A5; art is a commission,
+   not an engineering item (see the S8 correction).
+5. **F7** -- make the relationship bars playable. Next. Its Step 0 is already
+   done and its acceptance criterion is a measured threshold, which no other
+   open item can say.
+6. **F3 / F4 / F5 / A2** -- economy, stat pass, ending signposts, preparation.
+   Best done *after* the map exists, since districts change the shape of all
+   four. **Each still needs its own Step 0 census**: every spec in this document
+   that has been measured has turned out wrong, five for five.
 
 ---
 

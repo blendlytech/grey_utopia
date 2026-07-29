@@ -106,6 +106,17 @@ class TestStewardLedgerLine(unittest.TestCase):
         line = steward_ledger_line(c, summary)
         self.assertIn("33.4", line)
 
+    def test_day_number_overrides_the_date_without_touching_the_default(self):
+        """A4: the web HUD numbers days `day + 1` and the terminal does not, so
+        server.py passes its own frame. The engine frame stays the default."""
+        c = Character()
+        c.day = 6
+        summary = {"overnight": {}, "withdrawal": False, "stress": 33.4}
+        self.assertIn("Day 5", steward_ledger_line(c, summary))
+        self.assertIn("Day 6", steward_ledger_line(c, summary, day_number=c.day))
+        # Day 0 is a real date, not a falsy value to be replaced by the default.
+        self.assertIn("Day 0", steward_ledger_line(c, summary, day_number=0))
+
 
 if __name__ == "__main__":
     unittest.main()

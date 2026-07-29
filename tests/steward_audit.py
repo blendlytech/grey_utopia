@@ -92,8 +92,10 @@ def playout(strategy: str, seed: int, max_days: int = 100,
     steward_fire_days: List[int] = []
     review_days: Dict[str, int] = {}
     fired_ids: set = set()
+    fire_log: List[tuple] = []
     heat_by_day: Dict[int, float] = {}
     file_by_day: Dict[int, int] = {}
+    rel_by_day: Dict[int, Dict[str, float]] = {}
     filing_days = 0
     filings_fired: List[str] = []
     filing_tiers: List[int] = []
@@ -105,6 +107,11 @@ def playout(strategy: str, seed: int, max_days: int = 100,
             break
         heat_by_day[character.day] = character.get("Heat")
         file_by_day[character.day] = steward.file_weight(character)
+        # Recorded for A4 (tests/cast_audit.py), which reuses this loop rather
+        # than adding a sixth copy of the day loop -- see BACKLOG_HANDOFF §5.
+        rel_by_day[character.day] = {
+            n: (r.satisfaction, r.strength)
+            for n, r in character.relationships.items()}
 
         slots = 3 if (character.get("Physical_Integrity") >= 30
                       and character.get("Mental_Decay") <= 80) else 2
@@ -136,6 +143,7 @@ def playout(strategy: str, seed: int, max_days: int = 100,
             ev.last_fired_day = character.day
             ev.fire_count += 1
             fired_ids.add(ev.id)
+            fire_log.append((character.day, ev.id))
             slots_spent += 1
             if ev.id in FILINGS:
                 filings_fired.append(ev.id)
@@ -156,8 +164,12 @@ def playout(strategy: str, seed: int, max_days: int = 100,
         "steward_fire_days": steward_fire_days,
         "review_days": review_days,
         "fired_ids": fired_ids,
+        "fire_log": fire_log,
         "heat_by_day": heat_by_day,
         "file_by_day": file_by_day,
+        "rel_by_day": rel_by_day,
+        "rel_final": {n: (r.satisfaction, r.strength)
+                      for n, r in character.relationships.items()},
         "file_final": steward.file_weight(character),
         "filing_days": filing_days,
         "filings_fired": filings_fired,

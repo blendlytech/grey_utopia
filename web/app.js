@@ -1522,18 +1522,58 @@ function showDayOverlay(state) {
     if (!hasLedger) ledger.innerHTML = "";
   }
 
+  // A4: the morning report and the Steward's ledger line. `engine/ambient.py`
+  // has composed both since before this front end existed and `server.py`
+  // sends them on every state call as `state.ambient`, but nothing here ever
+  // read that key -- so `_mara_signal`'s "It's been 14 days since you called
+  // Mara. She's stopped asking why." has only ever reached terminal players.
+  // That line is A4's literal ask (a state-derived line in the character's own
+  // voice) and it was already written; see docs/A4_DESIGN.md §4.
+  //
+  // Placed under the ledger rather than in a sidebar panel because the
+  // terminal prints it at the same moment -- top of the day, after the night's
+  // accounting (main.py:173). Same strings, same order, both front ends.
+  let hasAmbient = false;
+  if (state.ambient) {
+    const lines = state.ambient.morning_report || [];
+    if (lines.length || state.ambient.ledger_line) {
+      const head = document.createElement("div");
+      head.className = "ledger-head morning-head";
+      head.textContent = "THE MORNING";
+      ledger.appendChild(head);
+    }
+    lines.forEach(text => {
+      const row = document.createElement("div");
+      row.className = "ledger-row lr-morning";
+      row.textContent = text;
+      ledger.appendChild(row);
+      hasAmbient = true;
+    });
+    if (state.ambient.ledger_line) {
+      const row = document.createElement("div");
+      row.className = "ledger-row lr-steward";
+      row.textContent = state.ambient.ledger_line;
+      ledger.appendChild(row);
+      hasAmbient = true;
+    }
+  }
+
   // soft data ticks under the ledger, one per stat row (capped), after the chime
   const tickRows = Math.min(ledger.querySelectorAll(".lr-pos, .lr-neg").length, 5);
   for (let i = 0; i < tickRows; i++) {
     setTimeout(() => playSound("ledger-tick"), 1300 + i * 160);
   }
 
-  // restart CSS animation; hold a beat longer when there's a ledger to read
-  overlay.classList.toggle("has-ledger", hasLedger);
+  // restart CSS animation; hold a beat longer when there's a ledger to read,
+  // and longer again when there is prose under it -- the morning lines are
+  // sentences, not stat rows, and 3.9s is not enough to read two of them.
+  const dwell = hasAmbient ? 5600 : hasLedger ? 3900 : 2650;
+  overlay.classList.toggle("has-ledger", hasLedger && !hasAmbient);
+  overlay.classList.toggle("has-morning", hasAmbient);
   overlay.classList.add("hidden");
   void overlay.offsetWidth;
   overlay.classList.remove("hidden");
-  setTimeout(() => overlay.classList.add("hidden"), hasLedger ? 3900 : 2650);
+  setTimeout(() => overlay.classList.add("hidden"), dwell);
 }
 
 /* ============ Contacts, Shop, Scenes ============ */

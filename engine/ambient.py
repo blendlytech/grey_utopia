@@ -109,7 +109,8 @@ def morning_report(character: Character) -> List[str]:
     return [line for _, line in active[:MAX_MORNING_LINES]]
 
 
-def steward_ledger_line(character: Character, yesterday_summary: Optional[Dict[str, Any]]) -> str:
+def steward_ledger_line(character: Character, yesterday_summary: Optional[Dict[str, Any]],
+                        day_number: Optional[int] = None) -> str:
     """One concrete citation from yesterday's day report, phrased as a dated Steward ledger entry.
 
     yesterday_summary is the day_report-shaped dict produced by a day
@@ -117,12 +118,21 @@ def steward_ledger_line(character: Character, yesterday_summary: Optional[Dict[s
     expired clocks, withdrawal flag, and the day's stress figure. character
     supplies the day number the entry is dated to -- a ledger without dates
     isn't much of a ledger.
+
+    `day_number` overrides that date, and exists because the two front ends
+    number days differently: the terminal prints the engine's `character.day`
+    directly, while the web HUD has always shown `day + 1`. The engine frame is
+    the default, so the terminal is unaffected; `server.py` passes the web's
+    frame so that a dated ledger entry agrees with the day counter three inches
+    above it. This only became visible when A4 started rendering the line in the
+    browser at all -- see docs/A4_DESIGN.md §5.
     """
     summary = yesterday_summary or {}
     if not summary:
         return "STEWARD LEDGER: no prior entry on file. Today opens a new page."
 
-    tag = f"STEWARD LEDGER (Day {character.day - 1})"
+    dated = character.day - 1 if day_number is None else day_number
+    tag = f"STEWARD LEDGER (Day {dated})"
 
     expired = summary.get("clocks_expired") or []
     if expired:

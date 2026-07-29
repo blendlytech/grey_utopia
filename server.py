@@ -438,9 +438,17 @@ class GameSession:
                     for d in load_districts()
                 ],
             },
+            # A4: both of these have been computed and sent since before the web
+            # front end existed, and nothing in web/app.js ever read the key --
+            # so `_mara_signal`'s escalating "you haven't called Mara" line has
+            # only ever reached terminal players. `showDayOverlay` renders them
+            # now. `day_number` is the web's 1-indexed frame (`val-day` is
+            # `day + 1`), so the ledger's date agrees with the day counter the
+            # player is looking at. See docs/A4_DESIGN.md §5.
             "ambient": None if self.character.dead else {
                 "morning_report": morning_report(self.character),
-                "ledger_line": steward_ledger_line(self.character, self.last_day_report),
+                "ledger_line": steward_ledger_line(self.character, self.last_day_report,
+                                                   day_number=self.character.day),
             },
             # A3: the file, for #steward-panel. `open` is the hidden-until-relevant
             # switch, following #clocks-panel / #threads-panel: the panel appears
