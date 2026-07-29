@@ -58,10 +58,10 @@ as non-monotonic. Two balance changes in one window cannot be attributed.
 | F1 | Per-day ambient quota | **CLOSED -- premise disproved** | Built, measured, shipped disabled. See below. |
 | F2 | Kill the fake dice | **CLOSED** | 0/1468 choices now presented as certain that can still fail. See below. |
 | **A1** | The Row as a map | **CLOSED -- both gates green** | 7 districts, 498 events / 332 shelved. Phase 3c fixed the instrument (seed-averaged, and never-fired split into `starved` / `outcompeted`) and then the one real regression it exposed. **`pargate` GREEN, `coverage_audit --assert` GREEN**, first time both have been green together since Phase 2. See below and `A1_DESIGN.md` §10. Remaining coverage residual is day gates and chain depth -- neither is an A1 problem, both are logged in §5. |
-| **F6** | Re-scale the chain day ladders | **NEW -- next up, see §4** | Chains gate links at days 10-52 against a **30-day median run**. Recorded three times by three windows (F1's S3 note, A1 Phase 1, A1 Phase 3c §10.7) and never actionable inside another item. It is the entire residual of `ambitions_pack` and the reason `the_rounding_pack` has 0/60 completions. Cheap: numbers in `preconditions`, not new content. |
+| ~~F6~~ | ~~Re-scale the chain day ladders~~ | **CLOSED 2026-07-29 -- premise disproved, nothing built** | The "30-day median run" three windows reasoned from is the **`random` bot's** median. Deliberate strategies run 55-63 days and reach a day-46 finale 69-93% of the time, so the ladders are calibrated correctly. Scope was wrong too: only 4 packs gate past d34, and `reckoning_pack`/`npc_arcs_pack` — flagged twice as suspects — max out at d18/d16. Delivered `--union` instead. See §5. |
+| **SHIP** | Settings / saves / achievements / content warning / art | **Next up, see §4** | Three items marked **blocking** and 0% done. |
 | A3 | Make the Steward take a turn | Not started | -- |
 | A4 | Put the cast on screen | Not started | -- |
-| SHIP | Settings / saves / achievements / content warning / art | Not started | -- |
 | F3 | Make money a decision | Not started | -- |
 | F4 | Give Fame and Social_Capital a spend | Not started | -- |
 | F5 | Signpost the endings in-fiction | Not started | -- |
@@ -69,10 +69,15 @@ as non-monotonic. Two balance changes in one window cannot be attributed.
 | A5 | Achievements you already wrote | Folded into SHIP | -- |
 
 Order above is the recommended sequence from `STEAM_READINESS_BACKLOG.md` §6.
-F5 and A2 sit late because both are cheaper to build once A1's map exists. **F6 is
-new in the A1 Phase 3c window** and is not in `STEAM_READINESS_BACKLOG.md`; it is
-placed ahead of A3 because three windows have now found it and none could act on
-it, not because it outranks A3 on player value.
+F5 and A2 sit late because both are cheaper to build once A1's map exists.
+
+**SHIP moved ahead of A3/A4 on 2026-07-29.** §6 of the backlog puts A3+A4 next, and
+that ordering was written when A1 was unbuilt. It is now built, coverage is
+measured healthy (`--union`: 61 of 498 unreachable however you play, and 59 of
+those are by-design or known flag-depth), and **four consecutive windows have gone
+into reachability**. The three blocking shipping items -- settings menu, content
+warning screen, manual save slots -- are still at zero and gate any release
+regardless of how good the deck gets. A3/A4 keep.
 
 ### Completed
 
@@ -589,96 +594,93 @@ against the <= 9/24 criterion, and 7/24 at seed 0 against Phase 3b's 14/24.
 
 ---
 
-## 4. CURRENT TASK -- F6: re-scale the chain day ladders to the run the game has
+## 4. CURRENT TASK -- SHIP: the three blocking items
 
-**Model:** **Opus 5** for the re-scale decision and the gate runs; the prose edits
-are trivial and need no author. This is a *pacing* change measured against two
-gates, not a writing task.
+**Model:** **Sonnet 5**. This is UI and persistence engineering against a clear
+spec, with no balance exposure and no gate runs. It does not need Opus 5, and
+`STEAM_READINESS_BACKLOG.md` §4 already holds the acceptance list.
 
-**Why this jumps the queue.** §6's recommended order puts A3 next, and A3 is a
-fine choice if you want to build rather than fix. But this item has now been
-recorded **three times by three different windows** (F1's S3 correction, A1 Phase
-1's §5 note, A1 Phase 3c's §10.7) and each time the window that found it could not
-act because it was inside another item. It is also the *entire* residual of the
-one acceptance criterion A1 spent a window rescuing, and it is cheap: the change
-is numbers in `preconditions`, not new content.
+**Read first:** `STEAM_READINESS_BACKLOG.md` **§4** (the shipping checklist) and
+**S8/S9**. You do **not** need the A1 design note for this item.
 
-**Read first:** §5's three day-gate entries (2026-07-27 F1, 2026-07-27 A1 Phase 1,
-2026-07-28 A1 Phase 3c) and `A1_DESIGN.md` **§10.4 and §10.7**. Then §6's baseline
-table. **Do not re-derive:** that `ambitions_pack`'s problem was weight (fixed,
-§10.4), that `resistance_pack` is a chain-head problem and not a weight one
-(§10.5), that `Mental_Decay` is a dead lever for the Sanctuary, or that
-`coverage_audit` plays `random` and therefore under-measures branch-gated chains
-(§5). All four are recorded with numbers and three of them cost a gate run.
+**Do not re-derive:** anything about coverage, reachability or the selector. That
+question is closed -- `--union` reports 61 of 498 events unreachable under all four
+strategies, 59 of which are by-design (`legacy_pack`) or known flag-depth
+(`betrayal_pack`, `npc_arcs_pack`, `reckoning_pack`) or intentional mutual
+exclusivity (`ambitions_pack`). **Four consecutive windows went into this. It is
+done. Do not open it again without a new reason that is not a never-fired count.**
 
 ### The state you are inheriting
 
-- **A1 is closed.** 7 districts, **332 of 498** events shelved,
-  `PLACEMENT_RATE = 0.40`.
-- **Both standing gates are GREEN**, first time together since Phase 2.
-  `coverage_audit --assert`: starved 66.2 (<= 76), outcompeted 35.0 (<= 42).
-  `pargate`: all assertions passed.
-- `unittest` **94** passed, `lint_content` clean (498 events, 391 flags),
-  `--parity` 3/3.
-- The gate now sweeps five seed bases and takes ~2.5 min. **Quote means, not seed
-  0** -- that is enforced by the instrument now, and §6's per-pack table is
-  already stated as a 5-base mean.
+- All standing gates **GREEN**: `pargate` all assertions, `coverage_audit --assert`
+  (starved 66.2 <= 76, outcompeted 35.0 <= 42), `unittest` 94, `lint_content`
+  clean, `--parity` 3/3.
+- A1 closed and merged to `main` (PR #1). 7 districts, 498 events, 332 shelved.
+- F6 closed without building anything; its premise was measurably false (§5).
 
-### The problem, stated with its numbers
+### The three blocking items
 
-Chains across the deck gate their links against day thresholds calibrated for a
-run length the game has not had for several windows. Median random run is now
-**30 days** (was 34 before Phase 3c's weight change; `pargate` average survival is
-36.6 for random, 57-63 for deliberate strategies).
+All three are marked **blocking** in `STEAM_READINESS_BACKLOG.md` §4 and all three
+are at zero.
 
-| chain | gates | reachable in a median run? |
-|---|---|---|
-| `ambitions_pack` x3 | links 10/16/22/28/34/40, finales 46, aftermath 52 | links 1-4 yes, 5 marginal, 6+ no |
-| `the_rounding_pack` | day 55 | no -- 0/60 chain completions at normal weights |
+**The backlog's §4 descriptions are stale in three places. Verified 2026-07-29
+against the code, and the real starting position is better than it reads:**
 
-`ambitions_pack`'s entire remaining residual is `amb_clean_4/5/6` and
-`amb_clean_finale`. This is not a competition problem: §10.4 fixed that and the
-pack went 14/24 -> 8.6/24 on the 5-base mean.
+1. **Content warning screen.** Genuinely absent -- `grep -i "content warning"`
+   across `.py`/`.js`/`.html` returns nothing. Greenfield. Shown once before a new
+   run, skippable thereafter, re-readable from settings. Cheapest of the three and
+   the one with the clearest ethical claim on being first: the game covers
+   addiction, overdose and involuntary commitment.
+2. **Settings menu.** **Not greenfield, and reduced motion is already half-done.**
+   `web/styles.css:1081` has a `@media (prefers-reduced-motion: reduce)` block that
+   already kills animations and `glitch-text`, and `web/app.js:895` respects it in
+   the typewriter. There is also already an audio **mute button**
+   (`btn-audio` / `isAudioMuted` / `toggleAudio`), and real audio behind it
+   (`web/audio/*.mp3` plus a WebAudio synth fallback).
+   What is actually missing: a settings **panel** to hold any of it, an **in-app**
+   reduced-motion toggle that does not depend on the OS setting, text size, volume
+   as a slider rather than a binary mute, and **persistence** -- `localStorage` is
+   already used for one thing (`GALLERY_KEY = "grey_utopia_endings_seen"`,
+   `app.js:14`), so follow that pattern.
+3. **Manual save slots. This is a web-only job.** `server.py:38` has a single
+   `AUTOSAVE_PATH = saves/autosave.json` with `save_state`/`load_state` at
+   `server.py:91/108`. **`main.py` has no persistence at all** -- it only records
+   endings through `engine/legacy.py`. So "both UIs" does not apply here; do not
+   invent terminal saves as part of this item.
+   `engine/legacy.py` owns `saves/legacy.json` (`LEGACY_PATH`) separately for NG+
+   and must not be clobbered by slot writes.
 
-### What to do
+### Watch for
 
-1. **Inventory first, and do not guess the scope.** Grep every `day` precondition
-   in `data/events/*.json`, bucket by pack, and find every chain whose *last* link
-   gates later than the measured median. `reckoning_pack` and `npc_arcs_pack` were
-   flagged as worth checking for the same shape in A1 Phase 1's §5 note and never
-   were. Write the inventory into the design note before editing anything.
-2. **Decide the rule, once, and apply it uniformly.** The obvious candidate is a
-   linear rescale of each ladder against the measured median (e.g. ambitions
-   10/16/22/28/34/40 -> 8/13/18/23/28/33, finale 46 -> 38). Whatever the rule is,
-   state it and apply it to every chain -- a per-chain hand-tune is how this
-   becomes unmaintainable the next time run length moves.
-3. **Expect the balance gate to move, and budget one run for it.** §10.4 is the
-   warning: making a *winning* chain more reachable inflated greedy's good endings
-   by 10.4 points in one edit. Finales are where that lives. If good endings run
-   hot, the lever is the finale weights, not the day gates you just fixed.
-4. **Re-measure and update §6** with 5-base means and the command that produced
-   them.
+- **`main.py` and `server.py` have drifted before** -- §5 records them counting a
+  "fired" event differently. Any state a save round-trips should be written once
+  and read by both, the way `engine/districts.py` handles placements.
+- **Save compatibility.** Adding fields to the save format is the change most
+  likely to break an existing `saves/autosave.json`. Decide the versioning story
+  before writing slot code, not after. This is the one part of the item worth a
+  second pair of eyes.
+- New HTTP routes go beside the existing ones in `server.py` (`/api/state`,
+  `/api/reset`, `/api/place`, `/api/rest`, `/api/buy_item`, `/api/contact_action`,
+  `/api/choose`).
+- Nothing here should move a balance or coverage number. **If one moves, something
+  is wrong** -- a useful tripwire, so run both gates once at the end even though
+  no content changed.
 
 ### Acceptance criteria
 
 | Metric | Target |
 |---|---|
-| `ambitions_pack` unreached, 5-base mean | **<= 5/24** (from 8.6) |
-| `the_rounding_pack` chain completions | **> 0** in a 40-run audit |
-| `coverage_audit --assert` | **green** on both `MAX_STARVED` and `MAX_OUTCOMPETED` |
-| `pargate` | **green**, or a violation accepted in writing with its measurement |
-| `unittest` + `lint_content` + `--parity` | passing / clean / 3/3 |
+| Content warning | shown pre-run, skippable, re-readable from settings |
+| Settings panel | one place holding motion / text size / volume |
+| Reduced-motion toggle | in-app, independent of the OS media query, and persists |
+| Text size + volume | persist via `localStorage`; volume replaces the binary mute |
+| Manual save slots | create / load / delete in the web UI, `legacy.json` untouched |
+| `unittest` + `lint_content` | passing / clean |
+| `pargate` + `coverage_audit --assert` | unchanged and green |
 
-**Explicitly out of scope:** spatial Heat (`A1_DESIGN.md` §3 -- must not share a
-window with a selector change), travel cost, `PLACEMENT_RATE` (§8.4 records it as
-balance-critical), and `betrayal_pack` / `npc_arcs_pack` *reachability* -- both
-measured gating-shaped three times now, and neither is fixable by pacing. If the
-inventory in step 1 shows their day gates are also miscalibrated, record it and
-leave it; their problem is flag depth, not days.
-
-**If you would rather build than fix**, A3 ("Make the Steward take a turn") is the
-next item in §6's recommended order and A1's closure unblocks it cleanly. F6 will
-keep -- it has kept three times.
+**Explicitly out of scope:** Steam achievements and Cloud (they need the slots
+first), capsule art and trailer, controller/Deck verification, localization
+scaffolding, and every reachability question.
 
 ### On completion
 
@@ -1100,6 +1102,56 @@ Triage these into the status board when they earn their place.
   shorter or `PLACEMENT_RATE` rises -- and §8.4 records the latter as
   balance-critical, so it is not a free knob.
 
+- *(2026-07-29, F6 step 1)* **F6's premise is measurably FALSE and the item should
+  not be built as written. The day ladders are calibrated correctly for anyone who
+  plays deliberately; the "30-day median run" three windows reasoned from is the
+  `random` bot's median.** Survival curve, 200 runs per strategy:
+
+  | strategy | median | reaches d40 | d46 | d55 |
+  |---|---|---|---|---|
+  | random | 34 | 40% | 32% | 22% |
+  | cautious | **63** | 100% | **93%** | 79% |
+  | reckless | 55 | 89% | 69% | 50% |
+  | greedy | 57 | 92% | 73% | 54% |
+
+  A day-46 finale is reached by **69-93% of deliberate runs**. This is the same
+  error as §10.5, made by the same author one window later: `coverage_audit` runs
+  `random`, and `random` is the chaos baseline nobody plays -- the very argument
+  used to split `INSTITUTIONAL_CAP` in the window before.
+
+  The scope was also wrong. Only **four** packs gate anything past day 34
+  (`ambitions_pack` 10 events, `cast_expansion_pack` 9, `origin_threads_pack` 5,
+  `the_rounding_pack` 1). `reckoning_pack` (max d18) and `npc_arcs_pack` (max d16)
+  were flagged twice as "worth checking for the same shape" and **do not have it**.
+
+- *(2026-07-29, F6 step 1)* **CLOSED by measurement, not by work: "The Rounding is
+  day-55 gated and never completes."** All 4 events of `the_rounding_pack` now fire
+  at n=40 under both `cautious` and `greedy` (3/4 under `random`). Something
+  between the recorded 0/60 and now -- most likely A1 placement plus depth-scaled
+  chain scheduling -- fixed it. *Caveat: "4/4 events ever fired across 40 runs" is
+  weaker than the "chain completions" metric the 0/60 came from, which was not
+  re-measured.*
+
+- *(2026-07-29, F6 step 1)* **Single-strategy coverage misleads in BOTH directions,
+  and the honest metric is the union across strategies.** `random` picks uniformly,
+  so it spreads across mutually-exclusive branches but dies early and fumbles
+  branch-gated chain heads. Deliberate bots live ~25 days longer but **always make
+  the same choice**, so they collapse every either/or in the deck. Measured at
+  n=40, seed 0:
+
+  | | random | cautious | reckless | greedy | **union** |
+  |---|---|---|---|---|---|
+  | never fired | 105 | 191 | 106 | 135 | **61** |
+  | never eligible | 72 | 179 | 97 | 113 | **51** |
+
+  `ambitions_pack` reads 17/24 unreached under `random` but **8/24** under greedy
+  and cautious -- a deliberate bot picks one ambition every run, so the other two
+  chains never exist. **Only 61 of 498 events (12.3%) are unreachable by every
+  strategy**, and 59 of those 61 are `betrayal_pack` (18), `legacy_pack` (18,
+  by design), `npc_arcs_pack` (10), `reckoning_pack` (7) and `ambitions_pack` (6,
+  which is mutual exclusivity working as intended). **Deck reachability is
+  healthy.** The gate should measure the union, or at minimum report it.
+
 ---
 
 ## 6. Recorded baseline
@@ -1109,10 +1161,21 @@ authority. Reproduce with:
 
 ```bash
 python tests/coverage_audit.py --assert                # the gate: 5 seed bases, ~2.5 min
+python tests/coverage_audit.py --union                 # what NO strategy reaches
 python tests/coverage_audit.py --parity                # live config: n=40, seed 0, random
 python tests/coverage_audit.py --placement control     # same stream, map off
 python tests/coverage_audit.py --placement pre-a1      # the pre-A1 column, exactly
 ```
+
+**Reachability is `--union`, not the gate.** Every gated figure below is `random`
+only, and single-strategy coverage is wrong in *both* directions (§5, 2026-07-29):
+`random` dies 25 days early and fumbles branch-gated chain heads; deliberate bots
+live long enough but always make the same choice, collapsing every either/or.
+**61 of 498 events (12.2%) are unreachable under all four strategies** -- 18
+`legacy_pack` (by design), 18 `betrayal_pack`, 10 `npc_arcs_pack`, 7
+`reckoning_pack`, 6 `ambitions_pack` (mutual exclusivity, working as intended),
+2 elsewhere. Quote that number when asked whether content reaches players; quote
+the gate only when asking whether something regressed.
 
 **Three columns, and the middle one is the only valid A/B partner for the
 first.** `control` spends the same RNG draws placement costs and then discards
