@@ -623,39 +623,58 @@ done. Do not open it again without a new reason that is not a never-fired count.
 All three are marked **blocking** in `STEAM_READINESS_BACKLOG.md` §4 and all three
 are at zero.
 
-1. **Content warning screen.** The game covers addiction, overdose and involuntary
-   commitment. Shown once before a new run, skippable thereafter, re-readable from
-   the settings menu. This is the cheapest of the three and the one with the
-   clearest ethical claim on being first.
-2. **Settings menu.** Volume sliders, text size, and **reduced motion** --
-   `web/styles.css` runs a full-screen CRT overlay and a `glitch-text` animation on
-   the title. §4 of the backlog is explicit that shipping without a motion toggle
-   is an accessibility failure that will surface in reviews. Persist to
-   `localStorage` for the web UI; the terminal UI needs only text size.
-3. **Manual save slots.** Today there is autosave only (`saves/autosave.json`).
-   Needs N named slots, load/delete, and a visible "last saved" stamp.
-   `saves/legacy.json` (NG+) is separate and must not be clobbered by slot writes.
+**The backlog's §4 descriptions are stale in three places. Verified 2026-07-29
+against the code, and the real starting position is better than it reads:**
+
+1. **Content warning screen.** Genuinely absent -- `grep -i "content warning"`
+   across `.py`/`.js`/`.html` returns nothing. Greenfield. Shown once before a new
+   run, skippable thereafter, re-readable from settings. Cheapest of the three and
+   the one with the clearest ethical claim on being first: the game covers
+   addiction, overdose and involuntary commitment.
+2. **Settings menu.** **Not greenfield, and reduced motion is already half-done.**
+   `web/styles.css:1081` has a `@media (prefers-reduced-motion: reduce)` block that
+   already kills animations and `glitch-text`, and `web/app.js:895` respects it in
+   the typewriter. There is also already an audio **mute button**
+   (`btn-audio` / `isAudioMuted` / `toggleAudio`), and real audio behind it
+   (`web/audio/*.mp3` plus a WebAudio synth fallback).
+   What is actually missing: a settings **panel** to hold any of it, an **in-app**
+   reduced-motion toggle that does not depend on the OS setting, text size, volume
+   as a slider rather than a binary mute, and **persistence** -- `localStorage` is
+   already used for one thing (`GALLERY_KEY = "grey_utopia_endings_seen"`,
+   `app.js:14`), so follow that pattern.
+3. **Manual save slots. This is a web-only job.** `server.py:38` has a single
+   `AUTOSAVE_PATH = saves/autosave.json` with `save_state`/`load_state` at
+   `server.py:91/108`. **`main.py` has no persistence at all** -- it only records
+   endings through `engine/legacy.py`. So "both UIs" does not apply here; do not
+   invent terminal saves as part of this item.
+   `engine/legacy.py` owns `saves/legacy.json` (`LEGACY_PATH`) separately for NG+
+   and must not be clobbered by slot writes.
 
 ### Watch for
 
 - **`main.py` and `server.py` have drifted before** -- §5 records them counting a
-  "fired" event differently. Any state that a save has to round-trip should be
-  written once and read by both, the way `engine/districts.py` handles placements.
+  "fired" event differently. Any state a save round-trips should be written once
+  and read by both, the way `engine/districts.py` handles placements.
 - **Save compatibility.** Adding fields to the save format is the change most
   likely to break an existing `saves/autosave.json`. Decide the versioning story
-  before writing the slot code, not after.
+  before writing slot code, not after. This is the one part of the item worth a
+  second pair of eyes.
+- New HTTP routes go beside the existing ones in `server.py` (`/api/state`,
+  `/api/reset`, `/api/place`, `/api/rest`, `/api/buy_item`, `/api/contact_action`,
+  `/api/choose`).
 - Nothing here should move a balance or coverage number. **If one moves, something
-  is wrong** -- that is a useful tripwire, so run both gates once at the end even
-  though no content changed.
+  is wrong** -- a useful tripwire, so run both gates once at the end even though
+  no content changed.
 
 ### Acceptance criteria
 
 | Metric | Target |
 |---|---|
 | Content warning | shown pre-run, skippable, re-readable from settings |
-| Reduced-motion toggle | disables CRT overlay + `glitch-text`; persists |
-| Text size + volume | persist across sessions in both UIs where applicable |
-| Manual save slots | create / load / delete, `legacy.json` untouched |
+| Settings panel | one place holding motion / text size / volume |
+| Reduced-motion toggle | in-app, independent of the OS media query, and persists |
+| Text size + volume | persist via `localStorage`; volume replaces the binary mute |
+| Manual save slots | create / load / delete in the web UI, `legacy.json` untouched |
 | `unittest` + `lint_content` | passing / clean |
 | `pargate` + `coverage_audit --assert` | unchanged and green |
 
