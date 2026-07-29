@@ -17,6 +17,7 @@ Usage:
     python tests/coverage_audit.py --assert           # standing gate; exit 1 on violation
                                                       # (sweeps 5 seed bases, ~2.5 min)
     python tests/coverage_audit.py --parity           # cross-check against sim_bot
+    python tests/coverage_audit.py --union            # what NO strategy reaches
     python tests/coverage_audit.py --ambient-slots 0  # A/B the ambient quota
     # A/B the A1 map: --placement control is the same run with the map switched
     # off and the same RNG draws spent, so the difference is the map alone
@@ -48,7 +49,8 @@ from engine.selector import (
     index_library, is_ambient, select_event,
 )
 from engine.stats import Character, create_starter_fixer
-from tests.sim_bot import DATA_DIR, load_all_events, pick_choice_by_strategy
+from tests.sim_bot import (
+    DATA_DIR, STRATEGIES, load_all_events, pick_choice_by_strategy)
 
 # How the audit stands in for a player's morning placement.
 #
@@ -460,6 +462,7 @@ def run_audit(runs: int, strategy: str, seed0: int,
         "deck": len(deck_ids),
         "packs": len(pack_totals),
         "runs": runs,
+        "strategy": strategy,
         "never": never,
         "starved": starved,
         "outcompeted": outcompeted,
@@ -538,6 +541,56 @@ def report(res: dict) -> None:
             print(f"      {count:4d}  {eid}")
 
 
+def union_across_strategies(runs: int, seed0: int, **kwargs) -> dict:
+    """Never-fired under EVERY strategy -- content no kind of player reaches.
+
+    Every other number this file prints is single-strategy, and single-strategy
+    coverage is wrong in *both* directions (measured 2026-07-29, n=40 seed 0):
+
+        | never fired | random 105 | cautious 191 | reckless 106 | greedy 135 |
+        |             | **union 61** |
+
+    `random` picks uniformly, so it spreads across mutually-exclusive branches --
+    but it dies ~25 days earlier than any deliberate strategy (median 34 vs
+    55-63), so it under-reports day-gated content, and it fumbles branch-gated
+    chain heads (§10.5). Deliberate bots live long enough for the day gates but
+    **always make the same choice**, so they collapse every either/or in the deck:
+    `ambitions_pack` reads 17/24 unreached under `random` and 8/24 under `greedy`,
+    because a deliberate bot picks one ambition every run and the other two chains
+    never happen.
+
+    Neither is the player. The union is the honest floor: an event in it is
+    unreachable however you play. It is what "is this content reachable?" should
+    be answered with -- see BACKLOG_HANDOFF §5 (2026-07-29) for the measurement
+    that retired F6 on the strength of it.
+    """
+    per: Dict[str, dict] = {}
+    for strategy in STRATEGIES:
+        per[strategy] = run_audit(runs, strategy, seed0, **kwargs)
+    never = set.intersection(*(set(r["never"]) for r in per.values()))
+    starved = set.intersection(*(set(r["starved"]) for r in per.values()))
+    return {"per_strategy": per, "never": sorted(never), "starved": sorted(starved),
+            "deck": next(iter(per.values()))["deck"],
+            "pack_of": next(iter(per.values()))["pack_of"]}
+
+
+def report_union(u: dict) -> None:
+    deck = u["deck"]
+    print(f"\n=== reachability across all {len(u['per_strategy'])} strategies ===")
+    print(f"  {'strategy':<12s}{'never':>8s}{'starved':>9s}{'outcompeted':>13s}")
+    for strategy, res in u["per_strategy"].items():
+        print(f"  {strategy:<12s}{len(res['never']):>8d}{len(res['starved']):>9d}"
+              f"{len(res['outcompeted']):>13d}")
+    n = len(u["never"])
+    print(f"  {'UNION':<12s}{n:>8d}{len(u['starved']):>9d}"
+          f"{'':>13s}  <- unreachable however you play ({n / deck * 100:.1f}%)")
+    by_pack: Counter = Counter(u["pack_of"].get(eid, "?") for eid in u["never"])
+    if by_pack:
+        print("\n  union-unreachable by pack:")
+        for pack, count in sorted(by_pack.items(), key=lambda kv: -kv[1]):
+            print(f"    {count:3d}  {pack}")
+
+
 def sweep_seed_bases(runs: int, strategy: str, seed0: int, primary: dict,
                      **kwargs) -> dict:
     """Re-measure the never-fired metrics at ASSERT_SEED_BASES bases and average.
@@ -602,6 +655,14 @@ def run_assertions(res: dict, sweep: Optional[dict] = None) -> int:
         )
 
     print("\n=== COVERAGE ASSERTIONS ===")
+    # The gate is deliberately single-strategy and stays that way: it is a fast
+    # regression guard on a calibrated baseline, and running four strategies x
+    # five seed bases would roughly quadruple it. But anyone reading a raw
+    # never-fired count off this output is reading a number that is wrong in both
+    # directions, so point at the metric that is not.
+    print(f"  (these gate `{res['strategy']}` only. A raw never-fired count is a "
+          f"ceiling, not a\n   reachability figure -- run --union for the events "
+          f"no strategy reaches.)")
     if not violations:
         print("  All coverage gates passed.")
     for v in violations:
@@ -642,6 +703,10 @@ def main() -> int:
                                              "own events (collision-free; prefer over --chain)")
     ap.add_argument("--track-pack", help="report eligibility/fire stats for one pack file's "
                                          "events, e.g. ambitions_pack")
+    ap.add_argument("--union", action="store_true",
+                    help="re-run every strategy and report the events none of them "
+                         "reach -- the honest answer to 'is this content reachable?', "
+                         "since single-strategy coverage misleads both ways")
     ap.add_argument("--assert", dest="do_assert", action="store_true",
                     help="enable the coverage gate; exit 1 on violation")
     ap.add_argument("--parity", action="store_true",
@@ -689,6 +754,11 @@ def main() -> int:
           + (f", shelf {'includes' if selector_module.SHELF_INCLUDES_AMBIENT else 'excludes'}"
              f" neutral ambient" if args.placement != "pre-a1" else ""))
     report(res)
+    if args.union:
+        report_union(union_across_strategies(
+            args.runs, args.seed, ambient_slots=slots, placement=args.placement,
+            district=args.district, district_slots=args.district_slots,
+            district_every=args.district_every))
     if args.do_assert:
         sweep = None
         if args.runs == RUNS:
