@@ -781,12 +781,13 @@
             "mods": []
           },
           "success": {
-            "text": "Kael doesn't blink at the name -- everyone who's ever needed quiet money knows Corso. 'He doesn't chase,' Kael says, 'he waits. Waiting costs you more.' Walking home, you realize that was the whole warning, not small talk.",
+            "text": "Kael doesn't blink at the name -- everyone who's ever needed quiet money knows Corso. 'He doesn't chase,' Kael says, 'he waits. Waiting costs you more.' Walking home, you realize that was the whole warning, not small talk. He noticed something too: that you came to him before you opened the slip, and that you didn't argue with the answer when it cost you something to hear. 'Come back when it's about money,' he says as you go. From Kael that is not a dismissal. It is the only invitation he knows how to write.",
             "rel_deltas": {
               "Kael (Broker)": 3
             },
             "flags_set": [
-              "clean_thread_1"
+              "clean_thread_1",
+              "kael_impressed"
             ],
             "deltas": {
               "Family_Friction": 2

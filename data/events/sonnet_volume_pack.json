@@ -1602,6 +1602,42 @@
           }
         },
         {
+          "id": "show_him_the_book",
+          "text": "Don't talk him up. Put your book on the table and let him read it -- every job, every margin, priced honestly -- with a retainer on top.",
+          "requires": {
+            "all": [
+              {
+                "stat": "Wealth",
+                "op": ">=",
+                "value": 300
+              }
+            ],
+            "none": [
+              {
+                "flag": "kael_impressed"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You set the ledger down, put the retainer on top of it, and then you say nothing at all, which is the hardest part. Kael reads everything twice. Somewhere in the second pass he stops. 'You priced the bad month,' he says -- not a compliment, an audit finding. Most people fold the bad month into the good one and hope he isn't counting; he is always counting. He pockets the retainer, and the easy smile goes wherever he keeps it, replaced by the stillness he saves for appreciating assets. 'Bigger jobs,' he says. 'You'll hear from me.' You haven't impressed him. You've been entered.",
+            "deltas": {
+              "Wealth": -300,
+              "Social_Capital": 4,
+              "Meaning": -1
+            },
+            "flags_set": [
+              "kael_impressed"
+            ],
+            "rel_deltas": {
+              "Kael (Broker)": 10
+            }
+          }
+        },
+        {
           "id": "stay_humble",
           "text": "Keep it modest. Undersell your reach on purpose.",
           "prob": {

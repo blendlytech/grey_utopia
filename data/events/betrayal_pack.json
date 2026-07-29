@@ -984,12 +984,15 @@
             "mods": []
           },
           "success": {
-            "text": "He takes the credits and the leak dies with the sale, technically -- Kael doesn't resell what he's been paid to sit on. You've bought silence about a plan Mara built for free, from the person who overheard her building it.",
+            "text": "He takes the credits and the leak dies with the sale, technically -- Kael doesn't resell what he's been paid to sit on. You've bought silence about a plan Mara built for free, from the person who overheard her building it. He counts it once, which from him is a courtesy, and files you somewhere nearer the front of the book: a man who pays the number rather than arguing with it. That is the only kind of respect Kael issues, and it is not the warm kind.",
             "deltas": {
               "Wealth": -800,
               "Meaning": -6,
               "Heat": -4
             },
+            "flags_set": [
+              "kael_impressed"
+            ],
             "rel_deltas": {
               "Kael (Broker)": 5
             }

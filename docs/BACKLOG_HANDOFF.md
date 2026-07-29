@@ -63,7 +63,8 @@ as non-monotonic. Two balance changes in one window cannot be attributed.
 | **A3** | Make the Steward take a turn | **CLOSED -- shipped live, both gates green** | Phase 1 disproved the premise twice; Phase 2 authored the content and wired it. `STEWARD_CADENCE = 7`, five tier-selected filings from day 31, notice + `#steward-panel` in both front ends. Deliberate runs get **4.7-6.0 filings** and the ladder discriminates by strategy (cautious lives at tiers 1-2 and never closes its file; reckless at 3-4). **`pargate` GREEN first run**, `coverage_audit --assert` GREEN. See below and `A3_DESIGN.md` §8. |
 | ~~A4~~ | ~~Put the cast on screen~~ | **CLOSED 2026-07-29 -- premise disproved** | The cast is already on screen: Mara **41-52%** of run-days, Vint 33-37%, Kael 21-27%, **never absent in 160 runs**. The real defect is the other end: Vint and Kael sit under 4% satisfaction on **~90%** of run-days and their bars move **1.3-3.9 points across every strategy**. Portraits would have decorated a dead readout. Delivered `tests/cast_audit.py` and shipped the one thing A4 asked for that already existed. See below and `A4_DESIGN.md`. |
 | ~~F7~~ | ~~Make the relationship bars playable~~ | **CLOSED 2026-07-29 -- shipped, half the gate met** | **Vint accumulates in all four strategies** (0.44 / 0.36 / 0.32 deliberate, 0.94 random, from 5.77 / 2.43 / 2.30) and his share of days below the alienation line went **89.8% -> 58.7%** cautious, **88.7% -> 29.3%** greedy. Kael 2.48 / 1.32 / **0.84** -- greedy clears, cautious and reckless are blocked on `kael_impressed` (see F8). **Mara untouched: spread 37.52 against 37.50.** Root cause was 19 Vint relationship storylets and 10 Kael ones that never touched a bar; 175 `rel_deltas` wired onto existing branches, **zero new events**. `pargate` GREEN, `--assert` GREEN and *improved*. See below and `F7_DESIGN.md`. |
-| **F8** | Open `kael_impressed` and the single-source flags | **Next -- diagnosed, sized, blocking F7's other half** | See §4. |
+| ~~F8~~ | ~~Open `kael_impressed` and the single-source flags~~ | **CLOSED 2026-07-29 -- shipped, F7's unmet criterion met** | **`kael_impressed` cautious 0/40 -> 37/40 (92%)** by three doors, and **Kael's accumulation ratio clears 1.0 in all three deliberate strategies: 0.92 / 0.93 / 0.62** from 2.48 / 1.32 / 0.84. All ten gated relationship storylets fire in cautious (0 -> 11-21/40 each); 3 branch edits opened **16** events across two tiers. Vint 0.43/0.34/0.31 (no regression), Mara's ratios unchanged. **Zero new events, zero new flags.** Union-unreachable **63 -> 58**, `--assert` GREEN with outcompeted *improving* 35.6 -> 33.6. **`pargate` red by 0.2pt on reckless terminal** -- see below and `F8_DESIGN.md`. |
+| **F9** | Recalibrate the relationship gates | **Next -- measured, sized, unblocked by F8** | 16 satisfaction gates, not the 6 the board recorded. Kael's two sit at **45 and 55** against a bond whose ceiling is 11.8; Vint's bar is live and gates **nothing**; 10 gates on 5 contacts **no window has ever measured**. See §4. |
 | F3 | Make money a decision | Not started | -- |
 | F4 | Give Fame and Social_Capital a spend | Not started | -- |
 | F5 | Signpost the endings in-fiction | Not started | -- |
@@ -82,6 +83,79 @@ warning screen, manual save slots -- are still at zero and gate any release
 regardless of how good the deck gets. A3/A4 keep.
 
 ### Completed
+
+**F8 -- Open `kael_impressed` and the single-source flags** *(2026-07-29, Opus 5)*
+-- **shipped; the criterion F7 could not meet is met.** Full write-up in
+`docs/F8_DESIGN.md`.
+
+Step 0 reproduced F7's table to the digit (Vint 0.44/0.36/0.32, Kael
+2.48/1.32/0.84, Mara spread 37.52) before anything changed.
+
+**The diagnosis was right and one level too shallow, and the correction is the
+generalisable part.** The item was sized off *events*; the answer only appears at
+*branch* granularity. Of every branch in the deck that is warm toward Kael,
+**cautious play picks exactly three, and the only unlocked one is the branch whose
+own prose says nothing happened** ("Kael shrugs, unbothered either way ... Nothing
+gained, nothing risked"). The other two are ambition-locked (34/40) and
+doubly-conditional (13/40). The cause is a class fact: **every warm branch of
+Kael's content is a gamble**, and `cautious` is *defined* as maximising
+`branch_score(failure or success)` -- `impress_kael`'s failure scores **-6.8**
+against `stay_humble`'s **+1.6**, a gap no game state can close.
+
+**So Kael was not gated behind a flag. He was gated behind risk appetite** -- F2
+made this deck's dice honest, and the unlooked-for cost was that the only door to
+a character became a coin flip. That reframing picked the fix: give the ledger a
+route that *costs* instead of *risks*.
+
+Three doors, none of them a gamble, **zero new events and zero new flags**:
+a fourth choice `show_him_the_book` on `volume_npc_kael_syndicate_check_in`
+(`base: 1.0`, no failure branch, 300 Wealth, `none: [kael_impressed]` so the
+repeatable event cannot re-charge it -- verified 9 picks / 9 grants / **0
+re-buys**), plus `kael_impressed` added to `twist_kael_exit_appraisal/
+buy_the_exclusivity` and `amb_clean_1_the_name/ask_kael_first`. Priced off
+measurement: cautious Wealth at that event is median 600 / **p10 zero**, and 76%
+of resolutions clear 300 against 39% at 800.
+
+| | random | cautious | reckless | greedy |
+|---|---|---|---|---|
+| runs reaching `kael_impressed` | 9/40 | **37/40 (92%)** | 33/40 | 37/40 |
+| Kael accumulation ratio | 2.00 | **0.92** | **0.93** | **0.62** |
+| *(was)* | 1.94 | 2.48 | 1.32 | 0.84 |
+| Kael reinforcements/run | 1.5 | **5.5** *(was 2.1)* | 5.5 | 7.5 |
+
+The 2.1 that was **invariant across all three of F7's levers** is 5.5. All ten
+`"relationship"` storylets went 0/40 -> 11-21/40 in cautious; the cascade opened
+with them (`arc_kael_the_audit` 0 -> 21, `twist_kael_asset_listing` 0 -> 25). **3
+branch edits, 16 events opened.**
+
+**The honest limit:** Kael's *final satisfaction* only went 1.7 -> 6.6 cautious,
+because the median grant day is 24 and his d5/d10 columns are identical across
+all four strategies (28.0, 19.6 -- the untouched decay curve). **F8 made the bond
+accumulate; it did not make it arrive early.** Moving the level rather than the
+slope means moving the entrance earlier, which is a different lever.
+
+`arc_mara_the_door`'s 0/160 was **ruled out with numbers, not absorbed**: the
+chain dies four links upstream at `res_shepherd_contract` (**1 fire in 160
+runs**), because its only door-opening branch scores -12.4 on downside. Same
+defect class, different pack, its own window.
+
+**Gates:** `unittest` 124; `lint_content` clean, **503 events / 398 flags /
+332 shelved, all unchanged**; `--assert` **GREEN** (starved 73.4 <= 76,
+outcompeted **33.6** <= 42 -- *improved*, mean 107.0); `--parity` 3/3;
+**union-unreachable 63 -> 58 of 503 (12.5% -> 11.5%)**.
+**`pargate` RED, and it is a real regression, not a sub-point overage.** Reckless
+terminal **35.2%** at the gate's own n=1000. The tempting reading -- 0.2 points is
+0.13σ at that sample, therefore noise -- **was tested and is false**: doubling to
+n=2000 moved the estimate *away* from the band to **36.0%**. A matched control
+(same 2000 seeds, the three packs reverted, deck the only variable) scores
+**34.9% and passes every assertion**, so **F8 owns +1.1 points** and the "band was
+already failing" reading is dead too.
+
+**Shipped red by explicit decision.** The only lever that recovers it is
+`ask_kael_first`, which is simultaneously **20 of cautious's 37 grants** --
+pulling it drops cautious to ~43% and pushes Kael's ratio back over 1.0, i.e.
+trades the whole item for one point of band. Put to the user with the control
+numbers; the call was ship-and-document. See `F8_DESIGN.md` §8.1-8.3.
 
 **F7 -- Make the relationship bars playable** *(2026-07-29, Opus 5)* -- **shipped;
 Vint fixed, Kael half-fixed and the other half traced to a walled-off cause.**
@@ -1038,7 +1112,105 @@ byte-for-byte afterwards.
 
 ---
 
-## 4. CURRENT TASK -- F8: open `kael_impressed`, and the single-source flags behind it
+## 4. CURRENT TASK -- F9: recalibrate the relationship gates against the bonds that now exist
+
+**Model:** **Opus 5**, in-session. A content/gating change on ~16 existing
+preconditions; no new prose volume, so this does not go through
+`generate_deck.py`.
+
+**Read first:** `docs/F8_DESIGN.md` §4.1 (what the bars actually reach now) and
+§2 (why the branch, not the event, is the unit), and this file's §5.
+
+**Do not re-derive:** presence, coverage, reachability, the retention curve, or
+which lever moves it. Ten consecutive windows have closed those. `python
+tests/cast_audit.py --retention` prints the baseline; confirm it reproduces
+before changing anything.
+
+### The state you are inheriting
+
+- **F7 and F8 together made all three starting bonds live.** Accumulation ratios:
+  Mara 0.28/0.33/0.34, Vint 0.43/0.34/0.31, Kael **0.92/0.93/0.62**. All under
+  1.0 in every deliberate strategy for the first time.
+- **`pargate` is RED on main and you are inheriting it.** Reckless terminal
+  **35.2%** at n=1000 / **36.0%** at n=2000 against a 25-35% band, with a matched
+  control at **34.9% passing**, so F8 owns +1.1 points. It was shipped red as an
+  explicit user decision, not an oversight. **You are inheriting negative headroom
+  on that band**: any change touching syndicate/debt/dose content makes it worse,
+  and a green `pargate` is no longer the baseline you are regressing against.
+  **Read `F8_DESIGN.md` §8.1-8.3 before you run it, or you will spend a window
+  re-deriving why it is red.** If your change is balance-neutral and the band is
+  still ~36%, that is F8's residue and not yours -- say so with the control.
+- Every other standing gate green: `--assert` (starved 73.4 <= 76, outcompeted
+  **33.6** <= 42, mean 107.0), `--parity` 3/3, `unittest` **124**,
+  `lint_content` clean (26 packs, 503 events, 398 flags), union **58 of 503**.
+- `coverage_audit --assert`: starved **73.4** <= 76, outcompeted **33.6** <= 42,
+  mean 107.0. Union-unreachable **58 of 503**.
+
+### The problem, already measured
+
+**This was F8's explicitly deferred adjacent item, and F8 produced the healthy
+Kael distribution it was waiting for.** The board recorded it as "six events read
+a satisfaction threshold". **It is sixteen** -- 2 event preconditions and 14
+choice-level `requires` -- and the shape is worse than recorded:
+
+| gate | threshold | the bond's measured final | verdict |
+|---|---|---|---|
+| `reck_syndicate_deadline/beg_kael_intercede` | Kael **>= 45** | 6.6 / 9.7 / **11.8** | **unreachable** |
+| `arc_mara_the_door/break_her_out` | Kael **>= 55** *(or 2 flags)* | as above | **unreachable** |
+| 4 Mara gates | 25 / 30 / 40 / 50 | 17.1 .. **51.9** | live |
+| **10 gates on 5 other contacts** | 35 and 60 | **never measured** | unknown |
+| **Vint** | -- | 12.6 .. 25.8 | **zero gates exist** |
+
+Three distinct defects in one table. **Kael's two gates are still ~4x his
+ceiling** even after F8 quadrupled his bar. **Vint's bar is live and gates
+nothing at all.** And `cast_expansion_pack` puts 35/60 thresholds on Auntie Six,
+Brann, Denny, Dex and the Ferryman, whose bonds **no window has ever measured** --
+`cast_audit.py` only tracks the four promoted contacts.
+
+### Step 0 -- measure the five unmeasured contacts first
+
+`tests/cast_audit.py`'s `CAST` dict is four entries; the deck has nine bonds.
+**Extend it and run `--retention` before designing anything.** Five of these
+sixteen gates may already be dead and two of them are the only paths to their
+events. Every backlog spec that has been measured has turned out wrong; this one
+is already 6-vs-16 wrong on its own headline number.
+
+### Acceptance criteria
+
+- **Every satisfaction gate in the deck is reachable by the bond it reads**, or
+  is deliberately retired with the number that justifies it.
+- **Vint reads at least one gate**, since F7 made his bar the most responsive of
+  the three (spread 16.64).
+- Ratios do not regress: Mara 0.28/0.33/0.34, Vint 0.43/0.34/0.31, Kael
+  0.92/0.93/0.62.
+- All standing gates green -- **and `pargate` is already red by 0.2pt, so this
+  window either brings it back inside the band or states plainly that it did
+  not.**
+
+### Watch for
+
+- **This is a balance change.** `reck_syndicate_deadline` and `arc_mara_the_door`
+  are terminal-adjacent, and reckless terminal has **no headroom left**.
+- **`arc_mara_the_door` is unreachable for a reason four links upstream** (§5).
+  Lowering its Kael gate changes nothing until `shepherd_offer` opens. Do not
+  spend the window there.
+- **A gate is not reachable because its bond's *ceiling* clears it** -- it is
+  reachable if the bond clears it *on the day the event can fire*. Kael's d20
+  median is 9.6 against a final of 11.8.
+
+### The adjacent item this window should NOT absorb
+
+**`echo_brother_known`** -- one source, `base: 0.5`, gating three events, with
+cautious never having Echo in the network at all (§5). It is `kael_impressed`
+one tier down and wants its own window, not a corner of this one.
+
+### On completion
+
+Update §3, append findings to §5, correct §6 in the same window if the baseline
+moves, and end with the model + ready-to-paste prompt for the next window.
+
+
+## 4b. COMPLETED TASK -- F8: open `kael_impressed`, and the single-source flags behind it
 
 **Model:** **Opus 5**, in-session. A content/gating change on ~17-27 existing
 events; no new prose volume, so this does not go through `generate_deck.py`.
@@ -1893,6 +2065,79 @@ Triage these into the status board when they earn their place.
   largest unwired Kael surface in the deck and the only one that reaches a
   cautious player 40 times out of 40.
 
+- *(2026-07-29, F8)* **The unit of a reachability question is the branch, not the
+  event, and eight windows have been reading the wrong one.** F8's item was sized
+  off "which events fire" and the answer changed completely at branch
+  granularity: `prologue_auditor_descent` fires **40/40 in every deliberate
+  strategy** and its `door_kael` branch -- whose prose *is* the flag being chased
+  -- is picked **0/40**, because all three deliberate bots take `door_mara`.
+  Event-level fire counts are an upper bound on branch reachability and can
+  overstate it without limit. **Measure `resolve_choice`, not `fire_log`.**
+
+- *(2026-07-29, F8)* **A 40/40/40 event can still be locked content, and the
+  audit cannot tell you.** `ot_aud_1/2/3` and all four prologue descents read as
+  universal in every per-strategy table in this repo *only because the three
+  deliberate bots are deterministic and all land on `origin_auditor`*. For a
+  human they are 1-of-4. This is the inverse of the board's existing rule (a
+  number that doesn't move across strategies isn't a system): **a number that is
+  identical across strategies may be measuring the bots' determinism rather than
+  the content's reach.** Check the precondition for an `origin_*` / `ambition_*`
+  flag before quoting any 40/40 figure as universal.
+
+- *(2026-07-29, F8)* **Shelved content converts starvation into firings, not into
+  competition.** The handoff predicted that unlocking 10-17 dead events would push
+  `outcompeted` up and `starved` down. Both went the other way -- outcompeted
+  **35.6 -> 33.6**, starved **73.0 -> 73.4** -- because the unlocked events are
+  `the_chalk_market` shelf content and a placed draw is a pool of ~12 against the
+  neutral pool's ~220. **Unlocking shelved content is much cheaper on the
+  competition metric than unlocking neutral content**, and the two are not
+  interchangeable when sizing a gating window against `MAX_OUTCOMPETED`.
+
+- *(2026-07-29, F8)* **`echo_brother_known` is `kael_impressed` one tier down, and
+  is now the last instance of the pattern.** One source
+  (`res_why_you_fix/turn_the_question`) at `base: 0.5` -- a gamble, so cautious is
+  defined to refuse it -- gating three events. Echo's accumulation ratios are
+  3.20-7.36 and **cautious never has him in the network at all**. Same shape,
+  same fix, its own window.
+
+- *(2026-07-29, F8)* **`arc_mara_the_door`'s 0/160 is a `resistance_pack` defect
+  four links upstream, and is now ruled out with numbers.** The chain is
+  `res_informer_recruitment` -> `shepherd_offer` -> `res_shepherd_contract` ->
+  `mara_unwatched` -> `twist_mara_unwatched` -> clock -> the door. It dies at link
+  2: `res_shepherd_contract` fires **1 time in 160 runs**, because the only branch
+  that grants `shepherd_offer` (`consider_the_post`) scores **-12.4** on downside
+  against `decline_commendation`'s **+1.0**, so no deliberate strategy takes it --
+  and the single run that did reach the contract picked one of the two branches of
+  three that do not open the door. Five events hang off this. See `F8_DESIGN.md` §5.
+
+- *(2026-07-29, F8)* **"It's within noise" is a hypothesis, and this deck now has
+  a worked example of it being false.** F8's `pargate` came back 0.2 points over a
+  band. At n=1000 a 35% rate carries SE ~1.5pt, so 0.2 is 0.13σ and the noise
+  reading was the reasonable first guess -- **and doubling the sample moved the
+  estimate away from the band, to 36.0%.** `pargate` is deterministic (seeds
+  0..999), so re-running proves nothing; **the only honest test of a borderline
+  gate is a larger sample, and the only honest test of attribution is a matched
+  control at that same larger sample.** The control (three packs reverted, same
+  2000 seeds) scored 34.9% and passed everything, which killed the second
+  convenient reading -- that the band was already failing. **Budget ~50 minutes for
+  the pair (2x run + 2x control) before claiming any borderline gate is noise, and
+  do not quote an n=1000 historical figure against an n=2000 new one.**
+
+- *(2026-07-29, F8)* **§2's "do not chase sub-point overages" is about the size of
+  the overage, not about whether it is convenient.** F8's looked sub-point (0.2)
+  and was not (1.1 once measured properly). The rule that survives: *measure the
+  overage properly first, then decide whether §2 applies* -- invoking §2 off the
+  first borderline number is how a real regression gets banked as a rounding
+  error.
+
+- *(2026-07-29, F8)* **`clock_mara_dark_expired` has zero sources in the deck**,
+  not the one `A4_DESIGN.md` §7 records. It is synthesised by
+  `engine/decay.py:317` when the `mara_dark` clock expires. Grepping the packs for
+  its source returns nothing, which is why it read as a content flag. **Clock
+  expiry flags (`clock_*_expired`) are engine-granted and will not appear in any
+  flag-source census built by scanning event JSON** -- the rest of §7's table is
+  accurate.
+
 ---
 
 ## 6. Recorded baseline
@@ -1936,28 +2181,33 @@ the old figure was the former, which is why the old gate was unmeetable. Both ar
 gated, as a pair -- see §5 and `A1_DESIGN.md` §10.1-10.2 for why neither works
 alone.
 
-**Re-measured 2026-07-29 after F7.** F7 added no events -- it wrote 175
-`rel_deltas` onto branches that already existed -- so the deck size, flag count
-and shelf are unchanged. What moved is downstream of bots choosing differently
-(`branch_score` weights `rel_deltas` at 0.3), and it moved in the good direction:
-**starved 73.6 -> 73.0, outcompeted 35.8 -> 35.6, mean never-fired 109.4 ->
-108.6**, median run length 30 -> 32 days. Thresholds were deliberately **not**
-tightened -- the gain is under 1% and F8 is a content/gating window that needs the
-headroom.
+**Re-measured 2026-07-29 after F8.** F8 also added no events and no flags -- one
+new *choice* on an existing event, plus `kael_impressed` added to two branches
+that already existed -- so deck size, flag count and shelf are unchanged again.
+What moved is 16 previously-gated events becoming reachable: **starved 73.0 ->
+73.4, outcompeted 35.6 -> 33.6, mean never-fired 108.6 -> 107.0**, median run
+32 -> 33 days, and **union-unreachable 63 -> 58 of 503 (12.5% -> 11.5%)**.
+Thresholds **not** tightened: `starved` rose.
 
-| Metric | **Live (post-F7)** | Pre-F7 (A3/A4) | Phase 3c (pre-A3) | Control (map off) |
+**Note the direction, because the handoff predicted the opposite and the reason
+generalises.** Unlocking gated content was expected to raise `outcompeted`; it
+*lowered* it, because the unlocked events are `the_chalk_market` shelf content
+and a placed draw is a pool of ~12 against the neutral pool's ~220. See §5.
+
+| Metric | **Live (post-F8)** | Post-F7 | Pre-F7 (A3/A4) | Phase 3c (pre-A3) |
 |---|---|---|---|---|
-| Events in deck | 503 (26 packs, 398 flags, **332 shelved**) | 503 (26, 398) | 498 (25, 391) | same |
-| Median eligible pool per day *(unplaced draws)* | **220** | 220 | 220 | -- |
-| Median eligible shelf *(placed draws)* | **12** (577 placed draws) | 13 (559) | 12 (557) | -- |
-| Unique events seen per run | **82** (16.3%) | 80 (16.0%) | 80 (16.1%) | -- |
-| **Events never fired, mean of 5 seed bases** | **108.6** | 109.4 | 101.2 | 119.6 *(Phase 3b deck)* |
-| -- of which **starved** *(gate: <= 76)* | **73.0** | 73.6 | 66.2 | -- |
-| -- of which **outcompeted** *(gate: <= 42)* | **35.6** | 35.8 | 35.0 | -- |
-| Arc draw-weight share *(unplaced draws)* | **52.0%** | 52.1% | 51.7% | -- |
-| Arc shelf-share *(placed draws)* | **53.6%** | -- | -- | -- |
-| Repeat-pick fraction | **6.7%** | 6.6% | 6.4% | -- |
-| Median run length | **32 days** | 30 days | 30 days | -- |
+| Events in deck | 503 (26 packs, 398 flags, **332 shelved**) | 503 (26, 398) | 503 (26, 398) | 498 (25, 391) |
+| Median eligible pool per day *(unplaced draws)* | **220** | 220 | 220 | 220 |
+| Median eligible shelf *(placed draws)* | **13** (591 placed draws) | 12 (577) | 13 (559) | 12 (557) |
+| Unique events seen per run | **82** (16.3%) | 82 (16.3%) | 80 (16.0%) | 80 (16.1%) |
+| **Events never fired, mean of 5 seed bases** | **107.0** | 108.6 | 109.4 | 101.2 |
+| -- of which **starved** *(gate: <= 76)* | **73.4** | 73.0 | 73.6 | 66.2 |
+| -- of which **outcompeted** *(gate: <= 42)* | **33.6** | 35.6 | 35.8 | 35.0 |
+| **Union-unreachable across all 4 strategies** | **58 (11.5%)** | 63 (12.5%) | 64 (12.7%) | 61 of 498 |
+| Arc draw-weight share *(unplaced draws)* | **52.5%** | 52.0% | 52.1% | 51.7% |
+| Arc shelf-share *(placed draws)* | **55.5%** | 53.6% | -- | -- |
+| Repeat-pick fraction | 6.7% | 6.7% | 6.6% | 6.4% |
+| Median run length | **33 days** | 32 days | 30 days | 30 days |
 | Truly guaranteed choices | **627** / 1533 (41%) | 627 / 1533 | 614 / 1513 | same |
 | Genuine gambles | **906** / 1533 | 906 / 1533 | 899 / 1513 | same |
 | Near-certain but fallible | **0** (F2's invariant holds) | 0 | 0 | same |
