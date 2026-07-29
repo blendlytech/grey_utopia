@@ -175,6 +175,41 @@ class TestConditionsAndRequires(unittest.TestCase):
         self.assertFalse(eval_conditions(
             {"all": [{"relationship": "Echo (Resistance)", "op": ">=", "value": 1}]}, c))
 
+    def test_relationship_field_reinforcements(self):
+        """F9: a gate can read the monotonic reinforcement count, not just the
+        decaying satisfaction value. The point of the field is that decay does
+        not touch it -- which is exactly what the ten `cast_expansion_pack`
+        gates needed and did not have."""
+        c = create_starter_fixer()
+        mara = {"relationship": "Mara (Sister)", "field": "reinforcements",
+                "op": ">=", "value": 2}
+        self.assertFalse(eval_conditions({"all": [mara]}, c))
+        c.reinforce("Mara (Sister)", 5.0)
+        self.assertFalse(eval_conditions({"all": [mara]}, c))
+        c.reinforce("Mara (Sister)", 5.0)
+        self.assertTrue(eval_conditions({"all": [mara]}, c))
+
+        # Decay erases satisfaction and must leave the count alone -- 90 days at
+        # Mara's S puts her satisfaction under 1 while the gate stays open.
+        for _ in range(90):
+            end_of_day_decay(c, stress_today=0.0)
+        self.assertLess(c.relationships["Mara (Sister)"].satisfaction, 1.0)
+        self.assertTrue(eval_conditions({"all": [mara]}, c))
+        self.assertFalse(eval_conditions(
+            {"all": [{"relationship": "Mara (Sister)", "op": ">=", "value": 35}]}, c))
+
+        # `strain` is deliberately not counted: being crossed raises S but must
+        # never read as affection (see engine/events.py and F7).
+        before = c.relationships["Vint (Informant)"].reinforcements
+        c.strain("Vint (Informant)", 10.0)
+        self.assertEqual(c.relationships["Vint (Informant)"].reinforcements, before)
+
+        # An unknown field falls back to satisfaction rather than crashing play;
+        # pipeline/lint_content.py is what forbids one reaching the deck.
+        self.assertTrue(eval_conditions(
+            {"all": [{"relationship": "Vint (Informant)", "field": "strength",
+                      "op": ">=", "value": 0}]}, c))
+
     def test_clock_conditions(self):
         c = Character()
         self.assertFalse(eval_conditions({"all": [{"clock": "debt", "op": "<=", "value": 5}]}, c))

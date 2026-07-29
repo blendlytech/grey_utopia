@@ -76,6 +76,33 @@ ENGINE_GRANTED_FLAGS: Set[str] = {
 # Comparison operators engine.events.compare_op actually implements.
 VALID_OPS: Set[str] = {">=", "<=", ">", "<", "==", "!="}
 
+# F9: the quantities a `{"relationship": ...}` condition may read. `strength` is
+# absent on purpose and its absence is enforced -- see engine/events.py.
+VALID_REL_FIELDS: Set[str] = {"satisfaction", "reinforcements"}
+
+
+def _relationship_gate_sites(event: dict):
+    """Yield (where, condition) for every relationship gate on one event.
+
+    Gates live at two sites with two different keys -- events use
+    `preconditions`, choices use `requires` -- and the linter's main loop only
+    walks the first. Ten of the deck's sixteen satisfaction gates are at the
+    second, which is part of why the board recorded the count as six.
+    """
+    def group(req, where):
+        if not isinstance(req, dict):
+            return
+        for grp in ("all", "any", "none"):
+            for cond in req.get(grp, []) or []:
+                if isinstance(cond, dict) and "relationship" in cond:
+                    yield where, cond
+
+    for key in ("preconditions", "requires"):
+        yield from group(event.get(key), "<event>")
+    for ch in event.get("choices", []) or []:
+        for key in ("requires", "preconditions"):
+            yield from group(ch.get(key), ch.get("id", "?"))
+
 # Phrases that mean the transaction did NOT happen. A branch whose prose says the
 # seller refused, and which still applies a 'dose', charges the player for a
 # substance they never obtained -- and 'dose' is not cosmetic: resolver.apply_dose
@@ -139,6 +166,24 @@ def lint() -> int:
                         errors.append(f"{name}:{eid}: invalid precondition op {op!r} -- engine accepts {sorted(VALID_OPS)}")
                     if "day" in cond and not isinstance(cond["day"], (int, float)):
                         errors.append(f"{name}:{eid}: 'day' precondition must be numeric, got {cond['day']!r}")
+
+            # F9: a satisfaction gate reads `field` to pick which quantity of the
+            # bond it tests, and engine.events falls back to `satisfaction` for
+            # anything it does not recognise. A typo there is silent and would
+            # re-create the defect F9 exists to remove -- a gate that reads a
+            # decaying value when its author meant the monotonic one -- so the
+            # fallback is allowed at runtime and forbidden here.
+            for where, req in _relationship_gate_sites(e):
+                field = req.get("field", "satisfaction")
+                if field not in VALID_REL_FIELDS:
+                    errors.append(
+                        f"{name}:{eid}:{where}: relationship gate field {field!r} unknown "
+                        f"-- engine accepts {sorted(VALID_REL_FIELDS)} (it silently reads "
+                        f"satisfaction for anything else)")
+                if field == "reinforcements" and not float(req.get("value", 0)).is_integer():
+                    errors.append(
+                        f"{name}:{eid}:{where}: reinforcements gate value "
+                        f"{req.get('value')!r} is not a whole number -- the count is an int")
 
             # Fail-forward guarantee: an event must never render zero choices.
             # Crisis events may corner the player (1-2 visible choices is a

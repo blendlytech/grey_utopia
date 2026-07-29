@@ -81,8 +81,9 @@
               },
               {
                 "relationship": "Kael (Broker)",
+                "field": "reinforcements",
                 "op": ">=",
-                "value": 55
+                "value": 6
               },
               {
                 "flag": "echo_trusted"

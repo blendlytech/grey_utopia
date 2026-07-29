@@ -190,8 +190,9 @@
             "all": [
               {
                 "relationship": "Kael (Broker)",
+                "field": "reinforcements",
                 "op": ">=",
-                "value": 45
+                "value": 4
               }
             ]
           },

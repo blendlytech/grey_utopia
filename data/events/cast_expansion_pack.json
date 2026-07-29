@@ -562,6 +562,11 @@
           {
             "day": 12,
             "op": ">="
+          },
+          {
+            "relationship": "Vint (Informant)",
+            "op": ">=",
+            "value": 15
           }
         ]
       },
@@ -2632,8 +2637,9 @@
             "all": [
               {
                 "relationship": "Brann (Artisan)",
+                "field": "reinforcements",
                 "op": ">=",
-                "value": 60
+                "value": 2
               }
             ]
           },
@@ -2676,8 +2682,9 @@
             "all": [
               {
                 "relationship": "Brann (Artisan)",
+                "field": "reinforcements",
                 "op": ">=",
-                "value": 35
+                "value": 1
               }
             ]
           },
@@ -2774,8 +2781,9 @@
               },
               {
                 "relationship": "The Ferryman (Seam)",
+                "field": "reinforcements",
                 "op": ">=",
-                "value": 60
+                "value": 2
               }
             ]
           },
@@ -2818,8 +2826,9 @@
             "all": [
               {
                 "relationship": "The Ferryman (Seam)",
+                "field": "reinforcements",
                 "op": ">=",
-                "value": 35
+                "value": 1
               }
             ]
           },
@@ -2910,8 +2919,9 @@
             "all": [
               {
                 "relationship": "Dex (Dispatcher)",
+                "field": "reinforcements",
                 "op": ">=",
-                "value": 60
+                "value": 2
               }
             ]
           },
@@ -2954,8 +2964,9 @@
             "all": [
               {
                 "relationship": "Dex (Dispatcher)",
+                "field": "reinforcements",
                 "op": ">=",
-                "value": 35
+                "value": 1
               }
             ]
           },
@@ -3045,8 +3056,9 @@
             "all": [
               {
                 "relationship": "Auntie Six (Stallkeeper)",
+                "field": "reinforcements",
                 "op": ">=",
-                "value": 60
+                "value": 2
               }
             ]
           },
@@ -3088,8 +3100,9 @@
             "all": [
               {
                 "relationship": "Auntie Six (Stallkeeper)",
+                "field": "reinforcements",
                 "op": ">=",
-                "value": 35
+                "value": 1
               }
             ]
           },
@@ -3179,8 +3192,9 @@
             "all": [
               {
                 "relationship": "Denny (Root Vendor)",
+                "field": "reinforcements",
                 "op": ">=",
-                "value": 60
+                "value": 2
               }
             ]
           },
@@ -3223,8 +3237,9 @@
             "all": [
               {
                 "relationship": "Denny (Root Vendor)",
+                "field": "reinforcements",
                 "op": ">=",
-                "value": 35
+                "value": 1
               }
             ]
           },

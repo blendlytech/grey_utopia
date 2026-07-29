@@ -154,11 +154,36 @@ def eval_single_cond(cond: Dict[str, Any], character: Character) -> bool:
         return compare_op(op, standing, val)
 
     if "relationship" in cond:
+        # `field` selects which of the bond's two readable quantities the gate
+        # tests. Default `satisfaction` keeps every pre-F9 gate byte-identical.
+        #
+        # F9: `satisfaction` is the Ebbinghaus value and it *decays every day*
+        # (engine.decay.end_of_day_decay), with a half-life of S ln2 -- 2.8 days
+        # for Denny, 4.2 for Auntie Six. A gate read 40 days after the bond is
+        # created is therefore reading ~14 half-lives of nothing, which is how
+        # `cast_expansion_pack` came to ship ten thresholds of 35 and 60 against
+        # bonds measured at 0.3-10.9 on the day their own event fires. Current
+        # satisfaction can only express "are you warm with them *right now*".
+        #
+        # `reinforcements` is the monotonic count of warm contacts. It never
+        # decays, so it is the only quantity in the model that can express "did
+        # you keep this person up across a whole run" -- which is what those
+        # gates were written to ask.
+        #
+        # `strength` is deliberately NOT offered. It looks like the same thing
+        # and is not: F7 made `Character.strain` raise S as well, so a bond you
+        # keep crossing builds strength too, and an S gate would read being
+        # hated as being loved. That is the exact trap `Relationship.reinforcements`
+        # was added to escape -- see engine/stats.py and docs/F7_DESIGN.md.
         rel = character.relationships.get(cond["relationship"])
-        sat = rel.satisfaction if rel else 0.0
+        field = cond.get("field", "satisfaction")
+        if field == "reinforcements":
+            actual = float(rel.reinforcements) if rel else 0.0
+        else:
+            actual = rel.satisfaction if rel else 0.0
         op = cond.get("op", ">=")
         val = float(cond.get("value", 0.0))
-        return compare_op(op, sat, val)
+        return compare_op(op, actual, val)
 
     if "clock" in cond:
         # Compares days remaining on a running clock; a stopped clock fails

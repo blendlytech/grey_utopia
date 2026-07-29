@@ -184,8 +184,25 @@ ASSERT_SEED_STRIDE = 100
 # feature-OFF control, or making the gate a *rate* rather than a count -- not a
 # re-base on the live figure, which banks the change's own effect as permitted
 # drift. Logged in BACKLOG_HANDOFF §5.
-MAX_OUTCOMPETED = 42     # measured 35.8 (was 34.8)
-MAX_STARVED = 76         # measured 73.6 (was 67.0); see the note above before moving it
+#
+# --- 2026-07-29, F9: starved 73.4 -> 72.4, so the cap tightens by the same 1 ---
+#
+# F9 re-pointed thirteen dead satisfaction gates at `reinforcements` and added an
+# event precondition on Vint. Opening ten previously-invisible choices gave four
+# `cast_expansion_pack` flags live sources for the first time, which is why
+# starvation *fell* on a change that added a gate. `outcompeted` rose 33.6 ->
+# 36.4 in exchange -- the same trade F8 §6 documented, and the healthy direction:
+# content moved from "never eligible" into "offered and lost a draw".
+#
+# **The Vint gate was priced by this instrument, not by taste.** At `>= 20` --
+# the alienation line the UI and `check_endings` already use, and the number this
+# window wanted -- `cx_vint_archive_night` fell 25/40 -> 2/40 in `random` and took
+# `vint_weather_heard`'s three dependents with it: **starved 76.6, RED**. At
+# `>= 15` the same gate keeps 38/40 of random's runs, and the window it can be spent
+# in (days on or after the event's own `day >= 12`) still spreads 6 against 38.
+# The threshold is the measurement's, and the pretty constant lost to it.
+MAX_OUTCOMPETED = 42     # measured 36.4 (was 35.8, 34.8)
+MAX_STARVED = 75         # measured 72.4 (was 73.6, 67.0); see the note above before moving it
 
 # NOT tightened alongside it, deliberately, even though the measured figure went
 # 24.7% -> 25.7%. This metric changed *definition* in the same window: it now

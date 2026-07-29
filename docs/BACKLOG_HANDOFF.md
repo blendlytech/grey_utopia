@@ -64,7 +64,8 @@ as non-monotonic. Two balance changes in one window cannot be attributed.
 | ~~A4~~ | ~~Put the cast on screen~~ | **CLOSED 2026-07-29 -- premise disproved** | The cast is already on screen: Mara **41-52%** of run-days, Vint 33-37%, Kael 21-27%, **never absent in 160 runs**. The real defect is the other end: Vint and Kael sit under 4% satisfaction on **~90%** of run-days and their bars move **1.3-3.9 points across every strategy**. Portraits would have decorated a dead readout. Delivered `tests/cast_audit.py` and shipped the one thing A4 asked for that already existed. See below and `A4_DESIGN.md`. |
 | ~~F7~~ | ~~Make the relationship bars playable~~ | **CLOSED 2026-07-29 -- shipped, half the gate met** | **Vint accumulates in all four strategies** (0.44 / 0.36 / 0.32 deliberate, 0.94 random, from 5.77 / 2.43 / 2.30) and his share of days below the alienation line went **89.8% -> 58.7%** cautious, **88.7% -> 29.3%** greedy. Kael 2.48 / 1.32 / **0.84** -- greedy clears, cautious and reckless are blocked on `kael_impressed` (see F8). **Mara untouched: spread 37.52 against 37.50.** Root cause was 19 Vint relationship storylets and 10 Kael ones that never touched a bar; 175 `rel_deltas` wired onto existing branches, **zero new events**. `pargate` GREEN, `--assert` GREEN and *improved*. See below and `F7_DESIGN.md`. |
 | ~~F8~~ | ~~Open `kael_impressed` and the single-source flags~~ | **CLOSED 2026-07-29 -- shipped, F7's unmet criterion met** | **`kael_impressed` cautious 0/40 -> 37/40 (92%)** by three doors, and **Kael's accumulation ratio clears 1.0 in all three deliberate strategies: 0.92 / 0.93 / 0.62** from 2.48 / 1.32 / 0.84. All ten gated relationship storylets fire in cautious (0 -> 11-21/40 each); 3 branch edits opened **16** events across two tiers. Vint 0.43/0.34/0.31 (no regression), Mara's ratios unchanged. **Zero new events, zero new flags.** Union-unreachable **63 -> 58**, `--assert` GREEN with outcompeted *improving* 35.6 -> 33.6. **`pargate` red by 0.2pt on reckless terminal** -- see below and `F8_DESIGN.md`. |
-| **F9** | Recalibrate the relationship gates | **Next -- measured, sized, unblocked by F8** | 16 satisfaction gates, not the 6 the board recorded. Kael's two sit at **45 and 55** against a bond whose ceiling is 11.8; Vint's bar is live and gates **nothing**; 10 gates on 5 contacts **no window has ever measured**. See §4. |
+| ~~F9~~ | ~~Recalibrate the relationship gates~~ | **CLOSED 2026-07-29 -- shipped, one gate red** | **Thirteen of sixteen gates were unreachable and none is now: DEAD 8 -> 0, LIVE 3 -> 14.** The count was **16**, not the 6 recorded, and the audit could only see 4 of the deck's **9** bonds. Root cause was not mispricing but arithmetic: the five `cast_expansion_pack` bonds are created on day 8-14 with a **2.8-4.2 day half-life** and their gates are read at **day 50+**, measuring 0.3-10.9 against thresholds of 35 and 60. Fixed by giving `{"relationship": ...}` a **`field`** (`satisfaction` default, `reinforcements` added, **`strength` deliberately refused** -- `strain` raises it, so it reads being crossed as being liked). Kael's peak is **40.0 = his starting value** in 160 runs, so 45/55 could never pass. **Vint reads a gate** (`cx_vint_archive_night`, satisfaction >= 15 -- the measurement overruled the prettier 20, which took `--assert` red). Brann's playable spread 1.69 -> **8.34**, Auntie's 1.04 -> **5.04**. **Zero new events, zero new flags, zero prose.** `--assert` GREEN with starved *improving* 73.4 -> 72.4 and `MAX_STARVED` tightened 76 -> 75; union 58 -> **55**; `unittest` **125**. **`pargate` red: reckless terminal 35.7% at n=1000 / 36.5% at n=2000 against F8's 35.2 / 36.0 on the same seeds -- F9 owns +0.5 at both samples, on a band already 0.2 over; total overage 1.5pt.** See below and `F9_DESIGN.md`. |
+| **F10** | Open Echo -- the third single-gamble entrance | **Next -- measured, sized** | `echo_brother_known` has **1 source at `base: 0.5`** gating 3 events, and cautious never has Echo in the network. But the static census says the blocker is one link earlier: **`echo_contact`, read by 18 events, has 3 sources and all 3 are gambles** (0.55 / 0.70 / 0.50) -- F8's exact defect on the entry flag. See §4. |
 | F3 | Make money a decision | Not started | -- |
 | F4 | Give Fame and Social_Capital a spend | Not started | -- |
 | F5 | Signpost the endings in-fiction | Not started | -- |
@@ -1112,7 +1113,137 @@ byte-for-byte afterwards.
 
 ---
 
-## 4. CURRENT TASK -- F9: recalibrate the relationship gates against the bonds that now exist
+## 4. CURRENT TASK -- F10: open Echo, the third instance of the single-gamble entrance
+
+**Model:** **Opus 5**, in-session. A gating/branch change on existing events; no
+new prose volume, so this does not go through `generate_deck.py`.
+
+**Read first:** `F8_DESIGN.md` §2 (why the *branch* is the unit, not the event) and
+§5, `F9_DESIGN.md` §2 (why a decaying quantity cannot carry a late gate), and this
+file's §5.
+
+**Do not re-derive:** presence, coverage, reachability, the retention curve, which
+lever moves it, or the gate census. Eleven windows have closed those.
+`python tests/cast_audit.py --retention` and `--gates` print the baseline; confirm
+they reproduce before changing anything.
+
+### The state you are inheriting
+
+- **All three starting bonds are live and all 17 satisfaction gates clear their own
+  bond.** Ratios (n=40): Mara 0.29/0.31/0.34, Vint 0.42/0.33/0.32, Kael
+  1.14/0.76/0.63 -- **and read §5 before reacting to that Kael figure.** At n=120
+  with a matched control it is **0.89 in both arms**; the n=40 estimator carries
+  ~+/-0.2 on Kael. Do not spend a window chasing it.
+- Gates: **LIVE 15 / unusable 2 / dead 0** of 17, from 3/5/8. `cast_audit.py
+  --gates` is the instrument and it is new -- run it if you touch a gate.
+- Every standing gate green except the inherited one: `--assert` (starved
+  **72.4** <= **75**, outcompeted 36.4 <= 42), `--parity` 3/3, `unittest` **125**,
+  `lint_content` clean (26 packs, 503 events, 398 flags), union **55 of 503**.
+- **`MAX_STARVED` is now 75, not 76.** F9 tightened it because it improved the
+  number. Headroom is 2.6.
+- **`pargate` is RED and you are inheriting it for the second window running.**
+  Reckless terminal **35.7% at n=1000 / 36.5% at n=2000** against a 25-35% band.
+  F8 shipped it red at 35.2 / 36.0 as an explicit user decision; **F9 added +0.5 at
+  both sample sizes** and did not tune it. **Total overage against the band top is
+  now 1.5 points.**
+  Attribution needed no fresh control -- `pargate` is deterministic, so F8's
+  recorded figures on the deck you would revert to *are* the matched control.
+  **The +0.5 is stable across n=1000 and n=2000, so it is the effect and not a
+  sampling artefact** -- unlike F8's, which grew 0.2 -> 1.0 on doubling. Reckless
+  `good` is 27.4% in both decks, unchanged, so the ending mix did not re-weight;
+  runs ended sooner. **Read `F8_DESIGN.md` §8.1-8.3 and `F9_DESIGN.md` §6.1-6.3
+  before you run it, or you will spend a window re-deriving why it is red.**
+- **Reckless terminal is now the binding constraint on all further work, and F9
+  proved it binds on non-content too**: F9 added no events, no flags and no prose,
+  and still moved it half a point. Either the band gets re-argued against what the
+  deck now is, or every window budgets against it explicitly. **Neither F8 nor F9
+  resolved that unilaterally; it is still open and it is a user call.**
+
+### The problem, already measured
+
+**This is the item F8 §9 and F9 both explicitly refused to absorb, and it is the
+same defect class for the third time.** `echo_brother_known` has **one source, at
+`base: 0.5`**, and gates three events -- two of them in `npc_arcs_pack`, which
+contributes 10 of the 55 union-unreachable events:
+
+```
+res_why_you_fix/turn_the_question  base 0.5  -> echo_brother_known
+   -> betrayal_pack:twist_echo_brother_question
+   -> npc_arcs_pack:arc_echo_rollback_offer
+   -> npc_arcs_pack:arc_echo_the_courier
+```
+
+Echo's accumulation ratios are **7.21 / -- / 3.08 / 2.89** and **cautious never has
+him in the network at all** -- the `--` is not a rounding artefact, it is
+`-- never in the network --`.
+
+**But the static census says the diagnosis is one link earlier than the board
+records, so make that your Step 0.** `echo_contact` -- the flag that puts Echo in
+the network at all, read by **18 events** including ten `sonnet_5_volume_pack`
+storylets -- has three sources and **all three are gambles**:
+
+| source | base |
+|---|---|
+| `res_chalk_sign/follow_the_arrow` | **0.55** |
+| `res_chalk_second_look/wait_beneath_the_mark` | **0.70** |
+| `res_chalk_second_look/chalk_an_answer` | **0.50** |
+
+`cautious` maximises `branch_score(failure or success)`, so it is *defined* to
+refuse all three. **That is F8's finding exactly -- every warm branch is a gamble
+-- on the entry flag rather than the deep one, and it explains the `--` better
+than `echo_brother_known` does.** F8's fix shape applies: give the ledger a route
+that **costs instead of risks**, at `base: 1.0` with no failure branch.
+
+### Step 0 -- confirm which link is the blocker before designing
+
+Measure `echo_contact` and `echo_brother_known` separately, per strategy: how often
+each fires, and which branch cautious actually picks at each of the four sources.
+**If `echo_contact` is the blocker, `echo_brother_known` is downstream of it and
+may open for free** -- F8 got 16 events from 3 branch edits for exactly this
+reason. Six of six measured specs on this board have been wrong; this one already
+disagrees with its own static census.
+
+### Acceptance criteria
+
+- **Echo enters the network in the clear majority of cautious runs**, from 0.
+- **Echo's accumulation ratio under 1.0 in at least the two strategies that
+  already reach him** (reckless 3.08, greedy 2.89), and measurable at all in
+  cautious.
+- `echo_brother_known`'s three gated events fire in cautious at all, from 0.
+- Ratios do not regress: Mara/Vint/Kael as above -- **judged at n=120 against a
+  matched control, not at n=40.**
+- All standing gates green, `pargate` reported plainly against the control below.
+
+### Watch for
+
+- **`--assert` has 2.6 points of starved headroom and F9 just spent a window
+  learning how easily a precondition eats it.** A new gate on a well-firing event
+  starves every flag that event sources -- check the dependents first (§5).
+- **Echo's S is 5.0 and he is created at 25-35.** His half-life is 3.5 days, so
+  any gate you add on him has F9's problem built in; use `field:
+  "reinforcements"` if you need to read the bond, and read `F9_DESIGN.md` §3.1 for
+  why `strength` is not offered.
+- `npc_arcs_pack`'s head fires 0/160 -- a pack of single-source flags is a chain,
+  not a pack.
+
+### The adjacent items this window should NOT absorb
+
+- **`shepherd_offer`**, the sibling defect in the same pack: 3 sources, chain dies
+  at `res_informer_recruitment/consider_the_post` (-12.4 downside), and it blocks
+  `arc_mara_the_door` plus four children. Same pack, same shape, **its own
+  window** -- two balance changes in one window cannot be attributed.
+- **The `cast_expansion_pack` finale reachability.** F9 made those ten gates live;
+  the five events carrying them still fire **10-34 times in 600 runs** (weight 5-6,
+  `day >= 50`, four-rung ladder). That is a weight/day-ladder item and the board
+  records weight changes on chain content as a chaotic lever. §5.
+
+### On completion
+
+Update §3, append findings to §5, correct §6 in the same window if the baseline
+moves, and end with the model + ready-to-paste prompt for the next window.
+
+
+## 4b. COMPLETED TASK -- F9: recalibrate the relationship gates against the bonds that now exist
 
 **Model:** **Opus 5**, in-session. A content/gating change on ~16 existing
 preconditions; no new prose volume, so this does not go through
@@ -2138,6 +2269,88 @@ Triage these into the status board when they earn their place.
   flag-source census built by scanning event JSON** -- the rest of §7's table is
   accurate.
 
+- *(2026-07-29, F9)* **An audit that tracks a subset of a system will certify the
+  subset and say nothing about the system.** `tests/cast_audit.py` tracked **four**
+  bonds; the deck has **nine**. Ten of the deck's sixteen satisfaction gates read
+  the five it was missing, so nine consecutive windows reported on "the cast" while
+  **62% of the cast's gating was invisible to the instrument** -- and all ten of
+  those gates turned out to be dead. The `CAST` dict is now all nine. **Before
+  trusting any audit's verdict, check that its subject list is the deck's, not the
+  one the first window happened to need.**
+
+- *(2026-07-29, F9)* **A decaying quantity cannot carry a gate read long after the
+  bond is created, and this is arithmetic rather than tuning.** The five
+  `cast_expansion_pack` contacts are created on day 8-14 with S = 4-6, i.e. a
+  half-life of **2.8-4.2 days**, and their finales read a 35/60 threshold at
+  **day 50+** -- about fourteen half-lives later. Measured satisfaction on the day
+  those events actually fire: **0.3, 0.4, 0.6, 2.7, 10.9**. Nothing in the range
+  35-60 was reachable, and no re-pricing of *satisfaction* could have fixed it.
+  **The general rule: when a gate and its bond are separated by many half-lives,
+  the fix is to change the quantity, not the number.** `{"relationship": ...}`
+  now takes `field`, and `reinforcements` is the monotonic one. See
+  `F9_DESIGN.md` §2-3.
+
+- *(2026-07-29, F9)* **`strength` was available, looks correct, and is the trap.**
+  It is monotonic like `reinforcements`, but F7 made `strain` raise it too, so an S
+  gate reads *being crossed* as *being liked*. This is the same defect A4's
+  accumulation gate had (it inferred reinforcements from S increments) and F7's
+  own lever then broke. `VALID_REL_FIELDS` in `pipeline/lint_content.py` excludes
+  it deliberately and the linter enforces the exclusion. **A metric whose input
+  can be produced by the opposite of the thing it measures is not a metric.**
+
+- *(2026-07-29, F9)* **The n=40 ratio figures this board has quoted since F7 carry
+  about +/-0.2 of noise on Kael, and one of them nearly caused a false regression
+  report.** F9's n=40 read Kael cautious **1.14** against F8's recorded 0.92 --
+  above 1.0, i.e. an apparent failure of F9's own criterion. At **n=120 with the
+  three data packs reverted for a matched control on identical seeds, both arms
+  read 0.89**. The cause is structural: Kael's cautious reinforcement gap is ~11
+  days over a ~58-day run, so the count divides by a small number and the ratio
+  inherits all its variance. **Do not read a 0.1-0.2 move on a Kael ratio as
+  signal, and price any borderline ratio the way F8 priced its borderline band --
+  larger sample plus a matched control at that sample.**
+
+- *(2026-07-29, F9)* **A gate priced on the prettiest available constant starved
+  the coverage gate; the measurement overruled it.** Vint's new gate wanted the
+  alienation line of **20**, which the UI and `check_endings` already use. At 20,
+  `cx_vint_archive_night` fell 25/40 -> 2/40 in `random`, took
+  `vint_weather_heard`'s three dependents with it, and `--assert` went **RED at
+  starved 76.6**. At **15** the gate keeps 38/40 of random's runs and still
+  narrows the window to 6 days against greedy's 38. **A precondition on a
+  well-firing event is a starvation lever on every flag that event sources --
+  check the dependents before picking the threshold.**
+
+- *(2026-07-29, F9)* **The `cast_expansion_pack` finales are near-unreachable
+  events, separately from having been unreachable gates.** All five are `weight`
+  5-6, `max_fires: 1`, `day >= 50`, behind a four-rung flag ladder, and they fire
+  **10-34 times in 600 runs**. F9 fixed the gates and could not fix that; every
+  per-finale number in `F9_DESIGN.md` therefore rests on n=10-34. **Auntie Six's
+  `S final` is 6.0 -- her creation value -- in all four strategies, meaning her
+  four-event ladder reinforces her zero times in the median run.** Denny and Dex
+  still have a cross-strategy spread under 0.5 points. This is a weight/day-ladder
+  item, not a gating one.
+
+- *(2026-07-29, F9)* **`endings.json` carries a second, previously uncensused layer
+  of 13 satisfaction thresholds** in `epilogues[].when`, now reported by
+  `cast_audit.py --gates`. Two are in the dead shape the content gates were:
+  `TERMINAL_syndicate_ledger`'s Kael >= 45 fires **0-1 of 40** in every strategy
+  and `NEUTRAL_stewards_shepherd`'s Vint >= 40 fires 0/0/5/4. **They select the
+  last paragraph a player ever reads.** Ten of the thirteen are Mara's and are
+  healthy. Not touched by F9: an epilogue is a different risk surface from a
+  choice gate and deserves its own decision.
+
+- *(2026-07-29, F9)* **When the gate instrument is deterministic and you inherited
+  the deck unchanged, the predecessor's recorded figure already IS your matched
+  control.** F9 read reckless terminal 35.7% at n=1000 against F8's recorded 35.2%
+  at n=1000 -- same seeds, same instrument, deck the only variable -- and attributed
+  **+0.5 with zero extra runs**. Verify the premise before using the shortcut
+  (`git diff` the data packs, reproduce the predecessor's Step 0 figures). **The
+  full two-arm control pair is for when a gate *transitions* from passing to
+  failing; once it is already red and inherited, there is no transition to
+  attribute** -- only the size of your own contribution, which is a one-run
+  question. F9 also ran n=2000 for a like-for-like against F8's 36.0% and got
+  **36.5%: the same +0.5**. A delta that holds across both samples is the effect;
+  F8's grew 0.2 -> 1.0 on doubling and therefore was not.
+
 ---
 
 ## 6. Recorded baseline
@@ -2194,23 +2407,46 @@ generalises.** Unlocking gated content was expected to raise `outcompeted`; it
 *lowered* it, because the unlocked events are `the_chalk_market` shelf content
 and a placed draw is a pool of ~12 against the neutral pool's ~220. See §5.
 
-| Metric | **Live (post-F8)** | Post-F7 | Pre-F7 (A3/A4) | Phase 3c (pre-A3) |
-|---|---|---|---|---|
-| Events in deck | 503 (26 packs, 398 flags, **332 shelved**) | 503 (26, 398) | 503 (26, 398) | 498 (25, 391) |
-| Median eligible pool per day *(unplaced draws)* | **220** | 220 | 220 | 220 |
-| Median eligible shelf *(placed draws)* | **13** (591 placed draws) | 12 (577) | 13 (559) | 12 (557) |
-| Unique events seen per run | **82** (16.3%) | 82 (16.3%) | 80 (16.0%) | 80 (16.1%) |
-| **Events never fired, mean of 5 seed bases** | **107.0** | 108.6 | 109.4 | 101.2 |
-| -- of which **starved** *(gate: <= 76)* | **73.4** | 73.0 | 73.6 | 66.2 |
-| -- of which **outcompeted** *(gate: <= 42)* | **33.6** | 35.6 | 35.8 | 35.0 |
-| **Union-unreachable across all 4 strategies** | **58 (11.5%)** | 63 (12.5%) | 64 (12.7%) | 61 of 498 |
-| Arc draw-weight share *(unplaced draws)* | **52.5%** | 52.0% | 52.1% | 51.7% |
-| Arc shelf-share *(placed draws)* | **55.5%** | 53.6% | -- | -- |
-| Repeat-pick fraction | 6.7% | 6.7% | 6.6% | 6.4% |
-| Median run length | **33 days** | 32 days | 30 days | 30 days |
-| Truly guaranteed choices | **627** / 1533 (41%) | 627 / 1533 | 614 / 1513 | same |
-| Genuine gambles | **906** / 1533 | 906 / 1533 | 899 / 1513 | same |
-| Near-certain but fallible | **0** (F2's invariant holds) | 0 | 0 | same |
+**Re-measured 2026-07-29 after F9.** F9 added no events, no flags and no prose --
+one engine capability (`field` on a relationship condition), thirteen gate
+re-pricings, one new event precondition. **starved 73.4 -> 72.4, outcompeted
+33.6 -> 36.4, mean never-fired 107.0 -> 108.8**, and **union-unreachable 58 -> 55
+of 503 (11.5% -> 10.9%)**, with `cast_expansion_pack` leaving the
+union-unreachable table entirely. **`MAX_STARVED` tightened 76 -> 75** per the
+rule that an improved number tightens its guard; `MAX_OUTCOMPETED` left at 42
+because that half got worse.
+
+**Starvation *fell* on a change that added a gate**, which is worth keeping: the
+ten re-pointed choice gates had never been satisfiable, so opening them gave four
+`cast_expansion_pack` flags live sources for the first time. Content moved from
+"never eligible" into "offered and lost a draw" -- the same trade F8 recorded, in
+the healthy direction. The opposite effect is also in this window and is the
+sharper lesson: Vint's new gate at the *obvious* threshold of 20 pushed starved to
+**76.6, RED**, by cutting one well-firing event that sources three flags. See §5.
+
+| Metric | **Live (post-F9)** | Post-F8 | Post-F7 | Pre-F7 (A3/A4) | Phase 3c (pre-A3) |
+|---|---|---|---|---|---|
+| Events in deck | 503 (26 packs, 398 flags, **332 shelved**) | 503 (26, 398) | 503 (26, 398) | 503 (26, 398) | 498 (25, 391) |
+| Median eligible pool per day *(unplaced draws)* | **221** | 220 | 220 | 220 | 220 |
+| Median eligible shelf *(placed draws)* | **13** (599 placed draws) | 13 (591) | 12 (577) | 13 (559) | 12 (557) |
+| Unique events seen per run | **84** (16.6%) | 82 (16.3%) | 82 (16.3%) | 80 (16.0%) | 80 (16.1%) |
+| **Events never fired, mean of 5 seed bases** | **108.8** | 107.0 | 108.6 | 109.4 | 101.2 |
+| -- of which **starved** *(gate: <= 75)* | **72.4** | 73.4 | 73.0 | 73.6 | 66.2 |
+| -- of which **outcompeted** *(gate: <= 42)* | **36.4** | 33.6 | 35.6 | 35.8 | 35.0 |
+| **Union-unreachable across all 4 strategies** | **55 (10.9%)** | 58 (11.5%) | 63 (12.5%) | 64 (12.7%) | 61 of 498 |
+| Arc draw-weight share *(unplaced draws)* | **51.7%** | 52.5% | 52.0% | 52.1% | 51.7% |
+| Arc shelf-share *(placed draws)* | **54.1%** | 55.5% | 53.6% | -- | -- |
+| Repeat-pick fraction | **7.1%** | 6.7% | 6.7% | 6.6% | 6.4% |
+| Median run length | **34 days** | 33 days | 32 days | 30 days | 30 days |
+| **Satisfaction gates: live / unusable / dead** | **14 / 3 / 0** of 17 | 3 / 5 / 8 of 16 | -- | -- | -- |
+| Truly guaranteed choices | **627** / 1533 (41%) | 627 / 1533 | 627 / 1533 | 614 / 1513 | same |
+| Genuine gambles | **906** / 1533 | 906 / 1533 | 906 / 1533 | 899 / 1513 | same |
+| Near-certain but fallible | **0** (F2's invariant holds) | 0 | 0 | 0 | same |
+
+**The gate row is new and is `python tests/cast_audit.py --gates`.** It is not an
+assertion, and it should be: 13 of 16 gates shipped dead for nine windows because
+nothing measured them. A future window that adds a satisfaction gate should run
+it.
 
 **The A3 column is +5 events and the coverage deltas are mostly that.** Adding
 `steward_filings_pack` with its schedule *off* costs exactly 5 starved and 0
