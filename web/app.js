@@ -224,9 +224,15 @@ function onKeyDown(e) {
     document.getElementById("journal-drawer").classList.add("hidden");
     return;
   }
-  if (e.key === "r" || e.key === "R") { restAction(); return; }
   if (e.key === "j" || e.key === "J") { toggleJournal(); return; }
   if (e.key === "?") { showIntro(true); return; }
+  // While the morning placement is open there is no storylet yet: Enter sets
+  // out, and the action keys would otherwise fire against last day's choices.
+  if (!document.getElementById("placement-stage").classList.contains("hidden")) {
+    if (e.key === "Enter" || e.key === " ") confirmPlacement();
+    return;
+  }
+  if (e.key === "r" || e.key === "R") { restAction(); return; }
   const n = parseInt(e.key, 10);
   if (!isNaN(n) && n >= 1 && n <= currentChoices.length) {
     selectChoice(n - 1);
@@ -707,7 +713,10 @@ function renderUI(state) {
   renderClocks(state.clocks || {});
   renderThreads(state.flags || []);
   renderEdgeChip(state.edge || 0);
-  renderContacts(state.relationships, state.slots_total - state.slots_used > 0);
+  // Contacts and rest both spend a slot, and a slot cannot be spent before the
+  // morning placement says where it is standing -- the server refuses either way.
+  const placing = !!(state.placement && state.placement.awaiting);
+  renderContacts(state.relationships, !placing && state.slots_total - state.slots_used > 0);
   renderShop(state.catalog || [], state.inventory || [], s.Wealth);
 
   // Center-stage mood: heat alarm & mental decay warp
@@ -727,6 +736,11 @@ function renderUI(state) {
     renderEnding(state);
     return;
   }
+
+  // The morning placement gates the day: until it is answered the server has
+  // not drawn a storylet, because which storylet it draws depends on the answer.
+  renderPlacement(state);
+  if (!document.getElementById("placement-stage").classList.contains("hidden")) return;
 
   const ev = state.event;
   if (ev) {
@@ -910,6 +924,89 @@ function typewrite(el, text) {
 }
 
 /* ============ Choices & Risk Tiers ============ */
+/* ============ Morning Placement (A1) ============ */
+// Where each of the day's slots stands. Held client-side only until "Set out"
+// posts it; the server is the one that decides a day has been placed, so a
+// half-filled screen is never a half-placed day.
+let pendingPlacement = {};
+
+function renderPlacement(state) {
+  const p = state.placement;
+  const stage = document.getElementById("placement-stage");
+  const storylet = document.getElementById("storylet-stage");
+  const awaiting = !!(p && p.awaiting && (p.districts || []).length);
+
+  stage.classList.toggle("hidden", !awaiting);
+  storylet.classList.toggle("hidden", awaiting);
+  if (!awaiting) return;
+
+  const slots = p.slots || 3;
+  document.getElementById("placement-intro").textContent =
+    `Three hours of usable day, give or take. Standing somewhere means the city hands you `
+    + `that district's business and not the Row's -- and the places you don't go keep running `
+    + `without you.`;
+
+  // Reset only when the day changed underneath us, so a re-render (an outcome
+  // banner, a stat tick) doesn't wipe a selection the player already made.
+  if (pendingPlacement.__day !== state.day) pendingPlacement = { __day: state.day };
+
+  const container = document.getElementById("placement-slots");
+  container.innerHTML = "";
+  for (let slot = 0; slot < slots; slot++) {
+    const row = document.createElement("div");
+    row.className = "placement-row";
+
+    const label = document.createElement("span");
+    label.className = "placement-slot-label";
+    label.textContent = `Hour ${slot + 1}`;
+    row.appendChild(label);
+
+    const opts = document.createElement("div");
+    opts.className = "placement-options";
+    const choices = [{ id: null, name: "The Row at large", hint: "Whatever the city hands you." }]
+      .concat(p.districts);
+
+    choices.forEach(d => {
+      const btn = document.createElement("button");
+      const chosen = (pendingPlacement[slot] || null) === d.id;
+      btn.className = `placement-opt${chosen ? " chosen" : ""}`;
+      btn.textContent = d.name;
+      btn.title = d.hint || d.blurb || "";
+      btn.addEventListener("click", () => {
+        if (d.id === null) delete pendingPlacement[slot];
+        else pendingPlacement[slot] = d.id;
+        renderPlacement(state);
+      });
+      opts.appendChild(btn);
+    });
+    row.appendChild(opts);
+    container.appendChild(row);
+  }
+
+  // The hint line lives once under the rows rather than on every option: it is
+  // per-district state, not per-slot, and repeating it three times reads as
+  // three different readings of the same street.
+  p.districts.forEach(d => {
+    const note = document.createElement("div");
+    note.className = "placement-hint";
+    note.innerHTML = `<span class="placement-hint-name">${d.name}</span> — ${d.hint}`;
+    container.appendChild(note);
+  });
+
+  document.getElementById("placement-confirm").onclick = () => confirmPlacement();
+}
+
+async function confirmPlacement() {
+  const payload = {};
+  Object.keys(pendingPlacement).forEach(k => {
+    if (k !== "__day") payload[k] = pendingPlacement[k];
+  });
+  const data = await api("/api/place", { placements: payload });
+  if (!data || data.error) return;
+  playSound("day");
+  renderUI(data);
+}
+
 function riskTier(prob) {
   if (prob >= 95) return { cls: "safe", label: "SAFE" };
   if (prob >= 65) return { cls: "favorable", label: `FAVORABLE ${Math.round(prob)}%` };

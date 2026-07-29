@@ -207,6 +207,7 @@
     },
     {
       "id": "volume_job_scrubber_favor",
+      "district": "level_d",
       "title": "A Favor in the Scrubbers",
       "body": "A stranger with chemical burns up one forearm asks you to hide a nondescript case in the industrial waste-scrubber levels for exactly one week. No questions. Triple the usual rate.",
       "weight": 7,
@@ -312,6 +313,7 @@
     },
     {
       "id": "volume_job_black_market_repair",
+      "district": "the_works",
       "title": "Off-the-Books Repairs",
       "body": "An elderly citizen slides you a pre-Accord tube radio, its dial cracked, wiring brittle. The Steward would happily replace it with a superior synthetic unit -- but replacement means surrender, and she wants it fixed, not improved.",
       "weight": 6,
@@ -848,6 +850,7 @@
     },
     {
       "id": "volume_vice_braindance_den",
+      "district": "parlor_row",
       "title": "The Braindance Den",
       "body": "A converted maintenance bay strung with salvaged VR rigs -- the local den where undercity residents jack into shared synthetic euphoria loops for an hour of borrowed, manufactured joy.",
       "weight": 7,
@@ -941,6 +944,7 @@
     },
     {
       "id": "volume_vice_tolerance_reset_serum",
+      "district": "parlor_row",
       "title": "The Tolerance Reset",
       "body": "A back-alley chemist offers a shimmering vial: an illegal serum that scrubs your body's built-up tolerance back to zero. Everything after tastes like the first time again. Everything after also hits like the first time again.",
       "weight": 5,
@@ -1053,6 +1057,7 @@
     },
     {
       "id": "volume_vice_pawn_for_a_hit",
+      "district": "parlor_row",
       "title": "Pawning the Present",
       "body": "The craving is loud tonight and your credits are thin. You're standing in front of a pawnbroker with the one thing on you worth real money -- a keepsake, not currency, until suddenly it has to be both.",
       "weight": 6,
@@ -1281,6 +1286,7 @@
     },
     {
       "id": "volume_family_mara_dinner_invite",
+      "district": "the_works",
       "title": "Mara's Table",
       "body": "Mara has cooked, actually cooked, using rationed ingredients she can't really spare, and set two places at a table built for a family that used to be bigger. She wants one uninterrupted evening. That's all. Just one.",
       "weight": 8,
@@ -1369,10 +1375,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_npc_vint_favor_owed",
+      "district": "the_works",
       "title": "Vint Calls in a Favor",
       "body": "Vint doesn't ask for much, which is exactly why you can't refuse when he finally does. He needs a small package moved through a checkpoint he can't personally risk crossing today, no questions, and he's calling in three favors at once to get it.",
       "weight": 6,
@@ -1479,10 +1487,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_npc_kael_syndicate_check_in",
+      "district": "the_chalk_market",
       "title": "Kael's Check-In",
       "body": "Kael finds you between jobs, all easy smiles and hard eyes, and asks how business has been -- the way a landlord asks how the apartment's treating you right before the rent goes up.",
       "weight": 6,
@@ -1596,10 +1606,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_family_mara_needs_a_favor",
+      "district": "the_works",
       "title": "A Small, Illegal Favor",
       "body": "Mara asks, quietly and with visible shame, if you can get your hands on a piece of unregistered medical tech the Steward's clinics won't prescribe -- something that worked for their mother, once, before the Accord made it obsolete and forbidden.",
       "weight": 6,
@@ -1727,10 +1739,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_steward_satisfaction_survey",
+      "district": "the_concourse",
       "title": "The Satisfaction Survey",
       "body": "Your apartment array chimes with the gentlest possible urgency: a mandatory quarterly Wellness & Satisfaction Survey, seven questions, estimated ninety seconds, 'your honest feedback shapes a kinder city.'",
       "weight": 6,
@@ -2021,6 +2035,7 @@
     },
     {
       "id": "volume_job_undercity_market_haggle",
+      "district": "the_chalk_market",
       "title": "Haggling in the Grey Market",
       "body": "The undercity grey market runs three levels of stalls selling everything the Steward's official supply chains politely pretend doesn't exist -- unregistered tools, off-book parts, and vendors who remember when haggling meant something.",
       "weight": 7,

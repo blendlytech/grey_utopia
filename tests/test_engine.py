@@ -13,8 +13,12 @@ from engine.decay import (
 from engine.events import Event, Choice, Insert, load_events, eval_conditions
 from engine.selector import (
     select_event, effective_weight, chain_depth, index_library,
-    eligible_pool, is_ambient, on_shelf,
+    eligible_pool, is_ambient, on_shelf, district_for_slot,
     DEPTH_SCALE, MAX_DEPTH, DEADLINE_BONUS, AMBIENT_TAGS, AMBIENT_SLOTS_PER_DAY
+)
+from engine.districts import (
+    apply_placements, auto_placement, clear_placements, district_hint,
+    district_ids, district_name, load_districts, shelf_open_count
 )
 from engine.resolver import (
     choice_probability, resolve_choice, check_endings,
@@ -654,8 +658,9 @@ class TestDistrictShelves(unittest.TestCase):
 
     def test_unplaced_slot_does_not_filter_at_all(self):
         """Districted events stay drawable from an unplaced slot. Exclusivity would
-        make every shelved event unreachable whenever placement is off -- a live
-        footgun while PROTOTYPE_DISTRICT ships as None. See docs/A1_DESIGN.md §2."""
+        make every shelved event unreachable to a player who leaves their slots in
+        the Row -- a legal play, and the whole game before the map is finished.
+        See docs/A1_DESIGN.md §2 and §7.6."""
         pool = eligible_pool(self._mixed(), Character(), day=1, district=None)
         self.assertEqual(self._ids(pool),
                          {"chain_a", "chain_b", "elsewhere", "noise", "job"})
@@ -715,19 +720,15 @@ class TestDistrictShelves(unittest.TestCase):
                                   district="the_archive")
             self.assertIn(picked.id, {"chain_a", "chain_b"})
 
-    def test_placement_helper_tracks_the_shipped_setting(self):
-        """One switch drives every caller, so main/server/sim_bot cannot disagree."""
-        import engine.selector as sel
-        original = sel.PROTOTYPE_DISTRICT
-        try:
-            sel.PROTOTYPE_DISTRICT = None
-            self.assertIsNone(sel.district_for_slot(0))
-            self.assertIsNone(sel.district_for_slot(2))
-            sel.PROTOTYPE_DISTRICT = "the_archive"
-            self.assertEqual(sel.district_for_slot(0), "the_archive")
-            self.assertIsNone(sel.district_for_slot(sel.DISTRICT_SLOTS_PER_DAY))
-        finally:
-            sel.PROTOTYPE_DISTRICT = original
+    def test_district_for_slot_reads_the_morning_placement(self):
+        """One read site drives every caller, so main/server/sim_bot cannot disagree
+        about where a slot is standing."""
+        c = Character()
+        self.assertIsNone(district_for_slot(c, 0))
+        apply_placements(c, {1: "the_archive"})
+        self.assertIsNone(district_for_slot(c, 0))
+        self.assertEqual(district_for_slot(c, 1), "the_archive")
+        self.assertIsNone(district_for_slot(c, 2))
 
     def test_on_shelf_ignores_other_districts_ambient(self):
         """Ambient rides along only while it is neutral. Once Phase 3 gives filler
@@ -751,6 +752,192 @@ class TestDistrictShelves(unittest.TestCase):
                     if e.get("district") is not None:
                         self.assertIn(e["district"], known,
                                       f"{os.path.basename(path)}:{e['id']}")
+
+
+class TestMorningPlacement(unittest.TestCase):
+    """A1 Phase 2: placement is a decision the player makes each morning."""
+
+    def test_registry_is_non_empty_and_ids_are_unique(self):
+        ids = district_ids()
+        self.assertTrue(ids, "the map needs at least one district to place into")
+        self.assertEqual(len(ids), len(set(ids)))
+        for d in load_districts():
+            self.assertTrue(d.get("name") and d.get("blurb"),
+                            f"{d['id']} needs a name and a blurb for the placement screen")
+
+    def test_placement_stamps_last_visited_and_clears_on_the_next_day(self):
+        c = Character(day=5)
+        apply_placements(c, {0: "the_archive"})
+        self.assertEqual(c.placements, {0: "the_archive"})
+        self.assertEqual(c.last_visited["the_archive"], 5)
+        c.day = 6
+        clear_placements(c)
+        # The placement expires with the day; the memory of the visit does not,
+        # because it is what the next morning's hint line is computed from.
+        self.assertEqual(c.placements, {})
+        self.assertEqual(c.last_visited["the_archive"], 5)
+
+    def test_unregistered_district_degrades_to_unplaced(self):
+        """A typo must not create a shelf no content can reach. Lint catches this
+        on the content side; this is the runtime half, and it matters because
+        /api/place takes the id straight off the wire."""
+        c = Character()
+        apply_placements(c, {0: "not_a_real_place", 1: "the_archive"})
+        self.assertEqual(c.placements, {1: "the_archive"})
+        self.assertNotIn("not_a_real_place", c.last_visited)
+
+    def test_placements_survive_a_save_load_round_trip(self):
+        """server.py persists placement by riding on the character, so this is the
+        whole of its save-compat story."""
+        c = Character(day=9)
+        apply_placements(c, {2: "the_archive"})
+        restored = Character.from_dict(json.loads(c.to_json()))
+        self.assertEqual(restored.placements, {2: "the_archive"})
+        self.assertEqual(restored.last_visited, {"the_archive": 9})
+
+    def test_a_pre_a1_save_loads_as_unplaced(self):
+        old = {"day": 3, "stats": {}, "flags": [], "relationships": {}}
+        restored = Character.from_dict(old)
+        self.assertEqual(restored.placements, {})
+        self.assertEqual(restored.last_visited, {})
+
+    def test_auto_placement_spends_one_draw_a_day_and_can_choose_the_row(self):
+        """coverage_audit proves itself honest by reproducing sim_bot seed for
+        seed, so the two loops must consume RNG identically -- which means this
+        policy must draw exactly once whatever it decides."""
+        import random as _r
+        c = Character()
+        picks = []
+        for seed in range(60):
+            rng = _r.Random(seed)
+            picks.append(auto_placement(rng, c, 3))
+            # Exactly two draws, whatever it decided: a reference stream that has
+            # spent the same whether-then-where pair must stay in lockstep after.
+            ref = _r.Random(seed)
+            ref.random()
+            ref.randrange(len(district_ids()))
+            self.assertEqual(rng.random(), ref.random())
+        chose_row = [p for p in picks if not p]
+        chose_district = [p for p in picks if p]
+        self.assertTrue(chose_row, "'stay in the Row' must be a reachable option")
+        self.assertTrue(chose_district, "districts must be reachable")
+        for p in chose_district:
+            self.assertEqual(list(p), [0], "the stand-in commits one slot, not the day")
+            self.assertIn(p[0], district_ids())
+
+    def test_stay_in_the_row_survives_any_registry_size(self):
+        """The Phase 3 regression, pinned at the extreme rather than at today's map.
+
+        Phase 2 derived the commitment rate from the map's size
+        (`min(1.0, len(districts) / 5)`), which saturates at five districts --
+        so a seventh district silently removed 'stay in the Row' as an outcome
+        and reserved a slot every single day. A constant that is a function of
+        *content* has to be tested at the sizes that content can reach, not just
+        the size it happens to have.
+        """
+        import random as _r
+        from engine import districts as _d
+        real = _d.load_districts()
+        try:
+            for n in (1, 2, 7, 12, 30):
+                _d._registry = [{"id": f"d{i}", "name": f"D{i}", "blurb": ""}
+                                for i in range(n)]
+                picks = [auto_placement(_r.Random(s), Character(), 3) for s in range(80)]
+                self.assertTrue([p for p in picks if not p],
+                                f"'stay in the Row' unreachable at {n} district(s)")
+                self.assertTrue([p for p in picks if p],
+                                f"no district reachable at {n} district(s)")
+        finally:
+            _d._registry = real
+
+    def test_auto_placement_draw_count_is_independent_of_slot_count(self):
+        import random as _r
+        for slots in (1, 2, 3):
+            a, b = _r.Random(7), _r.Random(7)
+            auto_placement(a, Character(), slots)
+            auto_placement(b, Character(), 3)
+            self.assertEqual(a.random(), b.random(),
+                             "a 2-slot day must not desynchronise the stream")
+
+    def test_hint_reports_an_empty_shelf_and_a_stocked_one(self):
+        events = [
+            Event(id="open_now", title="t", body="b", district="the_archive",
+                  choices=[Choice(id="c", text="c", prob={"base": 1.0})]),
+            Event(id="gated", title="t", body="b", district="the_archive",
+                  preconditions={"all": [{"flag": "never_granted"}]},
+                  choices=[Choice(id="c", text="c", prob={"base": 1.0})]),
+            Event(id="elsewhere", title="t", body="b",
+                  choices=[Choice(id="c", text="c", prob={"base": 1.0})]),
+        ]
+        c = Character(day=4)
+        self.assertEqual(shelf_open_count(events, c, "the_archive"), 1)
+        self.assertIn("not set foot", district_hint(events, c, "the_archive"))
+        apply_placements(c, {0: "the_archive"})
+        c.day = 6
+        self.assertIn("2 days since", district_hint(events, c, "the_archive"))
+        self.assertEqual(shelf_open_count(events, c, "no_such_district"), 0)
+        self.assertIn("Nothing here", district_hint(events, c, "no_such_district"))
+
+    def test_district_name_falls_back_to_the_row(self):
+        self.assertEqual(district_name(None), "the Row at large")
+        self.assertEqual(district_name("the_archive"), "The Archive Stacks")
+
+    def test_exclusive_shelves_hide_districted_content_from_unplaced_slots(self):
+        """SHELF_EXCLUSIVE ships Off; this pins what it does when it is not.
+
+        Phase 3 measured it as a coverage catastrophe (never-fired 107 -> 212)
+        and rejected it, but the switch is kept so the measurement stays
+        reproducible -- so its semantics need to be nailed down, including the
+        empty-pool fallback every other branch of eligible_pool honours.
+        """
+        from engine import selector as sel
+        events = [
+            Event(id="shelved", title="t", body="b", district="the_archive",
+                  choices=[Choice(id="c", text="c", prob={"base": 1.0})]),
+            Event(id="neutral", title="t", body="b",
+                  choices=[Choice(id="c", text="c", prob={"base": 1.0})]),
+        ]
+        c = Character(day=4)
+        ids = lambda pool: sorted(e.id for e in pool)
+        self.assertEqual(ids(sel.eligible_pool(events, c, c.day)),
+                         ["neutral", "shelved"])
+        prior = sel.SHELF_EXCLUSIVE
+        try:
+            sel.SHELF_EXCLUSIVE = True
+            self.assertEqual(ids(sel.eligible_pool(events, c, c.day)), ["neutral"])
+            # Nothing neutral left: hand back the unfiltered pool rather than
+            # burning the player's slot.
+            only_shelved = [events[0]]
+            self.assertEqual(ids(sel.eligible_pool(only_shelved, c, c.day)),
+                             ["shelved"])
+        finally:
+            sel.SHELF_EXCLUSIVE = prior
+
+    def test_arc_is_a_field_not_a_tag_and_defaults_off(self):
+        """`arc` must never reach `effective_weight`, which multiplies off tags."""
+        plain = Event(id="a", title="t", body="b")
+        marked = Event(id="b", title="t", body="b", arc=True)
+        self.assertFalse(plain.arc)
+        self.assertTrue(marked.arc)
+        self.assertNotIn("arc", marked.tags)
+        c = Character()
+        self.assertEqual(effective_weight(plain, c), effective_weight(marked, c))
+
+    def test_shipped_content_carries_the_arc_classification(self):
+        """`ambitions_pack` is the case that motivated the field.
+
+        Its 24 storylets are three 8-link chains and the tag-only classifier
+        scored them 0.0% arc, because they are tagged existential/undercity. If
+        the field ever stops loading, `MIN_ARC_SHARE` silently starts measuring
+        the old wrong thing again.
+        """
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        events = load_events(os.path.join(root, "data", "events", "ambitions_pack.json"))
+        self.assertTrue(events)
+        self.assertTrue(all(e.arc for e in events),
+                        "every ambitions storylet should be classified arc")
+        self.assertTrue(all("arc" not in e.tags for e in events),
+                        "arc must stay a field -- a tag would reach effective_weight")
 
 
 class TestInventoryAndFactions(unittest.TestCase):

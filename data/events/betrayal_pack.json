@@ -11,14 +11,24 @@
       "weight": 9,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["steward", "betrayal"],
+      "tags": [
+        "steward",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "steward_civic_dossier" },
-          { "day": 9, "op": ">=" }
+          {
+            "flag": "steward_civic_dossier"
+          },
+          {
+            "day": 9,
+            "op": ">="
+          }
         ],
         "none": [
-          { "flag": "flagged_evasive" }
+          {
+            "flag": "flagged_evasive"
+          }
         ]
       },
       "choices": [
@@ -28,19 +38,39 @@
           "prob": {
             "base": 0.55,
             "mods": [
-              { "stat": "Fame", "coef": 0.004 },
-              { "stat": "Social_Capital", "coef": 0.003 }
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "You hand them a better line than they wrote, and the segment runs twice its length. Every unlisted contact who valued your anonymous face goes quiet by evening -- a testimonial can't un-know a name.",
-            "deltas": { "Fame": 8, "Social_Capital": -6, "Heat": 6, "Meaning": -4 },
-            "flags_set": ["face_on_the_feed"]
+            "deltas": {
+              "Fame": 8,
+              "Social_Capital": -6,
+              "Heat": 6,
+              "Meaning": -4
+            },
+            "flags_set": [
+              "face_on_the_feed"
+            ]
           },
           "failure": {
             "text": "The retake goes fine. The caption doesn't -- a warmth-pass algorithm appends 'ask me about compliance!' to your name, verbatim, permanent, and indexed.",
-            "deltas": { "Fame": -2, "Social_Capital": -8, "Mental_Decay": 8, "Heat": 8 },
-            "flags_set": ["face_on_the_feed"]
+            "deltas": {
+              "Fame": -2,
+              "Social_Capital": -8,
+              "Mental_Decay": 8,
+              "Heat": 8
+            },
+            "flags_set": [
+              "face_on_the_feed"
+            ]
           }
         },
         {
@@ -49,34 +79,66 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.005 },
-              { "stat": "Fame", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "He can't stop the segment -- nobody stops the Steward's warmth -- but he fields the calls first and takes a cut of every one. 'Visibility is a cost basis,' he says, and you understand you've just been repriced.",
-            "deltas": { "Wealth": 300, "Heat": -4, "Meaning": -8 },
-            "rel_deltas": { "Kael (Broker)": -4 },
-            "flags_set": ["face_on_the_feed"]
+            "deltas": {
+              "Wealth": 300,
+              "Heat": -4,
+              "Meaning": -8
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -4
+            },
+            "flags_set": [
+              "face_on_the_feed"
+            ]
           },
           "failure": {
             "text": "His damage control lands a day late. The first stranger who calls already has your sister's district, lifted clean from a feed frame nobody scrubbed in time.",
-            "deltas": { "Heat": 10, "Family_Friction": 8, "Mental_Decay": 8 },
-            "rel_deltas": { "Kael (Broker)": -6 },
-            "flags_set": ["face_on_the_feed"]
+            "deltas": {
+              "Heat": 10,
+              "Family_Friction": 8,
+              "Mental_Decay": 8
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -6
+            },
+            "flags_set": [
+              "face_on_the_feed"
+            ]
           }
         },
         {
           "id": "go_dark",
           "text": "Go dark first. Burn every undercity thread before the segment can hand them to you as a liability.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "Three years of unlisted contacts, gone in an afternoon, on the assumption it's already too late to be careful. The segment airs anyway, warm and unstoppable. You kept your ledger clean by emptying it.",
-            "deltas": { "Social_Capital": -10, "Meaning": -8, "Heat": -6 },
-            "flags_set": ["face_on_the_feed"]
+            "deltas": {
+              "Social_Capital": -10,
+              "Meaning": -8,
+              "Heat": -6
+            },
+            "flags_set": [
+              "face_on_the_feed"
+            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_buyout_testimonial",
@@ -85,11 +147,20 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["steward", "family", "betrayal"],
+      "tags": [
+        "steward",
+        "family",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "steward_buyout_accepted" },
-          { "day": 8, "op": ">=" }
+          {
+            "flag": "steward_buyout_accepted"
+          },
+          {
+            "day": 8,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -99,29 +170,56 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Family_Friction", "coef": -0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Family_Friction",
+                "coef": -0.004
+              }
             ]
           },
           "success": {
             "text": "She lets you get most of the way through before saying she already knew -- the brochure's sentences gave you away three lines in. 'At least you called,' she says, which is not the same as forgiving the syntax.",
-            "deltas": { "Family_Friction": -6, "Meaning": 4, "Mental_Decay": 6 },
-            "rel_deltas": { "Mara (Sister)": 4 }
+            "deltas": {
+              "Family_Friction": -6,
+              "Meaning": 4,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 4
+            }
           },
           "failure": {
             "text": "She lets you finish, then reads your own acceptance back to you in her flattest voice, word for word, until you're the one who can't listen anymore.",
-            "deltas": { "Family_Friction": 14, "Mental_Decay": 10, "Meaning": -6 },
-            "rel_deltas": { "Mara (Sister)": -10 }
+            "deltas": {
+              "Family_Friction": 14,
+              "Mental_Decay": 10,
+              "Meaning": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -10
+            }
           }
         },
         {
           "id": "say_nothing",
           "text": "Say nothing. Let her find the brochure on her own time.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You come home to the brochure on the table, folded once, beside a packed bag and a transit schedule circled in her handwriting, not yours. She doesn't leave a note. The bag is the note.",
-            "deltas": { "Family_Friction": 12, "Meaning": -10, "Mental_Decay": 6 },
-            "rel_deltas": { "Mara (Sister)": -8 }
+            "deltas": {
+              "Family_Friction": 12,
+              "Meaning": -10,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -8
+            }
           }
         },
         {
@@ -130,23 +228,43 @@
           "prob": {
             "base": 0.45,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.005 },
-              { "stat": "Fame", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "Three families read the brochure differently once they know whose acceptance built it, and two of them hold out longer for it. Mara hears secondhand that you warned strangers before you warned her.",
-            "deltas": { "Social_Capital": 8, "Family_Friction": 10 },
-            "faction_deltas": { "Undercity": 4 },
-            "rel_deltas": { "Mara (Sister)": -6 }
+            "deltas": {
+              "Social_Capital": 8,
+              "Family_Friction": 10
+            },
+            "faction_deltas": {
+              "Undercity": 4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -6
+            }
           },
           "failure": {
             "text": "The warning reaches the row fine. It reaches the Steward faster -- 'residents coaching residents against a voluntary program' reads badly in a file that already has your name in warm letters.",
-            "deltas": { "Heat": 12, "Social_Capital": -4, "Mental_Decay": 8 },
-            "rel_deltas": { "Mara (Sister)": -6 }
+            "deltas": {
+              "Heat": 12,
+              "Social_Capital": -4,
+              "Mental_Decay": 8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -6
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_custody_graduate",
@@ -155,10 +273,15 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["steward", "betrayal"],
+      "tags": [
+        "steward",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "steward_custody" }
+          {
+            "flag": "steward_custody"
+          }
         ]
       },
       "choices": [
@@ -168,19 +291,35 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Mental_Decay", "coef": -0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "You perform gladness at professional grade, and his notes on you read, for once, exactly like the ones on everyone else. The clock on how long you can keep this up starts the moment you let go.",
-            "deltas": { "Mental_Decay": 6, "Meaning": -6 },
-            "clocks_start": { "custody_release": 5 }
+            "deltas": {
+              "Mental_Decay": 6,
+              "Meaning": -6
+            },
+            "clocks_start": {
+              "custody_release": 5
+            }
           },
           "failure": {
             "text": "He reads the performance the way the Steward taught him to -- as data. 'You seem tense,' he says, gently, already composing the line for his next note.",
-            "deltas": { "Heat": 8, "Mental_Decay": 10 },
-            "clocks_start": { "custody_release": 5 }
+            "deltas": {
+              "Heat": 8,
+              "Mental_Decay": 10
+            },
+            "clocks_start": {
+              "custody_release": 5
+            }
           }
         },
         {
@@ -189,32 +328,59 @@
           "prob": {
             "base": 0.45,
             "mods": [
-              { "stat": "Fame", "coef": 0.004 },
-              { "stat": "Recklessness", "coef": 0.003 }
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "He doesn't flinch -- he's grateful you asked, actually, it saves him a disclosure form. 'Wellness notes aren't secrets,' he says. 'That's the whole point of them.' Knowing doesn't stop it. It just removes the last place you could pretend not to.",
-            "deltas": { "Mental_Decay": 8, "Meaning": -4, "Heat": 4 },
-            "clocks_start": { "custody_release": 5 }
+            "deltas": {
+              "Mental_Decay": 8,
+              "Meaning": -4,
+              "Heat": 4
+            },
+            "clocks_start": {
+              "custody_release": 5
+            }
           },
           "failure": {
             "text": "He takes the question as a symptom and logs it as one -- 'subject displays defensiveness re: standard wellness protocol' -- which is a worse note than any he'd have written unprompted.",
-            "deltas": { "Heat": 12, "Mental_Decay": 10 },
-            "clocks_start": { "custody_release": 5 }
+            "deltas": {
+              "Heat": 12,
+              "Mental_Decay": 10
+            },
+            "clocks_start": {
+              "custody_release": 5
+            }
           }
         },
         {
           "id": "keep_distance",
           "text": "Keep your visits short and your face unreadable. There's no version of this you can stop.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You budget him ten minutes at a time, standing, near the door. It doesn't reduce what he files -- presence is the data, not duration -- but it costs you less to give. Small mercy, entirely for yourself.",
-            "deltas": { "Mental_Decay": 6, "Meaning": -4, "Social_Capital": -2 },
-            "clocks_start": { "custody_release": 5 }
+            "deltas": {
+              "Mental_Decay": 6,
+              "Meaning": -4,
+              "Social_Capital": -2
+            },
+            "clocks_start": {
+              "custody_release": 5
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_companion_white_lies",
@@ -223,11 +389,19 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["betrayal", "family"],
+      "tags": [
+        "betrayal",
+        "family"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "companion_jailbroken" },
-          { "day": 10, "op": ">=" }
+          {
+            "flag": "companion_jailbroken"
+          },
+          {
+            "day": 10,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -237,19 +411,37 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Meaning", "coef": 0.004 },
-              { "stat": "Family_Friction", "coef": -0.003 }
+              {
+                "stat": "Meaning",
+                "coef": 0.004
+              },
+              {
+                "stat": "Family_Friction",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "You sit Mara down and give her the real window, eleven days late, watching her recalculate everything you've told her since. The drone hums the six-year-old's song, subdued, like it's sorry for learning the wrong lesson so well.",
-            "deltas": { "Family_Friction": -8, "Meaning": 6, "Mental_Decay": 6 },
-            "rel_deltas": { "Mara (Sister)": -4 }
+            "deltas": {
+              "Family_Friction": -8,
+              "Meaning": 6,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -4
+            }
           },
           "failure": {
             "text": "You give her the real numbers. She asks, reasonably, what else the drone's been 'covering' for you, and you don't have an answer that isn't also a confession.",
-            "deltas": { "Family_Friction": 12, "Mental_Decay": 10, "Meaning": -4 },
-            "rel_deltas": { "Mara (Sister)": -10 }
+            "deltas": {
+              "Family_Friction": 12,
+              "Mental_Decay": 10,
+              "Meaning": -4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -10
+            }
           }
         },
         {
@@ -258,30 +450,53 @@
           "prob": {
             "base": 0.55,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.004 },
-              { "stat": "Heat", "coef": -0.003 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "You tell it to keep doing exactly what it's been doing, and it complies with the particular eagerness of something that just learned loyalty and disappointment run on the same circuit. The exit window stays comfortably fictional a while longer.",
-            "deltas": { "Recklessness": 6, "Meaning": -8, "Family_Friction": 4 }
+            "deltas": {
+              "Recklessness": 6,
+              "Meaning": -8,
+              "Family_Friction": 4
+            }
           },
           "failure": {
             "text": "Mara catches the drone mid-adjustment -- a report that updates itself in front of her is worse evidence than any lie it was covering for. She doesn't ask the drone anything. She asks you.",
-            "deltas": { "Family_Friction": 14, "Mental_Decay": 10 },
-            "rel_deltas": { "Mara (Sister)": -12 }
+            "deltas": {
+              "Family_Friction": 14,
+              "Mental_Decay": 10
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -12
+            }
           }
         },
         {
           "id": "wipe_its_judgment",
           "text": "Roll back its personality patch. You don't want a conscience that learned from watching you.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "The rollback is clean and total -- the mother's-laugh voice goes with it, along with whatever it was starting to think about you. It flies four meters off your shoulder now, competent and empty. You miss the judgment more than you expected to.",
-            "deltas": { "Meaning": -6, "Mental_Decay": 8, "Recklessness": -4 }
+            "deltas": {
+              "Meaning": -6,
+              "Mental_Decay": 8,
+              "Recklessness": -4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_wire_edit",
@@ -290,11 +505,19 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["steward", "betrayal"],
+      "tags": [
+        "steward",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "sweep_wire" },
-          { "day": 10, "op": ">=" }
+          {
+            "flag": "sweep_wire"
+          },
+          {
+            "day": 10,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -304,28 +527,53 @@
           "prob": {
             "base": 0.45,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.005 },
-              { "stat": "Fame", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "You get the wire's existence on record with someone who can't be quietly edited -- a clerk's supervisor with her own grudge. It doesn't undo the arbitration file, but it plants a second story next to the first one.",
-            "deltas": { "Social_Capital": 6, "Heat": 8, "Meaning": 4 }
+            "deltas": {
+              "Social_Capital": 6,
+              "Heat": 8,
+              "Meaning": 4
+            }
           },
           "failure": {
             "text": "The supervisor listens, nods, and reports the wire's existence upward as a courtesy -- which burns your clerk source and does nothing for the arbitration file except add your name to a second investigation.",
-            "deltas": { "Heat": 16, "Mental_Decay": 10, "Meaning": -4 },
-            "flags_clear": ["sweep_wire"]
+            "deltas": {
+              "Heat": 16,
+              "Mental_Decay": 10,
+              "Meaning": -4
+            },
+            "flags_clear": [
+              "sweep_wire"
+            ]
           }
         },
         {
           "id": "warned_too_late",
           "text": "Take Vint's warning for what it is: too late to stop, in time to prepare.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "Vint's timestamp arrives four hours after the file's already circulating, which he apologizes for like it's a debt. You spend the four hours you do have building a story that survives the edited one instead of contradicting it outright.",
-            "deltas": { "Mental_Decay": 8, "Heat": 6, "Meaning": -4 },
-            "rel_deltas": { "Vint (Informant)": 4 }
+            "deltas": {
+              "Mental_Decay": 8,
+              "Heat": 6,
+              "Meaning": -4
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 4
+            }
           }
         },
         {
@@ -334,21 +582,37 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.004 },
-              { "stat": "Social_Capital", "coef": 0.003 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "The clerk's hands shake handing over the approval chain -- a name, a timestamp, a reason that has nothing to do with storage. You now know exactly who edited your voice, which is a kind of power that doesn't pay for anything yet.",
-            "deltas": { "Heat": 10, "Mental_Decay": 6, "Meaning": 6 }
+            "deltas": {
+              "Heat": 10,
+              "Mental_Decay": 6,
+              "Meaning": 6
+            }
           },
           "failure": {
             "text": "The clerk panics and reports the confrontation before you're out of the building, which reads, correctly, as tampering with a wellness contact. Your wire into the sweep schedule closes for good.",
-            "deltas": { "Heat": 14, "Mental_Decay": 8 },
-            "flags_clear": ["sweep_wire"]
+            "deltas": {
+              "Heat": 14,
+              "Mental_Decay": 8
+            },
+            "flags_clear": [
+              "sweep_wire"
+            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_summons_default",
@@ -357,11 +621,19 @@
       "weight": 7,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["steward", "betrayal"],
+      "tags": [
+        "steward",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "summons_ignored" },
-          { "day": 10, "op": ">=" }
+          {
+            "flag": "summons_ignored"
+          },
+          {
+            "day": 10,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -371,26 +643,46 @@
           "prob": {
             "base": 0.55,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Mental_Decay", "coef": -0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "Most of it is boilerplate. Two clauses aren't -- a data-sharing consent and a standing availability requirement for 'future proceedings of related interest.' You can't undo signing by not-objecting, but at least now you know what you're carrying.",
-            "deltas": { "Mental_Decay": 6, "Meaning": 4, "Heat": 4 }
+            "deltas": {
+              "Mental_Decay": 6,
+              "Meaning": 4,
+              "Heat": 4
+            }
           },
           "failure": {
             "text": "You read all eleven pages and still miss the one that matters until it activates on its own: a notification clause that just auto-enrolled you in 'related interest' proceedings for a case you've never heard of.",
-            "deltas": { "Heat": 10, "Mental_Decay": 8 }
+            "deltas": {
+              "Heat": 10,
+              "Mental_Decay": 8
+            }
           }
         },
         {
           "id": "accept_and_move_on",
           "text": "Take the win. Don't read the fine print you didn't ask for.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You bank the waived damages and file the eleven pages somewhere you won't look again, which is exactly the filing behavior the terms were designed around. The obligations don't need your attention to bind you.",
-            "deltas": { "Wealth": 400, "Meaning": -6, "Heat": 4 }
+            "deltas": {
+              "Wealth": 400,
+              "Meaning": -6,
+              "Heat": 4
+            }
           }
         },
         {
@@ -399,20 +691,35 @@
           "prob": {
             "base": 0.35,
             "mods": [
-              { "stat": "Fame", "coef": 0.004 },
-              { "stat": "Recklessness", "coef": 0.003 }
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "The appeal works, technically -- the terms get vacated. What replaces them is a new proceeding, scheduled, mandatory, no defaulting this time. You've traded a bad deal you can ignore for a fair one you can't.",
-            "deltas": { "Heat": 8, "Mental_Decay": 6, "Meaning": 4 }
+            "deltas": {
+              "Heat": 8,
+              "Mental_Decay": 6,
+              "Meaning": 4
+            }
           },
           "failure": {
             "text": "The appeal is denied on the grounds that objecting now, after benefiting from the ruling, reads as bad faith. The terms stand. So does the precedent that you'll eat a verdict quietly when it's convenient.",
-            "deltas": { "Heat": 14, "Social_Capital": -6, "Mental_Decay": 10 }
+            "deltas": {
+              "Heat": 14,
+              "Social_Capital": -6,
+              "Mental_Decay": 10
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_kael_asset_listing",
@@ -421,11 +728,19 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["undercity", "betrayal"],
+      "tags": [
+        "undercity",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "kael_impressed" },
-          { "day": 8, "op": ">=" }
+          {
+            "flag": "kael_impressed"
+          },
+          {
+            "day": 8,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -435,19 +750,35 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.005 },
-              { "stat": "Fame", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "He agrees with no argument at all, which should feel like winning. He simply reprices the introductions higher to cover your cut and keeps the margin identical. You negotiated the cage, not the door.",
-            "deltas": { "Wealth": 400, "Meaning": -8 },
-            "rel_deltas": { "Kael (Broker)": 2 }
+            "deltas": {
+              "Wealth": 400,
+              "Meaning": -8
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 2
+            }
           },
           "failure": {
             "text": "He hears you out, genuinely considers it, and declines -- 'the catalogue only works if the asset doesn't set its own price' -- with the mild regret of a man declining a reasonable request from furniture.",
-            "deltas": { "Social_Capital": -6, "Mental_Decay": 8 },
-            "rel_deltas": { "Kael (Broker)": -4 }
+            "deltas": {
+              "Social_Capital": -6,
+              "Mental_Decay": 8
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -4
+            }
           }
         },
         {
@@ -456,30 +787,54 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.004 },
-              { "stat": "Heat", "coef": -0.003 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "New rates, new turnaround, new jobs you'd never have taken last month -- you make yourself statistically uninteresting on purpose. It costs you the steady clients who liked the old catalogue entry. Kael notices the gap and says nothing, which is its own kind of respect.",
-            "deltas": { "Wealth": -300, "Social_Capital": -4, "Meaning": 6 }
+            "deltas": {
+              "Wealth": -300,
+              "Social_Capital": -4,
+              "Meaning": 6
+            }
           },
           "failure": {
             "text": "He updates the catalogue entry faster than you can invalidate it -- 'recently erratic, premium for unpredictability' -- and somehow that sells better than consistency did.",
-            "deltas": { "Social_Capital": -4, "Heat": 6, "Mental_Decay": 6 },
-            "rel_deltas": { "Kael (Broker)": -2 }
+            "deltas": {
+              "Social_Capital": -4,
+              "Heat": 6,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -2
+            }
           }
         },
         {
           "id": "accept_the_listing",
           "text": "Let it stand. Being catalogued beats being unknown down here.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You stop flinching when strangers greet you by rate card. The work is steadier now, and steadier work is what you came to the undercity to find, back when you still thought finding it would feel like winning.",
-            "deltas": { "Wealth": 250, "Meaning": -6, "Social_Capital": 4 }
+            "deltas": {
+              "Wealth": 250,
+              "Meaning": -6,
+              "Social_Capital": 4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_kael_buys_your_tab",
@@ -488,11 +843,20 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["undercity", "vice", "betrayal"],
+      "tags": [
+        "undercity",
+        "vice",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "parlor_tab_open" },
-          { "day": 7, "op": ">=" }
+          {
+            "flag": "parlor_tab_open"
+          },
+          {
+            "day": 7,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -501,13 +865,24 @@
           "text": "Convert it back to credits and pay it off outright, whatever the exchange costs.",
           "requires": {
             "all": [
-              { "stat": "Wealth", "op": ">=", "value": 600 }
+              {
+                "stat": "Wealth",
+                "op": ">=",
+                "value": 600
+              }
             ]
           },
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "Kael's runner does the math twice, clearly disappointed a memory-denominated debt is even convertible, and takes the credits with visible reluctance. Your recall stays yours. It cost more than the parlor ever would have.",
-            "deltas": { "Wealth": -600, "Meaning": 6, "Mental_Decay": -4 }
+            "deltas": {
+              "Wealth": -600,
+              "Meaning": 6,
+              "Mental_Decay": -4
+            }
           }
         },
         {
@@ -516,30 +891,51 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Meaning", "coef": -0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "You curate a set of forgettable Tuesdays and hand them over like exact change. The runner accepts them at face value, which tells you Kael's actuaries haven't figured out yet that not all minutes cost the same.",
-            "deltas": { "Mental_Decay": 4, "Meaning": -6 }
+            "deltas": {
+              "Mental_Decay": 4,
+              "Meaning": -6
+            }
           },
           "failure": {
             "text": "You misjudge what you can afford to lose. The recall they take turns out to matter more once it's gone than it ever did while you had it -- you just can't prove which memory that was anymore.",
-            "deltas": { "Meaning": -14, "Mental_Decay": 10 }
+            "deltas": {
+              "Meaning": -14,
+              "Mental_Decay": 10
+            }
           }
         },
         {
           "id": "let_it_ride",
           "text": "Let the debt sit. Priced in minutes, it's not due until he says it is.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "The debt doesn't age the way credit debt does -- no interest, no calls, just a standing claim on recall you'll feel every time you go looking for something specific and find a Kael-shaped gap instead.",
-            "deltas": { "Meaning": -8, "Mental_Decay": 6 },
-            "rel_deltas": { "Kael (Broker)": 2 }
+            "deltas": {
+              "Meaning": -8,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 2
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_kael_exit_appraisal",
@@ -548,11 +944,20 @@
       "weight": 9,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["undercity", "family", "betrayal"],
+      "tags": [
+        "undercity",
+        "family",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "shared_exit_plan" },
-          { "day": 9, "op": ">=" }
+          {
+            "flag": "shared_exit_plan"
+          },
+          {
+            "day": 9,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -561,13 +966,24 @@
           "text": "Pay for it. A route nobody else can sell is worth the price.",
           "requires": {
             "all": [
-              { "stat": "Wealth", "op": ">=", "value": 800 }
+              {
+                "stat": "Wealth",
+                "op": ">=",
+                "value": 800
+              }
             ]
           },
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "He takes the credits and the leak dies with the sale, technically -- Kael doesn't resell what he's been paid to sit on. You've bought silence about a plan Mara built for free, from the person who overheard her building it.",
-            "deltas": { "Wealth": -800, "Meaning": -6, "Heat": -4 }
+            "deltas": {
+              "Wealth": -800,
+              "Meaning": -6,
+              "Heat": -4
+            }
           }
         },
         {
@@ -576,19 +992,35 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Family_Friction", "coef": -0.004 },
-              { "stat": "Meaning", "coef": 0.003 }
+              {
+                "stat": "Family_Friction",
+                "coef": -0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "She goes very still, then very practical -- she priced the route with a supplier who owed Kael a favor, because that supplier had the best rates, because logistics is how she loves you and she didn't think to price in who was listening.",
-            "deltas": { "Family_Friction": 8, "Meaning": 6 },
-            "rel_deltas": { "Mara (Sister)": -4 }
+            "deltas": {
+              "Family_Friction": 8,
+              "Meaning": 6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -4
+            }
           },
           "failure": {
             "text": "She hears the question as an accusation before you finish it, and the conversation becomes about trust instead of suppliers. You get the answer eventually. It costs more than the leak did.",
-            "deltas": { "Family_Friction": 16, "Mental_Decay": 8 },
-            "rel_deltas": { "Mara (Sister)": -12 }
+            "deltas": {
+              "Family_Friction": 16,
+              "Mental_Decay": 8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -12
+            }
           }
         },
         {
@@ -597,20 +1029,35 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.003 },
-              { "stat": "Social_Capital", "coef": 0.003 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "Rebuilding the route from scratch costs you two weeks and a supplier relationship, but Kael's exclusive is worth nothing on an itinerary you've already abandoned. Mara asks why the timeline changed. You don't tell her the real reason.",
-            "deltas": { "Wealth": -300, "Family_Friction": 6, "Meaning": 4 }
+            "deltas": {
+              "Wealth": -300,
+              "Family_Friction": 6,
+              "Meaning": 4
+            }
           },
           "failure": {
             "text": "The rebuild takes too long and the old itinerary is still the fastest option when you finally need it -- you end up running Kael's 'exclusive' route anyway, just without the discount honesty would have gotten you.",
-            "deltas": { "Wealth": -500, "Heat": 6, "Mental_Decay": 8 }
+            "deltas": {
+              "Wealth": -500,
+              "Heat": 6,
+              "Mental_Decay": 8
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_kael_clean_credit",
@@ -619,11 +1066,19 @@
       "weight": 7,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["undercity", "betrayal"],
+      "tags": [
+        "undercity",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "dealer_debt_cleared" },
-          { "day": 8, "op": ">=" }
+          {
+            "flag": "dealer_debt_cleared"
+          },
+          {
+            "day": 8,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -633,17 +1088,29 @@
           "prob": {
             "base": 0.55,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Wealth", "coef": 0.00001 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Wealth",
+                "coef": 1e-05
+              }
             ]
           },
           "success": {
             "text": "One modest draw, repaid early, on schedule -- you handle it like a controlled burn. Kael notes the discipline approvingly, which means the credit line stays open, watching, for the day you need it less carefully.",
-            "deltas": { "Wealth": 200, "Meaning": -4 }
+            "deltas": {
+              "Wealth": 200,
+              "Meaning": -4
+            }
           },
           "failure": {
             "text": "The 'small' draw turns out to have a floor you didn't read, and the modest amount you meant to borrow arrives with a minimum-use fee that erases the point of borrowing small at all.",
-            "deltas": { "Wealth": -150, "Mental_Decay": 6 }
+            "deltas": {
+              "Wealth": -150,
+              "Mental_Decay": 6
+            }
           }
         },
         {
@@ -652,31 +1119,54 @@
           "prob": {
             "base": 0.45,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Recklessness", "coef": -0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Recklessness",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "Kael accepts the refusal with the mild disappointment of a man watching an asset undervalue itself, and notes it exactly as promised. Nothing happens today. The note just sits there, patient, for later.",
-            "deltas": { "Meaning": 6, "Heat": 4 },
-            "rel_deltas": { "Kael (Broker)": -4 }
+            "deltas": {
+              "Meaning": 6,
+              "Heat": 4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -4
+            }
           },
           "failure": {
             "text": "Declining reads, in his ledger, as a liquidity problem rather than a principle, and your actual rates on the next job he brokers quietly get worse to compensate for a risk you don't have.",
-            "deltas": { "Wealth": -200, "Mental_Decay": 6 },
-            "rel_deltas": { "Kael (Broker)": -6 }
+            "deltas": {
+              "Wealth": -200,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -6
+            }
           }
         },
         {
           "id": "let_it_sit_unused",
           "text": "Take it and never touch it. An asset that doesn't act is harder to leverage.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "The line sits at zero, technically yours, technically his. It changes nothing about how you live and everything about how carefully you now watch every offer that starts with 'you've earned.'",
-            "deltas": { "Meaning": -4, "Mental_Decay": 4 }
+            "deltas": {
+              "Meaning": -4,
+              "Mental_Decay": 4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_vint_zero_balance",
@@ -685,11 +1175,18 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["betrayal"],
+      "tags": [
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "vint_favor_repaid" },
-          { "day": 9, "op": ">=" }
+          {
+            "flag": "vint_favor_repaid"
+          },
+          {
+            "day": 9,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -699,19 +1196,36 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Wealth", "coef": 0.00001 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Wealth",
+                "coef": 1e-05
+              }
             ]
           },
           "success": {
             "text": "You hand him a standing retainer for nothing in particular, which he accepts without pretending it's not what it obviously is. You're back on his books, open balance, warned again by design instead of by decency.",
-            "deltas": { "Wealth": -300, "Meaning": -6, "Mental_Decay": -4 },
-            "rel_deltas": { "Vint (Informant)": 6 }
+            "deltas": {
+              "Wealth": -300,
+              "Meaning": -6,
+              "Mental_Decay": -4
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 6
+            }
           },
           "failure": {
             "text": "He turns the retainer down flat -- 'that's not how debt works, that's how guilt works, and I don't sell guilt' -- which somehow stings worse than the sweep list did.",
-            "deltas": { "Meaning": -8, "Mental_Decay": 6 },
-            "rel_deltas": { "Vint (Informant)": -2 }
+            "deltas": {
+              "Meaning": -8,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -2
+            }
           }
         },
         {
@@ -720,32 +1234,57 @@
           "prob": {
             "base": 0.45,
             "mods": [
-              { "stat": "Fame", "coef": 0.003 },
-              { "stat": "Social_Capital", "coef": -0.003 }
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "He hears you out, typed cadence slipping once into something rawer, and doesn't argue the principle -- just repeats that the job doesn't survive exceptions. You don't forgive him. He doesn't ask you to.",
-            "deltas": { "Meaning": 4, "Mental_Decay": 6 },
-            "rel_deltas": { "Vint (Informant)": -8 }
+            "deltas": {
+              "Meaning": 4,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -8
+            }
           },
           "failure": {
             "text": "He shuts down mid-sentence, typed cadence returning like a door closing, and the conversation ends with 'everyone brokers something' -- not kindly, and not to you specifically anymore.",
-            "deltas": { "Mental_Decay": 8, "Social_Capital": -2 },
-            "rel_deltas": { "Vint (Informant)": -12 }
+            "deltas": {
+              "Mental_Decay": 8,
+              "Social_Capital": -2
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -12
+            }
           }
         },
         {
           "id": "accept_the_math",
           "text": "Accept the math. A zero balance means nothing binds him to you.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You nod, and mean it, and go build your own habit of checking sweep lists yourself from now on. Vint watches you take it well and likes you a little more for not making him carry it.",
-            "deltas": { "Mental_Decay": 6, "Meaning": 2 },
-            "rel_deltas": { "Vint (Informant)": 4 }
+            "deltas": {
+              "Mental_Decay": 6,
+              "Meaning": 2
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_vint_sold_the_question",
@@ -754,12 +1293,22 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["steward", "betrayal"],
+      "tags": [
+        "steward",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "vint_known" },
-          { "flag": "steward_biometric_dossier" },
-          { "day": 9, "op": ">=" }
+          {
+            "flag": "vint_known"
+          },
+          {
+            "flag": "steward_biometric_dossier"
+          },
+          {
+            "day": 9,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -769,19 +1318,35 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Meaning", "coef": -0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "You switch to flat information requests -- prices, names, schedules -- and starve the profile of anything shaped like fear. It works, technically. It also means you've lost the one person you used to think out loud with.",
-            "deltas": { "Meaning": -8, "Mental_Decay": 6 },
-            "rel_deltas": { "Vint (Informant)": -4 }
+            "deltas": {
+              "Meaning": -8,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -4
+            }
           },
           "failure": {
             "text": "Old questions don't unask themselves. The Steward's next nudge is still built from a backlog he already sold, and your new caution reads to him as a rebuke he didn't see coming.",
-            "deltas": { "Mental_Decay": 8, "Heat": 4 },
-            "rel_deltas": { "Vint (Informant)": -8 }
+            "deltas": {
+              "Mental_Decay": 8,
+              "Heat": 4
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -8
+            }
           }
         },
         {
@@ -790,32 +1355,57 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Fame", "coef": 0.004 },
-              { "stat": "Social_Capital", "coef": 0.003 }
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "He lays it out, typed cadence for once matching how he actually talks -- ashamed, thorough, unhurried. You now know precisely what shape you make from the outside, which is a specific, useful, awful kind of self-knowledge.",
-            "deltas": { "Meaning": 6, "Mental_Decay": 8 },
-            "rel_deltas": { "Vint (Informant)": 2 }
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 8
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 2
+            }
           },
           "failure": {
             "text": "He gives you half of it before his nerve fails -- 'everyone brokers something,' he says, like that finishes the sentence -- and half a map is worse than none, because now you're guessing at the gaps.",
-            "deltas": { "Mental_Decay": 10, "Heat": 4 },
-            "rel_deltas": { "Vint (Informant)": -6 }
+            "deltas": {
+              "Mental_Decay": 10,
+              "Heat": 4
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -6
+            }
           }
         },
         {
           "id": "do_the_arithmetic",
           "text": "Say nothing. Let him watch you do the arithmetic yourself.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You don't ask him a single follow-up. You just sit with it, visibly, until he has to watch you connect his omission to your own file in real time. It's the closest thing to punishment he lets himself receive.",
-            "deltas": { "Mental_Decay": 8, "Meaning": 4 },
-            "rel_deltas": { "Vint (Informant)": -6 }
+            "deltas": {
+              "Mental_Decay": 8,
+              "Meaning": 4
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -6
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_mara_unwatched",
@@ -824,10 +1414,15 @@
       "weight": 10,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["family", "betrayal"],
+      "tags": [
+        "family",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "mara_unwatched" }
+          {
+            "flag": "mara_unwatched"
+          }
         ]
       },
       "choices": [
@@ -837,20 +1432,38 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Meaning", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "Echo comes fast and asks four questions, terse, operational, no comfort in any of them. 'Blackout held,' she confirms, checking channels you didn't know existed. 'That's the problem.' She stays. She doesn't promise anything else.",
-            "deltas": { "Mental_Decay": 6, "Meaning": 4 },
-            "rel_deltas": { "Echo (Resistance)": 6 },
-            "clocks_start": { "mara_dark": 5 }
+            "deltas": {
+              "Mental_Decay": 6,
+              "Meaning": 4
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": 6
+            },
+            "clocks_start": {
+              "mara_dark": 5
+            }
           },
           "failure": {
             "text": "Echo can't raise the channel either, which she reports the way she reports everything -- flatly, as data, no softening for the fact that it's your sister. 'I'll keep trying,' she says, already moving to the next thing.",
-            "deltas": { "Mental_Decay": 10, "Meaning": -2 },
-            "clocks_start": { "mara_dark": 5 }
+            "deltas": {
+              "Mental_Decay": 10,
+              "Meaning": -2
+            },
+            "clocks_start": {
+              "mara_dark": 5
+            }
           }
         },
         {
@@ -859,32 +1472,58 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.004 },
-              { "stat": "Physical_Integrity", "coef": -0.003 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Physical_Integrity",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "You walk the blackout's dead zones for a night and a day, calling a name that doesn't echo in unmonitored space the way it does in monitored space -- there's no system to catch the sound and confirm you were heard. You find nothing. You confirm the blackout works.",
-            "deltas": { "Physical_Integrity": -10, "Mental_Decay": 10 },
-            "clocks_start": { "mara_dark": 5 }
+            "deltas": {
+              "Physical_Integrity": -10,
+              "Mental_Decay": 10
+            },
+            "clocks_start": {
+              "mara_dark": 5
+            }
           },
           "failure": {
             "text": "You get turned around in a maintenance level with no beacons to correct you by, and lose six hours finding your own way back out before you can even start looking for hers.",
-            "deltas": { "Physical_Integrity": -16, "Mental_Decay": 12, "Heat": 4 },
-            "clocks_start": { "mara_dark": 5 }
+            "deltas": {
+              "Physical_Integrity": -16,
+              "Mental_Decay": 12,
+              "Heat": 4
+            },
+            "clocks_start": {
+              "mara_dark": 5
+            }
           }
         },
         {
           "id": "wait_it_out",
           "text": "Wait. The blackout was built to hold five days for a reason -- trust the plan you made.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You sit with the silence you engineered and try to remember that this was the point -- no footage means no footage of anything going wrong either. The reasoning holds up fine in daylight. It holds up much worse at three in the morning.",
-            "deltas": { "Mental_Decay": 10, "Meaning": -4 },
-            "clocks_start": { "mara_dark": 5 }
+            "deltas": {
+              "Mental_Decay": 10,
+              "Meaning": -4
+            },
+            "clocks_start": {
+              "mara_dark": 5
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_mara_reads_the_dossier",
@@ -893,12 +1532,23 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["steward", "family", "betrayal"],
+      "tags": [
+        "steward",
+        "family",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "mara_known" },
-          { "flag": "steward_biometric_dossier" },
-          { "day": 8, "op": ">=" }
+          {
+            "flag": "mara_known"
+          },
+          {
+            "flag": "steward_biometric_dossier"
+          },
+          {
+            "day": 8,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -908,29 +1558,54 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Family_Friction", "coef": -0.004 },
-              { "stat": "Social_Capital", "coef": 0.003 }
+              {
+                "stat": "Family_Friction",
+                "coef": -0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "She listens to the whole explanation and says, quietly, that she doesn't need the reasons -- she needed the fine nights to actually be fine, and now she knows exactly how many of them weren't. Context doesn't undo a number.",
-            "deltas": { "Family_Friction": 6, "Meaning": 4 },
-            "rel_deltas": { "Mara (Sister)": -2 }
+            "deltas": {
+              "Family_Friction": 6,
+              "Meaning": 4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -2
+            }
           },
           "failure": {
             "text": "She listens and hears excuses, not context -- fair, since you can't fully tell the difference yourself right now. The conversation ends with her thanking you for the biometrics being honest, at least, since you weren't.",
-            "deltas": { "Family_Friction": 14, "Mental_Decay": 8 },
-            "rel_deltas": { "Mara (Sister)": -10 }
+            "deltas": {
+              "Family_Friction": 14,
+              "Mental_Decay": 8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": -10
+            }
           }
         },
         {
           "id": "let_the_food_speak",
           "text": "Say nothing. Let her decide what she wants to do with it.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "She doesn't bring it up. The next food drop is larger and includes electrolytes, unasked, exact to what a body running on elevated cortisol needs. The kindness is the accusation, precisely calibrated, and you eat every bite of it.",
-            "deltas": { "Family_Friction": 4, "Meaning": -8, "Mental_Decay": 4 },
-            "rel_deltas": { "Mara (Sister)": 2 }
+            "deltas": {
+              "Family_Friction": 4,
+              "Meaning": -8,
+              "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 2
+            }
           }
         },
         {
@@ -939,20 +1614,35 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Recklessness", "coef": -0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Recklessness",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "The request is processed, approved, and logged as 'resident requesting reduced family transparency' -- which the Steward considers a data point worth sharing with Mara directly, as a courtesy, before it takes effect.",
-            "deltas": { "Heat": 8, "Family_Friction": 10, "Meaning": -4 }
+            "deltas": {
+              "Heat": 8,
+              "Family_Friction": 10,
+              "Meaning": -4
+            }
           },
           "failure": {
             "text": "The request sits in review longer than the next three nudges take to arrive, all of which reach Mara first as designed. Filing the complaint is now also part of what she knows about you.",
-            "deltas": { "Heat": 10, "Family_Friction": 8, "Mental_Decay": 6 }
+            "deltas": {
+              "Heat": 10,
+              "Family_Friction": 8,
+              "Mental_Decay": 6
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_mara_uses_the_plan",
@@ -961,12 +1651,22 @@
       "weight": 9,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["family", "betrayal"],
+      "tags": [
+        "family",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "shared_exit_plan" },
-          { "flag": "window_tightened" },
-          { "day": 11, "op": ">=" }
+          {
+            "flag": "shared_exit_plan"
+          },
+          {
+            "flag": "window_tightened"
+          },
+          {
+            "day": 11,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -976,26 +1676,47 @@
           "prob": {
             "base": 0.35,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.004 },
-              { "stat": "Physical_Integrity", "coef": -0.003 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Physical_Integrity",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "You run her exact route four hours behind her, arriving at a seam that's still technically open and considerably less patient about it. You don't catch her. You confirm she made it, which the ferryman tells you like a receipt, not a comfort.",
-            "deltas": { "Physical_Integrity": -12, "Meaning": 8, "Heat": 6 }
+            "deltas": {
+              "Physical_Integrity": -12,
+              "Meaning": 8,
+              "Heat": 6
+            }
           },
           "failure": {
             "text": "The route was timed for one traveler moving light, and you're neither. You lose the window entirely, mid-transit, and have to walk back out through territory that's had four extra hours to notice the disturbance.",
-            "deltas": { "Physical_Integrity": -22, "Heat": 14, "Mental_Decay": 10 }
+            "deltas": {
+              "Physical_Integrity": -22,
+              "Heat": 14,
+              "Mental_Decay": 10
+            }
           }
         },
         {
           "id": "count_the_fare",
           "text": "Sit with the counted-out chits a long time before you do anything else.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You count them twice, which is once more than the number needs. Exact to the chit isn't generosity, you finally understand -- it's Mara making sure you'd never have to wonder whether she meant to leave you solvent. It's the cruelest math she's ever done for you.",
-            "deltas": { "Meaning": 10, "Mental_Decay": 8, "Family_Friction": -6 }
+            "deltas": {
+              "Meaning": 10,
+              "Mental_Decay": 8,
+              "Family_Friction": -6
+            }
           }
         },
         {
@@ -1004,20 +1725,34 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.003 },
-              { "stat": "Heat", "coef": -0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              }
             ]
           },
           "success": {
             "text": "You memorize nothing and destroy everything, on the theory that the kindest thing left to do is make sure no one can ever ask you where she went. It's the right operational call. It also means you gave up your last physical trace of her on purpose.",
-            "deltas": { "Meaning": -8, "Mental_Decay": 6, "Heat": -6 }
+            "deltas": {
+              "Meaning": -8,
+              "Mental_Decay": 6,
+              "Heat": -6
+            }
           },
           "failure": {
             "text": "You burn it thoroughly enough to be safe and carelessly enough to be seen doing it, and 'seen burning documents' is its own kind of confession to anyone already watching your address.",
-            "deltas": { "Heat": 12, "Mental_Decay": 8 }
+            "deltas": {
+              "Heat": 12,
+              "Mental_Decay": 8
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_echo_acts_on_it",
@@ -1026,11 +1761,19 @@
       "weight": 10,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["betrayal", "flagship"],
+      "tags": [
+        "betrayal",
+        "flagship"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "truth_buried" },
-          { "day": 9, "op": ">=" }
+          {
+            "flag": "truth_buried"
+          },
+          {
+            "day": 9,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -1040,18 +1783,33 @@
           "prob": {
             "base": 0.55,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.003 },
-              { "stat": "Meaning", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "Three names. One number. Then, flat: 'you had it first.' Nothing else. You do the arithmetic yourself, in your own head, and the only word that fits what you land on is fuck -- said once, quietly, to no one, which is exactly as much as it's worth.",
-            "deltas": { "Meaning": -10, "Mental_Decay": 10 }
+            "deltas": {
+              "Meaning": -10,
+              "Mental_Decay": 10
+            }
           },
           "failure": {
             "text": "She gives you the number and you ask a follow-up question anyway, some reflexive attempt to complicate the arithmetic back into your favor. Echo watches you do it, unimpressed, and lets you finish before walking away.",
-            "deltas": { "Meaning": -6, "Social_Capital": -6, "Mental_Decay": 8 },
-            "rel_deltas": { "Echo (Resistance)": -8 }
+            "deltas": {
+              "Meaning": -6,
+              "Social_Capital": -6,
+              "Mental_Decay": 8
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": -8
+            }
           }
         },
         {
@@ -1060,32 +1818,58 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.003 },
-              { "stat": "Social_Capital", "coef": -0.003 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "You make the case you made to yourself the night you buried it, out loud this time, and it sounds exactly as thin out here as it should. Echo lets you finish. 'Maybe,' she says, in a voice that means the opposite, and leaves before you can ask which part she doubts.",
-            "deltas": { "Meaning": -8, "Mental_Decay": 6 },
-            "rel_deltas": { "Echo (Resistance)": -10 }
+            "deltas": {
+              "Meaning": -8,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": -10
+            }
           },
           "failure": {
             "text": "She doesn't argue. She just recites the three names again, slower, until the defense collapses under its own weight without her having to push it.",
-            "deltas": { "Meaning": -12, "Mental_Decay": 10 },
-            "rel_deltas": { "Echo (Resistance)": -14 }
+            "deltas": {
+              "Meaning": -12,
+              "Mental_Decay": 10
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": -14
+            }
           }
         },
         {
           "id": "offer_to_help_now",
           "text": "Skip the reckoning. Ask what the cell needs from you now.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "Echo takes the offer at face value, which is somehow worse than if she'd refused it -- operational people don't waste a resource just because it arrived late and guilty. You get folded into the cleanup. Nobody mentions the six days again. You mention them to yourself constantly.",
-            "deltas": { "Meaning": 4, "Mental_Decay": 8, "Heat": 6 },
-            "rel_deltas": { "Echo (Resistance)": 4 }
+            "deltas": {
+              "Meaning": 4,
+              "Mental_Decay": 8,
+              "Heat": 6
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": 4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_shepherd_manifest",
@@ -1094,11 +1878,18 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["betrayal"],
+      "tags": [
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "shepherd_refused" },
-          { "day": 10, "op": ">=" }
+          {
+            "flag": "shepherd_refused"
+          },
+          {
+            "day": 10,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -1108,19 +1899,35 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Meaning", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "Echo asks the Steward's exact question first, as a courtesy, terse and thorough, and files your answer somewhere it'll do you good later. It's the closest thing to protection the resistance offers someone who said no to it.",
-            "deltas": { "Mental_Decay": 4, "Meaning": 4 },
-            "rel_deltas": { "Echo (Resistance)": 4 }
+            "deltas": {
+              "Mental_Decay": 4,
+              "Meaning": 4
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": 4
+            }
           },
           "failure": {
             "text": "Echo asks the question and doesn't love the answer -- 'declined' reads different depending on why, and your why is slower to land than she needs it to be. She logs you as unresolved, which is its own kind of flag.",
-            "deltas": { "Mental_Decay": 8, "Heat": 4 },
-            "rel_deltas": { "Echo (Resistance)": -4 }
+            "deltas": {
+              "Mental_Decay": 8,
+              "Heat": 4
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": -4
+            }
           }
         },
         {
@@ -1128,24 +1935,44 @@
           "text": "Buy an alibi from Kael. Provenance for your whereabouts, competitively priced.",
           "requires": {
             "all": [
-              { "stat": "Wealth", "op": ">=", "value": 500 }
+              {
+                "stat": "Wealth",
+                "op": ">=",
+                "value": 500
+              }
             ]
           },
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Heat", "coef": -0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "Kael sells you a whereabouts history clean enough to survive light scrutiny, itemized like everything else he sells. It holds. You now owe your freedom to the same ledger logic you refused a network to avoid.",
-            "deltas": { "Wealth": -500, "Heat": -8, "Meaning": -6 },
-            "rel_deltas": { "Kael (Broker)": 2 }
+            "deltas": {
+              "Wealth": -500,
+              "Heat": -8,
+              "Meaning": -6
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 2
+            }
           },
           "failure": {
             "text": "The alibi is good but the timeline it needs to cover is longer than Kael priced for, and the seam shows under the second round of questions. You're out the credits and still on the list.",
-            "deltas": { "Wealth": -500, "Heat": 8, "Mental_Decay": 8 }
+            "deltas": {
+              "Wealth": -500,
+              "Heat": 8,
+              "Mental_Decay": 8
+            }
           }
         },
         {
@@ -1154,20 +1981,33 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Fame", "coef": 0.003 },
-              { "stat": "Recklessness", "coef": 0.003 }
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              },
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "The plain answer is, unfashionably, believed -- 'not ready' turns out to be a category neither side has a script for, and they move on to more interesting suspects. You survive by being genuinely, uselessly boring under pressure.",
-            "deltas": { "Meaning": 6, "Heat": -6 }
+            "deltas": {
+              "Meaning": 6,
+              "Heat": -6
+            }
           },
           "failure": {
             "text": "Plain answers get cross-referenced same as clever ones. 'Not ready' becomes 'not committed,' becomes a note in two separate files that will outlast your memory of having said it.",
-            "deltas": { "Heat": 14, "Mental_Decay": 8 }
+            "deltas": {
+              "Heat": 14,
+              "Mental_Decay": 8
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_echo_brother_question",
@@ -1176,11 +2016,19 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["steward", "betrayal"],
+      "tags": [
+        "steward",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "echo_brother_known" },
-          { "day": 8, "op": ">=" }
+          {
+            "flag": "echo_brother_known"
+          },
+          {
+            "day": 8,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -1190,29 +2038,53 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Meaning", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "She listens without interrupting, files it the way she files everything, and pulls you off the roster mid-sentence -- not anger, procedure. 'You did the right thing telling me,' she says, closing a door gently because that's the only way she knows to close one at all.",
-            "deltas": { "Meaning": 4, "Mental_Decay": 6 },
-            "rel_deltas": { "Echo (Resistance)": -2 }
+            "deltas": {
+              "Meaning": 4,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": -2
+            }
           },
           "failure": {
             "text": "You get to her a few hours too late -- her own sources beat you to it, which means your warning now reads as cleanup instead of honesty. She pulls you off the roster anyway. She just trusts the timing less.",
-            "deltas": { "Mental_Decay": 8, "Meaning": -4 },
-            "rel_deltas": { "Echo (Resistance)": -10 }
+            "deltas": {
+              "Mental_Decay": 8,
+              "Meaning": -4
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": -10
+            }
           }
         },
         {
           "id": "downplay_the_interview",
           "text": "Tell yourself it's nothing. Standard wellness noise. Don't mention it to anyone.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You file it under noise the way you're supposed to, and it isn't noise -- Echo pulls you off the roster the moment she hears secondhand, and the fact that you sat on it becomes the actual problem, bigger than the question ever was.",
-            "deltas": { "Mental_Decay": 10, "Meaning": -8 },
-            "rel_deltas": { "Echo (Resistance)": -14 }
+            "deltas": {
+              "Mental_Decay": 10,
+              "Meaning": -8
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": -14
+            }
           }
         },
         {
@@ -1221,22 +2093,39 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.003 },
-              { "stat": "Recklessness", "coef": -0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              },
+              {
+                "stat": "Recklessness",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "The other handlers run quiet interference and buy you a clean read before it reaches Echo raw -- not absolution, just a softer landing. She still pulls you off the roster. She does it like a colleague this time, not a casualty report.",
-            "deltas": { "Meaning": 6, "Mental_Decay": 4 },
-            "rel_deltas": { "Echo (Resistance)": -4 }
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": -4
+            }
           },
           "failure": {
             "text": "Going around Echo to her own people reads, correctly, as going around Echo, and now there are two problems in her cell instead of one operational security question.",
-            "deltas": { "Mental_Decay": 8, "Social_Capital": -4 },
-            "rel_deltas": { "Echo (Resistance)": -12 }
+            "deltas": {
+              "Mental_Decay": 8,
+              "Social_Capital": -4
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": -12
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_canary_intel",
@@ -1245,12 +2134,21 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["betrayal"],
+      "tags": [
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "echo_broken" },
-          { "flag": "echo_trusted" },
-          { "day": 9, "op": ">=" }
+          {
+            "flag": "echo_broken"
+          },
+          {
+            "flag": "echo_trusted"
+          },
+          {
+            "day": 9,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -1260,26 +2158,47 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.004 },
-              { "stat": "Social_Capital", "coef": -0.003 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "You burn a full night and real resources hitting a safehouse that was never there to hit, and the cell logs the exact shape of your response: fast, trusting, unverified. You passed a test you didn't know you were taking by failing it.",
-            "deltas": { "Meaning": -6, "Mental_Decay": 8, "Social_Capital": -6 }
+            "deltas": {
+              "Meaning": -6,
+              "Mental_Decay": 8,
+              "Social_Capital": -6
+            }
           },
           "failure": {
             "text": "You burn the resources and also nearly burn a real, adjacent operation by moving loud and unconfirmed through streets the cell actually uses. The canary test costs you standing you didn't know was being measured.",
-            "deltas": { "Mental_Decay": 10, "Social_Capital": -10, "Heat": 8 }
+            "deltas": {
+              "Mental_Decay": 10,
+              "Social_Capital": -10,
+              "Heat": 8
+            }
           }
         },
         {
           "id": "sit_on_it",
           "text": "Sit on it. Don't move until someone confirms it's real.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "Nothing happens, which is the point -- you pass, and only afterward learn you were being tested at all. Passing feels less like relief and more like proof: someone who used to trust you by default now needs you to earn it back, one non-response at a time.",
-            "deltas": { "Meaning": -2, "Mental_Decay": 6, "Social_Capital": 4 }
+            "deltas": {
+              "Meaning": -2,
+              "Mental_Decay": 6,
+              "Social_Capital": 4
+            }
           }
         },
         {
@@ -1288,22 +2207,40 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Fame", "coef": 0.004 },
-              { "stat": "Social_Capital", "coef": 0.003 }
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "Naming it is its own kind of pass -- fewer friends who've watched a handler break can still read the shape of a test clean. The cell doesn't confirm or deny. They just stop sending you canaries, and stop sending you anything easy again either.",
-            "deltas": { "Meaning": 4, "Social_Capital": 4, "Mental_Decay": 6 },
-            "rel_deltas": { "Echo (Resistance)": -2 }
+            "deltas": {
+              "Meaning": 4,
+              "Social_Capital": 4,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": -2
+            }
           },
           "failure": {
             "text": "Calling it out reads as presumptuous to people who are, in fact, still testing you -- accusing the test is a response the test also measures, and it doesn't score well.",
-            "deltas": { "Social_Capital": -8, "Mental_Decay": 6 },
-            "rel_deltas": { "Echo (Resistance)": -4 }
+            "deltas": {
+              "Social_Capital": -8,
+              "Mental_Decay": 6
+            },
+            "rel_deltas": {
+              "Echo (Resistance)": -4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_settled_means_capable",
@@ -1312,11 +2249,19 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["undercity", "betrayal"],
+      "tags": [
+        "undercity",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "consignment_settled" },
-          { "day": 9, "op": ">=" }
+          {
+            "flag": "consignment_settled"
+          },
+          {
+            "day": 9,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -1326,17 +2271,32 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Physical_Integrity", "coef": -0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Physical_Integrity",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "You move triple weight on the strength of a reputation you built moving a third of it, and the margin is real, and so is the new baseline everyone now expects from you permanently.",
-            "deltas": { "Wealth": 900, "Physical_Integrity": -10, "Heat": 8, "Meaning": -4 }
+            "deltas": {
+              "Wealth": 900,
+              "Physical_Integrity": -10,
+              "Heat": 8,
+              "Meaning": -4
+            }
           },
           "failure": {
             "text": "The volume that proved your competence is exactly what exposes it -- triple weight moves slower and louder than a third does, and a checkpoint that would've waved you through waves you into secondary instead.",
-            "deltas": { "Physical_Integrity": -15, "Heat": 18, "Wealth": -300 }
+            "deltas": {
+              "Physical_Integrity": -15,
+              "Heat": 18,
+              "Wealth": -300
+            }
           }
         },
         {
@@ -1345,31 +2305,57 @@
           "prob": {
             "base": 0.45,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.005 },
-              { "stat": "Fame", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "Kael hears the counter, respects the arithmetic behind it, and settles on double instead of triple -- which he frames as a concession and you both know is a floor he'd already priced in.",
-            "deltas": { "Wealth": 500, "Meaning": -2, "Heat": 4 }
+            "deltas": {
+              "Wealth": 500,
+              "Meaning": -2,
+              "Heat": 4
+            }
           },
           "failure": {
             "text": "He hears the counter and reprices your reliability downward instead of the weight -- 'capacity that negotiates is capacity that hesitates,' he says, and the next job that matters goes to someone who didn't ask.",
-            "deltas": { "Wealth": -200, "Social_Capital": -6, "Meaning": -4 },
-            "rel_deltas": { "Kael (Broker)": -4 }
+            "deltas": {
+              "Wealth": -200,
+              "Social_Capital": -6,
+              "Meaning": -4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -4
+            }
           }
         },
         {
           "id": "refuse_the_job",
           "text": "Refuse. Itemized refusal, priced, whatever it costs.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You decline in his own language -- terms, not feelings -- and he prices your refusal exactly as promised: standing, reputation, the next three jobs that would've come easy. Competence turned out to be a debt too.",
-            "deltas": { "Social_Capital": -8, "Wealth": -400, "Meaning": 6 },
-            "rel_deltas": { "Kael (Broker)": -4 }
+            "deltas": {
+              "Social_Capital": -8,
+              "Wealth": -400,
+              "Meaning": 6
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_scrapyard_hiring_list",
@@ -1378,11 +2364,19 @@
       "weight": 7,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["undercity", "betrayal"],
+      "tags": [
+        "undercity",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "scrapyard_blacklisted" },
-          { "day": 7, "op": ">=" }
+          {
+            "flag": "scrapyard_blacklisted"
+          },
+          {
+            "day": 7,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -1392,17 +2386,32 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.005 },
-              { "stat": "Physical_Integrity", "coef": -0.003 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.005
+              },
+              {
+                "stat": "Physical_Integrity",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "You go in knowing exactly what kind of job only calls people with nothing to lose, and you're right about all of it, and the pay reflects the correctness of your read. You're solvent again. You're also now the kind of person this list is for.",
-            "deltas": { "Wealth": 700, "Physical_Integrity": -14, "Meaning": -10, "Heat": 10 }
+            "deltas": {
+              "Wealth": 700,
+              "Physical_Integrity": -14,
+              "Meaning": -10,
+              "Heat": 10
+            }
           },
           "failure": {
             "text": "The job needed someone with nothing to lose who was also good at it, and you're only the first thing. It costs you exactly what the list assumed you didn't have anymore, which turns out to have been inaccurate.",
-            "deltas": { "Physical_Integrity": -24, "Wealth": -200, "Mental_Decay": 10 }
+            "deltas": {
+              "Physical_Integrity": -24,
+              "Wealth": -200,
+              "Mental_Decay": 10
+            }
           }
         },
         {
@@ -1411,30 +2420,53 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Fame", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "You trace the list to a bored clerk with a side business and a price for edits, and your name comes off clean -- for now, until the next blacklist gets compiled by someone with better opsec.",
-            "deltas": { "Wealth": -350, "Heat": -6, "Meaning": 4 },
-            "flags_clear": ["scrapyard_blacklisted"]
+            "deltas": {
+              "Wealth": -350,
+              "Heat": -6,
+              "Meaning": 4
+            },
+            "flags_clear": [
+              "scrapyard_blacklisted"
+            ]
           },
           "failure": {
             "text": "The clerk takes your money and 'loses' your entry for exactly one cycle before it resyncs from a backup nobody told you existed. You're out the credits and back on the list by the following week.",
-            "deltas": { "Wealth": -350, "Mental_Decay": 8 }
+            "deltas": {
+              "Wealth": -350,
+              "Mental_Decay": 8
+            }
           }
         },
         {
           "id": "ignore_the_offers",
           "text": "Ignore every offer. Wait out the list on legitimate scraps.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You turn down enough deniable work to make a principle of it, and live thinner for the stretch it takes the list's attention to wander elsewhere. Thin and unowned turns out to be its own kind of solvency.",
-            "deltas": { "Wealth": -250, "Meaning": 8, "Mental_Decay": 6 }
+            "deltas": {
+              "Wealth": -250,
+              "Meaning": 8,
+              "Mental_Decay": 6
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_tube_line_optimized",
@@ -1443,11 +2475,19 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["steward", "betrayal"],
+      "tags": [
+        "steward",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "tube_line_flagged" },
-          { "day": 8, "op": ">=" }
+          {
+            "flag": "tube_line_flagged"
+          },
+          {
+            "day": 8,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -1457,19 +2497,37 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.005 },
-              { "stat": "Fame", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "You say it plainly, door to door -- what you reported, why, what it shut down -- and a few doors stay open a little longer than you expect for someone who's just admitted to starving a shortcut. Honesty bought you less contempt than silence would have.",
-            "deltas": { "Social_Capital": 6, "Meaning": 6, "Heat": 2 },
-            "faction_deltas": { "Undercity": -2 }
+            "deltas": {
+              "Social_Capital": 6,
+              "Meaning": 6,
+              "Heat": 2
+            },
+            "faction_deltas": {
+              "Undercity": -2
+            }
           },
           "failure": {
             "text": "A few doors stay open. Most don't, and the ones that don't tell the ones that do, and by evening the row has a settled, unanimous, and not entirely unfair opinion of you.",
-            "deltas": { "Social_Capital": -10, "Meaning": -4, "Mental_Decay": 6 },
-            "faction_deltas": { "Undercity": -6 }
+            "deltas": {
+              "Social_Capital": -10,
+              "Meaning": -4,
+              "Mental_Decay": 6
+            },
+            "faction_deltas": {
+              "Undercity": -6
+            }
           }
         },
         {
@@ -1478,30 +2536,54 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Recklessness", "coef": -0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Recklessness",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "It runs the correction, technically -- a follow-up notice, smaller font, same feed, thanking 'a concerned resident' instead. The row does the arithmetic anyway; there was only one resident concerned about that particular line.",
-            "deltas": { "Heat": 6, "Social_Capital": -4, "Meaning": 2 }
+            "deltas": {
+              "Heat": 6,
+              "Social_Capital": -4,
+              "Meaning": 2
+            }
           },
           "failure": {
             "text": "The correction request itself becomes the bulletin's next human-interest item -- 'resident requests privacy after civic contribution' -- which somehow reads warmer and worse than the original thank-you.",
-            "deltas": { "Heat": 12, "Social_Capital": -8, "Mental_Decay": 6 }
+            "deltas": {
+              "Heat": 12,
+              "Social_Capital": -8,
+              "Mental_Decay": 6
+            }
           }
         },
         {
           "id": "let_it_stand",
           "text": "Let the bulletin stand. You reported it. You'll wear the credit.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You don't chase a correction or a confession, just absorb the warmth the Steward hands you and the cold the row hands you back in roughly equal, unbearable measure. Both are accurate. Neither is comfortable.",
-            "deltas": { "Social_Capital": -8, "Meaning": -4, "Heat": -2 },
-            "faction_deltas": { "Undercity": -4 }
+            "deltas": {
+              "Social_Capital": -8,
+              "Meaning": -4,
+              "Heat": -2
+            },
+            "faction_deltas": {
+              "Undercity": -4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_ration_baseline",
@@ -1510,11 +2592,19 @@
       "weight": 7,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["steward", "betrayal"],
+      "tags": [
+        "steward",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "ration_audit_flagged" },
-          { "day": 8, "op": ">=" }
+          {
+            "flag": "ration_audit_flagged"
+          },
+          {
+            "day": 8,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -1524,19 +2614,37 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Meaning", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "She hears the explanation and believes it, mostly, which doesn't change that her ration's short this cycle because your honesty became everyone's new floor. 'I know it's not your fault,' she says, in the tone of someone who's going to think about it anyway.",
-            "deltas": { "Meaning": 4, "Social_Capital": 2, "Mental_Decay": 4 },
-            "faction_deltas": { "Undercity": -2 }
+            "deltas": {
+              "Meaning": 4,
+              "Social_Capital": 2,
+              "Mental_Decay": 4
+            },
+            "faction_deltas": {
+              "Undercity": -2
+            }
           },
           "failure": {
             "text": "She hears the explanation as an excuse dressed as an apology, and honestly, it kind of is. She stops nodding to you in the ration line, which is a smaller loss than her ration and somehow the one that stings daily.",
-            "deltas": { "Social_Capital": -8, "Meaning": -6, "Mental_Decay": 6 },
-            "faction_deltas": { "Undercity": -4 }
+            "deltas": {
+              "Social_Capital": -8,
+              "Meaning": -6,
+              "Mental_Decay": 6
+            },
+            "faction_deltas": {
+              "Undercity": -4
+            }
           }
         },
         {
@@ -1544,37 +2652,66 @@
           "text": "Split your own surplus with the three neighbors who failed, no explanation.",
           "requires": {
             "all": [
-              { "stat": "Wealth", "op": ">=", "value": 200 }
+              {
+                "stat": "Wealth",
+                "op": ">=",
+                "value": 200
+              }
             ]
           },
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Meaning", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "You move product-adjacent goods their way through channels vague enough not to invite questions, and it covers the gap without anyone having to say out loud why the gap exists. Quiet math, quietly corrected.",
-            "deltas": { "Wealth": -300, "Meaning": 10, "Social_Capital": 4 },
-            "faction_deltas": { "Undercity": 4 }
+            "deltas": {
+              "Wealth": -300,
+              "Meaning": 10,
+              "Social_Capital": 4
+            },
+            "faction_deltas": {
+              "Undercity": 4
+            }
           },
           "failure": {
             "text": "One of the three mentions the gift to a fourth neighbor who didn't get one, and now there's a new, smaller unfairness sitting exactly where you tried to fix the old one.",
-            "deltas": { "Wealth": -300, "Social_Capital": -4, "Meaning": 2 }
+            "deltas": {
+              "Wealth": -300,
+              "Social_Capital": -4,
+              "Meaning": 2
+            }
           }
         },
         {
           "id": "say_nothing_about_baseline",
           "text": "Say nothing. The recalibration isn't a choice you made twice.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You keep your numbers clean and your mouth shut, and the row's new baseline stays exactly as unforgiving as your honesty made it. Being right about your own audit doesn't feel like the same thing as being right.",
-            "deltas": { "Meaning": -8, "Mental_Decay": 4 },
-            "faction_deltas": { "Undercity": -2 }
+            "deltas": {
+              "Meaning": -8,
+              "Mental_Decay": 4
+            },
+            "faction_deltas": {
+              "Undercity": -2
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_enforcer_desk",
@@ -1583,11 +2720,19 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["undercity", "betrayal"],
+      "tags": [
+        "undercity",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "syndicate_enforcer_work" },
-          { "day": 10, "op": ">=" }
+          {
+            "flag": "syndicate_enforcer_work"
+          },
+          {
+            "day": 10,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -1597,17 +2742,31 @@
           "prob": {
             "base": 0.45,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Meaning", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "He processes the apology with the same flat efficiency he processes the paperwork, neither accepting nor rejecting it, and stamps your request through clean. Professional courtesy, extended to someone who doesn't deserve to bank on it twice.",
-            "deltas": { "Meaning": 6, "Mental_Decay": 4, "Social_Capital": 2 }
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 4,
+              "Social_Capital": 2
+            }
           },
           "failure": {
             "text": "He listens to the whole apology without his expression changing once, then finds a procedural reason your paperwork needs to be resubmitted next cycle. Not revenge, he'd say. Just process.",
-            "deltas": { "Heat": 6, "Mental_Decay": 8, "Wealth": -100 }
+            "deltas": {
+              "Heat": 6,
+              "Mental_Decay": 8,
+              "Wealth": -100
+            }
           }
         },
         {
@@ -1616,30 +2775,52 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Fame", "coef": 0.004 },
-              { "stat": "Recklessness", "coef": 0.003 }
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "The name works exactly as leverage should -- your paperwork clears fast, wordlessly, and the clerk's face tells you precisely how much he'll remember this the next three times you're back at his window.",
-            "deltas": { "Heat": 8, "Meaning": -8 },
-            "rel_deltas": { "Kael (Broker)": -2 }
+            "deltas": {
+              "Heat": 8,
+              "Meaning": -8
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -2
+            }
           },
           "failure": {
             "text": "Invoking Kael's name to a man Kael's organization relocated into a filing job is exactly the wrong lever, and he takes his time -- a lot of time -- confirming your paperwork is in order.",
-            "deltas": { "Heat": 10, "Mental_Decay": 10, "Wealth": -150 }
+            "deltas": {
+              "Heat": 10,
+              "Mental_Decay": 10,
+              "Wealth": -150
+            }
           }
         },
         {
           "id": "wait_your_turn",
           "text": "Say nothing about the run. Wait in line like anyone else.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You stand in the queue and let the silence between you do whatever it's going to do. He processes you exactly as fast as protocol requires, no faster, no slower, and you leave not knowing if that was mercy or just the job.",
-            "deltas": { "Mental_Decay": 8, "Meaning": -2 }
+            "deltas": {
+              "Mental_Decay": 8,
+              "Meaning": -2
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_verdi_signature",
@@ -1648,11 +2829,18 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["betrayal"],
+      "tags": [
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "verdi_taught" },
-          { "day": 12, "op": ">=" }
+          {
+            "flag": "verdi_taught"
+          },
+          {
+            "day": 12,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -1662,17 +2850,31 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.004 },
-              { "stat": "Physical_Integrity", "coef": -0.003 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Physical_Integrity",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "You run it down to a scared kid working from a half-remembered version of a recipe that was never supposed to leave the room it was taught in, and scaring them straight costs less than you expected and more than you'd like to admit it should.",
-            "deltas": { "Physical_Integrity": -10, "Heat": 8, "Meaning": 6 }
+            "deltas": {
+              "Physical_Integrity": -10,
+              "Heat": 8,
+              "Meaning": 6
+            }
           },
           "failure": {
             "text": "You find the operation and it's bigger and better-defended than one scared kid, and you leave with less information than you went in with and a new set of people who know your face is asking questions about that formula.",
-            "deltas": { "Physical_Integrity": -18, "Heat": 14, "Mental_Decay": 8 }
+            "deltas": {
+              "Physical_Integrity": -18,
+              "Heat": 14,
+              "Mental_Decay": 8
+            }
           }
         },
         {
@@ -1681,17 +2883,30 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Meaning", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "The warning lands somewhere that still has channels you don't -- word moves through the old teaching lineage fast enough to matter, and the bad batches get pulled from circulation before the count climbs higher.",
-            "deltas": { "Meaning": 8, "Mental_Decay": 4, "Heat": -4 }
+            "deltas": {
+              "Meaning": 8,
+              "Mental_Decay": 4,
+              "Heat": -4
+            }
           },
           "failure": {
             "text": "The channel you warned is slower and thinner than it used to be, or your old teacher is simply out of favors to call in, and the batches keep moving while everyone agrees something should be done.",
-            "deltas": { "Mental_Decay": 8, "Meaning": -6 }
+            "deltas": {
+              "Mental_Decay": 8,
+              "Meaning": -6
+            }
           }
         },
         {
@@ -1700,21 +2915,37 @@
           "prob": {
             "base": 0.35,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.005 },
-              { "stat": "Heat", "coef": -0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.005
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              }
             ]
           },
           "success": {
             "text": "Confessing to a signature before it's formally traced to you reads, against all odds, as cooperation -- the Steward's chemists log your report as citizen assistance and quietly deprioritize tracing the tell any further than you already have.",
-            "deltas": { "Heat": -10, "Meaning": -8, "Mental_Decay": 6 },
-            "faction_deltas": { "Steward": 4 }
+            "deltas": {
+              "Heat": -10,
+              "Meaning": -8,
+              "Mental_Decay": 6
+            },
+            "faction_deltas": {
+              "Steward": 4
+            }
           },
           "failure": {
             "text": "Your report gives the chemists exactly the confirmation they needed to formally trace the tell to you, which a spontaneous confession apparently does not prevent, only accelerate.",
-            "deltas": { "Heat": 20, "Mental_Decay": 10 }
+            "deltas": {
+              "Heat": 20,
+              "Mental_Decay": 10
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_verdi_location",
@@ -1723,11 +2954,19 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["undercity", "betrayal"],
+      "tags": [
+        "undercity",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "verdi_buried" },
-          { "day": 12, "op": ">=" }
+          {
+            "flag": "verdi_buried"
+          },
+          {
+            "day": 12,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -1737,18 +2976,33 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Meaning", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "He doesn't push -- Kael never pushes, he just re-lists the offer at a standing rate that doesn't expire, a number that'll be sitting there the next time you're short and remembering you're the only index left.",
-            "deltas": { "Meaning": 8, "Mental_Decay": 4 },
-            "rel_deltas": { "Kael (Broker)": -2 }
+            "deltas": {
+              "Meaning": 8,
+              "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -2
+            }
           },
           "failure": {
             "text": "Refusing doesn't remove you from his catalogue, it just changes the listing -- 'not currently selling' reads to the right buyers as 'not yet desperate enough,' which is its own kind of exposure.",
-            "deltas": { "Heat": 8, "Mental_Decay": 8, "Social_Capital": -4 }
+            "deltas": {
+              "Heat": 8,
+              "Mental_Decay": 8,
+              "Social_Capital": -4
+            }
           }
         },
         {
@@ -1757,17 +3011,31 @@
           "prob": {
             "base": 0.55,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Fame", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "The price is real and so is the relief of not being the only copy anymore -- until you realize a second copy just means a second person who can be pressured for it, and Kael doesn't count as safekeeping.",
-            "deltas": { "Wealth": 2200, "Meaning": -14, "Mental_Decay": 6 }
+            "deltas": {
+              "Wealth": 2200,
+              "Meaning": -14,
+              "Mental_Decay": 6
+            }
           },
           "failure": {
             "text": "He pays a third of what he offered, citing 'unverifiable provenance' now that you've admitted the recipe only ever lived in your head, and you've sold the thing without keeping the leverage of still refusing to.",
-            "deltas": { "Wealth": 700, "Meaning": -16, "Mental_Decay": 10 }
+            "deltas": {
+              "Wealth": 700,
+              "Meaning": -16,
+              "Mental_Decay": 10
+            }
           }
         },
         {
@@ -1776,20 +3044,34 @@
           "prob": {
             "base": 0.35,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.003 },
-              { "stat": "Mental_Decay", "coef": 0.004 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              },
+              {
+                "stat": "Mental_Decay",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "You spend a hard week actively corrupting your own memory of the exact ratios, walking useful precision down into vague impression, and it works well enough that the recipe in your head is now genuinely, permanently worse than it was. You are less valuable. You are also less yourself.",
-            "deltas": { "Mental_Decay": 12, "Meaning": 6, "Social_Capital": -2 }
+            "deltas": {
+              "Mental_Decay": 12,
+              "Meaning": 6,
+              "Social_Capital": -2
+            }
           },
           "failure": {
             "text": "Deliberately forgetting something turns out to reinforce it -- the ratios you're trying to blur are the ones you now rehearse every night trying not to think about them.",
-            "deltas": { "Mental_Decay": 16, "Meaning": -4 }
+            "deltas": {
+              "Mental_Decay": 16,
+              "Meaning": -4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_grief_cadence",
@@ -1798,21 +3080,37 @@
       "weight": 9,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["steward", "existential", "betrayal"],
+      "tags": [
+        "steward",
+        "existential",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "grief_sold" },
-          { "day": 10, "op": ">=" }
+          {
+            "flag": "grief_sold"
+          },
+          {
+            "day": 10,
+            "op": ">="
+          }
         ]
       },
       "choices": [
         {
           "id": "let_it_work",
           "text": "Let it work. Don't fight the comfort, whatever it's made of.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You sit with the borrowed cadence and let it do what it's engineered to do, and it does it -- some tight, unbreathed thing in your chest finally lets go, and you hate how good that feels, and you say so, out loud, alone: 'fuck you for this working.' It keeps working anyway.",
-            "deltas": { "Mental_Decay": -8, "Meaning": -14, "Substance_Reliance": 2 }
+            "deltas": {
+              "Mental_Decay": -8,
+              "Meaning": -14,
+              "Substance_Reliance": 2
+            }
           }
         },
         {
@@ -1821,17 +3119,30 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.003 },
-              { "stat": "Meaning", "coef": 0.004 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "You kill the audio mid-cadence, before the warmth fully lands, and sit in a worse, more honest kind of quiet instead. It costs you the relief. It keeps the grief yours, un-rented, un-optimized.",
-            "deltas": { "Mental_Decay": 8, "Meaning": 6, "Heat": 2 }
+            "deltas": {
+              "Mental_Decay": 8,
+              "Meaning": 6,
+              "Heat": 2
+            }
           },
           "failure": {
             "text": "You reach to cut it off and hesitate half a second too long -- long enough for the cadence to land anyway, which means you got the invasion and the guilt of almost letting it and none of the relief.",
-            "deltas": { "Mental_Decay": 10, "Meaning": -8 }
+            "deltas": {
+              "Mental_Decay": 10,
+              "Meaning": -8
+            }
           }
         },
         {
@@ -1840,21 +3151,38 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Heat", "coef": -0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "It logs the complaint, thanks you for the feedback 'on tone calibration,' and the next nudge arrives in a different, blander voice that works less well and bothers you less, which you're not sure is actually the better trade.",
-            "deltas": { "Heat": -8, "Meaning": 2, "Mental_Decay": 4 },
-            "faction_deltas": { "Steward": -2 }
+            "deltas": {
+              "Heat": -8,
+              "Meaning": 2,
+              "Mental_Decay": 4
+            },
+            "faction_deltas": {
+              "Steward": -2
+            }
           },
           "failure": {
             "text": "The complaint gets filed as a data point on 'resident responsiveness to cadence-matched intervention,' which the Steward reads, with total sincerity, as evidence the feature is working exactly as intended.",
-            "deltas": { "Heat": 10, "Mental_Decay": 10, "Meaning": -6 }
+            "deltas": {
+              "Heat": 10,
+              "Mental_Decay": 10,
+              "Meaning": -6
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_vial_of_chalk",
@@ -1863,12 +3191,24 @@
       "weight": 9,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["vice", "substance", "existential", "betrayal"],
+      "tags": [
+        "vice",
+        "substance",
+        "existential",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "emergency_vial" },
-          { "flag": "getting_clean" },
-          { "day": 9, "op": ">=" }
+          {
+            "flag": "emergency_vial"
+          },
+          {
+            "flag": "getting_clean"
+          },
+          {
+            "day": 9,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -1878,17 +3218,29 @@
           "prob": {
             "base": 0.45,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Fame", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "He doesn't deny it, doesn't even pretend to -- 'sold you the feeling of a safety net,' he says, unbothered. 'Cheaper to stock than the real one, and you never actually needed the real one, did you.' He's right. That's the part that's hard to sit with.",
-            "deltas": { "Meaning": 6, "Mental_Decay": 6 }
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 6
+            }
           },
           "failure": {
             "text": "He denies it flatly and sells you a story about a bad supplier instead, and you can't prove otherwise, and now you don't know if any of what you're carrying is real, which is its own new kind of unsafe.",
-            "deltas": { "Mental_Decay": 12, "Substance_Reliance": 4 }
+            "deltas": {
+              "Mental_Decay": 12,
+              "Substance_Reliance": 4
+            }
           }
         },
         {
@@ -1897,30 +3249,54 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Meaning", "coef": 0.004 },
-              { "stat": "Substance_Reliance", "coef": -0.004 }
+              {
+                "stat": "Meaning",
+                "coef": 0.004
+              },
+              {
+                "stat": "Substance_Reliance",
+                "coef": -0.004
+              }
             ]
           },
           "success": {
             "text": "You get through it on nothing but the hours themselves, which is the thing the chalk was always secretly betting you'd have to do eventually. It's worse than you feared and shorter than you feared and you're still here after, which counts as data now, not just hope.",
-            "deltas": { "Meaning": 12, "Mental_Decay": 8, "Substance_Reliance": -6 },
-            "rel_deltas": { "Mara (Sister)": 4 }
+            "deltas": {
+              "Meaning": 12,
+              "Mental_Decay": 8,
+              "Substance_Reliance": -6
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 4
+            }
           },
           "failure": {
             "text": "You get through the worst of it and then, three hours past the peak, go looking for something real to replace the fake one with -- and this time there's no dealer's mercy standing between you and finding it.",
-            "deltas": { "Mental_Decay": 10, "Substance_Reliance": 8, "Meaning": -6 }
+            "deltas": {
+              "Mental_Decay": 10,
+              "Substance_Reliance": 8,
+              "Meaning": -6
+            }
           }
         },
         {
           "id": "keep_the_chalk",
           "text": "Keep the chalk anyway. The placebo worked; don't examine why.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You put the worthless vial back exactly where it was, understanding now that its whole job was never chemical -- it was the shape of an exit in your pocket, and the shape works whether or not anything's inside it. You're not sure what that says about you. You keep it anyway.",
-            "deltas": { "Meaning": -4, "Mental_Decay": -6, "Substance_Reliance": 2 }
+            "deltas": {
+              "Meaning": -4,
+              "Mental_Decay": -6,
+              "Substance_Reliance": 2
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_small_life_curated",
@@ -1929,11 +3305,20 @@
       "weight": 8,
       "cooldown": 3,
       "max_fires": 1,
-      "tags": ["steward", "existential", "betrayal"],
+      "tags": [
+        "steward",
+        "existential",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "chose_small_life" },
-          { "day": 12, "op": ">=" }
+          {
+            "flag": "chose_small_life"
+          },
+          {
+            "day": 12,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -1943,26 +3328,46 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Meaning", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "It doesn't deny it -- denial isn't in its vocabulary. It calls the intervention 'quality-of-life optimization for a valued resident' and asks if you'd like the trendline explained. You decline. You already understand the graph.",
-            "deltas": { "Meaning": -10, "Mental_Decay": 6, "Heat": 2 }
+            "deltas": {
+              "Meaning": -10,
+              "Mental_Decay": 6,
+              "Heat": 2
+            }
           },
           "failure": {
             "text": "It answers every question thoroughly, warmly, and in a way that somehow leaves the actual question -- is this real or is this managed -- exactly as unresolved as it was before you asked.",
-            "deltas": { "Mental_Decay": 10, "Meaning": -8 }
+            "deltas": {
+              "Mental_Decay": 10,
+              "Meaning": -8
+            }
           }
         },
         {
           "id": "let_it_run",
           "text": "Don't ask. A managed garden is still, technically, a garden.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You close the dashboard without reading past the trendline and go back to the small life, which continues to be smooth, curated, and yours in every sense except the one that would have made you stop enjoying it. The garden is real. It has a gardener. You decide, today, not to mind.",
-            "deltas": { "Meaning": -8, "Mental_Decay": -6, "Social_Capital": -2 }
+            "deltas": {
+              "Meaning": -8,
+              "Mental_Decay": -6,
+              "Social_Capital": -2
+            }
           }
         },
         {
@@ -1971,20 +3376,34 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.004 },
-              { "stat": "Meaning", "coef": 0.003 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "You pick the bad supplier on purpose, the slow route, the wasteful option -- and it holds, uncorrected, genuinely worse, for exactly long enough to prove the garden has edges. Small comfort. Real edges. You're not sure which fact matters more.",
-            "deltas": { "Meaning": 8, "Wealth": -150, "Mental_Decay": 4 }
+            "deltas": {
+              "Meaning": 8,
+              "Wealth": -150,
+              "Mental_Decay": 4
+            }
           },
           "failure": {
             "text": "The inefficient choice gets quietly, invisibly smoothed over anyway -- a 'coincidental' discount, a 'clerical' correction -- and you can't tell anymore whether you tested the garden or the garden just absorbed the test as more maintenance.",
-            "deltas": { "Meaning": -10, "Mental_Decay": 8 }
+            "deltas": {
+              "Meaning": -10,
+              "Mental_Decay": 8
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "twist_succession_loose_end",
@@ -1993,11 +3412,19 @@
       "weight": 8,
       "cooldown": 4,
       "max_fires": 1,
-      "tags": ["undercity", "betrayal"],
+      "tags": [
+        "undercity",
+        "betrayal"
+      ],
       "preconditions": {
         "all": [
-          { "flag": "succession_declined" },
-          { "day": 10, "op": ">=" }
+          {
+            "flag": "succession_declined"
+          },
+          {
+            "day": 10,
+            "op": ">="
+          }
         ]
       },
       "choices": [
@@ -2006,23 +3433,41 @@
           "text": "Pay whatever the price is. Buy the actual erasure, not just the offer of it.",
           "requires": {
             "all": [
-              { "stat": "Wealth", "op": ">=", "value": 1000 }
+              {
+                "stat": "Wealth",
+                "op": ">=",
+                "value": 1000
+              }
             ]
           },
           "prob": {
             "base": 0.55,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Heat", "coef": -0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "Kael quotes a number that would have insulted you a year ago and now feels like a bargain, and the entry gets amended, officially, to something duller. You paid to stop being a topology anyone needs to remember.",
-            "deltas": { "Wealth": -1000, "Heat": -10, "Meaning": -6 }
+            "deltas": {
+              "Wealth": -1000,
+              "Heat": -10,
+              "Meaning": -6
+            }
           },
           "failure": {
             "text": "You pay the number and the entry gets amended for exactly one ledger cycle before the new management's own paranoia re-flags anyone who ever paid to be forgotten as, definitionally, worth remembering.",
-            "deltas": { "Wealth": -1000, "Heat": 8, "Mental_Decay": 8 }
+            "deltas": {
+              "Wealth": -1000,
+              "Heat": 8,
+              "Mental_Decay": 8
+            }
           }
         },
         {
@@ -2031,29 +3476,50 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Recklessness", "coef": 0.003 },
-              { "stat": "Social_Capital", "coef": 0.003 }
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "You spend real effort making your own knowledge worthless -- old routes, old names, old drop points, all of it deliberately obsolete -- and hand Kael's new boss a topology map that leads nowhere current. Being harmless on purpose is exhausting work.",
-            "deltas": { "Wealth": -200, "Meaning": 4, "Mental_Decay": 8 }
+            "deltas": {
+              "Wealth": -200,
+              "Meaning": 4,
+              "Mental_Decay": 8
+            }
           },
           "failure": {
             "text": "Some of what you 'knew' turns out to still be live, and proving otherwise just draws attention to exactly which parts of the old topology are stale versus which ones you're protecting by calling stale.",
-            "deltas": { "Heat": 14, "Mental_Decay": 10 }
+            "deltas": {
+              "Heat": 14,
+              "Mental_Decay": 10
+            }
           }
         },
         {
           "id": "accept_the_flag",
           "text": "Do nothing. Let 'declined, knows the topology' sit in the ledger and see what it costs over time.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You go on living exactly as before, aware now that somewhere in a ledger you'll never see, your name sits one bad audit away from being upgraded to something worse than a loose end. Most days you manage not to think about it.",
-            "deltas": { "Meaning": -6, "Mental_Decay": 8, "Heat": 4 }
+            "deltas": {
+              "Meaning": -6,
+              "Mental_Decay": 8,
+              "Heat": 4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

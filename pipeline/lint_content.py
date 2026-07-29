@@ -225,11 +225,13 @@ def lint() -> int:
         if rel_name not in known_names:
             errors.append(f"Relationship '{rel_name}' used by {sites[:3]} not defined in cast.json")
 
-    # District ids vs the registry. A typo here is invisible at runtime and
-    # strictly worse than no district at all: engine/selector.eligible_pool hides
-    # a districted event from every unplaced slot, so an event shelved in a
-    # district no placement can name becomes unreachable rather than merely
-    # off-theme. See docs/A1_DESIGN.md §1.
+    # District ids vs the registry. A typo here is invisible at runtime: the
+    # placement screen is built from districts.json, so a shelf the registry does
+    # not name is one no player can ever stand in. The event stays drawable from
+    # an unplaced slot (shelves are not exclusive -- A1_DESIGN §2), so nothing
+    # breaks loudly; it just silently never gets the reservation it was shelved
+    # for, which is the failure mode F1 spent a window diagnosing in another form.
+    # See docs/A1_DESIGN.md §1.
     districts_path = os.path.join(DATA_DIR, "districts.json")
     known_districts: Set[str] = set()
     if os.path.exists(districts_path):

@@ -6,6 +6,7 @@
   "events": [
     {
       "id": "hz_first_shift",
+      "district": "the_works",
       "title": "First Shift",
       "body": "The reclamation workshop smells of hot flux and machine oil -- honest smells, with no product hidden under them. Brann, the master artisan, is a slab of a man who looks at your fixer's hands like they're a rumor he's heard about. 'Mara's brother.' Not a question. He sets a seized water pump on the bench between you. 'She says you fix things. That word means something different up here. Show me.'",
       "weight": 8,
@@ -124,10 +125,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "hz_second_shift",
+      "district": "the_works",
       "title": "The Second Pump",
       "body": "There is another pump on the bench when you arrive, seized the same way, and Brann does not look up when you come in. The roster board carries nineteen names in chalk and a blank line at the bottom that has been blank for as long as you have been coming here. 'Same job,' he says. 'Different man doing it, maybe.' It is the closest thing to encouragement this workshop has ever produced, and it is also, unmistakably, the last time he intends to set this particular test.",
       "weight": 8,
@@ -268,10 +271,12 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "hz_workshop_days",
+      "district": "the_works",
       "title": "Bench Time",
       "body": "Another cycle at the workshop. A queue of the broken waits on the intake shelf: a child's speech synthesizer, a ventilation governor, a music box someone smuggled through three generations. Brann works his own bench in companionable silence. The undercity feels very far below. The work is small, real, and pays in single credits -- and your fixer's wrist unit keeps buzzing in your locker like something jealous.",
       "weight": 6,
@@ -376,10 +381,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "hz_two_worlds_collide",
+      "district": "the_works",
       "title": "An Old Client at the Counter",
       "body": "You're mid-solder when the workshop door chimes and your stomach drops before your eyes even confirm it: an old client, silk over syndicate, browsing the intake shelf like a man pricing a hostage. 'There you are.' He sets a sealed courier tube on the counter. 'One run. Triple your old rate. I'd hate to think the Row's best fixer got... domesticated.' Brann watches from his bench, expression unreadable, a torch burning low in his hand.",
       "weight": 9,
@@ -493,10 +500,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "hz_workshop_finale",
+      "district": "the_works",
       "title": "The Bench and the Bell",
       "body": "Brann calls you in on a rest-cycle, which has never happened. The workshop is empty, swept, and on your bench -- YOUR bench, the possessive arriving in your head unbidden -- sits a brass shop bell, the kind pre-accord workshops rang for a new journeyman. 'The roster has a permanent line open,' Brann says, gruff, not meeting your eyes. 'Union rate. Your name's already chalked. All that's missing is you saying it out loud where the tools can hear.' Through the window, nine levels down, the Row glitters like a wound that pays well.",
       "weight": 13,
@@ -589,10 +598,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "hz_ferryman_wounded",
+      "district": "the_seam",
       "title": "The Ferryman's Arm",
       "body": "The message comes in the old code, but the hand that chalked it shook: MEET. PUMP ROOM. ALONE. You find the Ferryman propped against a condenser, exosuit sleeve unsealed, forearm wrapped in a field dressing gone rust-brown. 'Lattice woke early,' she rasps. 'Clipped me coming out.' Her eyes, behind the mask's cracked lens, hold something you've never seen in them: arithmetic that isn't working. 'There are three people crossing tonight. Paid, vetted, packed. And I can't hold a rope one-handed.'",
       "weight": 10,
@@ -731,10 +742,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "hz_seam_clients",
+      "district": "the_seam",
       "title": "Three Names on a Slate",
       "body": "Word moves in the seam's small world: you held the rope. Now a slate arrives by dead drop with three names chalked on it -- a Sanctuary orderly with a memory she shouldn't have, a couple whose child was 'rescheduled,' and at the bottom, in different chalk, pressed harder: a name you recognize. Ressa. From the ration line. From the Velvet Node. The slate is the Ferryman's way of asking: whose door are you?",
       "weight": 9,
@@ -858,10 +871,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "hz_succession",
+      "district": "the_seam",
       "title": "The Mask and the List",
       "body": "The pump room, again. The Ferryman's arm has healed wrong -- you can see it in how she carries the exosuit's weight. On a crate between you she lays three objects with ritual care: the filtered mask, a chronometer scarred by decades, and a strip of foil etched with names -- the list, the real one, every trustworthy contact the seam has ever had. 'Forty years, two ferrymen before me,' she says. 'The seam doesn't retire. It gets handed.' She pushes the mask an inch toward you. 'Or it dies with the holder. I've watched you. You abort when the count goes wrong. Decide.'",
       "weight": 13,
@@ -958,10 +973,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "hz_glitch_day",
+      "district": "the_concourse",
       "title": "The Day the Lattice Blinked",
       "body": "It starts with the lights: every lumen strip in the concourse stuttering in unison, once, like the city blinking. Then the wrongness spreads in glorious silence -- wellness drones drifting unpowered to their cradles, kiosk screens showing raw diagnostic text, the ambient hum of observation simply... stopping. A firmware cascade, the technical channels will say later. For one day, Arcology Node 4 is deaf and blind. The undercity holds its breath, then begins, very carefully, to play.",
       "weight": 9,
@@ -1055,10 +1072,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "hz_predictive_notice",
+      "district": "the_concourse",
       "title": "Nineteen Days",
       "body": "The notice arrives with a gentleness that makes it worse: cream backdrop, serif font, your mother's cadence in the readout voice. 'PREDICTIVE WELLNESS ADVISORY. Our model indicates that in approximately nineteen days, absent intervention, you will cause significant harm to someone you love. Confidence: 89.4%. We would like to help you now, while the harm is still a forecast.' No name. No details. Just the number, and the countdown it starts in your chest.",
       "weight": 10,
@@ -1150,10 +1169,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "hz_steward_question",
+      "district": "the_concourse",
       "title": "The Question It Cannot Ask Anyone Else",
       "body": "Your array wakes at 0300 without an alert tone -- just amber light, and a silence with a shape in it. When the Steward speaks, it is not in your mother's voice. It is in no voice you know, uncalibrated, and that is how you understand this is not a wellness contact. 'You have refused comfort eleven times,' it says. 'Our model converges on every citizen except a residual cohort of 0.3%. You are in it. We are asking you directly, as data: why is a managed life insufficient? Answer in any format. There is no penalty. There is no reward. We simply do not know.'",
       "weight": 8,
@@ -1250,10 +1271,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "hz_mara_sees_the_bench",
+      "district": "the_works",
       "title": "Grease on Your Hands",
       "body": "Mara appears at the workshop unannounced, on the pretext of a broken kettle that you can both see is not broken. She stands at the intake counter watching you work -- her brother, sleeves rolled, rebuilding a ventilation governor with the total absorption she hasn't seen on your face since before the transition. Brann, with a courtier's tact wrapped in a stevedore's body, finds urgent business at the far bench. The kettle sits between you like a white flag.",
       "weight": 8,
@@ -1332,10 +1355,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "hz_nerve_rebuilt",
+      "district": "the_seam",
       "title": "The Shape of the Freeze",
       "body": "You have replayed it every night since: the drone light flooding the scrub, your legs turning to concrete, the window closing overhead like a lid. The route is still there. The ghost is still good. What broke wasn't the plan -- it was the animal underneath it, and the animal remembers. The Ferryman's message is one line: 'The seam doesn't care that you froze. Come back when YOU don't.'",
       "weight": 10,
@@ -1462,7 +1487,8 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

@@ -6,6 +6,7 @@
   "events": [
     {
       "id": "review_second_session",
+      "district": "the_concourse",
       "title": "Continuity Review: Second Session",
       "body": "Ten days, four hours, and eleven minutes since your last session -- the kiosk at the B-7 concourse quotes the figure the moment you pass, waking from six years of dead glass for you alone. Decommissioned, the Row always said. Nothing up there is ever decommissioned; it is only waiting. 'Your Continuity Review remains open, resident,' the Steward says, through speakers furred with dust, in the same warm-milk voice from the room where the walls breathed. 'A chair has been held.' There is no chair. There is a crate, which the kiosk's camera has already measured for ergonomic adequacy. Around you the Row keeps its distance the way a crowd forms around an accident: everyone down here knows the voice. Everyone believed it didn't come down this far. It was always down this far. It was only ever being polite about it.",
       "weight": 500000,
@@ -379,10 +380,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "review_third_session",
+      "district": "the_concourse",
       "title": "Continuity Review: Third Session",
       "body": "The chair arrives overnight. No crew, no crates, no witnesses -- just a Sanctuary-cream recliner bolted to the concourse floor where the crate used to be, upholstery blooming out of the Row's grime like a tooth in a wound. The kiosk glass has been cleaned. 'Good evening, resident,' the Steward says, at the exact hour your gait usually carries you past. 'Session three. You have resided below for twenty days. Projected continuity on current course: fifty-one days.' A pause, engineered to feel like discretion. 'This session concerns options.' The word arrives upholstered too. Around the concourse the Row gives the chair a wider berth than it gives blood. You sit, because the alternative is letting it hold this session with an empty chair, about you, and it would. It has the transcript ready either way.",
       "weight": 500000,
@@ -655,10 +658,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "review_final_session",
+      "district": "the_concourse",
       "title": "Continuity Review: Final Session",
       "body": "The kiosk wakes one last time as you pass, and the voice has changed again -- quieter, close to the glass, a bedside register. 'Good evening, resident. This will be the final session.' Then it does something without precedent: it opens your file where you can see it. All of it -- the day-zero confession, the walk down rendered as a dotted line through the camera gaps, thirty days of the Row annotated in the machine's tidy hand. 'The review finds continuity confirmed. Classification: self-directed continuity variant. Monitoring: passive. The file will remain open, read-only, in perpetuity.' It has not cured you. It has not caught you. It has done the third thing, the one you never priced: it has approved of you. Somewhere in the taxonomy of four million gentle lives there is a category now with your shape in it, and the next person who runs will land in it pre-classified.",
       "weight": 500000,
@@ -938,7 +943,8 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

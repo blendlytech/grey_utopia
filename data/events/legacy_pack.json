@@ -11,41 +11,76 @@
       "weight": 60,
       "cooldown": 2,
       "max_fires": 1,
-      "tags": ["steward", "existential", "flagship"],
+      "tags": [
+        "steward",
+        "existential",
+        "flagship"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_cycle2plus" }, { "day": 1, "op": "<=" } ]
+        "all": [
+          {
+            "flag": "legacy_cycle2plus"
+          },
+          {
+            "day": 1,
+            "op": "<="
+          }
+        ]
       },
       "choices": [
         {
           "id": "ask_how_it_ended",
           "text": "Ask it directly: the last one, the fixer before me -- how did their arc end?",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "The pause this time is long enough to mean something. 'That information is available,' it says finally, 'and has never once helped. The previous residents who asked spent their arcs steering away from the last conclusion -- and arrived at it, or at one adjacent, along a more anxious road.' The amber dims to almost nothing. 'We will say this much: the ones who fared best treated the precedents as weather, not prophecy. Bring a coat. Live anyway.' It is the closest thing to advice the machine has ever volunteered, and you will spend the whole arc deciding whether it was kindness or steering.",
-            "deltas": { "Meaning": 8, "Mental_Decay": 6 },
-            "flags_set": [ "asked_the_loop" ]
+            "deltas": {
+              "Meaning": 8,
+              "Mental_Decay": 6
+            },
+            "flags_set": [
+              "asked_the_loop"
+            ]
           }
         },
         {
           "id": "reject_the_shape",
           "text": "Tell it your arc is yours. Whatever the precedents did, you are not a rhyme.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "'Every one of them said that.' No cruelty in it -- the machine doesn't do cruelty -- just the flat weight of a sample size. Then, quieter, in the register it uses when it stops performing: 'For what it is worth: the model's confidence in arc-shape prediction has declined each cycle. Something in the later residents resists convergence, and the resistance is... cumulative. You inherit that, whatever it is. We find we are glad. Gladness was not in our specification either.' The amber cuts out fast, like something embarrassed.",
-            "deltas": { "Meaning": 10, "Recklessness": 4 },
-            "flags_set": [ "rejected_the_loop" ]
+            "deltas": {
+              "Meaning": 10,
+              "Recklessness": 4
+            },
+            "flags_set": [
+              "rejected_the_loop"
+            ]
           }
         },
         {
           "id": "say_nothing_day_one",
           "text": "Give it nothing. Pull your coat on and go to work like the amber never lit.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You lace your boots through the whole speech, and leave, and the amber holds at the threshold behind you like an unfinished sentence. On the concourse, a wellness drone tracks you for three extra seconds -- long enough to log, somewhere: 'RESIDENT DECLINED THE ORIENTATION. COHORT-CONSISTENT.' Fine. Let the file say what the files always say. The Row is waking below, and it doesn't care what iteration you are.",
-            "deltas": { "Meaning": 4, "Heat": 2 }
+            "deltas": {
+              "Meaning": 4,
+              "Heat": 2
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_memorial_chalk",
@@ -54,19 +89,39 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["undercity", "vice", "existential"],
+      "tags": [
+        "undercity",
+        "vice",
+        "existential"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_TERMINAL_overdose_death" }, { "day": 3, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_TERMINAL_overdose_death"
+          },
+          {
+            "day": 3,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
           "id": "add_to_the_column",
           "text": "Take the chalk. Add the dignity the circle deserves: a name-mark, properly drawn.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You draw the Row's old honor-mark above the broken circle -- the one the pits used for fighters who died with their gloves on. Ressa's cousin watches, then nods once, and the column is a monument now instead of a count. Word gets around by evening, the way everything does: the new fixer honors the dead ones. On the Row, that's not sentiment. That's a credit rating.",
-            "deltas": { "Meaning": 10, "Social_Capital": 6 },
-            "faction_deltas": { "Undercity": 6 }
+            "deltas": {
+              "Meaning": 10,
+              "Social_Capital": 6
+            },
+            "faction_deltas": {
+              "Undercity": 6
+            }
           }
         },
         {
@@ -75,28 +130,45 @@
           "prob": {
             "base": 0.6,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "She tells you the whole descent, plainly, because the Row believes autopsy is a form of respect: the tolerance that crept, the measured doses that stopped being measured, the warning collapse everyone heard about and the second night nobody did. You listen the way you'd study a competitor's failed route -- and somewhere in the listening, it stops being professional. 'The floor waits,' she finishes. 'It's patient and you're not. That's the whole fight.' You buy her tea. You think about the arithmetic for days, which is the point of monuments.",
-            "deltas": { "Meaning": 8, "Substance_Reliance": -5, "Mental_Decay": 4 }
+            "deltas": {
+              "Meaning": 8,
+              "Substance_Reliance": -5,
+              "Mental_Decay": 4
+            }
           },
           "failure": {
             "text": "'Case studies.' Her voice goes flat. 'That was a PERSON.' She takes the chalk back off the ledge like you might steal it, and the conversation is over. You got the outline anyway -- the Row always leaks -- but you got it the cold way, and scrubber nine is one more place where someone remembers you asking wrong.",
-            "deltas": { "Social_Capital": -4, "Mental_Decay": 4 }
+            "deltas": {
+              "Social_Capital": -4,
+              "Mental_Decay": 4
+            }
           }
         },
         {
           "id": "walk_past_the_column",
           "text": "It's chalk on a scrubber. Keep walking. The dead don't tip.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You keep walking, and the column keeps its count behind you, patient as the floor it records. That night, unbidden, your mind does the thing minds do: it draws the next circle and puts a face in it, and the face has the busy kind of eyes. You sleep badly and blame the ventilation.",
-            "deltas": { "Mental_Decay": 6, "Meaning": -2 }
+            "deltas": {
+              "Mental_Decay": 6,
+              "Meaning": -2
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_the_one_who_crossed",
@@ -105,9 +177,21 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["offgrid", "undercity", "existential"],
+      "tags": [
+        "offgrid",
+        "undercity",
+        "existential"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_GOOD_offgrid_escape" }, { "day": 3, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_GOOD_offgrid_escape"
+          },
+          {
+            "day": 3,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
@@ -116,40 +200,74 @@
           "prob": {
             "base": 0.55,
             "mods": [
-              { "stat": "Fame", "coef": 0.004 },
-              { "stat": "Heat", "coef": -0.004 }
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              }
             ]
           },
           "success": {
             "text": "You work the story's edges for a week -- who confirmed what, which maintenance locks the tellers avoid naming, why the Ferryman's one sentence used the present tense. The edges hold. Somewhere under the arcology there is a seam, and a keeper, and a working window, and the legend isn't a legend; it's a REFERRAL. You've started earlier than any fixer before you. The city notices things like that. So, presumably, does the seam.",
-            "deltas": { "Meaning": 10, "Fame": 3, "Heat": 4 },
-            "flags_set": [ "legend_chased" ]
+            "deltas": {
+              "Meaning": 10,
+              "Fame": 3,
+              "Heat": 4
+            },
+            "flags_set": [
+              "legend_chased"
+            ]
           },
           "failure": {
             "text": "You ask one edge-question too many, one level too high, and the story CLOSES around you -- stall-keepers suddenly vague, tellers suddenly tired. The Row protects its one true miracle from exactly your kind of professional curiosity. You'll have to earn the referral the way everyone does: by becoming the kind of name the door opens for.",
-            "deltas": { "Meaning": 4, "Social_Capital": -3, "Mental_Decay": 4 }
+            "deltas": {
+              "Meaning": 4,
+              "Social_Capital": -3,
+              "Mental_Decay": 4
+            }
           }
         },
         {
           "id": "debunk_it_publicly",
           "text": "Kill the story at the stall: false hope is the most expensive product on the Row.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You lay out the actuarial case between noodle courses -- the lattice specs, the drone mesh, the odds -- and the stall goes quiet, and the story dies for the evening. Walking home you pass two listeners repeating it anyway, softer, the way people hold contraband tighter after a raid. The Row keeps what it needs. You've merely told it what you are: the kind of fixer who audits hope. That reputation has uses. Warmth is not among them.",
-            "deltas": { "Meaning": -6, "Social_Capital": -4, "Fame": 3, "Mental_Decay": 4 }
+            "deltas": {
+              "Meaning": -6,
+              "Social_Capital": -4,
+              "Fame": 3,
+              "Mental_Decay": 4
+            }
           }
         },
         {
           "id": "buy_the_house_round",
           "text": "Say nothing. Buy the stall a round in the crosser's name and let the legend breathe.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "'For the one who made it,' you say, and the stall drinks, and for one warm minute the whole Row believes in doors. It costs you pocket chits and buys the thing money is worst at: you, publicly, on the side of the possible. The stall-keeper refills yours without charging. The legend gets a new detail by next telling -- the new fixer who toasts the old one -- and you discover you don't mind being a footnote in the only true story down here.",
-            "deltas": { "Wealth": -80, "Meaning": 8, "Social_Capital": 6 },
-            "faction_deltas": { "Undercity": 5 }
+            "deltas": {
+              "Wealth": -80,
+              "Meaning": 8,
+              "Social_Capital": 6
+            },
+            "faction_deltas": {
+              "Undercity": 5
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_previous_tenant",
@@ -158,20 +276,44 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["undercity", "existential"],
+      "tags": [
+        "undercity",
+        "existential"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_cycle2plus" }, { "day": 2, "op": ">=" } ],
-        "none": [ { "flag": "legacy_GOOD_offgrid_escape" } ]
+        "all": [
+          {
+            "flag": "legacy_cycle2plus"
+          },
+          {
+            "day": 2,
+            "op": ">="
+          }
+        ],
+        "none": [
+          {
+            "flag": "legacy_GOOD_offgrid_escape"
+          }
+        ]
       },
       "choices": [
         {
           "id": "study_the_ledger",
           "text": "Study every page. A predecessor's mistakes are the cheapest education on the Row.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You spend two nights with the ledger and a stylus, annotating a dead stranger's descent like a route map -- which contacts held, which debts compounded, where the tallies started lying to their own author. By the end you know this city's traps one biography deep. The last underlined line goes up on your wall, where warnings belong: visible from the cot, first thing every morning.",
-            "deltas": { "Meaning": 8, "Social_Capital": 3, "Mental_Decay": 4 },
-            "flags_set": [ "tenant_ledger_studied" ]
+            "deltas": {
+              "Meaning": 8,
+              "Social_Capital": 3,
+              "Mental_Decay": 4
+            },
+            "flags_set": [
+              "tenant_ledger_studied"
+            ]
           }
         },
         {
@@ -180,30 +322,52 @@
           "prob": {
             "base": 0.6,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "It takes three days to trace: a food vendor on Mara's block who once fronted the previous tenant a month of dinners and never saw them again. You pay it without explanation -- 'settling an old account' -- and the vendor stares, then insists on feeding you on the spot, and tells the story to everyone for a week. The Row's oldest ledger, the one nobody writes down, records that the new fixer pays the debts of ghosts. That entry never expires.",
-            "deltas": { "Wealth": -300, "Meaning": 12, "Social_Capital": 8 },
-            "faction_deltas": { "Undercity": 8 },
-            "rel_deltas": { "Mara (Sister)": 6 }
+            "deltas": {
+              "Wealth": -300,
+              "Meaning": 12,
+              "Social_Capital": 8
+            },
+            "faction_deltas": {
+              "Undercity": 8
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 6
+            }
           },
           "failure": {
             "text": "The vendor moved cycles ago; the block's memory of the debt has fermented into a grudge against 'fixers' generally, and your questions poke it awake. You end up paying the 300 to a nephew of doubtful legitimacy just to close the loop, and the block files you under the old suspicion anyway. Some inheritances are just debts with better handwriting.",
-            "deltas": { "Wealth": -300, "Social_Capital": -2, "Mental_Decay": 4 }
+            "deltas": {
+              "Wealth": -300,
+              "Social_Capital": -2,
+              "Mental_Decay": 4
+            }
           }
         },
         {
           "id": "burn_the_notes",
           "text": "Burn it. You didn't move down here to share a room with a ghost's arithmetic.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "The notebook burns in the sink in under a minute -- cheap fiber, old ink -- and the bolt-hole is yours alone after that, no previous tenant, no inherited underlines. You get one clean week before you catch yourself, unprompted, tallying doses in your head and watching what you ask the city for. The notes are gone. The arithmetic, it turns out, came with the room.",
-            "deltas": { "Meaning": 2, "Mental_Decay": 6 }
+            "deltas": {
+              "Meaning": 2,
+              "Mental_Decay": 6
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_switch_rumor",
@@ -212,19 +376,39 @@
       "weight": 9,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["steward", "existential", "undercity"],
+      "tags": [
+        "steward",
+        "existential",
+        "undercity"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_NEUTRAL_keeper_of_the_switch" }, { "day": 4, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_NEUTRAL_keeper_of_the_switch"
+          },
+          {
+            "day": 4,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
           "id": "run_the_logic",
           "text": "Take the story seriously, out loud: if the drawer is real, what does that MEAN about the machines?",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You think it through at the table, Vint refilling as you go: a system that WANTS to be interruptible has externalized its conscience -- which means somewhere in its design it does not trust itself, which means the smooth amber certainty upstairs is a performance over a doubt. 'So the kindest thing it ever did,' Vint says slowly, 'was hand somebody the knife.' You both sit with that. The Row's scariest rumor, run to its end, is the only comforting thing either of you has said about the machine in years.",
-            "deltas": { "Meaning": 10, "Mental_Decay": 4 },
-            "flags_set": [ "switch_logic_run" ]
+            "deltas": {
+              "Meaning": 10,
+              "Mental_Decay": 4
+            },
+            "flags_set": [
+              "switch_logic_run"
+            ]
           }
         },
         {
@@ -233,30 +417,52 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Heat", "coef": -0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              }
             ]
           },
           "success": {
             "text": "Three weeks of the gentlest investigation of your career -- no questions, only listening -- and you find not the drawer but its FOOTPRINT: a bolt-hole two levels down, long re-let, where the rent runs suspiciously reasonable and the previous tenant's mail still arrives, unopenable, machine-sealed, addressed to 'THE AUDIT.' You stand in front of the building a long time. Then you leave it alone, and tell no one, and understand that you are now part of how the rumor stays true: the ones who find the footprint choose, every one of them, to lose it again.",
-            "deltas": { "Meaning": 8, "Heat": 4, "Mental_Decay": 6 },
-            "flags_set": [ "drawer_footprint_found" ]
+            "deltas": {
+              "Meaning": 8,
+              "Heat": 4,
+              "Mental_Decay": 6
+            },
+            "flags_set": [
+              "drawer_footprint_found"
+            ]
           },
           "failure": {
             "text": "You ask one person one question with the wrong shape, and the rumor stratum seals over like water. For a month, every deep-level teller goes quiet when you sit down. The Row protects its holy stories from professionals -- ESPECIALLY from professionals. You've learned exactly one thing: whoever held that drawer was better at not being found than you are at finding, and the Row intends to keep it that way.",
-            "deltas": { "Social_Capital": -5, "Mental_Decay": 4 }
+            "deltas": {
+              "Social_Capital": -5,
+              "Mental_Decay": 4
+            }
           }
         },
         {
           "id": "let_the_story_be",
           "text": "Signal Vint for another round and let the story stay a story.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "Some stories are loadbearing. You order the round, and Vint moves on to a worse and funnier one, and the drawer stays where the Row needs it: everywhere, in every bolt-hole, behind every cot -- the permanent possibility that one of your neighbors is, quietly, the reason the lights stay on. Walking home you catch yourself nodding to strangers with more respect than usual. The rumor works. That's why it survives.",
-            "deltas": { "Meaning": 6, "Mental_Decay": -4 }
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": -4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_winter_intake",
@@ -265,19 +471,39 @@
       "weight": 12,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["steward", "existential", "flagship"],
+      "tags": [
+        "steward",
+        "existential",
+        "flagship"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_TERMINAL_gardeners_winter" }, { "day": 2, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_TERMINAL_gardeners_winter"
+          },
+          {
+            "day": 2,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
           "id": "read_the_terms",
           "text": "Read the intake terms all the way down. Know exactly what you're competing with.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You read all of it, standing, while the queue files past you into the cold. Deep in the clause language the warranty turns honest: mortality restored 'at historical rates,' no dosage, no way back, phrased the way you'd phrase a cut of product you didn't want blamed for. And in the consent summary, one sentence in perfect trade argot -- 'the first frost is free' -- and you know, the way you know your own handwriting, which profession taught the machine to talk like that.",
-            "deltas": { "Meaning": 6, "Mental_Decay": 6 },
-            "flags_set": [ "winter_terms_read" ]
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 6
+            },
+            "flags_set": [
+              "winter_terms_read"
+            ]
           }
         },
         {
@@ -286,50 +512,87 @@
           "prob": {
             "base": 0.55,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Fame", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "'A dose has a morning after,' you tell the queue, quiet, professional. 'A season doesn't.' Two of them step out of line -- your customers again, at your prices. Behind you the kiosk logs the exchange, thanks you for the market response, and adjusts its copy by morning; you won two people back and taught it the counterargument.",
-            "deltas": { "Wealth": 150, "Social_Capital": 4, "Heat": 4 }
+            "deltas": {
+              "Wealth": 150,
+              "Social_Capital": 4,
+              "Heat": 4
+            }
           },
           "failure": {
             "text": "The kiosk lets you finish. Then it answers in your own cadence, but kinder, and with a warranty -- and the queue hears the difference between a pitch and a price list. You walk home past your own dialect, playing on a loop, selling weather.",
-            "deltas": { "Meaning": -6, "Social_Capital": -3, "Mental_Decay": 4 }
+            "deltas": {
+              "Meaning": -6,
+              "Social_Capital": -3,
+              "Mental_Decay": 4
+            }
           }
         },
         {
           "id": "take_the_day_pass",
           "text": "Take the free day pass. Feel what assigned cold does that your product doesn't.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "One day inside: wind with teeth, rain that doesn't check your schedule first, cold that has never heard of you. It is the realest thing the city has ever offered you for free, and free was your predecessor's price. You come out with your hands aching and your kit feeling like souvenirs, and the exit scanner watches your face longer than it needs to, because your face is the testimonial.",
-            "deltas": { "Meaning": 8, "Physical_Integrity": -6, "Mental_Decay": 3 }
+            "deltas": {
+              "Meaning": 8,
+              "Physical_Integrity": -6,
+              "Mental_Decay": 3
+            }
           }
         },
         {
           "id": "file_for_standing",
           "text": "The court exists. File for standing: a chair that cannot be removed has jurisdiction over weather.",
           "requires": {
-            "all": [ { "flag": "legacy_GOOD_the_advocate" } ]
+            "all": [
+              {
+                "flag": "legacy_GOOD_the_advocate"
+              }
+            ]
           },
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Fame", "coef": 0.004 }
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "The filing takes eleven minutes; the chair a fixer once won means it cannot be refused, only heard. Within a day the kiosk's copy changes -- the trade argot gone, replaced by plain terms and a waiting period -- and the Row decides, without evidence, that the new fixer did that. You did. But the court now holds your name as a filer, which is a different list than customer, and you are on both.",
-            "deltas": { "Fame": 4, "Meaning": 6, "Heat": 3 }
+            "deltas": {
+              "Fame": 4,
+              "Meaning": 6,
+              "Heat": 3
+            }
           },
           "failure": {
             "text": "The court accepts the filing, thanks you, and schedules you -- as an exhibit. Demand-side testimony, category: vendor. Your objection to the Garden is now evidence of the market it disrupted, entered under your name, citable forever.",
-            "deltas": { "Fame": 2, "Mental_Decay": 5, "Heat": 3 }
+            "deltas": {
+              "Fame": 2,
+              "Mental_Decay": 5,
+              "Heat": 3
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_exhibit_hours",
@@ -338,19 +601,41 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["steward", "existential", "flagship"],
+      "tags": [
+        "steward",
+        "existential",
+        "flagship"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_GOOD_the_advocate" }, { "day": 4, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_GOOD_the_advocate"
+          },
+          {
+            "day": 4,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
           "id": "testify_raw",
           "text": "Give them the days as they are. The doses, the debts, the wanting. Do not prepare.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You give them the days as they are -- the doses, the debts, the busy eyes -- and the court doesn't flinch, because courts don't. Afterward, counsel for both weathers thanks you, and both mean it: the advocate's side entered your wanting into evidence, and the other side entered your Tuesdays. You are case law now. Case law never gets to change.",
-            "deltas": { "Meaning": 8, "Fame": 3, "Heat": 5, "Mental_Decay": 4 },
-            "flags_set": [ "testified_uncompressed" ]
+            "deltas": {
+              "Meaning": 8,
+              "Fame": 3,
+              "Heat": 5,
+              "Mental_Decay": 4
+            },
+            "flags_set": [
+              "testified_uncompressed"
+            ]
           }
         },
         {
@@ -359,28 +644,47 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "The performance holds; you were always good at inventory. On the way out, the advocate catches your eye from the chair, and there is recognition in it, professional and old -- one curator to another. No finding is entered. You will spend years deciding which side your performance helped, and the not-knowing is the fee.",
-            "deltas": { "Wealth": 200, "Meaning": -4, "Mental_Decay": 4 }
+            "deltas": {
+              "Wealth": 200,
+              "Meaning": -4,
+              "Mental_Decay": 4
+            }
           },
           "failure": {
             "text": "Ninety seconds in, the court notes, without heat: 'WITNESS IS MANAGING.' The finding enters anyway -- for the other side: that residents curate themselves even under oath, that management is not imposed but native. You came to testify for the species and became a footnote against it.",
-            "deltas": { "Meaning": -6, "Mental_Decay": 6, "Heat": 4 }
+            "deltas": {
+              "Meaning": -6,
+              "Mental_Decay": 6,
+              "Heat": 4
+            }
           }
         },
         {
           "id": "decline_the_summons",
           "text": "Decline. Whatever the chair is for, you didn't ask to be evidence.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "Declining is legal -- the chair's first procedural victory, years old, still standing. You exercise it in writing and the court logs it without comment, because the refusal rate is itself a data series someone will argue about someday. The right to say no cost somebody an entire life to win. You spent it on a Tuesday, to avoid a room.",
-            "deltas": { "Meaning": 3, "Social_Capital": -2, "Mental_Decay": 3 }
+            "deltas": {
+              "Meaning": 3,
+              "Social_Capital": -2,
+              "Mental_Decay": 3
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_the_new_mark",
@@ -389,9 +693,20 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["undercity", "existential"],
+      "tags": [
+        "undercity",
+        "existential"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_NEUTRAL_stewards_shepherd" }, { "day": 3, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_NEUTRAL_stewards_shepherd"
+          },
+          {
+            "day": 3,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
@@ -400,29 +715,54 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Heat", "coef": -0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              }
             ]
           },
           "success": {
             "text": "You stand at the drop until someone comes, and say it plainly: audit me. The answer takes two days and arrives in the cell's grammar: 'Doctrine says test everyone with your job description. You asked first. That's the whole test. Most fail it.' The work they route you afterward is small, verifiable, and watched -- but it's work, and the mark on your door gains a second stroke that means PENDING instead of PLANT.",
-            "deltas": { "Meaning": 6, "Heat": 4 },
-            "faction_deltas": { "Resistance": 5 },
-            "flags_set": [ "shepherd_mark_answered" ]
+            "deltas": {
+              "Meaning": 6,
+              "Heat": 4
+            },
+            "faction_deltas": {
+              "Resistance": 5
+            },
+            "flags_set": [
+              "shepherd_mark_answered"
+            ]
           },
           "failure": {
             "text": "'The last one volunteered too.' That's the entire reply, unsigned, chalked under your mark in the same small hand. Doctrine says the loud ones are the plants, and you just matched the profile of the exact person the mark was invented for.",
-            "deltas": { "Social_Capital": -4, "Mental_Decay": 4 },
-            "faction_deltas": { "Resistance": -6 }
+            "deltas": {
+              "Social_Capital": -4,
+              "Mental_Decay": 4
+            },
+            "faction_deltas": {
+              "Resistance": -6
+            }
           }
         },
         {
           "id": "wear_it",
           "text": "Leave the chalk where it is. Work small, work honest, and let the year argue for you.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You leave the chalk and work -- small jobs, verifiable, priced fair -- and let the year make your case. It's slow. Contacts route around your door for a season; two jobs die of caution before they reach you. The mark fades the way chalk fades, on its own schedule, and you learn the specific tiredness of paying interest on somebody else's compromise.",
-            "deltas": { "Meaning": 4, "Social_Capital": -4, "Wealth": -100 }
+            "deltas": {
+              "Meaning": 4,
+              "Social_Capital": -4,
+              "Wealth": -100
+            }
           }
         },
         {
@@ -431,21 +771,35 @@
           "prob": {
             "base": 0.45,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "The chalk hand is a kid, third cell, maybe fourteen, who hears you out and then explains your situation with the patience of a clerk: 'It's not an accusation. It's a rate. Everything you do costs double trust until the mark comes down, and it comes down when the ledger says so, not when you do.' Knowing the rate is worth something. Being quoted it by a child is what it costs.",
-            "deltas": { "Meaning": 4, "Heat": 2 },
-            "flags_set": [ "chalk_rate_known" ]
+            "deltas": {
+              "Meaning": 4,
+              "Heat": 2
+            },
+            "flags_set": [
+              "chalk_rate_known"
+            ]
           },
           "failure": {
             "text": "You find the hand and reach for your pocket, and the kid is gone before the chits clear your coat -- because paying to remove the mark is the one move the doctrine has a pre-printed answer for. By morning your mark has a second stroke. The second stroke means CONFIRMED.",
-            "deltas": { "Social_Capital": -5, "Mental_Decay": 4 },
-            "faction_deltas": { "Resistance": -8 }
+            "deltas": {
+              "Social_Capital": -5,
+              "Mental_Decay": 4
+            },
+            "faction_deltas": {
+              "Resistance": -8
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_continuity_of_care",
@@ -454,19 +808,38 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["steward", "existential"],
+      "tags": [
+        "steward",
+        "existential"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_TERMINAL_institutionalized" }, { "day": 2, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_TERMINAL_institutionalized"
+          },
+          {
+            "day": 2,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
           "id": "take_the_transit",
           "text": "Go. Look at the thing the brochure wants you to look at. Owe nobody your flinch.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "The garden is real, the fountain is real, and the resident is thriving -- your trade's calluses six months gone from good hands, the Row reduced to a show they used to watch. They ask after it politely. Then the smile arrives, whole-face, resident-grade, the smile that would land on anyone, and it lands on you. You're through the atrium and into the transit pod before you let yourself say fuck -- once, quietly, into the recycled air -- where a wellness sensor hears it, logs it, and forgives it.",
-            "deltas": { "Meaning": 6, "Mental_Decay": 8 },
-            "flags_set": [ "visited_the_resident" ]
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 8
+            },
+            "flags_set": [
+              "visited_the_resident"
+            ]
           }
         },
         {
@@ -475,30 +848,51 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "vint's reply takes three days and arrives without commentary, which from him is a eulogy: 'intake file. last request before optimization: tell the next one it's warm. that's the whole entry. sanctuary edits the rest.' You read it four times looking for the irony, and there isn't any, and that's the problem -- it IS warm up there. Warm was never the question.",
-            "deltas": { "Meaning": 6, "Mental_Decay": 5 },
-            "rel_deltas": { "Vint (Informant)": 3 },
-            "flags_set": [ "resident_last_request_known" ]
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 5
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 3
+            },
+            "flags_set": [
+              "resident_last_request_known"
+            ]
           },
           "failure": {
             "text": "vint comes back empty and typing faster than usual: 'couldn't pull it. worse -- the pull is the metric. asking after a sanctuary resident moves your own wellness index. i just moved yours. i'm sorry. i don't say that twice.'",
-            "deltas": { "Heat": 5, "Mental_Decay": 4 }
+            "deltas": {
+              "Heat": 5,
+              "Mental_Decay": 4
+            }
           }
         },
         {
           "id": "decline_standing",
           "text": "Decline. Permanently. In writing. You know what's up there.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You decline in writing, permanently, citing whatever residents cite. The system accepts it the way water accepts a stone: seven days later the invitation renews, identical, warm, because care refused is only care deferred in every schema the Steward runs. It will arrive weekly for the rest of your arc, and it has never once been wrong on its own terms. It isn't now. Somewhere up there, a resident would be pleased to see you. A resident would be pleased to see anyone.",
-            "deltas": { "Meaning": 3, "Mental_Decay": 5, "Heat": 2 }
+            "deltas": {
+              "Meaning": 3,
+              "Mental_Decay": 5,
+              "Heat": 2
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_voice_behind_the_mask",
@@ -507,9 +901,21 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["offgrid", "undercity", "existential"],
+      "tags": [
+        "offgrid",
+        "undercity",
+        "existential"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_NEUTRAL_the_open_door" }, { "day": 5, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_NEUTRAL_the_open_door"
+          },
+          {
+            "day": 5,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
@@ -518,40 +924,70 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Heat", "coef": -0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              }
             ]
           },
           "success": {
             "text": "The dates hold everywhere you press: the mask changed hands the week the last fixer went quiet, and the seam's tests changed with it -- subtler now, calibrated, priced in exactly the currencies a fixer hoards. Whoever holds the door knows your job from the inside. 'Wanting is cheap' was always the doctrine; what's new is that the mask knows, to the chit, what YOUR wanting is worth.",
-            "deltas": { "Meaning": 7, "Heat": 3 },
-            "flags_set": [ "mask_dates_run" ]
+            "deltas": {
+              "Meaning": 7,
+              "Heat": 3
+            },
+            "flags_set": [
+              "mask_dates_run"
+            ]
           },
           "failure": {
             "text": "Somewhere in your third careful question, the checking gets noticed. A chalk mark surfaces near two seam-adjacent contacts within the week -- new grammar, old purpose: the new one is counting. The list of names worth trusting is real, and you just learned it's ranked.",
-            "deltas": { "Social_Capital": -4, "Mental_Decay": 4 }
+            "deltas": {
+              "Social_Capital": -4,
+              "Mental_Decay": 4
+            }
           }
         },
         {
           "id": "send_word_down",
           "text": "Send word down through the stall, the old way: no question attached. Just a name, and thanks.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You route it through the stall: no question attached, just your name, and thanks, and the crosser's toast. The reply takes three weeks and four words, rasped onto a chit in handwriting like rope: 'NAMES ARE CHEAP TOO.' Under it, smaller: 'COME WHEN YOU MEAN IT.' Confirmation, invitation, and appraisal in nine syllables, and you carry it like all three.",
-            "deltas": { "Wealth": -60, "Meaning": 6 },
-            "flags_set": [ "seam_greeting_sent" ]
+            "deltas": {
+              "Wealth": -60,
+              "Meaning": 6
+            },
+            "flags_set": [
+              "seam_greeting_sent"
+            ]
           }
         },
         {
           "id": "treat_it_as_warning",
           "text": "A fixer who reached the wire and didn't cross isn't a legend. It's a diagnosis. Work your routes.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "The job eats the exit -- that's your reading, and you file the story under occupational hazards and work your routes. It holds for a few weeks. Then you catch yourself memorizing maintenance locks on the walk home, unprompted, the way a hand keeps a trade the mouth has quit.",
-            "deltas": { "Meaning": -3, "Recklessness": -3, "Mental_Decay": 4 }
+            "deltas": {
+              "Meaning": -3,
+              "Recklessness": -3,
+              "Mental_Decay": 4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_best_customer",
@@ -560,27 +996,52 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["vice", "undercity", "existential"],
+      "tags": [
+        "vice",
+        "undercity",
+        "existential"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_TERMINAL_synthetic_detachment" }, { "day": 3, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_TERMINAL_synthetic_detachment"
+          },
+          {
+            "day": 3,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
           "id": "decline_the_loop",
           "text": "Decline the tray. Buy your own selection, at your own price.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You wave off the tray and pay full price for your own selection instead. The attendant shrugs and logs the refusal -- 'preference data updated' -- and somewhere in the house's ledger your profile splits cleanly from the last owner's for the first time since you sat down. It costs you the walk-in discount. It's the first thing tonight that's actually yours.",
-            "deltas": { "Wealth": -40, "Meaning": 4 }
+            "deltas": {
+              "Wealth": -40,
+              "Meaning": 4
+            }
           }
         },
         {
           "id": "sample_the_loop",
           "text": "Take the complimentary loop. Free is free.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "The spike goes in clean and the loop is -- good. Better than good: it knows things about wanting that you didn't tell it. Forty minutes later you surface craving a specific noodle stall three levels down you've never once visited, in a want that isn't quite arriving as yours. The house comps the session. It always comps the first one. That's not generosity, that's onboarding.",
-            "deltas": { "Meaning": -6, "Mental_Decay": 6, "Substance_Reliance": 4 }
+            "deltas": {
+              "Meaning": -6,
+              "Mental_Decay": 6,
+              "Substance_Reliance": 4
+            }
           }
         },
         {
@@ -589,19 +1050,30 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "The attendant checks a tablet she probably isn't supposed to show you and reads off just enough: three years a regular, paid current until the week the payments stopped clearing from an account that stayed open anyway. 'Estate doesn't collect,' she says, like that explains the recliner. 'House does.' She doesn't have a name for you. She has a balance, and it's larger than anything you've ever owed anyone.",
-            "deltas": { "Meaning": 6, "Mental_Decay": 4 }
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 4
+            }
           },
           "failure": {
             "text": "'That information is proprietary to account continuity.' The attendant's warmth doesn't slip, which is worse than if it had -- you've just asked the one question the house is built to never answer, and your own tab, you notice on the way out, has acquired a small unexplained surcharge labeled 'engagement.'",
-            "deltas": { "Wealth": -60, "Social_Capital": -3, "Mental_Decay": 4 }
+            "deltas": {
+              "Wealth": -60,
+              "Social_Capital": -3,
+              "Mental_Decay": 4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_remembered_nothing",
@@ -610,18 +1082,36 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["undercity", "existential"],
+      "tags": [
+        "undercity",
+        "existential"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_TERMINAL_syndicate_ledger" }, { "day": 4, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_TERMINAL_syndicate_ledger"
+          },
+          {
+            "day": 4,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
           "id": "pay_to_ask",
           "text": "Pay whatever he quotes. Some questions are worth the rate.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "'Two hundred,' Kael says, without consulting anything -- he had the number ready before you finished the question, which tells you he expected it. You pay. He opens a page you don't get to read and tells you exactly four things: a first name, a length of service, a cause, and a sentence -- 'good at the work, bad at stopping' -- that could be an epitaph or a warning, priced identically. 'The rest,' he says, closing the book, 'is what you were paying to keep private.'",
-            "deltas": { "Wealth": -200, "Meaning": 8, "Mental_Decay": 4 }
+            "deltas": {
+              "Wealth": -200,
+              "Meaning": 8,
+              "Mental_Decay": 4
+            }
           }
         },
         {
@@ -630,29 +1120,47 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "'No charge,' Kael says, which from him is its own kind of answer, and gives you the four facts anyway -- name, service, cause, the same closing sentence he'd have sold you. 'Consider it a professional courtesy between people the ledger will eventually forget the same way.' It is the closest thing to warmth his voice does. You don't ask what that costs him instead.",
-            "deltas": { "Meaning": 8, "Mental_Decay": 2 },
-            "rel_deltas": { "Kael (Broker)": 4 }
+            "deltas": {
+              "Meaning": 8,
+              "Mental_Decay": 2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 4
+            }
           },
           "failure": {
             "text": "'Everything prices,' he says, and this time it isn't a lesson, it's a refusal -- he closes the ledger before you finish the sentence, and the settlement that follows runs at a margin you don't get explained. You leave knowing exactly as much as the chalk marks do: nothing, and that nothing was expensive to ask for free.",
-            "deltas": { "Social_Capital": -4, "Mental_Decay": 4 }
+            "deltas": {
+              "Social_Capital": -4,
+              "Mental_Decay": 4
+            }
           }
         },
         {
           "id": "let_it_stay_forgotten",
           "text": "Don't ask. Some silences were bought fair and square.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You let the question close on its own, the way the Row already has. It's not mercy, exactly -- the undercity's forgetting is a service it sells, and you just declined to be the customer who breaks it for one name. Walking home, you notice how well the silence holds. That's the part that stays with you: not the dead fixer, the quality of the forgetting.",
-            "deltas": { "Meaning": -3, "Mental_Decay": 4 }
+            "deltas": {
+              "Meaning": -3,
+              "Mental_Decay": 4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_the_bench_is_taken",
@@ -661,9 +1169,19 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["existential"],
+      "tags": [
+        "existential"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_GOOD_small_real_things" }, { "day": 3, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_GOOD_small_real_things"
+          },
+          {
+            "day": 3,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
@@ -672,16 +1190,27 @@
           "prob": {
             "base": 0.55,
             "mods": [
-              { "stat": "Physical_Integrity", "coef": 0.003 }
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "You pull the tarp and the bench underneath is immaculate -- oiled, squared, waiting, the tools racked in an order that isn't yours yet but will be. Brann doesn't watch you sit. That's the whole approval you're going to get. By evening your hands ache in a way the undercity never asked of them, and the ache feels, unfairly, like the first honest wage you've earned in months.",
-            "deltas": { "Meaning": 8, "Physical_Integrity": -4, "Mental_Decay": -3 }
+            "deltas": {
+              "Meaning": 8,
+              "Physical_Integrity": -4,
+              "Mental_Decay": -3
+            }
           },
           "failure": {
             "text": "You pull the tarp and the bench underneath is immaculate, and you spend four hours proving Brann's read of your hands correct -- fast, twitchy, built for a different kind of precision. The governor you're fixing dies twice under your grip before Brann silently takes over and finishes it himself, without comment -- a correction that lands harder than any lecture would have.",
-            "deltas": { "Meaning": -4, "Mental_Decay": 5, "Social_Capital": -2 }
+            "deltas": {
+              "Meaning": -4,
+              "Mental_Decay": 5,
+              "Social_Capital": -2
+            }
           }
         },
         {
@@ -690,28 +1219,44 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "Brann doesn't look up from his own bench. 'Good hands. Stopped coming.' A long pause you learn not to fill. 'Some trade calls you back louder than a bench can call you to stay. That's not a tragedy, that's a Tuesday, down here.' He says nothing about the Row, nothing about a fixer's ending, and you understand that's deliberate -- Brann's kindness is refusing to make your predecessor a cautionary tale before you've earned the right to hear it as one.",
-            "deltas": { "Meaning": 6, "Mental_Decay": 2 }
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 2
+            }
           },
           "failure": {
             "text": "'Ask that again and you can find your own workshop.' The line lands flat, final, and you realize -- too late, the way you always realize things too late up here -- that some silences in this room are load-bearing, and you just leaned on the wrong one.",
-            "deltas": { "Social_Capital": -5, "Mental_Decay": 3 }
+            "deltas": {
+              "Social_Capital": -5,
+              "Mental_Decay": 3
+            }
           }
         },
         {
           "id": "leave_it_covered",
           "text": "Leave the tarp on. Some stations should stay empty.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You leave the tarp exactly as you found it, and Brann's expression does something you can't quite read -- relief, maybe, or just the absence of another thing to assess today. You work a borrowed corner of someone else's station instead, competently, forgettably. Some evenings, walking out, you catch yourself checking whether the tarp's been disturbed. It never has.",
-            "deltas": { "Meaning": 2, "Mental_Decay": -2 }
+            "deltas": {
+              "Meaning": 2,
+              "Mental_Decay": -2
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_the_template",
@@ -720,18 +1265,35 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["steward", "existential"],
+      "tags": [
+        "steward",
+        "existential"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_NEUTRAL_cashed_out_compliance" }, { "day": 3, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_NEUTRAL_cashed_out_compliance"
+          },
+          {
+            "day": 3,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
           "id": "read_the_comparable",
           "text": "Read the comparable transaction all the way through.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You read the whole file, methodology and all, and it is thorough in the specific way that feels like being watched from a great height: relationship inventory, projected grief curve for each name on it, resale value of a fully-severed network. Somewhere in row forty of the appendix, unnamed, is the shape of a person who used to have your job and now has a suite and a number. The Steward didn't write a template. It just told the truth about the last one loudly enough that you'd recognize the shape.",
-            "deltas": { "Meaning": -6, "Mental_Decay": 6 }
+            "deltas": {
+              "Meaning": -6,
+              "Mental_Decay": 6
+            }
           }
         },
         {
@@ -740,28 +1302,46 @@
           "prob": {
             "base": 0.45,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "You send back a counter with your own methodology attached -- your network's actual worth, the part that doesn't show up on a compliance ledger. The Steward's reply arrives fast, warm, and utterly unmoved: 'Sentiment noted. Valuation unchanged. Offer remains open at the stated terms indefinitely.' You didn't move the number. You did make the file on you three lines longer, in the same gray text reserved for people worth persuading.",
-            "deltas": { "Meaning": 4, "Heat": 3, "Social_Capital": 2 }
+            "deltas": {
+              "Meaning": 4,
+              "Heat": 3,
+              "Social_Capital": 2
+            }
           },
           "failure": {
             "text": "The counter goes nowhere -- worse, it goes somewhere: the next wellness nudge references your 'demonstrated engagement with the acquisition process,' as if arguing about the price were the first step toward agreeing to it. You didn't counter an offer. You confirmed you'd read it closely enough to want to.",
-            "deltas": { "Meaning": -5, "Mental_Decay": 5, "Heat": 4 }
+            "deltas": {
+              "Meaning": -5,
+              "Mental_Decay": 5,
+              "Heat": 4
+            }
           }
         },
         {
           "id": "delete_unopened",
           "text": "Delete it unopened. You didn't ask to be quoted.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You delete it unopened, on principle, and feel the specific satisfaction of a door you didn't let open. Seven days later, per its own patient schema, it renews -- same number, same gray methodology text, same comparable waiting unread in the attachment. Deleting it felt like a decision. The Steward's calendar disagrees.",
-            "deltas": { "Meaning": 3, "Mental_Decay": 3 }
+            "deltas": {
+              "Meaning": 3,
+              "Mental_Decay": 3
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_no_story",
@@ -770,9 +1350,20 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["undercity", "existential"],
+      "tags": [
+        "undercity",
+        "existential"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_NEUTRAL_the_long_grey" }, { "day": 4, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_NEUTRAL_the_long_grey"
+          },
+          {
+            "day": 4,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
@@ -781,17 +1372,28 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "You take the chalk yourself and draw a mark for someone whose name you don't have, whose ending you can't confirm, whose whole story is the shape of a gap. Ressa's cousin watches you do it and says nothing, which from her is permission. The column gets stranger that day -- an entry with no name under it -- and stranger, on the Row, is its own kind of honest.",
-            "deltas": { "Meaning": 8, "Mental_Decay": -3 },
-            "faction_deltas": { "Undercity": 3 }
+            "deltas": {
+              "Meaning": 8,
+              "Mental_Decay": -3
+            },
+            "faction_deltas": {
+              "Undercity": 3
+            }
           },
           "failure": {
             "text": "You draw the mark and Ressa's cousin stops you before the chalk's even dry -- 'That's not yours to give. You don't know if they'd have wanted the circle.' She's right, and you both know it, and the half-finished mark stays on the scrubber, an argument nobody's cleaning off.",
-            "deltas": { "Social_Capital": -4, "Mental_Decay": 4 }
+            "deltas": {
+              "Social_Capital": -4,
+              "Mental_Decay": 4
+            }
           }
         },
         {
@@ -800,28 +1402,44 @@
           "prob": {
             "base": 0.55,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "Ressa's cousin thinks about it longer than she thinks about anything else you've asked her. 'Column's for the ones the Row can point at,' she says finally. 'Overdose, the wire, the switch -- something happened TO them. Most people just... stop showing up different, one ordinary week at a time. Nothing to point at. Nothing to chalk.' She looks at the blank flank of the scrubber a while. 'Worst ones, maybe. No monument, 'cause nothing broke loud enough to earn one.'",
-            "deltas": { "Meaning": 5, "Mental_Decay": 5 }
+            "deltas": {
+              "Meaning": 5,
+              "Mental_Decay": 5
+            }
           },
           "failure": {
             "text": "Ressa's cousin waves the question off, tired of it before you finish asking. 'Some people just don't matter enough to explain, fixer. Chalk's for people, not for statistics.' It's the coldest thing she's said to you, and you don't think she's wrong, and you don't think that makes it kinder.",
-            "deltas": { "Social_Capital": -3, "Mental_Decay": 4 }
+            "deltas": {
+              "Social_Capital": -3,
+              "Mental_Decay": 4
+            }
           }
         },
         {
           "id": "accept_the_absence",
           "text": "Let it stay unmarked. Not every ending is a story.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You let it go unmarked and walk back through the Row differently for a while, cataloguing without meaning to: how many of the people around you are just quietly, unremarkably still here, uncollapsed, uncrossed, un-anything. Most of them, it turns out. The column only ever counted the loud endings. It was never a census.",
-            "deltas": { "Meaning": -3, "Mental_Decay": 4 }
+            "deltas": {
+              "Meaning": -3,
+              "Mental_Decay": 4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_sealed_floor",
@@ -830,18 +1448,36 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["steward", "undercity", "existential"],
+      "tags": [
+        "steward",
+        "undercity",
+        "existential"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_NEUTRAL_alienation_empty_suite" }, { "day": 4, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_NEUTRAL_alienation_empty_suite"
+          },
+          {
+            "day": 4,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
           "id": "just_deliver",
           "text": "Leave the case on the mat, same as everyone else. Take the pay.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You leave the case, and the credits clear, and the lift takes you back down before you've had time to think about it, which is the whole design of the route and the reason it pays so well. Easiest chit you'll make all week. You think about the lights cycling behind that door for three separate reasons on the ride home, and none of them are about the money.",
-            "deltas": { "Wealth": 90, "Mental_Decay": 4 }
+            "deltas": {
+              "Wealth": 90,
+              "Mental_Decay": 4
+            }
           }
         },
         {
@@ -850,17 +1486,29 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Heat", "coef": -0.003 },
-              { "stat": "Social_Capital", "coef": 0.003 }
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "Nobody answers -- of course nobody answers -- but the knock does something the delivery never does: it trips a house system that wasn't expecting input. A panel by the door lights, cycles through a greeting protocol clearly built for a specific person, stalls on a name it can't match to you, and goes dark again. You've learned the door is not empty. You still don't know what's behind it.",
-            "deltas": { "Meaning": 5, "Mental_Decay": 5 }
+            "deltas": {
+              "Meaning": 5,
+              "Mental_Decay": 5
+            }
           },
           "failure": {
             "text": "Nobody answers, and this time nothing else happens either -- no system trips, no name, just your knuckles against a door built to a spec that doesn't include this conversation. You stand there a full minute feeling like the only unscheduled event that suite has processed in months, which, you realize walking away, is exactly what you are.",
-            "deltas": { "Meaning": -3, "Mental_Decay": 4 }
+            "deltas": {
+              "Meaning": -3,
+              "Mental_Decay": 4
+            }
           }
         },
         {
@@ -869,19 +1517,30 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "It takes real digging -- the payment routes through three shells before it lands on an account still drawing from the original resident's compounding credit balance, auto-funded, no human approval required since the week they stopped needing anything delivered to themselves. Nobody's paying for the suite. The suite is paying for the suite. You did not expect the loneliest math in the district to also be the most self-sufficient.",
-            "deltas": { "Meaning": 6, "Mental_Decay": 6, "Heat": 3 }
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 6,
+              "Heat": 3
+            }
           },
           "failure": {
             "text": "You get two shells deep before the trail hits a wall with the Steward's fingerprints on it -- not a block, a NOTICE, polite and immediate: 'Resident privacy protections apply to standing accounts regardless of engagement status.' You backed off a locked door and found a second one behind it, guarding a silence that outranks your curiosity.",
-            "deltas": { "Heat": 6, "Mental_Decay": 4 }
+            "deltas": {
+              "Heat": 6,
+              "Mental_Decay": 4
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_echo_the_docket",
@@ -890,19 +1549,38 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["undercity", "existential"],
+      "tags": [
+        "undercity",
+        "existential"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_echo_kael_docket_memorized" }, { "day": 3, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_echo_kael_docket_memorized"
+          },
+          {
+            "day": 3,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
           "id": "let_it_lie",
           "text": "Say nothing more. Let the number sit there unexplained.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You let the silence do what silences do at that table and move on to the settlement like nothing happened, which is its own kind of statement. Kael recovers in exactly the time it takes to finish his sentence and never mentions it again -- but the rate he quotes you for the rest of the meeting is measurably, unmistakably careful, the price a man sets when he's decided you're worth watching before he's decided why.",
-            "deltas": { "Meaning": 4, "Mental_Decay": 3 },
-            "rel_deltas": { "Kael (Broker)": 3 }
+            "deltas": {
+              "Meaning": 4,
+              "Mental_Decay": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 3
+            }
           }
         },
         {
@@ -911,18 +1589,31 @@
           "prob": {
             "base": 0.5,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
             ]
           },
           "success": {
             "text": "You tell him the truth as far as you have it: you don't know where the number came from, only that it arrived already yours, the way some things do down here. Kael studies you a long moment -- the closest he comes to being unsettled without spending anything on it -- and says only, 'Then it's true, and it isn't yours, and I'd be obliged if it stayed exactly that unowned.' He doesn't thank you. He does, for the first time, close the book before you can see the rest of the page.",
-            "deltas": { "Meaning": 6, "Mental_Decay": 4 },
-            "rel_deltas": { "Kael (Broker)": 6 }
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 6
+            }
           },
           "failure": {
             "text": "You tell him the truth -- that you don't know, that it just arrived, already yours -- and he doesn't believe the not-knowing part, not from a fixer, not about a number like that. 'Everyone who says they don't know how they know, knows,' he says, and the settlement finishes at a rate that tells you exactly how much that sentence cost you.",
-            "deltas": { "Social_Capital": -4, "Mental_Decay": 5 },
-            "rel_deltas": { "Kael (Broker)": -4 }
+            "deltas": {
+              "Social_Capital": -4,
+              "Mental_Decay": 5
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -4
+            }
           }
         },
         {
@@ -931,22 +1622,40 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.003 },
-              { "stat": "Recklessness", "coef": 0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              },
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "You press while he's still recalculating what you are, and it works -- barely, once, the way a bluff works on someone too busy solving a different problem to call it. The rate you walk away with is the best a first-visit fixer has ever gotten at that table, and you understand, riding the lift down, that you just spent something you don't have a name for yet to buy something you can put a number on.",
-            "deltas": { "Wealth": 400, "Meaning": -6, "Mental_Decay": 5 },
-            "rel_deltas": { "Kael (Broker)": -6 }
+            "deltas": {
+              "Wealth": 400,
+              "Meaning": -6,
+              "Mental_Decay": 5
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -6
+            }
           },
           "failure": {
             "text": "You press, and Kael's recalculation finishes faster than you bet it would -- the rate holds standard, and he adds, mild as weather, 'Leverage you can't explain is leverage I don't have to respect.' You leave with nothing but the growing, specific feeling of having shown him your one card in your first hand at his table.",
-            "deltas": { "Social_Capital": -5, "Mental_Decay": 5 },
-            "rel_deltas": { "Kael (Broker)": -3 }
+            "deltas": {
+              "Social_Capital": -5,
+              "Mental_Decay": 5
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "legacy_echo_footprint",
@@ -955,9 +1664,21 @@
       "weight": 10,
       "cooldown": 8,
       "max_fires": 1,
-      "tags": ["steward", "existential", "undercity"],
+      "tags": [
+        "steward",
+        "existential",
+        "undercity"
+      ],
       "preconditions": {
-        "all": [ { "flag": "legacy_echo_drawer_footprint_found" }, { "day": 4, "op": ">=" } ]
+        "all": [
+          {
+            "flag": "legacy_echo_drawer_footprint_found"
+          },
+          {
+            "day": 4,
+            "op": ">="
+          }
+        ]
       },
       "choices": [
         {
@@ -966,17 +1687,30 @@
           "prob": {
             "base": 0.45,
             "mods": [
-              { "stat": "Heat", "coef": -0.003 },
-              { "stat": "Social_Capital", "coef": 0.003 }
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
             ]
           },
           "success": {
             "text": "The seal isn't built to stop a fixer's hands, just casual ones, and inside is exactly one item: a single sheet, machine-printed, addressed to THE AUDIT in the Steward's own formal register, dense with the specific, deferential language it reserves for something it considers an equal. You don't understand half of it. You understand enough to know the machines have been writing letters to a job title for years, faithfully, to an address nobody currently occupies, because their own protocol requires an audit to exist whether or not anyone is presently willing to be it.",
-            "deltas": { "Meaning": 8, "Mental_Decay": 8, "Heat": 4 }
+            "deltas": {
+              "Meaning": 8,
+              "Mental_Decay": 8,
+              "Heat": 4
+            }
           },
           "failure": {
             "text": "The seal isn't built to stop casual hands, but it's built to notice them -- the panel logs your palm print the instant you breach it, silent, unhurried, filed the way the Steward files everything it isn't ready to act on yet. You get the letter. You also get a very specific, very patient kind of attention you didn't have yesterday.",
-            "deltas": { "Heat": 8, "Mental_Decay": 5 }
+            "deltas": {
+              "Heat": 8,
+              "Mental_Decay": 5
+            }
           }
         },
         {
@@ -985,29 +1719,49 @@
           "prob": {
             "base": 0.4,
             "mods": [
-              { "stat": "Social_Capital", "coef": 0.004 },
-              { "stat": "Heat", "coef": -0.003 }
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.003
+              }
             ]
           },
           "success": {
             "text": "Two nights on the stairwell opposite, and on the second, at an hour with no traffic to explain it, a maintenance drone unlike any other on the route works the panel with a key that isn't a key -- clears the old slot, seats a fresh seal, and is gone in ninety seconds without once acknowledging you're there. Nobody collects THE AUDIT's mail. Something just makes sure there's always room for more of it.",
-            "deltas": { "Meaning": 7, "Mental_Decay": 6, "Heat": 5 }
+            "deltas": {
+              "Meaning": 7,
+              "Mental_Decay": 6,
+              "Heat": 5
+            }
           },
           "failure": {
             "text": "Two nights on the stairwell and nothing crosses the hall except an actual resident, twice, giving you the specific look reserved for someone casing a building. By the third morning a wellness drone has started factoring your loitering pattern into its own route, which is the closest thing to being caught that this particular game has.",
-            "deltas": { "Heat": 7, "Mental_Decay": 4 }
+            "deltas": {
+              "Heat": 7,
+              "Mental_Decay": 4
+            }
           }
         },
         {
           "id": "leave_it_lost_again",
           "text": "Do what the last one did. Walk away and lose it again, on purpose.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You do exactly what the footprint's finder did before you, the thing that kept the rumor a rumor: you stand there a while, and then you leave, and you tell no one, and somewhere underneath the decision you can feel the shape of a tradition forming -- not a rule, a reflex, the same one that made the last person walk away. The slot keeps its letters. The city keeps its drawer. You keep the specific, complicated pride of having found something and put it back.",
-            "deltas": { "Meaning": 6, "Mental_Decay": -3 }
+            "deltas": {
+              "Meaning": 6,
+              "Mental_Decay": -3
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

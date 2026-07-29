@@ -2,6 +2,7 @@
   "events": [
     {
       "id": "sf_1_the_other_window",
+      "district": "the_seam",
       "title": "The Other Window",
       "body": "The Row is selling two new moons for the same night. Hers, at the price she has always charged, which is everything you have and a favor held open. And another one -- same perimeter, same ninety seconds, half the money, no favor. Somebody else is running the seam, and whoever it is does not seem to want anything from you at all.",
       "weight": 6,
@@ -128,10 +129,12 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "sf_2_the_missing_three",
+      "district": "the_seam",
       "title": "The Missing Three",
       "body": "You start with the ones who went out on the cheap window, because they are easy to count: eleven in six weeks. Nine of them left messages on the outside relay the way everyone does -- one line, no names, proof of a sky. Two did not. Then you check again on a night when you cannot sleep, and it is four who did not, and two of the nine have gone quiet since.",
       "weight": 6,
@@ -242,10 +245,12 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "sf_3_the_cheaper_lock",
+      "district": "the_seam",
       "title": "The Cheaper Lock",
       "body": "The eastern maintenance spine runs under four blocks of housing that the Steward decommissioned in a year nobody can name. His lock is at the end of it. You expect a door like hers -- a thing that has been forced, patched, and forced again. What you find is a clean panel with a working indicator light, serviced within the month, on a corridor that no maintenance schedule in the city admits exists.",
       "weight": 6,
@@ -366,10 +371,12 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "sf_4_the_kind_man",
+      "district": "the_seam",
       "title": "The Kind Man",
       "body": "He agrees to meet you the first time you ask, in a public canteen, at an hour with witnesses. He is mid-fifties and tired in the ordinary way and he buys you a bowl of something before you can stop him. 'You have been asking about me,' he says, without any edge on it at all. 'Ask me instead. It is faster and the food here is better than the Row's.'",
       "weight": 6,
@@ -491,10 +498,12 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "sf_5_the_budget_line",
+      "district": "the_seam",
       "title": "The Budget Line",
       "body": "The job number resolves, eventually, through a records clerk who wants nothing but to be asked something interesting. It sits under Continuity of Civic Mood, subsection Voluntary Attrition Management, and it has been funded, without interruption, for eleven months. There is a line for corridor maintenance. There is a line for community liaison, which is what he is. There is no line at all for the four.",
       "weight": 6,
@@ -614,10 +623,12 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "sf_6_she_knew",
+      "district": "the_seam",
       "title": "She Knew",
       "body": "You bring it to her on a night with no moon at all, which feels like something and is not. She reads your face before you have finished the first sentence, and she does not ask a single question, and that is how you find out. 'Eleven months,' she says. 'I priced myself against it for eleven months.' She is not looking at you. 'The ones who cannot pay me go to him. I have known where they go the whole time.'",
       "weight": 6,
@@ -741,10 +752,12 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "sf_7_which_seam_survives",
+      "district": "the_seam",
       "title": "Which Seam Survives",
       "body": "The fourteenth. Two windows open ninety minutes apart on the same stretch of wire: hers, expensive, and his, cheap, with nineteen names already on a piece of paper in a stairwell. You have the job number, the budget line, and whatever the last six weeks made of you. Whatever happens to those nineteen people is now, in the specific and unwanted way the city likes best, a thing you decided.",
       "weight": 8,
@@ -876,7 +889,8 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

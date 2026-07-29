@@ -58,6 +58,20 @@ class Event:
     # behaved before districts existed. Absent-means-neutral is what lets the
     # deck migrate a pack at a time. See docs/A1_DESIGN.md §1.
     district: Optional[str] = None
+    # Whether this storylet is content the player is walking a thread toward, as
+    # opposed to the city's background noise. Purely a *classification*: nothing
+    # in the engine reads it, and it is deliberately a top-level flag rather than
+    # a tag so that it cannot leak into `effective_weight`, which multiplies
+    # weight off `tags`. `tests/coverage_audit.py` is the only consumer.
+    #
+    # It exists because tags cannot answer the question and two windows were
+    # blocked by that. The audit's tag-based classifier scores `ambitions_pack`
+    # (three 8-link chains) and `cast_expansion_pack` (five character threads) at
+    # 0.0% arc, because they happen to be tagged existential/undercity/job. Since
+    # MIN_ARC_SHARE is a standing gate, shelving real arc content pushed the gate
+    # the *wrong* way -- a future window could have turned a red gate green by
+    # un-shelving the very content A1 exists to rescue. See BACKLOG_HANDOFF §5.
+    arc: bool = False
     last_fired_day: int = -9999
     fire_count: int = 0
 
@@ -248,6 +262,7 @@ def load_events(payload: Union[str, list, dict]) -> List[Event]:
             preconditions=e.get("preconditions", {}),
             choices=choices,
             inserts=inserts,
-            district=e.get("district")
+            district=e.get("district"),
+            arc=bool(e.get("arc", False))
         ))
     return events

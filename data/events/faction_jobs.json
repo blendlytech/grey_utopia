@@ -2,6 +2,7 @@
   "events": [
     {
       "id": "fac_steward_audit_01",
+      "district": "the_concourse",
       "title": "The Steward Protocol Audit",
       "body": "An automated Steward Auditor drone hovers above your hideout entrance. Its blue optical sensor scans your retina as a smooth synthetic voice speaks: 'Citizen Fixer. Discrepancies detected in your Arcology energy quota allocation.'",
       "weight": 1.5,
@@ -141,10 +142,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "fac_syndicate_contraband_run",
+      "district": "the_chalk_market",
       "title": "The Undercity Syndicate Contract",
       "body": "A courier from the Iron Lotus syndicate drops a heavy sealed canister of unrefined neural dampeners onto your table. 'Get this up to Sector 7 before midnight, or answer to the boss.'",
       "weight": 1.2,
@@ -263,7 +266,8 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

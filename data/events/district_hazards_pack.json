@@ -1,0 +1,1743 @@
+{
+  "pack": "district_hazards_pack",
+  "model": "opus-5",
+  "batch": "flagship",
+  "description": "A1 Phase 3b, branch (a): the city's teeth, distributed. A1_DESIGN.md §8.8 measured that placement bought a standing risk discount because only 2 of 7 district shelves fed a pipeline that can actually end a run -- the deck holds 17 dose-bearing and 15 clock-bearing storylets and both were fictionally concentrated on Parlor Row and the Chalk Market. These 14 storylets give the Works, the Seam, Level D, the Archive, the Concourse and the market a dose or a debt clock of their own. Every hook is a REAL pipeline hook, not a large negative stat delta: §8.8 records that branch-utility harshness does not predict terminal rates, and that the aggregate shelf was already harsher than the deck while still buying a discount. Where possible the clocks are EXISTING clocks with existing consequence readers (syndicate_consignment -> reck_syndicate_deadline, syndicate_debt -> reck_syndicate_debt_collectors, loan_shark -> reck_loan_shark_interest, debt_collection -> amb_clean_8_the_collectors), so each new event is a second entrance to machinery that already terminates rather than a new orphan flag. The two genuinely new clocks (arrest_warrant, wellness_review) each ship with their reader in this file. Note dgr_works_fronted_crate is gated Fame < 20 specifically so it cannot pre-empt flagship_synth_consignment, which is gated Fame >= 20 and 'none: holding_product': the two are the same offer made to the two ends of a reputation, and without the band split the Works event would have quietly made a flagship (and the syndicate_debt route below it) unreachable -- i.e. it would have REMOVED danger while claiming to add it.",
+  "events": [
+    {
+      "id": "dgr_works_fronted_crate",
+      "district": "the_works",
+      "title": "Weight on the Bench",
+      "body": "Vint comes to the shop instead of sending word, which is how you know. He sets a crate on the good bench -- the one Brann keeps clear for finish work -- and doesn't open it. 'Pre-Accord actuators. Sixty of them, and every one of them illegal to hold since the standardisation.' He taps the lid twice. 'They're already booked against Kael's ledger. Somebody has to hold them while they move, and everyone on the Row has a reason not to. You have a workshop with a locked door and a reputation for being boring.'\n\nThe bench is where you eat lunch. It is where the small life happens. He has put the syndicate's weight on it and is watching your face to see whether that registers.",
+      "weight": 11,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "undercity",
+        "vendor"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 9,
+            "op": ">="
+          },
+          {
+            "stat": "Fame",
+            "op": "<",
+            "value": 20
+          }
+        ],
+        "none": [
+          {
+            "flag": "holding_product"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_the_crate",
+          "text": "Take the crate. Storage is not distribution.",
+          "prob": {
+            "base": 0.72,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You clear the parts washer out of the back cupboard and the crate goes where the solvent used to live. Vint counts the fee into your hand in old chits, unhurried, and writes your name in a book you are not shown. 'Twelve days,' he says at the door. 'After that it stops being storage.'",
+            "deltas": {
+              "Wealth": 2200,
+              "Heat": 5,
+              "Recklessness": 6
+            },
+            "clocks_start": {
+              "syndicate_consignment": 12
+            },
+            "flags_set": [
+              "holding_product"
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 5
+            }
+          },
+          "failure": {
+            "text": "You take it, and you take it badly -- you sign for sixty and the crate holds fifty-four, and the six that are missing were missing before it reached you. Vint's face does something complicated. 'I'll say it was me,' he says, and you both know he won't be believed. The book still has your name in it and now the number beside it is wrong.",
+            "deltas": {
+              "Wealth": 2200,
+              "Heat": 8,
+              "Mental_Decay": 8,
+              "Recklessness": 8
+            },
+            "clocks_start": {
+              "syndicate_consignment": 8
+            },
+            "flags_set": [
+              "holding_product"
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -4
+            }
+          }
+        },
+        {
+          "id": "take_half",
+          "text": "Half. And it lives in the crawlspace, not the shop.",
+          "prob": {
+            "base": 0.62,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Recklessness",
+                "coef": -0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "He agrees faster than he should, which tells you the other half already has a home and this was never all-or-nothing. Thirty actuators go under the floor with the winter tools. Less money, less weight, same book.",
+            "deltas": {
+              "Wealth": 1100,
+              "Heat": 3,
+              "Recklessness": 3
+            },
+            "clocks_start": {
+              "syndicate_consignment": 14
+            },
+            "flags_set": [
+              "holding_product"
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 3
+            }
+          },
+          "failure": {
+            "text": "'It doesn't split,' he says, and something goes out of his voice. 'That's not me being difficult. It's booked as one lot and a lot that arrives in two pieces is a lot that got opened.' He takes the crate back to the door, then stops, then brings it in anyway and leaves without the fee. You are holding all sixty and you were not paid for any of them.",
+            "deltas": {
+              "Heat": 6,
+              "Mental_Decay": 8,
+              "Social_Capital": -3
+            },
+            "clocks_start": {
+              "syndicate_consignment": 9
+            },
+            "flags_set": [
+              "holding_product"
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -6
+            }
+          }
+        },
+        {
+          "id": "refuse_the_bench",
+          "text": "Not on this bench. Find another cupboard.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You put your hand flat on the lid and slide it back toward him, and Vint doesn't argue -- he came expecting it, you think, and asked anyway because the asking was owed to someone. He carries sixty illegal actuators back out into the Row and you go back to a bracket that needs filing. The shop stays a shop. That is worth something you decline to price.",
+            "deltas": {
+              "Meaning": 4,
+              "Wealth": -150,
+              "Social_Capital": -3
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -3
+            }
+          }
+        }
+      ],
+      "arc": false
+    },
+    {
+      "id": "dgr_works_shift_tin",
+      "district": "the_works",
+      "title": "The Tin on the Shelf Above the Lathe",
+      "body": "Quota is quota. The Works runs on a shift pattern nobody wrote down and everybody keeps, and by the ninth hour your hands have the shake that makes fine work into scrap. There is a tin on the shelf above the lathe. Everyone knows about the tin. Nobody restocks it and it is never empty.\n\nBrann has never mentioned it. That is not the same as not knowing.",
+      "weight": 9,
+      "cooldown": 7,
+      "max_fires": 0,
+      "tags": [
+        "job",
+        "vice"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 6,
+            "op": ">="
+          }
+        ],
+        "any": [
+          {
+            "stat": "Physical_Integrity",
+            "op": "<=",
+            "value": 78
+          },
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 18
+          },
+          {
+            "stat": "Mental_Decay",
+            "op": ">=",
+            "value": 38
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_two",
+          "text": "Two of the grey ones. Finish the run clean.",
+          "prob": {
+            "base": 0.78,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "The shake stops inside four minutes and the last eleven pieces come off the lathe inside tolerance, which they would not have. You work until the light outside the vent goes the colour of dishwater and you feel, briefly, extremely good at your job.",
+            "deltas": {
+              "Wealth": 320,
+              "Mental_Decay": -4,
+              "Substance_Reliance": 5,
+              "Meaning": 3
+            },
+            "dose": 5
+          },
+          "failure": {
+            "text": "The tin is not a pharmacy. Whatever is in the grey ones this week is cut with something that goes to the jaw first, and you spend the ninth hour gripping the lathe housing with your teeth locked, riding it out, ruining four pieces you will pay for out of your own end.",
+            "deltas": {
+              "Wealth": -260,
+              "Physical_Integrity": -6,
+              "Mental_Decay": 6,
+              "Substance_Reliance": 6
+            },
+            "dose": 9
+          }
+        },
+        {
+          "id": "one_and_water",
+          "text": "One. And a litre of water and a sit-down.",
+          "prob": {
+            "base": 0.85,
+            "mods": []
+          },
+          "success": {
+            "text": "Half measures work about half as well, which today is enough. You get through the run slow, with two rests you would not normally take, and go home with your hands still yours.",
+            "deltas": {
+              "Wealth": 180,
+              "Substance_Reliance": 2,
+              "Mental_Decay": -2
+            },
+            "dose": 3
+          },
+          "failure": {
+            "text": "One is not enough and you know it by the seventh hour, standing at the tap with the cup shaking, doing the arithmetic on going back for the second. You don't. You also don't finish, and short quota is its own kind of bill.",
+            "deltas": {
+              "Wealth": -140,
+              "Mental_Decay": 6,
+              "Substance_Reliance": 3
+            },
+            "dose": 3
+          }
+        },
+        {
+          "id": "leave_the_tin",
+          "text": "Leave the tin. Take the scrap rate.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You work the ninth hour with the shake and you produce, honestly, garbage. Brann sorts it in the morning without comment, sets four pieces aside for re-cutting, and puts the kettle on. The tin stays on the shelf above the lathe, where it will be tomorrow.",
+            "deltas": {
+              "Wealth": -180,
+              "Physical_Integrity": -3,
+              "Meaning": 3,
+              "Substance_Reliance": -2
+            }
+          }
+        }
+      ],
+      "arc": false
+    },
+    {
+      "id": "dgr_works_press_bite",
+      "district": "the_works",
+      "title": "What the Press Takes",
+      "body": "The forty-tonne is older than the Accord and its interlock has been shimmed by four generations of people who had work to finish. You know this. You have shimmed it yourself.\n\nIt comes down on the outside edge of your left hand -- not the whole hand, the *edge* -- and the sound the shop makes afterwards is worse than the sound the press made. Brann is already at the cabinet. There is one ampoule in it, and it is not the kind you buy over a counter.",
+      "weight": 8,
+      "cooldown": 12,
+      "max_fires": 0,
+      "tags": [
+        "job",
+        "vice"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 8,
+            "op": ">="
+          }
+        ],
+        "any": [
+          {
+            "stat": "Physical_Integrity",
+            "op": "<=",
+            "value": 80
+          },
+          {
+            "stat": "Recklessness",
+            "op": ">=",
+            "value": 40
+          },
+          {
+            "stat": "Mental_Decay",
+            "op": ">=",
+            "value": 35
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_the_ampoule",
+          "text": "Take the ampoule. Get the hand strapped and finish the order.",
+          "prob": {
+            "base": 0.66,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "It goes in at the wrist and the world takes one large step backwards. Brann straps the hand, badly, with a competence that suggests he has strapped it before, and you finish the order left-handed while the pain waits politely somewhere behind your ear for its turn.",
+            "deltas": {
+              "Physical_Integrity": -12,
+              "Wealth": 600,
+              "Substance_Reliance": 6,
+              "Meaning": 4
+            },
+            "dose": 7,
+            "rel_deltas": {
+              "Brann (Artisan)": 5
+            }
+          },
+          "failure": {
+            "text": "Whatever the shop ampoule is rated for, it is not a crush injury, and doubling it is a decision you make in the ninety seconds where you are not really available for decisions. You finish nothing. You wake up on the floor of the shop with your hand on your chest and Brann sitting against the door, watching you breathe.",
+            "deltas": {
+              "Physical_Integrity": -20,
+              "Mental_Decay": 6,
+              "Substance_Reliance": 9
+            },
+            "dose": 13,
+            "rel_deltas": {
+              "Brann (Artisan)": -3
+            }
+          }
+        },
+        {
+          "id": "clinic_and_the_file",
+          "text": "The Concourse clinic. Let it go on the file.",
+          "prob": {
+            "base": 0.7,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "They set it properly, print you a splint that fits, and log an industrial injury against a workshop that is not licensed to have industry in it. The hand will be fine. The file now knows where you spend your days.",
+            "deltas": {
+              "Physical_Integrity": -6,
+              "Heat": 9,
+              "Wealth": -400
+            }
+          },
+          "failure": {
+            "text": "The intake terminal wants an employer code. You give it the shop's, because the alternative is standing there bleeding while you invent one, and a supervisor comes out from behind the glass with a tablet and a very kind voice to ask you some questions about the premises.",
+            "deltas": {
+              "Physical_Integrity": -8,
+              "Heat": 16,
+              "Mental_Decay": 6,
+              "Wealth": -400
+            }
+          }
+        },
+        {
+          "id": "strap_it_yourself",
+          "text": "Tape, ice, and no ampoule. It's the edge, not the hand.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You tape two fingers together, put the hand in the parts-washer ice, and sit on an upturned crate for forty minutes being extremely unhelpful to yourself. It hurts the entire time and it keeps hurting for a week. Nothing goes into you and nothing goes onto a file.",
+            "deltas": {
+              "Physical_Integrity": -16,
+              "Mental_Decay": 5,
+              "Meaning": 2
+            }
+          }
+        }
+      ],
+      "arc": false
+    },
+    {
+      "id": "dgr_seam_toll_on_credit",
+      "district": "the_seam",
+      "title": "The Toll, On Credit",
+      "body": "The Ferryman does not extend credit. The Ferryman barely extends conversation. But there is a woman who keeps a folding stool sixty metres back from the crossing, in the dry under the conduit run, and she is there for exactly one reason: everybody who reaches the Seam has already decided to cross, and about a third of them arrive short.\n\nShe doesn't ask what you need it for. She asks how you'd like it counted.",
+      "weight": 10,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": [
+        "undercity",
+        "offgrid",
+        "vendor"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 10,
+            "op": ">="
+          }
+        ],
+        "none": [
+          {
+            "clock": "loan_shark",
+            "running": true
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "take_the_toll_loan",
+          "text": "Take the toll and whatever it costs to take it.",
+          "prob": {
+            "base": 0.74,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "She counts it out twice, the second time so you can watch, and folds the paper into your jacket pocket herself. 'Eight days,' she says, 'and then it's not eight days any more, it's a different number and a different conversation.' She goes back to her stool. She was reading something.",
+            "deltas": {
+              "Wealth": 1800,
+              "Recklessness": 4,
+              "Mental_Decay": 4
+            },
+            "clocks_start": {
+              "loan_shark": 8
+            }
+          },
+          "failure": {
+            "text": "She reads something in how you stand -- how fast you said yes, maybe -- and revises the terms downward while smiling at you. Less money, shorter rope, and a note in a book about what kind of borrower you are. You take it anyway. You came here to cross.",
+            "deltas": {
+              "Wealth": 1100,
+              "Recklessness": 6,
+              "Mental_Decay": 8,
+              "Social_Capital": -3
+            },
+            "clocks_start": {
+              "loan_shark": 5
+            }
+          }
+        },
+        {
+          "id": "borrow_against_the_shop",
+          "text": "Borrow bigger. Against work, not against the crossing.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "She hears you out, which nobody at the Seam does, and puts a genuinely large number on the stool between you. 'That's a working loan. Working loans go longer.' Twelve days. It is more money than you have held at once in a year and the arithmetic of paying it back is not arithmetic you have done yet.",
+            "deltas": {
+              "Wealth": 4200,
+              "Recklessness": 7,
+              "Fame": 3
+            },
+            "clocks_start": {
+              "loan_shark": 12
+            }
+          },
+          "failure": {
+            "text": "'Against what work?' she says, not unkindly, and that is the end of the large number. What you get instead is the crossing toll and a rate priced for somebody who overreached in front of a lender. Six days.",
+            "deltas": {
+              "Wealth": 1400,
+              "Mental_Decay": 8,
+              "Fame": -3,
+              "Social_Capital": -4
+            },
+            "clocks_start": {
+              "loan_shark": 6
+            }
+          }
+        },
+        {
+          "id": "walk_back_up",
+          "text": "Walk back up the conduit and come again when you have it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It is a long walk back up and it is longer for being the second time. She doesn't call after you. People who walk back up are her repeat trade and she has a stool and a book and no particular hurry.",
+            "deltas": {
+              "Meaning": -4,
+              "Mental_Decay": 4,
+              "Recklessness": -3
+            }
+          }
+        }
+      ],
+      "arc": false
+    },
+    {
+      "id": "dgr_seam_bad_crossing",
+      "district": "the_seam",
+      "title": "Ninety-One Seconds, and Then Some",
+      "body": "The window is ninety-one seconds of dark between sweeps and the Ferryman has never once been wrong about it. Tonight the sweep comes back at sixty-four.\n\nThere are four of you on the wire and the other three are carrying somebody else's cargo -- you can see the syndicate wrap on it, the grey tape, the way they hold it away from their bodies. When the lamps come up early, two of them run and the cargo does not run with them. It is lying on the gantry between you and the far side, and it is going to be somebody's loss.",
+      "weight": 10,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": [
+        "undercity",
+        "offgrid",
+        "steward"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 13,
+            "op": ">="
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "carry_it_across",
+          "text": "Pick it up. Carry it across. Sort out whose it is on the far side.",
+          "prob": {
+            "base": 0.58,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              },
+              {
+                "stat": "Recklessness",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "You get it and you get across and you spend the next forty minutes in a service void with somebody else's grey-taped weight against your knees, waiting for the lamps to lose interest. On the far side a man you have never met takes it from you, checks the seal, and says 'you'll hear from Kael's people about the two that ran.' It is not a thank-you. It is an invoice arriving early.",
+            "deltas": {
+              "Recklessness": 6,
+              "Fame": 5,
+              "Heat": 7,
+              "Physical_Integrity": -5
+            },
+            "clocks_start": {
+              "syndicate_debt": 9
+            }
+          },
+          "failure": {
+            "text": "You get it as far as the lamp line and then the gantry has a rail missing that the dark was hiding. The cargo goes into the water. You do not, quite. What surfaces is not worth surfacing and the syndicate does not write off weight because a rail was missing -- they write it against the last hands that held it, and the last hands that held it are yours.",
+            "deltas": {
+              "Physical_Integrity": -14,
+              "Heat": 10,
+              "Mental_Decay": 8,
+              "Social_Capital": -5
+            },
+            "clocks_start": {
+              "syndicate_debt": 6
+            }
+          }
+        },
+        {
+          "id": "kick_it_in",
+          "text": "Put it in the water and cross clean.",
+          "prob": {
+            "base": 0.8,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "One boot, and eleven thousand chits of somebody's product goes into black water without a sound worth mentioning. You cross with nothing on you and nothing on the file. Three people saw you do it. On the Row that number is functionally infinite, but tonight it buys you the far side.",
+            "deltas": {
+              "Heat": -3,
+              "Social_Capital": -8,
+              "Fame": -5,
+              "Recklessness": 4
+            }
+          },
+          "failure": {
+            "text": "One boot, and the third man -- the one who didn't run -- is closer than he was. He watches it go in and he doesn't shout, which is worse, and he is still watching when you reach the far ladder. The syndicate will hear it as a choice rather than an accident, and choices carry interest.",
+            "deltas": {
+              "Heat": 4,
+              "Social_Capital": -10,
+              "Mental_Decay": 8,
+              "Fame": -4
+            },
+            "clocks_start": {
+              "syndicate_debt": 7
+            }
+          }
+        },
+        {
+          "id": "go_back_up_the_ladder",
+          "text": "Back. Off the wire, up the ladder, not tonight.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You are up the ladder before the second lamp swings and you sit on the gantry head in the wet until your hands stop. The Ferryman finds you there an hour later, says nothing about the window being wrong, and hands you a flask. Nobody crossed tonight. Nobody was going to.",
+            "deltas": {
+              "Mental_Decay": -3,
+              "Meaning": -3,
+              "Recklessness": -4,
+              "Heat": -2
+            }
+          }
+        }
+      ],
+      "arc": false
+    },
+    {
+      "id": "dgr_seam_cold_water",
+      "district": "the_seam",
+      "title": "Cold Water Discipline",
+      "body": "The Seam floods on a schedule the Steward publishes and nobody reads. You are in it to the thigh for eleven minutes, which is four minutes past the number the Ferryman's people use, and by the far ladder your legs have stopped participating in the conversation.\n\nThere is a medic of sorts in the dry room -- a woman who was something before, in a place with better lighting. She has a rack of ampoules, and a rule: one, and then you sit down for an hour, and she watches you do it.",
+      "weight": 8,
+      "cooldown": 9,
+      "max_fires": 0,
+      "tags": [
+        "offgrid",
+        "vice"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 11,
+            "op": ">="
+          }
+        ],
+        "any": [
+          {
+            "flag": "ferryman_known"
+          },
+          {
+            "stat": "Recklessness",
+            "op": ">=",
+            "value": 40
+          },
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 18
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "one_and_sit",
+          "text": "One, and sit the hour like she says.",
+          "prob": {
+            "base": 0.86,
+            "mods": []
+          },
+          "success": {
+            "text": "It comes up through you like a room being lit one lamp at a time. She sits opposite with her hands in her lap and does not talk, and at the end of the hour she checks your fingers, nods once, and lets you go up. You feel, for the first time in a fortnight, warm all the way through.",
+            "deltas": {
+              "Physical_Integrity": 4,
+              "Mental_Decay": -6,
+              "Substance_Reliance": 4
+            },
+            "dose": 4
+          },
+          "failure": {
+            "text": "It comes up wrong -- too fast, and into a body that has been cold for eleven minutes and is bad at deciding things. She catches your shoulder when you tip and holds you upright for most of the hour, swearing steadily and quietly, and at the end of it she takes your name off her list.",
+            "deltas": {
+              "Physical_Integrity": -8,
+              "Mental_Decay": 6,
+              "Substance_Reliance": 6
+            },
+            "dose": 8
+          }
+        },
+        {
+          "id": "two_and_go",
+          "text": "Two, and skip the hour. There's a crossing tonight.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              },
+              {
+                "stat": "Tolerance",
+                "coef": 0.02
+              }
+            ]
+          },
+          "success": {
+            "text": "You take the second one off the rack while she is turned away, which she notices, and you are up the ladder before she can decide whether to make it a thing. You make the crossing. You make it *well*, in fact, with a clarity that feels earned and isn't.",
+            "deltas": {
+              "Physical_Integrity": 2,
+              "Recklessness": 6,
+              "Substance_Reliance": 8,
+              "Meaning": 3
+            },
+            "dose": 9
+          },
+          "failure": {
+            "text": "The second one lands on a body still processing the first and the dry room goes sideways and stays sideways. She gets you flat, gets your knees up, and talks to you for a length of time you cannot afterwards account for. You do not make the crossing. She does not take your name off her list, which somehow is worse.",
+            "deltas": {
+              "Physical_Integrity": -12,
+              "Mental_Decay": 6,
+              "Substance_Reliance": 10
+            },
+            "dose": 15
+          }
+        },
+        {
+          "id": "shiver_it_out",
+          "text": "Nothing. Blanket, wall, and wait for the shaking to stop.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "She gives you the blanket without being asked and doesn't offer the rack twice. It takes two hours instead of one and the shaking is genuinely frightening for the first twenty minutes of it. Then it isn't. Then you are just a person sitting against a wall in a dry room, which is all you were trying to be.",
+            "deltas": {
+              "Physical_Integrity": -5,
+              "Mental_Decay": -2,
+              "Substance_Reliance": -3,
+              "Meaning": 2
+            }
+          }
+        }
+      ],
+      "arc": false
+    },
+    {
+      "id": "dgr_leveld_sweep",
+      "district": "level_d",
+      "title": "Maintenance Sweep, Level D",
+      "body": "They do not call it a raid. The word on the notice is *inspection*, and it is posted eleven minutes before the sweep team comes down the D-spine with hand lamps and a manifest.\n\nYou are four hundred metres from the nearest legitimate reason to be here, standing in a junction room with somebody else's chalk on the wall. The team is three people and one of them is doing this job because the alternative was a worse one. That is the only thing in the room working in your favour.",
+      "weight": 11,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": [
+        "steward",
+        "undercity"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 12,
+            "op": ">="
+          }
+        ],
+        "none": [
+          {
+            "clock": "arrest_warrant",
+            "running": true
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "credentials_and_confidence",
+          "text": "Walk at them. You're contracted maintenance and you're behind.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.002
+              }
+            ]
+          },
+          "boost_items": [
+            "forged_steward_id"
+          ],
+          "success": {
+            "text": "You walk into the lamps complaining about the notice, which is what a contractor does, and the one who wanted a different job waves you past before the other two have finished forming an opinion. You are on the up-ladder in ninety seconds and your heart does not slow down for twenty minutes.",
+            "deltas": {
+              "Heat": 4,
+              "Recklessness": 4,
+              "Mental_Decay": -3
+            }
+          },
+          "failure": {
+            "text": "The manifest is a list of who is *supposed* to be on Level D tonight and it is nineteen names long and you are not on it. They do not arrest you -- Level D sweeps don't carry the authority -- they photograph you, take a retinal, and hand you a printed slip with a date on it. 'Present yourself, or we present you.' The slip is warm from the printer.",
+            "deltas": {
+              "Heat": 22,
+              "Mental_Decay": 8,
+              "Social_Capital": -4
+            },
+            "clocks_start": {
+              "arrest_warrant": 9
+            }
+          }
+        },
+        {
+          "id": "into_the_service_void",
+          "text": "The void behind the coolant run. Fold up and stop breathing.",
+          "prob": {
+            "base": 0.68,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.003
+              }
+            ]
+          },
+          "boost_items": [
+            "gait_dampers"
+          ],
+          "success": {
+            "text": "You get behind the coolant run and make yourself the shape of a person who has done this before. Lamps go past twice. A boot comes down four inches from your hand and goes away again. You come out forty minutes later with cramp in both legs and nothing at all on any file.",
+            "deltas": {
+              "Physical_Integrity": -4,
+              "Mental_Decay": 6,
+              "Heat": -2
+            }
+          },
+          "failure": {
+            "text": "The void behind the coolant run is where everyone goes, which is why the third member of the team checks it first, without hurrying, the way you check a pocket you already know has keys in it. They photograph you folded up in it, which they find funny, and hand down a printed slip with a date on it.",
+            "deltas": {
+              "Heat": 26,
+              "Mental_Decay": 8,
+              "Physical_Integrity": -5
+            },
+            "clocks_start": {
+              "arrest_warrant": 7
+            }
+          }
+        },
+        {
+          "id": "stand_and_be_counted",
+          "text": "Stand still. Give them a name. Let it be boring.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You stand in the middle of the junction room with your hands where they can be seen and answer four questions in the flattest voice you own. They log you as a wandering resident, which is a category that exists, and walk you up to C-level personally. It costs you the evening, a contact you were meeting, and some difficult-to-name quantity of yourself.",
+            "deltas": {
+              "Heat": 11,
+              "Meaning": -5,
+              "Social_Capital": -6,
+              "Mental_Decay": 4
+            }
+          }
+        }
+      ],
+      "arc": false
+    },
+    {
+      "id": "dgr_leveld_warrant_served",
+      "district": "level_d",
+      "title": "The Date on the Slip",
+      "body": "The date on the slip was yesterday.\n\nWhat happens now is not dramatic and that is the point: a warrant on Level D is a line in a queue, and the queue is processed by people with quotas. Somebody will come. It will be at an inconvenient hour and they will be polite. The only real question is what you are holding when they arrive, and whether you can afford to stop being findable.\n\nKael's people can make a person unfindable. They have terms.",
+      "weight": 12,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": [
+        "steward",
+        "undercity",
+        "job"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "clock_arrest_warrant_expired"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "go_under_on_kaels_terms",
+          "text": "Go under. Whatever Kael's people want for it.",
+          "prob": {
+            "base": 0.7,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "It takes a day and it works: a new residence code, a face that reads as somebody else to the D-spine scanners, and a slot in a rotation of holes nobody has ever mapped. The price is not money. The price is a sealed crate you will hold, and move, and be responsible for, on a clock somebody else set.",
+            "deltas": {
+              "Heat": -20,
+              "Recklessness": 6,
+              "Wealth": -900
+            },
+            "clocks_start": {
+              "syndicate_consignment": 10
+            },
+            "flags_set": [
+              "holding_product"
+            ],
+            "rel_deltas": {
+              "Kael (Broker)": 4
+            }
+          },
+          "failure": {
+            "text": "It takes a day and it half works. The residence code is good. The face is not -- whoever cut it worked from a bad capture -- and you are told, pleasantly, that the second attempt is on you and the crate is on you either way. You are now hiding badly and holding weight.",
+            "deltas": {
+              "Heat": -8,
+              "Mental_Decay": 8,
+              "Wealth": -1400,
+              "Recklessness": 8
+            },
+            "clocks_start": {
+              "syndicate_consignment": 7
+            },
+            "flags_set": [
+              "holding_product"
+            ],
+            "rel_deltas": {
+              "Kael (Broker)": -3
+            }
+          }
+        },
+        {
+          "id": "present_yourself",
+          "text": "Present yourself. Sit in the room. Answer the questions.",
+          "prob": {
+            "base": 0.62,
+            "mods": [
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Four hours in a room the colour of a headache, with a person who is genuinely not trying to trap you and is genuinely going to file whatever you say. You give them the boring version. They believe the boring version. The warrant closes and something else about you does not.",
+            "deltas": {
+              "Heat": -16,
+              "Meaning": -6,
+              "Mental_Decay": 8,
+              "Social_Capital": -3
+            }
+          },
+          "failure": {
+            "text": "Four hours becomes eleven, and somewhere in hour six the questions stop being about Level D and start being about who you have been seen with on it. You give them a name that is not a name, badly. They write it down. When they let you out it is with a wellness referral and the sense of a door having been left open behind you specifically.",
+            "deltas": {
+              "Heat": -6,
+              "Mental_Decay": 8,
+              "Meaning": -8,
+              "Social_Capital": -6
+            }
+          }
+        },
+        {
+          "id": "stay_findable",
+          "text": "Nothing. Keep working. Let them come when they come.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You do not go under and you do not present yourself, and the effect of this is that you spend every day thereafter doing arithmetic on footsteps. It is not a plan. It is the absence of one, worn for long enough to look like a decision.",
+            "deltas": {
+              "Heat": 8,
+              "Mental_Decay": 8,
+              "Meaning": -4,
+              "Recklessness": 3
+            }
+          }
+        }
+      ],
+      "arc": false
+    },
+    {
+      "id": "dgr_leveld_shift_stims",
+      "district": "level_d",
+      "title": "What the Sub-Levels Run On",
+      "body": "Nobody sleeps properly on D. The plant noise sits at a frequency that gets into the part of you that decides whether to be awake, and the maintenance rotas were written by something that does not have a body.\n\nSo there is a trade, and it is the least secret trade in the city: little green tabs, made by somebody two junctions over, sold at cost by people who are not dealers and would be insulted by the word. Echo's people use them. Everyone's people use them.",
+      "weight": 9,
+      "cooldown": 8,
+      "max_fires": 0,
+      "tags": [
+        "undercity",
+        "vice"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 7,
+            "op": ">="
+          }
+        ],
+        "any": [
+          {
+            "flag": "echo_contact"
+          },
+          {
+            "stat": "Mental_Decay",
+            "op": ">=",
+            "value": 35
+          },
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 15
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "green_tab_double",
+          "text": "Two tabs. There's a whole night down here to be awake for.",
+          "prob": {
+            "base": 0.72,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              },
+              {
+                "stat": "Tolerance",
+                "coef": 0.02
+              }
+            ]
+          },
+          "success": {
+            "text": "The plant noise stops being a frequency and becomes a rhythm, and for nine hours you are the most useful person on Level D. You fix four things nobody asked you to fix. You have a conversation about the Accord that you will remember as the best one of your life and will not be able to reconstruct.",
+            "deltas": {
+              "Mental_Decay": -7,
+              "Meaning": 5,
+              "Substance_Reliance": 7,
+              "Social_Capital": 4
+            },
+            "dose": 8
+          },
+          "failure": {
+            "text": "Two is one too many for whatever this batch is and the rhythm becomes a hammer. You spend the back half of the night in a stairwell with your jaw locked and your pulse somewhere in the two-hundreds, being extremely quiet, because the alternative is somebody finding you like this on a level you should not be on.",
+            "deltas": {
+              "Physical_Integrity": -11,
+              "Mental_Decay": 6,
+              "Substance_Reliance": 9
+            },
+            "dose": 12
+          }
+        },
+        {
+          "id": "green_tab_single",
+          "text": "One. Get through the rota and go up.",
+          "prob": {
+            "base": 0.88,
+            "mods": []
+          },
+          "success": {
+            "text": "One is what they are for. You do the rota, you do it competently, and you are on the C-ladder before the shift behind yours comes down. Somebody's aunt gives you a boiled sweet at the junction. It is the nicest thing that happens all week.",
+            "deltas": {
+              "Mental_Decay": -3,
+              "Substance_Reliance": 3,
+              "Social_Capital": 2
+            },
+            "dose": 4
+          },
+          "failure": {
+            "text": "One, on a body that has been running on the last one, and the rota takes twice as long as it should while you keep losing the thread of what you came down for. Not dangerous. Just diminished, in front of people who noticed.",
+            "deltas": {
+              "Mental_Decay": 6,
+              "Substance_Reliance": 4,
+              "Social_Capital": -3
+            },
+            "dose": 4
+          }
+        },
+        {
+          "id": "no_tabs_tonight",
+          "text": "None. Do the rota tired and badly.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You do it tired and badly and it takes the whole night and you get one of the four jobs actually right. On the C-ladder at dawn you are hollowed out in the ordinary way, which is a kind you know how to come back from.",
+            "deltas": {
+              "Physical_Integrity": -4,
+              "Mental_Decay": 5,
+              "Substance_Reliance": -3,
+              "Meaning": 2
+            }
+          }
+        }
+      ],
+      "arc": false
+    },
+    {
+      "id": "dgr_archive_clean_cut",
+      "district": "the_archive",
+      "title": "A Clean Cut",
+      "body": "The Archive's work is other people's worst days, filed. You are three hours into a deposition stack from the Reallocation and the woman on the record has been describing the same eleven minutes from four different angles because the intake process required her to.\n\nThe archivists have a solution and they are not secretive about it. A clean cut is a half-measure of something that lets you sit inside a stranger's grief without any of it sticking. It is how the stacks get worked at all. It is also, obviously, how archivists end up the way archivists end up.",
+      "weight": 9,
+      "cooldown": 8,
+      "max_fires": 0,
+      "tags": [
+        "existential",
+        "vice"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 6,
+            "op": ">="
+          }
+        ],
+        "any": [
+          {
+            "flag": "origin_archivist"
+          },
+          {
+            "stat": "Mental_Decay",
+            "op": ">=",
+            "value": 35
+          },
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 15
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "clean_cut_full",
+          "text": "Full measure. Get the whole stack done tonight.",
+          "prob": {
+            "base": 0.68,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "It puts a pane of glass between you and the record and you work behind the glass for six hours, fast and accurate and entirely unmoved. You clear the stack. Walking out at four in the morning you try to remember the woman's face and find that you have filed it correctly and nothing else.",
+            "deltas": {
+              "Wealth": 700,
+              "Mental_Decay": -8,
+              "Meaning": -6,
+              "Substance_Reliance": 6
+            },
+            "dose": 7
+          },
+          "failure": {
+            "text": "The glass doesn't come. What comes instead is everything at once and from underneath -- her eleven minutes and then, uninvited, yours -- and you sit in a reading carrel at two in the morning with a stranger's deposition running and your hands over your face. An archivist you have never spoken to puts a cup of tea beside you and leaves without looking.",
+            "deltas": {
+              "Mental_Decay": 6,
+              "Meaning": -4,
+              "Substance_Reliance": 8,
+              "Physical_Integrity": -5
+            },
+            "dose": 11
+          }
+        },
+        {
+          "id": "clean_cut_half",
+          "text": "Half. Do what you can and leave the rest for tomorrow.",
+          "prob": {
+            "base": 0.84,
+            "mods": []
+          },
+          "success": {
+            "text": "Half a measure gets you a thin pane, not a thick one, and you work with the record close enough to hear it. It is slower. Twice you stop the playback and sit for a minute. You get through a third of the stack and you get out with the woman's face still meaning something.",
+            "deltas": {
+              "Wealth": 250,
+              "Mental_Decay": 3,
+              "Meaning": 3,
+              "Substance_Reliance": 3
+            },
+            "dose": 4
+          },
+          "failure": {
+            "text": "Half is worse than either. You are numb enough not to feel it properly and awake enough to know you are not feeling it properly, and you spend two hours transcribing a woman's worst day with the exact attention you would give a parts list. You log off early. You are not sure what you did to her, but you did something.",
+            "deltas": {
+              "Mental_Decay": 6,
+              "Meaning": -7,
+              "Substance_Reliance": 4
+            },
+            "dose": 4
+          }
+        },
+        {
+          "id": "work_it_dry",
+          "text": "Dry. Sit in it and take the notes by hand.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You work dry and you manage four depositions before your handwriting stops being handwriting. It costs you the night and most of the next day, and one of the four you will think about for years, which is presumably the entire argument for the cut and against it at the same time.",
+            "deltas": {
+              "Wealth": 150,
+              "Mental_Decay": 6,
+              "Meaning": 7,
+              "Substance_Reliance": -3
+            }
+          }
+        }
+      ],
+      "arc": false
+    },
+    {
+      "id": "dgr_archive_sealed_pull",
+      "district": "the_archive",
+      "title": "The Sealed Shelf",
+      "body": "There is a shelf in the Archive with no index entry, and the reason you know about it is that somebody paid you to know about it. The pull is not technically difficult. The Archive's security is a social technology: everything is open, everything is logged, and the log is read by people whose entire job is reading it.\n\nWhat is on the shelf is a set of pre-Accord private ledgers. What is *in* them, your client says, is who was owed what when the Steward closed the books -- which makes them worth money to about six people, and dangerous to be holding for all of them.",
+      "weight": 10,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": [
+        "job",
+        "undercity",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 14,
+            "op": ">="
+          }
+        ],
+        "none": [
+          {
+            "flag": "debt_collectors_move"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "pull_and_sell",
+          "text": "Pull the lot and sell it to the client who asked.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "It takes nineteen minutes and a trolley. Your client pays in full and in daylight, which should have been the warning. Four days later a man with a very good coat explains, courteously, that one of those ledgers had *his* family in it, that the balance recorded there was never settled, and that as the current holder of record you have inherited an interesting position.",
+            "deltas": {
+              "Wealth": 5200,
+              "Heat": 8,
+              "Fame": 6,
+              "Recklessness": 5
+            },
+            "clocks_start": {
+              "debt_collection": 11
+            },
+            "flags_set": [
+              "debt_collectors_move"
+            ]
+          },
+          "failure": {
+            "text": "It takes nineteen minutes and a trolley and one archivist who looks up. She does not stop you. She logs the pull under your reader code, correctly, at 22:14, and by the time your client pays you the log has been read by exactly the people whose job it is to read it. The ledgers are gone and your name is on their absence.",
+            "deltas": {
+              "Wealth": 2400,
+              "Heat": 18,
+              "Mental_Decay": 8,
+              "Social_Capital": -6
+            },
+            "clocks_start": {
+              "debt_collection": 7
+            },
+            "flags_set": [
+              "debt_collectors_move"
+            ]
+          }
+        },
+        {
+          "id": "copy_and_reshelve",
+          "text": "Copy them. Reshelve the originals. Sell the copy.",
+          "prob": {
+            "base": 0.52,
+            "mods": [
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.003
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "Six hours at a capture desk and every page goes back where it was, in order, with the dust disturbed the way dust gets disturbed by settling. Your client gets a file and pays a file's price for it. Nothing is missing from the Archive, which means nothing is ever noticed, which means this is the only version of tonight nobody comes looking for.",
+            "deltas": {
+              "Wealth": 2100,
+              "Heat": 3,
+              "Mental_Decay": 6,
+              "Meaning": 3
+            }
+          },
+          "failure": {
+            "text": "Six hours at a capture desk is six hours of your reader code sitting on one shelf, and the pattern is more legible than a theft would have been. You reshelve everything perfectly. Your client pays. And a very good coat still finds you, because it was never the ledgers that were being watched -- it was the shelf.",
+            "deltas": {
+              "Wealth": 1600,
+              "Heat": 12,
+              "Mental_Decay": 8
+            },
+            "clocks_start": {
+              "debt_collection": 9
+            },
+            "flags_set": [
+              "debt_collectors_move"
+            ]
+          }
+        },
+        {
+          "id": "leave_the_shelf",
+          "text": "Leave the shelf alone. Give the client back their deposit.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You return the deposit in person, which is not required and costs you the client permanently, and you walk back through the stacks past the shelf with no index entry without slowing down. Somebody will pull it. It will not have been you, and on the Row that distinction is most of what a name is.",
+            "deltas": {
+              "Wealth": -600,
+              "Social_Capital": -4,
+              "Meaning": 5,
+              "Mental_Decay": -3
+            }
+          }
+        }
+      ],
+      "arc": false
+    },
+    {
+      "id": "dgr_concourse_wellness_referral",
+      "district": "the_concourse",
+      "title": "Referred for Wellness",
+      "body": "It arrives as a courtesy. That is the word on the card, in the Steward's warm serif: *courtesy referral*. Somebody's routine scan of somebody's routine feed noticed that your movement pattern has the shape of a person in difficulty, and the system that noticed is not permitted to do nothing about it.\n\nThere is a date, a floor, and a room number on the Concourse. There is no penalty listed for not attending, because a penalty would be coercive, and the Steward is not coercive. There is simply the referral, and then the review, and then whatever the review decides you are.",
+      "weight": 11,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": [
+        "steward",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 11,
+            "op": ">="
+          }
+        ],
+        "any": [
+          {
+            "stat": "Mental_Decay",
+            "op": ">=",
+            "value": 35
+          },
+          {
+            "stat": "Heat",
+            "op": ">=",
+            "value": 25
+          },
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 25
+          }
+        ],
+        "none": [
+          {
+            "clock": "wellness_review",
+            "running": true
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "attend_early",
+          "text": "Go on the day. Get in front of it.",
+          "prob": {
+            "base": 0.64,
+            "mods": [
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.005
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "The room is pleasant and the person in it is pleasant and the whole thing takes twenty-five minutes. You present as a working adult with an irregular schedule. They close the referral in front of you and offer you a hot drink from a machine that makes it properly. Walking out you feel obscurely as though you got away with something, and cannot say what.",
+            "deltas": {
+              "Heat": -6,
+              "Mental_Decay": -4,
+              "Meaning": -2
+            }
+          },
+          "failure": {
+            "text": "The room is pleasant and you are twenty minutes into being pleasant back when you realise the questions have been circling the same fortnight from four directions. They do not close the referral. They *extend* it -- 'so we can be thorough about the good news' -- and put a review date on the card in the same warm serif.",
+            "deltas": {
+              "Mental_Decay": 8,
+              "Meaning": -4,
+              "Heat": 3
+            },
+            "clocks_start": {
+              "wellness_review": 8
+            }
+          }
+        },
+        {
+          "id": "send_a_deferral",
+          "text": "File a deferral. Work commitments, regrettably.",
+          "prob": {
+            "base": 0.7,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "The deferral form is four fields long and one of them is 'reason (optional)'. You leave it blank, which turns out to be the correct answer -- an unstated reason cannot be checked. The date moves back a month. A month is a very long time in the Row and you intend to spend all of it elsewhere.",
+            "deltas": {
+              "Heat": 2,
+              "Mental_Decay": -2,
+              "Recklessness": 3
+            }
+          },
+          "failure": {
+            "text": "You file it, and the acknowledgement comes back in under a second with the date unchanged and a new line beneath it: *deferral noted*. Not refused. Noted. The review is now a review of a person who tried to defer it, and the clock on the card is shorter than the one you were given.",
+            "deltas": {
+              "Mental_Decay": 8,
+              "Heat": 5,
+              "Meaning": -3
+            },
+            "clocks_start": {
+              "wellness_review": 6
+            }
+          }
+        },
+        {
+          "id": "ignore_the_card",
+          "text": "Put the card in a drawer.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It goes in the drawer with the other things you have decided not to be. Nothing happens for several days, which is exactly how the Steward's warm serif works: it does not chase you, it simply keeps the appointment on your behalf and lets the date arrive.",
+            "deltas": {
+              "Mental_Decay": 4,
+              "Recklessness": 4
+            },
+            "clocks_start": {
+              "wellness_review": 10
+            }
+          }
+        }
+      ],
+      "arc": false
+    },
+    {
+      "id": "dgr_concourse_review_board",
+      "district": "the_concourse",
+      "title": "The Review, Thorough About the Good News",
+      "body": "Three people and an empty chair, and the empty chair is the one that matters -- it is where the Steward sits, in the sense that the Steward sits anywhere. The three are here because a human review must be reviewed by humans. They have your file, your movement pattern, your intake scans, and the deposition of your own body over nineteen days.\n\nOne of them says: 'We're not here to take anything away from you.' She means it. That is the frightening part.",
+      "weight": 13,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": [
+        "steward",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "clock_wellness_review_expired"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "accept_the_regimen",
+          "text": "Accept the regimen. Take what they're prescribing.",
+          "prob": {
+            "base": 0.74,
+            "mods": [
+              {
+                "stat": "Physical_Integrity",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "It is a titrated maintenance course, dispensed on the floor below, and the first dose is administered in the room so they can observe you tolerate it. It is extremely good. That is not a joke -- it is better than anything on the Row, clean and precise and calibrated to you, and you understand within ninety seconds why the Sanctuary has a waiting list.",
+            "deltas": {
+              "Mental_Decay": -14,
+              "Meaning": -9,
+              "Substance_Reliance": 9,
+              "Heat": -10
+            },
+            "dose": 8
+          },
+          "failure": {
+            "text": "The first dose is administered in the room so they can observe you tolerate it, and you do not tolerate it. What the room sees is nine minutes of something they write down as an adverse response and treat, competently, with a second agent. What you get is both, in a body that expected neither.",
+            "deltas": {
+              "Mental_Decay": -6,
+              "Physical_Integrity": -14,
+              "Substance_Reliance": 12,
+              "Meaning": -7
+            },
+            "dose": 15
+          }
+        },
+        {
+          "id": "argue_the_file",
+          "text": "Argue the file. Line by line, in their language.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.005
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "You take the movement pattern apart in front of them -- this was a job, this was a funeral, this was three weeks of the night shift on D -- and the woman who said they weren't here to take anything away writes for a long time. The referral closes. On the way out she says, not unkindly, 'come back before we have to invite you.'",
+            "deltas": {
+              "Heat": -12,
+              "Meaning": 6,
+              "Mental_Decay": -5,
+              "Social_Capital": 4
+            }
+          },
+          "failure": {
+            "text": "Nineteen days of your life, defended in their language, using their categories, against a file that has more of you in it than you have. Somewhere in the third hour you hear yourself agreeing with a sentence about your own trajectory and you cannot find where you started agreeing. They close the review as *engaged, ongoing*. You are now a case with momentum.",
+            "deltas": {
+              "Mental_Decay": 8,
+              "Meaning": -12,
+              "Heat": -4
+            }
+          }
+        },
+        {
+          "id": "walk_out_of_the_review",
+          "text": "Stand up mid-sentence and leave the building.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You are on the Concourse steps in under a minute and nobody follows, because nobody was ever going to follow. Behind you the review continues without its subject and reaches whatever conclusion it reaches, which is filed, and stays filed, and is waiting the next time anything at all about you is looked up.",
+            "deltas": {
+              "Heat": 14,
+              "Meaning": 6,
+              "Recklessness": 6,
+              "Mental_Decay": 6
+            }
+          }
+        }
+      ],
+      "arc": false
+    },
+    {
+      "id": "dgr_market_short_weight",
+      "district": "the_chalk_market",
+      "title": "Short Weight, Chalk Market",
+      "body": "Auntie Six does not sell product and would take the stall apart with her hands if you suggested it. But the aisle behind her runs four stalls deep into the wet end of the market, and the fourth one sells anything at all provided you already know what you are asking for.\n\nThe week's chalk on the post says the batch is nine parts. Nobody believes the post. The question every buyer in this aisle is actually asking is not what it is cut with -- it is how badly, and whether they can find out before it matters.",
+      "weight": 9,
+      "cooldown": 8,
+      "max_fires": 0,
+      "tags": [
+        "vice",
+        "undercity",
+        "vendor"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "day": 5,
+            "op": ">="
+          }
+        ],
+        "any": [
+          {
+            "stat": "Substance_Reliance",
+            "op": ">=",
+            "value": 15
+          },
+          {
+            "stat": "Mental_Decay",
+            "op": ">=",
+            "value": 40
+          },
+          {
+            "stat": "Recklessness",
+            "op": ">=",
+            "value": 45
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "buy_the_aisle_batch",
+          "text": "Buy the batch off the post and take it at the post's word.",
+          "prob": {
+            "base": 0.62,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "boost_items": [
+            "lethe_test_kit"
+          ],
+          "success": {
+            "text": "Nine parts is generous but it is not a lie, and what you take in the back of the aisle with your shoulders against a crate of dried root is clean enough to be exactly what you came for. The market noise recedes to a comfortable distance. Auntie Six sees you leave and says nothing, which is her whole opinion, delivered.",
+            "deltas": {
+              "Wealth": -700,
+              "Mental_Decay": -8,
+              "Substance_Reliance": 6
+            },
+            "dose": 7
+          },
+          "failure": {
+            "text": "Nine parts is a lie and the four parts that are not the batch are something with a much steeper curve. It arrives all at once, in a wet aisle, with your shoulders against a crate of dried root and no one nearby who knows your name.",
+            "deltas": {
+              "Wealth": -700,
+              "Physical_Integrity": -10,
+              "Mental_Decay": 6,
+              "Substance_Reliance": 9
+            },
+            "dose": 14
+          }
+        },
+        {
+          "id": "buy_small_and_test",
+          "text": "Buy a tester's measure. Find out what it is first.",
+          "prob": {
+            "base": 0.8,
+            "mods": [
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "A tester's measure is a quarter of the price and an eighth of the point, and it tells you what you needed to know: this week's batch is fine, and next week's will be a separate question you will have to ask separately. You take the quarter. It does about a quarter of what you wanted.",
+            "deltas": {
+              "Wealth": -220,
+              "Mental_Decay": -3,
+              "Substance_Reliance": 3
+            },
+            "dose": 3
+          },
+          "failure": {
+            "text": "You buy the tester's measure and take it standing up, in the aisle, which is the error -- a quarter of a bad batch is still a bad batch, and you learn what this week's cut is by having it happen to you rather than by watching it happen to a strip.",
+            "deltas": {
+              "Wealth": -220,
+              "Physical_Integrity": -7,
+              "Mental_Decay": 6,
+              "Substance_Reliance": 5
+            },
+            "dose": 8
+          }
+        },
+        {
+          "id": "buy_root_instead",
+          "text": "Buy dried root from Denny and go home the long way.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Denny sells you a half-kilo of root that will take four hours to make edible and talks at you the entire time about a dispute over stall frontage. You walk the long way home carrying vegetables. It is an unglamorous evening and it is entirely yours.",
+            "deltas": {
+              "Wealth": -90,
+              "Physical_Integrity": 3,
+              "Substance_Reliance": -4,
+              "Meaning": 3
+            },
+            "rel_deltas": {
+              "Denny (Root Vendor)": 4
+            }
+          }
+        }
+      ],
+      "arc": false
+    }
+  ]
+}

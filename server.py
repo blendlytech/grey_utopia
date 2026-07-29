@@ -13,6 +13,9 @@ from urllib.parse import urlparse
 from engine.stats import create_starter_fixer, Character
 from engine.events import Event, load_events
 from engine.selector import select_event, is_ambient, ambient_budget_for, district_for_slot
+from engine.districts import (
+    apply_placements, clear_placements, district_hint, load_districts
+)
 from engine.resolver import (
     choice_probability, resolve_choice, check_endings,
     eligible_choices, build_epilogue, build_run_memories,
@@ -49,6 +52,14 @@ class GameSession:
         self.used_slots_today: int = 0
         self.fired_today: set[str] = set()
         self.ambient_today: int = 0
+        # A1: the day is gated on the morning placement step until the player
+        # has said where they are working. The placement itself lives on the
+        # character (so it saves with everything else); this flag is only "has
+        # today's step been answered yet", and it is what makes advance_event
+        # hold off on drawing a storylet for a slot whose district is not
+        # decided. Drawing first and placing after would mean the placement
+        # never reached the draw it was for.
+        self.awaiting_placement: bool = True
         self.last_outcome: dict | None = None
         self.day_report: dict | None = None
         self.last_day_report: dict | None = None
@@ -84,6 +95,7 @@ class GameSession:
             "used_slots_today": self.used_slots_today,
             "fired_today": sorted(self.fired_today),
             "ambient_today": self.ambient_today,
+            "awaiting_placement": self.awaiting_placement,
             "event_state": {
                 e.id: {"fire_count": e.fire_count, "last_fired_day": e.last_fired_day}
                 for e in self.events if e.fire_count > 0 or e.last_fired_day > -9999
@@ -103,6 +115,11 @@ class GameSession:
             self.used_slots_today = int(data.get("used_slots_today", 0))
             self.fired_today = set(data.get("fired_today", []))
             self.ambient_today = int(data.get("ambient_today", 0))
+            # A save written before A1 Phase 2 has no placement in it. Default to
+            # "already answered" rather than re-opening the step, so restoring an
+            # old autosave drops the player back into the day it saved instead of
+            # into a placement screen for a day that is half spent.
+            self.awaiting_placement = bool(data.get("awaiting_placement", False))
             event_state = data.get("event_state", {})
             for e in self.events:
                 st = event_state.get(e.id)
@@ -140,6 +157,9 @@ class GameSession:
             self.used_slots_today = 0
             self.fired_today.clear()
             self.ambient_today = 0
+            # A new day is a new placement. Yesterday's districts do not carry.
+            clear_placements(self.character)
+            self.awaiting_placement = bool(load_districts())
             self.current_slots = self.calculate_slots()
             self.day_report = build_day_report(self.character, stress, stats_before, clocks_before)
             self.last_day_report = self.day_report
@@ -152,11 +172,17 @@ class GameSession:
                 self.current_event = None
                 return
 
+        # Hold the draw until the morning placement step has been answered: the
+        # storylet for a slot depends on where that slot is standing.
+        if self.awaiting_placement:
+            self.current_event = None
+            return
+
         # Pick the next storylet, skipping any whose choices are all locked
         # (a soft-lock guard; the linter forbids authoring such events).
         skip = set(self.fired_today)
         budget = ambient_budget_for(self.ambient_today)
-        district = district_for_slot(self.used_slots_today)
+        district = district_for_slot(self.character, self.used_slots_today)
         for _ in range(8):
             candidate = select_event(
                 self.events, self.character, self.character.day, self.rng,
@@ -176,6 +202,7 @@ class GameSession:
         self.used_slots_today = 0
         self.fired_today = set()
         self.ambient_today = 0
+        self.awaiting_placement = bool(load_districts())
         self.last_outcome = None
         self.day_report = None
         self.last_day_report = None
@@ -257,6 +284,22 @@ class GameSession:
                 for r in self.character.relationships.values()
             ],
             "event": event_data,
+            "placement": None if self.character.dead else {
+                "awaiting": self.awaiting_placement,
+                "slots": self.current_slots,
+                # slot index -> district id, as strings so the JSON object round
+                # trips; the client echoes this shape straight back to /api/place.
+                "assigned": {str(k): v for k, v in self.character.placements.items()},
+                "districts": [
+                    {
+                        "id": d["id"],
+                        "name": d["name"],
+                        "blurb": d.get("blurb", ""),
+                        "hint": district_hint(self.events, self.character, d["id"]),
+                    }
+                    for d in load_districts()
+                ],
+            },
             "ambient": None if self.character.dead else {
                 "morning_report": morning_report(self.character),
                 "ledger_line": steward_ledger_line(self.character, self.last_day_report),
@@ -335,12 +378,48 @@ class GreyUtopiaRequestHandler(SimpleHTTPRequestHandler):
             self.send_json(st)
             return
 
+        if parsed.path == "/api/place":
+            length = int(self.headers.get("Content-Length", 0))
+            body = self.rfile.read(length).decode("utf-8")
+            try:
+                data = json.loads(body)
+                raw = data.get("placements") or {}
+                requested = {int(k): v for k, v in raw.items()}
+            except (ValueError, TypeError, AttributeError):
+                self.send_json({"error": "Invalid payload"}, status=400)
+                return
+
+            if session.character.dead:
+                self.send_json({"error": "Game over"}, status=400)
+                return
+            if not session.awaiting_placement:
+                self.send_json({"error": "Today's slots are already placed"}, status=400)
+                return
+            if any(slot < 0 or slot >= session.current_slots for slot in requested):
+                self.send_json({"error": "Slot out of range"}, status=400)
+                return
+
+            # apply_placements drops any district the registry does not define,
+            # so an unknown id degrades to an unplaced slot rather than to a
+            # shelf no content can ever reach.
+            apply_placements(session.character, requested)
+            session.awaiting_placement = False
+            session.advance_event()
+            session.save_state()
+            st = session.get_state_dict()
+            st["catalog"] = ITEM_CATALOG
+            self.send_json(st)
+            return
+
         if parsed.path == "/api/rest":
             if session.character.dead:
                 self.send_json({"error": "Game over"}, status=400)
                 return
             if session.used_slots_today >= session.current_slots:
                 self.send_json({"error": "No action slots remaining today"}, status=400)
+                return
+            if session.awaiting_placement:
+                self.send_json({"error": "Place today's slots first"}, status=400)
                 return
             text = apply_rest(session.character, session.rng)
             session.used_slots_today += 1
@@ -407,6 +486,9 @@ class GreyUtopiaRequestHandler(SimpleHTTPRequestHandler):
             if session.used_slots_today >= session.current_slots:
                 self.send_json({"error": "No action slots remaining today"}, status=400)
                 return
+            if session.awaiting_placement:
+                self.send_json({"error": "Place today's slots first"}, status=400)
+                return
 
             session.character.reinforce(name, amount=25.0)
             session.used_slots_today += 1
@@ -435,6 +517,12 @@ class GreyUtopiaRequestHandler(SimpleHTTPRequestHandler):
 
             if session.character.dead or not session.current_event:
                 self.send_json({"error": "Game over or no active event"}, status=400)
+                return
+            # advance_event never leaves a storylet standing while placement is
+            # open, so this is belt-and-braces -- but resolving one here would
+            # spend a slot whose district was never decided.
+            if session.awaiting_placement:
+                self.send_json({"error": "Place today's slots first"}, status=400)
                 return
 
             visible = eligible_choices(session.current_event.choices, session.character)

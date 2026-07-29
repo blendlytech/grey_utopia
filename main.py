@@ -16,6 +16,10 @@ from engine.resolver import (
 )
 from engine.decay import end_of_day_decay, compute_daily_stress, build_day_report
 from engine.ambient import morning_report, steward_ledger_line
+from engine.districts import (
+    apply_placements, auto_placement, clear_placements, district_hint,
+    district_name, load_districts
+)
 from engine import items as item_catalog
 from engine import legacy
 from engine import paths
@@ -23,6 +27,7 @@ from ui.terminal import (
     print_banner, render_hud, render_event, render_choices,
     prompt_choice, prompt_from_list, render_resolution,
     render_end_of_day_summary, render_ending_screen, render_ambient,
+    prompt_placement, render_placement_summary,
     RED, GREEN, DIM, BOLD, RESET
 )
 
@@ -102,6 +107,26 @@ def run_market_menu(character: Character) -> None:
         print(f"{GREEN}Acquired {item['name']}.{RESET}")
 
 
+def run_placement_step(character: Character, all_events: List[Event], slots: int,
+                       auto_play: bool, rng: random.Random) -> None:
+    """The morning placement: commit each of the day's slots to a district.
+
+    Placement rides on the character rather than on a local, so this loop,
+    `server.py` and the harness all read it back through the same
+    `district_for_slot`, and `server.py` gets save/load persistence for free.
+    """
+    clear_placements(character)
+    districts = load_districts()
+    if not districts:
+        return
+    if auto_play:
+        apply_placements(character, auto_placement(rng, character, slots))
+        return
+    hints = [district_hint(all_events, character, d["id"]) for d in districts]
+    apply_placements(character, prompt_placement(slots, districts, hints))
+    render_placement_summary(character.placements, slots, district_name)
+
+
 def run_game_loop(auto_play: bool = False, max_days: int = 30) -> None:
     rng = random.Random()
     character = create_starter_fixer()
@@ -143,6 +168,8 @@ def run_game_loop(auto_play: bool = False, max_days: int = 30) -> None:
             print(f"{"\n" if character.day > 0 else ""}{'='*40} DAY {character.day} ({slots} Action Slots Available) {'='*40}")
             render_ambient(morning_report(character), steward_ledger_line(character, last_day_report))
 
+        run_placement_step(character, all_events, slots, auto_play, rng)
+
         # Execute daily action slots
         fired_today: set[str] = set()
         ambient_today = 0
@@ -150,7 +177,7 @@ def run_game_loop(auto_play: bool = False, max_days: int = 30) -> None:
         while slot < slots:
             ev = select_event(all_events, character, character.day, rng, exclude_ids=fired_today,
                               ambient_budget=ambient_budget_for(ambient_today),
-                              district=district_for_slot(slot))
+                              district=district_for_slot(character, slot))
             if not ev:
                 if not auto_play:
                     print("\n[No eligible events available today. Resting...]")

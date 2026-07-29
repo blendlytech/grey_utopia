@@ -78,11 +78,11 @@ def ambient_budget_for(ambient_today: int) -> Optional[int]:
 # share of each draw's weight. It is not hidden, it is drowned, and no weighting
 # lever reaches something losing at that ratio. See docs/A1_DESIGN.md §0.
 #
-# Shipped disabled (PROTOTYPE_DISTRICT = None): every slot is unplaced, every
-# event is district-neutral, and behaviour is identical to pre-A1. Absent-means-
-# neutral is also what lets the deck migrate one pack at a time.
-PROTOTYPE_DISTRICT: Optional[str] = None
-DISTRICT_SLOTS_PER_DAY: int = 1
+# Phase 2 made placement a player decision (see engine/districts.py), so the
+# Phase-1 PROTOTYPE_DISTRICT / DISTRICT_SLOTS_PER_DAY constants are gone: there is
+# no longer an engine-side answer to "which district is this slot in," only the
+# one the morning placement step recorded. Absent-means-neutral still holds, and
+# is still what lets the deck migrate one pack at a time.
 
 # Whether a district's shelf also carries the district-neutral ambient storylets.
 #
@@ -106,27 +106,63 @@ DISTRICT_SLOTS_PER_DAY: int = 1
 # a 10.5% win rate on eligible draws (not 100%), and the deck-wide numbers come
 # out ahead of baseline rather than behind. Full A/B in BACKLOG_HANDOFF.md §3.
 #
-# The right texture is a district's *own* ambient, which does not exist until
-# Phase 3 distributes the volume pack across shelves. Revisit this flag then, with
-# proportionate filler rather than all of it.
+# The right texture is a district's *own* ambient, and Phase 2 built it: 39 volume
+# storylets now live on the two shelves by hand, which is proportionate filler
+# rather than all of it. That settles this flag rather than deferring it, on two
+# measurements. Dilution is steep and non-monotonic in the amount (chain win rate
+# on eligible draws: 28.7% bare, 14.4% at 6 texture events, 7.2% at 14, 4.3% at
+# 28), so the size is a per-district judgment. And *which* filler matters as much
+# as how much: a shelf stocked only with gentle content is a standing risk
+# discount that cost four balance assertions before the market got its loan shark
+# back (docs/A1_DESIGN.md §7.7). A global boolean can express neither. Leave Off.
 SHELF_INCLUDES_AMBIENT: bool = False
 
+# Whether a district's content is invisible from an *unplaced* slot -- the
+# stricter, more evocative reading of "the Row as a map", where going somewhere
+# is the only way to see what is there.
+#
+# Off, and Phase 3 settles it on measurement rather than the footgun Phase 1
+# deferred it on. Phase 1's objection was that "neutral" meant "not yet
+# migrated", so exclusivity would silently orphan the shelved minority. That
+# objection has expired -- 317 of 483 events have a home. What replaces it is
+# much worse for exclusivity, and it is a consequence of the map being *large*:
+#
+#   An automated day places at most one of three slots, on 55% of days, uniform
+#   over 7 districts -- so any one district is stood in roughly every 13th day,
+#   about 3 placed draws in a 36-day run. Exclusive shelves would make those ~3
+#   draws the *only* route to that district's 30-70 storylets. The other two
+#   slots a day would meanwhile draw from whatever was left neutral: family
+#   upkeep, the prologue, and two packs already measured gating-shaped.
+#
+# Measured, not argued (n=40, seed 0, the shipped map):
+#
+#                        non-exclusive   exclusive
+#   events never fired         81           212
+#   median eligible pool      209            81
+#   ambitions unreached       6/24         19/24
+#   unique events per run       90            68
+#
+# Non-exclusive shelves are *additive*: a districted storylet keeps competing in
+# the two unplaced draws a day, which is where most of its fires come from, and
+# the placed draw is a bonus reservation on top. That is the whole reason the
+# mechanism works at all -- it buys a chain extra chances without taking the
+# city away from it. See docs/A1_DESIGN.md §7.9.
+SHELF_EXCLUSIVE: bool = False
 
-def district_for_slot(slot_index: int) -> Optional[str]:
-    """Which district the day's `slot_index`-th action slot is placed in.
+
+def district_for_slot(character: Character, slot_index: int) -> Optional[str]:
+    """Which district the day's `slot_index`-th action slot is standing in.
 
     The direct analogue of ambient_budget_for: the three day loops call it
-    unconditionally and the on/off switch lives in exactly one place. None means
-    the slot is unplaced and draws from the district-neutral pool.
+    unconditionally, and it is the single read site for placement so they cannot
+    disagree about it. None means the slot is unplaced and draws the whole deck.
 
-    A placeholder for player agency. The full A1 has the player placing each of
-    the day's slots across 6-8 districts; until that UI exists, this hands the
-    first DISTRICT_SLOTS_PER_DAY slots to the prototype district so the mechanism
-    can be measured end to end.
+    In Phase 1 this was a module constant standing in for player agency. It now
+    reads what the morning placement step recorded on the character, which is
+    also what makes placement survive a save: it rides on the character rather
+    than in a session object only the web server has.
     """
-    if PROTOTYPE_DISTRICT is None:
-        return None
-    return PROTOTYPE_DISTRICT if slot_index < DISTRICT_SLOTS_PER_DAY else None
+    return character.placements.get(slot_index)
 
 
 # Flag provenance for the currently indexed library: flag -> ids of the events
@@ -274,15 +310,14 @@ def eligible_pool(
     link still day-gated), the unfiltered pool is handed back for the same reason
     the ambient quota yields -- a dead slot is worse than an off-theme one.
 
-    None -- unplaced -- does not filter at all, so a districted event stays
-    drawable from unplaced slots. Deliberately *not* the stricter reading, under
-    which a district's content is invisible from outside it. Exclusivity would
-    make every shelved event unreachable the moment placement is off (a live
-    footgun while PROTOTYPE_DISTRICT ships as None, and during a migration where
-    most of the map does not exist yet), and it would buy nothing: hiding a
-    storylet from the other two slots cannot help it win the one it is reserved
-    on. Revisit in Phase 3, once every event has a home and 'neutral' means
-    ambient rather than unmigrated. See docs/A1_DESIGN.md §2.
+    None -- unplaced -- does not filter, so a districted event stays drawable
+    from unplaced slots. Deliberately *not* the stricter reading, under which a
+    district's content is invisible from outside it: Phase 1 rejected that on a
+    footgun and Phase 3 re-decided it on measurement (SHELF_EXCLUSIVE above).
+    The shelf is a reservation *added* to an event's normal life in the deck,
+    not a relocation out of it -- which is why the mechanism can lift a first
+    link losing 2271 of 2290 draws without costing the rest of the deck.
+    See docs/A1_DESIGN.md §2 and §7.9.
     """
     exclude_ids = exclude_ids or set()
     # Never repeat a storylet within the same day.
@@ -292,7 +327,11 @@ def eligible_pool(
         if budgeted:
             pool = budgeted
     if district is None:
-        return pool
+        if not SHELF_EXCLUSIVE:
+            return pool
+        # Same empty-pool discipline as everywhere else in this function: an
+        # unplaced slot with nothing neutral left must not burn the player's day.
+        return [e for e in pool if e.district is None] or pool
     shelf = [e for e in pool if on_shelf(e, district)]
     return shelf or pool
 

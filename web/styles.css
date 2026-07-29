@@ -691,6 +691,69 @@ body {
 
 .choice-btn:disabled { opacity: 0.45; cursor: wait; transform: none; }
 
+/* ---- Morning placement (A1: the Row as a map) ---- */
+.placement-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-bottom: 0.9rem;
+}
+
+.placement-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.placement-slot-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  min-width: 4.2rem;
+}
+
+.placement-options { display: flex; gap: 0.4rem; flex-wrap: wrap; flex: 1; }
+
+.placement-opt {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  border-radius: 6px;
+  padding: 0.45rem 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.placement-opt:hover, .placement-opt:focus-visible {
+  border-color: var(--cyan);
+  color: var(--text-main);
+  outline: none;
+}
+
+.placement-opt.chosen {
+  background: rgba(0, 240, 255, 0.12);
+  border-color: var(--cyan);
+  color: var(--text-main);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.18);
+}
+
+.placement-hint {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  border-left: 2px solid rgba(0, 240, 255, 0.25);
+  padding-left: 0.7rem;
+  margin-top: 0.35rem;
+}
+
+.placement-hint-name { color: var(--cyan); font-family: var(--font-mono); font-size: 0.72rem; }
+
+.placement-confirm { justify-content: center; }
+
 .choice-text {
   font-size: 0.95rem;
   font-weight: 500;

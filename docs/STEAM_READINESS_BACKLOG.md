@@ -233,27 +233,70 @@ for exactly one of fourteen endings.
 
 ## 3. Additions
 
-### A1 -- The Row as a map  *(the big one)*  *(Phase 1 DONE 2026-07-27 -- premise confirmed)*
+### A1 -- The Row as a map  *(the big one)*  *(Phase 3 BLOCKED 2026-07-28 -- map built, both gates red)*
 **Addresses:** S1, S2, S3, S7, S8
 **Effort:** ~6-8 weeks
 
-> **Phase 1 (design + one measured proof-of-concept) is complete and the premise
-> holds.** Design decisions are in `docs/A1_DESIGN.md`; numbers are in
-> `BACKLOG_HANDOFF.md` §3. Headline: shelving the 24-event `ambitions_pack` on one
-> district and reserving a placed slot for it took the chain from 6/24 events
-> reachable in 19/40 runs to **23/24 in 40/40**, and took deck-wide never-fired
-> from **103 to 83** -- the first lever in three windows to move that number the
-> right way. Shipped disabled (`PROTOTYPE_DISTRICT = None`) because the winning
-> configuration depends on a *visit cadence* that is currently a test-harness
-> stand-in for a player choosing where to stand; Phase 2 builds that choice.
+> **Phase 3 correction, 2026-07-28 -- read this before the Phase 1-2 summary
+> below, which two of its claims no longer support.**
 >
-> Two design positions were overturned by measurement and one by a footgun:
-> shelves do **not** carry the general ambient pool (it collapses the eligible
-> pool 209 -> 74 and takes 45.7% of picks), districts are **not** exclusive (that
-> would silently orphan every shelved event while placement is off), and
-> `betrayal_pack` should **not** be migrated at all -- 16 of its 30 events are
-> never *eligible*, which is a gating problem no shelf can reach. **Do not
-> re-open any of these without reading `A1_DESIGN.md` first.**
+> The map is at 7 districts and 317 shelved events, and it ships with
+> `coverage_audit --assert` red (107 never-fired vs a gate of 85) and `pargate`
+> red (reckless terminal 19.6% against a 25-35% band). `docs/A1_DESIGN.md` §8 is
+> the full account; `BACKLOG_HANDOFF.md` §4 is the task that unblocks it.
+>
+> **"6-8 districts lands near the every-5 cadence" below is wrong**, and it was
+> wrong in a way that deleted a player option: the formula it describes
+> (`min(1.0, len(districts)/5)`) saturates at five districts, so at seven it
+> reserved a slot *every day* and made "stay in the Row" unreachable. Replaced
+> with a flat `PLACEMENT_RATE`.
+>
+> **"Phase 3 gets that by writing districts, not by tuning anything" is also
+> wrong.** Adding districts is free, but adding shelved *content* is not: a
+> shelf's value is `deck_eligible / (n_districts x shelf_eligible)`, the district
+> count cancels, and only the total shelved count matters. Phase 2's map was
+> worth +22 events deck-wide on 88 shelved; Phase 3's is worth **-9** on 317.
+> **The `>= 300 events shelved` target is retired** (§8.3).
+>
+> Two positions below are now settled *harder* by Phase 3, not softened:
+> exclusivity is dead on measurement (never-fired 107 -> 212), and §7.7's warning
+> came true -- but inverted and larger. Shelves of pure thread content are a risk
+> *discount*, because thread content is where the deck keeps its wins while the
+> untagged middle keeps its deaths. The deck has only 17 dose-bearing and 15
+> clock-bearing storylets in total, which is the real ceiling on how many
+> districts can carry the city's lethality.
+
+> **Phase 1 proved the mechanism; Phase 2 shipped it.** Design decisions and all
+> Phase 2 findings are in `docs/A1_DESIGN.md` (§7 for Phase 2); numbers are in
+> `BACKLOG_HANDOFF.md` §3 and §6. There is now a morning placement step in both
+> UIs, two districts, and 77 shelved events. Headline: **`ambitions_pack` went
+> from 18/24 unreached to 5/24 and `cast_expansion_pack` from 9/35 to 4/35**, and
+> deck-wide never-fired from 103 to **79** -- 22 of those against a same-RNG-stream
+> control, so the map is doing the work. Both shelves sit well short of the 100%
+> win rate a bare shelf produces.
+>
+> **Cadence is no longer a knob.** The automated stand-in places one slot,
+> uniformly over the districts plus "stay in the Row", so how often a district is
+> visited falls out of how big the map is -- 6-8 districts lands near the every-5
+> cadence Phase 1 measured as best. Phase 3 gets that by writing districts, not by
+> tuning anything.
+>
+> Four design positions are settled by measurement and one by a footgun, and
+> **none should be re-opened without reading `A1_DESIGN.md` first**: shelves do
+> **not** carry the general ambient pool (209 -> 74 eligible pool, 45.7% of picks);
+> texture is hand-sized per district, not global (dilution is steep and
+> non-monotonic -- §7.3); districts are **not** exclusive until "neutral" stops
+> meaning "unmigrated"; and `betrayal_pack` **and `npc_arcs_pack`** are never
+> migrated -- both are *gating*-shaped (npc_arcs: 7/17 ever eligible, and in 23 of
+> 40 runs not one of its events entered a pool), which no shelf can reach.
+>
+> Two measurement caveats worth carrying. **Placement changes RNG consumption**,
+> so any A/B here needs `coverage_audit --placement control` (same draws spent,
+> map off) rather than a no-placement run -- and a control is only valid for the
+> policy it was measured under. **And a district shelf is a safer place to stand
+> than the open deck**: the first live `pargate` failed four assertions because
+> the shelves were stocked with gentle content, which no coverage metric can see.
+> A1_DESIGN §7.7 has the diagnosis; Phase 3 must not repeat it at scale.
 
 Turn 3 action slots into 3 **placements** across 6-8 districts. Each district
 carries its own Heat, its own storylet shelf, and a travel cost.

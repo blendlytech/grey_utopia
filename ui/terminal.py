@@ -1,6 +1,6 @@
 """terminal.py -- Gritty, atmospheric text-based UI renderer for GREY UTOPIA."""
 from __future__ import annotations
-from typing import List, Optional
+from typing import Dict, List, Optional
 from engine.stats import Character
 from engine.events import Event, Choice
 from engine.resolver import choice_probability
@@ -70,6 +70,50 @@ def render_ambient(morning_lines: List[str], ledger_line: str) -> None:
         print(f"{CYAN}{ledger_line}{RESET}")
     if morning_lines or ledger_line:
         print()
+
+
+def prompt_placement(slots: int, districts: List[dict], hints: List[str]) -> Dict[int, str]:
+    """The morning placement step: commit each of the day's slots to a district.
+
+    Placement is free (A1_DESIGN §4) -- the cost of standing in the Archive is
+    the districts you are not standing in, not a slot spent travelling. Empty
+    input leaves a slot in the Row at large, so a player who does not want to
+    engage with the map presses Enter three times and gets the pre-A1 game.
+    """
+    if not districts:
+        return {}
+    print(f"\n{BOLD}--- MORNING: WHERE WILL YOU WORK? ---{RESET}")
+    for idx, (district, hint) in enumerate(zip(districts, hints), 1):
+        print(f"  {BOLD}[{idx}]{RESET} {CYAN}{district['name']}{RESET}")
+        print(f"      {DIM}{hint}{RESET}")
+    print(f"  {BOLD}[0]{RESET} {DIM}The Row at large -- take whatever the city hands you{RESET}")
+
+    placements: Dict[int, str] = {}
+    for slot in range(slots):
+        while True:
+            try:
+                val = input(f"{BOLD}Slot {slot + 1} "
+                            f"{DIM}[0-{len(districts)}, Enter = the Row]{RESET}{BOLD}: {RESET}").strip()
+            except EOFError:
+                return placements
+            if not val or val == "0":
+                break
+            if val.isdigit() and 1 <= int(val) <= len(districts):
+                placements[slot] = districts[int(val) - 1]["id"]
+                break
+            print(f"{RED}Pick 0-{len(districts)}, or press Enter to stay in the Row.{RESET}")
+    return placements
+
+
+def render_placement_summary(placements: Dict[int, str], slots: int, name_for) -> None:
+    """One line confirming where the day's slots are standing."""
+    if not placements:
+        return
+    where = ", ".join(
+        f"slot {i + 1}: {name_for(placements[i])}" for i in sorted(placements) if i < slots
+    )
+    if where:
+        print(f"{CYAN}You set out. {where}.{RESET}")
 
 
 def render_event(event: Event, character: Character) -> None:
