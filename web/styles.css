@@ -14,6 +14,12 @@
   font-display: swap;
 }
 
+/* Text size setting: scales every rem-based measurement (text, spacing,
+   controls) uniformly, the same way a browser zoom would. */
+html { font-size: 16px; }
+html.text-size-large { font-size: 18px; }
+html.text-size-xlarge { font-size: 20px; }
+
 :root {
   --bg-dark: #06080d;
   --panel-bg: rgba(12, 16, 24, 0.88);
@@ -1089,6 +1095,16 @@ body {
   .day-overlay { animation: none; opacity: 1; }
 }
 
+/* Same rules, driven by the in-app Settings toggle rather than the OS query --
+   a player on a machine they don't control still needs a way to ask for this. */
+:root.reduced-motion *, :root.reduced-motion *::before, :root.reduced-motion *::after {
+  animation-duration: 0.001s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.05s !important;
+}
+:root.reduced-motion .glitch-text::before, :root.reduced-motion .glitch-text::after { display: none; }
+:root.reduced-motion .day-overlay { animation: none; opacity: 1; }
+
 /* ============ Deadline Clocks ============ */
 .clocks-panel .panel-title { color: var(--red); }
 .clocks-list { display: flex; flex-direction: column; gap: 6px; }
@@ -1410,6 +1426,95 @@ body {
   color: var(--purple); text-align: center; margin-bottom: 1rem;
 }
 .intro-card .btn-primary { display: block; margin: 0 auto; }
+
+/* ============ Content Warning ============ */
+.warning-overlay { z-index: 10003; }
+.warning-card { max-width: 520px; text-align: left; padding: 1.8rem 2rem; }
+.warning-eyebrow {
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.3em;
+  color: var(--red); margin-bottom: 0.5rem; text-align: center;
+}
+.warning-title {
+  font-size: 1.3rem; font-weight: 800; text-align: center;
+  margin-bottom: 1rem; color: var(--text-main);
+}
+.warning-body p { font-size: 0.9rem; line-height: 1.6; color: var(--text-main); margin-bottom: 0.7rem; }
+.warning-body strong { color: var(--red); }
+.warning-list { margin: 0 0 0.9rem 1.2rem; padding: 0; }
+.warning-list li { font-size: 0.88rem; line-height: 1.55; color: var(--text-dim); margin-bottom: 0.5rem; }
+.warning-card .btn-primary { display: block; margin: 0.4rem auto 0; }
+
+/* ============ Settings Panel ============ */
+.settings-overlay { z-index: 10001; }
+.settings-card { max-width: 460px; text-align: left; padding: 1.6rem 1.8rem; }
+.settings-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1.2rem; padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.settings-title {
+  font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.15em; color: var(--cyan);
+}
+.settings-section { margin-bottom: 1.3rem; }
+.settings-section:last-child { margin-bottom: 0; }
+.settings-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.8rem; padding: 0.5rem 0; font-size: 0.88rem; color: var(--text-main);
+}
+.settings-range { flex: 1; accent-color: var(--cyan); }
+.settings-range-val {
+  font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim);
+  min-width: 3ch; text-align: right;
+}
+.settings-checkbox { width: 18px; height: 18px; accent-color: var(--cyan); cursor: pointer; }
+.text-size-group { display: flex; gap: 0.4rem; }
+.text-size-btn {
+  background: transparent; border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-dim); border-radius: 6px; cursor: pointer;
+  font-family: var(--font-sans); font-weight: 700; line-height: 1;
+  padding: 0.4rem 0.7rem;
+}
+.text-size-btn:nth-child(1) { font-size: 0.75rem; }
+.text-size-btn:nth-child(2) { font-size: 0.95rem; }
+.text-size-btn:nth-child(3) { font-size: 1.15rem; }
+.text-size-btn.active { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 8px rgba(0, 240, 255, 0.25); }
+.settings-link { width: 100%; text-align: center; }
+
+/* ============ Save Slots Panel ============ */
+.saves-overlay { z-index: 10001; }
+.saves-card { max-width: 480px; text-align: left; padding: 1.6rem 1.8rem; }
+.saves-autosave-note {
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+.saves-new-row { display: flex; gap: 0.6rem; margin-bottom: 0.6rem; }
+.save-name-input {
+  flex: 1; background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px; color: var(--text-main); font-family: var(--font-sans);
+  font-size: 0.85rem; padding: 0.5rem 0.7rem;
+}
+.save-name-input:focus { outline: none; border-color: var(--cyan); }
+.saves-save-btn { padding: 0.5rem 1.1rem; font-size: 0.85rem; box-shadow: none; }
+.saves-hint {
+  font-size: 0.74rem; color: var(--text-muted); margin-bottom: 1rem;
+  padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.saves-list { display: flex; flex-direction: column; gap: 0.5rem; max-height: 320px; overflow-y: auto; }
+.saves-empty { font-size: 0.85rem; color: var(--text-muted); text-align: center; padding: 1rem 0; }
+.save-row {
+  display: flex; justify-content: space-between; align-items: center; gap: 0.8rem;
+  background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px; padding: 0.6rem 0.8rem;
+}
+.save-row-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.save-row-name { font-size: 0.85rem; font-weight: 700; color: var(--text-main); }
+.save-row-meta {
+  font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.save-row-actions { display: flex; gap: 0.4rem; flex-shrink: 0; }
+.save-load-btn, .save-delete-btn { font-size: 0.72rem; padding: 0.35rem 0.6rem; }
 
 /* ============ Threads (visible consequence flags) ============ */
 .threads-list { display: flex; flex-wrap: wrap; gap: 6px; }

@@ -1,6 +1,6 @@
 // app.js -- Web UI Frontend Controller for GREY UTOPIA
 let audioCtx = null;
-let isAudioMuted = false;
+let masterVolume = 0.7;
 let prevStats = null;
 let prevDay = null;
 let currentChoices = [];
@@ -13,6 +13,8 @@ let journal = [];
 
 const GALLERY_KEY = "grey_utopia_endings_seen";
 const JOURNAL_KEY = "grey_utopia_journal";
+const SETTINGS_KEY = "grey_utopia_settings";
+const CONTENT_WARNING_KEY = "grey_utopia_content_warning_ack";
 
 // Human labels for stat-check chips and the night ledger.
 const STAT_LABELS = {
@@ -198,6 +200,9 @@ function quoteForDay(day) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  loadSettings();
+  initSettingsPanel();
+  initSavesPanel();
   initTabs();
   initAudio();
   loadJournal();
@@ -205,9 +210,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("btn-reset").addEventListener("click", armedReset);
   document.getElementById("btn-modal-reset").addEventListener("click", resetGame);
-  document.getElementById("btn-audio").addEventListener("click", toggleAudio);
   document.getElementById("btn-help").addEventListener("click", () => showIntro(true));
   document.getElementById("btn-intro-begin").addEventListener("click", dismissIntro);
+  document.getElementById("btn-warning-ack").addEventListener("click", acknowledgeContentWarning);
   document.getElementById("btn-journal").addEventListener("click", toggleJournal);
   document.getElementById("btn-journal-close").addEventListener("click", toggleJournal);
   document.addEventListener("keydown", onKeyDown);
@@ -215,6 +220,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function onKeyDown(e) {
   if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+  const warning = document.getElementById("content-warning-overlay");
+  if (!warning.classList.contains("hidden")) {
+    if (e.key === "Enter" || e.key === "Escape" || e.key === " ") acknowledgeContentWarning();
+    return;
+  }
+  const settingsOverlay = document.getElementById("settings-overlay");
+  if (!settingsOverlay.classList.contains("hidden")) {
+    if (e.key === "Escape") closeSettings();
+    return;
+  }
+  const savesOverlay = document.getElementById("saves-overlay");
+  if (!savesOverlay.classList.contains("hidden")) {
+    if (e.key === "Escape") closeSaves();
+    return;
+  }
   const intro = document.getElementById("intro-overlay");
   if (!intro.classList.contains("hidden")) {
     if (e.key === "Enter" || e.key === "Escape" || e.key === " ") dismissIntro();
@@ -266,10 +286,34 @@ function dismissIntro() {
 function maybeShowIntro(state) {
   // A fresh run: day zero, nothing spent, nothing resolved yet.
   if (!introSeenThisRun && !state.dead && state.day === 0 && state.slots_used === 0 && !state.last_outcome) {
-    showIntro(false);
+    if (!hasAckedContentWarning()) showContentWarning(false);
+    else showIntro(false);
   } else {
     introSeenThisRun = true;
   }
+}
+
+/* ============ Content Warning ============ */
+function hasAckedContentWarning() {
+  try { return localStorage.getItem(CONTENT_WARNING_KEY) === "1"; } catch { return false; }
+}
+
+// isRecall: re-reading from Settings vs. the pre-run gate. Both share one
+// overlay; only the gate chains into the intro afterward.
+function showContentWarning(isRecall) {
+  const overlay = document.getElementById("content-warning-overlay");
+  document.getElementById("btn-warning-ack").textContent = isRecall ? "Close" : "I Understand";
+  overlay.dataset.recall = isRecall ? "1" : "0";
+  overlay.classList.remove("hidden");
+}
+
+function acknowledgeContentWarning() {
+  const overlay = document.getElementById("content-warning-overlay");
+  const wasRecall = overlay.dataset.recall === "1";
+  overlay.classList.add("hidden");
+  try { localStorage.setItem(CONTENT_WARNING_KEY, "1"); } catch {}
+  playSound("click");
+  if (!wasRecall) showIntro(false);
 }
 
 /* ============ Armed restart (no more one-click run loss) ============ */
@@ -331,21 +375,21 @@ function tone(freqStart, freqEnd, dur, type, vol, delay = 0) {
   osc.type = type;
   osc.frequency.setValueAtTime(freqStart, t0);
   if (freqEnd !== freqStart) osc.frequency.exponentialRampToValueAtTime(Math.max(freqEnd, 1), t0 + dur);
-  gain.gain.setValueAtTime(vol, t0);
+  gain.gain.setValueAtTime(vol * masterVolume, t0);
   gain.gain.linearRampToValueAtTime(0.005, t0 + dur);
   osc.start(t0);
   osc.stop(t0 + dur + 0.02);
 }
 
 function playSound(kind) {
-  if (isAudioMuted || !audioCtx) return;
+  if (masterVolume <= 0 || !audioCtx) return;
   if (audioCtx.state === "suspended") audioCtx.resume();
 
   if (sfxBuffers[kind]) {
     const src = audioCtx.createBufferSource();
     src.buffer = sfxBuffers[kind];
     const gain = audioCtx.createGain();
-    gain.gain.value = SFX_GAIN[kind] || 0.5;
+    gain.gain.value = (SFX_GAIN[kind] || 0.5) * masterVolume;
     src.connect(gain);
     gain.connect(audioCtx.destination);
     src.start();
@@ -414,7 +458,7 @@ function startAmbient() {
       ambientMode = "buffer";
       ambientTarget = SFX_GAIN["ambient"];
       switchAmbientLoop(ambientKeyForScene(currentSceneKey));
-      ambientGain.gain.linearRampToValueAtTime(isAudioMuted ? 0 : ambientTarget, audioCtx.currentTime + 4);
+      ambientGain.gain.linearRampToValueAtTime(ambientTarget * masterVolume, audioCtx.currentTime + 4);
       return;
     } catch (e) { /* fall through to synth */ }
   }
@@ -454,22 +498,228 @@ function startAmbient() {
     // slow fade-in so the room breathes rather than switches on
     ambientMode = "synth";
     ambientTarget = 0.022;
-    ambientGain.gain.linearRampToValueAtTime(isAudioMuted ? 0 : ambientTarget, audioCtx.currentTime + 4);
+    ambientGain.gain.linearRampToValueAtTime(ambientTarget * masterVolume, audioCtx.currentTime + 4);
   } catch (e) { /* ambience is a garnish, never an error */ }
 }
 
-function setAmbientMuted(muted) {
+function setAmbientVolume() {
   if (!ambientGain || !audioCtx) return;
   ambientGain.gain.cancelScheduledValues(audioCtx.currentTime);
-  ambientGain.gain.linearRampToValueAtTime(muted ? 0 : ambientTarget, audioCtx.currentTime + 0.6);
+  ambientGain.gain.linearRampToValueAtTime(ambientTarget * masterVolume, audioCtx.currentTime + 0.6);
 }
 
-function toggleAudio() {
-  isAudioMuted = !isAudioMuted;
-  const btn = document.getElementById("btn-audio");
-  btn.innerHTML = isAudioMuted ? "&#128263; Audio: OFF" : "&#128266; Audio: ON";
-  setAmbientMuted(isAudioMuted);
-  if (!isAudioMuted) playSound("click");
+/* ============ Settings (motion / text size / volume), localStorage-persisted ============ */
+const DEFAULT_SETTINGS = { reducedMotion: false, textSize: "normal", volume: 70 };
+let settings = { ...DEFAULT_SETTINGS };
+
+function loadSettings() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(SETTINGS_KEY));
+    settings = { ...DEFAULT_SETTINGS, ...(stored || {}) };
+  } catch { settings = { ...DEFAULT_SETTINGS }; }
+  applySettings();
+}
+
+function saveSettings() {
+  try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch {}
+}
+
+function applySettings() {
+  document.documentElement.classList.toggle("reduced-motion", !!settings.reducedMotion);
+  document.documentElement.classList.remove("text-size-large", "text-size-xlarge");
+  if (settings.textSize === "large") document.documentElement.classList.add("text-size-large");
+  if (settings.textSize === "xlarge") document.documentElement.classList.add("text-size-xlarge");
+  masterVolume = Math.max(0, Math.min(100, settings.volume)) / 100;
+  setAmbientVolume();
+}
+
+// Independent of the OS media query: a player on a shared machine still needs this.
+function prefersReducedMotion() {
+  return document.documentElement.classList.contains("reduced-motion")
+    || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function syncSettingsUI() {
+  document.getElementById("setting-reduced-motion").checked = !!settings.reducedMotion;
+  document.getElementById("setting-volume").value = settings.volume;
+  document.getElementById("setting-volume-val").textContent = `${settings.volume}%`;
+  document.querySelectorAll(".text-size-btn").forEach(b => {
+    b.classList.toggle("active", b.dataset.size === settings.textSize);
+  });
+}
+
+function openSettings() {
+  syncSettingsUI();
+  document.getElementById("settings-overlay").classList.remove("hidden");
+  playSound("click");
+}
+
+function closeSettings() {
+  document.getElementById("settings-overlay").classList.add("hidden");
+}
+
+function initSettingsPanel() {
+  document.getElementById("btn-settings").addEventListener("click", openSettings);
+  document.getElementById("btn-settings-close").addEventListener("click", closeSettings);
+  document.getElementById("setting-reduced-motion").addEventListener("change", (e) => {
+    settings.reducedMotion = e.target.checked;
+    saveSettings();
+    applySettings();
+  });
+  document.getElementById("setting-volume").addEventListener("input", (e) => {
+    settings.volume = parseInt(e.target.value, 10);
+    document.getElementById("setting-volume-val").textContent = `${settings.volume}%`;
+    saveSettings();
+    applySettings();
+  });
+  document.querySelectorAll(".text-size-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      settings.textSize = btn.dataset.size;
+      saveSettings();
+      applySettings();
+      syncSettingsUI();
+    });
+  });
+  document.getElementById("btn-view-content-warning").addEventListener("click", () => showContentWarning(true));
+}
+
+/* ============ Save Slots ============ */
+// Load/Delete use the same two-click "arm, then confirm" pattern as the
+// header's Restart button -- no native confirm() dialog, and each button
+// labels exactly what it is about to do.
+let savesArmedId = null;
+let savesArmedAction = null;
+let savesArmTimer = null;
+
+function formatSaveTime(iso) {
+  if (!iso) return "never";
+  try { return new Date(iso).toLocaleString(); } catch { return iso; }
+}
+
+function openSaves() {
+  document.getElementById("saves-overlay").classList.remove("hidden");
+  playSound("click");
+  refreshSaves();
+}
+
+function closeSaves() {
+  document.getElementById("saves-overlay").classList.add("hidden");
+  document.getElementById("save-name-input").value = "";
+}
+
+async function refreshSaves() {
+  const note = document.getElementById("saves-autosave-note");
+  note.textContent = lastState && lastState.last_saved_at
+    ? `Current run last saved: ${formatSaveTime(lastState.last_saved_at)}`
+    : "Current run has not been saved yet.";
+  const data = await api("/api/saves");
+  if (data) renderSavesList(data.slots || []);
+}
+
+function renderSavesList(slots) {
+  const list = document.getElementById("saves-list");
+  list.innerHTML = "";
+  if (!slots.length) {
+    const p = document.createElement("p");
+    p.className = "saves-empty";
+    p.textContent = "No manual saves yet.";
+    list.appendChild(p);
+    return;
+  }
+  slots.forEach(s => {
+    const row = document.createElement("div");
+    row.className = "save-row";
+
+    const info = document.createElement("div");
+    info.className = "save-row-info";
+    const name = document.createElement("span");
+    name.className = "save-row-name";
+    name.textContent = s.name;
+    const meta = document.createElement("span");
+    meta.className = "save-row-meta";
+    const endingBit = s.ending ? ` · ${s.ending.replace(/_/g, " ")}` : "";
+    meta.textContent = `Day ${s.day + 1}${endingBit} · ${formatSaveTime(s.saved_at)}`;
+    info.appendChild(name);
+    info.appendChild(meta);
+
+    const actions = document.createElement("div");
+    actions.className = "save-row-actions";
+    const loadBtn = document.createElement("button");
+    loadBtn.className = "btn-ghost save-load-btn";
+    loadBtn.textContent = "Load";
+    loadBtn.addEventListener("click", () => armOrCommit(s.id, "load", loadBtn, () => loadSlot(s.id)));
+    const delBtn = document.createElement("button");
+    delBtn.className = "btn-ghost save-delete-btn";
+    delBtn.textContent = "Delete";
+    delBtn.addEventListener("click", () => armOrCommit(s.id, "delete", delBtn, () => deleteSlot(s.id)));
+    actions.appendChild(loadBtn);
+    actions.appendChild(delBtn);
+
+    row.appendChild(info);
+    row.appendChild(actions);
+    list.appendChild(row);
+  });
+}
+
+function armOrCommit(id, action, btn, commit) {
+  if (savesArmedId === id && savesArmedAction === action) {
+    clearTimeout(savesArmTimer);
+    savesArmedId = null;
+    savesArmedAction = null;
+    commit();
+    return;
+  }
+  savesArmedId = id;
+  savesArmedAction = action;
+  const original = btn.textContent;
+  btn.textContent = action === "load" ? "Confirm Load?" : "Confirm Delete?";
+  btn.classList.add("armed");
+  playSound("failure");
+  savesArmTimer = setTimeout(() => {
+    savesArmedId = null;
+    savesArmedAction = null;
+    btn.textContent = original;
+    btn.classList.remove("armed");
+  }, 3200);
+}
+
+async function saveNewSlot() {
+  const input = document.getElementById("save-name-input");
+  const name = input.value.trim();
+  playSound("click");
+  const data = await api("/api/saves/save", { name });
+  if (!data) return;
+  input.value = "";
+  renderSavesList(data.slots || []);
+}
+
+async function loadSlot(id) {
+  const data = await api("/api/saves/load", { id });
+  if (!data) {
+    // api() already logged the error to the console; a refused load (e.g. a
+    // save from a newer build) needs to reach the player, not just that.
+    document.getElementById("saves-autosave-note").textContent =
+      "Could not load that save -- it may be from a newer version of the game.";
+    return;
+  }
+  closeSaves();
+  document.getElementById("outcome-banner").classList.add("hidden");
+  document.getElementById("ending-modal").classList.add("hidden");
+  introSeenThisRun = true; // a loaded run is never the fresh-run intro state
+  playSound("day");
+  renderUI(data);
+}
+
+async function deleteSlot(id) {
+  playSound("click");
+  const data = await api("/api/saves/delete", { id });
+  if (data) renderSavesList(data.slots || []);
+}
+
+function initSavesPanel() {
+  document.getElementById("btn-saves").addEventListener("click", openSaves);
+  document.getElementById("btn-saves-close").addEventListener("click", closeSaves);
+  document.getElementById("btn-save-new").addEventListener("click", saveNewSlot);
 }
 
 /* ============ Tabs ============ */
@@ -892,7 +1142,7 @@ function spawnDeltaFloats(oldS, newS) {
 /* ============ Typewriter ============ */
 function typewrite(el, text) {
   if (typewriterTimer) { clearInterval(typewriterTimer); typewriterTimer = null; }
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduced = prefersReducedMotion();
   if (reduced || text.length > 900) { el.textContent = text; return; }
 
   el.textContent = "";

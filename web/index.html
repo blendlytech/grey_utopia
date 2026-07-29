@@ -22,7 +22,8 @@
       <div class="controls">
         <button id="btn-journal" class="btn-ghost" title="Run journal [J]">&#128214; Journal</button>
         <button id="btn-help" class="btn-ghost" title="Protocol briefing [?]">? Protocol</button>
-        <button id="btn-audio" class="btn-ghost">&#128266; Audio: ON</button>
+        <button id="btn-saves" class="btn-ghost" title="Save slots">&#128190; Saves</button>
+        <button id="btn-settings" class="btn-ghost" title="Settings">&#9881; Settings</button>
         <button id="btn-reset" class="btn-ghost">Restart Simulation</button>
       </div>
     </header>
@@ -242,6 +243,91 @@
         </div>
         <div class="intro-cycle hidden" id="intro-cycle"></div>
         <button id="btn-intro-begin" class="btn-primary">ENTER THE ROW</button>
+      </div>
+    </div>
+
+    <!-- Content Warning Overlay -->
+    <div id="content-warning-overlay" class="modal-overlay warning-overlay hidden">
+      <div class="modal-card glass-panel warning-card">
+        <div class="warning-eyebrow">CONTENT WARNING</div>
+        <h1 class="warning-title">Before You Begin</h1>
+        <div class="warning-body">
+          <p>GREY UTOPIA is a story about a city that solved scarcity and broke something
+          else instead. It depicts, without flinching:</p>
+          <ul class="warning-list">
+            <li><strong>Substance use and addiction</strong> -- doses, tolerance, and withdrawal, and their
+            consequences.</li>
+            <li><strong>Overdose</strong>, including as a possible outcome of play.</li>
+            <li><strong>Involuntary psychiatric commitment</strong> -- being taken, against your will,
+            "for your own good."</li>
+          </ul>
+          <p>None of this is played for shock. If any of it isn't something you want to sit
+          with right now, that's a good reason to close the tab instead.</p>
+        </div>
+        <button id="btn-warning-ack" class="btn-primary">I Understand</button>
+      </div>
+    </div>
+
+    <!-- Settings Panel -->
+    <div id="settings-overlay" class="modal-overlay settings-overlay hidden">
+      <div class="modal-card glass-panel settings-card">
+        <div class="settings-head">
+          <span class="settings-title">SETTINGS</span>
+          <button id="btn-settings-close" class="btn-ghost">Close</button>
+        </div>
+
+        <div class="settings-section">
+          <h4 class="sub-heading">Accessibility</h4>
+          <label class="settings-row">
+            <span>Reduced motion</span>
+            <input type="checkbox" id="setting-reduced-motion" class="settings-checkbox">
+          </label>
+          <div class="settings-row">
+            <span>Text size</span>
+            <div class="text-size-group" id="text-size-group">
+              <button class="text-size-btn" data-size="normal" title="Normal">A</button>
+              <button class="text-size-btn" data-size="large" title="Large">A</button>
+              <button class="text-size-btn" data-size="xlarge" title="X-Large">A</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h4 class="sub-heading">Audio</h4>
+          <label class="settings-row">
+            <span>Volume</span>
+            <input type="range" id="setting-volume" class="settings-range" min="0" max="100" step="1">
+            <span id="setting-volume-val" class="settings-range-val">70%</span>
+          </label>
+        </div>
+
+        <div class="settings-section">
+          <h4 class="sub-heading">Content</h4>
+          <button id="btn-view-content-warning" class="btn-ghost settings-link">View content warning</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save Slots Panel -->
+    <div id="saves-overlay" class="modal-overlay saves-overlay hidden">
+      <div class="modal-card glass-panel saves-card">
+        <div class="settings-head">
+          <span class="settings-title">SAVES</span>
+          <button id="btn-saves-close" class="btn-ghost">Close</button>
+        </div>
+
+        <div class="saves-autosave-note" id="saves-autosave-note">Current run has not been saved yet.</div>
+
+        <div class="saves-new-row">
+          <input type="text" id="save-name-input" class="save-name-input" placeholder="Name this save&hellip;" maxlength="60">
+          <button id="btn-save-new" class="btn-primary saves-save-btn">Save</button>
+        </div>
+
+        <div class="saves-hint">Loading a save replaces your current run. Click Load twice to confirm.</div>
+
+        <div class="saves-list" id="saves-list">
+          <p class="saves-empty">No manual saves yet.</p>
+        </div>
       </div>
     </div>
 

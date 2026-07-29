@@ -355,11 +355,15 @@ achievements with zero new design work.
 
 ## 4. Steam shipping checklist
 
+> **The three blocking rows below closed 2026-07-29 (Sonnet 5, branch
+> `ship-blocking-items`).** Full write-up, verification, and gate results in
+> `BACKLOG_HANDOFF.md` §3 (search "SHIP -- the three blocking shipping items").
+
 | Item | Status | Note |
 |---|---|---|
-| Settings menu (volume sliders, text size, reduced motion) | Not started | **blocking** |
-| Content warning screen | Not started | **blocking** -- addiction, overdose, involuntary commitment |
-| Manual save slots | Not started | **blocking** -- autosave-only today |
+| Settings menu (volume sliders, text size, reduced motion) | **Done** | shipped: reduced motion (in-app + OS query), text size (3 steps), volume slider replacing binary mute; all persist via `localStorage` |
+| Content warning screen | **Done** | shown pre-run, skippable thereafter, re-readable from Settings |
+| Manual save slots | **Done** | create/load/delete in web UI; `SAVE_FORMAT_VERSION`; `legacy.json` untouched |
 | Steam achievements | Not started | A5 makes this nearly free |
 | Steam Cloud (for `saves/legacy.json`) | Not started | NG+ depends on it |
 | Controller / Steam Deck verification | Not started | |

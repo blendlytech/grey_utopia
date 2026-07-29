@@ -59,8 +59,8 @@ as non-monotonic. Two balance changes in one window cannot be attributed.
 | F2 | Kill the fake dice | **CLOSED** | 0/1468 choices now presented as certain that can still fail. See below. |
 | **A1** | The Row as a map | **CLOSED -- both gates green** | 7 districts, 498 events / 332 shelved. Phase 3c fixed the instrument (seed-averaged, and never-fired split into `starved` / `outcompeted`) and then the one real regression it exposed. **`pargate` GREEN, `coverage_audit --assert` GREEN**, first time both have been green together since Phase 2. See below and `A1_DESIGN.md` §10. Remaining coverage residual is day gates and chain depth -- neither is an A1 problem, both are logged in §5. |
 | ~~F6~~ | ~~Re-scale the chain day ladders~~ | **CLOSED 2026-07-29 -- premise disproved, nothing built** | The "30-day median run" three windows reasoned from is the **`random` bot's** median. Deliberate strategies run 55-63 days and reach a day-46 finale 69-93% of the time, so the ladders are calibrated correctly. Scope was wrong too: only 4 packs gate past d34, and `reckoning_pack`/`npc_arcs_pack` — flagged twice as suspects — max out at d18/d16. Delivered `--union` instead. See §5. |
-| **SHIP** | Settings / saves / achievements / content warning / art | **Next up, see §4** | Three items marked **blocking** and 0% done. |
-| A3 | Make the Steward take a turn | Not started | -- |
+| **SHIP** | Settings / saves / achievements / content warning / art | **Three blocking items CLOSED** | Content warning, settings panel, manual save slots all shipped. See below. |
+| **A3** | Make the Steward take a turn | **Next up, see §4** | -- |
 | A4 | Put the cast on screen | Not started | -- |
 | F3 | Make money a decision | Not started | -- |
 | F4 | Give Fame and Social_Capital a spend | Not started | -- |
@@ -594,93 +594,195 @@ against the <= 9/24 criterion, and 7/24 at seed 0 against Phase 3b's 14/24.
 
 ---
 
-## 4. CURRENT TASK -- SHIP: the three blocking items
+**SHIP -- the three blocking shipping items** *(2026-07-29, Sonnet 5)* --
+**all three closed: content warning, settings panel, manual save slots.**
+Touches no content and no engine balance logic; `web/index.html`,
+`web/app.js`, `web/styles.css`, `server.py`. Landed on branch
+`ship-blocking-items`, not `main`.
 
-**Model:** **Sonnet 5**. This is UI and persistence engineering against a clear
-spec, with no balance exposure and no gate runs. It does not need Opus 5, and
-`STEAM_READINESS_BACKLOG.md` §4 already holds the acceptance list.
+**Part 1, content warning.** New `#content-warning-overlay`, shown once
+before a fresh run (day 0, no slots spent, no outcome yet -- same gate
+`maybeShowIntro` already used for the protocol briefing), naming addiction,
+overdose and involuntary commitment. `localStorage["grey_utopia_content_warning_ack"]`
+skips it on future runs; "View content warning" in Settings re-opens it
+without re-arming the gate.
 
-**Read first:** `STEAM_READINESS_BACKLOG.md` **§4** (the shipping checklist) and
-**S8/S9**. You do **not** need the A1 design note for this item.
+**Part 2, settings panel.** Read first, changed nothing that was already
+working: `web/styles.css:1082`'s `@media (prefers-reduced-motion: reduce)`
+block and the `btn-audio` mute stayed conceptually in place, just
+rehomed/extended. New `⚙ Settings` button replaces the header's binary mute.
+One panel holds:
 
-**Do not re-derive:** anything about coverage, reachability or the selector. That
-question is closed -- `--union` reports 61 of 498 events unreachable under all four
-strategies, 59 of which are by-design (`legacy_pack`) or known flag-depth
-(`betrayal_pack`, `npc_arcs_pack`, `reckoning_pack`) or intentional mutual
-exclusivity (`ambitions_pack`). **Four consecutive windows went into this. It is
-done. Do not open it again without a new reason that is not a never-fired count.**
+- **Reduced motion**, in-app and independent of the OS query -- the existing
+  media-query block's rules are duplicated under a `:root.reduced-motion`
+  selector so either source disables animation. `typewrite()` now checks a
+  shared `prefersReducedMotion()` helper instead of the raw media query.
+- **Text size** (Normal/Large/X-Large) -- scales `html`'s font-size
+  (16/18/20px), so every rem-based measurement scales together, the same way
+  a browser zoom would.
+- **Volume**, a 0-100 slider. `isAudioMuted` (boolean) is gone; a continuous
+  `masterVolume` multiplier now feeds `playSound()`, `tone()`, and the
+  ambient bed directly.
+
+All three persist in `localStorage["grey_utopia_settings"]`, following the
+existing `GALLERY_KEY` pattern (`app.js:14`) rather than inventing a second
+storage mechanism.
+
+**Part 3, manual save slots -- STOP cleared, then built to the approved
+spec plus four additions from the review** (opaque slot filenames; version
+refuses-if-newer instead of tolerant-reading; slot metadata inside each file,
+no index; explicit load-confirmation UX). What shipped:
+
+- `SAVE_FORMAT_VERSION = 1` on a single shared payload (`GameSession.
+  _session_payload` / `_apply_session_payload`) used by both `save_state()`
+  (autosave) and the new `save_slot()` / `load_slot()`. Missing/0 is adopted
+  silently (every save on disk today is v0); a version *greater* than this
+  build's is refused with a message that reaches the player (not just the
+  console) -- verified by hand-editing a slot to `"version": 999` and
+  confirming both the API 400 and the Saves-panel error text.
+- Slot files are `saves/slot_<12 hex chars>.json`, id minted by
+  `uuid.uuid4().hex[:12]`, never derived from the player's display name.
+  `load`/`delete` validate the id against `^[0-9a-f]{12}$` before it ever
+  touches a path. Verified: `id: "../../etc/passwd"` and `id: "legacy"` both
+  rejected with 400 before any filesystem call; `saves/legacy.json` confirmed
+  byte-identical (MD5) before and after a full save/load/delete sequence.
+- Metadata (display name, day, ending, timestamp) is discovered by scanning
+  `SAVES_DIR` for `slot_*.json` and reading each file -- no separate index.
+  `_apply_session_payload` also had to start clearing `fire_count` for events
+  absent from a payload's `event_state`, not just skip them: `load_state()`
+  only ever ran once against a fresh process (all events already at 0), but
+  `load_slot()` now runs against a *live* session, and without the fix a
+  loaded slot would inherit the abandoned run's fire counts.
+- Four new routes beside the existing ones: `/api/saves` (list),
+  `/api/saves/save`, `/api/saves/load`, `/api/saves/delete`. Loading calls
+  `session.save_state()` immediately after applying the slot, so the loaded
+  run becomes the new autosave without waiting for the player's next action
+  -- the web UI gates Load behind the same two-click "arm, then confirm"
+  pattern the header's Restart button already uses (no native `confirm()`),
+  labeled per-action ("Confirm Load?" / "Confirm Delete?"), with a static
+  hint line ("Loading a save replaces your current run") stating the
+  behaviour up front.
+- `last_saved_at` threaded through `get_state_dict()` for the "last saved"
+  stamp the checklist asked for; shown in the Saves panel header, not the
+  main HUD.
+
+**Backward compatibility, verified against a real pre-change save**, not a
+synthetic one: an `autosave.json` on disk from before this window (written
+by the old `save_state()`, genuinely missing both `version` and `saved_at`)
+loaded correctly under the new code -- flags, day and stats round-tripped,
+`last_saved_at` correctly reported `None` rather than fabricating a time.
+
+**Verified live**, `python server.py` + Playwright end-to-end (no
+`chromium-cli` on this Windows box; used the `playwright` Python package,
+already installed): 31/31 checks on the warning/settings/gameplay path, then
+12/12 on the Saves panel (create, list, two-click Load and Delete, panel
+persists across the recalled-warning flow) -- zero console errors both
+passes. Screenshots confirm the visual rendering matches the existing panel
+language (`glass-panel`, `btn-ghost`, the armed-button red).
+
+**Verified final state:** `unittest` **94 passed** (unchanged); `lint_content`
+**clean**, 498 events, 391 flags, 332 on 7 shelves (unchanged -- no content
+touched); `coverage_audit --assert` **GREEN**, reproducing the exact recorded
+baseline (starved 66.2, outcompeted 35.0, mean 101.2, per-seed
+105/82/111/103/105) -- byte-for-byte unchanged, as expected for an item that
+touches no selector or event precondition; `pargate` **GREEN**, cautious
+terminal 17.8 / reckless good-terminal 30.9-33.3 / greedy good-terminal
+41.1-16.7, all matching the Phase 3c table exactly. Both tripwires held.
+
+**One correction to the approved proposal's answer 5, worth recording
+accurately rather than as originally phrased in chat.** A save referencing a
+renamed event id is not "inert": since `_apply_session_payload` resets every
+event's `fire_count` to 0 before applying `event_state`, an id that no
+longer matches anything in the current deck just means that id's saved
+progress is silently dropped -- but if an event was *renamed* (old id
+retired, same content reappearing under a new id) rather than deleted, the
+"same" storylet under its new id loads at `fire_count = 0`, so a
+`max_fires: 1` one-shot can fire a second time after a rename. Still out of
+scope for SHIP; noted here so it doesn't need re-deriving later.
+
+---
+
+## 4. CURRENT TASK -- A3: Make the Steward take a turn
+
+**Model:** **Opus 5**, in-session, per CLAUDE.md's roster note -- this is design
+work (a new mechanic, not volume prose) before it is content, and flagship-shaped
+design/content is authored directly in the working session now that Fable 5 and
+Opus 4.8 are gone. Follow A1 Phase 1's shape: a short design note answering the
+open questions below, a measured proof-of-concept, then a STOP-and-report before
+wiring it live, the same way A1 didn't ship its prototype district enabled.
+
+**Read first:** `STEAM_READINESS_BACKLOG.md` **§3, item A3** (the one-paragraph
+spec) and **S1** (the "one verb, never varied" diagnosis A3 is meant to address).
+`docs/CAST_BIBLE.md` if it covers the Steward's voice/behavior; check before
+assuming it does.
+
+**Do not re-derive:** anything about coverage, reachability, the selector, or
+chain day gates. Four consecutive windows closed that; `coverage_audit --union`
+still reports 61/498 unreachable under every strategy and 59 of those are by
+design or known flag-depth. Nothing in A3 should touch `engine/selector.py`'s
+eligibility logic or the district shelves.
 
 ### The state you are inheriting
 
 - All standing gates **GREEN**: `pargate` all assertions, `coverage_audit --assert`
   (starved 66.2 <= 76, outcompeted 35.0 <= 42), `unittest` 94, `lint_content`
-  clean, `--parity` 3/3.
+  clean, `--parity` 3/3. Confirmed again this window with zero drift (SHIP touched
+  no content or engine logic).
 - A1 closed and merged to `main` (PR #1). 7 districts, 498 events, 332 shelved.
-- F6 closed without building anything; its premise was measurably false (§5).
+- **SHIP closed** (this window, branch `ship-blocking-items`, not yet merged --
+  merge or open a PR before starting A3 if you want a clean base). Content
+  warning, settings panel, and manual save slots all shipped; see the write-up
+  above. `saves/` now holds `autosave.json` (`SAVE_FORMAT_VERSION = 1`) and
+  opaquely-named `slot_*.json` files beside `legacy.json`.
 
-### The three blocking items
+### The spec, and one number in it that needs re-verifying
 
-All three are marked **blocking** in `STEAM_READINESS_BACKLOG.md` §4 and all three
-are at zero.
+`STEAM_READINESS_BACKLOG.md` says the Steward is "currently a stat modifier with
+6 events in `data/events/steward_interventions.json`." **That file has 2 events
+today** (`steward_wellness_check`, `steward_buyout_offer`), checked this window
+but not investigated further -- it may be that the other 4 were split out,
+renamed, or that the description was already stale when written (S8/S9's other
+descriptions were, per SHIP's §4 corrections). Separately, F1 measured **120
+events tagged `steward`** scattered across other packs (S2 correction, §5) --
+those are ambient flavor, not the Steward taking a visible turn, but they are the
+raw material this item might route through instead of a fully new mechanic.
+Verify the real shape before designing against a stale number.
 
-**The backlog's §4 descriptions are stale in three places. Verified 2026-07-29
-against the code, and the real starting position is better than it reads:**
+The ask, unchanged from the backlog: give the Steward **a visible weekly move**
+-- it files something, offers something, corrects something, escalates -- one
+line the player sees coming and can play against. Not six more ambient events;
+a cadence and a legible, anticipatable pattern. "An antagonist you can
+anticipate is worth ten atmospheric mentions."
 
-1. **Content warning screen.** Genuinely absent -- `grep -i "content warning"`
-   across `.py`/`.js`/`.html` returns nothing. Greenfield. Shown once before a new
-   run, skippable thereafter, re-readable from settings. Cheapest of the three and
-   the one with the clearest ethical claim on being first: the game covers
-   addiction, overdose and involuntary commitment.
-2. **Settings menu.** **Not greenfield, and reduced motion is already half-done.**
-   `web/styles.css:1081` has a `@media (prefers-reduced-motion: reduce)` block that
-   already kills animations and `glitch-text`, and `web/app.js:895` respects it in
-   the typewriter. There is also already an audio **mute button**
-   (`btn-audio` / `isAudioMuted` / `toggleAudio`), and real audio behind it
-   (`web/audio/*.mp3` plus a WebAudio synth fallback).
-   What is actually missing: a settings **panel** to hold any of it, an **in-app**
-   reduced-motion toggle that does not depend on the OS setting, text size, volume
-   as a slider rather than a binary mute, and **persistence** -- `localStorage` is
-   already used for one thing (`GALLERY_KEY = "grey_utopia_endings_seen"`,
-   `app.js:14`), so follow that pattern.
-3. **Manual save slots. This is a web-only job.** `server.py:38` has a single
-   `AUTOSAVE_PATH = saves/autosave.json` with `save_state`/`load_state` at
-   `server.py:91/108`. **`main.py` has no persistence at all** -- it only records
-   endings through `engine/legacy.py`. So "both UIs" does not apply here; do not
-   invent terminal saves as part of this item.
-   `engine/legacy.py` owns `saves/legacy.json` (`LEGACY_PATH`) separately for NG+
-   and must not be clobbered by slot writes.
+### Open questions a design note should answer before building
+
+1. What triggers a Steward move -- a fixed cadence (every N days), a stat
+   threshold (Heat, Fame), or both? A2/F4 (Social_Capital, Fame spend) are later
+   in the sequence but touch the same stats; check whether A3 should anticipate
+   them or ship independently and be revisited.
+2. Where does the player see it coming -- a HUD element (there's no obvious slot;
+   the sidebar is already three stacked panels plus Exit Chain/Clocks/Threads),
+   a day-transition line, or a new dedicated UI surface?
+3. Is a Steward move itself a storylet (competes in the normal draw), a forced
+   event (bypasses the pool, like `weight: 500000` forced events elsewhere per
+   the voice-narration memory's note on that pattern), or a passive state change
+   with only a text notification?
+4. Does this touch balance? If a Steward move changes Heat/stats on its own
+   schedule rather than through a player choice, that is a new, unreviewed input
+   to `sim_bot`'s strategies and needs its own `pargate` run before shipping --
+   flag it explicitly rather than discovering it after the fact, the way A1
+   Phase 3's shelves discovered their balance exposure late.
 
 ### Watch for
 
-- **`main.py` and `server.py` have drifted before** -- §5 records them counting a
-  "fired" event differently. Any state a save round-trips should be written once
-  and read by both, the way `engine/districts.py` handles placements.
-- **Save compatibility.** Adding fields to the save format is the change most
-  likely to break an existing `saves/autosave.json`. Decide the versioning story
-  before writing slot code, not after. This is the one part of the item worth a
-  second pair of eyes.
-- New HTTP routes go beside the existing ones in `server.py` (`/api/state`,
-  `/api/reset`, `/api/place`, `/api/rest`, `/api/buy_item`, `/api/contact_action`,
-  `/api/choose`).
-- Nothing here should move a balance or coverage number. **If one moves, something
-  is wrong** -- a useful tripwire, so run both gates once at the end even though
-  no content changed.
-
-### Acceptance criteria
-
-| Metric | Target |
-|---|---|
-| Content warning | shown pre-run, skippable, re-readable from settings |
-| Settings panel | one place holding motion / text size / volume |
-| Reduced-motion toggle | in-app, independent of the OS media query, and persists |
-| Text size + volume | persist via `localStorage`; volume replaces the binary mute |
-| Manual save slots | create / load / delete in the web UI, `legacy.json` untouched |
-| `unittest` + `lint_content` | passing / clean |
-| `pargate` + `coverage_audit --assert` | unchanged and green |
-
-**Explicitly out of scope:** Steam achievements and Cloud (they need the slots
-first), capsule art and trailer, controller/Deck verification, localization
-scaffolding, and every reachability question.
+- **This deck's levers are non-monotonic** (`grey-utopia-balance-levers`
+  memory). If the Steward's weekly move has any mechanical teeth (not pure
+  flavor text), treat it as a balance change: run `pargate` before calling it
+  done, and don't chase a sub-point gate overage if one appears (§2).
+- A3 is listed ahead of A4 ("put the cast on screen") in the recommended
+  sequence, but both were sequenced before A1's map existed. Check whether
+  giving the Steward a district-shelf-like home (its own visible "turn" surface)
+  overlaps with A4's portrait/reaction work before designing either in a vacuum.
 
 ### On completion
 

@@ -6,7 +6,10 @@ import os
 import json
 import random
 import glob
+import re
+import uuid
 import threading
+from datetime import datetime, timezone
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse
 
@@ -37,6 +40,66 @@ IMAGE_TYPES = {".jpg": "image/jpeg", ".jpeg": "image/jpeg",
 SAVES_DIR = os.path.join(paths.user_data_dir(), "saves")
 AUTOSAVE_PATH = os.path.join(SAVES_DIR, "autosave.json")
 
+# Bumped only when the session payload's *meaning* changes, not when a field is
+# merely added (tolerant .get(key, default) reads already handle that). A save
+# with no version is treated as v0 and adopted silently; one with a version
+# greater than this build knows is refused rather than tolerant-read, since a
+# newer shape read by an older reader is exactly what a missing-key default
+# cannot detect. See docs/BACKLOG_HANDOFF.md SHIP item, Step 3 (save-versioning
+# proposal), for the full reasoning.
+SAVE_FORMAT_VERSION = 1
+
+# Manual save slots live beside autosave.json in the same directory as
+# legacy.json (engine/legacy.py). Filenames are never derived from the
+# player-chosen display name -- that name lives inside the file instead --
+# so a slot cannot collide with legacy.json/autosave.json or escape SAVES_DIR
+# via "/" or "..", and Windows-reserved names (CON, NUL, PRN, AUX...) are moot.
+SLOT_ID_RE = re.compile(r"^[0-9a-f]{12}$")
+SLOT_FILENAME_RE = re.compile(r"^slot_([0-9a-f]{12})\.json$")
+
+
+def _slot_path(slot_id: str) -> str:
+    return os.path.join(SAVES_DIR, f"slot_{slot_id}.json")
+
+
+def list_slots() -> list[dict]:
+    """Every manual save, discovered by scanning SAVES_DIR -- no separate index
+    file to keep in sync or corrupt. Metadata (name, day, ending, timestamp)
+    is read out of each slot file itself."""
+    if not os.path.isdir(SAVES_DIR):
+        return []
+    out = []
+    for filepath in glob.glob(os.path.join(SAVES_DIR, "slot_*.json")):
+        m = SLOT_FILENAME_RE.fullmatch(os.path.basename(filepath))
+        if not m:
+            continue
+        try:
+            with open(filepath, "r", encoding="utf-8") as fh:
+                data = json.load(fh)
+            char = data.get("character") or {}
+            out.append({
+                "id": m.group(1),
+                "name": ((data.get("slot_meta") or {}).get("name")) or "Unnamed run",
+                "saved_at": data.get("saved_at", ""),
+                "day": int(char.get("day", 0)),
+                "ending": char.get("ending") or None,
+            })
+        except (json.JSONDecodeError, OSError, TypeError, ValueError):
+            continue  # a corrupt slot file just doesn't appear in the list
+    out.sort(key=lambda s: s["saved_at"], reverse=True)
+    return out
+
+
+def delete_slot(slot_id: str) -> bool:
+    if not SLOT_ID_RE.fullmatch(slot_id or ""):
+        raise ValueError("Invalid slot id.")
+    path = _slot_path(slot_id)
+    if os.path.isfile(path):
+        os.remove(path)
+        return True
+    return False
+
+
 # Global Game Session State
 class GameSession:
     def __init__(self):
@@ -63,6 +126,7 @@ class GameSession:
         self.last_outcome: dict | None = None
         self.day_report: dict | None = None
         self.last_day_report: dict | None = None
+        self.last_saved_at: str | None = None
         if not self.load_state():
             self.advance_event()
 
@@ -88,9 +152,12 @@ class GameSession:
             slots -= 1
         return max(1, slots)
 
-    def save_state(self) -> None:
-        os.makedirs(SAVES_DIR, exist_ok=True)
-        payload = {
+    def _session_payload(self) -> dict:
+        """The one save shape, shared by autosave and every manual slot. A
+        slot file is this payload plus a "slot_meta" block (see save_slot)."""
+        return {
+            "version": SAVE_FORMAT_VERSION,
+            "saved_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "character": json.loads(self.character.to_json()),
             "used_slots_today": self.used_slots_today,
             "fired_today": sorted(self.fired_today),
@@ -102,8 +169,49 @@ class GameSession:
             },
             "current_event_id": self.current_event.id if self.current_event else None,
         }
+
+    def _apply_session_payload(self, data: dict) -> None:
+        """Shared by autosave restore and slot load. A version newer than this
+        build knows is refused (raises ValueError) rather than tolerant-read --
+        see SAVE_FORMAT_VERSION. Missing/0 is adopted silently, same as every
+        other field here defaults via .get()."""
+        version = int(data.get("version") or 0)
+        if version > SAVE_FORMAT_VERSION:
+            raise ValueError(
+                f"save is format v{version}; this build only supports up to v{SAVE_FORMAT_VERSION}"
+            )
+        self.character = Character.from_dict(data["character"])
+        self.used_slots_today = int(data.get("used_slots_today", 0))
+        self.fired_today = set(data.get("fired_today", []))
+        self.ambient_today = int(data.get("ambient_today", 0))
+        # A save written before A1 Phase 2 has no placement in it. Default to
+        # "already answered" rather than re-opening the step, so restoring an
+        # old autosave drops the player back into the day it saved instead of
+        # into a placement screen for a day that is half spent.
+        self.awaiting_placement = bool(data.get("awaiting_placement", False))
+        event_state = data.get("event_state", {})
+        for e in self.events:
+            st = event_state.get(e.id)
+            if st:
+                e.fire_count = int(st.get("fire_count", 0))
+                e.last_fired_day = int(st.get("last_fired_day", -9999))
+            else:
+                # This may be replacing a live run's fire counts (slot load),
+                # not just populating a fresh process, so an event this
+                # payload is silent about must be cleared, not left as-is.
+                e.fire_count = 0
+                e.last_fired_day = -9999
+        self.current_slots = self.calculate_slots()
+        wanted = data.get("current_event_id")
+        self.current_event = next((e for e in self.events if e.id == wanted), None)
+        self.last_saved_at = data.get("saved_at")
+
+    def save_state(self) -> None:
+        os.makedirs(SAVES_DIR, exist_ok=True)
+        payload = self._session_payload()
         with open(AUTOSAVE_PATH, "w", encoding="utf-8") as fh:
             json.dump(payload, fh, indent=2)
+        self.last_saved_at = payload["saved_at"]
 
     def load_state(self) -> bool:
         if not os.path.exists(AUTOSAVE_PATH):
@@ -111,31 +219,55 @@ class GameSession:
         try:
             with open(AUTOSAVE_PATH, "r", encoding="utf-8") as fh:
                 data = json.load(fh)
-            self.character = Character.from_dict(data["character"])
-            self.used_slots_today = int(data.get("used_slots_today", 0))
-            self.fired_today = set(data.get("fired_today", []))
-            self.ambient_today = int(data.get("ambient_today", 0))
-            # A save written before A1 Phase 2 has no placement in it. Default to
-            # "already answered" rather than re-opening the step, so restoring an
-            # old autosave drops the player back into the day it saved instead of
-            # into a placement screen for a day that is half spent.
-            self.awaiting_placement = bool(data.get("awaiting_placement", False))
-            event_state = data.get("event_state", {})
-            for e in self.events:
-                st = event_state.get(e.id)
-                if st:
-                    e.fire_count = int(st.get("fire_count", 0))
-                    e.last_fired_day = int(st.get("last_fired_day", -9999))
-            self.current_slots = self.calculate_slots()
-            wanted = data.get("current_event_id")
-            self.current_event = next((e for e in self.events if e.id == wanted), None)
+            self._apply_session_payload(data)
             if self.current_event is None and not self.character.dead:
                 self.advance_event()
-            print(f"Restored autosave: Day {self.character.day}, {len(event_state)} event states.")
+            print(f"Restored autosave: Day {self.character.day}, "
+                  f"{len(data.get('event_state', {}))} event states.")
             return True
         except (KeyError, ValueError, json.JSONDecodeError, OSError) as err:
             print(f"Autosave restore failed ({err}); starting fresh.")
             return False
+
+    def save_slot(self, name: str) -> dict:
+        """Write the current run to a new, opaquely-named slot file. The
+        player's display name lives inside the file (slot_meta), never in the
+        filename -- see the module-level comment above SLOT_ID_RE."""
+        os.makedirs(SAVES_DIR, exist_ok=True)
+        slot_id = uuid.uuid4().hex[:12]
+        payload = self._session_payload()
+        payload["slot_meta"] = {
+            "name": (name or f"Day {self.character.day + 1}").strip()[:60] or "Unnamed run",
+        }
+        with open(_slot_path(slot_id), "w", encoding="utf-8") as fh:
+            json.dump(payload, fh, indent=2)
+        return {
+            "id": slot_id,
+            "name": payload["slot_meta"]["name"],
+            "saved_at": payload["saved_at"],
+            "day": self.character.day,
+            "ending": self.character.ending or None,
+        }
+
+    def load_slot(self, slot_id: str) -> None:
+        """Replace the live session with a manual slot's contents. The caller
+        (the /api/saves/load route) is responsible for then calling
+        save_state() so the loaded run becomes the new autosave -- loading a
+        slot is a real, if sharp, replacement of the in-progress run, and the
+        web UI gates it behind an explicit confirm step for that reason."""
+        if not SLOT_ID_RE.fullmatch(slot_id or ""):
+            raise ValueError("invalid slot id")
+        path = _slot_path(slot_id)
+        if not os.path.isfile(path):
+            raise FileNotFoundError("slot not found")
+        with open(path, "r", encoding="utf-8") as fh:
+            data = json.load(fh)
+        self._apply_session_payload(data)
+        self.last_outcome = None
+        self.day_report = None
+        self.last_day_report = None
+        if self.current_event is None and not self.character.dead:
+            self.advance_event()
 
     def advance_event(self):
         self.day_report = None
@@ -206,6 +338,7 @@ class GameSession:
         self.last_outcome = None
         self.day_report = None
         self.last_day_report = None
+        self.last_saved_at = None
         # One-shot storylets must come back for a new run
         for e in self.events:
             e.fire_count = 0
@@ -305,7 +438,8 @@ class GameSession:
                 "ledger_line": steward_ledger_line(self.character, self.last_day_report),
             },
             "last_outcome": self.last_outcome,
-            "day_report": self.day_report
+            "day_report": self.day_report,
+            "last_saved_at": self.last_saved_at,
         }
 
 
@@ -556,6 +690,68 @@ class GreyUtopiaRequestHandler(SimpleHTTPRequestHandler):
             st = session.get_state_dict()
             st["catalog"] = ITEM_CATALOG
             self.send_json(st)
+            return
+
+        if parsed.path == "/api/saves":
+            self.send_json({"slots": list_slots()})
+            return
+
+        if parsed.path == "/api/saves/save":
+            length = int(self.headers.get("Content-Length", 0))
+            body = self.rfile.read(length).decode("utf-8") if length else "{}"
+            try:
+                data = json.loads(body) if body else {}
+                name = str(data.get("name", ""))
+            except (json.JSONDecodeError, TypeError, AttributeError):
+                self.send_json({"error": "Invalid payload"}, status=400)
+                return
+            entry = session.save_slot(name)
+            self.send_json({"slots": list_slots(), "saved": entry})
+            return
+
+        if parsed.path == "/api/saves/load":
+            length = int(self.headers.get("Content-Length", 0))
+            body = self.rfile.read(length).decode("utf-8")
+            try:
+                data = json.loads(body)
+                slot_id = str(data.get("id", ""))
+            except (json.JSONDecodeError, TypeError, AttributeError):
+                self.send_json({"error": "Invalid payload"}, status=400)
+                return
+            try:
+                session.load_slot(slot_id)
+            except FileNotFoundError:
+                self.send_json({"error": "Slot not found."}, status=404)
+                return
+            except (ValueError, KeyError, TypeError) as err:
+                # Covers both a malformed slot and the version-refusal case in
+                # _apply_session_payload -- either way the player needs to see
+                # this, not just the console.
+                self.send_json({"error": f"Could not load that save: {err}"}, status=400)
+                return
+            # Loading becomes the new current run: it must persist immediately
+            # as the autosave, not wait for the player's next action.
+            session.save_state()
+            st = session.get_state_dict()
+            st["catalog"] = ITEM_CATALOG
+            self.send_json(st)
+            return
+
+        if parsed.path == "/api/saves/delete":
+            length = int(self.headers.get("Content-Length", 0))
+            body = self.rfile.read(length).decode("utf-8")
+            try:
+                data = json.loads(body)
+                slot_id = str(data.get("id", ""))
+            except (json.JSONDecodeError, TypeError, AttributeError):
+                self.send_json({"error": "Invalid payload"}, status=400)
+                return
+            try:
+                delete_slot(slot_id)
+            except ValueError:
+                self.send_json({"error": "Invalid slot id."}, status=400)
+                return
+            self.send_json({"slots": list_slots()})
             return
 
         self.send_error(404, "Unknown Endpoint")
