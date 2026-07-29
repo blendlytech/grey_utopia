@@ -962,6 +962,7 @@ function renderUI(state) {
   renderExitChain(state.flags || []);
   renderClocks(state.clocks || {});
   renderThreads(state.flags || []);
+  renderStewardFile(state.steward);
   renderEdgeChip(state.edge || 0);
   // Contacts and rest both spend a slot, and a slot cannot be spent before the
   // morning placement says where it is standing -- the server refuses either way.
@@ -1068,6 +1069,38 @@ function renderThreads(flags) {
     chip.title = meta.tip;
     list.appendChild(chip);
   });
+}
+
+/* ============ The Steward's file (A3) ============ */
+// The one line the player sees coming. The terminal front end prints
+// steward.filing_notice() beside the ledger line; the web front end never
+// rendered state.ambient at all, so the notice lives here instead -- same
+// string, same window, from the same server call.
+let prevFilingTier = null;
+
+function renderStewardFile(file) {
+  const panel = document.getElementById("steward-panel");
+  if (!panel) return;
+  // Hidden until the Steward has written something down, exactly as
+  // #clocks-panel is hidden until a clock runs.
+  panel.classList.toggle("hidden", !(file && file.open));
+  if (!file || !file.open) { prevFilingTier = null; return; }
+
+  document.getElementById("steward-tier").textContent = file.tier_name;
+  const n = file.entries;
+  document.getElementById("steward-entries").textContent =
+    `${n} ${n === 1 ? "entry" : "entries"}`;
+  panel.dataset.tier = file.tier;
+
+  const notice = document.getElementById("steward-notice");
+  notice.classList.toggle("hidden", !file.notice);
+  notice.textContent = file.notice || "";
+  notice.classList.toggle("notice-today", file.days_until === 0);
+
+  // Escalation is the thing this panel exists to make legible, so it gets the
+  // same one-shot audio treatment a newly-critical clock does.
+  if (prevFilingTier !== null && file.tier > prevFilingTier) playSound("warning");
+  prevFilingTier = file.tier;
 }
 
 function renderEdgeChip(edge) {

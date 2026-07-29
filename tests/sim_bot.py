@@ -24,6 +24,7 @@ from typing import Dict, List
 # Ensure parent directory is in python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+from engine import steward
 from engine.stats import create_starter_fixer, Character
 from engine.events import Event, Choice, load_events
 from engine.selector import select_event, is_ambient, ambient_budget_for, district_for_slot
@@ -166,6 +167,10 @@ def run_single_simulation(strategy: str = "random", seed: int = 0, max_days: int
         # heuristic, so this keeps the map strategy-neutral and keeps the balance
         # gate measuring the deck rather than a placement AI. One RNG draw a day.
         clear_placements(character)
+        # A3: arm today's filing. No RNG, so this does not reshuffle the stream --
+        # what it changes is the eligible pool on filing days, which is precisely
+        # the balance effect this gate exists to score.
+        steward.begin_day(character)
         drawn = {} if placement == "off" else auto_placement(rng, character, slots)
         if placement == "auto":
             apply_placements(character, drawn)

@@ -326,6 +326,14 @@ probability model in `engine/resolver.py:119-132` something to be legible about.
 ### A3 -- Make the Steward take a turn
 **Addresses:** S1, world-presence
 **Effort:** medium
+**Status: DONE 2026-07-29 (Phase 2), both gates green.** `STEWARD_CADENCE = 7`
+and `data/events/steward_filings_pack.json` -- five tier-selected filings, forced
+every 7 days from day 31, taking over the ~30 days the Continuity Review ladder
+leaves empty. Deliberate runs get 4.7-6.0 of them, and *which* filing you get is
+decided by a file that never cools: cautious play lives at tiers 1-2 and never
+closes its file, reckless at tiers 3-4. The visible move is
+`steward.filing_notice()` in the terminal and `#steward-panel` in the web left
+column. `BACKLOG_HANDOFF.md` §3 and `docs/A3_DESIGN.md` §8.
 
 > **CORRECTED 2026-07-29 (A3 Phase 1), measured by `tests/steward_audit.py`. The
 > paragraph below is wrong in both directions and the item was re-scoped around

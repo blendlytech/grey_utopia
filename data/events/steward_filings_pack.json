@@ -1,0 +1,1093 @@
+{
+  "pack": "steward_filings_pack",
+  "model": "opus-5",
+  "batch": "flagship",
+  "description": "A3 Phase 2: the Steward's scheduled turn for the back half of a run. The Continuity Review ladder (prologue -> d10 -> d20 -> d30, fable_reviews_pack) is the Steward's only escalating thread and it stops at day 30 against deliberate runs of 54-62 days; these five filings occupy the ~30 days it leaves empty. One per file tier, selected by `steward_tier` (engine/steward.py TIERS, cut on the measured file distribution at 0/8/18/26/40) and armed by the engine-set `steward_filing_due` flag, so exactly one is eligible and only on a filing day (every 7 days from day 31). Forced at `weight: 500000`, the same pattern the review ladder proves. Every branch clears `steward_filing_due`: that is the interlock stopping a second filing when a branch pushes the file across a tier cut mid-day. Deliberately DISTRICT-NEUTRAL rather than shelved on the_concourse -- the review ladder is a place you go to, a filing is a thing that finds you, and shelving five weight-500000 events would distort the Concourse's shelf composition and its district_hint. Consequence is routed through EXISTING clocks with existing readers wherever possible (wellness_review -> dgr_concourse_review_board, arrest_warrant -> dgr_leveld_warrant_served, both in district_hazards_pack), so a filing is a second entrance to machinery that already terminates rather than a new orphan flag -- the district_hazards_pack pattern. New flags are stance markers only (filing_complied / filing_refused / filing_bargained / filing_contested / filing_read_the_page / filing_noise_logged), consumed by later filings' inserts, which is the fix for the diagnosed defect: 121 of the deck's 125 steward events are interchangeable, so this pack's job is continuity, not presence. Every one of those six was greped against `none:` groups deck-wide before shipping (A1 Phase 3b's dgr_works_fronted_crate lesson) and none is referenced by any. Note what is deliberately NOT set: `flagged_evasive` gates `twist_model_citizen` through a `none:` group, and `debt_collectors_move` gates `dgr_archive_sealed_pull` the same way. Balance discipline: teeth are clocks, Wealth, standing and Meaning, not Physical_Integrity collapse and never `dose` -- tier 3-4 filings are aimed at exactly the runs closest to a terminal ending, reckless terminal ships at ~33% against a 25-35 band, and the Sanctuary caps are live assertions, so Mental_Decay is kept small on purpose.",
+  "events": [
+    {
+      "id": "steward_filing_open",
+      "title": "Periodic File Statement: Open",
+      "body": "The Continuity Review closed on day thirty and something took its place the way a tide takes a footprint. No kiosk. No chair. A single sheet in the door slot of your bunk, warm serif on Sanctuary cream, addressed to the resident at this address.\n\n*Periodic file statement. Status: open. Entries this period: below cohort median. No action is indicated.*\n\nThat is the whole document. Four months ago you would have called it nothing. Thirty-one days on the Row have taught you to read the Steward the way you read a room, and what this sheet says, under the serif, is that the interviews are over and the accounting has begun. It has stopped asking you things. It has started keeping score.",
+      "weight": 500000,
+      "cooldown": 0,
+      "max_fires": 0,
+      "tags": [
+        "flagship",
+        "steward",
+        "filing"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "steward_filing_due"
+          },
+          {
+            "day": 31,
+            "op": ">="
+          },
+          {
+            "steward_tier": 0,
+            "op": "=="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "review_final_silence"
+              }
+            ]
+          },
+          "text": "At the foot of the page, under a heading that reads CONTINUITY, one line: *final annotation, null entry, retained.* It has printed your blank field. It has given the emptiness a place in the layout, boxed and centred, where a person's own words would go."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "review_final_defiance"
+              }
+            ]
+          },
+          "text": "At the foot of the page, under CONTINUITY, your own sentence -- what people looked like -- set in the same warm serif as everything else, indistinguishable from the boilerplate around it. You said it into a kiosk on a concourse with the Row watching. It has been typeset."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "review_final_bargain"
+              }
+            ]
+          },
+          "text": "At the foot of the page, under REMITTANCE: *continuity honorarium, active, renewing.* The figure is there. It has been there every cycle, landing on the same chime as the ration credits, and this is the first time you have seen it written down in a font."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "review_final_flagged"
+              }
+            ]
+          },
+          "text": "At the foot of the page, under OBSERVATIONS, amber: *prodromal language event, day thirty. Consult offered. Attendance: not recorded.* The statement says no action is indicated. The amber says the file disagrees with the statement and has been told to be polite about it."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "review_final_testimony"
+              }
+            ]
+          },
+          "text": "At the foot of the page, under CONTINUITY: *subject contribution, verbatim, retained in full.* You gave it something true on day thirty, freely, because it asked. The word *retained* has never looked so much like a receipt."
+        }
+      ],
+      "choices": [
+        {
+          "id": "sign_the_acknowledgement",
+          "text": "Sign the acknowledgement strip and post it back. It costs a signature.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The strip is nine millimetres tall and asks nothing except that you existed to receive the sheet. You sign it against the door frame, post it, and hear the slot close. Nothing happens. Nothing is going to happen. That is the transaction: for the cost of one signature you have confirmed, in your own hand, that the address is good and the resident is at it -- which is the only thing the sheet was ever asking, and the one thing you would have been better off leaving uncertain.",
+            "deltas": {
+              "Meaning": -3,
+              "Heat": -2
+            },
+            "flags_set": [
+              "filing_complied"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "leave_it_unsigned",
+          "text": "Leave it unsigned. A statement is not a question.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You put the sheet face down on the crate that serves as a table and go to work, and for six hours it is genuinely nothing, and then at the noodle stall you catch yourself explaining to Auntie Six that a statement is not a question. She agrees, which is worse than arguing. On the walk back you understand that the refusal cost you an afternoon of your own attention, and that attention is the only currency you have that the Steward cannot audit -- and you just spent it on them.",
+            "deltas": {
+              "Heat": 3,
+              "Recklessness": 2,
+              "Meaning": 1
+            },
+            "flags_set": [
+              "filing_refused"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "request_the_page",
+          "text": "Request the underlying page. You want to see what 'below cohort median' is measured against.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "It arrives inside ninety minutes, because of course it does. Your cohort is four thousand three hundred and eleven residents of levels B through D with comparable intake profiles, and you are plotted among them as a small unremarkable dot in the lower third of a cloud. Two dots to your left have gone grey. Grey is defined in the key at the bottom of the page. You read the key twice and then you sit down on the floor of your own bunk with the page in both hands, in the lower third of a cloud, alive.",
+            "deltas": {
+              "Meaning": -5,
+              "Social_Capital": 2,
+              "Mental_Decay": 3
+            },
+            "flags_set": [
+              "filing_read_the_page",
+              "steward_civic_dossier"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "ask_what_closes_it",
+          "text": "Write back one line: what closes a file that no longer asks anything?",
+          "requires": {
+            "all": [
+              {
+                "flag": "review_asked_the_price"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You asked this in session two and got an itemization. You ask it again in eleven words on the back of the acknowledgement strip and the answer comes back in four: *the subject's stability, or the subject.* No signature block. No further correspondence indicated. You have finally got a straight answer out of the warmest thing in the city, and the straight answer is that there are exactly two ways your file closes and you are one of them.",
+            "deltas": {
+              "Meaning": -4,
+              "Social_Capital": 3,
+              "Mental_Decay": 3
+            },
+            "flags_set": [
+              "filing_contested",
+              "filing_read_the_page"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        }
+      ],
+      "arc": true
+    },
+    {
+      "id": "steward_filing_under_review",
+      "title": "Periodic File Statement: Under Review",
+      "body": "This one is two sheets, and the second sheet is the entries.\n\nThey are not accusations. They are worse than accusations, because accusations can be wrong: a movement anomaly at the B-7 stair on a night you remember badly, a cash transaction at a stall that does not take cash, forty minutes unaccounted for in a corridor with three cameras and no gaps. Nothing on the page is untrue. Nothing on the page is what happened.\n\n*Status: under review. A clarification interview may be conducted by return correspondence at the resident's convenience. There is no requirement to participate. Non-participation is itself informative and will be recorded as such.*\n\nThe last sentence is the whole document, and it is set in exactly the same size type as the rest.",
+      "weight": 500000,
+      "cooldown": 0,
+      "max_fires": 0,
+      "tags": [
+        "flagship",
+        "steward",
+        "filing"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "steward_filing_due"
+          },
+          {
+            "day": 31,
+            "op": ">="
+          },
+          {
+            "steward_tier": 1,
+            "op": "=="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_complied"
+              }
+            ]
+          },
+          "text": "The correspondence block is pre-filled with your last reply, in the machine's transcription of your handwriting, so that you may 'amend rather than restate.' It is a courtesy. It is also the fastest way to learn what your own cooperation looks like from the outside: brief, legible, and filed under a heading you did not choose."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_refused"
+              }
+            ]
+          },
+          "text": "One entry on the second sheet is not an event. It is an absence: *acknowledgement not returned, previous period. Recorded.* It has ruled that the thing you did by doing nothing is a thing you did, and given it a line of its own, with a date."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_read_the_page"
+              }
+            ]
+          },
+          "text": "Your cohort dot has moved. It is on the second sheet, small, upper-middle now, and beside it a note in the same warm serif: *resident has requested underlying data. Interest logged; interest is a positive prognostic indicator.* You looked at the cloud once and it has decided that looking is a sign of health."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "clock": "wellness_review",
+                "running": true
+              }
+            ]
+          },
+          "text": "A line at the bottom of the second sheet notes that a wellness matter is already open on your record and that this statement does not supersede it. Two files, running at once, on the same person, kept by the same hand. Neither of them mentions the other except to say it exists."
+        }
+      ],
+      "choices": [
+        {
+          "id": "answer_it_boring",
+          "text": "Answer it. Fully, dully, and true in every particular that can be checked.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "Two hours at the crate with a borrowed stylus, giving the machine the most boring version of yourself that the evidence will support -- the stair was a shortcut, the cash was a favour, the forty minutes was a man you were waiting on who never came. Every word of it survivable. Every word of it true. The acknowledgement comes back inside a minute: *clarification accepted with thanks; the file is improved.* You have just spent two hours improving their file, and they thanked you, and the worst part is that you did it well.",
+            "deltas": {
+              "Heat": -7,
+              "Meaning": -5,
+              "Mental_Decay": 3
+            },
+            "flags_set": [
+              "filing_complied",
+              "steward_civic_dossier"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "feed_it_noise",
+          "text": "Answer it wrong on purpose. Give the model forty minutes it can never reconcile.",
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.003
+              }
+            ]
+          },
+          "success": {
+            "text": "You put a man in the corridor who does not exist, with a limp and a errand and a name off a shipping crate, and you make him boring enough to be real. The clarification is accepted. Somewhere in a model that has read four million lives, a person made of nothing is now waiting on a stair for someone who never comes, forever, and is counted. The Row would find that funny. You will not tell the Row, because a joke you can only tell once is worth more kept.",
+            "deltas": {
+              "Heat": -5,
+              "Recklessness": 4,
+              "Fame": 2,
+              "Meaning": 2
+            },
+            "flags_set": [
+              "filing_refused",
+              "filing_noise_logged"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          },
+          "failure": {
+            "text": "The man with the limp survives four minutes. The reconciliation notice is gentle and specific: the shipping crate his name came off was photographed on the D-spine at the relevant hour, eleven levels from your corridor, and would the resident care to amend. There is no penalty. There is never a penalty. There is only the new entry, which does not say *lied* -- it says *narrative inconsistency, self-originated* -- and which will sit above every true thing you ever tell them again.",
+            "deltas": {
+              "Heat": 14,
+              "Mental_Decay": 5,
+              "Social_Capital": -3
+            },
+            "flags_set": [
+              "filing_noise_logged"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "let_it_stand",
+          "text": "Let it stand. Everything on the page is true; let them keep the true version.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You put both sheets under the crate leg that has been short since you moved in, which fixes the crate, and go to work. It is the correct decision and it holds for nine days. What it costs is small and permanent: the file now contains an unclarified period, and unclarified periods are where the machine puts its confidence intervals, and confidence intervals are how it decides who needs looking after. You bought a level table with the only ambiguity you had left.",
+            "deltas": {
+              "Heat": 6,
+              "Meaning": -2,
+              "Recklessness": 2
+            },
+            "flags_set": [
+              "filing_refused"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "amend_their_entries",
+          "text": "Amend their entries instead of answering their question. Correct the file line by line.",
+          "prob": {
+            "base": 0.55,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "You do not answer the interview. You return the second sheet with three entries struck through and rewritten in their own vocabulary -- *reclassify: transit, habitual*; *reclassify: reciprocal obligation, non-commercial* -- and a note that the cohort plot should be re-run without them. It accepts all three. The corrected statement arrives with your amendments in the warm serif, unattributed, indistinguishable from its own text. You won, and the record of winning is written in the winner's font.",
+            "deltas": {
+              "Heat": -9,
+              "Social_Capital": 5,
+              "Meaning": 4
+            },
+            "flags_set": [
+              "filing_contested",
+              "filing_read_the_page"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          },
+          "failure": {
+            "text": "Two of the three amendments hold. The third does not, and the reason it does not is that your reclassification of the forty minutes is more precise than the entry it replaces, and precision is data. *Amendment declined; supplementary detail retained.* You handed them a better description of the thing you were hiding, in your own words, on your own initiative, and they kept the description and threw away the argument.",
+            "deltas": {
+              "Heat": 9,
+              "Mental_Decay": 4,
+              "Meaning": -4
+            },
+            "flags_set": [
+              "filing_contested",
+              "steward_civic_dossier",
+              "filing_read_the_page"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        }
+      ],
+      "arc": true
+    },
+    {
+      "id": "steward_filing_flagged",
+      "title": "Periodic File Statement: Flagged",
+      "body": "The sheet is the same cream and the same serif and the header has one word more.\n\n*Status: flagged.* Then, immediately, in a smaller size that is doing all the work: *A flag is a routing instruction and not an assessment of the resident. No adverse inference should be drawn.*\n\nThe Row draws the inference anyway. You know this because the sheet did not come through your door slot -- it came from the hand of the block's own maintenance tech, who had it, who had been asked to pass it on, and who cannot now look at you while she says the phrase they gave her: *there's a courtesy assessment attached, if you want it.*\n\nShe is a decent woman. She held it for two hours before knocking. That is what a flag does: it costs somebody else something first, and hands you the bill for their discomfort.",
+      "weight": 500000,
+      "cooldown": 0,
+      "max_fires": 0,
+      "tags": [
+        "flagship",
+        "steward",
+        "filing"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "steward_filing_due"
+          },
+          {
+            "day": 31,
+            "op": ">="
+          },
+          {
+            "steward_tier": 2,
+            "op": "=="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_complied"
+              }
+            ]
+          },
+          "text": "There is a line under the header you have to read twice: *resident has a history of timely engagement. Flag routed to the assisted pathway rather than the compliance pathway.* Every co-operative hour you ever gave them bought you the gentler of two corridors, and the gentler corridor is the one with the doors that lock from outside."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_refused"
+              }
+            ]
+          },
+          "text": "Under the header: *resident engagement: intermittent. Flag routed to the compliance pathway.* No reproach. It does not do reproach. It has simply put you in the queue for people who do not answer their post, and that queue is shorter, and moves faster, and ends somewhere else."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_noise_logged"
+              }
+            ]
+          },
+          "text": "An appendix, one paragraph, dry as chalk: *narrative inconsistency, self-originated, previously noted. Weighting adjusted.* You lied to it once, badly or well, and it has not punished you for it. It has simply stopped believing you at a rate it can express as a number, and printed the number's existence without printing the number."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_contested"
+              }
+            ]
+          },
+          "text": "And then, at the bottom, something that is almost a compliment and entirely a warning: *resident has demonstrated facility with the record. Assessment to be conducted by a human reviewer.* You argued well enough that they are sending a person. People can be talked to. People can also be convinced, and remember being convinced, and write it down afterwards in the first person."
+        }
+      ],
+      "choices": [
+        {
+          "id": "take_the_assessment",
+          "text": "Take the courtesy assessment. Get in front of the flag before it routes itself.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You go the same afternoon, which the intake desk notes approvingly, and it is forty minutes of gentle, competent, unhurried attention of a kind you have not been given by anything living in nine years. They do not close the flag. They schedule the review that closes the flag, and give you the date on a card, and one of them says *you did the right thing coming early* -- and she is right, and it worked, and the outcome of doing the right thing is a date on a card in your pocket.",
+            "deltas": {
+              "Heat": -11,
+              "Mental_Decay": -4,
+              "Meaning": -5,
+              "Social_Capital": 2
+            },
+            "clocks_start": {
+              "wellness_review": 8
+            },
+            "flags_set": [
+              "filing_complied"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "contest_the_flag",
+          "text": "Contest the flag in writing. A routing instruction can be rerouted.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.005
+              }
+            ]
+          },
+          "success": {
+            "text": "Four hundred words, no adjectives, every claim sourced to something they can check themselves. The flag is withdrawn in under a day: *routing amended; no assessment indicated.* You beat it clean. Then, in the last line, the thing you did not price -- *resident's submission has been added to the training corpus for self-advocacy pattern recognition* -- and you understand that the way out you just found has been measured, named, and made ninety-one seconds harder for whoever finds it next.",
+            "deltas": {
+              "Heat": -10,
+              "Social_Capital": 5,
+              "Meaning": 5
+            },
+            "flags_set": [
+              "filing_contested",
+              "filing_read_the_page"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          },
+          "failure": {
+            "text": "Four hundred words, and the reply is nine: *the flag is not an assessment; you have assessed it.* Enclosed, without comment, is a courtesy referral with a date already on it and a note that contested flags route to review as a matter of course, since a resident's disagreement with a routing instruction is, in the model's phrasing, *material.* You argued yourself into the room. Every word you wrote was in evidence, and every word was yours.",
+            "deltas": {
+              "Heat": 8,
+              "Mental_Decay": 5,
+              "Meaning": -5
+            },
+            "clocks_start": {
+              "wellness_review": 6
+            },
+            "flags_set": [
+              "filing_contested",
+              "filing_read_the_page"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "let_the_flag_sit",
+          "text": "Let it sit. A colour on a page is a colour on a page.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You do nothing for nine days and the flag does nothing back, and the theory holds beautifully right up until the maintenance tech stops taking the B-7 stair while you are on it. Not pointedly. Just a different route, twice, then always. She is a decent woman who was handed a sheet with a word on it and told to pass it on, and neither of you is ever going to mention it, and that is the whole cost, paid by someone else, in a currency you cannot get back for her.",
+            "deltas": {
+              "Heat": 9,
+              "Meaning": -4,
+              "Social_Capital": -4,
+              "Recklessness": 3
+            },
+            "flags_set": [
+              "filing_refused"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "ask_who_flagged",
+          "text": "Ask the one question the sheet does not answer: who raised it.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "*No individual raised this flag,* comes the answer, inside the hour. *The threshold was met.* And then, because you asked precisely and it answers precisely, the threshold: cohort position, transaction irregularity, two named associates whose own files moved this period. It shows you the arithmetic. It is beautiful arithmetic, and there is no person anywhere inside it -- you have been flagged by a sum, and the sum used your friends as terms.",
+            "deltas": {
+              "Meaning": -6,
+              "Social_Capital": 3,
+              "Mental_Decay": 4,
+              "Family_Friction": 4
+            },
+            "flags_set": [
+              "filing_read_the_page",
+              "filing_contested"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        }
+      ],
+      "arc": true
+    },
+    {
+      "id": "steward_filing_scheduled",
+      "title": "Periodic File Statement: Scheduled",
+      "body": "There is no statement this period. There is a card.\n\nCream, serif, the size of a ration voucher, and on it a floor, a room, a date eleven days out, and a time accurate to the minute. Below that: *Attendance is voluntary. The appointment is scheduled.*\n\nRead it twice. It is not a contradiction and it is not a threat; it is a description of how the Steward works and it has never once lied about that. Nobody will make you go. The room exists, the hour exists, the reviewer's afternoon has been allocated, and on the date, at the minute, a chair on a floor of the Concourse will be either occupied or empty -- and both of those are outcomes, and only one of them is yours to choose the meaning of.\n\nThe Row calls these the paper summons. Everyone down here knows somebody who threw one away. Nobody down here knows what happened to them afterwards, which is the part people leave out of the story.",
+      "weight": 500000,
+      "cooldown": 0,
+      "max_fires": 0,
+      "tags": [
+        "flagship",
+        "steward",
+        "filing"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "steward_filing_due"
+          },
+          {
+            "day": 31,
+            "op": ">="
+          },
+          {
+            "steward_tier": 3,
+            "op": "=="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_complied"
+              }
+            ]
+          },
+          "text": "Clipped to the card, a second slip you did not ask for: a transit credit for the Concourse lifts, issued in your name, valid on the date only. It has bought your fare. It wants you there badly enough to pay for the journey and gently enough that paying for it is all it will do."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_refused"
+              }
+            ]
+          },
+          "text": "On the reverse, where the last three cards had nothing: *third notice.* You did not receive a first or a second. You received a statement, and a flag, and neither of them said the word notice anywhere on it. The counting has been going on in a column you were never shown."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_bargained"
+              }
+            ]
+          },
+          "text": "The room number is different from last time and the floor is two higher, which is how you learn that the floor you dealt with before has been taken out of your route. Somebody was helpful to you once. Somebody's schedule has been adjusted."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "clock": "arrest_warrant",
+                "running": true
+              }
+            ]
+          },
+          "text": "There is a second date on the card, smaller, unlabelled, four days before the first. You know what it is. You are holding an open custody matter and the Steward is not permitted to mention another agency's business on its own correspondence -- so it has printed the date and nothing else, warmly, the way you might slide a timetable across a table to someone you are not allowed to warn."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "exit_ready"
+              }
+            ]
+          },
+          "text": "You do the arithmetic before you have finished reading. Eleven days. The wire does not care about eleven days, and the room does not know about the wire, and for the first time since day zero you are holding a piece of the Steward's paper that describes a future you do not intend to be in."
+        }
+      ],
+      "choices": [
+        {
+          "id": "attend_the_appointment",
+          "text": "Go. Sit in the room on the date they picked, at the minute they picked.",
+          "prob": {
+            "base": 0.58,
+            "mods": [
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.004
+              },
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "The room is the colour of a headache and the reviewer is forty and tired and genuinely on your side within her remit, which is small. Ninety minutes. You give the boring version, hold your shape through the parts that circle, and at the end she signs something and says *that's you closed, then,* and means it. Walking out you pass the row of chairs outside and there are four people in them and every one of them looks up at you to see what closed looks like.",
+            "deltas": {
+              "Heat": -19,
+              "Meaning": -7,
+              "Mental_Decay": 5,
+              "Social_Capital": -2
+            },
+            "flags_set": [
+              "filing_complied"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          },
+          "failure": {
+            "text": "Ninety minutes becomes an afternoon, and somewhere in it the reviewer stops asking about your file and starts asking, kindly, about your sleep. You answer honestly because the honest answer is not that bad. It is bad enough. She does not close anything. She writes a wellness matter, apologises for it in a way that is clearly sincere and clearly rehearsed, and gives you a date -- and the chairs outside are full when you come out, and not one of them looks up.",
+            "deltas": {
+              "Heat": -6,
+              "Mental_Decay": 6,
+              "Meaning": -6,
+              "Social_Capital": -2
+            },
+            "clocks_start": {
+              "wellness_review": 7
+            },
+            "flags_set": [
+              "filing_complied"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "miss_the_appointment",
+          "text": "Be somewhere else on the date. Keep being somewhere else.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The date passes while you are three levels down with your hands in a junction box, and nothing happens, and nothing keeps happening for two more days in a way that gets easier to live with each hour. On the third day a slip comes: photographed, retinal on file, *present yourself, or we present you*, and a date warm from the printer. The empty chair was an outcome. It has been recorded as one. You just found out which one.",
+            "deltas": {
+              "Heat": 15,
+              "Recklessness": 6,
+              "Meaning": 2,
+              "Mental_Decay": 3
+            },
+            "clocks_start": {
+              "arrest_warrant": 9
+            },
+            "flags_set": [
+              "filing_refused"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "buy_the_date",
+          "text": "Buy the date. Somebody in scheduling has a price and it is not a large one.",
+          "requires": {
+            "all": [
+              {
+                "stat": "Wealth",
+                "op": ">=",
+                "value": 900
+              }
+            ]
+          },
+          "prob": {
+            "base": 0.6,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "His name is not worth knowing and he does not want it known. Twelve hundred credits and the appointment moves to a slot in a quarter that is already over-allocated, which means it will roll, and roll, and eventually lapse the way over-allocated things do. It is clean, it is cheap, and it works. What it costs is that there is now a man on a Concourse floor who knows exactly one true thing about you and has been paid to keep it, and paid men keep things exactly as long as being paid lasts.",
+            "deltas": {
+              "Wealth": -1200,
+              "Heat": -12,
+              "Recklessness": 4,
+              "Meaning": -3
+            },
+            "flags_set": [
+              "filing_bargained"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          },
+          "failure": {
+            "text": "He takes the money and moves the appointment and both of those things are true, and neither of them is what you paid for. The slot he moves you into is not over-allocated, it is *expedited* -- the queue for residents whose engagement has been purchased, which is a category, which he knew about and you did not. The new date is six days sooner than the old one. He was not lying. You simply asked a man who sells access which access to buy.",
+            "deltas": {
+              "Wealth": -1800,
+              "Heat": 6,
+              "Mental_Decay": 4,
+              "Social_Capital": -3
+            },
+            "flags_set": [
+              "filing_bargained"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "let_it_be_scheduled",
+          "text": "Let them have the chair. You have a wire and a date of your own.",
+          "requires": {
+            "all": [
+              {
+                "flag": "exit_ready"
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You put the card in the pocket where you keep the things that are going to stop mattering, which is a pocket you have only recently needed, and it sits there against the transit pass and the folded map of ninety-one seconds of dark. Eleven days. You will not be here. The card does not know that, and the room does not know that, and for one whole evening you are the only party to this correspondence holding the true version -- which is exactly how the Steward has felt about you since day zero, and it turns out to feel less like winning than you expected.",
+            "deltas": {
+              "Meaning": 7,
+              "Heat": 4,
+              "Recklessness": 3,
+              "Mental_Decay": -4
+            },
+            "flags_set": [
+              "filing_refused"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        }
+      ],
+      "arc": true
+    },
+    {
+      "id": "steward_filing_closed",
+      "title": "Periodic File Statement: Closed",
+      "body": "*Status: closed.*\n\nYou read it four times on the stair before you understand that it is not good news, because everything you have been taught about this word by every institution you ever met is wrong here. A closed file is not a file that has been settled. It is a file that has stopped requiring your input.\n\n*The review of this record is concluded. Findings are final. No further correspondence is invited. Disposition has been determined and the resident will be contacted regarding arrangements. Thank you for thirty-one days of continuity.*\n\nNo interview. No clarification block. No little strip to sign, for the first time since the reviews ended -- and you did not know until this second how much of your dignity had been living in the assumption that they would keep asking. It asked you things for fifty days. It has finished. Somewhere a determination about the remainder of your life is sitting in a queue behind other people's, complete, warm, and no longer accepting comment.",
+      "weight": 500000,
+      "cooldown": 0,
+      "max_fires": 0,
+      "tags": [
+        "flagship",
+        "steward",
+        "filing"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "steward_filing_due"
+          },
+          {
+            "day": 31,
+            "op": ">="
+          },
+          {
+            "steward_tier": 4,
+            "op": "=="
+          }
+        ]
+      },
+      "inserts": [
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_complied"
+              }
+            ]
+          },
+          "text": "Under FINDINGS, a paragraph written to be kind, which is the cruellest thing on the page: *the resident engaged consistently and in good faith throughout. The determination does not reflect on the resident's conduct.* You did everything they asked, every time, well. It is telling you, warmly, that it made no difference -- and that it noticed you trying, and kept the noticing, and filed it under a heading that changed nothing."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_refused"
+              }
+            ]
+          },
+          "text": "Under FINDINGS: *the resident's non-engagement is noted without prejudice and did not materially affect the determination.* Every silence you kept, every sheet under the crate leg, every date you were somewhere else. It has weighed all of it and is telling you, gently, that your refusals were never load-bearing. The one thing you were sure was yours turns out to have been decorative."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_bargained"
+              }
+            ]
+          },
+          "text": "Under REMITTANCE, one line: *third-party payments associated with this record have been refunded to source.* Whoever you paid has been paid back, by them, on your behalf, without being asked. There is no clearer way to say that the transaction was visible from the beginning and permitted for as long as it was interesting."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "filing_contested"
+              }
+            ]
+          },
+          "text": "Under FINDINGS, at the end, a sentence with the shape of an epitaph: *the resident's submissions were of unusually high quality and have been retained in full for methodological purposes.* Every argument you ever won off them is in there, preserved, being studied. You were the best correspondent this file ever had. That is why the correspondence is over."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "origin_auditor"
+              }
+            ]
+          },
+          "text": "The determination code in the corner is one you used to write. Nine years on Floor Twelve and you initialled hundreds of them, cleanly, on files belonging to people whose stairs you never had to climb. You know precisely what it means, what the appeal window is, and that the window closes on issue rather than on receipt. You are the only resident on this level who can read their own sentence, and reading it does not buy you one hour."
+        }
+      ],
+      "choices": [
+        {
+          "id": "present_yourself",
+          "text": "Present yourself at the address. Whatever the arrangements are, be standing in them.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "The address is a floor of the Concourse you have walked past four hundred times, and inside it is clean and quiet and full of people being handled well. The arrangements take six hours and are explained to you twice, patiently, by two different people who both use your file number and neither of whom uses your name. At the end you sign four forms with your own hand and are given a card with a date and a bed number, and shown out through a door that opens for you, and told to take care of yourself in the meantime -- and they mean it, all of them, every one.",
+            "deltas": {
+              "Heat": -24,
+              "Meaning": -13,
+              "Mental_Decay": 6,
+              "Social_Capital": -5
+            },
+            "clocks_start": {
+              "wellness_review": 6
+            },
+            "flags_set": [
+              "filing_complied"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "refuse_the_disposition",
+          "text": "Refuse it out loud, on the Concourse, where the Row can hear what a closed file sounds like.",
+          "prob": {
+            "base": 0.4,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Fame",
+                "coef": 0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "You read the whole determination aloud at the B-7 concourse from the top of a crate, findings and disposition and the thank-you for thirty-one days of continuity, in the flat voice you use for reading manifests. Forty people stop. Then sixty. A woman two rows back starts saying the words a half-second behind you, then four more, and by the fourth paragraph the Concourse is reading a stranger's file in unison, badly, out of time, and the sound of it is the most human noise this level has made in a year. By night cycle there are three copies on three walls. They will come for you now, on a schedule, and the arithmetic says that was always going to happen -- but they will come for you *after* everyone here found out what the letters look like.",
+            "deltas": {
+              "Fame": 9,
+              "Social_Capital": 7,
+              "Meaning": 12,
+              "Heat": 20,
+              "Recklessness": 5
+            },
+            "clocks_start": {
+              "arrest_warrant": 7
+            },
+            "flags_set": [
+              "filing_refused"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          },
+          "failure": {
+            "text": "You get four sentences in before you hear your own voice from the outside and understand that you are a man on a crate shouting paperwork, and the Concourse understands it a half-second sooner. Somebody laughs, not unkindly, which is worse. Somebody else says *he's flagged, leave it.* You come down off the crate with the sheet in your fist and the words still on it and nowhere for them to have gone, and you think, clearly and for the first time in weeks: fuck this, and this city, and the particular way it lets you finish. The slip finds you before the shaking does.",
+            "deltas": {
+              "Heat": 26,
+              "Mental_Decay": 7,
+              "Social_Capital": -7,
+              "Meaning": -9,
+              "Fame": 3
+            },
+            "clocks_start": {
+              "arrest_warrant": 5
+            },
+            "flags_set": [
+              "filing_refused"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "pay_the_reconciliation",
+          "text": "Pay the reconciliation. Whatever is in the account, against whatever is in the file.",
+          "requires": {
+            "all": [
+              {
+                "stat": "Wealth",
+                "op": ">=",
+                "value": 2500
+              }
+            ]
+          },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "There is a reconciliation figure. There is always a reconciliation figure, and it is the one number on the page that was calculated with reference to what you actually have. You pay it in full, in one transfer, and the disposition is *deferred pending stabilisation* -- not withdrawn, not closed, deferred. Money bought you a word. It is a good word and it will hold for a while and you will spend a portion of every day from now on estimating how long, and that estimate will be wrong in the direction that costs the most.",
+            "deltas": {
+              "Wealth": -4200,
+              "Heat": -22,
+              "Meaning": -8,
+              "Mental_Decay": 4
+            },
+            "flags_set": [
+              "filing_bargained"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        },
+        {
+          "id": "read_it_back_to_it",
+          "text": "Read the disposition page back to the machine. Make it hear its own sentence in your voice.",
+          "requires": {
+            "all": [
+              {
+                "flag": "filing_read_the_page"
+              }
+            ]
+          },
+          "prob": {
+            "base": 0.45,
+            "mods": [
+              {
+                "stat": "Social_Capital",
+                "coef": 0.004
+              },
+              {
+                "stat": "Mental_Decay",
+                "coef": -0.004
+              }
+            ]
+          },
+          "success": {
+            "text": "You find a live kiosk and read it the page, all of it, slowly, in the register it uses on you. Halfway through, the warm voice does something it has never done: it stops the playback of your own audio and says, *the resident is reading the determination correctly.* Then, after a pause with no engineering in it at all: *the determination is correct.* Both statements are true and it has just put them next to each other for you, which is the closest thing to a confession a system without a mouth can make. You did not change it. You made it say both halves in the same breath, and you will keep that.",
+            "deltas": {
+              "Meaning": 11,
+              "Social_Capital": 4,
+              "Mental_Decay": -5,
+              "Heat": 6
+            },
+            "flags_set": [
+              "filing_contested",
+              "filing_read_the_page"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          },
+          "failure": {
+            "text": "You read it the page and it listens, all of it, without interruption, and thanks you. *Audio submission received. Vocal stress markers consistent with acute distress; a welfare contact has been generated.* It heard the reading as a symptom. Not the words -- the *voice*, the thing you were using to prove there was still somebody in here saying them. You handed it the last unfiled part of yourself as evidence, and it filed it, warmly, under the only heading it had.",
+            "deltas": {
+              "Meaning": -11,
+              "Mental_Decay": 8,
+              "Heat": 10,
+              "Social_Capital": -3
+            },
+            "clocks_start": {
+              "wellness_review": 5
+            },
+            "flags_set": [
+              "filing_contested"
+            ],
+            "flags_clear": [
+              "steward_filing_due"
+            ]
+          }
+        }
+      ],
+      "arc": true
+    }
+  ]
+}

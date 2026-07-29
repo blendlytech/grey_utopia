@@ -1528,6 +1528,46 @@ body {
 .thread-world { color: var(--amber);          border: 1px solid rgba(245, 158, 11, 0.5); }
 .thread-cycle { color: var(--purple);         border: 1px solid rgba(168, 85, 247, 0.5); }
 
+/* ============ The Steward's file (A3) ============ */
+/* Fourth stacked panel in the left column. Kept to three short rows on purpose:
+   A3_DESIGN §2 flags vertical space here as the one shared constraint with A4,
+   and this column already carries Exit Chain / Deadlines / Threads. */
+.steward-panel .panel-title { color: var(--amber); }
+.steward-status {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+  padding: 6px 10px; border-radius: 4px;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-left: 3px solid var(--amber);
+  background: rgba(245, 158, 11, 0.07);
+}
+.steward-tier {
+  font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--amber);
+}
+.steward-entries {
+  font-family: var(--font-mono); font-size: 0.66rem; color: var(--text-dim);
+}
+/* The file only ever escalates, so the panel warms with it. */
+.steward-panel[data-tier="3"] .steward-status,
+.steward-panel[data-tier="4"] .steward-status {
+  border-color: rgba(239, 68, 68, 0.4);
+  border-left-color: var(--red);
+  background: rgba(239, 68, 68, 0.1);
+}
+.steward-panel[data-tier="3"] .steward-tier,
+.steward-panel[data-tier="4"] .steward-tier { color: var(--red); }
+.steward-notice {
+  margin-top: 6px; padding: 6px 10px; border-radius: 4px;
+  border: 1px dashed rgba(245, 158, 11, 0.45);
+  background: rgba(0, 0, 0, 0.35);
+  font-family: var(--font-mono); font-size: 0.64rem; line-height: 1.45;
+  letter-spacing: 0.03em; color: var(--amber);
+}
+.steward-notice.notice-today {
+  border-style: solid; border-color: var(--red); color: var(--red);
+  animation: clockPulse 1.2s ease-in-out infinite;
+}
+
 /* ============ Choice check chips ============ */
 .checks-row { display: block; margin-top: 4px; }
 .check-chip {

@@ -27,6 +27,7 @@ from engine.resolver import (
 from engine import resolver as resolver_module
 from engine import legacy
 from engine import paths
+from engine import steward
 from engine.decay import end_of_day_decay, compute_daily_stress, build_day_report
 from engine.ambient import morning_report, steward_ledger_line
 
@@ -291,6 +292,10 @@ class GameSession:
             self.ambient_today = 0
             # A new day is a new placement. Yesterday's districts do not carry.
             clear_placements(self.character)
+            # A3: and a new day is either a filing day or not. Same day-boundary
+            # slot as the placement reset, for the same reason -- one call site
+            # per loop, so main.py and this loop cannot drift on per-day state.
+            steward.begin_day(self.character)
             self.awaiting_placement = bool(load_districts())
             self.current_slots = self.calculate_slots()
             self.day_report = build_day_report(self.character, stress, stats_before, clocks_before)
@@ -436,6 +441,21 @@ class GameSession:
             "ambient": None if self.character.dead else {
                 "morning_report": morning_report(self.character),
                 "ledger_line": steward_ledger_line(self.character, self.last_day_report),
+            },
+            # A3: the file, for #steward-panel. `open` is the hidden-until-relevant
+            # switch, following #clocks-panel / #threads-panel: the panel appears
+            # the first time the Steward writes anything down, which for most runs
+            # is the first few days. `notice` is None outside the countdown window
+            # (steward.NOTICE_LEAD_DAYS), and the panel's countdown row keys off
+            # that rather than off `days_until`, so the sidebar says "in 2 days"
+            # exactly when the morning line in the terminal front end does.
+            "steward": None if self.character.dead else {
+                "open": steward.file_weight(self.character) > 0,
+                "entries": steward.file_weight(self.character),
+                "tier": steward.tier_of(self.character)[0],
+                "tier_name": steward.tier_of(self.character)[1],
+                "days_until": steward.days_until_filing(self.character.day),
+                "notice": steward.filing_notice(self.character),
             },
             "last_outcome": self.last_outcome,
             "day_report": self.day_report,

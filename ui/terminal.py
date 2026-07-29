@@ -62,13 +62,24 @@ def render_hud(character: Character) -> None:
     print(f"{BOLD}--------------------------------------------------------------------------------{RESET}")
 
 
-def render_ambient(morning_lines: List[str], ledger_line: str) -> None:
-    """Print the morning's ambient report and Steward ledger line, before the day's first event."""
+def render_ambient(morning_lines: List[str], ledger_line: str,
+                   filing_notice: Optional[str] = None) -> None:
+    """Print the morning's ambient report, Steward ledger line and -- when the
+    Steward is about to file -- the filing notice, before the day's first event.
+
+    The notice is A3's "one line the player sees coming". It rides this call
+    rather than getting a surface of its own because `steward.filing_notice` is
+    written in the same register as `ambient.steward_ledger_line` and belongs
+    beside it; it is bold rather than dim because unlike the ledger it is about
+    something that has not happened yet. None outside the notice window.
+    """
     for line in morning_lines:
         print(f"{DIM}{line}{RESET}")
     if ledger_line:
         print(f"{CYAN}{ledger_line}{RESET}")
-    if morning_lines or ledger_line:
+    if filing_notice:
+        print(f"{BOLD}{YELLOW}{filing_notice}{RESET}")
+    if morning_lines or ledger_line or filing_notice:
         print()
 
 

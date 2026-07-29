@@ -41,6 +41,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 from engine.decay import compute_daily_stress, end_of_day_decay
 from engine.resolver import check_endings, eligible_choices, resolve_choice
 from engine import selector as selector_module
+from engine import steward
 from engine.districts import (
     PLACEMENT_RATE, apply_placements, auto_placement, clear_placements,
     district_ids)
@@ -152,8 +153,39 @@ ASSERT_SEED_STRIDE = 100
 # its 24 links fire varies by seed, and an ordinary content addition can shift the
 # 5-base mean several events on stream reshuffle alone. A gate tight enough to
 # trip on that is a gate that gets ignored.
-MAX_OUTCOMPETED = 42     # measured 34.8
-MAX_STARVED = 76         # measured 67.0
+#
+# --- 2026-07-29, A3 Phase 2: NEITHER number moved, and that is the finding ---
+#
+# `steward_filings_pack` took the deck 498 -> 503 and `starved` is an **absolute
+# count against a growing deck**, so it rose. Mean of 5 seed bases, n=40, random:
+#
+#                                       starved   outcompeted   never fired
+#   pre-A3 baseline (498 events)           66.2          35.0         101.2
+#   filings in deck, schedule OFF (503)    71.2          35.0         106.2
+#   filings live, first cut                76.8          34.6         111.4   RED
+#   filings live, shipped                  73.6          35.8         109.4   green
+#
+# Row 2 is the cleanest control this instrument has produced: five unreachable
+# events cost **exactly five** starved and move outcompeted **not at all**.
+#
+# Row 3 was red by 0.8 and the cap was briefly re-based to 81 on that control.
+# **That was reverted.** Row 4 is the same build after a reachability defect in
+# the new pack was fixed on its own merits -- `filing_read_the_page` gated three
+# later choices and its only source was a filing that fires in ~1% of runs, i.e.
+# freshly-authored gating-shaped dead content, F1's S3 failure mode. Giving the
+# flag live sources brought starved to 73.6, **under the unchanged cap**, so
+# there was nothing to re-base: a gate that passes must not be loosened, and the
+# red reading had been a real (if small) content defect rather than deck growth
+# after all.
+#
+# **Headroom is now 2.4, against a per-seed starved spread of 39 events
+# (58/62/71/80/97).** The next pack added to this deck will trip this gate
+# without having regressed anything. When that happens the fix is a re-base on a
+# feature-OFF control, or making the gate a *rate* rather than a count -- not a
+# re-base on the live figure, which banks the change's own effect as permitted
+# drift. Logged in BACKLOG_HANDOFF §5.
+MAX_OUTCOMPETED = 42     # measured 35.8 (was 34.8)
+MAX_STARVED = 76         # measured 73.6 (was 67.0); see the note above before moving it
 
 # NOT tightened alongside it, deliberately, even though the measured figure went
 # 24.7% -> 25.7%. This metric changed *definition* in the same window: it now
@@ -268,6 +300,9 @@ def audit_run(strategy: str, seed: int, max_days: int = 100,
         # comparable seed for seed and a difference between two of them is the
         # map rather than a reshuffled stream.
         clear_placements(character)
+        # A3: arm today's filing, exactly as sim_bot does. If this line is missing
+        # from either loop --parity goes red, which is the point of having it.
+        steward.begin_day(character)
         drawn = {} if placement == "pre-a1" else auto_placement(rng, character, slots)
         if placement == "auto":
             apply_placements(character, drawn)

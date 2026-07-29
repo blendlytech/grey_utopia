@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 from typing import List, Dict, Any, Optional, Union
 import json
 from engine.stats import Character, STAT_SPEC
+from engine import steward
 
 VALID_OPS = {">=", "<=", ">", "<", "==", "!="}
 
@@ -128,6 +129,18 @@ def eval_single_cond(cond: Dict[str, Any], character: Character) -> bool:
         op = cond.get("op", ">=")
         val = float(cond.get("value", 0.0))
         return compare_op(op, character.get(stat_name), val)
+
+    if "steward_tier" in cond:
+        # A3: the Steward's file band, 0..4. Deliberately its own condition kind
+        # rather than a `stat`, for the same reason `steward_file` is a counter on
+        # Character and not an entry in STAT_SPEC: a stat can be written by any
+        # branch's `deltas`, clamped by `set`, and multiplied into
+        # `selector.effective_weight`. The file must be none of those -- it is a
+        # record, and content is not allowed to edit the record. See
+        # engine/steward.py and docs/A3_DESIGN.md §1.4.
+        op = cond.get("op", ">=")
+        return compare_op(op, float(steward.tier_of(character)[0]),
+                          float(cond["steward_tier"]))
 
     if "item" in cond:
         has = character.has_item(cond["item"])

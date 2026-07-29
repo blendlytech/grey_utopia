@@ -13,14 +13,13 @@ item's written premise:
                  whether the Continuity Review ladder completes
     --trigger    Heat vs the file, as candidate triggers. The measurement that
                  killed Heat: cautious runs spend 0.0% of their days at Heat >= 25.
-    --cadence N  what a forced filing every N days would cost, against a control
-                 that spends the same RNG and discards it
+    --cadence N  what a filing every N days costs and reaches, against the real
+                 filings, with the schedule off as the A/B partner
 
 Usage:
     python tests/steward_audit.py --presence
     python tests/steward_audit.py --trigger
     python tests/steward_audit.py --cadence 7
-    python tests/steward_audit.py --cadence 7 --control
     python tests/steward_audit.py --trigger -n 20 --seed-base 100
 """
 from __future__ import annotations
@@ -55,21 +54,36 @@ REVIEW_LADDER = (
     "review_final_session",
 )
 
+# A3 Phase 2's content: one filing per file tier, forced on filing days. Ordered
+# by tier so the report reads as a ladder.
+FILINGS = (
+    "steward_filing_open",
+    "steward_filing_under_review",
+    "steward_filing_flagged",
+    "steward_filing_scheduled",
+    "steward_filing_closed",
+)
+
 HEAT_THRESHOLDS = (15, 20, 25, 35, 45, 60)
 
 
 def playout(strategy: str, seed: int, max_days: int = 100,
-            cadence: Optional[int] = None, control: bool = False) -> dict:
+            cadence: Optional[int] = None) -> dict:
     """One instrumented run. Mirrors sim_bot.run_single_simulation exactly except
     for the observations, which have to be taken inside the slot loop.
 
-    `cadence` reserves one action slot on each filing day, standing in for a
-    forced Steward event the way A1 Phase 1's harness stood in for a player
-    choosing a district. `control` computes the same filing days and reserves
-    nothing -- the honest A/B partner, because skipping a slot removes a
-    `select_event` call and so reshuffles every subsequent draw (BACKLOG_HANDOFF
-    §5, A1 Phase 2: "a change that alters RNG consumption cannot be A/B'd
-    against a run that does not").
+    `cadence` overrides `steward.STEWARD_CADENCE` for this run: None plays the
+    shipped schedule, 0 disables filings entirely, and any int is a what-if.
+
+    Phase 1's version of this function reserved slot 0 on filing days as a
+    stand-in for a forced Steward event that did not exist yet, against a
+    `control` mode that computed the same days and reserved nothing (the A1 Phase
+    2 rule: a change that alters RNG consumption cannot be A/B'd against a run
+    that does not). Phase 2 authored the filings, so the stand-in is retired --
+    the real event wins the slot at `weight: 500000` and consumes it through
+    `select_event` like any other storylet, which also makes cadence=0 a fair
+    partner without a special mode: both arms make the same number of RNG calls
+    per slot.
     """
     rng = random.Random(seed)
     character = create_starter_fixer()
@@ -80,9 +94,10 @@ def playout(strategy: str, seed: int, max_days: int = 100,
     fired_ids: set = set()
     heat_by_day: Dict[int, float] = {}
     file_by_day: Dict[int, int] = {}
-    filings = 0
+    filing_days = 0
+    filings_fired: List[str] = []
+    filing_tiers: List[int] = []
     slots_spent = 0
-    slots_reserved = 0
 
     while character.day < max_days and not character.dead:
         if check_endings(character):
@@ -96,19 +111,12 @@ def playout(strategy: str, seed: int, max_days: int = 100,
         clear_placements(character)
         apply_placements(character, auto_placement(rng, character, slots))
 
-        filing_today = steward.is_filing_day(character.day, cadence)
-        if filing_today:
-            filings += 1
+        if steward.begin_day(character, cadence):
+            filing_days += 1
 
         fired_today: set = set()
         ambient_today = 0
         for slot in range(slots):
-            # The reserved slot: a forced filing would win this draw outright at
-            # the deck's `weight: 500000` precedent, so the honest cost model is
-            # that the slot never reaches select_event at all.
-            if filing_today and slot == 0 and not control:
-                slots_reserved += 1
-                continue
             ev = select_event(all_events, character, character.day, rng,
                               exclude_ids=fired_today,
                               ambient_budget=ambient_budget_for(ambient_today),
@@ -119,12 +127,18 @@ def playout(strategy: str, seed: int, max_days: int = 100,
             choices = eligible_choices(ev.choices, character)
             if not choices:
                 continue
+            # The tier has to be read *before* the branch lands, or a filing that
+            # pushes the file across a cut reports the tier it escalated you to.
+            if ev.id in FILINGS:
+                filing_tiers.append(steward.tier_of(character)[0])
             idx = pick_choice_by_strategy(choices, character, strategy, rng)
             resolve_choice(choices[idx], character, rng)
             ev.last_fired_day = character.day
             ev.fire_count += 1
             fired_ids.add(ev.id)
             slots_spent += 1
+            if ev.id in FILINGS:
+                filings_fired.append(ev.id)
             if "steward" in ev.tags:
                 steward_fire_days.append(character.day)
             if ev.id in REVIEW_LADDER and ev.id not in review_days:
@@ -145,9 +159,10 @@ def playout(strategy: str, seed: int, max_days: int = 100,
         "heat_by_day": heat_by_day,
         "file_by_day": file_by_day,
         "file_final": steward.file_weight(character),
-        "filings": filings,
+        "filing_days": filing_days,
+        "filings_fired": filings_fired,
+        "filing_tiers": filing_tiers,
         "slots_spent": slots_spent,
-        "slots_reserved": slots_reserved,
     }
 
 
@@ -257,28 +272,47 @@ def report_trigger(n: int, base: int) -> None:
 
 
 def report_cadence(cadence: int, n: int, base: int) -> None:
+    """What a filing every N days actually costs and reaches, against the real
+    content. Phase 1's version of this modelled the slot cost only, because the
+    filings did not exist; this measures fires and tiers."""
     print(f"\n=== CADENCE: a forced filing every {cadence} days from day "
           f"{steward.FILING_ONSET} (n={n}) ===\n")
-    print(f"{'strategy':10s} {'mode':>8s} {'med days':>9s} {'filings':>8s} "
-          f"{'slots kept':>11s} {'reserved':>9s} {'uniq/run':>9s} {'never fired':>12s}")
-    print("-" * 84)
+    print(f"{'strategy':10s} {'mode':>8s} {'med days':>9s} {'filing d':>9s} "
+          f"{'fired':>7s} {'slots':>8s} {'uniq/run':>9s} {'never fired':>12s}")
+    print("-" * 78)
+    deck = len(load_all_events())
+    tiers_by_strategy: Dict[str, Counter] = {}
+    reach: Dict[str, set] = {}
     for strat in STRATEGIES:
-        for mode, ctl in (("control", True), ("live", False)):
-            runs = _sweep(strat, n, base, cadence=cadence, control=ctl)
-            deck = len(load_all_events())
+        for mode, cad in (("off", 0), (f"every {cadence}", cadence)):
+            runs = _sweep(strat, n, base, cadence=cad)
             seen = set()
             for r in runs:
                 seen |= r["fired_ids"]
             print(f"{strat:10s} {mode:>8s} "
                   f"{statistics.median(r['days'] for r in runs):9.0f} "
-                  f"{statistics.mean(r['filings'] for r in runs):8.1f} "
-                  f"{statistics.mean(r['slots_spent'] for r in runs):11.1f} "
-                  f"{statistics.mean(r['slots_reserved'] for r in runs):9.1f} "
+                  f"{statistics.mean(r['filing_days'] for r in runs):9.1f} "
+                  f"{statistics.mean(len(r['filings_fired']) for r in runs):7.1f} "
+                  f"{statistics.mean(r['slots_spent'] for r in runs):8.1f} "
                   f"{statistics.mean(len(r['fired_ids']) for r in runs):9.1f} "
                   f"{deck - len(seen):12d}")
-    print("\n`control` computes the same filing days and reserves nothing, so the two rows\n"
-          "differ only by the reserved slot. Comparing `live` against a no-cadence run\n"
-          "instead would confound the reservation with the RNG reshuffle it causes.")
+            if cad:
+                tiers_by_strategy[strat] = Counter(t for r in runs for t in r["filing_tiers"])
+                reach[strat] = {f for r in runs for f in r["filings_fired"]}
+
+    print(f"\n--- which filing fired, by tier at the moment of filing ---")
+    print(f"{'tier':24s}" + "".join(f"{s:>11s}" for s in STRATEGIES))
+    for threshold, index, name in steward.TIERS:
+        label = f"{index} {name}"
+        print(f"{label:24s}"
+              + "".join(f"{tiers_by_strategy[s][index]:>11d}" for s in STRATEGIES))
+    print(f"\n{'filings ever reached':24s}"
+          + "".join(f"{len(reach[s]):>8d}/{len(FILINGS)}" for s in STRATEGIES))
+    print("\n`off` disables the schedule and is the honest A/B partner: both arms make the\n"
+          "same number of RNG calls per slot, because a filing wins a draw rather than\n"
+          "skipping one. Phase 1's reserved-slot stand-in is retired (see playout).\n"
+          "`random`'s median run is 30 days against FILING_ONSET 31, so it sees this\n"
+          "content barely at all -- quote the deliberate rows, not the chaos baseline.")
 
 
 def main() -> None:

@@ -958,18 +958,59 @@ class TestInventoryAndFactions(unittest.TestCase):
 
 
 class TestStewardFile(unittest.TestCase):
-    """A3 Phase 1: the file, and the schedule it acts on. Shipped disabled."""
+    """A3: the file, and the schedule it acts on."""
 
-    def test_the_mechanism_ships_disabled(self):
-        """The whole of A3's ship-safety story. A filing consumes an action slot
-        and carries consequence, so enabling it is a balance change that needs
-        its own pargate against content that does not exist yet."""
-        self.assertIsNone(steward.STEWARD_CADENCE,
-                          "A3 ships disabled until the filings are authored and gated")
-        self.assertFalse(steward.is_filing_day(999))
-        self.assertIsNone(steward.next_filing_day(0))
-        self.assertIsNone(steward.days_until_filing(0))
-        self.assertIsNone(steward.filing_notice(Character(day=40)))
+    def test_the_schedule_ships_live(self):
+        """Phase 2's enablement, gated by its own pargate run. The disabled path
+        is still exercised below, because `cadence=0` is what the audit's A/B
+        partner plays and what a future window would set to switch this off."""
+        self.assertEqual(steward.STEWARD_CADENCE, 7)
+        self.assertTrue(steward.is_filing_day(steward.FILING_ONSET))
+        self.assertEqual(steward.next_filing_day(0), steward.FILING_ONSET)
+
+    def test_a_zero_cadence_disables_the_whole_mechanism(self):
+        self.assertFalse(steward.is_filing_day(999, cadence=0))
+        self.assertIsNone(steward.next_filing_day(0, cadence=0))
+        self.assertIsNone(steward.days_until_filing(0, cadence=0))
+        self.assertIsNone(steward.filing_notice(Character(day=40), cadence=0))
+        c = Character(day=steward.FILING_ONSET)
+        self.assertFalse(steward.begin_day(c, cadence=0))
+        self.assertNotIn(steward.FILING_DUE_FLAG, c.flags)
+
+    def test_begin_day_arms_only_on_filing_days(self):
+        c = Character(day=steward.FILING_ONSET)
+        self.assertTrue(steward.begin_day(c))
+        self.assertIn(steward.FILING_DUE_FLAG, c.flags)
+
+    def test_begin_day_disarms_an_unfired_filing(self):
+        """The Steward files on schedule or not at all. A filing that never fired
+        must not carry into tomorrow, or the countdown starts lying."""
+        c = Character(day=steward.FILING_ONSET)
+        steward.begin_day(c)
+        c.day += 1
+        self.assertFalse(steward.begin_day(c))
+        self.assertNotIn(steward.FILING_DUE_FLAG, c.flags)
+
+    def test_begin_day_consumes_no_rng(self):
+        """A day loop that adds this call must not reshuffle its own stream --
+        BACKLOG_HANDOFF §5: a change that alters RNG consumption cannot be A/B'd
+        against a run that does not."""
+        rng = random.Random(0)
+        before = [rng.random() for _ in range(3)]
+        rng2 = random.Random(0)
+        steward.begin_day(Character(day=steward.FILING_ONSET))
+        self.assertEqual(before, [rng2.random() for _ in range(3)])
+
+    def test_the_notice_is_a_warning_not_wallpaper(self):
+        """Without a window this returns a line on every day of every run from
+        day 0 ('reviewed in 31 days'), which is the exact undifferentiated-
+        presence defect the design note diagnoses in the other 121 events."""
+        far = Character(day=0)
+        self.assertIsNone(steward.filing_notice(far))
+        near = Character(day=steward.FILING_ONSET - steward.NOTICE_LEAD_DAYS)
+        self.assertIsNotNone(steward.filing_notice(near))
+        edge = Character(day=steward.FILING_ONSET - steward.NOTICE_LEAD_DAYS - 1)
+        self.assertIsNone(steward.filing_notice(edge))
 
     def test_a_heat_raising_branch_writes_a_line(self):
         c = Character()
@@ -1081,6 +1122,149 @@ class TestStewardFile(unittest.TestCase):
     def test_a_pre_a3_save_loads_with_an_empty_file(self):
         old = {"day": 3, "stats": {}, "flags": [], "relationships": {}}
         self.assertEqual(Character.from_dict(old).steward_file, 0)
+
+
+DATA_EVENTS_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "events")
+
+
+def _all_event_packs():
+    """Every shipped pack as raw JSON, for deck-wide structural assertions."""
+    for name in sorted(os.listdir(DATA_EVENTS_DIR)):
+        if not name.endswith(".json") or name == "endings.json":
+            continue
+        with open(os.path.join(DATA_EVENTS_DIR, name), "r", encoding="utf-8") as fh:
+            yield name, json.load(fh).get("events", [])
+
+
+class TestStewardFilings(unittest.TestCase):
+    """A3 Phase 2: the five filings, and the flag interlock that schedules them."""
+
+    FILINGS_PACK = os.path.join(DATA_EVENTS_DIR, "steward_filings_pack.json")
+
+    def setUp(self):
+        self.filings = load_events(self.FILINGS_PACK)
+        self.character = Character(day=steward.FILING_ONSET)
+
+    def _eligible(self, character):
+        return [e for e in self.filings if e.eligible(character, character.day)]
+
+    def test_the_tier_precondition_reads_the_file(self):
+        c = Character()
+        cond = {"steward_tier": 2, "op": ">="}
+        self.assertFalse(eval_conditions({"all": [cond]}, c))
+        c.steward_file = 18
+        self.assertTrue(eval_conditions({"all": [cond]}, c))
+
+    def test_a_tier_gate_cannot_be_moved_by_content_deltas(self):
+        """The file is a record, and content is not allowed to edit the record --
+        which is why it is a counter on Character and its own condition kind
+        rather than a stat. A branch that tried would be a no-op."""
+        c = Character()
+        c.apply_deltas({"steward_tier": 40, "steward_file": 40})
+        self.assertEqual(steward.file_weight(c), 0)
+        self.assertEqual(steward.tier_of(c)[0], 0)
+
+    def test_exactly_one_filing_is_eligible_at_every_tier(self):
+        """The tier bands are `==`, so the ladder selects rather than stacks. If
+        two were ever eligible at once the second would fire the next slot."""
+        for threshold, index, name in steward.TIERS:
+            self.character.steward_file = threshold
+            steward.begin_day(self.character)
+            eligible = self._eligible(self.character)
+            self.assertEqual([e.id for e in eligible].__len__(), 1,
+                             f"tier {index} ({name}) has {len(eligible)} filings eligible")
+
+    def test_no_filing_is_eligible_when_the_day_is_not_a_filing_day(self):
+        self.character.day = steward.FILING_ONSET + 1
+        steward.begin_day(self.character)
+        self.assertEqual(self._eligible(self.character), [])
+
+    def test_no_filing_is_eligible_before_the_review_ladder_ends(self):
+        """FILING_ONSET sits after the day-30 Continuity Review so the two
+        scheduled Steward threads hand over rather than collide."""
+        for day in range(0, steward.FILING_ONSET):
+            c = Character(day=day)
+            c.steward_file = 30
+            steward.begin_day(c)
+            self.assertEqual([e for e in self.filings if e.eligible(c, day)], [],
+                             f"a filing was eligible on day {day}")
+
+    def test_every_filing_branch_clears_the_due_flag(self):
+        """The interlock. Without it, a branch that pushes the file across a tier
+        cut makes the *next* tier's filing eligible for the same day's next slot,
+        and the player gets two filings in one day."""
+        for ev in self.filings:
+            for ch in ev.choices:
+                for branch_name in ("success", "failure"):
+                    branch = getattr(ch, branch_name)
+                    if not branch:
+                        continue
+                    self.assertIn(steward.FILING_DUE_FLAG, branch.get("flags_clear", []),
+                                  f"{ev.id}:{ch.id}:{branch_name} does not clear the due flag")
+
+    def test_a_filing_outbids_the_deck(self):
+        """The review ladder's proven pattern: a scheduled beat cannot be left to
+        compete (amb_the_choosing lost 2271 of 2290 draws at a 0.789% share)."""
+        for ev in self.filings:
+            self.assertGreaterEqual(effective_weight(ev, self.character), 100_000.0)
+
+    def test_no_filing_flag_lands_in_a_none_group_anywhere_in_the_deck(self):
+        """A1 Phase 3b's dgr_works_fronted_crate lesson, made permanent: a new
+        flag source can silently make an existing storylet unreachable, and
+        lint_content cannot see it. Any future filing flag has to pass this."""
+        blocked = {}
+        for name, events in _all_event_packs():
+            for e in events:
+                groups = [(e["id"], e.get("preconditions") or {})]
+                groups += [(f"{e['id']}:{c['id']}", c.get("requires") or {})
+                           for c in e.get("choices", [])]
+                groups += [(f"{e['id']}:insert{i}", ins.get("when") or {})
+                           for i, ins in enumerate(e.get("inserts", []))]
+                for site, pre in groups:
+                    for cond in pre.get("none", []):
+                        if "flag" in cond:
+                            blocked.setdefault(cond["flag"], []).append(f"{name}:{site}")
+
+        for ev in self.filings:
+            for ch in ev.choices:
+                for branch in (ch.success, ch.failure):
+                    for flag in (branch or {}).get("flags_set", []):
+                        self.assertNotIn(
+                            flag, blocked,
+                            f"{ev.id}:{ch.id} sets '{flag}', which is a `none:` gate on "
+                            f"{blocked.get(flag)} -- that content becomes unreachable")
+
+    def test_the_filings_carry_no_dose(self):
+        """Balance discipline: tier 3-4 filings are aimed at the runs already
+        closest to a terminal ending, and `dose` routes straight through the
+        overdose model. The Steward's teeth are clocks, not chemistry."""
+        for ev in self.filings:
+            for ch in ev.choices:
+                for branch in (ch.success, ch.failure):
+                    self.assertEqual(float((branch or {}).get("dose", 0.0)), 0.0,
+                                     f"{ev.id}:{ch.id} doses the player")
+
+    def test_the_filings_hook_clocks_that_already_have_readers(self):
+        """district_hazards_pack's pattern: a second entrance to machinery that
+        already terminates, rather than a new orphan flag."""
+        started = {
+            name
+            for ev in self.filings for ch in ev.choices
+            for branch in (ch.success, ch.failure)
+            for name in (branch or {}).get("clocks_start", {})
+        }
+        self.assertTrue(started, "the filings start no clocks at all")
+        readers = set()
+        for _, events in _all_event_packs():
+            for e in events:
+                for cond in (e.get("preconditions") or {}).get("all", []):
+                    flag = cond.get("flag", "")
+                    if flag.startswith("clock_") and flag.endswith("_expired"):
+                        readers.add(flag[len("clock_"):-len("_expired")])
+        for name in started:
+            self.assertIn(name, readers,
+                          f"clock '{name}' is started by a filing but nothing reads its expiry")
 
 
 if __name__ == "__main__":

@@ -60,7 +60,7 @@ as non-monotonic. Two balance changes in one window cannot be attributed.
 | **A1** | The Row as a map | **CLOSED -- both gates green** | 7 districts, 498 events / 332 shelved. Phase 3c fixed the instrument (seed-averaged, and never-fired split into `starved` / `outcompeted`) and then the one real regression it exposed. **`pargate` GREEN, `coverage_audit --assert` GREEN**, first time both have been green together since Phase 2. See below and `A1_DESIGN.md` §10. Remaining coverage residual is day gates and chain depth -- neither is an A1 problem, both are logged in §5. |
 | ~~F6~~ | ~~Re-scale the chain day ladders~~ | **CLOSED 2026-07-29 -- premise disproved, nothing built** | The "30-day median run" three windows reasoned from is the **`random` bot's** median. Deliberate strategies run 55-63 days and reach a day-46 finale 69-93% of the time, so the ladders are calibrated correctly. Scope was wrong too: only 4 packs gate past d34, and `reckoning_pack`/`npc_arcs_pack` — flagged twice as suspects — max out at d18/d16. Delivered `--union` instead. See §5. |
 | **SHIP** | Settings / saves / achievements / content warning / art | **Three blocking items CLOSED** | Content warning, settings panel, manual save slots all shipped. See below. |
-| **A3** | Make the Steward take a turn | **Phase 1 CLOSED -- premise disproved twice; mechanism built, shipped disabled** | The Steward already appears on 54-60% of days and already takes a *scheduled* forced turn that completes 40/40. Heat is measured dead as a trigger (cautious: **0.0%** of days at Heat >= 25). Delivered `engine/steward.py` + the file counter + `tests/steward_audit.py`, `STEWARD_CADENCE = None`. See below and `A3_DESIGN.md`. Phase 2 in §4. |
+| **A3** | Make the Steward take a turn | **CLOSED -- shipped live, both gates green** | Phase 1 disproved the premise twice; Phase 2 authored the content and wired it. `STEWARD_CADENCE = 7`, five tier-selected filings from day 31, notice + `#steward-panel` in both front ends. Deliberate runs get **4.7-6.0 filings** and the ladder discriminates by strategy (cautious lives at tiers 1-2 and never closes its file; reckless at 3-4). **`pargate` GREEN first run**, `coverage_audit --assert` GREEN. See below and `A3_DESIGN.md` §8. |
 | A4 | Put the cast on screen | Not started | -- |
 | F3 | Make money a decision | Not started | -- |
 | F4 | Give Fame and Social_Capital a spend | Not started | -- |
@@ -796,84 +796,173 @@ every resolution, so a moved number would have meant it was reachable.
 
 ---
 
-## 4. CURRENT TASK -- A3 Phase 2: author the filings and wire them live
+**A3 Phase 2 -- the filings, wired live** *(2026-07-29, Opus 5)* -- **A3 CLOSED.
+`pargate` green on the first run.** Full write-up in `docs/A3_DESIGN.md` §8.
 
-**Model:** **Opus 5**, in-session. This is flagship-shaped content (five filings
-in the Steward's voice) plus a wiring pass plus a balance gate -- authored
-directly in the session per CLAUDE.md's roster note, not through
-`generate_deck.py`.
+**Delivered:** `data/events/steward_filings_pack.json` (5 filings, one per file
+tier, `weight: 500000`, 4 choices and 4-5 continuity inserts each),
+`STEWARD_CADENCE = 7`, the `steward_tier` precondition kind, `steward.begin_day`
+threaded through **five** day loops, `NOTICE_LEAD_DAYS`, the terminal notice line,
+`#steward-panel` in the web left column, a rewritten `steward_audit --cadence`,
+and 15 new unit tests (108 -> 123).
 
-**Read first:** `docs/A3_DESIGN.md` in full -- it is the deliverable of Phase 1
-and it answers all four of the questions that used to sit in this section.
-`docs/VOICE_BIBLE.md` and `CAST_BIBLE.md` for the Steward's register (warm oil,
-never profane, administrative). `data/events/fable_reviews_pack.json` is the
-model to write against: it is the same character doing the same thing, and it
-is good.
+**Two implementation questions §4 left open, both answered.** A filing reads the
+file through a new precondition kind `steward_tier` -- its own kind rather than a
+`stat` for the same reason the counter is not in `STAT_SPEC`: a stat can be
+written by content `deltas`, clamped, and multiplied into `effective_weight`, and
+the file is a *record* content may not edit (unit-tested). "Today is a filing
+day" becomes an engine-set flag, `steward_filing_due`, armed and disarmed by
+`begin_day` at the day boundary and named in `lint_content.ENGINE_GRANTED_FLAGS`.
+Bands are `== tier`, so exactly one filing is eligible at a time; **every branch
+clears the flag**, which is the interlock that stops a branch pushing the file
+across a cut and firing a second filing the same day. Both unit-tested.
 
-**Do not re-derive:** the Steward census, the Heat measurement, the file-feed
-comparison, or the tier cuts. Phase 1 closed all four and they are tabulated in
-`A3_DESIGN.md` §0-§1. Also do not re-derive coverage/reachability/selector work
--- five consecutive windows have now closed that.
+**§4 said three day loops. There are five** -- `coverage_audit` and
+`steward_audit` carry their own copies -- and `--parity` catches only one of the
+two omissions (§5).
+
+**The filings are coverage-positive, which §5 of the design did not predict.**
+`steward_audit --cadence 7`, n=10, against the schedule off (Phase 1's
+reserved-slot stand-in is retired -- the real event wins the draw and consumes
+the slot, so both arms make the same RNG calls per slot):
+
+| strategy | med days | filings fired | uniq/run | never fired |
+|---|---|---|---|---|
+| cautious | 56 -> 60 | 0 -> **4.7** | 148.8 -> 151.1 | 213 -> **206** |
+| reckless | 61 -> 71 | 0 -> **5.0** | 148.8 -> 157.5 | 141 -> **128** |
+| greedy | 68 -> 76 | 0 -> **6.0** | 161.4 -> 169.6 | 169 -> **149** |
+
+**And the ladder discriminates**, which is what §1.2 chose the file feed for.
+Filings fired by tier at the moment of filing, n=10: cautious 0/14/22/11/**0**,
+reckless 0/1/13/19/**17**, greedy 0/6/17/28/9. The careful player's Steward lives
+at tiers 1-2 and never once closes their file; the reckless player's lives at
+3-4. Same schedule, same five events, different antagonist.
+
+**The coverage gate went red and the red was real -- this is the useful part.**
+`--assert` came back starved **76.8 against a cap of 76**. The control run §2
+demands looked conclusive: filings in the deck with the schedule *off* score
+71.2, i.e. exactly +5 for 5 events, with outcompeted unmoved at 35.0. On that
+reading `starved` is an absolute count against a growing deck, and `MAX_STARVED`
+was re-based to 81. **It was then reverted**, because fixing an unrelated
+reachability bug in the new pack -- `filing_read_the_page` gated three later
+choices and its only source was the tier-0 filing, which fires in ~1% of runs --
+brought starved to **73.6, under the unchanged cap**. A control that explains a
+red gate is not the same as a control that exonerates the change. `MAX_STARVED`
+stays 76; headroom is now 2.4 (§5).
+
+**Tier 0 is measured at ~1% and ships anyway, stated plainly.** The tier cuts
+were measured on end-of-run file weight; the filings read it at day 31, where the
+median is 13-24 and **1 of 138 bot runs** is under the tier-1 cut. It ships
+because no bot plays *against* the file -- `sim_bot` scores stat utility and has
+never heard of `steward_file` -- and `--union` confirms no filing is unreachable.
+The generalisable lesson is in §5.
+
+**Verified final state:** `unittest` **123 passed** (108 + 15); `lint_content`
+**clean**, 26 packs, **503 events, 398 flags**, 332 on 7 shelves, 0 warnings;
+`--report-dice` **627 guaranteed / 0 near-certain-fallible / 906 gambles** (F2's
+invariant holds); `coverage_audit --parity` **3/3**; `--assert` **GREEN** --
+starved **73.6** (<= 76), outcompeted **35.8** (<= 42), never-fired mean **109.4**
+(116/96/131/110/94); `--union` **64 of 503 (12.7%)** unreachable however you play
+(was 61 of 498), with `steward_filings_pack` absent from that table; `pargate`
+**GREEN in 13.7m** -- random 0.6% good / 71.9% terminal / 41.3 avg days, cautious
+17.6 / 12.6, reckless 30.2 / **34.2** (band 25-35), greedy 39.2 / **15.4** (band
+12-25, under the 45.0 cap).
+
+**Two things to watch, not to act on.** Reckless terminal 34.2% sits **0.8 under
+the top of its band** -- the filings pushed it exactly as §4 predicted, and a
+future window adding danger should expect to give some back. And cautious now
+reaches **exactly 5 distinct endings, which is `MIN_CAUTIOUS_ENDINGS` exactly**;
+its table is 52.7% long grey, so the next thing that trims its tail trips that
+assertion.
+
+---
+
+## 4. CURRENT TASK -- A4: put the cast on screen
+
+**Model:** **Opus 5**, in-session. Design judgment plus a front-end pass; the
+prose it needs is one line per contact per state, not a volume batch, so this
+does not go through `generate_deck.py`.
+
+**Read first:** `docs/STEAM_READINESS_BACKLOG.md` §A4 and its S8 diagnosis,
+`docs/CAST_BIBLE.md` (voice keys and arc canon for the five promoted NPCs),
+`data/cast.json`, and `docs/A3_DESIGN.md` §2 -- A3 already settled the column
+question and the shared constraint, do not re-derive them.
+
+**Do not re-derive:** coverage, reachability, or selector work. **Six**
+consecutive windows have now closed that, and A1 is finished. Also do not
+re-derive the A3/A4 overlap: it is settled in `A3_DESIGN.md` §2.
 
 ### The state you are inheriting
 
-- All standing gates **GREEN**: `pargate`, `coverage_audit --assert` (starved
-  66.2 <= 76, outcompeted 35.0 <= 42), `unittest` **108**, `lint_content` clean,
-  `--parity` 3/3. Phase 1 reproduced the coverage baseline byte-for-byte.
-- `engine/steward.py` exists and is **inert**: `STEWARD_CADENCE = None`,
-  `FILING_ONSET = 31`, five tiers cut at 0/8/18/26/40. `Character.steward_file`
-  counts and round-trips through saves. Nothing reads it yet.
-- `tests/steward_audit.py` exists: `--presence`, `--trigger`, `--cadence N`.
-- **SHIP is still uncommitted working-tree state on branch
-  `ship-blocking-items`** (`server.py`, `web/*`), and Phase 1's changes sit on
-  top of it. Commit or branch before starting.
+- All standing gates **GREEN**: `pargate` (13.7m, all assertions), `coverage_audit
+  --assert` (starved 73.6 <= 76, outcompeted 35.8 <= 42), `unittest` **123**,
+  `lint_content` clean (26 packs, 503 events, 398 flags), `--parity` 3/3.
+- **A3 is live**: `STEWARD_CADENCE = 7`, five filings from day 31, and a
+  **fourth panel in the web left column** (`#steward-panel`). That column now
+  carries Exit Chain / Deadlines / Threads / Your File.
+- The right sidebar is a tabbed Network / Gear panel (`index.html:189-209`)
+  whose Network tab already lists Mara/Vint/Kael with Ebbinghaus retention.
+  **That is A4's home** -- different column from A3, no new surface needed.
 
-### The task
+### Step 0 -- measure before designing. This is not optional.
 
-1. **Author `data/events/steward_filings_pack.json`** -- five filings, one per
-   tier, each `weight: 500000`, `max_fires: 0`, gated on
-   `day >= FILING_ONSET` **plus** its tier band (a `stat`-style gate cannot read
-   `steward_file`, so this needs either a precondition kind for it or the tier
-   written onto the character as a flag at the day boundary -- decide and record
-   which, it is the one open implementation question Phase 1 left).
-   - Tier 0 "Open" is courteous and nearly free; tier 4 "Closed" should be the
-     harshest content in the deck.
-   - **Prefer existing clocks** (`wellness_review`, `arrest_warrant`,
-     `debt_collection`) over new flags, so each filing is a second entrance to
-     machinery that already terminates. `district_hazards_pack` is the pattern.
-   - **Before shipping any filing, grep every flag it sets against `none:`
-     groups deck-wide.** A1 Phase 3b's `dgr_works_fronted_crate` silently made a
-     flagship unreachable this exact way and `lint_content` cannot see it.
-2. **Set `STEWARD_CADENCE = 7`** and thread `is_filing_day` through `main.py`,
-   `server.py` and `tests/sim_bot.py` -- all three, or `coverage_audit --parity`
-   will go red and that is the tripwire that catches the drift.
-3. **The one line the player sees coming**: call `steward.filing_notice()`
-   beside `ambient.steward_ledger_line()` in both front ends, and add
-   `#steward-panel` to `web/index.html`'s left column following the
-   `#clocks-panel` / `#threads-panel` hidden-until-relevant pattern
-   (`index.html:119`, `:125`).
-4. **Run `pargate`.** This is mandatory and it is the whole reason Phase 1
-   stopped. Expect reckless and greedy terminal rates to move: tier 3-4 filings
-   are by construction aimed at the runs already closest to a terminal ending.
+**Every backlog spec that has been measured has turned out wrong. Four for
+four** (S2/S3 by F1, S8/S9 by SHIP, A3 by its own window, plus F6 closed
+unbuilt). S8 is the *only* diagnosis behind A4 and it has never been checked.
+Before writing a line of design, answer with numbers:
+
+1. **How often does each of Mara / Vint / Kael actually appear?** A3's Step 0
+   found the Steward on 54-60% of run-days when the spec said "6 events".
+   `tests/steward_audit.py --presence` is the template: it is 60 lines and it
+   overturned an entire item. Adapt it, or add a `--cast` mode.
+2. **Do they already interrupt unprompted?** Grep for `weight: 500000` and for
+   satisfaction-gated preconditions. The Steward's scheduled turn already
+   existed and A3 nearly re-invented it.
+3. **What is the actual retention curve doing?** `Character.reinforce` /
+   `relationship_retention` in `engine/decay.py`. If bonds decay to zero in
+   every run regardless of play, portraits will decorate a dead system and the
+   real item is the curve, not the sidebar.
+4. **Is `MIN_CAUTIOUS_ENDINGS` about to bite?** Cautious currently reaches
+   **exactly 5** distinct endings against a floor of 5, with 52.7% of its runs
+   in the long grey. Any A4 change that touches relationship-gated finales
+   (`horizon_pack`, `npc_arcs_pack`) can trip it. Know this before you build.
+
+If Step 0 disproves S8, **write that up and close A4 the way F6 was closed.**
+That is a successful window, not a failed one.
+
+### The task, assuming Step 0 holds
+
+1. **Portraits and a "what they want from you right now" line** in the right
+   sidebar's existing Network tab. The line is state-derived, in each
+   character's voice key (`CAST_BIBLE.md`): Mara's love arrives as logistics,
+   Kael prices things, Vint deflects one beat late.
+2. **`npc_arcs_pack` is gating-shaped and is the known problem** -- 7/17 ever
+   eligible, 10 union-unreachable, hung off `vint_known` / `kael_impressed` /
+   `mara_ransomed` / `echo_brother_known` granted in other packs (§5, A1 Phase
+   2). If A4 wants visible arcs, that pack is where they already are and cannot
+   be reached. A second entrance is the proven fix (`res_chalk_second_look`,
+   `district_hazards_pack`).
+3. **Art.** `pipeline/crop_scenes.py` and `data/assets/` are the existing
+   pipeline. Portraits are the one part of this item that may need assets that
+   do not exist; scope that early and say so rather than discovering it late.
 
 ### Watch for
 
-- **This is a balance change three ways** (`A3_DESIGN.md` §4): a forced filing
-  consumes an action slot, applies consequence on its own schedule, and its
-  content is danger. Do not chase a sub-point overage if one appears (§2), but
-  a multi-point one is real -- A1 Phase 3b's 19.6-vs-25.0 was 5.4 points and was
-  correctly chased.
-- **`coverage_audit` plays `random`, whose median run is 30 days against
-  `FILING_ONSET = 31`.** It will systematically under-report this content's
-  reach (1.3-1.5 filings vs 4-5 for deliberate play). Quote `steward_audit` or
-  `--union` for the filings, not the coverage gate.
-- **A4 overlap is settled and is not a blocker**: A3's panel is the left
-  column; A4's portraits belong in the right sidebar's existing Network tab
-  (`index.html:189-196`), which already lists Mara/Vint/Kael with their
-  Ebbinghaus retention. The shared constraint is vertical space in the left
-  column -- check it at 900px before adding a fifth panel. A3 does **not** want
-  a district of its own; the Steward already has `the_concourse` (47 of its 125
-  events).
+- **A4 is a balance change if it touches preconditions or the day loop**, and
+  not otherwise. A pure sidebar render is not; a second entrance to
+  `npc_arcs_pack` is. Run `pargate` if you touch content, and note that
+  **reckless terminal sits 0.8 under the top of its band** -- there is very
+  little room above it right now.
+- **`starved` has 2.4 points of headroom** against its cap and rises by roughly
+  one per event added. Read the note above `MAX_STARVED` in
+  `tests/coverage_audit.py` *before* concluding a red gate is deck growth --
+  A3 Phase 2 nearly used that argument to explain away a real content defect.
+- **Five day loops, not three**, if anything per-day is added (§5).
+- **`web/app.js` never renders `state.ambient`** -- the morning report and
+  Steward ledger line have never reached the web player. If you are in that
+  file anyway, it is a two-line fix (§5).
+- **Vertical space in the left column is now four panels.** Check at 900px
+  before anything is added there. A4 should not need to be.
 
 ### On completion
 
@@ -1408,12 +1497,64 @@ Triage these into the status board when they earn their place.
   changes now sit on top of them. §3 recorded SHIP as "landed on branch
   `ship-blocking-items`", which is not what happened. Nothing is lost, but the
   next window should commit or split before doing anything destructive.
+  **Resolved:** committed as `9f2666e` on branch `a3-steward-turn`.
+
+- *(2026-07-29, A3 Phase 2)* **There are five day loops, not three, and only
+  `--parity` enforces it.** §4 asked for `is_filing_day` in `main.py`,
+  `server.py` and `sim_bot.py`. `tests/coverage_audit.py` and
+  `tests/steward_audit.py` carry their own copies of the same loop and both
+  needed the call too -- coverage_audit because `--parity` compares it against
+  sim_bot playout-for-playout, steward_audit because it is the instrument that
+  measures this feature. **Any future per-day mechanism has five call sites**,
+  and the only automated tripwire for a missed one is `--parity`, which catches
+  coverage_audit and *not* steward_audit. Worth a shared day-boundary helper
+  the next time something is threaded this way.
+
+- *(2026-07-29, A3 Phase 2)* **`starved` is an absolute count against a growing
+  deck -- but this window nearly used that fact to explain away a real defect.**
+  The arithmetic is genuine and measured cleanly here: adding
+  `steward_filings_pack` with the schedule *off* moved starved 66.2 -> 71.2
+  (exactly the 5 new events) and outcompeted 35.0 -> 35.0 (not at all). On that
+  control the live 76.8-against-76 read as deck growth, and `MAX_STARVED` was
+  re-based to 81. **It was then reverted**: fixing an unrelated reachability bug
+  in the new pack (a flag gating three choices whose only source fires in ~1% of
+  runs) brought starved to **73.6, under the unchanged cap**. The gate had been
+  right. **A control that explains a red gate is not the same as a control that
+  exonerates the change** -- check the new content for its own defects before
+  concluding the instrument is at fault. Headroom is now **2.4** against a
+  per-seed starved spread of 39 events, so the *next* pack really will trip it
+  for the arithmetic reason; the fix then is a feature-off re-base or a
+  rate-based gate (starved / deck size), never a re-base on the live figure.
+
+- *(2026-07-29, A3 Phase 2)* **`web/app.js` never renders `state.ambient`.**
+  `server.py` has computed and sent `morning_report` and `ledger_line` on every
+  `/api/state` call since they were written, and no code path in the web client
+  reads either. The terminal front end shows both; the web player has never seen
+  a morning report or a Steward ledger line. A3 worked around it by putting the
+  filing notice in `#steward-panel`, but the underlying block is still dead and
+  it is *authored content that reaches nobody* -- the same class of defect A1
+  spent four windows on, in the one surface nobody audited. Cheap to fix
+  (`renderAmbient(state.ambient)` beside `renderThreads`); worth folding into A4
+  or F5, whichever next touches `web/app.js`.
+
+- *(2026-07-29, A3 Phase 2)* **The Steward's file tier 0 is authored content
+  about 1% of runs will see, and the reason generalises.** The tier cuts were
+  measured on the file's weight at **run end**; the filings read it at day 31.
+  Median file at day 31 is 13-24, and **1 of 138 bot runs** sits below the
+  tier-1 cut of 8, so `steward_filing_open` almost never fires. It ships because
+  no bot plays *against* the file -- `sim_bot`'s strategies score stat utility
+  and have never heard of `steward_file`, while a human reading the panel has a
+  lever none of them use. **But the general lesson is that a threshold cut on an
+  end-of-run distribution does not transfer to a mid-run read**, and nothing in
+  Phase 1 checked the second distribution. If a later window wants the rung
+  livelier the levers are lowering the tier-1 cut or lowering `FILING_ONSET`;
+  both are balance changes needing their own `pargate`.
 
 ---
 
 ## 6. Recorded baseline
 
-**Re-measured 2026-07-28 (A1 Phase 3c window).** `tests/coverage_audit.py` is the
+**Re-measured 2026-07-29 (A3 Phase 2 window).** `tests/coverage_audit.py` is the
 authority. Reproduce with:
 
 ```bash
@@ -1428,11 +1569,12 @@ python tests/coverage_audit.py --placement pre-a1      # the pre-A1 column, exac
 only, and single-strategy coverage is wrong in *both* directions (§5, 2026-07-29):
 `random` dies 25 days early and fumbles branch-gated chain heads; deliberate bots
 live long enough but always make the same choice, collapsing every either/or.
-**61 of 498 events (12.2%) are unreachable under all four strategies** -- 18
-`legacy_pack` (by design), 18 `betrayal_pack`, 10 `npc_arcs_pack`, 7
+**64 of 503 events (12.7%) are unreachable under all four strategies** -- 19
+`betrayal_pack`, 18 `legacy_pack` (by design), 10 `npc_arcs_pack`, 8
 `reckoning_pack`, 6 `ambitions_pack` (mutual exclusivity, working as intended),
-2 elsewhere. Quote that number when asked whether content reaches players; quote
-the gate only when asking whether something regressed.
+3 elsewhere. Quote that number when asked whether content reaches players; quote
+the gate only when asking whether something regressed. *(Was 61 of 498 at Phase
+3c. `steward_filings_pack` does not appear in the union-unreachable table.)*
 
 **Three columns, and the middle one is the only valid A/B partner for the
 first.** `control` spends the same RNG draws placement costs and then discards
@@ -1451,24 +1593,30 @@ the old figure was the former, which is why the old gate was unmeetable. Both ar
 gated, as a pair -- see §5 and `A1_DESIGN.md` §10.1-10.2 for why neither works
 alone.
 
-| Metric | **Live (7 districts)** | Control (map off) | Pre-A1 |
+| Metric | **Live (7 districts)** | Phase 3c (pre-A3) | Control (map off) |
 |---|---|---|---|
-| Events in deck | 498 (25 packs, 391 flags, **332 shelved**) | same | same |
-| Median eligible pool per day *(unplaced draws)* | **220** | -- | -- |
-| Median eligible shelf *(placed draws)* | **12** (557 placed draws) | -- | -- |
-| Unique events seen per run | **80** (16.1%) | -- | -- |
-| Events never fired **in 40 runs, seed 0** | **105** (21.1%) | -- | -- |
-| **Events never fired, mean of 5 seed bases** | **101.2** | 119.6 *(Phase 3b deck)* | -- |
-| -- of which **starved** *(gate: <= 76)* | **66.2** | -- | -- |
-| -- of which **outcompeted** *(gate: <= 42)* | **35.0** | -- | -- |
-| Arc draw-weight share *(unplaced draws)* | **51.7%** | -- | -- |
-| Arc share of actual picks | **53.6%** | -- | -- |
-| Ambient share of actual picks | **20.9%** | -- | -- |
-| Repeat-pick fraction | **6.4%** | -- | -- |
-| Median run length | **30 days** | -- | -- |
-| Truly guaranteed choices | **614** / 1513 (41%) | same | same |
-| Genuine gambles | **899** / 1513 | same | same |
-| Near-certain but fallible | **0** (F2's invariant holds) | same | same |
+| Events in deck | 503 (26 packs, 398 flags, **332 shelved**) | 498 (25, 391) | same |
+| Median eligible pool per day *(unplaced draws)* | **220** | 220 | -- |
+| Median eligible shelf *(placed draws)* | **13** (559 placed draws) | 12 (557) | -- |
+| Unique events seen per run | **80** (16.0%) | 80 (16.1%) | -- |
+| Events never fired **in 40 runs, seed 0** | **116** (23.1%) | 105 (21.1%) | -- |
+| **Events never fired, mean of 5 seed bases** | **109.4** | 101.2 | 119.6 *(Phase 3b deck)* |
+| -- of which **starved** *(gate: <= 76)* | **73.6** | 66.2 | -- |
+| -- of which **outcompeted** *(gate: <= 42)* | **35.8** | 35.0 | -- |
+| Arc draw-weight share *(unplaced draws)* | **52.1%** | 51.7% | -- |
+| Arc share of actual picks | **54.4%** | 53.6% | -- |
+| Ambient share of actual picks | **20.9%** | 20.9% | -- |
+| Repeat-pick fraction | **6.6%** | 6.4% | -- |
+| Median run length | **30 days** | 30 days | -- |
+| Truly guaranteed choices | **627** / 1533 (41%) | 614 / 1513 | same |
+| Genuine gambles | **906** / 1533 | 899 / 1513 | same |
+| Near-certain but fallible | **0** (F2's invariant holds) | 0 | same |
+
+**The A3 column is +5 events and the coverage deltas are mostly that.** Adding
+`steward_filings_pack` with its schedule *off* costs exactly 5 starved and 0
+outcompeted (measured control, `coverage_audit.py`'s note above `MAX_STARVED`).
+`starved` has **2.4 points of headroom left** against its cap -- read that note
+before the next pack lands.
 
 **The control column has NOT been re-measured on this deck.** Phase 3b's
 119.6 is left in the table only as the last known value and must not be used as

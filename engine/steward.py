@@ -168,16 +168,15 @@ def next_tier(weight: int) -> Optional[Tuple[int, int, str]]:
 
 # --- The schedule ---------------------------------------------------------
 
-# How often the Steward files, in days. **Shipped disabled**, and that is a
-# scope decision rather than an unfinished one: a filing consumes an action slot
-# and carries consequence, which makes it a pool-composition change and a new
-# unreviewed input to `sim_bot`'s strategies at once. This deck's levers are
-# documented non-monotonic, so it needs its own `pargate` run against content
-# that does not exist yet. Set to an int, author the filings, then gate it.
+# How often the Steward files, in days. **Live as of Phase 2**, gated by its own
+# `pargate` run -- Phase 1 shipped this as None precisely because a filing
+# consumes an action slot and carries consequence, which makes it a
+# pool-composition change and a new unreviewed input to `sim_bot`'s strategies
+# at once, against content that did not exist yet.
 #
 # The cadence sweep is in docs/A3_DESIGN.md §5; `tests/steward_audit.py
-# --cadence N` reproduces it.
-STEWARD_CADENCE: Optional[int] = None
+# --cadence N` reproduces it against the real filings.
+STEWARD_CADENCE: Optional[int] = 7
 
 # The day the Steward stops asking and starts filing. The Continuity Review
 # ladder occupies days 0/10/20/30 already and completes 40/40 in deliberate
@@ -185,6 +184,30 @@ STEWARD_CADENCE: Optional[int] = None
 # handover is the escalation the player is meant to feel. Four courteous
 # interviews a fortnight apart, and then the interviews stop.
 FILING_ONSET: int = 31
+
+# The flag the day loops arm on a filing day and the filings themselves clear.
+#
+# This is how a *scheduled* event is expressed in a deck whose only scheduling
+# primitive is `day`: `data/events/steward_filings_pack.json` gates on this flag
+# plus a `steward_tier` band, so exactly one filing is eligible at a time and it
+# is eligible only on the day the Steward files. Set by `begin_day` and cleared
+# by every branch of every filing (`flags_clear`), which is the interlock that
+# stops a second filing firing in the same day when a branch pushes the file
+# across a tier cut mid-day.
+#
+# It is engine-granted, not content-granted, so `lint_content.ENGINE_GRANTED_FLAGS`
+# names it -- otherwise the linter would correctly report a flag five events
+# require that nothing sets.
+FILING_DUE_FLAG: str = "steward_filing_due"
+
+# How many days ahead the notice starts appearing. A3's ask is "one line the
+# player sees coming"; without a window, `filing_notice` returns a line on every
+# day of every run from day 0 ("reviewed in 31 days"), which is not foresight,
+# it is wallpaper -- the exact defect §0.3 of the design note diagnoses in the
+# other 121 Steward events. Three days is the lead the design's own example line
+# quotes, and at cadence 7 it means the notice is present on 4 days in 7 rather
+# than 7 in 7.
+NOTICE_LEAD_DAYS: int = 3
 
 
 def is_filing_day(day: int, cadence: Optional[int] = None) -> bool:
@@ -217,6 +240,32 @@ def days_until_filing(day: int, cadence: Optional[int] = None) -> Optional[int]:
     return None if nxt is None else nxt - day
 
 
+def begin_day(character: Character, cadence: Optional[int] = None) -> bool:
+    """Arm (or disarm) today's filing. Called at day start by every day loop.
+
+    The direct analogue of `districts.clear_placements`: one call at the day
+    boundary, in `main.py`, `server.py`, `tests/sim_bot.py`,
+    `tests/coverage_audit.py` and `tests/steward_audit.py`, so the five loops
+    cannot disagree about whether the Steward filed today. `coverage_audit
+    --parity` is the tripwire if one of them is missed.
+
+    Disarming matters as much as arming. A filing that never fired -- the run
+    ended, or every choice on it was locked -- does not carry into tomorrow: the
+    Steward files on schedule or not at all, which is what keeps the countdown in
+    `filing_notice` honest.
+
+    Consumes no RNG, so a day loop that adds this call does not reshuffle its own
+    stream (BACKLOG_HANDOFF §5, A1 Phase 2). What it does change is the eligible
+    pool on filing days, which is the balance change `pargate` gates.
+    """
+    due = is_filing_day(character.day, cadence)
+    if due:
+        character.flags.add(FILING_DUE_FLAG)
+    else:
+        character.flags.discard(FILING_DUE_FLAG)
+    return due
+
+
 def filing_notice(character: Character, cadence: Optional[int] = None) -> Optional[str]:
     """One line the player sees coming, for the morning report.
 
@@ -225,9 +274,12 @@ def filing_notice(character: Character, cadence: Optional[int] = None) -> Option
     Steward's register is warm and administrative and a raw counter would break
     it. `ambient.steward_ledger_line` is the existing precedent and this is
     written to sit beside it.
+
+    None outside NOTICE_LEAD_DAYS of the filing, which is what makes it a warning
+    rather than furniture -- see the constant.
     """
     days = days_until_filing(character.day, cadence)
-    if days is None:
+    if days is None or days > NOTICE_LEAD_DAYS:
         return None
     _, name = tier_of(character)
     if days == 0:

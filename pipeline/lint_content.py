@@ -25,6 +25,7 @@ from typing import Dict, List, Set, Tuple
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+from engine import steward
 from engine.events import load_events
 from engine.stats import STAT_SPEC
 from engine.resolver import P_MAX
@@ -65,8 +66,12 @@ RESOLVER_ENDINGS = {
 
 # Flags granted by engine/server mechanics rather than event branches:
 # resolver.apply_dose sets the overdose pair; end_of_day_decay mints
-# clock_<name>_expired flags for every clock content ever starts.
-ENGINE_GRANTED_FLAGS: Set[str] = {"near_overdose", "flag_overdose_death"}
+# clock_<name>_expired flags for every clock content ever starts; steward.begin_day
+# arms the filing flag at the day boundary (A3), which is how a scheduled event is
+# expressed in a deck whose only scheduling primitive is `day`.
+ENGINE_GRANTED_FLAGS: Set[str] = {
+    "near_overdose", "flag_overdose_death", steward.FILING_DUE_FLAG,
+}
 
 # Comparison operators engine.events.compare_op actually implements.
 VALID_OPS: Set[str] = {">=", "<=", ">", "<", "==", "!="}

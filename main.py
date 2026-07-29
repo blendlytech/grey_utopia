@@ -23,6 +23,7 @@ from engine.districts import (
 from engine import items as item_catalog
 from engine import legacy
 from engine import paths
+from engine import steward
 from ui.terminal import (
     print_banner, render_hud, render_event, render_choices,
     prompt_choice, prompt_from_list, render_resolution,
@@ -162,11 +163,15 @@ def run_game_loop(auto_play: bool = False, max_days: int = 30) -> None:
             break
 
         slots = calculate_daily_action_slots(character)
+        # A3: arm today's filing before anything reads the pool. Consumes no RNG;
+        # it only decides whether the day's forced Steward event is eligible.
+        steward.begin_day(character)
 
         if not auto_play:
             render_hud(character)
             print(f"{"\n" if character.day > 0 else ""}{'='*40} DAY {character.day} ({slots} Action Slots Available) {'='*40}")
-            render_ambient(morning_report(character), steward_ledger_line(character, last_day_report))
+            render_ambient(morning_report(character), steward_ledger_line(character, last_day_report),
+                           steward.filing_notice(character))
 
         run_placement_step(character, all_events, slots, auto_play, rng)
 
