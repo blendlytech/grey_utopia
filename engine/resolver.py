@@ -5,6 +5,7 @@ import random
 from engine.stats import Character, clamp
 from engine.events import Choice, eval_conditions
 from engine import items as item_catalog
+from engine import steward
 from engine.decay import overdose_probability
 
 P_MIN: float = 0.02
@@ -201,6 +202,11 @@ def resolve_choice(
     last_resolution.clear()
     last_resolution.update({"p": p, "roll": roll, "guaranteed": 0.0 if was_gamble else 1.0})
 
+    # A3: the file reads Heat's integral, so the pre-delta value has to be held
+    # across the mutations below. See engine/steward.py for why the stock itself
+    # is unusable (K_COOL drains it to zero for any careful player).
+    heat_before = character.get("Heat")
+
     # Apply stat deltas
     character.apply_deltas(branch.get("deltas", {}))
 
@@ -245,6 +251,13 @@ def resolve_choice(
         character.flags.add(flag)
     for flag in branch.get("flags_clear", []):
         character.flags.discard(flag)
+
+    # A3: note the resolution against the Steward's file. Last, so it sees the
+    # fully-applied branch. Nothing reads the counter while STEWARD_CADENCE is
+    # None, so this is inert -- it consumes no RNG and gates nothing, which is
+    # what lets `coverage_audit --assert` reproduce the baseline byte-for-byte
+    # and thereby prove the mechanism is unreachable rather than merely quiet.
+    steward.note_resolution(character, branch, heat_before)
 
     return success, branch
 

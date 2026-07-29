@@ -3,7 +3,9 @@ import unittest
 import math
 import os
 import json
+import random
 
+from engine import steward
 from engine.stats import Character, create_starter_fixer, STAT_SPEC, clamp
 from engine.decay import (
     update_mood, relationship_retention, dose_effect,
@@ -953,6 +955,132 @@ class TestInventoryAndFactions(unittest.TestCase):
         c = Character()
         c.add_faction("Steward", 25.0)
         self.assertEqual(c.factions["Steward"], 15.0)  # Started at -10.0 + 25.0
+
+
+class TestStewardFile(unittest.TestCase):
+    """A3 Phase 1: the file, and the schedule it acts on. Shipped disabled."""
+
+    def test_the_mechanism_ships_disabled(self):
+        """The whole of A3's ship-safety story. A filing consumes an action slot
+        and carries consequence, so enabling it is a balance change that needs
+        its own pargate against content that does not exist yet."""
+        self.assertIsNone(steward.STEWARD_CADENCE,
+                          "A3 ships disabled until the filings are authored and gated")
+        self.assertFalse(steward.is_filing_day(999))
+        self.assertIsNone(steward.next_filing_day(0))
+        self.assertIsNone(steward.days_until_filing(0))
+        self.assertIsNone(steward.filing_notice(Character(day=40)))
+
+    def test_a_heat_raising_branch_writes_a_line(self):
+        c = Character()
+        ch = Choice(id="x", text="x", prob={"base": 1.0},
+                    success={"deltas": {"Heat": 8.0}})
+        resolve_choice(ch, c, random.Random(0))
+        self.assertEqual(steward.file_weight(c), 1)
+
+    def test_a_dossier_flag_writes_a_line_even_with_no_heat(self):
+        """The 47 events that already grant these flags feed the counter on day
+        one, which is why A3 needs no new content to have a trigger."""
+        c = Character()
+        ch = Choice(id="x", text="x", prob={"base": 1.0},
+                    success={"flags_set": ["steward_biometric_dossier"]})
+        resolve_choice(ch, c, random.Random(0))
+        self.assertEqual(steward.file_weight(c), 1)
+
+    def test_the_same_dossier_flag_counts_every_time(self):
+        """The defect this reads past: the deck's dossier flags are booleans, so
+        a player who trips the biometric dossier 26 times is charged once."""
+        c = Character()
+        ch = Choice(id="x", text="x", prob={"base": 1.0},
+                    success={"flags_set": ["steward_civic_dossier"]})
+        for _ in range(5):
+            resolve_choice(ch, c, random.Random(0))
+        self.assertEqual(steward.file_weight(c), 5)
+        self.assertEqual(c.flags, {"steward_civic_dossier"})
+
+    def test_a_quiet_branch_writes_nothing(self):
+        c = Character()
+        ch = Choice(id="x", text="x", prob={"base": 1.0},
+                    success={"deltas": {"Meaning": 4.0}})
+        resolve_choice(ch, c, random.Random(0))
+        self.assertEqual(steward.file_weight(c), 0)
+
+    def test_the_file_never_cools(self):
+        """The property that makes it usable where Heat is not: cautious runs
+        spend 0.0% of their days at Heat >= 25 because K_COOL drains the stock,
+        so the file reads its integral and is monotonic by construction."""
+        c = Character()
+        up = Choice(id="u", text="u", prob={"base": 1.0}, success={"deltas": {"Heat": 30.0}})
+        down = Choice(id="d", text="d", prob={"base": 1.0}, success={"deltas": {"Heat": -60.0}})
+        resolve_choice(up, c, random.Random(0))
+        resolve_choice(down, c, random.Random(0))
+        self.assertEqual(c.get("Heat"), 0.0)
+        self.assertEqual(steward.file_weight(c), 1)
+
+    def test_heat_already_at_the_ceiling_does_not_write_a_line(self):
+        """Heat clamps at 100, so a raise that cannot land is not a raise. This
+        is the edge the 'raised Heat' feed has to get right or a maxed-out run
+        accrues file weight for nothing."""
+        c = Character()
+        c.set("Heat", 100.0)
+        ch = Choice(id="x", text="x", prob={"base": 1.0}, success={"deltas": {"Heat": 20.0}})
+        resolve_choice(ch, c, random.Random(0))
+        self.assertEqual(steward.file_weight(c), 0)
+
+    def test_tiers_are_ordered_and_every_tier_is_reachable(self):
+        thresholds = [t for t, _, _ in steward.TIERS]
+        self.assertEqual(thresholds, sorted(thresholds))
+        self.assertEqual(thresholds[0], 0, "tier 0 must cover a fresh character")
+        indices = [i for _, i, _ in steward.TIERS]
+        self.assertEqual(indices, list(range(len(steward.TIERS))))
+        for threshold, index, name in steward.TIERS:
+            self.assertEqual(steward.tier_for(threshold), (index, name))
+
+    def test_tier_lookup_between_and_above_the_cuts(self):
+        self.assertEqual(steward.tier_for(0)[1], "Open")
+        self.assertEqual(steward.tier_for(7)[1], "Open")
+        self.assertEqual(steward.tier_for(8)[1], "Under Review")
+        self.assertEqual(steward.tier_for(10_000)[1], steward.TIERS[-1][2])
+        self.assertIsNone(steward.next_tier(10_000))
+        self.assertEqual(steward.next_tier(0)[0], steward.TIERS[1][0])
+
+    def test_cadence_schedule_starts_after_the_review_ladder(self):
+        """The Continuity Review occupies days 0/10/20/30 and completes 40/40 in
+        deliberate play, so filings begin after it rather than colliding."""
+        self.assertGreater(steward.FILING_ONSET, 30)
+        self.assertFalse(steward.is_filing_day(steward.FILING_ONSET - 1, cadence=7))
+        self.assertTrue(steward.is_filing_day(steward.FILING_ONSET, cadence=7))
+        self.assertTrue(steward.is_filing_day(steward.FILING_ONSET + 7, cadence=7))
+        self.assertFalse(steward.is_filing_day(steward.FILING_ONSET + 3, cadence=7))
+
+    def test_countdown_is_monotonic_and_hits_zero_on_filing_days(self):
+        cadence = 7
+        for day in range(0, steward.FILING_ONSET + 3 * cadence):
+            left = steward.days_until_filing(day, cadence)
+            self.assertIsNotNone(left)
+            self.assertGreaterEqual(left, 0)
+            self.assertLessEqual(left, max(cadence, steward.FILING_ONSET))
+            self.assertEqual(left == 0, steward.is_filing_day(day, cadence))
+
+    def test_notice_names_the_tier_and_the_countdown(self):
+        c = Character(day=steward.FILING_ONSET - 2)
+        c.steward_file = 18
+        line = steward.filing_notice(c, cadence=7)
+        self.assertIn("2 days", line)
+        self.assertIn("Flagged", line)
+        c.day = steward.FILING_ONSET
+        self.assertIn("today", steward.filing_notice(c, cadence=7))
+
+    def test_the_file_survives_a_save_load_round_trip(self):
+        c = Character(day=12)
+        c.steward_file = 17
+        restored = Character.from_dict(json.loads(c.to_json()))
+        self.assertEqual(restored.steward_file, 17)
+        self.assertEqual(steward.tier_of(restored), steward.tier_for(17))
+
+    def test_a_pre_a3_save_loads_with_an_empty_file(self):
+        old = {"day": 3, "stats": {}, "flags": [], "relationships": {}}
+        self.assertEqual(Character.from_dict(old).steward_file, 0)
 
 
 if __name__ == "__main__":

@@ -327,11 +327,36 @@ probability model in `engine/resolver.py:119-132` something to be legible about.
 **Addresses:** S1, world-presence
 **Effort:** medium
 
-The Steward is the premise and is currently a stat modifier with 6 events in
-`data/events/steward_interventions.json`. Give it a **visible weekly move**: it
-files something, offers something, corrects something, escalates. One line the
-player sees coming and can play against. An antagonist you can anticipate is worth
-ten atmospheric mentions.
+> **CORRECTED 2026-07-29 (A3 Phase 1), measured by `tests/steward_audit.py`. The
+> paragraph below is wrong in both directions and the item was re-scoped around
+> the measurement; full write-up in `docs/A3_DESIGN.md`.**
+>
+> - `steward_interventions.json` holds **2** events, not 6.
+> - The Steward is not "a stat modifier". **125 events are tagged `steward`**
+>   (25% of the deck) and it appears on **53.8-59.7% of every run's days**, never
+>   silent for a full week.
+> - It already **takes a scheduled turn**: `prologue_continuity_review` ->
+>   `review_second_session` (d10) -> `review_third_session` (d20) ->
+>   `review_final_session` (d30) is a forced (`weight: 500000`), flag-chained
+>   ladder that completes **40/40 runs under every deliberate strategy** and
+>   whose terminal flags feed four endings.
+>
+> The real defects are that **121 of the 125 are interchangeable** (50 repeatable,
+> 37 with no preconditions at all) and that the one chain which *does* escalate
+> **stops at day 30** against deliberate runs of 54-62 days -- so roughly half of
+> every run has no scheduled Steward presence. A3 should add continuity and
+> consequence to presence that already exists; writing "six more Steward events"
+> would make the diagnosed problem measurably worse.
+>
+> Also measured, and it kills the obvious design: **Heat cannot be the trigger.**
+> Cautious runs spend **0.0%** of their days at Heat >= 25 and exactly one in 40
+> ever crosses it, because `decay.K_COOL` drains the stock every clean day. A
+> Heat-gated Steward besieges the reckless and never speaks to the careful.
+
+The Steward is the premise. Give it a **visible weekly move**: it files something,
+offers something, corrects something, escalates. One line the player sees coming
+and can play against. An antagonist you can anticipate is worth ten atmospheric
+mentions.
 
 ### A4 -- Put the cast on screen
 **Addresses:** S8

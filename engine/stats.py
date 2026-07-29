@@ -52,6 +52,12 @@ class Character:
     last_visited: Dict[str, int] = field(default_factory=dict)
     pending_dose: float = 0.0    # substance dose taken today, consumed by end_of_day_decay
     fail_streak: int = 0         # consecutive genuinely-failed rolls; fuels the desperation edge
+    # A3: how many lines the Steward has written about this run. Monotonic and
+    # never cools, which is the whole point -- Heat is a stock that K_COOL
+    # drains to zero for any careful player (measured: cautious runs spend 0.0%
+    # of their days at Heat >= 25), so the file reads its integral instead.
+    # Written by engine.steward.note_resolution. See engine/steward.py.
+    steward_file: int = 0
     dead: bool = False
     ending: str = ""
 
@@ -148,6 +154,7 @@ class Character:
             "last_visited": self.last_visited,
             "pending_dose": self.pending_dose,
             "fail_streak": self.fail_streak,
+            "steward_file": self.steward_file,
             "days_since_use": self.days_since_use,
             "md_high_streak": self.md_high_streak,
             "dead": self.dead,
@@ -174,6 +181,9 @@ class Character:
             last_visited={k: int(v) for k, v in data.get("last_visited", {}).items()},
             pending_dose=float(data.get("pending_dose", 0.0)),
             fail_streak=int(data.get("fail_streak", 0)),
+            # Absent in saves written before A3; an old save reloads with an
+            # empty file, which is exactly what it was playing.
+            steward_file=int(data.get("steward_file", 0)),
             days_since_use=data.get("days_since_use", 0),
             md_high_streak=data.get("md_high_streak", 0),
             dead=data.get("dead", False),

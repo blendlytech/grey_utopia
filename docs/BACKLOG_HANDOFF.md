@@ -60,7 +60,7 @@ as non-monotonic. Two balance changes in one window cannot be attributed.
 | **A1** | The Row as a map | **CLOSED -- both gates green** | 7 districts, 498 events / 332 shelved. Phase 3c fixed the instrument (seed-averaged, and never-fired split into `starved` / `outcompeted`) and then the one real regression it exposed. **`pargate` GREEN, `coverage_audit --assert` GREEN**, first time both have been green together since Phase 2. See below and `A1_DESIGN.md` §10. Remaining coverage residual is day gates and chain depth -- neither is an A1 problem, both are logged in §5. |
 | ~~F6~~ | ~~Re-scale the chain day ladders~~ | **CLOSED 2026-07-29 -- premise disproved, nothing built** | The "30-day median run" three windows reasoned from is the **`random` bot's** median. Deliberate strategies run 55-63 days and reach a day-46 finale 69-93% of the time, so the ladders are calibrated correctly. Scope was wrong too: only 4 packs gate past d34, and `reckoning_pack`/`npc_arcs_pack` — flagged twice as suspects — max out at d18/d16. Delivered `--union` instead. See §5. |
 | **SHIP** | Settings / saves / achievements / content warning / art | **Three blocking items CLOSED** | Content warning, settings panel, manual save slots all shipped. See below. |
-| **A3** | Make the Steward take a turn | **Next up, see §4** | -- |
+| **A3** | Make the Steward take a turn | **Phase 1 CLOSED -- premise disproved twice; mechanism built, shipped disabled** | The Steward already appears on 54-60% of days and already takes a *scheduled* forced turn that completes 40/40. Heat is measured dead as a trigger (cautious: **0.0%** of days at Heat >= 25). Delivered `engine/steward.py` + the file counter + `tests/steward_audit.py`, `STEWARD_CADENCE = None`. See below and `A3_DESIGN.md`. Phase 2 in §4. |
 | A4 | Put the cast on screen | Not started | -- |
 | F3 | Make money a decision | Not started | -- |
 | F4 | Give Fame and Social_Capital a spend | Not started | -- |
@@ -702,87 +702,178 @@ scope for SHIP; noted here so it doesn't need re-deriving later.
 
 ---
 
-## 4. CURRENT TASK -- A3: Make the Steward take a turn
+**A3 Phase 1 -- Make the Steward take a turn: design + proof-of-concept**
+*(2026-07-29, Opus 5)* -- **the item's premise is wrong in both directions.
+Mechanism built, measured, shipped disabled.** Full write-up in
+`docs/A3_DESIGN.md`; `STEAM_READINESS_BACKLOG.md` §3's A3 entry is corrected in
+the same window.
 
-**Model:** **Opus 5**, in-session, per CLAUDE.md's roster note -- this is design
-work (a new mechanic, not volume prose) before it is content, and flagship-shaped
-design/content is authored directly in the working session now that Fable 5 and
-Opus 4.8 are gone. Follow A1 Phase 1's shape: a short design note answering the
-open questions below, a measured proof-of-concept, then a STOP-and-report before
-wiring it live, the same way A1 didn't ship its prototype district enabled.
+**Step 0 disproved the spec on three counts, and §4 was right to ask.** The
+handoff flagged one number to re-verify; all of them were wrong.
 
-**Read first:** `STEAM_READINESS_BACKLOG.md` **§3, item A3** (the one-paragraph
-spec) and **S1** (the "one verb, never varied" diagnosis A3 is meant to address).
-`docs/CAST_BIBLE.md` if it covers the Steward's voice/behavior; check before
-assuming it does.
+- `steward_interventions.json` holds **2** events, not 6.
+- The Steward is not "a stat modifier". **125 events are tagged `steward`** and
+  it fires 26.7-43.6 times a run across **53.8-59.7% of every run's days**,
+  never silent for more than 4.7-6.3 days.
+- **It already takes a scheduled turn, and that turn already works.**
+  `prologue_continuity_review` -> `review_second_session` (d10) ->
+  `review_third_session` (d20) -> `review_final_session` (d30) is a forced
+  (`weight: 500000`), flag-chained, day-gated ladder in `fable_reviews_pack` +
+  `prologue_pack`, district `the_concourse`, whose terminal flags feed four
+  endings at three sites in `endings.json`. It completes **40/40 runs under
+  every deliberate strategy**. The mechanism A3 was going to invent is built
+  and shipped.
 
-**Do not re-derive:** anything about coverage, reachability, the selector, or
-chain day gates. Four consecutive windows closed that; `coverage_audit --union`
-still reports 61/498 unreachable under every strategy and 59 of those are by
-design or known flag-depth. Nothing in A3 should touch `engine/selector.py`'s
-eligibility logic or the district shelves.
+**So the real defect is not presence or cadence.** It is that **121 of the 125
+are interchangeable** (50 repeatable, 37 with no preconditions at all, ~45
+mechanically identical `steward_*_ping` volume storylets), and that the one
+chain which *does* escalate **stops at day 30** against deliberate runs of
+54-62 days -- so roughly half of every run has no scheduled Steward presence.
+**Writing "six more Steward events" would have made the diagnosed problem
+measurably worse.**
+
+**Heat is measured dead as a trigger, and that killed the obvious design.**
+n=40 per strategy, over every day of every run:
+
+| | random | cautious | reckless | greedy |
+|---|---|---|---|---|
+| mean Heat | 17.89 | **0.86** | 16.05 | 2.73 |
+| share of days at Heat >= 25 | 28.9% | **0.0%** | 27.3% | 1.7% |
+| runs ever crossing Heat 25 | 31/40 | **1/40** | 36/40 | 9/40 |
+
+A **20.9x spread**. `decay.K_COOL = 4.0` sheds Heat every clean day, so Heat is
+a *stock* any careful player drains to zero -- a Heat-gated Steward besieges the
+reckless and never once speaks to the careful. It also means
+`selector.effective_weight`'s `1 + Heat/40` steward multiplier is a flat 1.0 for
+cautious play (§5).
+
+**The fix is Heat's integral: a file that never cools.** The deck already grants
+`steward_biometric_dossier` (26 source events) and `steward_civic_dossier` (21)
+-- as booleans, so grants 2..26 are no-ops. **Counting only those is a trap** and
+it is the one a design would reach for:
+
+| feed, per 10 days | random | cautious | reckless | greedy | spread |
+|---|---|---|---|---|---|
+| dossier flags only | 3.18 | 3.33 | 3.55 | 3.23 | **1.12x** |
+| dossier flags **+ any Heat-raising branch** | 7.29 | 4.26 | 6.84 | 5.80 | **1.71x** |
+
+A 1.12x spread is a tenure clock wearing an antagonist's coat: it measures how
+long you lived, not how you played, so there is nothing to play against.
+
+**Tiers cut on the measured distribution**, against two criteria -- every
+strategy must reach every tier *sometimes*, and the middle must be where careful
+and reckless diverge. An earlier cut at 32/50 was rejected on this table for
+putting cautious at 7/40 and **0/40**:
+
+| cut | tier | random | cautious | reckless | greedy |
+|---|---|---|---|---|---|
+| 8 | Under Review | 40 | 40 | 40 | 40 |
+| 18 | Flagged | 25 | 39 | 40 | 38 |
+| 26 | Scheduled | 16 | **21** | **34** | 33 |
+| 40 | Closed | 5 | 1 | 19 | 16 |
+
+**Cost of a weekly filing, `--cadence 7` against a matched control** (which
+computes the same filing days and reserves nothing, per A1 Phase 2's rule):
+**~1 slot per filing, 4-5 filings, against 160-180 slots -- about 2.7%.** Every
+deck-wide coverage delta (-6 to +10) is inside the ~15-event noise band, and the
+reckless row moving the *wrong* way (control 54 d / 4.1 filings vs live 60 / 5.0)
+demonstrates it: reserving slots cannot lengthen a run.
+
+**Shipped state: `STEWARD_CADENCE = None`.** Delivered `engine/steward.py`,
+`Character.steward_file` with save/load round-tripping, one hook at the end of
+`resolver.resolve_choice`, `tests/steward_audit.py` (`--presence` / `--trigger`
+/ `--cadence N`), and 14 unit tests. **No filing storylets, no day-loop
+integration, no UI, no `pargate`-gated enablement** -- that is Phase 2, and it is
+a balance change three separate ways (§4).
+
+**Verified final state:** `unittest` **108 passed** (94 + 14); `lint_content`
+**clean**, 25 packs, 498 events, 391 flags, 332 on 7 shelves, 0 warnings (no
+content touched); `coverage_audit --parity` **3/3**; `coverage_audit --assert`
+**GREEN and byte-for-byte identical to the recorded baseline** -- starved
+**66.2**, outcompeted **35.0**, mean **101.2**, per-seed 105/82/111/103/105.
+That identity is the deliverable, not a formality: the counter increments on
+every resolution, so a moved number would have meant it was reachable.
+
+---
+
+## 4. CURRENT TASK -- A3 Phase 2: author the filings and wire them live
+
+**Model:** **Opus 5**, in-session. This is flagship-shaped content (five filings
+in the Steward's voice) plus a wiring pass plus a balance gate -- authored
+directly in the session per CLAUDE.md's roster note, not through
+`generate_deck.py`.
+
+**Read first:** `docs/A3_DESIGN.md` in full -- it is the deliverable of Phase 1
+and it answers all four of the questions that used to sit in this section.
+`docs/VOICE_BIBLE.md` and `CAST_BIBLE.md` for the Steward's register (warm oil,
+never profane, administrative). `data/events/fable_reviews_pack.json` is the
+model to write against: it is the same character doing the same thing, and it
+is good.
+
+**Do not re-derive:** the Steward census, the Heat measurement, the file-feed
+comparison, or the tier cuts. Phase 1 closed all four and they are tabulated in
+`A3_DESIGN.md` §0-§1. Also do not re-derive coverage/reachability/selector work
+-- five consecutive windows have now closed that.
 
 ### The state you are inheriting
 
-- All standing gates **GREEN**: `pargate` all assertions, `coverage_audit --assert`
-  (starved 66.2 <= 76, outcompeted 35.0 <= 42), `unittest` 94, `lint_content`
-  clean, `--parity` 3/3. Confirmed again this window with zero drift (SHIP touched
-  no content or engine logic).
-- A1 closed and merged to `main` (PR #1). 7 districts, 498 events, 332 shelved.
-- **SHIP closed** (this window, branch `ship-blocking-items`, not yet merged --
-  merge or open a PR before starting A3 if you want a clean base). Content
-  warning, settings panel, and manual save slots all shipped; see the write-up
-  above. `saves/` now holds `autosave.json` (`SAVE_FORMAT_VERSION = 1`) and
-  opaquely-named `slot_*.json` files beside `legacy.json`.
+- All standing gates **GREEN**: `pargate`, `coverage_audit --assert` (starved
+  66.2 <= 76, outcompeted 35.0 <= 42), `unittest` **108**, `lint_content` clean,
+  `--parity` 3/3. Phase 1 reproduced the coverage baseline byte-for-byte.
+- `engine/steward.py` exists and is **inert**: `STEWARD_CADENCE = None`,
+  `FILING_ONSET = 31`, five tiers cut at 0/8/18/26/40. `Character.steward_file`
+  counts and round-trips through saves. Nothing reads it yet.
+- `tests/steward_audit.py` exists: `--presence`, `--trigger`, `--cadence N`.
+- **SHIP is still uncommitted working-tree state on branch
+  `ship-blocking-items`** (`server.py`, `web/*`), and Phase 1's changes sit on
+  top of it. Commit or branch before starting.
 
-### The spec, and one number in it that needs re-verifying
+### The task
 
-`STEAM_READINESS_BACKLOG.md` says the Steward is "currently a stat modifier with
-6 events in `data/events/steward_interventions.json`." **That file has 2 events
-today** (`steward_wellness_check`, `steward_buyout_offer`), checked this window
-but not investigated further -- it may be that the other 4 were split out,
-renamed, or that the description was already stale when written (S8/S9's other
-descriptions were, per SHIP's §4 corrections). Separately, F1 measured **120
-events tagged `steward`** scattered across other packs (S2 correction, §5) --
-those are ambient flavor, not the Steward taking a visible turn, but they are the
-raw material this item might route through instead of a fully new mechanic.
-Verify the real shape before designing against a stale number.
-
-The ask, unchanged from the backlog: give the Steward **a visible weekly move**
--- it files something, offers something, corrects something, escalates -- one
-line the player sees coming and can play against. Not six more ambient events;
-a cadence and a legible, anticipatable pattern. "An antagonist you can
-anticipate is worth ten atmospheric mentions."
-
-### Open questions a design note should answer before building
-
-1. What triggers a Steward move -- a fixed cadence (every N days), a stat
-   threshold (Heat, Fame), or both? A2/F4 (Social_Capital, Fame spend) are later
-   in the sequence but touch the same stats; check whether A3 should anticipate
-   them or ship independently and be revisited.
-2. Where does the player see it coming -- a HUD element (there's no obvious slot;
-   the sidebar is already three stacked panels plus Exit Chain/Clocks/Threads),
-   a day-transition line, or a new dedicated UI surface?
-3. Is a Steward move itself a storylet (competes in the normal draw), a forced
-   event (bypasses the pool, like `weight: 500000` forced events elsewhere per
-   the voice-narration memory's note on that pattern), or a passive state change
-   with only a text notification?
-4. Does this touch balance? If a Steward move changes Heat/stats on its own
-   schedule rather than through a player choice, that is a new, unreviewed input
-   to `sim_bot`'s strategies and needs its own `pargate` run before shipping --
-   flag it explicitly rather than discovering it after the fact, the way A1
-   Phase 3's shelves discovered their balance exposure late.
+1. **Author `data/events/steward_filings_pack.json`** -- five filings, one per
+   tier, each `weight: 500000`, `max_fires: 0`, gated on
+   `day >= FILING_ONSET` **plus** its tier band (a `stat`-style gate cannot read
+   `steward_file`, so this needs either a precondition kind for it or the tier
+   written onto the character as a flag at the day boundary -- decide and record
+   which, it is the one open implementation question Phase 1 left).
+   - Tier 0 "Open" is courteous and nearly free; tier 4 "Closed" should be the
+     harshest content in the deck.
+   - **Prefer existing clocks** (`wellness_review`, `arrest_warrant`,
+     `debt_collection`) over new flags, so each filing is a second entrance to
+     machinery that already terminates. `district_hazards_pack` is the pattern.
+   - **Before shipping any filing, grep every flag it sets against `none:`
+     groups deck-wide.** A1 Phase 3b's `dgr_works_fronted_crate` silently made a
+     flagship unreachable this exact way and `lint_content` cannot see it.
+2. **Set `STEWARD_CADENCE = 7`** and thread `is_filing_day` through `main.py`,
+   `server.py` and `tests/sim_bot.py` -- all three, or `coverage_audit --parity`
+   will go red and that is the tripwire that catches the drift.
+3. **The one line the player sees coming**: call `steward.filing_notice()`
+   beside `ambient.steward_ledger_line()` in both front ends, and add
+   `#steward-panel` to `web/index.html`'s left column following the
+   `#clocks-panel` / `#threads-panel` hidden-until-relevant pattern
+   (`index.html:119`, `:125`).
+4. **Run `pargate`.** This is mandatory and it is the whole reason Phase 1
+   stopped. Expect reckless and greedy terminal rates to move: tier 3-4 filings
+   are by construction aimed at the runs already closest to a terminal ending.
 
 ### Watch for
 
-- **This deck's levers are non-monotonic** (`grey-utopia-balance-levers`
-  memory). If the Steward's weekly move has any mechanical teeth (not pure
-  flavor text), treat it as a balance change: run `pargate` before calling it
-  done, and don't chase a sub-point gate overage if one appears (§2).
-- A3 is listed ahead of A4 ("put the cast on screen") in the recommended
-  sequence, but both were sequenced before A1's map existed. Check whether
-  giving the Steward a district-shelf-like home (its own visible "turn" surface)
-  overlaps with A4's portrait/reaction work before designing either in a vacuum.
+- **This is a balance change three ways** (`A3_DESIGN.md` §4): a forced filing
+  consumes an action slot, applies consequence on its own schedule, and its
+  content is danger. Do not chase a sub-point overage if one appears (§2), but
+  a multi-point one is real -- A1 Phase 3b's 19.6-vs-25.0 was 5.4 points and was
+  correctly chased.
+- **`coverage_audit` plays `random`, whose median run is 30 days against
+  `FILING_ONSET = 31`.** It will systematically under-report this content's
+  reach (1.3-1.5 filings vs 4-5 for deliberate play). Quote `steward_audit` or
+  `--union` for the filings, not the coverage gate.
+- **A4 overlap is settled and is not a blocker**: A3's panel is the left
+  column; A4's portraits belong in the right sidebar's existing Network tab
+  (`index.html:189-196`), which already lists Mara/Vint/Kael with their
+  Ebbinghaus retention. The shared constraint is vertical space in the left
+  column -- check it at 900px before adding a fifth panel. A3 does **not** want
+  a district of its own; the Steward already has `the_concourse` (47 of its 125
+  events).
 
 ### On completion
 
@@ -1253,6 +1344,70 @@ Triage these into the status board when they earn their place.
   by design), `npc_arcs_pack` (10), `reckoning_pack` (7) and `ambitions_pack` (6,
   which is mutual exclusivity working as intended). **Deck reachability is
   healthy.** The gate should measure the union, or at minimum report it.
+
+- *(2026-07-29, A3 Phase 1)* **A backlog item's one-paragraph spec was wrong on
+  every factual clause, and only one of them was flagged for re-checking.** §4
+  asked this window to verify "6 events in `steward_interventions.json`" (it is
+  2). It should have asked about all of it: "a stat modifier" describes 125
+  tagged events on 54-60% of run-days, and "give it a visible weekly move"
+  describes a forced, flag-chained, day-gated ladder that has been shipping and
+  completing 40/40 since before the backlog was written. **The pattern is now
+  three-for-three** -- S2 and S3 were corrected by F1, S8/S9's descriptions by
+  SHIP, A3's by this window. The remaining unverified specs are **F3, F4, F5, A2,
+  A4 and S4-S7**, all written in the same pass. Treat every unmeasured claim in
+  `STEAM_READINESS_BACKLOG.md` §1 and §3 as a hypothesis, and make Step 0 of each
+  remaining item a census before a design.
+
+- *(2026-07-29, A3 Phase 1)* **DEAD LEVER for half the game: `Heat` as a gate or
+  trigger.** Measured n=40/strategy over every run-day: mean Heat 17.89 random /
+  **0.86 cautious** / 16.05 reckless / 2.73 greedy, a **20.9x spread**, with
+  cautious spending **0.0%** of its days at Heat >= 25 and exactly **1 run in 40**
+  ever crossing it. `decay.K_COOL = 4.0` sheds it every clean day, so Heat is a
+  stock any careful player holds at zero. Two live consequences beyond A3:
+  **(a)** the 40 events gated on Heat are effectively unreachable in careful play
+  -- including `steward_wellness_check` (>= 20) and `steward_buyout_offer`
+  (>= 35), i.e. both events in `steward_interventions.json`; **(b)**
+  `selector.effective_weight`'s `if "steward" in tags: w *= 1 + Heat/40` is a
+  flat **1.0** for cautious and ~1.07 for greedy against ~1.45 for reckless, so
+  the deck's one Steward-weighting rule silently does nothing for two of four
+  strategies. Neither was fixed here. **Anything that wants to escalate against
+  player conduct must read an integral, not a level.**
+
+- *(2026-07-29, A3 Phase 1)* **An accumulator fed only by "the Steward wrote
+  something down" is a tenure clock, not an antagonist -- and it is the design
+  anyone would reach for first.** The deck grants `steward_biometric_dossier` (26
+  source events) and `steward_civic_dossier` (21). Counting those alone
+  accumulates at 3.18 / 3.33 / 3.55 / 3.23 per 10 days across the four
+  strategies: a **1.12x spread**, i.e. it measures how long you lived, not how
+  you played. Adding Heat-raising branches gives 1.71x while still reaching the
+  low tiers 40/40 under every strategy. **A counter that does not separate
+  strategies cannot be played against, however good its fiction is.**
+
+- *(2026-07-29, A3 Phase 1)* **47 events grant a dossier flag that is a boolean,
+  so grants 2..26 are no-ops.** `steward_biometric_dossier` has 26 sources and 3
+  readers; `steward_civic_dossier` has 21 sources and 2. A player who trips the
+  biometric dossier 26 times has done the same thing 26 times and been charged
+  once. This is a *deck-wide authoring shape*, not a Steward problem --
+  `vice_personal_habit` has **53** sources and 1 reader, `undercity_smuggling_rep`
+  24 sources and 2, `mara_known` 33 and 5. Worth a general look: the deck spends a
+  lot of authoring on grants that are already true by the third time they fire.
+
+- *(2026-07-29, A3 Phase 1)* **The Continuity Review's five terminal flags are
+  read by `endings.json` and by nothing else.** `review_final_silence` /
+  `_defiance` / `_bargain` / `_testimony` / `_flagged` have zero event readers.
+  That is defensible for a finale, but it means a 30-day, four-session flagship
+  chain -- the best-realised Steward content in the game -- leaves no trace on the
+  remaining 24-32 days of a deliberate run. F5 (signpost the endings in-fiction)
+  is the natural home for fixing that, and this is the concrete instance to
+  point it at.
+
+- *(2026-07-29, A3 Phase 1)* **The SHIP window's work is uncommitted working-tree
+  state, not a commit on `ship-blocking-items`.** `git log` on that branch is
+  `d92b66c Merge PR #2`; `server.py`, `web/app.js`, `web/index.html`,
+  `web/styles.css` and both docs are modified but unstaged, and A3 Phase 1's
+  changes now sit on top of them. §3 recorded SHIP as "landed on branch
+  `ship-blocking-items`", which is not what happened. Nothing is lost, but the
+  next window should commit or split before doing anything destructive.
 
 ---
 
