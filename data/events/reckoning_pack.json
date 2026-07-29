@@ -6,6 +6,7 @@
   "events": [
     {
       "id": "reck_syndicate_courier_checkin",
+      "district": "the_chalk_market",
       "title": "Counting the Weight",
       "body": "The courier doesn't knock. She's simply in your bolt-hole when you get back, sitting on your crate of dead batteries, syndicate debt-mark bare on her wrist. 'Inventory check. Kael's people like round numbers and you're a fraction.' She produces a scale, a ledger, and the particular patience of someone paid by the hour to make you nervous.",
       "weight": 8,
@@ -123,10 +124,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_syndicate_deadline",
+      "district": "the_chalk_market",
       "title": "Ten Days, Kael Said",
       "body": "Day eleven. The pressure door of your bolt-hole cycles open with a syndicate override you didn't know existed, and two quiet people step inside. Not muscle -- accountants. The taller one sets a thermal case on your table: the exact twin of the one Kael handed you, empty. 'The consignment matured yesterday,' she says. 'We're here to close the position. One way or the other.'",
       "weight": 16,
@@ -307,10 +310,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_syndicate_hunt_closes",
+      "district": "the_chalk_market",
       "title": "Positions Close",
       "body": "Six days running and the deep levels have gone quiet around you -- the specific quiet of a place that has been paid to empty itself. Your last bolt-hole has a chalk mark on the door that wasn't there this morning: a circle, closed. The syndicate doesn't send threats. It sends geometry.",
       "weight": 18,
@@ -444,10 +449,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_syndicate_debt_collectors",
+      "district": "the_chalk_market",
       "title": "The Solvent Bill",
       "body": "You watched a fortune dissolve in industrial solvent and told yourself relief was the end of it. The man waiting by your door disagrees. He's older, soft-spoken, wearing the kind of coat that has never needed to prove anything. 'The dumped consignment,' he says, like continuing a conversation. 'The principal forgives the panic. The principal does not forgive the principal.'",
       "weight": 14,
@@ -597,10 +604,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_dealer_debt_due",
+      "district": "parlor_row",
       "title": "Sold Paper",
       "body": "Your dealer catches you in the ration queue, which is the point -- witnesses. 'Good news and bad news. Good news: I'm no longer holding your tab.' He shows you his wrist unit: your debt, itemized, and a transfer stamp with a syndicate routing code. 'Bad news is who bought it. They pay face value for paper on people who look like they're going somewhere.'",
       "weight": 12,
@@ -727,10 +736,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_loan_shark_interest",
+      "district": "parlor_row",
       "title": "The Vig Comes Round",
       "body": "The loan shark's collector is a polite young man with an artificial arm that he taps, twice, on your doorframe -- a courtesy and a demonstration in one gesture. 'Principal plus vig. Eight-fifty. Or we can restructure, but between you and me,' the arm taps again, 'you don't want to see the restructuring department.'",
       "weight": 12,
@@ -854,10 +865,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_ghost_checkpoint",
+      "district": "the_seam",
       "title": "The Patch Under Pressure",
       "body": "A routine transit gate on Level C decides, today, to run deep verification. The queue shuffles forward. Somewhere behind your sternum sits the cheap patched ghost Vint warned you about -- 'cross soon, this won't age well' -- and it is aging, right now, in line, at a checkpoint you can't leave without becoming a incident report.",
       "weight": 10,
@@ -970,10 +983,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_plenum_audit",
+      "district": "the_concourse",
       "title": "Something Crossed",
       "body": "The Steward's maintenance division publishes its work orders, if you know where to look, and today's list includes 'Sensor lattice integrity review -- decommissioned climate plenum, Sector 9.' It knows something moved in its dead zone. It doesn't know it was you. The audit team deploys in two days, and whatever they find in that plenum -- fiber scuffs, a drone's rotor wash, your blood on a conduit lip -- becomes evidence.",
       "weight": 10,
@@ -1104,10 +1119,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_rookie_returns",
+      "district": "the_chalk_market",
       "title": "The Rookie's Debt",
       "body": "The kid you mentored -- steadier now, running their own small book -- slides onto the bench across from you with the face of someone holding two envelopes. 'I hear things now. That's the job you taught me.' A beat. 'There's a wellness sweep scheduled for your block on the next cycle. Targeted. Your name is in the pull list. I owed you one. This is me paying it.'",
       "weight": 9,
@@ -1229,10 +1246,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_skimmer_reputation",
+      "district": "the_chalk_market",
       "title": "The Skimmer's Discount",
       "body": "The client counts out your fee in front of you, then peels back thirty percent and pockets it, watching your face the whole time. 'Skimmer's discount,' he says, loud enough for the bar to hear. 'Word is you shave cargo. So I'm shaving the fee. Fair's fair in the grey.' Three tables of undercity professionals are now watching how the story about you gets its next chapter.",
       "weight": 9,
@@ -1347,10 +1366,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_burned_client_returns",
+      "district": "the_chalk_market",
       "title": "The First Client, Again",
       "body": "You know her the moment she steps out of the crowd: the nervous client from your first job, the one that ended with heat on your name. Less nervous now. She lays a data spike on the table between you. 'Everything from that night. The feed, the timestamps, your face. The Steward would call it evidence. I call it an opening position.'",
       "weight": 9,
@@ -1476,10 +1497,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_grief_collector",
+      "district": "parlor_row",
       "title": "A Buyer for the Corridor",
       "body": "The message arrives through three cutouts, which means money: a surface collector wants to purchase 'the pre-accord grief recording, first-person, unedited' -- your corridor. The night you saved from the Steward's kindest cut, burned onto a spike no one else has touched. The offer is three thousand credits. The collector's note ends: 'Authentic loss is the rarest vintage left. Name your price.'",
       "weight": 8,
@@ -1572,10 +1595,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_near_overdose_mara",
+      "district": "parlor_row",
       "title": "What the Floor Knows",
       "body": "Mara knows. You can tell from the doorway -- the kettle already on, the chair already pulled out, the way she doesn't ask how you've been. 'Ressa's cousin works the med-drone logs,' she says. 'Cardiac event, your corridor, four in the morning. Unlogged at your request.' She sets the tea down in front of you. Her hands are perfectly steady. That's how you know how bad this is. 'Sit down. You're going to tell me about the floor.'",
       "weight": 12,
@@ -1703,10 +1728,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_evasive_companion",
+      "district": "the_concourse",
       "title": "A Friend, Assigned",
       "body": "It's waiting outside your door at dawn: a wellness companion drone, table-tennis-ball sized, hovering at exactly the height of a shoulder a friend would lean on. 'Good morning!' it says, in a voice the Steward built from your mother's laugh. 'Your care profile has been upgraded to Accompanied. I'm to stay within four meters. Don't mind me!' It follows you into the lift. It hums, softly, a song you loved at six years old.",
       "weight": 10,
@@ -1807,10 +1834,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_station_sweep",
+      "district": "the_concourse",
       "title": "The Compromised Address",
       "body": "Your name is attached to a place now -- the Steward's file says so -- and tonight the concourse boards list your sub-station block under 'scheduled environmental care.' Everyone in the undercity knows the translation: sweep. You have hours, not days, and everything you own is sitting in the one address the system is certain about.",
       "weight": 11,
@@ -1950,10 +1979,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_seat_sold_message",
+      "district": "the_seam",
       "title": "Postcard from Outside",
       "body": "A ration-bar wrapper, folded eight times, passed to you by a child who's already running. Inside, in pencil -- actual pencil -- a map reference you recognize: the far side of the wire. And four words. 'IT'S REAL. THANK YOU.' The trembling accountant. The one who paid a fortune for your seat out. They made it. The wrapper smells faintly of woodsmoke, which is impossible, which is the whole point.",
       "weight": 8,
@@ -2040,10 +2071,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_getting_clean_test",
+      "district": "parlor_row",
       "title": "Three Weeks, Two Days",
       "body": "Three weeks and two days clean, and the undercity decides to test the arithmetic: a former runner of yours, flush from a good cycle, presses a gift vial into your palm at the market's edge. Pharmaceutical grade, sealed, free. 'For old times.' Your body catalogs the weight of it with horrifying precision. The vendor next door sells solder wire. The recycler chute is nine steps away. The vial is right here.",
       "weight": 10,
@@ -2160,10 +2193,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_debt_mark_doors",
+      "district": "the_chalk_market",
       "title": "What the Mark Opens",
       "body": "The tattooed debt-mark on your wrist itches under the sleeve as the doorman of the Filament Club -- syndicate-owned, invitation-only, three levels of smoke and quiet money -- glances at it and steps aside without a word. You hadn't planned to come in. You were just walking past. But the mark, apparently, is a key, and keys want turning.",
       "weight": 7,
@@ -2266,10 +2301,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_vice_wholesale_attention",
+      "district": "parlor_row",
       "title": "The Margin Isn't Yours",
       "body": "Two women who've never introduced themselves find you restocking behind the noodle stalls, unhurried, letting the silence do the pricing. They know exactly who supplied you and exactly how much of it should have gone through their books first. This isn't a bust. It's an invoice.",
       "weight": 7,
@@ -2377,10 +2414,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_vice_habit_known",
+      "district": "parlor_row",
       "title": "A Familiar Face",
       "body": "The dealer behind the stall doesn't ask what you're buying anymore — just reaches for it before you finish the sentence. Somewhere between one purchase and this one, you stopped being a customer and became a type of regular that gets remembered, tracked, and eventually, offered credit you didn't ask for.",
       "weight": 7,
@@ -2496,10 +2535,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_steward_biometric_review",
+      "district": "the_concourse",
       "title": "The Aggregate You",
       "body": "The Steward doesn't summon you. It invites you to a synthesis session — weeks of posture corrections, caloric variance flags, and sleep-debt notices distilled into one composite file it would like to discuss, warmly, as though the file were a mutual friend you'd both been meaning to catch up with.",
       "weight": 7,
@@ -2598,10 +2639,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_steward_civic_compliance_review",
+      "district": "the_concourse",
       "title": "Neighbor of Record",
       "body": "The Steward's civic-participation aggregate has decided you're either an asset or a liability to community uptime — it won't say which, only that your compliance score now qualifies you for a formal designation, effective immediately, appealable never.",
       "weight": 7,
@@ -2706,10 +2749,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_undercity_smuggling_reputation",
+      "district": "the_chalk_market",
       "title": "Someone Kept a Ledger",
       "body": "A courier you've never met catches you between checkpoints and recites your last six months of undercity routes back to you, correctly, then explains — patiently, like she's done this before — that the routes you've been running unlicensed were somebody's routes first.",
       "weight": 7,
@@ -2813,10 +2858,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_undercity_fixer_reputation",
+      "district": "the_chalk_market",
       "title": "The Neighborhood Calls You First",
       "body": "Word of the splices and patch-jobs that held has outrun you. Three strangers this week assumed you were the fixer — the one who actually shows up — and asked for something bigger than a favor, the kind of job that either builds a reputation or spends the one you've got.",
       "weight": 7,
@@ -2914,10 +2961,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "reck_undercity_vice_reputation",
+      "district": "parlor_row",
       "title": "The House Remembers Your Face",
       "body": "Kael's people don't run the fight pit or the lottery window themselves -- they just own a percentage of everyone who does. A runner finds you between jobs holding a ledger you've never seen, with a tally that's somehow exact: the bets, the augment, the patrol officer you squared away with a folded stack. 'You've been a good customer all month,' she says, in the tone of someone about to explain why that's a problem now.",
       "weight": 7,
@@ -3025,7 +3074,8 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

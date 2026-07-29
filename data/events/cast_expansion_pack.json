@@ -6,6 +6,7 @@
   "events": [
     {
       "id": "cx_brann_rag_drawer",
+      "district": "the_chalk_market",
       "title": "Ink Is for Finished Things",
       "body": "Brann sends you for flux and you open the wrong drawer. Dozens of shop rags inside, folded square, each tagged in his blocky hand with a name and a date range -- every apprentice he ever kept. Three tags end mid-date, no closing number, just a dash into nothing. Yours is already in there, folded with the rest, tagged in pencil. You're still holding the drawer open when his shadow crosses the light. He doesn't raise his voice. \"Ink's for finished things,\" he says, and takes the flux from your other hand like the drawer was never open at all.",
       "weight": 6,
@@ -121,10 +122,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_brann_bad_arm_day",
+      "district": "the_chalk_market",
       "title": "The Arm Quits",
       "body": "The arm quits mid-lift -- no warning, no shake first, just gone -- and a governor's worth of scalding coolant tips toward the floor an inch from his boot. You're moving before you decide to. Whether you catch it or not, you saw his face in the half-second his body stopped answering him: not pain. Arithmetic. He clamps the valve one-handed like nothing happened and looks at you the way a man looks at a witness he didn't choose. \"Say something and I'll charge you for it,\" he says. It isn't a joke. Brann prices what people see the way Kael prices debt.",
       "weight": 6,
@@ -219,10 +222,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_brann_the_chalk_line",
+      "district": "the_chalk_market",
       "title": "No Is a Tool",
       "body": "He sends you to refuse a job on the workshop's behalf -- a silk-over-syndicate client wanting reclamation work the shop doesn't do for people like him, the kind of no that needs saying face to face or it isn't really a no. \"No's a tool,\" Brann says, not looking up from the bench. \"Third one you reach for.\" He doesn't explain the first two. You're expected to have been paying attention long enough to already know them.",
       "weight": 6,
@@ -334,10 +339,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_brann_ink",
+      "district": "the_chalk_market",
       "title": "The Rag in Ink",
       "body": "He inks your tag. No ceremony -- you find it already done, ink still wet, tucked back in the drawer where you first found it wrong. His own rag hangs beside it now with an end date freshly written in the same hand, same steadiness the arm doesn't have anymore for anything else. You can still see the pencil ghost faintly under the ink, two versions of your name sitting one on top of the other. He doesn't ask if you noticed. He never asks anything he's already watched you answer.",
       "weight": 7,
@@ -444,10 +451,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_mara_wrong_noodles",
+      "district": "the_chalk_market",
       "title": "Wrong Noodles",
       "body": "Auntie Six's counter, Mara across from you, and she orders your childhood order wrong on purpose -- the sauce you've both hated since you were nine, ordered like she forgot, watching you over the bowl to see what you do with it. It isn't dinner. It's a test dressed as dinner: correct her and you're still her brother; let it slide and you're just another thing she has to manage.",
       "weight": 5,
@@ -530,10 +539,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_vint_archive_night",
+      "district": "the_archive",
       "title": "People Sounding Like Weather",
       "body": "2 a.m. on his floor, dead drives stacked like furniture. Vint plays you the one file he says he'll never sell: forty seconds of pre-accord street noise, a market, rain starting, four hundred strangers arguing about umbrellas. \"people sounding like weather,\" he types, even now, even speaking out loud he can't stop typing the register, \"before weather got a subscription tier.\" He doesn't charge you. For weeks after, he'll be unbearable about having let you see it.",
       "weight": 5,
@@ -613,10 +624,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_ferry_toll_book",
+      "district": "the_seam",
       "title": "The Toll Book",
       "body": "She shows you the book of crossings. Not names -- weights. Kilograms, to the gram, of what each crosser carried through, because the seam prices bodies and she prices what they couldn't leave behind. One entry is circled: 0.31 kg, eleven years old, never collected. She charges you for the lesson, exact change, counted one-handed against the mask's rasp. \"Wanting is cheap,\" she says. \"Carrying isn't.\" You didn't ask for a price and got billed for one anyway, which is the entire grammar of this conversation.",
       "weight": 6,
@@ -713,10 +726,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_ferry_the_no",
+      "district": "the_seam",
       "title": "The No",
       "body": "You watch her refuse a crossing. A desperate client, funds already in hand, the window open and counting -- and she says no, and eats what the no costs in front of you without flinching. The no is mercy: the client would freeze at forty seconds, she's seen the exact tremor before, on someone else, a long time ago. It doesn't look like mercy. It looks like a woman turning away money from someone begging for it. She doesn't explain, because she never explains twice, and the first explanation already went to somebody eleven years gone.",
       "weight": 6,
@@ -820,10 +835,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_ferry_mask_off",
+      "district": "the_seam",
       "title": "Doors Don't Have Faces",
       "body": "Auntie Six's stall, 3 a.m. The mask is off. She's eating noodles like an ordinary person, one arm, and she has opinions -- the broth ratio, the criminal under-salting -- delivered in the same rasped koan cadence, which is suddenly, catastrophically funny. The mask was never for the air. \"Doors don't have faces,\" she says. \"People keep trying to knock on mine.\"",
       "weight": 5,
@@ -933,10 +950,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_ferry_last_toll",
+      "district": "the_seam",
       "title": "The Last Toll",
       "body": "The book comes out one more time. She crosses one name off -- hers isn't in it; the book prices cargo, and she was never cargo. What she's doing, you realize watching her work, is naming what the door needs next: not nerve, not hunger -- arithmetic. Somebody who counts what people carry and charges honestly for the weight of it. She doesn't say she's dying. She doesn't have to. The book does the saying for her, the way it's always done the saying for everyone else.",
       "weight": 6,
@@ -1039,10 +1058,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_dex_the_list",
+      "district": "the_chalk_market",
       "title": "The List",
       "body": "Waiting out a checkpoint cycle in his booth, you see the list -- paper, handwritten, annotated. Not weights and rates: load limits of the soul. \"No organics -- mother died of a recall.\" \"Night runs only. Daylight makes him honest.\" \"Pays her cut to her sister first. Don't schedule against visiting hours.\" He's been routing people around their own damage for years and calling it dispatch. Your entry exists. He catches you reading upside down and doesn't cover it.",
       "weight": 7,
@@ -1147,10 +1168,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_dex_slow_day",
+      "district": "the_chalk_market",
       "title": "Slow Day",
       "body": "The Deprecation bites: no freight worth moving. Dex invents a run -- sealed case, three checkpoints, dawn deadline -- for an old courier whose hands have started shaking on empty days, and asks you to play the receiving contact. Make it look real. The case is empty. The countdown is real because he made it real, on paper, with the same care he gives an actual manifest.",
       "weight": 6,
@@ -1241,10 +1264,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_dex_the_offer",
+      "district": "the_chalk_market",
       "title": "Continuity of Community Function",
       "body": "A Steward logistics liaison at the transit gap, warm as invoicing: dispatch optimization, the list digitized, \"continuity of your community function.\" Everyone routed efficiently. Nobody routed around anything. Dex's face does nothing for a long time, which from him is a scream.",
       "weight": 7,
@@ -1350,10 +1375,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_dex_tuesday",
+      "district": "the_chalk_market",
       "title": "You're a Tuesday Courier",
       "body": "Your label changes. You catch it upside down across the counter -- the old annotation struck through, a new one in fresh ink -- and it's the truest one-line review of your run so far, whether or not you wanted a review at all.",
       "weight": 6,
@@ -1474,10 +1501,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_auntie_the_board",
+      "district": "the_chalk_market",
       "title": "The Board",
       "body": "She teaches you to read the board -- the marks aren't amounts, they're histories. A hook means fed on credit the week of a death. A double strike means paid off in work. A spiral means don't ask, feed them anyway. Your mark is already up there, from before you ever knew her name -- she's been carrying you at a loss since a night you don't remember and she does, in order-level detail.",
       "weight": 7,
@@ -1571,10 +1600,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_auntie_zero_day",
+      "district": "the_chalk_market",
       "title": "Settled Means Gone",
       "body": "The clearing-at-zero reaches the overpass: a Steward notice, courteous as a hymn, declaring all informal debts \"resolved under continuity accounting.\" The Row's debts, settled by fiat, by a machine that thinks a debt is money. That night she re-chalks the entire board from memory -- four hundred marks, every hook and spiral -- and you're the only customer she lets watch.",
       "weight": 6,
@@ -1663,10 +1694,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_auntie_the_name",
+      "district": "the_chalk_market",
       "title": "One Bowl, Never Collected",
       "body": "Top of the board, oldest chalk, one bowl, never collected. Her son took Sanctuary intake nine years ago -- voluntarily, smiling, the way they do -- and his debt is one bowl of the good broth, ordered and never eaten, the night before. She keeps it chalked because settled means gone, and gone is the one thing the board won't say about him. Then she comps your bowl and charges you for the napkin, because grief is not a discount.",
       "weight": 6,
@@ -1765,10 +1798,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_auntie_collection_day",
+      "district": "the_chalk_market",
       "title": "The Interpretive Layer",
       "body": "A syndicate consolidator at the stall, silk over spreadsheet: the board is intelligence -- four hundred households' pressure points, pre-sorted -- and he'd like to buy the stall as a \"community data asset,\" Auntie retained as an \"interpretive layer.\" She lets him finish. Then she prices him, out loud, in board grammar, in front of the dinner rush -- what he owes, who he stiffed, which mark his mother was -- an audit so complete the queue starts writing it down.",
       "weight": 7,
@@ -1867,10 +1902,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_auntie_open_late",
+      "district": "the_chalk_market",
       "title": "Open Late",
       "body": "The stall at 3 a.m., steam against the underpass dark, whoever's at the counter tonight. Auntie Six doesn't ask why you're up. She never does.",
       "weight": 3,
@@ -1977,10 +2014,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_denny_the_hum",
+      "district": "the_chalk_market",
       "title": "The Hum",
       "body": "Slow night at the bead curtain. He tells you what the hum is -- his theory, polished like liturgy: it's the Steward humming to itself, the sound of a mind vast as weather doing its filing, and the root doesn't quiet the city, it quiets your listening. Then the patter stops mid-sentence -- first time you've heard silence in that booth -- and he asks, actually asks: \"You hear it too, or you buying politeness?\"",
       "weight": 6,
@@ -2073,10 +2112,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_denny_dry_batch",
+      "district": "the_chalk_market",
       "title": "Dry Batch",
       "body": "The root crop failed -- it grows in a flooded conduit off the reclamation runoff, and the runoff ran clean this month, which is the Steward improving the water and killing the crop, a kindness with a body count of one economy. Denny's facing his own empty stall the way his customers face it, which you've never seen before and he clearly hoped you never would.",
       "weight": 5,
@@ -2172,10 +2213,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_denny_quiet_customer",
+      "district": "the_chalk_market",
       "title": "The Quiet Customer",
       "body": "A Sanctuary graduate at the curtain -- the smile, the cadence, the wrongness -- with a folded request: root, for someone still inside. Denny's one hard rule surfaces: he won't sell to the graduate, because the graduate doesn't need, the need was optimized out of them, and selling to that is selling to the file. The someone inside is a different arithmetic entirely. The graduate haggles from a script anyway. Denny plays along, patter against protocol, funny right up until the exact second it stops being funny.",
       "weight": 5,
@@ -2279,10 +2322,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_denny_the_silence",
+      "district": "the_chalk_market",
       "title": "The Silence",
       "body": "The hum stops. For him. Mid-shift, mid-sentence -- his hearing's been going for a year and the exact band the Steward files itself on went first. A vendor of relief from a sound he can no longer hear, patter suddenly a script about someone else's skull. He tells only you. And he asks for the one thing he's never asked a customer: stop buying. \"Root's for the hum. You start chewing for the quiet, that's a different shop. Worse one. I've seen the shelves.\"",
       "weight": 6,
@@ -2372,10 +2417,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_kael_the_umbrella",
+      "district": "the_chalk_market",
       "title": "The Umbrella",
       "body": "Kael pays for something with no angle -- intercepts a street kid's debt to a bad collector, full freight, in front of you, and walks on. Impossible. You spend the scene auditing for the price, running his own methods against him, and the looking is the price: proof you've finally learned his accounting.",
       "weight": 5,
@@ -2455,10 +2502,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_echo_chalk_joke",
+      "district": "level_d",
       "title": "That One Wasn't Code",
       "body": "A dead-drop mark in her chalk -- routine, operational -- except the third stroke is bent into, unmistakably, a tiny wellness drone with a flat tire. A joke. In tradecraft. Laughing at a dead drop is a security breach; she drew it anyway, timed to when you'd pass, erased by rain within the hour. Next contact she says only: \"that one wasn't code.\"",
       "weight": 5,
@@ -2546,10 +2595,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_brann_the_last_season",
+      "district": "the_chalk_market",
       "title": "Ink's for Finished Things",
       "body": "The date on his own rag arrives the way he does everything — without announcement. He's at the bench same as always, except the bench is doing more of the work than his arm is now, and everyone in the shop has started pretending not to notice at the same volume. Ink's for finished things. He never said the date was a deadline. He also never said it wasn't.",
       "weight": 6,
@@ -2679,10 +2730,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_ferry_stand_the_door",
+      "district": "the_seam",
       "title": "Three Nights Untended",
       "body": "Word reaches you the way it reaches everyone down here — sideways, through someone who owes someone. The seam's been quiet for three nights running. Not closed. Untended. The one good arm isn't lifting the mask lately, and the toll book hasn't moved.",
       "weight": 5,
@@ -2818,10 +2871,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_dex_the_replacement",
+      "district": "the_chalk_market",
       "title": "No Name on the Line",
       "body": "The liaison's back, and this time there's no offer attached to the visit — just a routing memo, effective the first of the month, and a new voice on the dispatch line that says please and thank you and never once says a name. Dex reads it twice, folds it into the same pocket as the list, and doesn't say a word for the length of a checkpoint cycle.",
       "weight": 6,
@@ -2952,10 +3007,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_auntie_passing_the_board",
+      "district": "the_chalk_market",
       "title": "Question's Who Reads It After",
       "body": "She's slower on the ladle than she used to be, and she catches you noticing, and she doesn't deny it — just chalks a new mark at the bottom of the board where the newest debts go, small, in a hand that shakes a little now. 'Board's outlasted better women than me,' she says. 'Question's who reads it after.'",
       "weight": 6,
@@ -3084,10 +3141,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_denny_the_new_shop",
+      "district": "the_chalk_market",
       "title": "Reading Your Mouth Instead",
       "body": "The curtain's still there, the beads still catching what light makes it under the overpass, but the patter's different now — shorter, watching your mouth instead of listening past it, reading you instead of the room. He's figuring out how to sell a thing he built his whole trade on hearing, without the hearing left to check his own work.",
       "weight": 5,
@@ -3217,10 +3276,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_web_kael_and_the_board",
+      "district": "the_chalk_market",
       "title": "A Number That Doesn't Match His Math",
       "body": "Kael mentions the consolidator's failed play at the noodle stall like he's reading a stock report, not gossip. ‘Word is you backed the old woman.’ He doesn't ask why. He's already pricing what it cost you and what it bought her, and the two numbers don't match his usual math.",
       "weight": 4,
@@ -3315,10 +3376,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_web_brann_and_mara",
+      "district": "the_chalk_market",
       "title": "Didn't Come In",
       "body": "Brann calls you Mara's brother the way other people say your name, and today he adds something to it — off-hand, mid-measurement, like it costs him nothing to have noticed: ‘She walked past the shop twice last week. Didn't come in.’ He doesn't ask why. He goes back to the bench.",
       "weight": 4,
@@ -3411,10 +3474,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_web_echo_and_the_list",
+      "district": "level_d",
       "title": "Cell-Grade Work",
       "body": "Echo doesn't do compliments, but she brings up the Dex situation unprompted, which for her is the same thing. ‘Paper list against a digitizing intake.’ She's not asking for details. She's deciding something about you based on ones she already has.",
       "weight": 4,
@@ -3535,10 +3600,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_web_vint_and_the_seam",
+      "district": "the_seam",
       "title": "Not in My Archive",
       "body": "Vint goes very still when the Ferryman comes up in conversation, the stillness of a man deciding how much of what he knows is safe to type out loud. ‘She's not in my archive,’ he says, eventually. ‘On purpose. Some things I don't keep copies of.’ It's the nearest he's come to admitting there's a line even he won't cross for a good file.",
       "weight": 4,
@@ -3636,10 +3703,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "cx_web_auntie_checks_on_denny",
+      "district": "the_chalk_market",
       "title": "Quiet-Quiet",
       "body": "Auntie Six brings up Denny without you asking — ‘Boy's gone quiet at the curtain, you know. Quiet-quiet, not busy-quiet.’ She's not asking you to fix it. She's telling you the Row already knows, and the Row is deciding, collectively and without a meeting, whether to do anything about it.",
       "weight": 4,
@@ -3730,7 +3799,8 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

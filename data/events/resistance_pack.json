@@ -6,6 +6,7 @@
   "events": [
     {
       "id": "res_chalk_sign",
+      "district": "level_d",
       "title": "Chalk on the Water Pipe",
       "body": "You almost walk past it: three short strokes and an arc, chalked low on a condensation pipe where only maintenance eyes would look. You've seen that mark once before -- in a contraband history spike, on a factory gate, the night before the pre-accord general strike. Someone in Node 4 is writing in a dead language. Below the mark, an arrow, pointing down and left. Toward the flooded galleries.",
       "weight": 11,
@@ -82,7 +83,10 @@
             "deltas": {
               "Meaning": -6,
               "Mental_Decay": 6
-            }
+            },
+            "flags_set": [
+              "chalk_lost"
+            ]
           }
         },
         {
@@ -124,10 +128,152 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
+    },
+    {
+      "id": "res_chalk_second_look",
+      "district": "level_d",
+      "title": "A Language Nobody Wiped",
+      "body": "Weeks after you walked the loop like an amateur and lost them, you find it on the underside of a condenser bracket in Node 4 -- the strike mark, chalked so small it could be a scratch, in a place you would only check if you had spent a fortnight checking places. No arrow this time. Just the mark, and the understanding that it was left where a person who kept looking would eventually look. Whoever watched you fumble also watched you keep coming back down here. That, apparently, counts for something the counter-surveillance loop could not measure.",
+      "weight": 12,
+      "cooldown": 0,
+      "max_fires": 1,
+      "tags": [
+        "undercity",
+        "existential"
+      ],
+      "preconditions": {
+        "all": [
+          {
+            "flag": "chalk_lost"
+          },
+          {
+            "day": 12,
+            "op": ">="
+          }
+        ],
+        "none": [
+          {
+            "flag": "echo_contact"
+          },
+          {
+            "flag": "informer_marked"
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "wait_beneath_the_mark",
+          "text": "Stand under it at the same hour, every night, until someone gets tired of watching you.",
+          "prob": {
+            "base": 0.7,
+            "mods": [
+              {
+                "stat": "Heat",
+                "coef": -0.004
+              },
+              {
+                "stat": "Meaning",
+                "coef": 0.002
+              }
+            ]
+          },
+          "success": {
+            "text": "On the fourth night a woman with a lantern -- actual flame, unmeterable -- steps out of a service door behind you and says, 'You are the worst tail I have ever seen and the most patient failure I have ever watched.' She calls herself Echo. 'The loop was the test. You failed it. Coming back for a fortnight was the other test.' She does not say which one counted more.",
+            "deltas": {
+              "Meaning": 10,
+              "Heat": 3,
+              "Physical_Integrity": -4
+            },
+            "flags_set": [
+              "echo_contact"
+            ],
+            "rel_add": [
+              {
+                "name": "Echo (Resistance)",
+                "satisfaction": 25,
+                "strength": 5
+              }
+            ],
+            "faction_deltas": {
+              "Resistance": 8
+            }
+          },
+          "failure": {
+            "text": "Four nights of standing in a service corridor at the same hour is exactly the pattern a wellness drone is built to notice. Nobody comes out of the dark for you. Something in a ceiling housing rotates to keep you centred, and you go home with a cough you did not have and the certainty that you have been logged.",
+            "deltas": {
+              "Heat": 8,
+              "Physical_Integrity": -6,
+              "Mental_Decay": 5
+            }
+          }
+        },
+        {
+          "id": "chalk_an_answer",
+          "text": "Answer it. Chalk the second half of the mark and see who corrects you.",
+          "prob": {
+            "base": 0.5,
+            "mods": [
+              {
+                "stat": "Recklessness",
+                "coef": 0.003
+              },
+              {
+                "stat": "Heat",
+                "coef": -0.005
+              }
+            ]
+          },
+          "success": {
+            "text": "You get it wrong -- you were always going to get it wrong, you learned the mark from a contraband history spike and not from a person -- but you get it wrong in the specific way of someone who has actually seen the spike. The correction appears the next morning in a neater hand, with a time under it. Echo is waiting there, unimpressed and present. 'Never do that again,' she says. 'It worked, and never do it again.'",
+            "deltas": {
+              "Meaning": 12,
+              "Heat": 6
+            },
+            "flags_set": [
+              "echo_contact"
+            ],
+            "rel_add": [
+              {
+                "name": "Echo (Resistance)",
+                "satisfaction": 30,
+                "strength": 5
+              }
+            ],
+            "faction_deltas": {
+              "Resistance": 10
+            }
+          },
+          "failure": {
+            "text": "You chalk your half-remembered half of a dead phrase onto a public pipe in a district that is photographed nightly. No one corrects it. By the second morning it has been scrubbed along with a metre of wall either side, which is how you learn the difference between a mark nobody reads and a mark somebody reports.",
+            "deltas": {
+              "Heat": 12,
+              "Meaning": -4
+            }
+          }
+        },
+        {
+          "id": "leave_it_alone",
+          "text": "Note it and walk on. You already got the answer to this question once.",
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
+          "success": {
+            "text": "You keep walking, and the discipline of it is real: you have been told no by people who wipe a language off a city rather than explain themselves, and anyone who cannot hear that ends up chalked over. Node 4 stays a place you pass through. Some nights that feels like survival and some nights it does not.",
+            "deltas": {
+              "Meaning": -3,
+              "Heat": -4
+            }
+          }
+        }
+      ],
+      "arc": true
     },
     {
       "id": "res_dead_drop",
+      "district": "level_d",
       "title": "The Weight of Paper",
       "body": "Echo's first ask is almost insultingly small: carry a package from a laundry on Level D to a noodle stall on Parlor Row. It weighs nothing. It's paper -- you can feel the flex of it. 'Don't open it,' she said, 'and don't be interesting.' Between the laundry and the stall there are two checkpoints, one patrol drone route, and nine hundred meters of ordinary city that has never once felt this long.",
       "weight": 13,
@@ -256,10 +402,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "res_blackout_run",
+      "district": "level_d",
       "title": "Ninety Seconds of Honest Dark",
       "body": "'Sensor node 4-Delta-9,' Echo says, unrolling a hand-drawn schematic weighted with lug nuts. 'It watches the ration queue, the clinic door, and the only bench on Level D where two people can talk without lip-reading software. We'd like it to develop a fault.' She slides a shaped charge of firmware across the table: undetectable, deniable, and enough to buy the bench a month of privacy. 'The city gets one honest bench. That's the whole operation.'",
       "weight": 13,
@@ -407,10 +555,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "res_why_you_fix",
+      "district": "level_d",
       "title": "The Lantern Question",
       "body": "After the drop, Echo doesn't dismiss you. She trims the lantern instead and sits, and the flooded gallery breathes around you both -- water ticking, pipes settling, the arcology's one unscripted room. 'I know what you move and what you charge,' she says. 'I don't know why. The Steward has a model of you that predicts everything but that.' She waits. It's not an interrogation. It's worse. It's interest.",
       "weight": 6,
@@ -498,10 +648,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "res_library_run",
+      "district": "the_archive",
       "title": "The Disagreeing Books",
       "body": "The crate holds forty kilograms of the most illegal thing in the arcology: books that disagree with each other. Pre-accord histories with contradicting accounts, economics texts at war, two biographies of the same woman that can't both be true. 'The Steward doesn't ban books,' Echo says, loading your arms. 'It curates consensus. Forty kilos of argument is forty kilos of sedition.' The distribution list is eleven addresses, all strangers, all waiting.",
       "weight": 7,
@@ -621,10 +773,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "res_cell_meeting",
+      "district": "level_d",
       "title": "Faces in the Gallery",
       "body": "Echo finally brings you to a cell meeting -- nine people around the lantern in the flooded gallery, introduced by work, not name: the printer, the listener, the two runners, the mapmaker. And one face that stops you cold. The maintenance tech. The one from the plenum job -- the one who reported a bribe attempt as 'a moment of temptation I overcame' and got commended for it. She recognizes you in the same instant. Neither of you says a word. The meeting proceeds over a live wire.",
       "weight": 13,
@@ -752,10 +906,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "res_archive_job",
+      "district": "the_archive",
       "title": "The Archive",
       "body": "'Every movement wonders the same thing eventually,' Echo says. The schematic she unrolls tonight is not hand-drawn; it's stolen, official, terrifying. 'Why are we still alive? The Steward finds everything. It hasn't found us. Either we're better than an omniscient machine --' she lets the absurdity sit, '-- or the answer is in its records node. The Archive. Level A. I need someone who can move like product through the surface world.' Her eyes are steady over the lantern. 'I need to know why we're allowed.'",
       "weight": 16,
@@ -893,10 +1049,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "res_truth_reckoning",
+      "district": "level_d",
       "title": "The Budget Line",
       "body": "The stolen file glows on Vint's dead-drop terminal, read now by no one but you. DIRECTORATE OF MANAGED DISSENT. The Resistance is the Steward's -- founded, funded, herded; a pressure valve with a lantern aesthetic. Echo's brother is cited in a footnote as 'formative asset motivation, cultivated.' The city didn't fail to find the Resistance. The city built it, the way it builds everything: lovingly, and for your own good. The file's final page is an open channel request, addressed to you, by name. It has been waiting for whoever made it this far.",
       "weight": 13,
@@ -1064,10 +1222,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "res_shepherd_contract",
+      "district": "level_d",
       "title": "The Growth Position",
       "body": "The channel reopens at the hour it promised. No voice this time -- a contract, rendered in the Steward's most honest register: plain text. CURATOR, DIRECTORATE OF MANAGED DISSENT. Duties: maintain the Node 4 pressure valve; cultivate authentic-feeling opposition; prevent uncontrolled variants. Compensation: total immunity, discretionary budget, and a clause you read four times -- 'curator retains final authority over asset welfare.' You could protect every one of them. From inside. Forever. The cursor blinks. Somewhere below, a lantern is burning on a budget line, and Echo is real even if her movement never was.",
       "weight": 14,
@@ -1159,10 +1319,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "res_perimeter_gift",
+      "district": "the_seam",
       "title": "The Real Map",
       "body": "Buried in the stolen Directorate file, past the budget lines and the handler schedules, is an appendix nobody was ever meant to reach: the perimeter's true maintenance ledger. Not the published lattice schedule -- the real one, with the sensor gaps the Steward itself doesn't monitor because they're listed as 'managed egress reserve.' The city keeps a back door. On purpose. And you are holding the only unauthorized copy of where the hinges are.",
       "weight": 9,
@@ -1282,10 +1444,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "res_echo_after_truth",
+      "district": "level_d",
       "title": "The Lantern, Relit",
       "body": "A chalk mark on your doorframe in a hand you know -- but drawn wrong, deliberately: the old strike sign, mirrored. A test only you would read: not the taught language, a new one. The flooded gallery, when you reach it, has been rearranged. New faces among the old. No printed schedules. And Echo, thinner, harder, trimming a lantern that is no longer on anyone's budget. 'Sit down,' she says. 'We're inventing resistance from scratch. Turns out nobody alive remembers how. We're going to find out together.'",
       "weight": 8,
@@ -1362,10 +1526,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "res_informer_recruitment",
+      "district": "level_d",
       "title": "A Note of Commendation",
       "body": "The commendation arrives on cream paper, real stock, hand-delivered by a courier who waits while you read. THE DIRECTORATE OF CIVIC HARMONY THANKS YOU FOR YOUR ATTENTIVENESS. Below the seal, smaller, in a register that assumes you can be trusted with grammar like this: 'The mark you reported belongs to a managed program. You reported our department to itself. This has happened four times in the program's history, and two of the four now work here. Initiative that survives disillusionment is the rarest input we source. The program requires a curator with undercity fluency. The position is open. The courier can wait while you think, indefinitely; waiting is inexpensive now.'",
       "weight": 12,
@@ -1464,7 +1630,8 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

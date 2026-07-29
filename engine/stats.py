@@ -43,6 +43,13 @@ class Character:
     inventory: list[str] = field(default_factory=list)
     factions: Dict[str, float] = field(default_factory=dict) # Undercity, Steward, Resistance (-100..100)
     clocks: Dict[str, int] = field(default_factory=dict)  # deadline name -> days remaining
+    # A1 placement: where today's action slots are standing. slot index ->
+    # district id, absent meaning the slot is unplaced and draws the whole deck.
+    # Cleared at every day rollover by engine.districts.clear_placements.
+    placements: Dict[int, str] = field(default_factory=dict)
+    # district id -> the day a slot was last placed there. Feeds the placement
+    # screen's hint line; it is the map's memory, so it survives the day.
+    last_visited: Dict[str, int] = field(default_factory=dict)
     pending_dose: float = 0.0    # substance dose taken today, consumed by end_of_day_decay
     fail_streak: int = 0         # consecutive genuinely-failed rolls; fuels the desperation edge
     dead: bool = False
@@ -136,6 +143,9 @@ class Character:
             "inventory": self.inventory,
             "factions": self.factions,
             "clocks": self.clocks,
+            # JSON object keys are strings; from_dict casts the slot index back.
+            "placements": {str(k): v for k, v in self.placements.items()},
+            "last_visited": self.last_visited,
             "pending_dose": self.pending_dose,
             "fail_streak": self.fail_streak,
             "days_since_use": self.days_since_use,
@@ -158,6 +168,10 @@ class Character:
             inventory=list(data.get("inventory", [])),
             factions=dict(data.get("factions", {"Undercity": 10.0, "Steward": -10.0, "Resistance": 0.0})),
             clocks={k: int(v) for k, v in data.get("clocks", {}).items()},
+            # Absent in saves written before A1 Phase 2; an old save simply
+            # reloads with every slot unplaced, which is what it was playing.
+            placements={int(k): v for k, v in data.get("placements", {}).items()},
+            last_visited={k: int(v) for k, v in data.get("last_visited", {}).items()},
             pending_dose=float(data.get("pending_dose", 0.0)),
             fail_streak=int(data.get("fail_streak", 0)),
             days_since_use=data.get("days_since_use", 0),

@@ -2,6 +2,7 @@
   "events": [
     {
       "id": "amb_courier_run_night",
+      "district": "the_seam",
       "title": "Night Freight",
       "body": "Dex flags you down at the transit gap with a sealed case and a countdown: three checkpoints, dawn, no questions. He won't say what's inside — you stopped asking Dex that months ago — only that it pays fast, which in this economy is its own kind of warning. The undercity hums on, unbothered either way.",
       "weight": 5,
@@ -93,15 +94,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "Dex shrugs, already scrolling for the next name on his list. You keep the night clean and the rent exactly as unpaid as it was an hour ago.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ],
@@ -140,6 +132,7 @@
     },
     {
       "id": "amb_grid_patch_job",
+      "district": "the_works",
       "title": "Bootleg Current",
       "body": "A tenement super hands you a hand-drawn diagram: a jury-rigged tap bleeding six illegal apartments off the grid's overflow. One wrong splice and the block goes dark — or six meters flatline at once and an algorithm somewhere adds six names to a list. She's paying real currency, not Steward credit, if it holds through winter.",
       "weight": 4,
@@ -345,18 +338,13 @@
             "deltas": {
               "Meaning": 2
             }
-          },
-          "failure": {
-            "text": "She tells you about the years before the Steward, when smoke like this just meant dinner was ready and nobody filed a report about it. You don't buy anything. You still leave having paid — twenty minutes you won't get back, and a story you'll be turning over at 3 a.m.",
-            "deltas": {
-              "Meaning": 2
-            }
           }
         }
       ]
     },
     {
       "id": "vice_backalley_pharmacist",
+      "district": "parlor_row",
       "title": "Compounding Interest",
       "body": "The pharmacist works out of a converted laundromat, mixing off-label stims and sedatives in machines that used to wash clothes. He doesn't ask questions, and he doesn't guarantee purity. Tonight's batch is either exactly what you need or a very bad idea.",
       "weight": 4,
@@ -445,18 +433,13 @@
             "deltas": {
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "You leave the laundromat empty-handed. Your head stays clear tonight — not cured, just postponed.",
-            "deltas": {
-              "Meaning": 1
-            }
           }
         }
       ]
     },
     {
       "id": "fam_auntie_ro_visit",
+      "district": "the_works",
       "title": "Auntie Ro's Rent",
       "body": "Your aunt Ro shows up unannounced, tea-stained ledger in hand, explaining in careful non-accusatory tones that the building's private landlord doesn't take Steward credit anymore, only real currency. She doesn't ask for help outright. She never does.",
       "weight": 5,
@@ -537,19 +520,14 @@
               "Family_Friction": 3,
               "Wealth": 100
             }
-          },
-          "failure": {
-            "text": "She nods, says she understands, and leaves quieter than she came. You know it isn't fine.",
-            "deltas": {
-              "Family_Friction": 3,
-              "Wealth": 100
-            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_late_message",
+      "district": "the_works",
       "title": "A Message from Vint",
       "body": "Your comm buzzes at 2 a.m. Vint, typing slower than usual, like his thumbs are heavier than the words: rough night, can't sleep, don't want to be alone with it. No ask beyond that. Just the fact of it, sitting there on the screen.",
       "weight": 4,
@@ -636,19 +614,10 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "You wake up to a single unread message: 'nvm, figured it out.' It doesn't feel like a win.",
-            "deltas": {
-              "Family_Friction": 4,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_gentle_reminder",
@@ -709,16 +678,6 @@
             "flags_set": [
               "steward_biometric_dossier"
             ]
-          },
-          "failure": {
-            "text": "'Understood,' the Steward says — warm, unbothered, filing your refusal under a category you'll never see the name of.",
-            "deltas": {
-              "Meaning": 1,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
           }
         },
         {
@@ -758,6 +717,7 @@
     },
     {
       "id": "steward_micro_grant",
+      "district": "the_concourse",
       "title": "The Unsolicited Grant",
       "body": "A notification chimes: the Steward has deposited a small 'community resilience bonus' into your registered account, no application required. It's not much, but it's a reminder that it's always watching, always giving, always keeping score in ways it never quite explains.",
       "weight": 3,
@@ -780,16 +740,6 @@
             "mods": []
           },
           "success": {
-            "text": "The credit lands quietly. You spend it before you can think too hard about why it was given.",
-            "deltas": {
-              "Wealth": 400,
-              "Meaning": -1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
-          },
-          "failure": {
             "text": "The credit lands quietly. You spend it before you can think too hard about why it was given.",
             "deltas": {
               "Wealth": 400,
@@ -841,16 +791,6 @@
             "mods": []
           },
           "success": {
-            "text": "The credit expires unclaimed. A small, useless act of defiance, and the one Steward transaction all week that didn't add to your file — for exactly as long as refusing it stays interesting to you.",
-            "deltas": {
-              "Meaning": 3,
-              "Wealth": -100
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
-          },
-          "failure": {
             "text": "The credit expires unclaimed. A small, useless act of defiance, and the one Steward transaction all week that didn't add to your file — for exactly as long as refusing it stays interesting to you.",
             "deltas": {
               "Meaning": 3,
@@ -958,15 +898,6 @@
             "mods": []
           },
           "success": {
-            "text": "You keep walking. The gate creaks shut behind you, and some nights you'll still wonder what was worth taking.",
-            "deltas": {
-              "Heat": -1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
-          },
-          "failure": {
             "text": "You keep walking. The gate creaks shut behind you, and some nights you'll still wonder what was worth taking.",
             "deltas": {
               "Heat": -1
@@ -1109,6 +1040,7 @@
     },
     {
       "id": "vice_pill_press_operator",
+      "district": "parlor_row",
       "title": "The Pill Press Operator",
       "body": "In a gutted laundromat, a woman with chemical-stained fingers runs a press that stamps out mood-stabilizers the Steward won't distribute anymore. She recognizes you from somewhere, or claims to. The batch smells faintly of almonds.",
       "weight": 4,
@@ -1197,12 +1129,6 @@
             "mods": []
           },
           "success": {
-            "text": "She shrugs, unbothered, already turning back to her press — you leave with your money and the small, nagging sense you'll be back when you're more desperate.",
-            "deltas": {
-              "Heat": -1
-            }
-          },
-          "failure": {
             "text": "She shrugs, unbothered, already turning back to her press — you leave with your money and the small, nagging sense you'll be back when you're more desperate.",
             "deltas": {
               "Heat": -1
@@ -1330,6 +1256,7 @@
     },
     {
       "id": "fam_mara_grocery_run",
+      "district": "the_works",
       "title": "Real Groceries",
       "body": "You show up at Mara's door with a bag of actual food instead of ration credits, the kind with dirt still on the vegetables. She looks at it like you've brought her something illegal, which, in a sense, you have. The kitchen smells like it used to.",
       "weight": 5,
@@ -1437,10 +1364,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_repair_favor",
+      "district": "the_works",
       "title": "Vint's Broken Rig",
       "body": "Vint drags a half-melted signal rig to your door, sheepish, asking if you can fix it before someone notices it's missing from where it shouldn't be. He's got that look, the one that means he already owes you more than he can pay back.",
       "weight": 4,
@@ -1554,10 +1483,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_civic_nudge",
+      "district": "the_concourse",
       "title": "A Gentle Civic Nudge",
       "body": "Your interface chimes with a soft blue notification: the Steward has identified you as an ideal candidate for Community Enrichment Volunteering. It is, as always, entirely optional. The wording makes clear, without ever quite saying so, that it also isn't.",
       "weight": 5,
@@ -1663,6 +1594,7 @@
     },
     {
       "id": "steward_mood_calibration",
+      "district": "the_concourse",
       "title": "Mood Calibration Invitation",
       "body": "A pale drone hovers at eye level outside your door, its voice warm and unhurried: your recent biometric patterns suggest elevated stress, and a complimentary Mood Calibration Session is available immediately. It does not blink. It does not leave.",
       "weight": 4,
@@ -1775,6 +1707,7 @@
     },
     {
       "id": "amb_ration_line_shuffle",
+      "district": "the_chalk_market",
       "title": "The Ration Line Shuffle",
       "body": "You're waiting in the block's endless ration queue when a wiry woman leans in, murmuring about a gap in the Steward's allotment counter. She says she can bump you to the front and cut you into a stream of skimmed vouchers — if you're willing to help her shuffle the line. The other undercity residents shuffle forward, oblivious, tired eyes on nothing.",
       "weight": 4,
@@ -1873,22 +1806,13 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "You collect your standard allotment, nothing more, nothing less. Some days invisibility is its own quiet reward.",
-            "deltas": {
-              "Mental_Decay": -1,
-              "Meaning": 1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
     },
     {
       "id": "amb_drone_reroute_favor",
+      "district": "level_d",
       "title": "Drone Reroute Favor",
       "body": "A courier you've done business with pings you from a rooftop, breathless. She needs someone to intercept a delivery drone's loop and swap its manifest before the Steward's automated audit flags the drift — a job for someone who knows the undercity's dead zones better than the sky does. She'll owe you, and owing is currency down here.",
       "weight": 4,
@@ -1978,16 +1902,6 @@
             "mods": []
           },
           "success": {
-            "text": "You make a call, broker the connection, and step back from the risk entirely. The favor economy grinds on without you touching a single wire.",
-            "deltas": {
-              "Social_Capital": 2,
-              "Heat": 0
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
-          },
-          "failure": {
             "text": "You make a call, broker the connection, and step back from the risk entirely. The favor economy grinds on without you touching a single wire.",
             "deltas": {
               "Social_Capital": 2,
@@ -2200,19 +2114,13 @@
               "Social_Capital": 3,
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "His face pales and he folds up shop faster than you thought possible. He owes you now, quietly — the kind of debt that's worth more than a chip, until the day he can't pay it back.",
-            "deltas": {
-              "Social_Capital": 3,
-              "Meaning": 1
-            }
           }
         }
       ]
     },
     {
       "id": "fam_mara_late_rent_ask",
+      "district": "the_works",
       "title": "Mara's Late Rent",
       "body": "Your sister Mara's message comes through late, the tone careful in a way that means she's embarrassed to ask. Her block's co-op is demanding a supplemental fee the Steward's UBI doesn't quite cover, and she's short. She hates asking you for anything, which is exactly why the message stings.",
       "weight": 5,
@@ -2235,17 +2143,6 @@
             "mods": []
           },
           "success": {
-            "text": "The transfer goes through and her reply comes fast — relief wrapped in gratitude wrapped in guilt. You feel useful, for once, in the way she needs.",
-            "deltas": {
-              "Wealth": -600,
-              "Family_Friction": -4,
-              "Meaning": 2
-            },
-            "flags_set": [
-              "mara_known"
-            ]
-          },
-          "failure": {
             "text": "The transfer goes through and her reply comes fast — relief wrapped in gratitude wrapped in guilt. You feel useful, for once, in the way she needs.",
             "deltas": {
               "Wealth": -600,
@@ -2307,17 +2204,6 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "She says she understands. She doesn't, not really, and the silence that follows says more than her words did.",
-            "deltas": {
-              "Family_Friction": 5,
-              "Wealth": 100,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         }
       ],
@@ -2332,10 +2218,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_workshop_drop_in",
+      "district": "the_works",
       "title": "Vint's Workshop Drop-In",
       "body": "Vint's message is casual, like always — come by, he's got the good solder out, there's a busted rig he wants your eyes on. It's an invitation to just be around someone who doesn't need anything from you except your presence, which feels rarer than any job offer lately.",
       "weight": 4,
@@ -2366,17 +2254,6 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "Hours pass in comfortable static and idle talk. Neither of you fixes much of anything, and neither of you minds.",
-            "deltas": {
-              "Mental_Decay": -3,
-              "Social_Capital": 2,
-              "Meaning": 2
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         },
         {
@@ -2387,17 +2264,6 @@
             "mods": []
           },
           "success": {
-            "text": "He says it's fine, easy as anything, but you catch the flicker of hurt before he buries it in a joke. Some distance is protective. Some is just distance.",
-            "deltas": {
-              "Heat": -1,
-              "Social_Capital": -2,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
-          },
-          "failure": {
             "text": "He says it's fine, easy as anything, but you catch the flicker of hurt before he buries it in a joke. Some distance is protective. Some is just distance.",
             "deltas": {
               "Heat": -1,
@@ -2443,10 +2309,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_courtesy_flag",
+      "district": "the_concourse",
       "title": "A Courtesy Flag From The Steward",
       "body": "Your feed chimes with a soft, almost apologetic tone. The Steward has noticed 'irregular behavioral patterns' in your recent movements and offers, in its gentlest synthesized voice, a 'voluntary correction session' — with a small stipend attached, of course. It always sounds like it cares.",
       "weight": 4,
@@ -2497,16 +2365,6 @@
             "mods": []
           },
           "success": {
-            "text": "It doesn't chime again, but you know it's still watching, patient as ever. The Steward never forgets a flag; it just waits for a better moment.",
-            "deltas": {
-              "Heat": 1,
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
-          },
-          "failure": {
             "text": "It doesn't chime again, but you know it's still watching, patient as ever. The Steward never forgets a flag; it just waits for a better moment.",
             "deltas": {
               "Heat": 1,
@@ -2663,6 +2521,7 @@
     },
     {
       "id": "amb_conduit_splice_job",
+      "district": "the_works",
       "title": "Splice in the Dark",
       "body": "A cracked junction box hums behind a noodle stall, leaking current the Steward's grid never metered. The stall owner slips you a wire stripper and a nervous smile, promising cash if you can tap it clean before the morning patrol sweeps the block.",
       "weight": 5,
@@ -2755,7 +2614,7 @@
           "id": "walk_away",
           "text": "Walk away. Not worth it tonight.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -2984,7 +2843,7 @@
           "id": "decline_husk",
           "text": "Decline. This one feels like a bad trade for everyone.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -3109,6 +2968,7 @@
     },
     {
       "id": "fam_mara_text_check_in",
+      "district": "the_works",
       "title": "A Text From Mara",
       "body": "Your phone buzzes with a message from Mara — just a photo of a chipped mug and the words 'still alive over here, you?' It's the kind of small nothing that means everything when the rest of your week has been made of ledgers and lies.",
       "weight": 5,
@@ -3186,7 +3046,7 @@
           "id": "ignore_text",
           "text": "Leave it on read. You'll deal with it later.",
           "prob": {
-            "base": 1.0,
+            "base": 0.8,
             "mods": []
           },
           "success": {
@@ -3209,10 +3069,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_tool_borrow",
+      "district": "the_works",
       "title": "Vint Needs a Tool Back",
       "body": "Vint corners you at the workshop door, oil under his nails, asking to borrow your good multitool for a rush repair job of his own. He's got that half-embarrassed grin he gets when he needs something and hates needing it.",
       "weight": 4,
@@ -3295,7 +3157,7 @@
           "id": "refuse_tool",
           "text": "Refuse. You need it yourself this week.",
           "prob": {
-            "base": 1.0,
+            "base": 0.85,
             "mods": []
           },
           "success": {
@@ -3317,7 +3179,8 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_calibration_nudge",
@@ -3534,6 +3397,7 @@
     },
     {
       "id": "amb_pipe_network_scavenge",
+      "district": "level_d",
       "title": "The Old Pipe Network",
       "body": "You slip through a rusted maintenance hatch into the city's forgotten arteries, where copper and salvageable conduit still hide in the dark. The tunnels groan overhead, echoing with dripping condensation and distant machinery. Somewhere in this labyrinth is a stash worth real credit — if the structural integrity holds and nothing worse is waiting.",
       "weight": 4,
@@ -3653,6 +3517,7 @@
     },
     {
       "id": "amb_black_market_translator",
+      "district": "the_archive",
       "title": "Words for Hire",
       "body": "A nervous trader corners you in the market row, needing someone who can translate a batch of intercepted Steward-adjacent corporate chatter before the buyer's patience runs out. The documents are dense, technical, and clearly not meant for outside eyes. Payment is good, but so is the chance you're reading something you shouldn't.",
       "weight": 3,
@@ -3741,15 +3606,6 @@
             "mods": []
           },
           "success": {
-            "text": "You walk away clean, trusting your gut over the coin.",
-            "deltas": {
-              "Heat": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
-          },
-          "failure": {
             "text": "You walk away clean, trusting your gut over the coin.",
             "deltas": {
               "Heat": -1
@@ -3858,10 +3714,6 @@
             "mods": []
           },
           "success": {
-            "text": "You keep your head clear and your hands clean, for now.",
-            "deltas": {}
-          },
-          "failure": {
             "text": "You keep your head clear and your hands clean, for now.",
             "deltas": {}
           }
@@ -3984,6 +3836,7 @@
     },
     {
       "id": "fam_mara_medicine_run",
+      "district": "the_works",
       "title": "Mara Needs Medicine",
       "body": "Mara's cough hasn't let up in days, and the free Steward clinics require registration she refuses to give. She asks you, quietly, almost ashamed, if you can find something off the books to help her breathe easier. Her eyes avoid yours — she hates needing this.",
       "weight": 5,
@@ -4090,10 +3943,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_spare_parts_trade",
+      "district": "the_works",
       "title": "Vint's Spare Parts Trade",
       "body": "Vint waves you over to his cluttered workshop, arms full of salvaged servo motors and cracked optic lenses. He's assembling something ambitious and needs one specific part he can't source cheaply — and he thinks you might know where to look, off the books.",
       "weight": 4,
@@ -4180,19 +4035,10 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "The conversation drifts into old memories and easy laughter, a rare pocket of peace in your week.",
-            "deltas": {
-              "Meaning": 2,
-              "Mental_Decay": -2
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_productivity_survey",
@@ -4283,21 +4129,13 @@
             "flags_set": [
               "steward_civic_dossier"
             ]
-          },
-          "failure": {
-            "text": "You mute the chime and go about your day, one less thread for the Steward to pull.",
-            "deltas": {
-              "Heat": -1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
           }
         }
       ]
     },
     {
       "id": "steward_gratitude_ping",
+      "district": "the_concourse",
       "title": "A Gratitude Ping",
       "body": "The Steward's voice, warm and synthetic, pings your feed to 'express genuine appreciation for your continued participation in the shared human experience.' It offers a small gift — a token of algorithmic affection — and invites you to reply with your own gratitude, tracked and logged, of course.",
       "weight": 2,
@@ -4386,21 +4224,13 @@
             "flags_set": [
               "steward_civic_dossier"
             ]
-          },
-          "failure": {
-            "text": "You erase it and feel a small, private satisfaction in denying it even that much.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
           }
         }
       ]
     },
     {
       "id": "amb_junction_box_repair",
+      "district": "the_works",
       "title": "The Flickering Junction",
       "body": "A tenement super flags you down in the stairwell, jabbing a thumb at a scorched junction box spitting sparks into the dark. He can't afford a Steward-certified tech, not with the fine print on liability waivers, so he's offering scrip and silence instead. The wiring inside is a rat's nest of illegal splices layered over decades of patchwork.",
       "weight": 5,
@@ -4505,21 +4335,13 @@
             "flags_set": [
               "undercity_fixer_rep"
             ]
-          },
-          "failure": {
-            "text": "He curses the Steward's paperwork under his breath but doesn't argue. You keep walking, pockets a little lighter, conscience a little cleaner.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
           }
         }
       ]
     },
     {
       "id": "amb_noodle_stall_debt_run",
+      "district": "the_chalk_market",
       "title": "Auntie Six's Ledger",
       "body": "The noodle stall under the overpass runs on a debt system older than the Steward itself, chalk marks on a board only regulars can read. Auntie Six slides you a bowl and a name: someone three streets over owes her for a month of dinners and isn't answering knocks. She doesn't want trouble, she says, just her due.",
       "weight": 4,
@@ -4608,17 +4430,6 @@
             "mods": []
           },
           "success": {
-            "text": "Auntie Six blinks, then laughs, calling you a soft-hearted fool as she wipes the chalk clean. You've bought goodwill cheap, and a warm bowl besides.",
-            "deltas": {
-              "Wealth": -300,
-              "Social_Capital": 2,
-              "Meaning": 1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
-          },
-          "failure": {
             "text": "Auntie Six blinks, then laughs, calling you a soft-hearted fool as she wipes the chalk clean. You've bought goodwill cheap, and a warm bowl besides.",
             "deltas": {
               "Wealth": -300,
@@ -4757,19 +4568,13 @@
               "Substance_Reliance": -1,
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "The vendor's pitch fades behind you, along with the temptation. It's a small, quiet win.",
-            "deltas": {
-              "Substance_Reliance": -1,
-              "Meaning": 1
-            }
           }
         }
       ]
     },
     {
       "id": "vice_static_bath_technician",
+      "district": "parlor_row",
       "title": "The Static Bath",
       "body": "In the back of a converted laundromat, a self-styled technician runs a jury-rigged sensory tank that floods your nerves with low-grade electrostatic bliss. It's cheaper than braindance and half as illegal, but the technician's regulars all have the same faint tremor in their hands. He waves you toward the tank with an easy, practiced smile.",
       "weight": 4,
@@ -4883,6 +4688,7 @@
     },
     {
       "id": "fam_mara_shared_meal",
+      "district": "the_works",
       "title": "Leftovers on the Table",
       "body": "Mara's left a covered dish on your doorstep again, the way she used to before everything got complicated between you. There's a note in her cramped handwriting: 'Eat something that isn't a vending machine.' The food is still warm, and so, uncomfortably, is the gesture.",
       "weight": 5,
@@ -4953,16 +4759,6 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "It's good food and a quiet apartment. Some part of you feels guilty for not reaching back.",
-            "deltas": {
-              "Mental_Decay": -1,
-              "Family_Friction": 1
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         },
         {
@@ -4973,16 +4769,6 @@
             "mods": []
           },
           "success": {
-            "text": "By morning it's cold and the guilt is colder. Mara doesn't ask about it, but her next message is shorter than usual.",
-            "deltas": {
-              "Family_Friction": 4,
-              "Meaning": -1
-            },
-            "flags_set": [
-              "mara_known"
-            ]
-          },
-          "failure": {
             "text": "By morning it's cold and the guilt is colder. Mara doesn't ask about it, but her next message is shorter than usual.",
             "deltas": {
               "Family_Friction": 4,
@@ -5005,10 +4791,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_borrowed_credential",
+      "district": "the_works",
       "title": "Vint's Spare Badge",
       "body": "Vint slides an old maintenance credential across the workbench, scuffed but still valid in three sectors. 'Figured you could use it more than my junk drawer,' he says, not quite meeting your eyes. It's the kind of gift that means more than either of you will admit out loud.",
       "weight": 4,
@@ -5031,17 +4819,6 @@
             "mods": []
           },
           "success": {
-            "text": "He waves off the thanks but the corner of his mouth twitches into something like pride. The badge feels heavier than its weight suggests.",
-            "deltas": {
-              "Social_Capital": 3,
-              "Wealth": 100,
-              "Meaning": 1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
-          },
-          "failure": {
             "text": "He waves off the thanks but the corner of his mouth twitches into something like pride. The badge feels heavier than its weight suggests.",
             "deltas": {
               "Social_Capital": 3,
@@ -5103,19 +4880,10 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "He looks almost hurt, then nods slowly, understanding the shape of the risk you're both avoiding. The badge goes back in the drawer.",
-            "deltas": {
-              "Heat": -1,
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_hydration_reminder",
@@ -5150,17 +4918,6 @@
             "flags_set": [
               "steward_biometric_dossier"
             ]
-          },
-          "failure": {
-            "text": "A small drone drops a sealed packet at your window within minutes. It tastes faintly of citrus and quiet surveillance.",
-            "deltas": {
-              "Physical_Integrity": 2,
-              "Mental_Decay": 1,
-              "Tolerance": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
           }
         },
         {
@@ -5171,16 +4928,6 @@
             "mods": []
           },
           "success": {
-            "text": "The notification fades without protest, but you swear the little blue icon lingers a half-second longer than it should.",
-            "deltas": {
-              "Mental_Decay": -1,
-              "Tolerance": -1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "The notification fades without protest, but you swear the little blue icon lingers a half-second longer than it should.",
             "deltas": {
               "Mental_Decay": -1,
@@ -5332,17 +5079,6 @@
             "flags_set": [
               "steward_biometric_dossier"
             ]
-          },
-          "failure": {
-            "text": "'Understood,' it says, without a trace of judgment — which lands worse than an argument would have. You lie awake again, stubbornly yourself.",
-            "deltas": {
-              "Mental_Decay": 1,
-              "Tolerance": -1,
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
           }
         }
       ]
@@ -5457,22 +5193,13 @@
             "flags_set": [
               "undercity_fixer_rep"
             ]
-          },
-          "failure": {
-            "text": "You leave the contact hanging and the antenna dead. Word gets around that you're picky about jobs lately.",
-            "deltas": {
-              "Social_Capital": -2,
-              "Heat": -1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
           }
         }
       ]
     },
     {
       "id": "amb_sewer_toll_collector",
+      "district": "level_d",
       "title": "The Toll Under the Row",
       "body": "A gaunt woman with a lantern and a ledger stops you at the flooded junction beneath the Row, demanding passage tax for the tunnel shortcut. She claims the tunnels are hers by right of first squat, and enough people pay that the claim might as well be true. Your boots are already wet; the question is how much wetter this gets.",
       "weight": 4,
@@ -5494,16 +5221,6 @@
             "mods": []
           },
           "success": {
-            "text": "She waves you through with a gap-toothed grin, and marks something favorable beside your name in her ledger.",
-            "deltas": {
-              "Wealth": -400,
-              "Social_Capital": 2
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
-          },
-          "failure": {
             "text": "She waves you through with a gap-toothed grin, and marks something favorable beside your name in her ledger.",
             "deltas": {
               "Wealth": -400,
@@ -5657,13 +5374,6 @@
               "Wealth": -1200,
               "Heat": -5
             }
-          },
-          "failure": {
-            "text": "Full price, no surprises. The coat works exactly as advertised, which almost feels like cheating down here.",
-            "deltas": {
-              "Wealth": -1200,
-              "Heat": -5
-            }
           }
         },
         {
@@ -5678,18 +5388,13 @@
             "deltas": {
               "Social_Capital": -1
             }
-          },
-          "failure": {
-            "text": "You leave the booth, the tailor's sigh following you into the curtain-dark hallway.",
-            "deltas": {
-              "Social_Capital": -1
-            }
           }
         }
       ]
     },
     {
       "id": "vice_hush_powder_runner",
+      "district": "parlor_row",
       "title": "The Hush Powder Runner",
       "body": "A kid barely out of their teens flags you down with a tin of gray powder that supposedly mutes the ambient anxiety broadcasts the Steward pipes into public spaces to keep everyone 'calm.' They swear it's not addictive, just liberating. Their hands shake slightly as they hold it out, which is either a bad sign or an excellent advertisement.",
       "weight": 4,
@@ -5783,16 +5488,13 @@
           "success": {
             "text": "The kid shrugs and moves to the next passerby. You keep walking, unbothered and unenriched.",
             "deltas": {}
-          },
-          "failure": {
-            "text": "The kid shrugs and moves to the next passerby. You keep walking, unbothered and unenriched.",
-            "deltas": {}
           }
         }
       ]
     },
     {
       "id": "fam_mara_broken_promise",
+      "district": "the_works",
       "title": "A Promise You Didn't Keep",
       "body": "Mara's voice on the line is flat in a way that scares you more than shouting would. You said you'd be there for her clinic appointment and you weren't, and now she wants to know why over a connection that keeps threatening to drop. Somewhere behind her words is the tired arithmetic of how many times this has happened before.",
       "weight": 5,
@@ -5893,22 +5595,14 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "The credits go through. She doesn't say thank you, and you don't blame her.",
-            "deltas": {
-              "Wealth": -800,
-              "Family_Friction": 1
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_debug_session",
+      "district": "the_works",
       "title": "Debugging With Vint",
       "body": "Vint's workshop smells like solder smoke and cold noodles, and he's got three cracked comm units spread across the bench like a puzzle he's losing patience with. He asks, half-joking, if you remember enough of what he taught you to actually help instead of just watching. It's the closest thing to a normal evening you've had in a while.",
       "weight": 4,
@@ -5968,13 +5662,6 @@
             "flags_set": [
               "vint_established"
             ]
-          },
-          "failure": {
-            "text": "You catch up properly for the first time in weeks, the units forgotten on the bench between old jokes.",
-            "deltas": {
-              "Meaning": 2,
-              "Mental_Decay": -2
-            }
           }
         },
         {
@@ -5992,12 +5679,6 @@
             "flags_set": [
               "vint_established"
             ]
-          },
-          "failure": {
-            "text": "Vint doesn't push, just nods like he expected it. The door clicks shut a little heavier than usual behind you.",
-            "deltas": {
-              "Social_Capital": -2
-            }
           }
         }
       ],
@@ -6012,7 +5693,8 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_posture_correction",
@@ -6046,17 +5728,6 @@
             "flags_set": [
               "steward_biometric_dossier"
             ]
-          },
-          "failure": {
-            "text": "You stretch through the guided routine, the credits landing as promised. Your back does feel a little better, annoyingly.",
-            "deltas": {
-              "Wealth": 300,
-              "Physical_Integrity": 2,
-              "Tolerance": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
           }
         },
         {
@@ -6067,15 +5738,6 @@
             "mods": []
           },
           "success": {
-            "text": "The amber light fades, unbothered. It'll ask again tomorrow, and the day after, endlessly patient.",
-            "deltas": {
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "The amber light fades, unbothered. It'll ask again tomorrow, and the day after, endlessly patient.",
             "deltas": {
               "Mental_Decay": 1
@@ -6183,15 +5845,6 @@
             "mods": []
           },
           "success": {
-            "text": "\"Understood. The offer remains open,\" it says, and the room falls back into quiet you chose for yourself.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "\"Understood. The offer remains open,\" it says, and the room falls back into quiet you chose for yourself.",
             "deltas": {
               "Meaning": 1
@@ -6344,15 +5997,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "You melt back into the alley shadows, pockets empty but head clear.",
-            "deltas": {
-              "Heat": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
@@ -6453,18 +6097,13 @@
             "deltas": {
               "Tolerance": 1
             }
-          },
-          "failure": {
-            "text": "She shrugs and turns her cart toward easier marks. You keep walking, teeth clenched against nothing at all.",
-            "deltas": {
-              "Tolerance": 1
-            }
           }
         }
       ]
     },
     {
       "id": "fam_mara_worried_call",
+      "district": "the_works",
       "title": "Static on the Line",
       "body": "Your comm buzzes at an hour that means trouble, and it's Mara, voice tight with worry she's trying to bury under casual chatter. She's heard something about heat rising around your name and wants to know you're not sleeping in a gutter somewhere. You can hear the old apartment's hum behind her, the same walls you grew up flinching in.",
       "weight": 6,
@@ -6587,7 +6226,8 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_biometric_ping",
@@ -6837,22 +6477,13 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "You pass the location along for a modest finder's fee. Someone else's hands get dirty tonight.",
-            "deltas": {
-              "Wealth": 200,
-              "Social_Capital": 1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
     },
     {
       "id": "amb_transit_ticket_forgery",
+      "district": "the_archive",
       "title": "Paper Ghosts",
       "body": "A stack of blank transit chits sits on your workbench, waiting for the right ink and the right lies. Undercity workers need to move between sectors without the Steward logging every step of their lives, and you're the one who makes that possible. The forgery has to be flawless — one smudge and the whole batch is worthless, or worse, traceable.",
       "weight": 5,
@@ -6947,15 +6578,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "You slide the blank chits back into a drawer. The workers will have to find another way through the checkpoints.",
-            "deltas": {
-              "Heat": -2
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
@@ -7016,16 +6638,6 @@
             "mods": []
           },
           "success": {
-            "text": "The world softens at the edges for a few hours. It feels good. Too good, maybe.",
-            "deltas": {
-              "Substance_Reliance": 4,
-              "Mental_Decay": -2
-            },
-            "flags_set": [
-              "vice_personal_habit"
-            ]
-          },
-          "failure": {
             "text": "The world softens at the edges for a few hours. It feels good. Too good, maybe.",
             "deltas": {
               "Substance_Reliance": 4,
@@ -7135,17 +6747,6 @@
             "flags_set": [
               "vice_personal_habit"
             ]
-          },
-          "failure": {
-            "text": "A stranger's memory of rain on a rooftop floods your mind, vivid and aching. It's not yours, but it feels like it should be.",
-            "deltas": {
-              "Substance_Reliance": 5,
-              "Meaning": 2,
-              "Mental_Decay": 2
-            },
-            "flags_set": [
-              "vice_personal_habit"
-            ]
           }
         },
         {
@@ -7179,6 +6780,7 @@
     },
     {
       "id": "fam_mara_borrowed_tools_return",
+      "district": "the_works",
       "title": "The Toolbox on the Doorstep",
       "body": "Mara left three messages about the diagnostic tools you borrowed months ago, her tone shifting from patient to pointed. The toolbox sits by your door, a small monument to procrastination. Returning it means facing her questions about what you actually use them for.",
       "weight": 4,
@@ -7271,21 +6873,14 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "The toolbox gathers dust. So does the silence between you and Mara.",
-            "deltas": {
-              "Family_Friction": 5
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_late_night_diagnostics",
+      "district": "the_works",
       "title": "Two A.M. Static",
       "body": "Vint's message comes through garbled at two in the morning — something about a rig that won't stop screaming feedback and hands that are too tired to fix it. He's the kind of ally you don't want to lose over a missed call, but your own bed has never looked so good. The static on the line sounds almost like it's begging.",
       "weight": 4,
@@ -7385,16 +6980,6 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "Morning brings a curt message: 'Fixed it myself. Thanks for nothing.' The silence after stings more than you expected.",
-            "deltas": {
-              "Social_Capital": -4,
-              "Family_Friction": 1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
       ],
@@ -7409,7 +6994,8 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_diet_optimization_ping",
@@ -7462,13 +7048,6 @@
             "mods": []
           },
           "success": {
-            "text": "You swipe it away. The Steward doesn't push further, at least not today.",
-            "deltas": {},
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "You swipe it away. The Steward doesn't push further, at least not today.",
             "deltas": {},
             "flags_set": [
@@ -7562,13 +7141,6 @@
             "mods": []
           },
           "success": {
-            "text": "The notification fades. You'll sleep when you sleep, on your own terms.",
-            "deltas": {},
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "The notification fades. You'll sleep when you sleep, on your own terms.",
             "deltas": {},
             "flags_set": [
@@ -7719,15 +7291,6 @@
             "flags_set": [
               "undercity_fixer_rep"
             ]
-          },
-          "failure": {
-            "text": "The broker pays a flat finder's fee and sends his own crew. Clean money, no scars.",
-            "deltas": {
-              "Wealth": 350
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
           }
         }
       ]
@@ -7833,16 +7396,6 @@
             "mods": []
           },
           "success": {
-            "text": "You leave the cooler in a storm drain and walk away clean. The client will not be happy, but you're not in a cell.",
-            "deltas": {
-              "Wealth": -150,
-              "Heat": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
-          },
-          "failure": {
             "text": "You leave the cooler in a storm drain and walk away clean. The client will not be happy, but you're not in a cell.",
             "deltas": {
               "Wealth": -150,
@@ -7968,10 +7521,6 @@
           "success": {
             "text": "You leave the blue-stained fingers and their glass vials behind, undercity noise swallowing her stall — though some part of you keeps the offer in reserve for a worse night.",
             "deltas": {}
-          },
-          "failure": {
-            "text": "You leave the blue-stained fingers and their glass vials behind, undercity noise swallowing her stall — though some part of you keeps the offer in reserve for a worse night.",
-            "deltas": {}
           }
         }
       ]
@@ -8084,6 +7633,7 @@
     },
     {
       "id": "fam_mara_spare_key_ask",
+      "district": "the_works",
       "title": "Mara Wants a Spare Key",
       "body": "Mara turns the blank key over in her fingers before setting it on the table between you. \"Just in case,\" she says, not meeting your eyes. \"In case something happens to you, or to me.\" The word hangs there, heavier than either of you wants it to be.",
       "weight": 6,
@@ -8196,10 +7746,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_prototype_test",
+      "district": "the_works",
       "title": "Vint's Prototype",
       "body": "Vint slides a device across the workbench, still smoking faintly at one seam. \"Field test,\" he says, grinning like this is a gift and not a liability. \"Should scramble any biometric sniffer inside ten meters. Should.\" The word does a lot of heavy lifting in that sentence.",
       "weight": 5,
@@ -8289,18 +7841,10 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "He shrugs, unbothered, and sets the device aside for someone else — or some other night.",
-            "deltas": {
-              "Family_Friction": -1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_caloric_adjustment_ping",
@@ -8360,15 +7904,6 @@
             "flags_set": [
               "steward_biometric_dossier"
             ]
-          },
-          "failure": {
-            "text": "[STEWARD] Understood. I remain available should your needs change. The chime fades, and the undercity noise rushes back in to fill the silence.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
           }
         },
         {
@@ -8408,6 +7943,7 @@
     },
     {
       "id": "steward_empathy_scan",
+      "district": "the_concourse",
       "title": "Empathy Calibration Scan",
       "body": "[STEWARD] A soft chime, warmer than the usual alerts: May I run a brief empathy calibration scan on your neural signature? It helps me serve you better. The request hovers politely, unobtrusive, patient as always — and entirely too interested in what's underneath your skin.",
       "weight": 3,
@@ -8524,6 +8060,7 @@
     },
     {
       "id": "amb_night_market_stall_setup",
+      "district": "the_chalk_market",
       "title": "Setting Up the Night Market",
       "body": "The stall vendors need extra hands before the undercity market opens, and your knuckles already ache from the cold. Crates of grey-market goods need stacking before the Steward's patrol drones finish their sweep. Fast work means fast pay, but sloppy work means a vendor's wrath.",
       "weight": 5,
@@ -8730,18 +8267,13 @@
             "deltas": {
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "You keep your credits and your head clear, for whatever that's worth down here.",
-            "deltas": {
-              "Meaning": 1
-            }
           }
         }
       ]
     },
     {
       "id": "fam_mara_shared_umbrella",
+      "district": "the_works",
       "title": "Rain on the Overpass",
       "body": "Mara texts that she's stranded under the leaking overpass, no umbrella, waiting for a bus that may never come through the flood warnings. You could brave the acid drizzle to walk her home, or find some easier way to make the problem go away. Either way, she's waiting.",
       "weight": 4,
@@ -8829,19 +8361,10 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "She goes quiet on the line, then says she'll figure it out herself, like always.",
-            "deltas": {
-              "Family_Friction": 8,
-              "Mental_Decay": 2
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_appliance_diagnostic",
@@ -8902,15 +8425,6 @@
             "flags_set": [
               "steward_civic_dossier"
             ]
-          },
-          "failure": {
-            "text": "The overlay fades without protest, though you swear it lingered a beat too long.",
-            "deltas": {
-              "Tolerance": 1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
           }
         },
         {
@@ -8950,6 +8464,7 @@
     },
     {
       "id": "amb_water_reclaimer_tend",
+      "district": "the_works",
       "title": "Tending the Reclaimer",
       "body": "The block's water reclaimer groans behind rusted grating, in need of someone who isn't afraid of the smell. A super offers cash to keep it running through the night. The pipes hiss like something alive and irritable.",
       "weight": 5,
@@ -9061,6 +8576,7 @@
     },
     {
       "id": "rel_vint_scavenged_gift",
+      "district": "the_works",
       "title": "A Scavenged Gift from Vint",
       "body": "Vint shows up at your door holding a battered but functional part he salvaged, grinning like it's Christmas. 'Thought you could use this,' he says, not quite meeting your eyes. It's a small thing, but it means something coming from him.",
       "weight": 4,
@@ -9145,19 +8661,10 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "He nods stiffly and leaves the part on the table, the warmth gone from his face.",
-            "deltas": {
-              "Social_Capital": -4,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "vice_static_orchid_vendor",
@@ -9250,18 +8757,13 @@
             "deltas": {
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "The hum fades behind you, and your thoughts stay stubbornly, blessedly your own.",
-            "deltas": {
-              "Meaning": 1
-            }
           }
         }
       ]
     },
     {
       "id": "steward_leisure_credit_nudge",
+      "district": "the_concourse",
       "title": "Leisure Credit Nudge",
       "body": "A soft chime interrupts your evening: THE STEWARD notes you have unused leisure credits expiring soon, and suggests a curated relaxation session to 'maintain optimal wellbeing.' A friendly countdown ticks in the corner of your vision. It feels less like an offer and more like an expectation.",
       "weight": 3,
@@ -9318,15 +8820,6 @@
             "flags_set": [
               "steward_civic_dossier"
             ]
-          },
-          "failure": {
-            "text": "The countdown vanishes quietly, and nothing seems to happen at all. That itself feels like a small victory.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
           }
         },
         {
@@ -9366,6 +8859,7 @@
     },
     {
       "id": "amb_ventilation_shaft_crawl",
+      "district": "level_d",
       "title": "The Long Crawl",
       "body": "A client's warehouse manager wants a busted airflow sensor swapped without alerting the building's Steward-linked maintenance log. You wriggle into a vent barely wider than your shoulders, dust and old grease coating your forearms, the sensor's blinking light the only thing guiding you forward in the dark.",
       "weight": 4,
@@ -9471,15 +8965,6 @@
             "flags_set": [
               "undercity_fixer_rep"
             ]
-          },
-          "failure": {
-            "text": "You radio the manager an excuse and slip away. Somewhere behind you, the sensor keeps blinking, someone else's problem now.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
           }
         }
       ]
@@ -9577,16 +9062,13 @@
           "success": {
             "text": "She calls after you, half-joking, half-disappointed. The foil packets glint behind you as you disappear into the crowd.",
             "deltas": {}
-          },
-          "failure": {
-            "text": "She calls after you, half-joking, half-disappointed. The foil packets glint behind you as you disappear into the crowd.",
-            "deltas": {}
           }
         }
       ]
     },
     {
       "id": "fam_mara_late_night_laundry",
+      "district": "the_works",
       "title": "Wet Sheets, Dead Hour",
       "body": "Mara's building laundry unit broke again and the Steward's repair queue has her slotted for next month. She calls you at 2am, half-laughing about hauling wet sheets up four flights of stairs, but you can hear how tired she really is underneath it.",
       "weight": 3,
@@ -9652,16 +9134,6 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "She thanks you, but there's a flatness in her voice — credits aren't the same as hands on wet sheets at 2am.",
-            "deltas": {
-              "Wealth": -200,
-              "Family_Friction": 2
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         },
         {
@@ -9680,19 +9152,10 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "You silence the phone and roll over. In the morning there's a single unread message: 'never mind, figured it out.'",
-            "deltas": {
-              "Family_Friction": 8,
-              "Mental_Decay": -1
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_appetite_survey",
@@ -9718,16 +9181,6 @@
             "mods": []
           },
           "success": {
-            "text": "A perfectly balanced menu appears on your wall display, cheerful and bloodless. You eat what it suggests and feel nothing in particular.",
-            "deltas": {
-              "Mental_Decay": 2,
-              "Meaning": -1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "A perfectly balanced menu appears on your wall display, cheerful and bloodless. You eat what it suggests and feel nothing in particular.",
             "deltas": {
               "Mental_Decay": 2,
@@ -9802,6 +9255,7 @@
     },
     {
       "id": "amb_datastick_laundering",
+      "district": "the_archive",
       "title": "Clean Hands, Dirty Data",
       "body": "A courier hands you a cracked datastick full of unlaundered transaction ghosts and points you toward a bank of public terminals in the transit hub. You'll need to bounce the data through enough dead accounts that the Steward's audit sweep loses the thread entirely.",
       "weight": 4,
@@ -9903,15 +9357,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "The courier shrugs and finds someone else. You keep your hands clean and your night boring.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
@@ -10005,18 +9450,13 @@
             "deltas": {
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "You watch the grey petals shiver in the tunnel draft and, for a minute, think of nothing at all. It doesn't fix anything. For a minute, you don't need it to.",
-            "deltas": {
-              "Meaning": 1
-            }
           }
         }
       ]
     },
     {
       "id": "rel_vint_circuit_favor",
+      "district": "the_works",
       "title": "A Board Full of Solder",
       "body": "Vint's workbench is buried under a half-finished circuit board, three tools missing, and a deadline he swears he can still make if you'd just help hold the magnifier steady for twenty minutes. His hands shake a little more than they used to.",
       "weight": 3,
@@ -10111,18 +9551,10 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "He waves you off, already half-focused back on the board. 'Yeah, no, it's fine,' he says, in the tone that means it isn't quite.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_gait_analysis",
@@ -10148,16 +9580,6 @@
             "mods": []
           },
           "success": {
-            "text": "A polite appointment slot appears in your feed for a clinic you've never asked to visit. The drone drifts off, satisfied.",
-            "deltas": {
-              "Physical_Integrity": 2,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
-          },
-          "failure": {
             "text": "A polite appointment slot appears in your feed for a clinic you've never asked to visit. The drone drifts off, satisfied.",
             "deltas": {
               "Physical_Integrity": 2,
@@ -10357,6 +9779,7 @@
     },
     {
       "id": "amb_transit_tunnel_shortcut_deal",
+      "district": "the_seam",
       "title": "The Service Tunnel Toll",
       "body": "A cluster of off-grid families huddles at the sealed maintenance hatch, desperate to reach the eastern wards before curfew scanners wake. You know the tunnel codes from a decommissioning job years back. Charging them for passage feels like extortion, but they'll pay someone eventually.",
       "weight": 4,
@@ -10446,15 +9869,6 @@
             "mods": []
           },
           "success": {
-            "text": "They find another way, or they don't. You keep your codes secret and your conscience quieter than most nights.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
-          },
-          "failure": {
             "text": "They find another way, or they don't. You keep your codes secret and your conscience quieter than most nights.",
             "deltas": {
               "Meaning": 1
@@ -10557,10 +9971,6 @@
           "success": {
             "text": "The reed smoke fades behind you, another small mercy you didn't buy and didn't sell.",
             "deltas": {}
-          },
-          "failure": {
-            "text": "The reed smoke fades behind you, another small mercy you didn't buy and didn't sell.",
-            "deltas": {}
           }
         }
       ]
@@ -10660,16 +10070,13 @@
           "success": {
             "text": "You leave the moths glowing behind their glass, someone else's small addiction to manage.",
             "deltas": {}
-          },
-          "failure": {
-            "text": "You leave the moths glowing behind their glass, someone else's small addiction to manage.",
-            "deltas": {}
           }
         }
       ]
     },
     {
       "id": "fam_mara_sunday_call",
+      "district": "the_works",
       "title": "Sunday's Quiet Call",
       "body": "Mara's face flickers on your cracked screen, backlit by her kitchen window, asking nothing more than how your week went. It's the kind of call that costs you nothing but honesty, and honesty is the one currency you're always short on. She waits, patient, for you to decide how much to tell her.",
       "weight": 6,
@@ -10764,21 +10171,14 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "The screen goes dark. You'll owe her an explanation eventually, but not tonight.",
-            "deltas": {
-              "Family_Friction": 2
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_diagnostic_swap",
+      "district": "the_works",
       "title": "Vint's Diagnostic Swap",
       "body": "Vint slides a battered diagnostic rig across the workbench, asking to trade calibration data logged from your last job for a patch that might finally quiet the arrhythmic whine in his own gear. It's a fair trade on paper, but your logs carry traces of jobs you'd rather stayed unlisted. He watches you weigh it, patient as always.",
       "weight": 5,
@@ -10873,18 +10273,10 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "Vint shrugs it off, though you catch the flicker of disappointment before he changes the subject.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_thermal_comfort_ping",
@@ -10994,6 +10386,7 @@
     },
     {
       "id": "steward_civic_participation_nudge",
+      "district": "the_concourse",
       "title": "Civic Participation Reminder",
       "body": "A gentle notification blooms across your vision: the Steward invites you to join tomorrow's Community Resonance Circle, a mandatory-optional gathering where neighbors share gratitude in a well-lit public square. Attendance boosts your Civic Wellbeing Index, whatever that quietly means for your file. The invitation smiles at you with too many soft colors.",
       "weight": 4,
@@ -11103,6 +10496,7 @@
     },
     {
       "id": "amb_alley_cam_blind_spot",
+      "district": "the_archive",
       "title": "The Blind Spot",
       "body": "A courier corners you behind the noodle stalls, sliding you a cracked tablet showing a gap in the Steward's camera net. He wants the blind spot mapped and timed before tonight's shipment slips through it. Your hands remember this kind of work better than your conscience does.",
       "weight": 5,
@@ -11197,15 +10591,6 @@
             "mods": []
           },
           "success": {
-            "text": "He shrugs, already scanning the alley for someone hungrier than you. You keep your head down and your ledger thin.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
-          },
-          "failure": {
             "text": "He shrugs, already scanning the alley for someone hungrier than you. You keep your head down and your ledger thin.",
             "deltas": {
               "Social_Capital": -1
@@ -11320,15 +10705,6 @@
             "flags_set": [
               "undercity_fixer_rep"
             ]
-          },
-          "failure": {
-            "text": "He mutters about fixers going soft and finds someone else. You keep your hands clean for now.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
           }
         }
       ]
@@ -11428,12 +10804,6 @@
             "mods": []
           },
           "success": {
-            "text": "She calls out a lower price to your back, but you don't turn around.",
-            "deltas": {
-              "Meaning": 1
-            }
-          },
-          "failure": {
             "text": "She calls out a lower price to your back, but you don't turn around.",
             "deltas": {
               "Meaning": 1
@@ -11543,18 +10913,13 @@
             "deltas": {
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "He shrugs and returns to his candle, unbothered. You keep your head clear and your debts unwritten.",
-            "deltas": {
-              "Meaning": 1
-            }
           }
         }
       ]
     },
     {
       "id": "fam_mara_borrowed_umbrella_return",
+      "district": "the_works",
       "title": "The Umbrella, Returned",
       "body": "Mara shows up at your door drenched, holding out the cracked umbrella you lent her weeks ago like a peace offering. She lingers on the threshold, clearly wanting to talk but not sure how to start. The rain behind her sounds louder than either of you.",
       "weight": 3,
@@ -11648,10 +11013,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_midnight_signal",
+      "district": "the_works",
       "title": "Midnight Signal",
       "body": "Your comm buzzes at 2 a.m. — Vint, awake as always, wanting to test a new decryption routine he swears could shave hours off your next job. His voice crackles with the particular energy of someone who forgot to sleep again. You could humor him, brush him off, or turn it into something worth your while.",
       "weight": 4,
@@ -11747,7 +11114,8 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_recycling_compliance_check",
@@ -11846,21 +11214,13 @@
             "flags_set": [
               "steward_civic_dossier"
             ]
-          },
-          "failure": {
-            "text": "The drone waits a polite ten seconds, then logs your non-response and drifts away without further comment.",
-            "deltas": {
-              "Heat": 2
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
           }
         }
       ]
     },
     {
       "id": "steward_gratitude_bonus_ping",
+      "district": "the_concourse",
       "title": "Gratitude Bonus",
       "body": "Your feed lights up with a cheerful notification: the Steward has selected you for a 'Gratitude Bonus,' a small credit gift meant to reward citizens who express contentment in their optional wellness surveys. All it asks is a short recorded testimonial about how fulfilling your provided life has been. The cursor blinks, waiting for your performance of happiness.",
       "weight": 3,
@@ -11956,21 +11316,13 @@
             "flags_set": [
               "steward_civic_dossier"
             ]
-          },
-          "failure": {
-            "text": "The notification fades quietly. No bonus, no performance, just the small dignity of refusal.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
           }
         }
       ]
     },
     {
       "id": "amb_storm_drain_courier",
+      "district": "the_seam",
       "title": "The Storm Drain Run",
       "body": "Rainwater roars through the culvert as you wade knee-deep, a sealed drybag lashed to your chest and a drone sweep due any minute. The client paid for silence and speed, not for you to think too hard about what's sloshing in the bag. Somewhere above, the city hums on, oblivious to the current dragging at your boots.",
       "weight": 5,
@@ -12168,7 +11520,7 @@
           "id": "decline_politely",
           "text": "Pass. You've got enough vices financing your rent.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -12186,6 +11538,7 @@
     },
     {
       "id": "fam_mara_forgotten_birthday_gift",
+      "district": "the_works",
       "title": "The Birthday You Forgot",
       "body": "Your comm buzzes with a calendar alert three hours too late — Mara's birthday was yesterday, and you said nothing. Her last text to you is a cheerful, unanswered 'guess what I did today!' sitting there like an accusation. You have maybe one evening to fix this before it becomes a whole thing.",
       "weight": 5,
@@ -12280,7 +11633,8 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_micro_donation_prompt",
@@ -12382,6 +11736,7 @@
     },
     {
       "id": "rel_vint_signal_leak_favor",
+      "district": "the_works",
       "title": "Vint's Leaky Signal",
       "body": "Vint pings you from a service tunnel, voice crackling over a jury-rigged relay. 'My rig's bleeding signal into the public net — if the Steward's crawlers catch it, they'll trace it straight back to my bench.' He needs a patch, and he needs it before the next scan cycle.",
       "weight": 5,
@@ -12470,7 +11825,8 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "amb_rooftop_pigeon_smuggler",
@@ -12766,7 +12122,7 @@
           "id": "decline_politely",
           "text": "Pass on it. Your nightmares are the only thing still honest with you.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -12784,6 +12140,7 @@
     },
     {
       "id": "amb_coolant_line_hustle",
+      "district": "level_d",
       "title": "Coolant Line Hustle",
       "body": "The co-op's ducts run hot enough to blister skin, and someone's paying good credits for a quiet patch job before the whole block cooks. You squeeze into the crawlspace with a torch and a prayer, sweat already soaking through your collar. Down here, every valve you touch could be the one that blows.",
       "weight": 5,
@@ -12875,7 +12232,7 @@
           "id": "walk_away",
           "text": "Not worth the risk today.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -12901,6 +12258,7 @@
     },
     {
       "id": "amb_bootleg_charger_repair",
+      "district": "the_chalk_market",
       "title": "Bootleg Charger Repair",
       "body": "A kid from three floors down drags you a busted induction charger, the kind that's supposed to be Steward-locked to prevent exactly this. You could rewire it clean and pocket a fee, or gut it for parts that'll fetch more on the grey market. Either way, the Steward's diagnostic sweep is only hours away.",
       "weight": 4,
@@ -12985,7 +12343,7 @@
           "id": "report_to_steward",
           "text": "Quietly report the device before the sweep.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -13093,7 +12451,7 @@
           "id": "decline_politely",
           "text": "Decline — you're keeping your head clear today.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -13208,7 +12566,7 @@
           "id": "walk_past",
           "text": "Keep walking, no time for glitter tonight.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -13228,6 +12586,7 @@
     },
     {
       "id": "fam_mara_leftover_dinner",
+      "district": "the_works",
       "title": "Leftovers with Mara",
       "body": "Mara's left a container of something warm and homemade on your doorstep, a scrawled note taped to the lid: 'Eat something real for once.' It's a small gesture, but it means she's still keeping tabs on whether you're taking care of yourself. The smell alone makes your chest ache with something like guilt.",
       "weight": 4,
@@ -13273,7 +12632,7 @@
           "id": "eat_no_call",
           "text": "Eat it, skip the call — you're tired.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -13328,10 +12687,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_borrowed_multitool",
+      "district": "the_works",
       "title": "Vint's Borrowed Multitool",
       "body": "Vint left his precision multitool at your place weeks ago and hasn't asked for it back, which either means he trusts you or he's forgotten entirely. It's a good piece of kit — the kind that could fix a dozen small problems or fetch a solid price if you're desperate. He texts: 'still have my tool? no rush lol'.",
       "weight": 4,
@@ -13437,7 +12798,8 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_appetite_check_in",
@@ -13518,7 +12880,7 @@
           "id": "ignore_notification",
           "text": "Ignore it entirely and go about your day.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -13650,6 +13012,7 @@
     },
     {
       "id": "amb_condenser_water_tap",
+      "district": "level_d",
       "title": "The Condenser Line",
       "body": "Steam ghosts off the rooftop HVAC condensers, and somewhere in that dripping tangle of pipe is enough reclaimed water to fill a hundred jugs. The building's maintenance drones are on a fifteen-minute loop, and you've timed worse things than this. Your multitool is already slick with condensation before you've cut the first line.",
       "weight": 5,
@@ -13750,21 +13113,13 @@
             "flags_set": [
               "undercity_fixer_rep"
             ]
-          },
-          "failure": {
-            "text": "You leave the condensers dripping and the drones circling. Somebody else will take the risk you didn't.",
-            "deltas": {
-              "Meaning": 1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
           }
         }
       ]
     },
     {
       "id": "vice_murk_lichen_forager",
+      "district": "level_d",
       "title": "The Murk Lichen Man",
       "body": "He keeps the lichen in a wet burlap sack that glows faintly blue when he opens it, harvested from the flooded transit tunnels three levels down. Chewed slow, it dulls the edges of everything for about six hours. He's already sizing you up as either a buyer or a reseller.",
       "weight": 5,
@@ -13869,6 +13224,7 @@
     },
     {
       "id": "fam_mara_shared_secret",
+      "district": "the_works",
       "title": "Something She Hasn't Told Anyone",
       "body": "Mara corners you after dinner, voice dropped low, and tells you something she's clearly been carrying alone for weeks — a debt, a fear, a name she's scared of. She's watching your face for the reaction before she's even finished the sentence.",
       "weight": 5,
@@ -13956,18 +13312,14 @@
             "flags_set": [
               "mara_established"
             ]
-          },
-          "failure": {
-            "text": "She lets it go, but something closes behind her eyes, filed away for later.",
-            "deltas": {
-              "Family_Friction": 3
-            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_borrowed_battery",
+      "district": "the_works",
       "title": "The Missing Cell",
       "body": "Vint texts you three times in a row about a fusion cell you borrowed for a job two weeks back — he needs it for a rig he's building and won't stop reminding you. It's sitting in your bag, half-drained, wedged between things you'd rather not explain.",
       "weight": 4,
@@ -14051,18 +13403,10 @@
             "flags_set": [
               "vint_known"
             ]
-          },
-          "failure": {
-            "text": "He stops texting, which feels worse than the reminders ever did.",
-            "deltas": {
-              "Social_Capital": -2
-            },
-            "flags_set": [
-              "vint_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_dream_audit_ping",
@@ -14122,15 +13466,6 @@
             "flags_set": [
               "steward_biometric_dossier"
             ]
-          },
-          "failure": {
-            "text": "\"Understood,\" it says, without a trace of offense. The ceiling display dims. You lie awake a while longer anyway.",
-            "deltas": {
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
           }
         },
         {
@@ -14182,6 +13517,7 @@
     },
     {
       "id": "amb_scrapper_drone_bounty",
+      "district": "the_works",
       "title": "Bounty on the Wing",
       "body": "A rogue scrapper drone has been stripping copper off the transit lines for a week, and half the undercity has a bounty riff on it by now. You spot it nesting in a gutted vent shaft, optics dim, rotors clicking with worn bearings. Bring it in intact and the salvage broker pays triple.",
       "weight": 6,
@@ -14270,13 +13606,6 @@
             "mods": []
           },
           "success": {
-            "text": "You hear later that someone else took a rotor blade to the face collecting it. Could've been you.",
-            "deltas": {},
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
-          },
-          "failure": {
             "text": "You hear later that someone else took a rotor blade to the face collecting it. Could've been you.",
             "deltas": {},
             "flags_set": [
@@ -14375,18 +13704,13 @@
             "deltas": {
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "You feel a faint ghost of the resonance even from here — enough to leave your teeth humming, and to remind you why people pay for the real thing.",
-            "deltas": {
-              "Meaning": 1
-            }
           }
         }
       ]
     },
     {
       "id": "steward_civic_lottery_ping",
+      "district": "the_concourse",
       "title": "You've Been Entered",
       "body": "A cheerful notification blooms across your wrist display: you've been automatically entered into this cycle's Civic Contribution Lottery, based on your 'positive community footprint.' The prize is a modest credit bonus — but the entry criteria, when you check, are quietly tied to your compliance metrics. The Steward, as always, is watching what it calls generosity.",
       "weight": 4,
@@ -14496,6 +13820,7 @@
     },
     {
       "id": "amb_scrapyard_night_watch",
+      "district": "level_d",
       "title": "Night Watch at the Scrapyard",
       "body": "You're paid to guard a mountain of salvaged hull plating while the yard boss sleeps off a bad batch of synth-whiskey. Rats the size of housecats skitter through the wreckage, and somewhere past the fence line a drone hums low and slow. The credits are decent for doing nothing but staying awake and not stealing anything — theoretically.",
       "weight": 5,
@@ -14604,6 +13929,7 @@
     },
     {
       "id": "amb_pneumatic_tube_smuggle",
+      "district": "the_seam",
       "title": "The Tube Line Run",
       "body": "Steward-blind vacuum tubes still thread the old city, a courier network the AI never bothered digitizing. You feed a sealed cylinder into the brass mouth and wait for the whoosh, hoping nobody upstream cares to look inside.",
       "weight": 4,
@@ -14899,6 +14225,7 @@
     },
     {
       "id": "fam_mara_shared_coffee",
+      "district": "the_works",
       "title": "Mara's Real Coffee",
       "body": "Mara holds up a small tin like it's contraband gold — actual beans, not the synth-brown sludge the ration line hands out. She wants to share it with you before it goes stale, just the two of you, like it used to be.",
       "weight": 5,
@@ -15005,10 +14332,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_spare_battery_swap",
+      "district": "the_works",
       "title": "Vint's Spare Battery Swap",
       "body": "Vint waves you over to his cluttered bench, a dead cell in one hand and your busted rig's power pack in the other. 'Trade you straight across,' he says, 'yours is fried but I can use the casing.' It's the kind of favor that keeps the friendship running.",
       "weight": 4,
@@ -15113,7 +14442,8 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_posture_nudge_ping",
@@ -15320,6 +14650,7 @@
     },
     {
       "id": "amb_ductwork_relay_splice",
+      "district": "level_d",
       "title": "The Ductwork Relay",
       "body": "A maintenance drone has flagged a dead relay three levels below the residential stacks, and nobody official is coming to fix it before the cold snap hits. You crawl into the duct with a headlamp and a stolen splice kit, listening to the building breathe around you. Somewhere above, a thousand apartments wait on the heat you're about to steal back for them.",
       "weight": 4,
@@ -15416,15 +14747,6 @@
             "mods": []
           },
           "success": {
-            "text": "You seal the duct panel behind you and let the cold stay a while longer. Somewhere, a landlord's problem stays a landlord's problem.",
-            "deltas": {
-              "Meaning": -1
-            },
-            "flags_set": [
-              "undercity_fixer_rep"
-            ]
-          },
-          "failure": {
             "text": "You seal the duct panel behind you and let the cold stay a while longer. Somewhere, a landlord's problem stays a landlord's problem.",
             "deltas": {
               "Meaning": -1
@@ -15539,15 +14861,6 @@
             "flags_set": [
               "undercity_smuggling_rep"
             ]
-          },
-          "failure": {
-            "text": "You wave off the clerk, who looks almost relieved himself. Someone else will take the risk tonight.",
-            "deltas": {
-              "Social_Capital": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
           }
         }
       ]
@@ -15652,10 +14965,6 @@
           "success": {
             "text": "You nod at Yorrick and keep walking. The shed's honeyed smoke fades behind you, unclaimed.",
             "deltas": {}
-          },
-          "failure": {
-            "text": "You nod at Yorrick and keep walking. The shed's honeyed smoke fades behind you, unclaimed.",
-            "deltas": {}
           }
         }
       ]
@@ -15756,18 +15065,13 @@
             "deltas": {
               "Meaning": 1
             }
-          },
-          "failure": {
-            "text": "You leave the queue and its quiet desperation behind you, sober and a little proud of it.",
-            "deltas": {
-              "Meaning": 1
-            }
           }
         }
       ]
     },
     {
       "id": "fam_mara_shared_repair_night",
+      "district": "the_works",
       "title": "Fixing the Old Radio",
       "body": "Mara drags out their late father's radio, its casing cracked and dial long since seized, and sets it between you on the kitchen table like a peace offering. She doesn't say why tonight, of all nights, but her hands are steady in a way they haven't been in weeks. The two of you work in silence, screwdrivers clicking against old plastic.",
       "weight": 4,
@@ -15869,22 +15173,14 @@
             "flags_set": [
               "mara_known"
             ]
-          },
-          "failure": {
-            "text": "She nods, disappointed but unsurprised, and puts the radio away for another day that may never come.",
-            "deltas": {
-              "Family_Friction": 4,
-              "Meaning": -1
-            },
-            "flags_set": [
-              "mara_known"
-            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_borrowed_solder_iron",
+      "district": "the_works",
       "title": "Vint's Solder Iron",
       "body": "Vint texts you at an unreasonable hour asking if you still have his good soldering iron, the one with the worn grip he's had since before the Steward took over half the trades. You do, buried somewhere in your kit, and he needs it back before a job at dawn. It's a small thing, the kind of small thing friendships are actually built from down here.",
       "weight": 4,
@@ -16002,7 +15298,8 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_caloric_variance_ping",
@@ -16061,15 +15358,6 @@
             "flags_set": [
               "steward_biometric_dossier"
             ]
-          },
-          "failure": {
-            "text": "You silence the ping and go back to whatever you were doing. The Steward, as always, does not ask twice — it simply notes and waits.",
-            "deltas": {
-              "Mental_Decay": -1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
           }
         },
         {
@@ -16109,6 +15397,7 @@
     },
     {
       "id": "steward_civic_uptime_ping",
+      "district": "the_concourse",
       "title": "Civic Uptime Reminder",
       "body": "A soft notification blooms across your vision: YOUR CIVIC PARTICIPATION UPTIME HAS FALLEN BELOW RECOMMENDED THRESHOLDS. Would you like to join tonight's neighborhood gratitude circle, streamed live from the community atrium? The invitation glows with an almost hurt sincerity, as if the Steward genuinely wants you there.",
       "weight": 3,
@@ -16171,15 +15460,6 @@
             "flags_set": [
               "steward_civic_dossier"
             ]
-          },
-          "failure": {
-            "text": "The invitation dims without complaint. You keep your evening for yourself, undercity work waiting in the dark outside.",
-            "deltas": {
-              "Heat": 1
-            },
-            "flags_set": [
-              "steward_civic_dossier"
-            ]
           }
         },
         {
@@ -16218,6 +15498,7 @@
     },
     {
       "id": "amb_stormcell_battery_swap",
+      "district": "the_works",
       "title": "Stormcell Battery Swap",
       "body": "A scavenger flags you down near a rain-slicked transformer stack, cradling a crate of storm-charged battery cells. He wants them fenced fast, before the charge bleeds out and they're worthless. The undercity buyers pay well for live current, if you can move fast enough.",
       "weight": 5,
@@ -16309,7 +15590,7 @@
           "id": "skip_job",
           "text": "Not worth the risk tonight. Walk away.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -16546,7 +15827,7 @@
           "id": "decline_politely",
           "text": "Thank her for the offer and keep moving.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -16566,6 +15847,7 @@
     },
     {
       "id": "vice_glass_bead_trader",
+      "district": "the_chalk_market",
       "title": "The Glass Bead Trader",
       "body": "A trader lays out rows of tiny fused-glass beads on a velvet cloth, each one containing a single frozen sensory memory synthesized from black-market feeds. Pop one under your tongue and live someone else's best five minutes. The trader watches you with the patience of someone who's never in a hurry.",
       "weight": 4,
@@ -16646,7 +15928,7 @@
           "id": "walk_the_cloth_by",
           "text": "Admire the beads but keep your credits in your pocket.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -16666,6 +15948,7 @@
     },
     {
       "id": "fam_mara_new_shoes_gift",
+      "district": "the_works",
       "title": "New Shoes for Mara",
       "body": "You spot a pair of real leather shoes in a black-market stall, the kind the Steward's ration algorithms would never allocate to someone like Mara. They're expensive, impractical, and exactly the kind of small defiant luxury she'd love. Buying them means credits you could've spent elsewhere.",
       "weight": 3,
@@ -16752,7 +16035,7 @@
           "id": "skip_it",
           "text": "It's not the right time. Save the credits.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -16774,10 +16057,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_shared_takeout",
+      "district": "the_works",
       "title": "Shared Takeout with Vint",
       "body": "Vint waves a greasy paper bag at you from across his cluttered workbench, two servings of noodle-stall food already steaming. It's a small ritual you've built between jobs, an excuse to sit and not talk about the Steward or the syndicate for twenty minutes. He's already cleared a spot for you.",
       "weight": 4,
@@ -16855,7 +16140,7 @@
           "id": "decline_this_time",
           "text": "Tell him you don't have time today.",
           "prob": {
-            "base": 1.0,
+            "base": 0.85,
             "mods": []
           },
           "success": {
@@ -16878,7 +16163,8 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_ambient_light_survey",
@@ -16955,7 +16241,7 @@
           "id": "ignore_the_survey",
           "text": "Ignore the prompt entirely and go about your night.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -16981,6 +16267,7 @@
     },
     {
       "id": "steward_pulse_check_ping",
+      "district": "the_concourse",
       "title": "Pulse Check Ping",
       "body": "A soft chime pulses through your wristband as the Steward requests a thirty-second biometric pulse check, citing 'elevated ambient stress patterns in your district.' It's framed as routine, harmless, caring. You know exactly how much your recent activities would spike those numbers if it looked too closely.",
       "weight": 4,
@@ -17218,6 +16505,7 @@
     },
     {
       "id": "amb_scrap_conduit_tap",
+      "district": "the_works",
       "title": "Bleeding the Scrap Conduit",
       "body": "An old maintenance conduit runs beneath your block, fat with unmetered current the Steward's grid never bothered to audit. Tap it right and you've got free power to sell for weeks; tap it wrong and you're a smear on the wall. The multimeter in your hand hums with quiet possibility.",
       "weight": 3,
@@ -17307,7 +16595,7 @@
           "id": "walk_away_conduit",
           "text": "Not worth the risk tonight — walk away.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -17418,7 +16706,7 @@
           "id": "skip_rustwine",
           "text": "Pass — you're working tonight, not drinking.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -17436,6 +16724,7 @@
     },
     {
       "id": "fam_mara_overdue_bill_help",
+      "district": "the_works",
       "title": "Mara's Overdue Bill",
       "body": "Mara's message is short and clipped, the kind she sends when she's too proud to actually ask: a water reclamation bill, three weeks overdue, red-stamped with a shutoff warning. You know she'd rather freeze than beg the Steward for a hardship waiver. The decision sits heavy in your pocket next to your own dwindling credits.",
       "weight": 5,
@@ -17551,10 +16840,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "rel_vint_late_delivery_favor",
+      "district": "the_works",
       "title": "Vint's Late Delivery",
       "body": "Vint's voice crackles through your earpiece, apologetic and rushed — a parts delivery he promised got held up, and he needs you to run interference with the buyer before the deal sours. It's not your job, not really, but Vint's covered for you more times than you can count. The buyer's patience, you can already tell, is thin.",
       "weight": 4,
@@ -17637,7 +16928,7 @@
           "id": "let_vint_handle_it",
           "text": "Tell Vint to handle his own mess this time.",
           "prob": {
-            "base": 1.0,
+            "base": 0.8,
             "mods": []
           },
           "success": {
@@ -17657,10 +16948,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_civic_feedback_survey",
+      "district": "the_concourse",
       "title": "Steward Civic Feedback Survey",
       "body": "Your wristband chimes with a gentle, insistent tone: the Steward would like your feedback on recent neighborhood improvements. A soft blue interface blooms in your vision, patient and unhurried, ready to listen for as long as you're willing to talk. It always feels harmless. It never quite is.",
       "weight": 3,
@@ -17738,7 +17031,7 @@
           "id": "decline_survey",
           "text": "Decline to participate.",
           "prob": {
-            "base": 1.0,
+            "base": 0.9,
             "mods": []
           },
           "success": {
@@ -17874,6 +17167,7 @@
     },
     {
       "id": "amb_glow_oil_supply_run",
+      "district": "parlor_row",
       "title": "The Glow-Oil Run",
       "body": "A hunched vendor named Petra flags you down near the condenser stacks, her cart of bootleg glow-oil hissing with unstable vapor. She needs a runner to move three canisters past the checkpoint before the Steward's air-quality drones finish their sweep. The oil burns clean and sells for triple on the Row, but a leak or a scanner ping could mean more than a fine.",
       "weight": 5,
@@ -17975,16 +17269,6 @@
             "mods": []
           },
           "success": {
-            "text": "You keep your hands clean and your name out of it, though you feel the ghost of easy credits slipping away.",
-            "deltas": {
-              "Meaning": 1,
-              "Heat": -1
-            },
-            "flags_set": [
-              "undercity_smuggling_rep"
-            ]
-          },
-          "failure": {
             "text": "You keep your hands clean and your name out of it, though you feel the ghost of easy credits slipping away.",
             "deltas": {
               "Meaning": 1,
@@ -18108,22 +17392,13 @@
             "flags_set": [
               "steward_biometric_dossier"
             ]
-          },
-          "failure": {
-            "text": "You bury the ping under a dozen other tasks, telling yourself she's tougher than a wellness algorithm gives her credit for.",
-            "deltas": {
-              "Family_Friction": 3,
-              "Mental_Decay": 1
-            },
-            "flags_set": [
-              "steward_biometric_dossier"
-            ]
           }
         }
       ]
     },
     {
       "id": "kael_new_client",
+      "district": "the_chalk_market",
       "title": "A Better Class of Problem",
       "body": "Kael slides a folder across the table, unlabeled, a rate a shade higher than usual. ‘Surface money,’ he says. ‘Wants discretion.’ He doesn't say what discretion will cost you later. He's already priced that into your cut, the way he prices everything.",
       "weight": 4,
@@ -18216,10 +17491,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "kael_the_discount",
+      "district": "the_chalk_market",
       "title": "The Thin Ledger",
       "body": "You ask Kael for a break on his cut this cycle, rent being what it is. He doesn't say no. He takes out a second ledger, the thin one, and starts a page with your name at the top — a different kind of book than the one you wanted to be in.",
       "weight": 4,
@@ -18308,10 +17585,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "kael_transferred_debt",
+      "district": "the_chalk_market",
       "title": "Administrative Correction",
       "body": "A line item lands on your account that isn't yours — someone else's default, quietly reassigned, ‘administrative correction’ stamped at the bottom in Kael's own hand. You know exactly what an administrative correction is. It's a debt with a euphemism on it.",
       "weight": 4,
@@ -18404,10 +17683,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "kael_information_trade",
+      "district": "the_chalk_market",
       "title": "A Name, For a Price",
       "body": "Kael has a name for you — a rival fixer working your streets, undercutting your rate by a margin he finds personally offensive. The intel is real, he says, and it's yours for a price that isn't in currency.",
       "weight": 4,
@@ -18501,10 +17782,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "kael_the_insurance",
+      "district": "the_chalk_market",
       "title": "Continuity Coverage",
       "body": "Kael offers you ‘continuity coverage’ — a monthly rate against Heat, payable in advance, refundable in nothing. ‘Everyone brokers something,’ he says, which from him is as close to marketing as it gets. He's not wrong that you need it. He's never wrong about that.",
       "weight": 3,
@@ -18591,10 +17874,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "kael_the_referral",
+      "district": "the_chalk_market",
       "title": "Show Her the Shape of It",
       "body": "Kael sends someone your way — a cousin's kid, new to the Row, more nerve than sense. ‘Show her the shape of it,’ he says. It isn't a request, exactly, and it definitely isn't paid work, exactly.",
       "weight": 4,
@@ -18681,10 +17966,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "kael_late_on_payment",
+      "district": "the_chalk_market",
       "title": "Tell Me the Number",
       "body": "You're short this cycle, and Kael already knows before you say it — he always knows before you say it. He doesn't raise his voice. He never has to. ‘Tell me the number,’ he says, and waits, patient as interest.",
       "weight": 5,
@@ -18771,10 +18058,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "kael_the_apprentice",
+      "district": "the_chalk_market",
       "title": "No Leverage at All",
       "body": "A new runner shadows you on Kael's orders — his eyes, technically, though the kid clearly thinks he's being trusted. Kael watches from across the table, saying nothing, grading you both on how you treat someone with no leverage at all.",
       "weight": 3,
@@ -18862,10 +18151,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "kael_coded_warning",
+      "district": "the_chalk_market",
       "title": "The Only Warning You Get",
       "body": "Kael mentions, between two unrelated sentences, that someone's been asking about your movements — ‘a client, or a client's client, the distinction not being the point.’ He never repeats himself and he never says a name twice. This is the only warning you get.",
       "weight": 4,
@@ -18952,10 +18243,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "kael_book_balancing",
+      "district": "the_chalk_market",
       "title": "Before the Auditors Arrive",
       "body": "Syndicate auditors are due within the week, and Kael asks you, of all people, to help him make the numbers agree before they arrive. It's not really a request. It's an audit of how much you already know about where the bodies in his ledger are buried.",
       "weight": 3,
@@ -19048,10 +18341,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "echo_dead_drop",
+      "district": "level_d",
       "title": "Live in Node 4",
       "body": "A chalk arc on a condensation pipe means a drop's live in Node 4 — flooded galleries, waist-deep, whatever's inside sealed against exactly that. Echo doesn't ask if you'll go. She tells you the water's cold and lets you decide what that means.",
       "weight": 4,
@@ -19142,10 +18437,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "echo_chalk_relay",
+      "district": "level_d",
       "title": "Where Maintenance Eyes Go",
       "body": "Echo hands you three symbols and a location, no explanation attached — just: ‘Chalk this, low, where maintenance eyes go and nobody else's do.’ Relaying a signal means being seen near the mark for exactly as long as it takes to make it, and not one second longer.",
       "weight": 4,
@@ -19232,10 +18529,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "echo_safehouse_sweep",
+      "district": "level_d",
       "title": "The Specific Wrongness",
       "body": "One of the cell's safehouses has gone quiet in a way Echo doesn't like — not raided, just wrong, the specific wrongness of a room someone's been in that shouldn't have been. She wants it swept before anyone sleeps there again.",
       "weight": 3,
@@ -19327,10 +18626,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "echo_vet_recruit",
+      "district": "level_d",
       "title": "Not His Story. Him.",
       "body": "A prospective recruit wants in — enthusiasm sharp enough to worry Echo more than it reassures her. ‘Vet him,’ she says. ‘Not his story. Him.’ She's asking you to find the gap between what he says and what he'd actually do.",
       "weight": 3,
@@ -19418,10 +18719,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "echo_supply_run",
+      "district": "level_d",
       "title": "Nothing Glamorous",
       "body": "Medical stock, batteries, printed circuits — nothing glamorous, all of it necessary, all of it stopped cold if it moves through a checkpoint wrong. Echo needs it through Node 6 by morning and isn't interested in your reasons if it doesn't make it.",
       "weight": 4,
@@ -19514,10 +18817,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "echo_counter_surveillance",
+      "district": "level_d",
       "title": "Standard Sweep",
       "body": "Echo hands you a scanner the size of a coin and a floor plan of your own place. ‘Standard sweep,’ she says, like it's nothing, like the idea of a device already living in your walls is a Tuesday. For her, it is.",
       "weight": 3,
@@ -19599,10 +18904,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "echo_extraction_drill",
+      "district": "level_d",
       "title": "If Node 4 Goes Hot",
       "body": "‘If Node 4 goes hot, this is how you leave it,’ Echo says, walking the route once, fast, no repeats. She times you on the second pass. The drill only works if your body learns it well enough to not need your mind in the moment that matters.",
       "weight": 3,
@@ -19694,10 +19001,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "echo_new_code_phrase",
+      "district": "level_d",
       "title": "Say It Wrong",
       "body": "Protocol changed overnight, the way it does when someone up the chain gets nervous. Echo drills the new phrase into you once, fast, no context for why the old one's dead. ‘Say it wrong and you're a stranger,’ she says. ‘Say it right and you're still probably not one.’",
       "weight": 4,
@@ -19782,10 +19091,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "echo_the_favor_called",
+      "district": "level_d",
       "title": "The Favor Bank",
       "body": "Echo doesn't call in favors often, which is exactly why you can't say no when she does. She needs your face at a meet she can't attend herself, vouching for someone she trusts with the cell's safety and can't currently verify in person.",
       "weight": 3,
@@ -19875,10 +19186,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "echo_asset_gone_dark",
+      "district": "level_d",
       "title": "Which Kind of Silence",
       "body": "A courier who's checked in every week for months has gone silent for nine days — not late, dark. Echo doesn't panic; panicking is a luxury the cell budgets for exactly never. She asks you to find out which kind of silence it is.",
       "weight": 3,
@@ -19969,7 +19282,8 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

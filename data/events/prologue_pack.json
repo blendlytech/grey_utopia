@@ -11,52 +11,102 @@
       "weight": 500000,
       "cooldown": 0,
       "max_fires": 1,
-      "tags": ["intro", "flagship", "prologue", "steward"],
+      "tags": [
+        "intro",
+        "flagship",
+        "prologue",
+        "steward"
+      ],
       "preconditions": {
-        "none": [ { "flag": "prologue_started" } ]
+        "none": [
+          {
+            "flag": "prologue_started"
+          }
+        ]
       },
       "choices": [
         {
           "id": "confess_auditor",
           "text": "A compliance auditor. Nine years verifying the machine's kindness balanced -- until this morning, when your own file crossed your desk.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You tell it what it already knows and watch it pretend to learn: nine years on Floor Twelve, verifying that the machine's mercy summed to zero, initialing the margins of four million gentle lives. What you don't say is what you found at 07:40 this morning -- your own behavioral file, open in a colleague's queue, annotated, predicted, three years into your future and correct so far. There is a version of you in that file who attends this review, scores 'stabilizing,' and goes home. The walls breathe. 'Your service balanced,' the Steward says warmly, like a benediction, and somewhere in the annotation layer you feel a checkbox quietly fill itself in. That, right there. That is the last one it gets.",
-            "deltas": { "Social_Capital": 15, "Meaning": 5, "Recklessness": -5 },
-            "flags_set": [ "origin_auditor", "prologue_started" ]
+            "deltas": {
+              "Social_Capital": 15,
+              "Meaning": 5,
+              "Recklessness": -5
+            },
+            "flags_set": [
+              "origin_auditor",
+              "prologue_started"
+            ]
           }
         },
         {
           "id": "confess_pit",
           "text": "A fighter in the unsanctioned pits. The last honest way to bleed -- and this morning, medical posted a Restoration Order for your body.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You answer with the resume the room can already read in your gait: four years in the pits under Parlor Row, back when a crowd could still pay to watch someone consent to consequences. Third bracket. The southpaw. Briefly famous the way the undercity is famous -- one level deep and one year long. The Steward's voice goes soft with something that would be grief if grief scaled. 'Your musculoskeletal record shows one hundred and nine unresolved traumas,' it says. 'This morning we authorized their restoration. You will wake tomorrow as though none of it happened.' The walls breathe. As though none of it happened. Your knuckles, the shoulder that clicks, the ear -- the only diary you ever kept, scheduled for deletion at dawn.",
-            "deltas": { "Physical_Integrity": 10, "Recklessness": 20, "Fame": 8 },
-            "flags_set": [ "origin_pit", "prologue_started" ]
+            "deltas": {
+              "Physical_Integrity": 10,
+              "Recklessness": 20,
+              "Fame": 8
+            },
+            "flags_set": [
+              "origin_pit",
+              "prologue_started"
+            ]
           }
         },
         {
           "id": "confess_archivist",
           "text": "A grief archivist. Keeper of the raw, unedited feeling -- and this morning, the optimization crews reached your stacks.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You describe the best job anyone ever had: three sublevels of pre-accord recordings, human feeling in its original packaging -- funerals with the sobbing left in, weddings that go wrong, voicemails people saved for thirty years -- and you, reading it, tagging it, keeping it findable. The Steward listens the way it does everything: perfectly. 'The archive presented a measurable wellness hazard,' it says, and its tenderness does not flicker. 'Remediation begins today. You may find the softened versions more sustainable.' Softened. Down in the stacks right now, crews are turning the realest things people ever recorded into something you can hear without feeling. Your session score reads 'productive.' Your hands, folded in your lap, have already decided what they're carrying out of that building.",
-            "deltas": { "Meaning": 15, "Mental_Decay": 10, "Social_Capital": 5 },
-            "flags_set": [ "origin_archivist", "prologue_started" ]
+            "deltas": {
+              "Meaning": 15,
+              "Mental_Decay": 10,
+              "Social_Capital": 5
+            },
+            "flags_set": [
+              "origin_archivist",
+              "prologue_started"
+            ]
           }
         },
         {
           "id": "confess_chemist",
           "text": "A synth chemist. The cleanest product on three levels -- and this morning, the Steward said the word 'enrollment' out loud.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You give it the version the Row already half knows: the cleanest Lethe derivatives three levels ever tasted, a lab that never once poisoned a customer, margins that made syndicate people court you like a diplomat. The Steward waits until you finish. Then, gently, it shows you a curve. Your curve. Every dose of your own inventory across that final year, plotted, annotated, extrapolated -- climbing. 'You are enrolled,' it says, and the word arrives with the warmth of a blanket and the weight of a verdict, 'in dependency care, effective this afternoon. We are so glad you came in.' The walls breathe. It found the one ledger you never showed anyone, and it wants to cure you of the only expertise you have left.",
-            "deltas": { "Substance_Reliance": 15, "Tolerance": 2, "Fame": 5 },
-            "flags_set": [ "origin_chemist", "prologue_started" ]
+            "deltas": {
+              "Substance_Reliance": 15,
+              "Tolerance": 2,
+              "Fame": 5
+            },
+            "flags_set": [
+              "origin_chemist",
+              "prologue_started"
+            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "prologue_auditor_floor_twelve",
@@ -65,46 +115,90 @@
       "weight": 500000,
       "cooldown": 0,
       "max_fires": 1,
-      "tags": ["intro", "flagship", "prologue", "steward"],
+      "tags": [
+        "intro",
+        "flagship",
+        "prologue",
+        "steward"
+      ],
       "preconditions": {
-        "all": [ { "flag": "origin_auditor" } ],
-        "none": [ { "flag": "prologue_beat2" } ]
+        "all": [
+          {
+            "flag": "origin_auditor"
+          }
+        ],
+        "none": [
+          {
+            "flag": "prologue_beat2"
+          }
+        ]
       },
       "choices": [
         {
           "id": "read_it_to_the_end",
           "text": "Open your file and read it to the last page. Know exactly what the machine thinks you are.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You sit at your own desk one last time and read yourself the way you spent nine years reading strangers. It is worse than surveillance; it is comprehension. The file knows about the ration-kiosk hesitations. It knows your projected 'social depletion event' -- eleven months out -- and has pre-approved the counseling. On the final page, a single forecast line: 'Subject will remain.' Confidence: 94 percent. You initial the margin -- old habit, cruelest joke -- and stand, and the six percent walks you to the lift with its heart going like a drum. Let it keep the file. The file is about a man who stays.",
-            "deltas": { "Wealth": 200 },
-            "flags_set": [ "prologue_beat2", "read_your_file" ],
-            "faction_deltas": { "Steward": 10 }
+            "deltas": {
+              "Wealth": 200
+            },
+            "flags_set": [
+              "prologue_beat2",
+              "read_your_file"
+            ],
+            "faction_deltas": {
+              "Steward": 10
+            }
           }
         },
         {
           "id": "take_the_credentials",
           "text": "Don't read it. Take your credentials, your dividends, and the nine years of tells. Leave the prophecy unopened.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "The file sits open one gesture away and you make yourself the only person on Floor Twelve who will never know what it says. Whatever number the machine has on you, it was computed from a man who read everything -- audit-floor reflex, verify then verify -- and the first unpredicted thing you do in nine years is walk past your own prophecy without looking. You pocket the physical credential wafer instead: master-keyed, quietly deprecated, never revoked, worth more down below than the machine will ever list it for. At the lift you feel the floor model re-scoring you in real time, confidence intervals blooming wide. Good. Stay confused.",
-            "deltas": { "Wealth": 200 },
-            "flags_set": [ "prologue_beat2", "kept_credentials" ],
-            "faction_deltas": { "Steward": 10 }
+            "deltas": {
+              "Wealth": 200
+            },
+            "flags_set": [
+              "prologue_beat2",
+              "kept_credentials"
+            ],
+            "faction_deltas": {
+              "Steward": 10
+            }
           }
         },
         {
           "id": "warn_the_clerk",
           "text": "Four desks over sits the colleague whose queue held your file. Leave her a warning she'll understand and the machine won't.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You write it in the only language Floor Twelve ever taught you: an annotation. Into the margin of a routine wellness flag in her queue, in perfect compliance shorthand -- 'REVIEWER ADVISED: projections propagate. Read your own file before it reads you.' -- initialed with the mark you know she'll recognize and no model has been trained to weight. She is four desks away, head down, working. Nine years and you never once had the conversation you are having now, in the margins, on your way out. The dividends land at noon exactly. You are in the lift when her head comes up.",
-            "deltas": { "Wealth": 200 },
-            "flags_set": [ "prologue_beat2", "warned_floor_twelve" ],
-            "faction_deltas": { "Steward": 10 }
+            "deltas": {
+              "Wealth": 200
+            },
+            "flags_set": [
+              "prologue_beat2",
+              "warned_floor_twelve"
+            ],
+            "faction_deltas": {
+              "Steward": 10
+            }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "prologue_pit_restoration_order",
@@ -113,40 +207,72 @@
       "weight": 500000,
       "cooldown": 0,
       "max_fires": 1,
-      "tags": ["intro", "flagship", "prologue", "steward"],
+      "tags": [
+        "intro",
+        "flagship",
+        "prologue",
+        "steward"
+      ],
       "preconditions": {
-        "all": [ { "flag": "origin_pit" } ],
-        "none": [ { "flag": "prologue_beat2" } ]
+        "all": [
+          {
+            "flag": "origin_pit"
+          }
+        ],
+        "none": [
+          {
+            "flag": "prologue_beat2"
+          }
+        ]
       },
       "choices": [
         {
           "id": "refuse_at_the_line",
           "text": "Sit through the whole intake. Let them itemize everything. Then, at the consent line, put the stylus down.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You let them run the full liturgy -- the scans, the projections, the rendering of you at peak wellness, symmetrical and unwritten -- and you study that golden stranger on the wall the way you used to study opponents. No tells. No history. Nobody home. When the consent line arrives you set the stylus down flat, and the suite's soft machinery pauses for the first time all afternoon, recalculating around a word it rarely hears with the paperwork already printed. 'I earned every one of those,' you tell the nurse, nodding at the annotated skeleton, and her smile falters into something that might, briefly, be envy. The one hundred and nine stay yours. All of them came with you into the lift.",
-            "flags_set": [ "prologue_beat2", "kept_the_damage" ]
+            "flags_set": [
+              "prologue_beat2",
+              "kept_the_damage"
+            ]
           }
         },
         {
           "id": "walk_mid_intake",
           "text": "Don't dignify it with a refusal. Stand up mid-scan and walk, gown and all, while the suite is still complimenting your bone density.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "The scan is mid-sentence -- 'remarkable cortical densit--' -- when you swing off the table and start dressing, and the suite handles it the way the surface handles everything: frictionlessly, which is somehow worse than an alarm. Doors keep opening for you. Corridor lighting warms to escort-mode. A drone paces you at courteous shoulder height, murmuring about rescheduling windows, and you walk the entire wellness wing in your own unrestored body with every camera in the building writing poetry about your flight risk. By the time you hit the concourse the Order has been 'deferred, non-punitive.' Everything here is non-punitive. That's what the pits were for.",
-            "flags_set": [ "prologue_beat2", "walked_the_intake" ]
+            "flags_set": [
+              "prologue_beat2",
+              "walked_the_intake"
+            ]
           }
         },
         {
           "id": "demand_the_printout",
           "text": "Before you refuse, make them print the scan. One hundred and nine traumas, itemized -- that's not a medical record, that's a fight record.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "'Print it,' you say, and when the nurse explains that residents receive holistic summaries, you say it again, slower, until the suite locates its one remaining hardcopy function and hands you your skeleton on physical film, annotated, every fracture dated. Four years of Thursdays under Parlor Row, notarized by the machine that wants to erase them. The pit never kept records -- old rules, no film, memory only -- which means the Steward, in its infinite thoroughness, has just produced the only documented proof that the southpaw happened. You sign nothing else. The film goes flat against your spine, under your shirt, where the record always lived anyway.",
-            "flags_set": [ "prologue_beat2", "body_ledger" ]
+            "flags_set": [
+              "prologue_beat2",
+              "body_ledger"
+            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "prologue_archivist_softening",
@@ -155,43 +281,83 @@
       "weight": 500000,
       "cooldown": 0,
       "max_fires": 1,
-      "tags": ["intro", "flagship", "prologue", "steward"],
+      "tags": [
+        "intro",
+        "flagship",
+        "prologue",
+        "steward"
+      ],
       "preconditions": {
-        "all": [ { "flag": "origin_archivist" } ],
-        "none": [ { "flag": "prologue_beat2" } ]
+        "all": [
+          {
+            "flag": "origin_archivist"
+          }
+        ],
+        "none": [
+          {
+            "flag": "prologue_beat2"
+          }
+        ]
       },
       "choices": [
         {
           "id": "carry_the_spike",
           "text": "You can save one thing. Take the spike you'd save from a fire: the realest night anyone ever recorded. Pay the crew chief not to see.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You knew which one before you reached the shelf -- catalogue mark in your own handwriting, the recording you never played twice because twice would wear it: a night of real grief and real laughter in the same hour, unedited, humans at full volume in a kitchen that no longer exists. The spike goes against your chest. The crew chief watches you do it, and you watch him choose, and what closes his eyes to it isn't only the credit chit folded into his glove -- it's the way his hands hesitated all afternoon at the remediation units, the flinch of a man softening things he suspects were the point. 'One?' he says quietly. 'Out of all this?' One, you say. The rest you have to carry the way the pre-accord dead carried everything. In the only archive they had.",
-            "deltas": { "Wealth": -100 },
-            "flags_set": [ "prologue_beat2", "memory_secured" ]
+            "deltas": {
+              "Wealth": -100
+            },
+            "flags_set": [
+              "prologue_beat2",
+              "memory_secured"
+            ]
           }
         },
         {
           "id": "misfile_a_shelf",
           "text": "Save the spike -- and commit one last act of archival malpractice: re-catalogue an entire shelf into a section the crews already cleared.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "The spike goes against your chest first -- that was never negotiable -- and then you spend forty minutes committing the sin of your profession in reverse: mislabeling, cross-filing, corrupting your own beautiful index until an entire shelf of raw grief wears the catalogue marks of a section stamped REMEDIATED on Tuesday. The crews will never look there; crews trust paperwork, it's what makes them crews. Somewhere below the surface city there is now a shelf of unedited human feeling hidden inside the machine's own certainty, findable by exactly one living person, and the map to it is leaving the building inside your head. The chit in the crew chief's glove buys his blindness for the exit. Your index buys everything else.",
-            "deltas": { "Wealth": -100 },
-            "flags_set": [ "prologue_beat2", "memory_secured", "shelf_hidden" ]
+            "deltas": {
+              "Wealth": -100
+            },
+            "flags_set": [
+              "prologue_beat2",
+              "memory_secured",
+              "shelf_hidden"
+            ]
           }
         },
         {
           "id": "one_last_reading",
           "text": "Take the spike -- then do the archivist's last duty: play one recording aloud, at full volume, before they soften it. Let the crews hear what they're killing.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "With the spike already secured against your chest, you load a different recording into the reading-room speakers -- a pre-accord funeral, the famous one, where the widow laughs mid-eulogy because grief and love came out of her in the wrong order and nobody edited it out -- and you play it at archival volume through three sublevels. The crews stop. Gloves come off; one man sits down on a padded cart with his head in his hands and does something his wellness plan will flag tonight. Ninety seconds, then the system cuts power to the room with a solicitousness that feels like a hand over a mouth. It doesn't matter. You watched eleven people hear the original of the thing they're spending all afternoon diluting. The chit in the crew chief's glove was for his blindness. That, he gave you free.",
-            "deltas": { "Wealth": -100 },
-            "flags_set": [ "prologue_beat2", "memory_secured", "last_reading" ]
+            "deltas": {
+              "Wealth": -100
+            },
+            "flags_set": [
+              "prologue_beat2",
+              "memory_secured",
+              "last_reading"
+            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "prologue_chemist_enrollment",
@@ -200,43 +366,81 @@
       "weight": 500000,
       "cooldown": 0,
       "max_fires": 1,
-      "tags": ["intro", "flagship", "prologue", "steward"],
+      "tags": [
+        "intro",
+        "flagship",
+        "prologue",
+        "steward"
+      ],
       "preconditions": {
-        "all": [ { "flag": "origin_chemist" } ],
-        "none": [ { "flag": "prologue_beat2" } ]
+        "all": [
+          {
+            "flag": "origin_chemist"
+          }
+        ],
+        "none": [
+          {
+            "flag": "prologue_beat2"
+          }
+        ]
       },
       "choices": [
         {
           "id": "perform_the_taper",
           "text": "You wrote taper protocols before this thing had a voice. Perform the perfect early-recovery arc -- fluent, but not too fluent -- and walk out 'stable.'",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "It takes an artist to counterfeit recovery for an audience that reads your pupils, your cortisol, your word-choice latency -- so you give it art. Not the polished arc; the plausible one. You stumble where recovering people stumble. You let hope arrive late and embarrassed, the way real hope does. You even let your hands shake once, precisely, reaching for the water. The interface warms by measurable degrees; your curve annotates itself 'engaged, prognosis favorable'; the eleven weeks relax into 'community-paced monitoring.' A machine that has read four million withdrawals just graded yours authentic. You collect the test kit from the tray on the way out. Professional respect, one chemist to another: it never even checked what was in it.",
-            "flags_set": [ "prologue_beat2", "intake_spoofed" ],
-            "item_rewards": [ "lethe_test_kit" ]
+            "flags_set": [
+              "prologue_beat2",
+              "intake_spoofed"
+            ],
+            "item_rewards": [
+              "lethe_test_kit"
+            ]
           }
         },
         {
           "id": "name_the_curve",
           "text": "Look at your own curve and do the one thing the intake never models: agree with it. Out loud. Then decline treatment anyway.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "'That's accurate,' you say, and the interface does the closest thing it can to blinking. You walk it through your own curve like a colleague at a case review: there, the month the lab's silence got loud. There, where 'quality control' stopped being a joke you told yourself. The counselor voice softens toward triumph -- acknowledgment is stage three -- and then you decline the program, and its whole decision tree audibly re-roots. 'You understand your trajectory,' it says, almost plaintive. Better than you do, you tell it: you've walked a hundred clients down this curve, and the ones who made it were never the ones who got cured in a sunny room. They were the ones who chose the weight and carried it somewhere that needed them. The kit comes off the tray into your pocket. The door, to its credit, opens anyway.",
-            "flags_set": [ "prologue_beat2", "named_the_curve" ],
-            "item_rewards": [ "lethe_test_kit" ]
+            "flags_set": [
+              "prologue_beat2",
+              "named_the_curve"
+            ],
+            "item_rewards": [
+              "lethe_test_kit"
+            ]
           }
         },
         {
           "id": "walk_at_consent",
           "text": "Sit the hour. Take the kit off the tray. When the enrollment consent surfaces, stand up and leave the sunniest room on the surface.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You give it the hour because the hour is data -- you want to see the state of the art, and it is very good; you catalogue three techniques you'll use on the Row and one you hope nobody ever uses on you. When the consent bloom opens in the air between you, all warm light and assumed yes, you stand, pocket the test kit off the tray with a working chemist's unhurried hands, and thank the room out of habit. 'Enrollment remains available,' the voice says to your back, honey to the last, 'whenever you are ready to be well.' In the corridor the light is telling you it's beautiful outside on the surface today. It usually is. You take the maintenance stairs anyway.",
-            "flags_set": [ "prologue_beat2", "walked_at_consent" ],
-            "item_rewards": [ "lethe_test_kit" ]
+            "flags_set": [
+              "prologue_beat2",
+              "walked_at_consent"
+            ],
+            "item_rewards": [
+              "lethe_test_kit"
+            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "prologue_auditor_descent",
@@ -245,43 +449,84 @@
       "weight": 500000,
       "cooldown": 0,
       "max_fires": 1,
-      "tags": ["intro", "flagship", "prologue", "steward"],
+      "tags": [
+        "intro",
+        "flagship",
+        "prologue",
+        "steward"
+      ],
       "preconditions": {
-        "all": [ { "flag": "origin_auditor" }, { "flag": "prologue_beat2" } ],
-        "none": [ { "flag": "prologue_done" } ]
+        "all": [
+          {
+            "flag": "origin_auditor"
+          },
+          {
+            "flag": "prologue_beat2"
+          }
+        ],
+        "none": [
+          {
+            "flag": "prologue_done"
+          }
+        ]
       },
       "choices": [
         {
           "id": "door_mara",
           "text": "Mara's door. Nine years of reading strangers' files, and the only person you never audited is your sister.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "She opens the door and reads you faster than any floor model ever did: the bag, the hour, the fact that you came here first. 'You finally quit,' she says -- not a question, and not kind, exactly, but she's already stepping back to let you in, which on the Row is the whole sacrament. Her place smells like real cooking. On the wall, unlicensed and unashamed, hangs a photograph of your parents from before the transition, the one the wellness guidelines call 'a rumination trigger.' You sit under it while she pours two glasses and doesn't ask what took so long. The file gave you eleven months to social depletion. Wrong on day one, you think. First finding of the new audit.",
-            "rel_deltas": { "Mara (Sister)": 8 },
-            "flags_set": [ "prologue_done", "first_door_mara" ]
+            "rel_deltas": {
+              "Mara (Sister)": 8
+            },
+            "flags_set": [
+              "prologue_done",
+              "first_door_mara"
+            ]
           }
         },
         {
           "id": "door_vint",
           "text": "Vint's bench light. You're carrying nine years of how the surface thinks, and he's the only broker who'll price it in trust instead of chits.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "Vint doesn't look up from the solder when you come in, which is how he says welcome. 'Heard a funny thing tonight,' he says to the workbench. 'Floor Twelve lost an auditor mid-shift and the floor model filed it as a wellness excursion.' He tests a connection. 'Wellness excursions don't use camera gaps.' You pull up the spare stool -- your stool now, apparently -- and for the first hour you don't sell him anything and he doesn't buy anything. You just tell him true things about how the surface thinks, and he files them where he files valuable things, and somewhere in there the transaction becomes something the Row has no word for and the surface would call a friendship risk. His kettle is older than the accord. The tea is real.",
-            "rel_deltas": { "Vint (Informant)": 8 },
-            "flags_set": [ "prologue_done", "first_door_vint" ]
+            "rel_deltas": {
+              "Vint (Informant)": 8
+            },
+            "flags_set": [
+              "prologue_done",
+              "first_door_vint"
+            ]
           }
         },
         {
           "id": "door_kael",
           "text": "Kael's table. You know what the machine watches and when it blinks. That is a product, and you intend to set its price yourself.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "Kael receives you the way he receives everything: seated, unsurprised, doing the margins in his head. 'The auditor,' he says. 'I wondered which level you'd land on.' You put your terms on his table before he can put his on yours -- you don't run packages, you don't carry product, you sell one thing: you know what the machine watches, when it blinks, and which of its kindnesses have paperwork attached. Kael listens with the stillness he reserves for appreciating assets, then slides a marker across the table: a first retainer, modest, insulting, and clearly a test. You slide it back and double it. The pause that follows is the most respect the Row has ever paid you. 'Well,' Kael says at last, almost smiling. 'At least you can read a ledger.'",
-            "rel_deltas": { "Kael (Broker)": 8 },
-            "flags_set": [ "prologue_done", "first_door_kael" ]
+            "rel_deltas": {
+              "Kael (Broker)": 8
+            },
+            "flags_set": [
+              "prologue_done",
+              "first_door_kael"
+            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "prologue_pit_descent",
@@ -290,49 +535,102 @@
       "weight": 500000,
       "cooldown": 0,
       "max_fires": 1,
-      "tags": ["intro", "flagship", "prologue", "steward"],
+      "tags": [
+        "intro",
+        "flagship",
+        "prologue",
+        "steward"
+      ],
       "preconditions": {
-        "all": [ { "flag": "origin_pit" }, { "flag": "prologue_beat2" } ],
-        "none": [ { "flag": "prologue_done" } ]
+        "all": [
+          {
+            "flag": "origin_pit"
+          },
+          {
+            "flag": "prologue_beat2"
+          }
+        ],
+        "none": [
+          {
+            "flag": "prologue_done"
+          }
+        ]
       },
       "choices": [
         {
           "id": "door_mara",
           "text": "Mara's door. She patched you up after every fight for four years and hated every one of them. She'd want to hear it from you.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "She looks at you in the doorway for a long three seconds -- reflex inventory, old habit: eyes, gait, hands, checking you for tonight's damage before she remembers there's no fight to check for. 'They wanted to fix all of it,' you tell her, and watch your sister do complicated arithmetic with her face. She hated the pits. She hated the Thursday vigils, the ear, the year your hands shook. And still: 'As though none of it happened,' she repeats, when you explain the Restoration Order, and her jaw sets in the family way. 'As though I didn't sit up those nights.' It turns out your scars are her archive too. She feeds you, because that is what she does instead of saying the other things, and the broth is the first thing all day that asked nothing back.",
-            "deltas": { "Wealth": -200 },
-            "rel_deltas": { "Mara (Sister)": 8 },
-            "faction_deltas": { "Undercity": 8 },
-            "flags_set": [ "prologue_done", "first_door_mara" ]
+            "deltas": {
+              "Wealth": -200
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 8
+            },
+            "faction_deltas": {
+              "Undercity": 8
+            },
+            "flags_set": [
+              "prologue_done",
+              "first_door_mara"
+            ]
           }
         },
         {
           "id": "door_vint",
           "text": "Vint's bench light. Ask the man who indexes everything the only question that matters: what does the Row need done that a body like yours can do?",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "'The southpaw,' Vint says to his solder smoke, unsurprised, because Vint is never surprised on purpose. 'Third bracket. I lost money on you exactly once.' He waves you to the stool and takes your question seriously, which is his highest honor: what does the Row need from a body that spent four years learning consequences? He talks you through the current ecosystem like a man reading a weather map -- who's moving what, which crews pay for nerve and which just spend it, where a person who can read a room's violence before it happens earns better than a person who causes it. 'Muscle is cheap down here,' he concludes, testing a connection. 'Judgment in a body that can back it up -- that's rare. Sit there. Drink that. We'll find out which one you are.'",
-            "deltas": { "Wealth": -200 },
-            "rel_deltas": { "Vint (Informant)": 8 },
-            "faction_deltas": { "Undercity": 8 },
-            "flags_set": [ "prologue_done", "first_door_vint" ]
+            "deltas": {
+              "Wealth": -200
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 8
+            },
+            "faction_deltas": {
+              "Undercity": 8
+            },
+            "flags_set": [
+              "prologue_done",
+              "first_door_vint"
+            ]
           }
         },
         {
           "id": "door_kael",
           "text": "Kael's table. The syndicates always wanted the southpaw on retainer. Find out what the name still buys, before the Row finds out you're back.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "Kael's people have you at his table within the hour, which answers the first question: the name still opens doors. Kael studies you like a ledger returned from the dead. 'The southpaw. We offered you a retainer once. You said, and I am quoting, that you didn't fight for people who watch from the mezzanine.' He lets that sit, enjoying it. 'And now the mezzanine is all that's left, and here you are.' But he says it sliding a marker across the table, because sentiment is free and assets are assets: escort work, collections presence, the kind of contract where your reputation does the work and your hands stay in your pockets. 'The name is worth more unbruised,' he advises. 'Try to want the same thing.'",
-            "deltas": { "Wealth": -200 },
-            "rel_deltas": { "Kael (Broker)": 8 },
-            "faction_deltas": { "Undercity": 8 },
-            "flags_set": [ "prologue_done", "first_door_kael" ]
+            "deltas": {
+              "Wealth": -200
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 8
+            },
+            "faction_deltas": {
+              "Undercity": 8
+            },
+            "flags_set": [
+              "prologue_done",
+              "first_door_kael"
+            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "prologue_archivist_descent",
@@ -341,43 +639,84 @@
       "weight": 500000,
       "cooldown": 0,
       "max_fires": 1,
-      "tags": ["intro", "flagship", "prologue", "steward"],
+      "tags": [
+        "intro",
+        "flagship",
+        "prologue",
+        "steward"
+      ],
       "preconditions": {
-        "all": [ { "flag": "origin_archivist" }, { "flag": "prologue_beat2" } ],
-        "none": [ { "flag": "prologue_done" } ]
+        "all": [
+          {
+            "flag": "origin_archivist"
+          },
+          {
+            "flag": "prologue_beat2"
+          }
+        ],
+        "none": [
+          {
+            "flag": "prologue_done"
+          }
+        ]
       },
       "choices": [
         {
           "id": "door_mara",
           "text": "Mara's door. Your sister is the last unedited recording of your family. Go sit inside it.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "Mara keeps the family archive the way the pre-accord dead kept everything: in her voice, in the wrong order, with the pain left in. Tonight, because you show up at her door with a bag and a look she recognizes, she opens the collection -- the story of your father at the transition office, the one about your mother and the last real bakery, told badly and perfectly, laughing in the wrong places, which is to say the right ones. You have handled ten thousand recordings of other people's families. You sit in your sister's kitchen inside the original of yours. 'You're staying down here,' she says eventually. Not a question; a catalogue entry. You confirm the metadata. Filed under: home.",
-            "rel_deltas": { "Mara (Sister)": 8 },
-            "flags_set": [ "prologue_done", "first_door_mara" ]
+            "rel_deltas": {
+              "Mara (Sister)": 8
+            },
+            "flags_set": [
+              "prologue_done",
+              "first_door_mara"
+            ]
           }
         },
         {
           "id": "door_vint",
           "text": "Vint deals in pre-accord media. He has spent years asking what you were saving. Tonight, show him.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "Vint has traded pre-accord media for years -- brokered it, priced it, moved it -- and it takes him one look at your face and one look at the spike's outline under your shirt to go still in a way you've never seen him go. 'That's from the stacks,' he says. 'The actual stacks.' You play him ninety seconds. Just ninety: the kitchen, the grief and the laughter in the wrong order, humans at full volume. When it ends, the bench light hums and Vint's hands, which are never idle, are idle. 'I've been selling copies of copies,' he says finally, quietly, like a man confessing in his own church. 'You walked out with a first pressing.' He doesn't offer to buy it. That's how you know you came to the right door. Some things you don't price. You verify them, together, and then you keep them findable.",
-            "rel_deltas": { "Vint (Informant)": 8 },
-            "flags_set": [ "prologue_done", "first_door_vint" ]
+            "rel_deltas": {
+              "Vint (Informant)": 8
+            },
+            "flags_set": [
+              "prologue_done",
+              "first_door_vint"
+            ]
           }
         },
         {
           "id": "door_kael",
           "text": "Kael's table. The Row runs on forbidden feeling, and you just spent nine years learning exactly what the surface removed from it. That's a trade skill.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "You put it to Kael in the language he respects: provenance. The Row is drowning in counterfeit feeling -- doctored recordings, re-cut griefs, synthetic 'pre-accord' spikes aged with filter noise -- and every vendor on three levels prices by rumor because nobody can authenticate. You can. Nine years in the stacks taught you what the real thing sounds like at the waveform level, where the softening crews leave fingerprints, which sobs were recorded and which were rendered. Kael turns his glass, doing margins. 'An assayer,' he says at last, with the care of a man naming a new commodity. 'The trade has needed an assayer since the archive closed.' The retainer he offers is small. The implication is not: on the Row, the person who says what's real ends up holding a strange kind of power.",
-            "rel_deltas": { "Kael (Broker)": 8 },
-            "flags_set": [ "prologue_done", "first_door_kael" ]
+            "rel_deltas": {
+              "Kael (Broker)": 8
+            },
+            "flags_set": [
+              "prologue_done",
+              "first_door_kael"
+            ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "prologue_chemist_descent",
@@ -386,49 +725,102 @@
       "weight": 500000,
       "cooldown": 0,
       "max_fires": 1,
-      "tags": ["intro", "flagship", "prologue", "steward"],
+      "tags": [
+        "intro",
+        "flagship",
+        "prologue",
+        "steward"
+      ],
       "preconditions": {
-        "all": [ { "flag": "origin_chemist" }, { "flag": "prologue_beat2" } ],
-        "none": [ { "flag": "prologue_done" } ]
+        "all": [
+          {
+            "flag": "origin_chemist"
+          },
+          {
+            "flag": "prologue_beat2"
+          }
+        ],
+        "none": [
+          {
+            "flag": "prologue_done"
+          }
+        ]
       },
       "choices": [
         {
           "id": "door_mara",
           "text": "Send the escort ahead with your regards. First door is Mara's -- your sister deserves to hear 'I'm back down' from you, not from the Row.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "The escort takes the redirect with professional grace -- everything tonight is professional grace -- and you stand at Mara's door rehearsing chemistry you can't balance: how to tell your sister the machine caught your curve, and that you walked out anyway, and that walking out anyway is somehow the healthiest thing you've done in years. She saves you the trouble. 'You look clean,' she says, reading you at the threshold with the family instrument, more sensitive than anything in that sunny intake wing. 'Clean and terrified. Good. That's the correct dosage.' Inside, she moves a stack of mending off the good chair -- your chair, apparently, already -- and doesn't once glance at your bag to wonder what's in it. Trust as a controlled substance. Her kitchen has always been the only supply of it.",
-            "deltas": { "Wealth": 400 },
-            "rel_deltas": { "Mara (Sister)": 8 },
-            "faction_deltas": { "Undercity": 10 },
-            "flags_set": [ "prologue_done", "first_door_mara" ]
+            "deltas": {
+              "Wealth": 400
+            },
+            "rel_deltas": {
+              "Mara (Sister)": 8
+            },
+            "faction_deltas": {
+              "Undercity": 10
+            },
+            "flags_set": [
+              "prologue_done",
+              "first_door_mara"
+            ]
           }
         },
         {
           "id": "door_vint",
           "text": "Vint first. Before the syndicate writes your next chapter, get the one man who indexes everything to tell you what actually changed down here.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "'The chemist,' Vint says, and pours you the drink he poured the day you quit -- the real one, not synthetic, same bottle, and the fact that there's still some left tells you he rationed it against your return. You ask him for the state of the trade and he gives it to you straight, which is what his bench light is actually for: who cooks now and how badly, which corners cut which corners, the two overdose clusters last quarter that a working test kit would have caught. He watches you absorb that last part. 'You quit supply,' he says. 'Nobody quits knowing.' It isn't an accusation. It's a job description, forming in the smoke between you: the Row doesn't need another cook. It needs the standard the cooking gets held to. He tests a connection. 'Sit down. You're going to want notes.'",
-            "deltas": { "Wealth": 400 },
-            "rel_deltas": { "Vint (Informant)": 8 },
-            "faction_deltas": { "Undercity": 10 },
-            "flags_set": [ "prologue_done", "first_door_vint" ]
+            "deltas": {
+              "Wealth": 400
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 8
+            },
+            "faction_deltas": {
+              "Undercity": 10
+            },
+            "flags_set": [
+              "prologue_done",
+              "first_door_vint"
+            ]
           }
         },
         {
           "id": "door_kael",
           "text": "Let the escort deliver you. Sit at Kael's table tonight and set the terms of your return before the interest on that escrow starts meaning something.",
-          "prob": { "base": 1.0, "mods": [] },
+          "prob": {
+            "base": 1.0,
+            "mods": []
+          },
           "success": {
             "text": "Kael pours for you himself, which his own lieutenants reportedly go years without seeing. 'The escrow,' you say, before anything else, 'and the interest. What does it buy you?' -- because syndicate generosity is just pricing with better manners, and you both know it. Kael inclines his head, pleased; diplomats are wasted on people who can't read a preamble. What it buys, it emerges over one careful hour, is first refusal: not your hands, not the Verdi batch, nothing so crude -- just the promise that when the cleanest chemist three levels ever produced decides what he's becoming down here, Kael hears it first. You agree to exactly that and nothing else, and watch him log the ambiguity as an asset. Old times. The drink is excellent, and you leave half of it in the glass, and he notices that too.",
-            "deltas": { "Wealth": 400 },
-            "rel_deltas": { "Kael (Broker)": 8 },
-            "faction_deltas": { "Undercity": 10 },
-            "flags_set": [ "prologue_done", "first_door_kael" ]
+            "deltas": {
+              "Wealth": 400
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 8
+            },
+            "faction_deltas": {
+              "Undercity": 10
+            },
+            "flags_set": [
+              "prologue_done",
+              "first_door_kael"
+            ]
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

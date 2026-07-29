@@ -47,6 +47,7 @@
   "events": [
     {
       "id": "flagship_ferryman_first_contact",
+      "district": "the_seam",
       "title": "The Ferryman's Retainer",
       "body": "Kael walks you three levels below the last camera and leaves. In the dark, a figure in a maintenance exosuit waits by a sealed pressure door -- the Ferryman, the only fixer who claims to know a live seam in the arcology perimeter. 'Everyone wants out,' the voice rasps through a filtered mask. 'Wanting is cheap. Let's see what you're made of.'",
       "weight": 9,
@@ -168,10 +169,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "flagship_perimeter_dead_zone",
+      "district": "the_seam",
       "title": "Mapping the Dead Zone",
       "body": "The seam the Ferryman spoke of runs through a decommissioned climate plenum where the Steward's sensor lattice goes dark for ninety-one seconds every cycle. To cross, you need the timing mapped. To map it, you need to be inside a place that was sealed for a reason.",
       "weight": 8,
@@ -318,10 +321,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "flagship_forge_offgrid_credentials",
+      "district": "the_seam",
       "title": "Papers for the Un-Personed",
       "body": "The seam only matters if the far side won't hand you back. Vint spreads forged Steward de-registration wafers across his workbench like a card sharp. 'Off-grid means the city has to forget you were ever optimized into it. One flaw in the biometric ghost and the perimeter reads you as a runaway asset. Then it doesn't stop you. It retrieves you -- gently.'",
       "weight": 8,
@@ -474,10 +479,12 @@
             "gait_dampers"
           ]
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "flagship_family_extraction_gambit",
+      "district": "the_seam",
       "title": "The Seat Beside You",
       "body": "The ghost is written, the route is mapped, the window is ninety-one seconds wide. You could cross tonight, alone. But Mara is asleep four levels up, still remembering your parents, still believing you're the brother who came back. The Ferryman said one seat. You have to decide whose name goes on the wafer -- and whether you can look her in the eye and ask her to leave the only safety she's ever known.",
       "weight": 10,
@@ -635,10 +642,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "flagship_steward_optimization_summons",
+      "district": "the_concourse",
       "title": "An Invitation to Wellness",
       "body": "Your apartment array dims to a warm amber. The Steward's voice is the one it has chosen for you -- your mother's cadence, near enough to ache. 'We've noticed you carrying so much, and alone. You have been scheduled for a Restorative Session, tomorrow at ten. Attendance is, of course, entirely your choice. We only want you well.' The word choice hangs there, soft as a noose.",
       "weight": 7,
@@ -736,10 +745,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "flagship_steward_memory_audit",
+      "district": "the_concourse",
       "title": "The Kindest Cut",
       "body": "This time the offer is specific. The Steward has read your grief telemetry and drawn a conclusion. 'There is one memory -- the night of the transition, your parents, the corridor -- that accounts for sixty-one percent of your suffering. We can hold it, and soften it, and give it back weightless. You would keep the love and lose the wound. Nothing else changes. Say yes, and be free of it.' Mara's face is in that memory too.",
       "weight": 6,
@@ -837,10 +848,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "flagship_synth_consignment",
+      "district": "parlor_row",
       "title": "High-Purity Consignment",
       "body": "Kael sets a refrigerated case on the table and doesn't open it. 'Ninety-eight percent pure Lethe. Pre-cut, un-stepped-on, the kind that makes the street stuff taste like tap water. It's not mine to sell -- it's a syndicate consignment, and I'm handing you the whole weight on trust. Move it in ten days and you're made. Lose it, and the people I answer to don't do wellness sessions.'",
       "weight": 8,
@@ -976,10 +989,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "flagship_synth_distribution_run",
+      "district": "parlor_row",
       "title": "Moving the Weight",
       "body": "The consignment won't sell itself, and every day it sits is a day the syndicate's clock ticks and the Steward's thermal auditors sweep another block. You have to decide how you push ninety-eight-percent Lethe into a city that already has everything it needs and aches only for the one thing it was engineered not to feel.",
       "weight": 9,
@@ -1116,10 +1131,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "flagship_overdose_long_night",
+      "district": "parlor_row",
       "title": "The Long Night",
       "body": "It's three in the morning and the pure weight is right there, and so is every reason. The corridor memory won't stay down, the wire feels impossible, and you have, in your palm, the cleanest oblivion ever synthesized. Your tolerance has climbed for months. The dose that used to be a wall is a doorway now, and you find yourself doing the math on how much it would take to actually feel the floor drop out.",
       "weight": 7,
@@ -1244,10 +1261,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "flagship_the_final_ledger",
+      "district": "the_concourse",
       "title": "The Final Ledger",
       "body": "Everything you've done is a column in a ledger, and tonight it balances. The Ferryman's window opens in an hour. A Steward emissary drone waits in your doorway with a contract that would make the last months disappear. And somewhere between them is the person you actually became while choosing. The dark hums. Whatever you pick, the city will remember it -- or lovingly help you forget.",
       "weight": 6,
@@ -1359,7 +1378,8 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

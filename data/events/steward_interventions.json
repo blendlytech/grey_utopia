@@ -2,6 +2,7 @@
   "events": [
     {
       "id": "steward_wellness_check",
+      "district": "the_concourse",
       "title": "A Benevolent Intervention",
       "body": "A soft, melodious chime sounds through your apartment array. The Steward has detected elevated biometric stress and offers 'guided equilibrium.'",
       "weight": 8,
@@ -97,10 +98,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_buyout_offer",
+      "district": "the_concourse",
       "title": "The Golden Package",
       "body": "A pristine Steward emissary drone hovers before your desk. It extends a legally binding offer: full immunity, a permanent luxury suite, and zero responsibilities.",
       "weight": 5,
@@ -193,7 +196,8 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

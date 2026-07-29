@@ -7,6 +7,7 @@
   "events": [
     {
       "id": "volume_vice_market_lethe_cutter",
+      "district": "parlor_row",
       "title": "The Cutter's Stall",
       "body": "A stall three sublevels down sells 'enhanced' Lethe-9 -- the same neon vial, but the cutter swears his blend hits harder for less. The crowd around him is thin. The regulars know why.",
       "weight": 7,
@@ -114,6 +115,7 @@
     },
     {
       "id": "volume_vice_market_fight_pit",
+      "district": "the_chalk_market",
       "title": "The Undercity Fight Pit",
       "body": "A cleared-out cargo bay rings with cheering three nights a week -- an unlicensed fight pit where undercity residents bet ration credits and worse on bare-knuckle matches the Steward's wellness metrics pretend don't exist.",
       "weight": 6,
@@ -223,6 +225,7 @@
     },
     {
       "id": "volume_vice_market_organ_broker",
+      "district": "the_chalk_market",
       "title": "The Organ Broker's Ledger",
       "body": "A soft-spoken broker in a converted freight container keeps a ledger of black-market synthetic organ upgrades -- augments the Steward's clinics ration by lottery, sold here without the wait, without the paperwork, and without any guarantee.",
       "weight": 5,
@@ -328,6 +331,7 @@
     },
     {
       "id": "volume_vice_market_loan_shark",
+      "district": "the_chalk_market",
       "title": "The Undercity Loan Shark",
       "body": "A moneylender who never touches Steward-tracked credit lines offers fast, untraceable cash at a rate that's less a number than a threat. Everyone down here has a story about someone who borrowed once.",
       "weight": 6,
@@ -363,11 +367,6 @@
             "flags_set": [
               "loan_shark_debt"
             ],
-            "clocks_start": {
-              "loan_shark": 8
-            }
-          },
-          "failure": {
             "clocks_start": {
               "loan_shark": 8
             }
@@ -412,6 +411,7 @@
     },
     {
       "id": "volume_vice_market_memory_parlor_debt",
+      "district": "parlor_row",
       "title": "The Braindance Parlor's Tab",
       "body": "The braindance den keeps a running tab for its regulars, and yours has quietly climbed past what you remember agreeing to. The proprietor mentions it gently, the way someone mentions a knife they're not currently using.",
       "weight": 6,
@@ -576,6 +576,7 @@
     },
     {
       "id": "volume_vice_market_black_lottery",
+      "district": "the_chalk_market",
       "title": "The Undercity Black Lottery",
       "body": "An unlicensed lottery runs out of a barbershop back room, paying out in untraceable credit instead of Steward-tracked winnings -- illegal purely because the Steward can't tax or monitor it, not because anyone's really hurt.",
       "weight": 6,
@@ -659,6 +660,7 @@
     },
     {
       "id": "volume_vice_market_grief_dealer",
+      "district": "parlor_row",
       "title": "The Grief Dealer",
       "body": "A quiet man in the back of the braindance den specializes in something darker than euphoria loops -- curated grief spikes, other people's worst days, sold to customers who find their own numbness easier to bear against someone else's tragedy.",
       "weight": 5,
@@ -746,6 +748,7 @@
     },
     {
       "id": "volume_vice_market_wellness_bribe",
+      "district": "the_chalk_market",
       "title": "Bribing the Wellness Patrol",
       "body": "A wellness patrol officer catches you exactly where you shouldn't be, clipboard raised, ready to log a citation that'll tick your Heat up for a month. He also, pointedly, hasn't looked directly at your pockets yet.",
       "weight": 6,
@@ -852,6 +855,7 @@
     },
     {
       "id": "volume_family_mara_late_night_call",
+      "district": "the_works",
       "title": "Mara Calls Past Midnight",
       "body": "Your comms buzz well after a reasonable hour. Mara's voice comes through thin and unsteady -- not an emergency, she insists, she just couldn't sleep and wanted to hear someone who isn't a Steward wellness chatbot.",
       "weight": 8,
@@ -939,10 +943,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_family_mara_finds_out",
+      "district": "the_works",
       "title": "Mara Finds Out",
       "body": "Mara corners you in the doorway, jaw set, holding a scrap of information she clearly wishes she didn't have -- someone mentioned your name and a vice den in the same breath, and she wants to hear it isn't true from you directly.",
       "weight": 7,
@@ -1063,10 +1069,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_family_mara_job_offer",
+      "district": "the_works",
       "title": "Mara Has a Real Job Lined Up",
       "body": "Mara sits you down with something like hope on her face -- a legitimate Steward-sponsored apprenticeship opening, boring and stable and completely legal, that she thinks could pull you out of the fixer trade for good.",
       "weight": 7,
@@ -1166,10 +1174,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_family_mara_birthday",
+      "district": "the_works",
       "title": "Mara's Birthday",
       "body": "It's Mara's birthday, and the Steward's civic calendar has helpfully reminded your comms three separate times, as if you'd forget the one date that's meant something your whole life.",
       "weight": 6,
@@ -1244,10 +1254,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_family_mara_ubi_shortfall",
+      "district": "the_works",
       "title": "Mara's UBI Shortfall",
       "body": "A Steward recalibration quietly trims Mara's stipend this cycle -- an algorithmic 'household efficiency adjustment' that leaves her short on rent with no appeal process faster than the deadline itself.",
       "weight": 7,
@@ -1342,10 +1354,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_family_mara_old_photo",
+      "district": "the_works",
       "title": "The Photo From Before",
       "body": "Sorting through a box of pre-Accord belongings, Mara finds an actual printed photograph -- your whole family, before it was smaller, before the Steward, before either of you had to be this tired this young.",
       "weight": 6,
@@ -1418,10 +1432,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_family_mara_asks_you_to_stop",
+      "district": "the_works",
       "title": "Mara Asks You to Stop",
       "body": "No preamble, no ambush -- just Mara, tired, asking you directly and plainly to stop whatever it is you've been doing down in the sublevels, before it stops being your choice to make.",
       "weight": 7,
@@ -1540,10 +1556,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_family_mara_meets_vint",
+      "district": "the_works",
       "title": "Mara Meets Vint",
       "body": "Against your better judgment, Mara and Vint end up in the same room -- your sister and your informant, sizing each other up over lukewarm synth-coffee, each one clearly trying to decide how worried they should be about you.",
       "weight": 5,
@@ -1648,10 +1666,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_family_niece_nephew_visit",
+      "district": "the_works",
       "title": "A Small Visitor",
       "body": "Mara brings her kid along this time -- your niece or nephew, all restless energy and blunt questions, staring at the calluses on your hands like they're trying to solve a puzzle they're too young to be shown the whole picture of.",
       "weight": 6,
@@ -1723,10 +1743,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_family_mara_worried_about_heat",
+      "district": "the_works",
       "title": "Mara Notices the Drones",
       "body": "Mara mentions, too casually, that she's seen the same patrol drone pass her block three times this week -- and she's fairly sure it isn't her the Steward's watching.",
       "weight": 6,
@@ -1839,10 +1861,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_family_mara_wants_out_together",
+      "district": "the_works",
       "title": "Mara Talks About Leaving",
       "body": "Late, over cold tea, Mara floats an idea she's clearly turned over for weeks -- what if the two of you saved up and actually left the arcology together, off-grid, before either of you gets too tangled up to leave at all.",
       "weight": 5,
@@ -1916,7 +1940,8 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "volume_vice_market_smuggled_liquor",
@@ -2101,6 +2126,7 @@
     },
     {
       "id": "volume_vice_market_withdrawal_night",
+      "district": "parlor_row",
       "title": "A Bad Night to Quit",
       "body": "You told yourself tonight was the night you'd go without, and your body has other, louder opinions about that decision -- sweats, shakes, and a craving that's stopped being subtle about what it wants.",
       "weight": 7,
@@ -2216,6 +2242,7 @@
     },
     {
       "id": "volume_vice_market_fence_stolen_meds",
+      "district": "the_chalk_market",
       "title": "Fencing Stolen Clinic Stock",
       "body": "A jittery contact offers a case of stolen Steward clinic medication -- legitimate, effective, and diverted from a supply run meant for a wellness center two districts over. The undercity's black-market pharmacy would pay well for it.",
       "weight": 5,
@@ -2329,6 +2356,7 @@
     },
     {
       "id": "volume_family_mara_relapse_support",
+      "district": "the_works",
       "title": "Mara's Own Bad Night",
       "body": "The roles reverse for once -- Mara calls shaking, not about you, about her own quiet struggle with the same undercity vices she's spent months lecturing you about, too ashamed to call anyone else.",
       "weight": 6,
@@ -2430,7 +2458,8 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

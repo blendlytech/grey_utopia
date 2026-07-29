@@ -2,6 +2,7 @@
   "events": [
     {
       "id": "fixer_first_client",
+      "district": "the_works",
       "title": "The Nervous Client",
       "body": "A twitchy man in a borrowed coat finds you in the undercity concourse. He clutches a heavy carbon-fiber casing.",
       "weight": 10,
@@ -102,11 +103,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "contraband_braindance",
-      "text": "The Unfiltered Feed",
+      "district": "parlor_row",
       "title": "The Unfiltered Feed",
       "body": "Vint presents a military-grade neural spike containing unedited human anguish from before the AI Accord.",
       "weight": 8,
@@ -209,7 +211,8 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }

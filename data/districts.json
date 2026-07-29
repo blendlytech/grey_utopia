@@ -1,0 +1,40 @@
+{
+  "_comment": "A1 district registry. An event's optional top-level 'district' field must name an id here; pipeline/lint_content.py errors otherwise, so a typo cannot create an orphan shelf no placement can reach. Events with no district are neutral and behave exactly as they did before districts existed. Order matters: the placement screen offers districts in this order, and engine.districts.auto_placement samples uniformly over it, so adding an entry changes how often every other district is visited AND how much of the day is reserved for shelves -- the reserved fraction is len(districts)/VISIT_INTERVAL_DAYS, capped at one slot. Filling the map is therefore a balance change, not bookkeeping. See docs/A1_DESIGN.md.",
+  "districts": [
+    {
+      "id": "the_archive",
+      "name": "The Archive Stacks",
+      "blurb": "Rows of dead terminals under sodium light, where the Steward keeps what it has finished reading. People come here to look up who they used to be, and to decide what to do about it."
+    },
+    {
+      "id": "the_chalk_market",
+      "name": "The Chalk Market",
+      "blurb": "Four blocks of booths, stalls and roll-down shutters that have outlasted three rounds of optimisation. Auntie Six's board carries the debts nobody entered into a system, and everyone who works here is owed by someone who works here."
+    },
+    {
+      "id": "parlor_row",
+      "name": "Parlor Row",
+      "blurb": "Curtained doorways and a smell of scorched sugar, four hours of somebody else's better life sold by the gram. The Row's chemists work the back rooms and the Row's dead are counted here first, which the two facts have in common."
+    },
+    {
+      "id": "the_seam",
+      "name": "The Seam",
+      "blurb": "Where the lattice thins at the city's edge and the sensors go dark for ninety-one seconds at a time. The Ferryman prices bodies by what they cannot leave behind, and nobody who walks it twice talks about it once."
+    },
+    {
+      "id": "the_concourse",
+      "name": "The Concourse",
+      "blurb": "Clean glass, warm light, and a kiosk that knows your name and your caloric variance. This is the Steward's face in public: the reviews, the wellness invitations, the queue where people wait to be told they are doing well."
+    },
+    {
+      "id": "the_works",
+      "name": "The Works",
+      "blurb": "Benches, solder smoke and the honest hum of things being made to run again. The last trade in the Row that pays in daylight, and the only address here anyone would give a sister."
+    },
+    {
+      "id": "level_d",
+      "name": "Level D",
+      "blurb": "Maintenance corridors under the tram beds, wet ductwork and chalk marks that mean something to about forty people. Nothing on this level is on a map the Steward keeps, which is the entire reason it is still useful."
+    }
+  ]
+}

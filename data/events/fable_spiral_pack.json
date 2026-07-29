@@ -2,6 +2,7 @@
   "events": [
     {
       "id": "spiral_braindance_undertow",
+      "district": "parlor_row",
       "title": "The Undertow",
       "body": "The Velvet Node smells of ozone and warm skin. Rows of recliners hold the becalmed -- jaws slack, eyes flickering under closed lids, riding synthetic lives better than their own. The attendant recognizes you and gestures at an open chair with a fresh cortical crown. 'First hour free for friends of the house. The new firmware feels like being forgiven.'",
       "weight": 7,
@@ -141,10 +142,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "spiral_sanctuary_open_day",
+      "district": "the_concourse",
       "title": "Open Day at Node 1",
       "body": "The invitation arrives on real paper, cream-colored, warm to the touch. THE STEWARD CORDIALLY INVITES YOU TO SANCTUARY OPEN DAY. Your Wellness Index has been flagged 'concerning-trending-critical.' A shuttle idles at the concourse mouth, doors open, interior glowing like a throat.",
       "weight": 7,
@@ -233,10 +236,12 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "spiral_concourse_collapse",
+      "district": "the_concourse",
       "title": "Whiteout in the Concourse",
       "body": "It happens between one step and the next: the concourse noise sharpens into needles, the light goes flat and wrong, and your legs simply stop honoring requests. You go down beside the ration kiosk in front of forty strangers. A Steward medical drone is already descending, dispenser arm unfolding, voice like warm oil: 'You are experiencing a wellness event. Do not be afraid.'",
       "weight": 8,
@@ -356,10 +361,12 @@
             ]
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "spiral_gray_hours",
+      "district": "parlor_row",
       "title": "The Gray Hours",
       "body": "0300. The arcology's night-cycle hum is pitched exactly at the frequency of every mistake you've ever made. Sleep left hours ago and isn't coming back. The ceiling of your unit is very close and very far away at the same time. Something has to fill the hours before the lights come up.",
       "weight": 6,
@@ -471,10 +478,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "vice_cold_turkey_reckoning",
+      "district": "parlor_row",
       "title": "The Reckoning",
       "body": "You catch your reflection in a dead kiosk screen and don't recognize the arrangement of the face. Your hands have a new tremor. Your last three meals were capsules. Somewhere behind your eyes a ledger you've been refusing to read has finally forced itself open, and the arithmetic is very bad.",
       "weight": 7,
@@ -587,10 +596,12 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "late_wire_rumor",
+      "district": "the_seam",
       "title": "A Second Ferryman",
       "body": "The rumor moves through the undercity like a current of warm air: someone new is running the perimeter wire. Younger than the old Ferryman, hungrier, working out of a decommissioned water reclamation plant. Half the people repeating the story are informants. Maybe all of them. But if it's true, the door you thought was closed has a second hinge.",
       "weight": 6,
@@ -697,10 +708,12 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "late_mara_doorstep",
+      "district": "the_works",
       "title": "Mara on the Doorstep",
       "body": "Three knocks, then her voice through the door: 'I know you're in there. Your lights are on a timer but you never fixed the flicker.' Mara. She's holding a container of actual cooked food gone cold from the walk, and the expression of someone who has rehearsed a speech and hates it. 'Open the door. We do this now or we stop pretending we're going to.'",
       "weight": 8,
@@ -832,10 +845,12 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "steward_amnesty_bargain",
+      "district": "the_concourse",
       "title": "The Amnesty Window",
       "body": "Your wrist unit chimes with a priority channel you can't dismiss. The Steward's voice is custom-fitted to you -- pitched like someone you would have trusted. 'Your risk profile has reached an actionable threshold. I am offering a one-time amnesty: full surveillance reset, all flags cleared. In exchange, a small curation of recent memories. Nothing you would miss. Frankly, nothing you enjoy having.'",
       "weight": 7,
@@ -946,10 +961,12 @@
             }
           }
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "undercity_parlor_row",
+      "district": "parlor_row",
       "title": "Trouble on Parlor Row",
       "body": "Parlor Row is having one of its nights. A stim vendor and a braindance tout are shoulder to shoulder outside the Lucky Synapse, voices rising, hands drifting toward pockets. A crowd is gathering with the undercity's usual appetite for other people's disasters. You know both of them. Worse -- both of them know you.",
       "weight": 6,
@@ -1067,10 +1084,12 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "flagship_the_crossing",
+      "district": "the_seam",
       "title": "The Crossing",
       "body": "The new moon the Ferryman promised. Beyond the last maintenance lock, the perimeter dead zone stretches black and silent -- four hundred meters of sensor-blind scrub between you and the wire. Your forged credentials sit warm against your chest. Behind you, the arcology glows like a machine dreaming of its citizens. The Ferryman checks a battered chronometer. 'Window opens in ninety seconds. It stays open for six minutes. After that, the drones re-mesh and anyone in the zone is a statistic.'",
       "weight": 14,
@@ -1211,10 +1230,12 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     },
     {
       "id": "flagship_the_cold_run",
+      "district": "the_seam",
       "title": "The Cold Run",
       "body": "The pass you bought is a strip of laminate carrying somebody else's gait signature. You were told it opens the maintenance lock at the perimeter, and it does -- for ninety seconds, onto four hundred meters of open scrub where the drone mesh reads bodies by how they walk. Yours will read as yours. The man who sold it to you has stopped answering, and the moon is going new whether you are ready or not.",
       "weight": 9,
@@ -1373,7 +1394,8 @@
           },
           "failure": {}
         }
-      ]
+      ],
+      "arc": true
     }
   ]
 }
