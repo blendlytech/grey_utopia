@@ -49,7 +49,10 @@
             },
             "flags_set": [
               "known_skimmer"
-            ]
+            ],
+            "rel_deltas": {
+              "Kael (Broker)": -7
+            }
           }
         },
         {
@@ -73,6 +76,9 @@
             "deltas": {
               "Wealth": 300,
               "Social_Capital": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 4
             }
           },
           "failure": {
@@ -80,6 +86,9 @@
             "deltas": {
               "Heat": 14,
               "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 2
             }
           }
         },
@@ -95,6 +104,9 @@
             "deltas": {
               "Meaning": -3,
               "Mental_Decay": 2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           }
         }

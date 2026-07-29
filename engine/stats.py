@@ -23,12 +23,24 @@ def clamp(value: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, value))
 
 
+# F7: how much memory strength an adversarial contact builds, against the 1.5 a
+# warm one builds in `Character.reinforce`. See `Character.strain`.
+K_STRAIN = 1.0
+
+
 @dataclass
 class Relationship:
     name: str
     satisfaction: float = 60.0   # 0..100
     strength: float = 8.0        # S in Ebbinghaus forgetting curve (days)
     last_reinforced_day: int = 0
+    # F7: a monotonic count of warm contacts. Until F7, `strength` was raised by
+    # `reinforce` alone, so counting S increments counted reinforcements exactly
+    # and tests/cast_audit.py did precisely that. F7 made `strain` raise S too,
+    # which severs that identity -- so the count is kept explicitly rather than
+    # inferred, or the accumulation gate would score adversarial contact as
+    # affection and grade its own change.
+    reinforcements: int = 0
     flags: set[str] = field(default_factory=set)
 
 
@@ -118,14 +130,29 @@ class Character:
             return
         r.satisfaction = clamp(r.satisfaction + amount, 0.0, 100.0)
         r.last_reinforced_day = self.day
+        r.reinforcements += 1
         r.strength = min(r.strength + 1.5, 40.0)   # Spacing effect increases memory strength
 
     def strain(self, name: str, amount: float) -> None:
-        """Damage a relationship without the memory-strength bonus of reinforcement."""
+        """Damage a bond's satisfaction, while still deepening the memory of it.
+
+        S in the Ebbinghaus curve is memorability, not affection: a broker you
+        keep crossing remembers you vividly, and the next thing you do lands on
+        someone who has not forgotten. Before F7, `strain` moved satisfaction and
+        left S alone, so the contacts whose content runs half-adversarial -- Vint
+        and Kael -- never built the strength that lets a warm contact survive to
+        the next one, and their bars sat under 4% on ~90% of run-days.
+
+        Strain builds strength more slowly than warmth does (`K_STRAIN` against
+        `reinforce`'s 1.5): being crossed is memorable, but it is not the habit
+        that warm contact is, and if the two were equal then burning a contact
+        would be a way to make them durable.
+        """
         r = self.relationships.get(name)
         if not r:
             return
         r.satisfaction = clamp(r.satisfaction - amount, 0.0, 100.0)
+        r.strength = min(r.strength + K_STRAIN, 40.0)
 
     def adjust_relationship(self, name: str, delta: float) -> None:
         """Route an event's relationship delta: positive deltas reinforce, negative strain."""
@@ -196,14 +223,31 @@ class Character:
                 satisfaction=rdata.get("satisfaction", 60.0),
                 strength=rdata.get("strength", 8.0),
                 last_reinforced_day=rdata.get("last_reinforced_day", 0),
+                # Absent in saves written before F7; an old save reloads with an
+                # uncounted history, which costs it nothing -- the field is read
+                # by the audit, never by play.
+                reinforcements=int(rdata.get("reinforcements", 0)),
                 flags=set(rdata.get("flags", []))
             )
         return c
 
 
 def create_starter_fixer() -> Character:
+    """The three bonds a run opens with.
+
+    These numbers are duplicated in `data/cast.json`, which the linter and the
+    legacy-inheritance path read; **this** function is what play actually starts
+    from, so editing cast.json alone changes nothing. Keep the two in step.
+
+    F7 raised the two starting strengths. S in the Ebbinghaus curve is
+    memorability, not affection, and both of these characters are defined by
+    remembering: Kael keeps the ledger the whole Row is filed in ("he doesn't say
+    anything -- he just remembers"), and Vint is the archivist who never throws a
+    drive away. Their old values had them forgetting you faster than your sister
+    does, which inverted all three characterizations at once.
+    """
     c = Character()
     c.add_relationship("Mara (Sister)", satisfaction=75.0, strength=12.0)
-    c.add_relationship("Vint (Informant)", satisfaction=50.0, strength=6.0)
-    c.add_relationship("Kael (Broker)", satisfaction=40.0, strength=8.0)
+    c.add_relationship("Vint (Informant)", satisfaction=50.0, strength=10.0)
+    c.add_relationship("Kael (Broker)", satisfaction=40.0, strength=14.0)
     return c

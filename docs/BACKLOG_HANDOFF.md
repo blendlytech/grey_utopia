@@ -62,7 +62,8 @@ as non-monotonic. Two balance changes in one window cannot be attributed.
 | **SHIP** | Settings / saves / achievements / content warning / art | **Three blocking items CLOSED** | Content warning, settings panel, manual save slots all shipped. See below. |
 | **A3** | Make the Steward take a turn | **CLOSED -- shipped live, both gates green** | Phase 1 disproved the premise twice; Phase 2 authored the content and wired it. `STEWARD_CADENCE = 7`, five tier-selected filings from day 31, notice + `#steward-panel` in both front ends. Deliberate runs get **4.7-6.0 filings** and the ladder discriminates by strategy (cautious lives at tiers 1-2 and never closes its file; reckless at 3-4). **`pargate` GREEN first run**, `coverage_audit --assert` GREEN. See below and `A3_DESIGN.md` §8. |
 | ~~A4~~ | ~~Put the cast on screen~~ | **CLOSED 2026-07-29 -- premise disproved** | The cast is already on screen: Mara **41-52%** of run-days, Vint 33-37%, Kael 21-27%, **never absent in 160 runs**. The real defect is the other end: Vint and Kael sit under 4% satisfaction on **~90%** of run-days and their bars move **1.3-3.9 points across every strategy**. Portraits would have decorated a dead readout. Delivered `tests/cast_audit.py` and shipped the one thing A4 asked for that already existed. See below and `A4_DESIGN.md`. |
-| **F7** | Make the relationship bars playable | **Next -- Step 0 already done** | Spun out of A4's census with its acceptance criterion measured. See §4. |
+| ~~F7~~ | ~~Make the relationship bars playable~~ | **CLOSED 2026-07-29 -- shipped, half the gate met** | **Vint accumulates in all four strategies** (0.44 / 0.36 / 0.32 deliberate, 0.94 random, from 5.77 / 2.43 / 2.30) and his share of days below the alienation line went **89.8% -> 58.7%** cautious, **88.7% -> 29.3%** greedy. Kael 2.48 / 1.32 / **0.84** -- greedy clears, cautious and reckless are blocked on `kael_impressed` (see F8). **Mara untouched: spread 37.52 against 37.50.** Root cause was 19 Vint relationship storylets and 10 Kael ones that never touched a bar; 175 `rel_deltas` wired onto existing branches, **zero new events**. `pargate` GREEN, `--assert` GREEN and *improved*. See below and `F7_DESIGN.md`. |
+| **F8** | Open `kael_impressed` and the single-source flags | **Next -- diagnosed, sized, blocking F7's other half** | See §4. |
 | F3 | Make money a decision | Not started | -- |
 | F4 | Give Fame and Social_Capital a spend | Not started | -- |
 | F5 | Signpost the endings in-fiction | Not started | -- |
@@ -81,6 +82,48 @@ warning screen, manual save slots -- are still at zero and gate any release
 regardless of how good the deck gets. A3/A4 keep.
 
 ### Completed
+
+**F7 -- Make the relationship bars playable** *(2026-07-29, Opus 5)* -- **shipped;
+Vint fixed, Kael half-fixed and the other half traced to a walled-off cause.**
+
+The defect was not the curve. It was that **the deck already puts these people on
+screen constantly and never wrote any of it down**: 44 of the 68 events that name
+Vint move nothing (17.0 firings per deliberate run), 33 of Kael's 64 likewise
+(10.4). Sharpest form: **Vint has nineteen storylets tagged `"relationship"` and
+not one of them touched his bar**, while their prose does nothing but move the
+bond ("the kind of quiet that means he'll remember this longer than you will";
+"the warmth gone from his face"). A4's lesson in a second costume -- check whether
+the thing you are about to write already exists and is merely unwired.
+
+Three levers A/B'd separately, deliberate strategies only:
+
+| arm | Vint | Kael | Mara spread |
+|---|---|---|---|
+| baseline | 5.77 / 2.43 / 2.30 | 5.13 / 4.75 / 3.87 | 37.50 |
+| B alone (strain builds S) | 4.95 / 2.40 / 2.30 | **5.13** / 4.29 / 3.50 | 38.77 |
+| A alone (175 deltas) | 0.67 / 0.47 / 0.40 | 4.06 / 1.92 / 1.39 | 36.72 |
+| A + B | 0.55 / 0.45 / 0.40 | 3.98 / 2.03 / 1.25 | 37.52 |
+| **A+B+C shipped** | **0.44 / 0.36 / 0.32** | 2.48 / 1.32 / **0.84** | **37.52** |
+
+A is the dominant term by ~20x, as A4 predicted. **B alone left Kael's cautious
+ratio unchanged to the digit** -- he takes 0.0 adversarial touches in cautious
+play, so growing S on strain cannot reach him there by construction.
+
+**The instrument had to be fixed first.** A4 counted reinforcements by counting
+`strength` increments and documented that as exact -- which lever 2 (*let `strain`
+raise strength*) makes false, shrinking the measured gap and lengthening the
+half-life at once. The gate would have graded its own change favourably, twice,
+under unchanged column headings. Replaced with an explicit
+`Relationship.reinforcements` counter; baseline then reproduced to the digit.
+
+**Zero new events** (503 / 398 flags unchanged), which is why `starved` improved
+rather than costing headroom. `pargate` GREEN; `MIN_CAUTIOUS_ENDINGS` was the
+flagged risk and **improved from exactly 5 to 6** -- the tail widened.
+
+Kael's remainder is sized and handed to F8: his cautious reinforcement count is
+**2.1 per run and invariant across all three levers**, because all ten of his
+`"relationship"` storylets gate on `kael_impressed`, which has one source that
+cautious play declines 33 times in 40. See `F7_DESIGN.md` §5.
 
 **F1 -- Per-day ambient quota** *(2026-07-27, Opus 5)* -- **premise disproved; quota
 built and shipped disabled.** Delivered `tests/coverage_audit.py` (the missing
@@ -995,7 +1038,104 @@ byte-for-byte afterwards.
 
 ---
 
-## 4. CURRENT TASK -- F7: make the relationship bars playable
+## 4. CURRENT TASK -- F8: open `kael_impressed`, and the single-source flags behind it
+
+**Model:** **Opus 5**, in-session. A content/gating change on ~17-27 existing
+events; no new prose volume, so this does not go through `generate_deck.py`.
+
+**Read first:** `docs/F7_DESIGN.md` §5 (why this is now a blocker and not just a
+tidy-up), `docs/A4_DESIGN.md` §7 (the single-source flag table), and
+`tests/coverage_audit.py --union`.
+
+**Do not re-derive:** presence, coverage, reachability, the retention curve, or
+which lever moves it. Eight consecutive windows have closed those. **Do not
+re-measure the accumulation ratio before changing anything except to confirm the
+baseline** -- `python tests/cast_audit.py --retention` prints it, and F7's shipped
+numbers are in the table below.
+
+### The state you are inheriting
+
+- All standing gates **GREEN** after F7: `coverage_audit --assert` (starved
+  **73.0** <= 76, outcompeted **35.6** <= 42, mean 108.6), `--parity` 3/3,
+  `unittest` **124**, `lint_content` clean (26 packs, 503 events, 398 flags).
+  `pargate` -- see §3's F7 entry.
+- **F7 shipped and met half its gate.** Vint accumulates in all four strategies
+  (0.44 / 0.36 / 0.32 deliberate, 0.94 random, from 5.77 / 2.43 / 2.30). Kael is
+  2.48 / 1.32 / **0.84** -- greedy clears, cautious and reckless do not.
+- **`starved` was deliberately not tightened** despite improving 73.6 -> 73.0.
+  The improvement is under 1%, and this window is a content/gating window that
+  needs the headroom. Tighten it when a window ends with slack it does not hand
+  onward.
+
+### The problem, already measured
+
+**Every warm Kael storylet in the deck is behind one branch of one event.** Kael
+has ten storylets tagged `"relationship"`; all ten gate on `kael_impressed`; all
+ten fire **0 times in 40 cautious runs**. That flag's only source is the
+`impress_kael` branch of `volume_npc_kael_syndicate_check_in`, and cautious play
+picks that event's `stay_humble` branch **33 times out of 40**.
+
+The consequence is that Kael's cautious reinforcement count is **2.1 per run and
+invariant across every lever F7 tried** (1.9 baseline, 1.9 with strain-builds-S,
+2.1 with 175 new deltas, 2.1 with raised starting strength). Strength levers move
+the denominator of the accumulation ratio; only content moves the 27.2-day gap in
+the numerator. At that gap, clearing 1.0 needs S ~= 39 against a cap of 40.
+
+`A4_DESIGN.md` §7 has the rest of the same shape: `echo_brother_known` (1
+source), `clock_mara_dark_expired` (1 source, from an event that fires **0/160**),
+and three groups of four-to-three flags whose sole source is a single tier-1 arc
+event apiece.
+
+### Step 0 -- confirm, then pick entrances
+
+The fix pattern is already established and named: **second entrances on the
+tier-1 heads, not new content** (`res_chalk_second_look`, A1 Phase 3c). The
+question this window has to answer with measurement is *which* existing events
+should carry them, and that is a draw-frequency question -- read
+`--union` and the per-strategy fire counts before choosing, not the pack layout.
+
+### Acceptance criteria
+
+- **`kael_impressed` reachable in cautious play in the clear majority of runs**,
+  and Kael's ten relationship storylets firing there at all.
+- **Kael's accumulation ratio < 1.0 in the three deliberate strategies**
+  (`cast_audit.py --retention`). This is F7's unmet criterion and it transfers
+  here intact. Vint's must not regress below its shipped 0.44 / 0.36 / 0.32.
+- **Mara must not be flattened** -- spread stays near 37.5.
+- `arc_mara_the_door`'s 0/160 addressed or explicitly ruled out with a number.
+- All standing gates green.
+
+### Watch for
+
+- **This is a balance change.** Run `pargate`. Note the F7 entry in §3 for where
+  the ending distribution now sits and how much room each band has.
+- **Unlocking 10-17 previously-dead events will move `outcompeted` up and may
+  move `starved` down.** Both are gated as a pair; read the note above
+  `MAX_STARVED` in `tests/coverage_audit.py` before concluding either direction
+  is deck growth.
+- **`kael_impressed` also gates `arc_kael_unpriced_line` and `arc_kael_the_audit`,
+  which are `npc_arcs_pack` tier-1 heads that themselves source three more
+  flags.** Opening the flag cascades two tiers; that is the point, but it means
+  the coverage delta will be larger than the number of events you edit.
+- **The `ot_aud_*` trio is the fallback if second entrances underdeliver** -- 40/40
+  in every deliberate strategy, names Kael, touches nothing, but all three are
+  `gate_critical`. See §5.
+
+### The adjacent item this window should NOT absorb
+
+**Recalibrating the relationship *gates*.** Six events read a satisfaction
+threshold -- four Mara, two Kael at **>= 45 and >= 55** -- and zero read Vint,
+whose bar F7 just made live. A4 flagged this as F7's follow-on and it still is,
+but it wants a healthy Kael distribution to calibrate against, which is exactly
+what this window produces. Do it next, not now.
+
+### On completion
+
+Update §3, append findings to §5, correct §6 in the same window if the baseline
+moves, and end with the model + ready-to-paste prompt for the next window.
+
+
+## 4b. COMPLETED TASK -- F7: make the relationship bars playable
 
 **Model:** **Opus 5**, in-session. Engine tuning against a measured curve, plus
 possibly a small content pass; no volume batch, so this does not go through
@@ -1723,6 +1863,36 @@ Triage these into the status board when they earn their place.
   the code half of S8 is small and mostly done; the rest is a purchasing
   decision.
 
+- *(2026-07-29, F7)* **`data/cast.json` does not drive the starting network, and
+  the F7 brief's lever-3 pointer named it alone.**
+  `engine.stats.create_starter_fixer` hardcodes all three starting bonds;
+  cast.json is read only by `lint_content` and the legacy-inheritance path.
+  Editing it by itself is a silent no-op that a balance A/B would report as "the
+  lever does nothing." Both are updated and both now carry a comment saying they
+  are twinned, **but the duplication is still live.** Collapse it -- have
+  `create_starter_fixer` read the file, honouring `"starting": false` -- in any
+  window that touches starting state.
+
+- *(2026-07-29, F7)* **A metric that infers its input from a side effect stops
+  being a metric the moment you change the side effect.** A4's accumulation gate
+  counted reinforcements by counting `strength` increments, which was exact *and
+  documented as exact* -- and lever 2 on its own successor's list was "make
+  `strain` raise strength too." Adopting it would have shrunk the measured gap
+  and grown the half-life simultaneously, and the gate would have graded its own
+  change favourably, twice, while printing the same reassuring column headings.
+  Fixed with an explicit `Relationship.reinforcements` counter. **Before trusting
+  any inherited gate, check whether the change you are about to make is one of
+  the things its measurement assumes cannot happen.**
+
+- *(2026-07-29, F7)* **`ot_aud_1_counter_audit`, `ot_aud_2_sweep` and
+  `ot_aud_3_successor` fire ~40/40 in every deliberate strategy, name Kael, and
+  touch nothing.** `ot_aud_2_sweep/sell_the_schedule` is real Kael content ("takes
+  the sweep schedule to Kael, who pays exactly what you expected"). All three are
+  `gate_critical` origin threads, so wiring them moves branch scoring on content
+  the reachability gates depend on -- left alone deliberately, but they are the
+  largest unwired Kael surface in the deck and the only one that reaches a
+  cautious player 40 times out of 40.
+
 ---
 
 ## 6. Recorded baseline
@@ -1766,24 +1936,31 @@ the old figure was the former, which is why the old gate was unmeetable. Both ar
 gated, as a pair -- see §5 and `A1_DESIGN.md` §10.1-10.2 for why neither works
 alone.
 
-| Metric | **Live (7 districts)** | Phase 3c (pre-A3) | Control (map off) |
-|---|---|---|---|
-| Events in deck | 503 (26 packs, 398 flags, **332 shelved**) | 498 (25, 391) | same |
-| Median eligible pool per day *(unplaced draws)* | **220** | 220 | -- |
-| Median eligible shelf *(placed draws)* | **13** (559 placed draws) | 12 (557) | -- |
-| Unique events seen per run | **80** (16.0%) | 80 (16.1%) | -- |
-| Events never fired **in 40 runs, seed 0** | **116** (23.1%) | 105 (21.1%) | -- |
-| **Events never fired, mean of 5 seed bases** | **109.4** | 101.2 | 119.6 *(Phase 3b deck)* |
-| -- of which **starved** *(gate: <= 76)* | **73.6** | 66.2 | -- |
-| -- of which **outcompeted** *(gate: <= 42)* | **35.8** | 35.0 | -- |
-| Arc draw-weight share *(unplaced draws)* | **52.1%** | 51.7% | -- |
-| Arc share of actual picks | **54.4%** | 53.6% | -- |
-| Ambient share of actual picks | **20.9%** | 20.9% | -- |
-| Repeat-pick fraction | **6.6%** | 6.4% | -- |
-| Median run length | **30 days** | 30 days | -- |
-| Truly guaranteed choices | **627** / 1533 (41%) | 614 / 1513 | same |
-| Genuine gambles | **906** / 1533 | 899 / 1513 | same |
-| Near-certain but fallible | **0** (F2's invariant holds) | 0 | same |
+**Re-measured 2026-07-29 after F7.** F7 added no events -- it wrote 175
+`rel_deltas` onto branches that already existed -- so the deck size, flag count
+and shelf are unchanged. What moved is downstream of bots choosing differently
+(`branch_score` weights `rel_deltas` at 0.3), and it moved in the good direction:
+**starved 73.6 -> 73.0, outcompeted 35.8 -> 35.6, mean never-fired 109.4 ->
+108.6**, median run length 30 -> 32 days. Thresholds were deliberately **not**
+tightened -- the gain is under 1% and F8 is a content/gating window that needs the
+headroom.
+
+| Metric | **Live (post-F7)** | Pre-F7 (A3/A4) | Phase 3c (pre-A3) | Control (map off) |
+|---|---|---|---|---|
+| Events in deck | 503 (26 packs, 398 flags, **332 shelved**) | 503 (26, 398) | 498 (25, 391) | same |
+| Median eligible pool per day *(unplaced draws)* | **220** | 220 | 220 | -- |
+| Median eligible shelf *(placed draws)* | **12** (577 placed draws) | 13 (559) | 12 (557) | -- |
+| Unique events seen per run | **82** (16.3%) | 80 (16.0%) | 80 (16.1%) | -- |
+| **Events never fired, mean of 5 seed bases** | **108.6** | 109.4 | 101.2 | 119.6 *(Phase 3b deck)* |
+| -- of which **starved** *(gate: <= 76)* | **73.0** | 73.6 | 66.2 | -- |
+| -- of which **outcompeted** *(gate: <= 42)* | **35.6** | 35.8 | 35.0 | -- |
+| Arc draw-weight share *(unplaced draws)* | **52.0%** | 52.1% | 51.7% | -- |
+| Arc shelf-share *(placed draws)* | **53.6%** | -- | -- | -- |
+| Repeat-pick fraction | **6.7%** | 6.6% | 6.4% | -- |
+| Median run length | **32 days** | 30 days | 30 days | -- |
+| Truly guaranteed choices | **627** / 1533 (41%) | 627 / 1533 | 614 / 1513 | same |
+| Genuine gambles | **906** / 1533 | 906 / 1533 | 899 / 1513 | same |
+| Near-certain but fallible | **0** (F2's invariant holds) | 0 | 0 | same |
 
 **The A3 column is +5 events and the coverage deltas are mostly that.** Adding
 `steward_filings_pack` with its schedule *off* costs exactly 5 starved and 0

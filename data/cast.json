@@ -10,13 +10,13 @@
       "name": "Vint (Informant)",
       "description": "An off-grid data broker who deals in illegal pre-accord historical media.",
       "satisfaction": 50.0,
-      "strength": 6.0
+      "strength": 10.0
     },
     {
       "name": "Kael (Broker)",
       "description": "An undercity syndicate intermediary who connects fixers with high-paying clients.",
       "satisfaction": 40.0,
-      "strength": 8.0
+      "strength": 14.0
     },
     {
       "name": "Echo (Resistance)",

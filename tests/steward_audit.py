@@ -110,7 +110,7 @@ def playout(strategy: str, seed: int, max_days: int = 100,
         # Recorded for A4 (tests/cast_audit.py), which reuses this loop rather
         # than adding a sixth copy of the day loop -- see BACKLOG_HANDOFF §5.
         rel_by_day[character.day] = {
-            n: (r.satisfaction, r.strength)
+            n: (r.satisfaction, r.strength, r.reinforcements)
             for n, r in character.relationships.items()}
 
         slots = 3 if (character.get("Physical_Integrity") >= 30
@@ -168,7 +168,7 @@ def playout(strategy: str, seed: int, max_days: int = 100,
         "heat_by_day": heat_by_day,
         "file_by_day": file_by_day,
         "rel_by_day": rel_by_day,
-        "rel_final": {n: (r.satisfaction, r.strength)
+        "rel_final": {n: (r.satisfaction, r.strength, r.reinforcements)
                       for n, r in character.relationships.items()},
         "file_final": steward.file_weight(character),
         "filing_days": filing_days,

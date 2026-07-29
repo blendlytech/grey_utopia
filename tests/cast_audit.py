@@ -296,12 +296,15 @@ def report_retention(n: int, base: int) -> None:
 
     print("\n--- CAN THE BOND ACCUMULATE? reinforcement gap vs the bond's own "
           "half-life ---")
-    print("`reinforce` adds +1.5 to S and is the only thing that ever raises it, so "
-          "counting\nS increments counts reinforcements exactly. A bond grows only if "
-          "reinforcements\narrive faster than the curve erases them: ratio = mean gap "
-          "/ half-life (S ln2).\nAbove 1.0 the next reinforcement lands on a bond that "
-          "has already fallen below\nhalf of the last one, and satisfaction can never "
-          "climb -- the bar is a sawtooth\nagainst zero regardless of play.\n")
+    print("Reinforcements are counted from `Relationship.reinforcements`, which only "
+          "warm\ncontact increments. A4 inferred them from S increments instead, which "
+          "was exact\nwhen `reinforce` was the only thing that raised S -- F7 made "
+          "`strain` raise it too,\nso an inferred count would now score being crossed "
+          "as being liked and the gate\nwould grade its own change. A bond grows only "
+          "if reinforcements arrive faster than\nthe curve erases them: ratio = mean "
+          "gap / half-life (S ln2). Above 1.0 the next\nreinforcement lands on a bond "
+          "that has already fallen below half of the last one,\nand satisfaction can "
+          "never climb -- a sawtooth against zero regardless of play.\n")
     print(f"{'contact':8s} {'strategy':10s} {'reinf/run':>10s} {'mean gap':>9s} "
           f"{'med S':>7s} {'half-life':>10s} {'ratio':>7s}  verdict")
     print("-" * 78)
@@ -310,15 +313,15 @@ def report_retention(n: int, base: int) -> None:
             runs = _sweep(strat, n, base)
             counts, gaps, mid_s = [], [], []
             for r in runs:
-                seq = [(d, v[full][1]) for d, v in sorted(r["rel_by_day"].items())
-                       if full in v]
+                seq = [(d, v[full][1], v[full][2])
+                       for d, v in sorted(r["rel_by_day"].items()) if full in v]
                 if len(seq) < 2:
                     continue
-                bumps = sum(1 for (_, a), (_, b) in zip(seq, seq[1:]) if b > a + 1e-9)
+                bumps = seq[-1][2] - seq[0][2]
                 span = seq[-1][0] - seq[0][0]
                 counts.append(bumps)
                 gaps.append(span / bumps if bumps else float(span))
-                mid_s.append(statistics.median(s for _, s in seq))
+                mid_s.append(statistics.median(s for _, s, _ in seq))
             if not counts:
                 print(f"{short:8s} {strat:10s} {'-- never in the network --':>50s}")
                 continue

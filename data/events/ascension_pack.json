@@ -434,6 +434,9 @@
             ],
             "faction_deltas": {
               "Undercity": 10
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           },
           "failure": {
@@ -445,7 +448,10 @@
             },
             "flags_set": [
               "world_price_zero"
-            ]
+            ],
+            "rel_deltas": {
+              "Kael (Broker)": -4
+            }
           }
         },
         {

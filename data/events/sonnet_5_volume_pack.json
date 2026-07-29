@@ -558,7 +558,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 8
+            }
           },
           "failure": {
             "text": "You get there late, half-asleep, and say the wrong thing — some half-formed reassurance that lands like static. Vint doesn't correct you. He just goes quiet in a different way than before, and you're not sure you helped.",
@@ -568,7 +571,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 4
+            }
           }
         },
         {
@@ -586,7 +592,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 4
+            }
           },
           "failure": {
             "text": "The call drops twice, and the second silence after redial goes on a beat too long. Vint says he's fine now and hangs up before you can decide whether to believe him.",
@@ -595,7 +604,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 1
+            }
           }
         },
         {
@@ -613,7 +625,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -6
+            }
           }
         }
       ],
@@ -1404,7 +1419,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 7
+            }
           },
           "failure": {
             "text": "One component's fried past saving, and no amount of skill fixes physics. You did what you could. Vint can see that, which helps him more than it helps the rig.",
@@ -1414,7 +1432,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 3
+            }
           }
         },
         {
@@ -1437,7 +1458,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -3
+            }
           },
           "failure": {
             "text": "He pays late and grudgingly, and something between you cools a little.",
@@ -1447,7 +1471,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -5
+            }
           }
         },
         {
@@ -1470,7 +1497,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 6
+            }
           },
           "failure": {
             "text": "He gets frustrated, fries a second component, and you end up fixing it anyway.",
@@ -1480,7 +1510,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 1
+            }
           }
         }
       ],
@@ -2253,7 +2286,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 6
+            }
           }
         },
         {
@@ -2272,7 +2308,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -4
+            }
           }
         },
         {
@@ -2296,7 +2335,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 7
+            }
           },
           "failure": {
             "text": "Turns out he already has three of what you brought. He's gracious about it, but the moment feels slightly deflated.",
@@ -2306,7 +2348,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 2
+            }
           }
         }
       ],
@@ -3982,7 +4027,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 7
+            }
           },
           "failure": {
             "text": "You come back empty-handed after chasing dead leads all day. Vint shrugs it off, but you can tell he's disappointed.",
@@ -3991,7 +4039,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 2
+            }
           }
         },
         {
@@ -4009,14 +4060,20 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 5
+            }
           },
           "failure": {
             "text": "He needs something more specific than what you've got, and the trade falls through awkwardly.",
             "deltas": {},
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -1
+            }
           }
         },
         {
@@ -4034,7 +4091,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 5
+            }
           }
         }
       ],
@@ -4827,7 +4887,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 5
+            }
           }
         },
         {
@@ -4851,7 +4914,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 2
+            }
           },
           "failure": {
             "text": "He gets oddly offended, like you've turned a gift into a transaction. The badge sits between you a beat too long before he shrugs it off.",
@@ -4861,7 +4927,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -3
+            }
           }
         },
         {
@@ -4879,7 +4948,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 1
+            }
           }
         }
       ],
@@ -5636,13 +5708,19 @@
             },
             "flags_set": [
               "vint_established"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 7
+            }
           },
           "failure": {
             "text": "You fry a capacitor and Vint has to redo half your work, laughing at you the whole time. Still good company, though.",
             "deltas": {
               "Wealth": -200,
               "Social_Capital": 1
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 4
             }
           }
         },
@@ -5661,7 +5739,10 @@
             },
             "flags_set": [
               "vint_established"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 5
+            }
           }
         },
         {
@@ -5678,7 +5759,10 @@
             },
             "flags_set": [
               "vint_established"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -4
+            }
           }
         }
       ],
@@ -6919,7 +7003,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 7
+            }
           },
           "failure": {
             "text": "You're both too tired to think straight and the rig ends up worse than when you started. At least you tried.",
@@ -6929,7 +7016,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 3
+            }
           }
         },
         {
@@ -6952,7 +7042,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 2
+            }
           },
           "failure": {
             "text": "The parts aren't quite right for his setup, and he has to scrounge the rest himself, frustration evident in his next text.",
@@ -6961,7 +7054,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -2
+            }
           }
         },
         {
@@ -6979,7 +7075,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -7
+            }
           }
         }
       ],
@@ -7786,7 +7885,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 6
+            }
           },
           "failure": {
             "text": "It overloads mid-scan, sparking against your skin. 'Fuck!' — out loud, involuntary — draws exactly the attention it was supposed to prevent.",
@@ -7796,7 +7898,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 1
+            }
           }
         },
         {
@@ -7814,7 +7919,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 5
+            }
           },
           "failure": {
             "text": "It fizzles out after thirty seconds. Vint sighs and starts pulling it apart again, muttering about capacitors.",
@@ -7823,7 +7931,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 1
+            }
           }
         },
         {
@@ -7840,7 +7951,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -3
+            }
           }
         }
       ],
@@ -8606,7 +8720,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 6
+            }
           },
           "failure": {
             "text": "You fumble the words and it comes out flat. He shrugs it off, but something small is lost.",
@@ -8615,7 +8732,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -1
+            }
           }
         },
         {
@@ -8633,7 +8753,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -2
+            }
           },
           "failure": {
             "text": "He gets quietly annoyed, mutters that not everything's a transaction, and leaves early.",
@@ -8642,7 +8765,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -5
+            }
           }
         },
         {
@@ -8660,7 +8786,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -6
+            }
           }
         }
       ],
@@ -9491,7 +9620,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 6
+            }
           },
           "failure": {
             "text": "Your arm cramps halfway through and the board slips, frying a component neither of you can afford to replace tonight.",
@@ -9501,7 +9633,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 2
+            }
           }
         },
         {
@@ -9524,7 +9659,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 5
+            }
           },
           "failure": {
             "text": "You come back empty-handed and apologetic. Vint just shrugs and makes do with a bent paperclip instead.",
@@ -9533,7 +9671,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 1
+            }
           }
         },
         {
@@ -9550,7 +9691,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -3
+            }
           }
         }
       ],
@@ -10213,7 +10357,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 6
+            }
           },
           "failure": {
             "text": "One log entry references a job neither of you should discuss aloud. The silence after is awkward, cold.",
@@ -10223,7 +10370,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -2
+            }
           }
         },
         {
@@ -10245,7 +10395,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 2
+            }
           },
           "failure": {
             "text": "Your scrub job is sloppy, and Vint notices the gaps immediately, though he's too polite to press.",
@@ -10255,7 +10408,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -1
+            }
           }
         },
         {
@@ -10272,7 +10428,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -3
+            }
           }
         }
       ],
@@ -11056,6 +11215,9 @@
               "Social_Capital": 2,
               "Meaning": 1,
               "Mental_Decay": -2
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 7
             }
           },
           "failure": {
@@ -11063,6 +11225,9 @@
             "deltas": {
               "Mental_Decay": 8,
               "Physical_Integrity": -4
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 2
             }
           }
         },
@@ -11078,12 +11243,18 @@
             "deltas": {
               "Physical_Integrity": 1,
               "Social_Capital": -1
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -1
             }
           },
           "failure": {
             "text": "He keeps pinging you anyway, and you end up half-awake regardless, irritation simmering.",
             "deltas": {
               "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -2
             }
           }
         },
@@ -11104,6 +11275,9 @@
             "deltas": {
               "Wealth": -800,
               "Social_Capital": 3
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 5
             }
           },
           "failure": {
@@ -11111,6 +11285,9 @@
             "deltas": {
               "Wealth": -800,
               "Family_Friction": 4
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -2
             }
           }
         }
@@ -11773,6 +11950,9 @@
             "deltas": {
               "Social_Capital": 6,
               "Heat": -2
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 7
             }
           },
           "failure": {
@@ -11780,6 +11960,9 @@
             "deltas": {
               "Heat": 20,
               "Physical_Integrity": -8
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 3
             }
           }
         },
@@ -11795,12 +11978,18 @@
             "deltas": {
               "Wealth": 500,
               "Social_Capital": 1
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -2
             }
           },
           "failure": {
             "text": "He's insulted you'd charge him now of all times. He fixes it himself, badly, and doesn't call for a while.",
             "deltas": {
               "Social_Capital": -5
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -6
             }
           }
         },
@@ -11815,6 +12004,9 @@
             "text": "He manages on his own, though the silence afterward has a certain weight to it.",
             "deltas": {
               "Social_Capital": -3
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -4
             }
           },
           "failure": {
@@ -11822,6 +12014,9 @@
             "deltas": {
               "Social_Capital": -8,
               "Heat": 12
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -7
             }
           }
         }
@@ -12722,7 +12917,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 6
+            }
           },
           "failure": {
             "text": "He's distracted and distant, barely acknowledging the tool or you. Something's off with him.",
@@ -12731,7 +12929,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 1
+            }
           }
         },
         {
@@ -12753,7 +12954,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -1
+            }
           },
           "failure": {
             "text": "He asks a friend who saw you using it on a job. The lie stings worse than the tool was worth.",
@@ -12762,7 +12966,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -6
+            }
           }
         },
         {
@@ -12785,7 +12992,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -3
+            }
           },
           "failure": {
             "text": "Vint finds out you sold his gear. The silence that follows is worse than any argument.",
@@ -12795,7 +13005,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -8
+            }
           }
         }
       ],
@@ -13348,7 +13561,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 6
+            }
           },
           "failure": {
             "text": "The charger you used is flakier than you thought — the cell comes back half-dead and Vint clocks it immediately, annoyed.",
@@ -13357,7 +13573,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -2
+            }
           }
         },
         {
@@ -13375,7 +13594,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 2
+            }
           },
           "failure": {
             "text": "The replacement he wanted is out of stock everywhere — you end up owing him the favor anyway.",
@@ -13385,7 +13607,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 1
+            }
           }
         },
         {
@@ -13402,7 +13627,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -6
+            }
           }
         }
       ],
@@ -14372,7 +14600,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 4
+            }
           },
           "failure": {
             "text": "The 'spare' cell dies within the hour. Vint feels bad and covers your next parts order instead.",
@@ -14382,7 +14613,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 3
+            }
           }
         },
         {
@@ -14404,7 +14638,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -2
+            }
           },
           "failure": {
             "text": "'We don't do cash, you know that,' he says, a little hurt you'd even ask.",
@@ -14413,7 +14650,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -4
+            }
           }
         },
         {
@@ -14430,7 +14670,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -2
+            }
           },
           "failure": {
             "text": "He takes the refusal harder than expected, muttering about you never needing anyone.",
@@ -14439,7 +14682,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -4
+            }
           }
         }
       ],
@@ -15221,7 +15467,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 6
+            }
           },
           "failure": {
             "text": "You get turned around in the dark stacks and arrive an hour late. Vint's already jury-rigged something worse in your absence, and it shows in his mood.",
@@ -15231,7 +15480,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -2
+            }
           }
         },
         {
@@ -15253,7 +15505,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 1
+            }
           },
           "failure": {
             "text": "Without the iron, Vint botches the dawn job and loses a client. He doesn't blame you outright, but he doesn't call for a while either.",
@@ -15262,7 +15517,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -5
+            }
           }
         },
         {
@@ -15285,7 +15543,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -4
+            }
           },
           "failure": {
             "text": "He doesn't believe you for a second. 'I saw it in your bag last week,' he says flatly, and hangs up.",
@@ -15295,7 +15556,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -8
+            }
           }
         }
       ],
@@ -16091,7 +16355,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 6
+            }
           },
           "failure": {
             "text": "Your comm buzzes mid-bite with a job, and you have to cut the meal short.",
@@ -16101,7 +16368,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 2
+            }
           }
         },
         {
@@ -16124,7 +16394,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -1
+            }
           },
           "failure": {
             "text": "He notices you're only there for the favor and goes quiet for the rest of the meal.",
@@ -16133,7 +16406,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -4
+            }
           }
         },
         {
@@ -16150,7 +16426,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -2
+            }
           },
           "failure": {
             "text": "He doesn't say anything, but the offer doesn't come again for a while.",
@@ -16160,7 +16439,10 @@
             },
             "flags_set": [
               "vint_known"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -4
+            }
           }
         }
       ],
@@ -16885,13 +17167,19 @@
             },
             "flags_set": [
               "vint_established"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 6
+            }
           },
           "failure": {
             "text": "The buyer walks anyway, unimpressed by your excuses. Vint's apology afterward feels thin.",
             "deltas": {
               "Wealth": -200,
               "Family_Friction": 4
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 1
             }
           }
         },
@@ -16915,12 +17203,18 @@
             },
             "flags_set": [
               "vint_established"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": 7
+            }
           },
           "failure": {
             "text": "Even your credits can't smooth this one over — the buyer's already burned the bridge in his head.",
             "deltas": {
               "Wealth": -500
+            },
+            "rel_deltas": {
+              "Vint (Informant)": 2
             }
           }
         },
@@ -16938,13 +17232,19 @@
             },
             "flags_set": [
               "vint_established"
-            ]
+            ],
+            "rel_deltas": {
+              "Vint (Informant)": -4
+            }
           },
           "failure": {
             "text": "Vint fumbles it badly, and the fallout costs him a client he can't easily replace.",
             "deltas": {
               "Family_Friction": 4,
               "Social_Capital": -2
+            },
+            "rel_deltas": {
+              "Vint (Informant)": -6
             }
           }
         }
@@ -17434,6 +17734,9 @@
             "deltas": {
               "Wealth": 700,
               "Fame": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 5
             }
           },
           "failure": {
@@ -17441,6 +17744,9 @@
             "deltas": {
               "Wealth": 250,
               "Social_Capital": -2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           }
         },
@@ -17461,12 +17767,18 @@
             "deltas": {
               "Wealth": 950,
               "Social_Capital": -1
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 1
             }
           },
           "failure": {
             "text": "‘The rate is the rate,’ he says, and the folder stays exactly where it was until you stop reaching for it.",
             "deltas": {
               "Social_Capital": -3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -2
             }
           }
         },
@@ -17481,6 +17793,9 @@
             "text": "He closes the folder without a flicker. ‘Your discretion,’ he says, and you can't tell if he means yours or his own.",
             "deltas": {
               "Social_Capital": 1
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -2
             }
           },
           "failure": {
@@ -17488,6 +17803,9 @@
             "deltas": {
               "Social_Capital": -2,
               "Meaning": 1
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -4
             }
           }
         }
@@ -17527,6 +17845,9 @@
             "deltas": {
               "Wealth": 400,
               "Social_Capital": -2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 2
             }
           },
           "failure": {
@@ -17534,6 +17855,9 @@
             "deltas": {
               "Wealth": 400,
               "Mental_Decay": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -2
             }
           }
         },
@@ -17549,6 +17873,9 @@
             "deltas": {
               "Wealth": -500,
               "Social_Capital": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 5
             }
           },
           "failure": {
@@ -17556,6 +17883,9 @@
             "deltas": {
               "Wealth": -500,
               "Mental_Decay": 2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 3
             }
           }
         },
@@ -17576,12 +17906,18 @@
             "deltas": {
               "Social_Capital": 2,
               "Heat": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 4
             }
           },
           "failure": {
             "text": "He considers the offer a full ten seconds before declining. ‘Cash is simpler,’ he says, and the silence after costs you the negotiation.",
             "deltas": {
               "Social_Capital": -2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           }
         }
@@ -17621,6 +17957,9 @@
             "deltas": {
               "Wealth": -600,
               "Social_Capital": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 5
             }
           },
           "failure": {
@@ -17628,6 +17967,9 @@
             "deltas": {
               "Wealth": -600,
               "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 2
             }
           }
         },
@@ -17647,6 +17989,9 @@
             "text": "He actually checks — a small miracle — and reverses it without apology, because being wrong costs him more than being caught. You've learned something about where his floor is.",
             "deltas": {
               "Social_Capital": 4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 3
             }
           },
           "failure": {
@@ -17654,6 +17999,9 @@
             "deltas": {
               "Social_Capital": -3,
               "Heat": 2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           }
         },
@@ -17674,12 +18022,18 @@
             "deltas": {
               "Meaning": 3,
               "Heat": 2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 4
             }
           },
           "failure": {
             "text": "You ask around and get nothing but a reputation for asking, which in this ledger is its own small debt.",
             "deltas": {
               "Social_Capital": -2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           }
         }
@@ -17725,12 +18079,18 @@
               "Wealth": -400,
               "Social_Capital": 2,
               "Heat": 2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 4
             }
           },
           "failure": {
             "text": "You pay and the intel turns out half-true, aged, already known to everyone but you. Kael shrugs; he never promised freshness.",
             "deltas": {
               "Wealth": -400
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 1
             }
           }
         },
@@ -17745,6 +18105,9 @@
             "text": "You decline, and Kael files it — not disapproval, just data. He'll ask a different way next time.",
             "deltas": {
               "Social_Capital": 1
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -1
             }
           },
           "failure": {
@@ -17752,6 +18115,9 @@
             "deltas": {
               "Social_Capital": -2,
               "Meaning": -1
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -4
             }
           }
         },
@@ -17772,6 +18138,9 @@
             "deltas": {
               "Meaning": 6,
               "Social_Capital": -3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -5
             }
           },
           "failure": {
@@ -17779,6 +18148,9 @@
             "deltas": {
               "Social_Capital": -4,
               "Heat": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -8
             }
           }
         }
@@ -17818,12 +18190,18 @@
             "deltas": {
               "Wealth": -450,
               "Heat": -5
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 5
             }
           },
           "failure": {
             "text": "You pay and nothing happens, which is either the coverage working exactly as intended or thirty days of money spent on air. Kael declines to clarify which.",
             "deltas": {
               "Wealth": -450
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 2
             }
           }
         },
@@ -17843,6 +18221,9 @@
             "text": "You handle it yourself, carefully, and it holds. You keep the money and the credit for it.",
             "deltas": {
               "Meaning": 2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -2
             }
           },
           "failure": {
@@ -17850,6 +18231,9 @@
             "deltas": {
               "Heat": 8,
               "Mental_Decay": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -4
             }
           }
         },
@@ -17865,12 +18249,18 @@
             "deltas": {
               "Meaning": 3,
               "Heat": 2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 4
             }
           },
           "failure": {
             "text": "‘The coverage,’ he says, and offers nothing further. Some prices you pay just for asking the question.",
             "deltas": {
               "Social_Capital": -1
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           }
         }
@@ -17915,6 +18305,9 @@
             "deltas": {
               "Meaning": 5,
               "Social_Capital": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 7
             }
           },
           "failure": {
@@ -17922,6 +18315,9 @@
             "deltas": {
               "Physical_Integrity": -4,
               "Mental_Decay": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -2
             }
           }
         },
@@ -17936,12 +18332,18 @@
             "text": "You show her just enough and send her off with nothing she can blame you for later. Efficient. Also a little cold, and you both know it.",
             "deltas": {
               "Social_Capital": 1
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 1
             }
           },
           "failure": {
             "text": "She reads the distance as disrespect and says so, loudly, in front of people whose opinion of you matters.",
             "deltas": {
               "Social_Capital": -3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -4
             }
           }
         },
@@ -17956,6 +18358,9 @@
             "text": "You bill him flat rate, and he pays without argument — which means he expected you to ask, and you just failed a small test by taking too long.",
             "deltas": {
               "Wealth": 300
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           },
           "failure": {
@@ -17963,6 +18368,9 @@
             "deltas": {
               "Wealth": 300,
               "Social_Capital": -2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -5
             }
           }
         }
@@ -18002,12 +18410,18 @@
             "deltas": {
               "Social_Capital": -1,
               "Meaning": 2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 6
             }
           },
           "failure": {
             "text": "He extends it anyway, but the number that comes due next cycle has grown a little, quietly, the way debts do near him.",
             "deltas": {
               "Wealth": -200
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 2
             }
           }
         },
@@ -18028,6 +18442,9 @@
             "deltas": {
               "Wealth": -350,
               "Social_Capital": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 5
             }
           },
           "failure": {
@@ -18035,6 +18452,9 @@
             "deltas": {
               "Wealth": -350,
               "Heat": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -2
             }
           }
         },
@@ -18049,12 +18469,18 @@
             "text": "You talk your way to another week, somehow, and spend the whole week regretting how much that somehow probably cost you.",
             "deltas": {
               "Mental_Decay": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           },
           "failure": {
             "text": "He doesn't argue. He just moves you three rows down in a book you're not allowed to read, and every job after this one is worth a little less.",
             "deltas": {
               "Social_Capital": -5
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -7
             }
           }
         }
@@ -18099,6 +18525,9 @@
             "deltas": {
               "Meaning": 4,
               "Social_Capital": 2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 6
             }
           },
           "failure": {
@@ -18106,6 +18535,9 @@
             "deltas": {
               "Physical_Integrity": -3,
               "Heat": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           }
         },
@@ -18121,6 +18553,9 @@
             "deltas": {
               "Wealth": 300,
               "Meaning": -2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 3
             }
           },
           "failure": {
@@ -18128,6 +18563,9 @@
             "deltas": {
               "Social_Capital": -3,
               "Meaning": -3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -5
             }
           }
         },
@@ -18142,12 +18580,18 @@
             "text": "You send him home before anything goes wrong, and he's grateful in the specific way of someone who doesn't yet know that's a cost too.",
             "deltas": {
               "Social_Capital": -1
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -1
             }
           },
           "failure": {
             "text": "Kael asks, mildly, why the job took a runner short. You don't have an answer that sounds like anything but softness.",
             "deltas": {
               "Social_Capital": -3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -4
             }
           }
         }
@@ -18187,12 +18631,18 @@
             "deltas": {
               "Heat": -6,
               "Wealth": -300
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 2
             }
           },
           "failure": {
             "text": "You go quiet and the work dries up faster than the danger does. Kael doesn't offer to cover the gap.",
             "deltas": {
               "Wealth": -600
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           }
         },
@@ -18208,12 +18658,18 @@
             "deltas": {
               "Meaning": 3,
               "Mental_Decay": 4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 5
             }
           },
           "failure": {
             "text": "‘I told you what I know,’ he says, in a tone that closes the subject harder than a locked door would.",
             "deltas": {
               "Social_Capital": -2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           }
         },
@@ -18233,6 +18689,9 @@
             "text": "Nothing comes of it, this time, and you bank the extra work while your nerve holds.",
             "deltas": {
               "Wealth": 500
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 1
             }
           },
           "failure": {
@@ -18240,6 +18699,9 @@
             "deltas": {
               "Heat": 8,
               "Physical_Integrity": -4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           }
         }
@@ -18284,6 +18746,9 @@
             "deltas": {
               "Social_Capital": 5,
               "Heat": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 7
             }
           },
           "failure": {
@@ -18291,6 +18756,9 @@
             "deltas": {
               "Heat": 6,
               "Mental_Decay": 3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 2
             }
           }
         },
@@ -18305,12 +18773,18 @@
             "text": "You decline, cleanly, and Kael doesn't argue — he just remembers, precisely, who was in the room when he needed help and said no.",
             "deltas": {
               "Social_Capital": -3
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -5
             }
           },
           "failure": {
             "text": "Your refusal reads as something worse than caution to a man who assumes everyone's angle is financial. He prices the insult in.",
             "deltas": {
               "Social_Capital": -5
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -7
             }
           }
         },
@@ -18331,6 +18805,9 @@
             "deltas": {
               "Meaning": 5,
               "Social_Capital": 2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 6
             }
           },
           "failure": {
@@ -18338,6 +18815,9 @@
             "deltas": {
               "Social_Capital": -3,
               "Heat": 2
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -3
             }
           }
         }

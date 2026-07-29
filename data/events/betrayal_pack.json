@@ -58,7 +58,10 @@
             },
             "flags_set": [
               "face_on_the_feed"
-            ]
+            ],
+            "rel_deltas": {
+              "Kael (Broker)": -3
+            }
           },
           "failure": {
             "text": "The retake goes fine. The caption doesn't -- a warmth-pass algorithm appends 'ask me about compliance!' to your name, verbatim, permanent, and indexed.",
@@ -134,7 +137,10 @@
             },
             "flags_set": [
               "face_on_the_feed"
-            ]
+            ],
+            "rel_deltas": {
+              "Kael (Broker)": -5
+            }
           }
         }
       ],
@@ -983,6 +989,9 @@
               "Wealth": -800,
               "Meaning": -6,
               "Heat": -4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 5
             }
           }
         },
@@ -1045,6 +1054,9 @@
               "Wealth": -300,
               "Family_Friction": 6,
               "Meaning": 4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -5
             }
           },
           "failure": {
@@ -1053,6 +1065,9 @@
               "Wealth": -500,
               "Heat": 6,
               "Mental_Decay": 8
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -2
             }
           }
         }

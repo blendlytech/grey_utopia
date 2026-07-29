@@ -570,6 +570,9 @@
             },
             "clocks_start": {
               "syndicate_debt": 9
+            },
+            "rel_deltas": {
+              "Kael (Broker)": 6
             }
           },
           "failure": {
@@ -582,6 +585,9 @@
             },
             "clocks_start": {
               "syndicate_debt": 6
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -4
             }
           }
         },
@@ -604,6 +610,9 @@
               "Social_Capital": -8,
               "Fame": -5,
               "Recklessness": 4
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -7
             }
           },
           "failure": {
@@ -616,6 +625,9 @@
             },
             "clocks_start": {
               "syndicate_debt": 7
+            },
+            "rel_deltas": {
+              "Kael (Broker)": -8
             }
           }
         },
